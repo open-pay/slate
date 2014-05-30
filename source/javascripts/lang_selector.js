@@ -13,40 +13,4 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations
 under the License.
 */
-languages = []
-function activateLanguage(language) {
-  $("#lang-selector a").removeClass('active');
-  $("#lang-selector a[data-language-name='" + language + "']").addClass('active');
-  for (var i=0; i < languages.length; i++) {
-    $(".highlight." + languages[i]).hide();
-  }
-  $(".highlight." + language).show();
-
-}
-
-function setupLanguages(l) {
-  languages = l;
-  currentLanguage = languages[0];
-  defaultLanguage = localStorage.getItem("language");
-
-  if ((location.search.substr(1) != "") && (jQuery.inArray(location.search.substr(1), languages)) != -1) {
-    // the language is in the URL, so use that language!
-    activateLanguage(location.search.substr(1));
-
-    // set this language as the default for next time, if the URL has no language
-    localStorage.setItem("language", location.search.substr(1));
-  } else if ((defaultLanguage !== null) && (jQuery.inArray(defaultLanguage, languages) != -1)) {
-    // the language was the last selected one saved in localstorage, so use that language!
-    activateLanguage(defaultLanguage);
-  } else {
-    // no language selected, so use the default
-    activateLanguage(languages[0]);
-  }
-
-  // if we click on a language tab, reload the page with that language in the URL
-  $("#lang-selector a").bind("click", function() {
-    window.location.replace("?" + $(this).data("language-name") + window.location.hash);
-    return false;
-  });
-
-}
+function activateLanguage(a){$("#lang-selector a").removeClass("active"),$("#lang-selector a[data-language-name='"+a+"']").addClass("active");for(var e=0;e<languages.length;e++)$(".highlight."+languages[e]).hide();$(".highlight."+a).show()}function setupLanguages(a){languages=a,currentLanguage=languages[0],defaultLanguage=localStorage.getItem("language"),""!=location.search.substr(1)&&-1!=jQuery.inArray(location.search.substr(1),languages)?(activateLanguage(location.search.substr(1)),localStorage.setItem("language",location.search.substr(1))):null!==defaultLanguage&&-1!=jQuery.inArray(defaultLanguage,languages)?activateLanguage(defaultLanguage):activateLanguage(languages[0]),$("#lang-selector a").bind("click",function(){return window.location.replace("?"+$(this).data("language-name")+window.location.hash),!1})}languages=[];

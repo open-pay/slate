@@ -1,5 +1,4 @@
-/*! normalize.css v2.0.1 | MIT License | git.io/normalize */
-article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
+/*! normalize.css v2.0.1 | MIT License | git.io/normalize */article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
 	display: block
 }
 audio, canvas, video {
@@ -126,4 +125,87 @@ textarea {
 table {
 	border-collapse: collapse;
 	border-spacing: 0
+}
+.content h1, .content h2, .content h3, body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 13px
+}
+.content h1, .content h2, .content h3 {
+	font-weight: bold
+}
+.content pre, .content code {
+	font-family: Monaco, "Courier New", monospace;
+	font-size: 12px
+}
+.content pre, .content code {
+	-ms-word-break: break-all;
+	word-break: break-all;
+	word-break: break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto
+}
+.tocify, .toc-footer {
+	display: none
+}
+.tocify-wrapper>img {
+	margin: 0 auto;
+	display: block
+}
+.content {
+	font-size: 12px
+}
+.content pre, .content code {
+	border: 1px solid #999999;
+	border-radius: 5px;
+	font-size: 0.8em
+}
+.content pre {
+	padding: 1.3em
+}
+.content code {
+	padding: 0.2em
+}
+.content table {
+	border: 1px solid #999999
+}
+.content table tr {
+	border-bottom: 1px solid #999999
+}
+.content table td, .content table th {
+	padding: 0.7em
+}
+.content p {
+	line-height: 1.5
+}
+.content a {
+	text-decoration: none;
+	color: #000
+}
+.content h1 {
+	font-size: 2.5em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	margin-top: 1em;
+	margin-bottom: 21px;
+	border: 2px solid #cccccc;
+	border-width: 2px 0;
+	text-align: center
+}
+.content h2 {
+	font-size: 1.8em;
+	margin-top: 2em;
+	border-top: 2px solid #cccccc;
+	padding-top: 0.8em
+}
+.content h1+h2, .content h1+div+h2 {
+	border-top: none;
+	padding-top: 0;
+	margin-top: 0
+}
+.content h3 {
+	font-size: 0.8em;
+	margin-top: 1.5em;
+	margin-bottom: 0.8em;
+	text-transform: uppercase
 }
