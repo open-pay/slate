@@ -3469,8 +3469,12 @@ card | ***object*** <br/> Medio de pago con el cual se cobrará la suscripción.
 
 > Definición
 
-```
+```shell
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions
+```
+
+```java
+openpayAPI.subscriptions().create({CUSTOMER_ID}, {REQUEST});
 ```
 
 > Ejemplo de petición 
@@ -3489,6 +3493,19 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    },
    "plan_id":"pbi4kb8hpb64x0uud2eb"
 }' 
+```
+
+```java
+final Calendar trialEndDate = Calendar.getInstance();
+trialEndDate.set(2014, 5, 1, 0, 0, 0);
+        
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Subscription request = new Subscription();
+request.planId("idPlan-01001");
+request.trialEndDate(trialEndDate.getTime());
+request.sourceId("ktrpvymgatocelsciak7");
+
+request = api.subscriptions().create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
@@ -3538,8 +3555,12 @@ Regresa el [objeto suscripción](#objeto-suscripción) creado o una [respuesta d
 
 > Definición
 
-```
+```shell
 PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions
+```
+
+```java
+openpayAPI.subscriptions().update({REQUEST});
 ```
 
 > Ejemplo de petición 
@@ -3558,6 +3579,19 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
         "cvv2":"1234"
     }
 }' 
+```
+
+```java
+final Calendar trialEndDate = Calendar.getInstance();
+trialEndDate.set(2014, 5, 1, 0, 0, 0);
+        
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Subscription request = new Subscription();
+request.planId("idPlan-01001");
+request.trialEndDate(trialEndDate.getTime());
+request.sourceId("ktrpvymgatocelsciak7");
+
+request = api.subscriptions().update(request);
 ```
 
 > Ejemplo de respuesta
@@ -3606,8 +3640,12 @@ Regresa el [objeto suscripción](#objeto-suscripción) actualizado o una [respue
 
 > Definición
 
-```
+```shell
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions/{SUBSCRIPTION_ID}
+```
+
+```java
+api.subscriptions().get({CUSTOMER_ID}, {SUBSCRIPTION_ID});
 ```
 
 > Ejemplo de petición 
@@ -3616,6 +3654,11 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subs
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/subscriptions/s0gmyor4yqtyv1miqwr0 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ``` 
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Subscription subscription = api.subscriptions().get("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
+```
 
 > Ejemplo de respuesta
 
@@ -3662,8 +3705,12 @@ Regresa un [objeto suscripción](#objeto-suscripción)
 
 > Definición
 
-```
+```shell
 DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions/{SUBSCRIPTION_ID}
+```
+
+```java
+openpayAPI.subscriptions().delete({CUSTOMER_ID}, {SUBSCRIPTION_ID});
 ```
 
 > Ejemplo de petición 
@@ -3672,6 +3719,11 @@ DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/s
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/subscriptions/s0gmyor4yqtyv1miqwr0 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -X DELETE
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.subscriptions().delete("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 ```
 
 Cancela inmediatamente la suscrupción del cliente. Ya no se realizarán mas cargos a la tarjeta y todos cargos pendientes se cancelarán.
@@ -3687,8 +3739,12 @@ Si la suscripción se cancelo correctamente la respuesta es vacía, si no se reg
 ##Listado de suscripciones
 > Definición
 
-```
+```shell
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions
+```
+
+```java
+openpayAPI.subscriptions().list({CUSTOMER_ID}, {REQUEST});
 ```
 
 > Ejemplo de petición 
@@ -3696,6 +3752,22 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subs
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/subscriptions?limit=10" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```java
+final Calendar dateGte = Calendar.getInstance();
+final Calendar dateLte = Calendar.getInstance();
+dateGte.set(2014, 5, 1, 0, 0, 0);
+dateLte.set(2014, 5, 15, 0, 0, 0);
+        
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.creationGte(dateGte.getTime());
+request.creationLte(dateLte.getTime());
+request.offset(0);
+request.limit(100);
+
+List<Subscription> subscriptions = api.subscriptions().list("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
