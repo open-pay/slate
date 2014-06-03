@@ -103,7 +103,7 @@ El parámetro -u se ocupa para realizar la autenticación HTTP Basic (al agregar
 Solo es necesario usar la URI base https://api.openpay.mx
 ```
 
-```html
+```php
 <? Openpay::setProductionMode(true); ?>
 ```
 
