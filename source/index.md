@@ -99,10 +99,10 @@ El parámetro -u se ocupa para realizar la autenticación HTTP Basic (al agregar
 ```
 
 ```java
-Sandbox:
+Sandbox
 final OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 
-Produccion:
+Produccion
 final OpenpayAPI api = new OpenpayAPI("https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 ```
 
@@ -117,7 +117,7 @@ Solo es necesario usar la URI base https://api.openpay.mx
 ```
 
 ```java
-Solo es necesario usar la URI base https://api.openpay.mx
+//Solo es necesario usar la URI base https://api.openpay.mx
 ```
 
 
@@ -243,10 +243,10 @@ $customer->charges->create({REQUEST});
 ```
 
 ```java
-Cliente:
+Cliente
 openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio:
+Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
@@ -383,10 +383,10 @@ $customer->charges->create({REQUEST});
 
 
 ```java
-Cliente:
+Cliente
 openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio:
+Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
@@ -534,10 +534,10 @@ $customer->charges->create({REQUEST});
 ```
 
 ```java
-Cliente:
+Cliente
 openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio:
+Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
@@ -647,10 +647,10 @@ $customer->charges->create({REQUEST});
 
 
 ```java
-Cliente:
+Cliente
 openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio:
+Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
@@ -761,10 +761,10 @@ $charge->capture({REQUEST});
 ```
 
 ```java
-Cliente:
+Cliente
 openpayAPI.charges().confirmCapture({CUSTOMER_ID}, {REQUEST});
 
-Comercio:
+Comercio
 openpayAPI.charges().confirmCapture({REQUEST});
 ```
 
@@ -876,10 +876,10 @@ $charge->refund({REQUEST});
 ```
 
 ```java
-Cliente:
+Cliente
 openpayAPI.charges().refund({CUSTOMER_ID}, {REQUEST});
 
-Comercio:
+Comercio
 openpayAPI.charges().refund({REQUEST});
 ```
 
@@ -1005,10 +1005,10 @@ $charge = $customer->charges->get({TRANSACTION_ID});
 ```
 
 ```java
-Cliente:
+Cliente
 openpayAPI.charges().get({CUSTOMER_ID}, {TRANSACTION_ID});
 
-Comercio:
+Comercio
 openpayAPI.charges().get({TRANSACTION_ID});
 ```
 
@@ -1119,10 +1119,10 @@ $chargeList = $customer->charges->getList({REQUEST});
 ```
 
 ```java
-Cliente:
+Cliente
 openpayAPI.charges().list({CUSTOMER_ID}, {REQUEST});
 
-Comercio:
+Comercio
 openpayAPI.charges().list({REQUEST});
 ```
 
@@ -1263,10 +1263,10 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/pay
 ```
 
 ```java
-Cliente:
+Cliente
 openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST}});
 
-Comercio:
+Comercio
 openpayAPI.payouts().create({REQUEST}});
 ```
 
@@ -1360,10 +1360,10 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/pay
 ```
 
 ```java
-Cliente:
+Cliente
 openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio:
+Comercio
 openpayAPI.payouts().create({REQUEST});
 ```
 
@@ -1456,10 +1456,10 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/pay
 ```
 
 ```java
-Cliente:
+Cliente
 openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio:
+Comercio
 openpayAPI.payouts().create({REQUEST});
 ```
 
@@ -1559,10 +1559,10 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payo
 ```
 
 ```java
-Cliente:
+Cliente
 openpayAPI.payouts().get({CUSTOMER_ID}, {TRANSACTION_ID});
 
-Comercio:
+Comercio
 openpayAPI.payouts().get({TRANSACTION_ID});
 ```
 
@@ -1637,10 +1637,10 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payo
 ```
 
 ```java
-Cliente:
+Cliente
 openpayAPI.payouts().list({CUSTOMER_ID}, {REQUEST});
 
-Comercio:
+Comercio
 openpayAPI.payouts().list({REQUEST});
 ```
 
