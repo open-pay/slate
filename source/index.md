@@ -2830,10 +2830,19 @@ creation_date | ***datetime*** <br/>Fecha y hora en que se creó la cuenta banc
  
 > Definición
 
-```
+```shell
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bankaccounts
 ```
-> Ejemplo de petición 
+
+```java
+Cliente
+openpayAPI.bankAccounts().create({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.bankAccounts().create({REQUEST});
+```
+
+> Ejemplo de petición con cliente
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/bankaccounts \
@@ -2843,9 +2852,20 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "clabe":"032180000118359719",
    "alias":"Cuenta principal",
    "holder_name":"Juan Hernández Sánchez"
-}' 
-
+}'
 ```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BankAccount request = new BankAccount();
+request.holderName("Juan Hernández Sánchez");
+request.alias("Cuenta principal");
+request.clabe("032XXXXXXXXXX59719");
+
+request = api.bankAccounts().create("a9pvykxz4g5rg0fplze0", request);
+```
+
+
 > Ejemplo de respuesta
 
 ```javascript
@@ -2878,16 +2898,29 @@ Regresa un [objeto cuenta bancaria](#objeto-cuenta-bancaria) creado o un error e
 
 > Definición
 
-```
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bankaccounts/{BANKACCOUNT_ID}
+```shell
+GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bankaccounts/{BANK_ACCOUNT_ID}
 ```
 
-> Ejemplo de petición 
+```java
+Cliente
+openpayAPI.bankAccounts().get({CUSTOMER_ID}, {BANK_ACCOUNT_ID});
+
+Comercio
+openpayAPI.bankAccounts().get({BANK_ACCOUNT_ID});
+```
+
+> Ejemplo de petición con cliente
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/bankaccounts/buyj4apkwilpp2jfxr9r \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ``` 
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BankAccount bankAccount = api.bankAccounts().get("a9pvykxz4g5rg0fplze0", "buyj4apkwilpp2jfxr9r");
+```
 
 > Ejemplo de respuesta
 
@@ -2917,16 +2950,29 @@ Regresa un [objeto cuenta bancaria](#objeto-cuenta-bancaria)
 
 > Definición
 
-```
-DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bankaccounts/{BANKACCOUNT_ID}
+```shell
+DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bankaccounts/{BANK_ACCOUNT_ID}
 ```
 
-> Ejemplo de petición 
+```java
+Cliente
+openpayAPI.bankAccounts().delete({CUSTOMER_ID}, {BANK_ACCOUNT_ID});
+
+Comercio
+openpayAPI.bankAccounts().delete({BANK_ACCOUNT_ID});
+```
+
+> Ejemplo de petición con cliente
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/bankaccounts/buyj4apkwilpp2jfxr9r \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -X DELETE
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.bankAccounts().delete("a9pvykxz4g5rg0fplze0", "buyj4apkwilpp2jfxr9r");
 ```
 
 Elimina la cuenta bancaria asociada al cliente. Las transacciones que se encuentran asociadas a esta cuenta no sufren cambios y se podrán seguir consultando.
@@ -2942,15 +2988,39 @@ Si la cuenta bancaria se borra correctamente la respuesta es vacía, si no se pu
 ##Listado de cuentas bancarias
 > Definición
 
-```
+```shell
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bankaccounts
 ```
 
-> Ejemplo de petición 
+```java
+Cliente
+openpayAPI.bankAccounts().list({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.bankAccounts().list({REQUEST});
+```
+
+> Ejemplo de petición con cliente
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/bankaccounts?limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```java
+final Calendar dateGte = Calendar.getInstance();
+final Calendar dateLte = Calendar.getInstance();
+dateGte.set(2014, 5, 1, 0, 0, 0);
+dateLte.set(2014, 5, 15, 0, 0, 0);
+        
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.creationGte(dateGte.getTime());
+request.creationLte(dateLte.getTime());
+request.offset(0);
+request.limit(100);
+        
+List<BankAccount> bankAccounts = api.bankAccounts().list("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
