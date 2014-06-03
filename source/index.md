@@ -4,6 +4,7 @@ title: API Reference
 language_tabs:
   - shell: cURL
   - php
+  - java
 
 toc_footers:
  - <a href='#'>Sign Up for a Developer Key</a>
@@ -97,6 +98,19 @@ El parámetro -u se ocupa para realizar la autenticación HTTP Basic (al agregar
 <? $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178ce26348b0fac'); ?>
 ```
 
+```java
+Sintaxis:
+  final OpenpayAPI api = new OpenpayAPI("endPoint", privateKey, merchantId);
+
+Donde:
+  * endPoint: URI del ambiente donde estaremos operando "pruebas o producción"
+  * privateKey: Llave privada del comercio
+  * merchantId: Id público del comercio
+
+Ejemplo:
+  final OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+```
+
 > Producción 
 
 ```shell
@@ -105,6 +119,10 @@ Solo es necesario usar la URI base https://api.openpay.mx
 
 ```php
 <? Openpay::setProductionMode(true); ?>
+```
+
+```java
+Para ejecutar operaciones en un ambiente de producción, basta con usar la URI base de producción
 ```
 
 
@@ -148,6 +166,10 @@ Openpay regresa objetos de JSON en las respuestas del servicio, incluso en caso 
     "error_code" : 1005,
     "request_id" : "1981cdb8-19cb-4bad-8256-e95d58bc035c"
 }
+```
+
+```java
+Para el caso de java, toda operación regresara una instancia de la clase "OpenpayServiceException" la cual contendrá esta información del error.
 ```
 
 Propiedad | Descripción
@@ -225,6 +247,15 @@ $customer->charges->create({REQUEST});
 ?>
 ```
 
+```java
+Cliente:
+openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
+
+Comercio:
+openpayAPI.charges().create({REQUEST});
+```
+
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -255,6 +286,20 @@ $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->create($chargeData);
 ?>
 ```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateCardChargeParams request = new CreateCardChargeParams();
+request.cardId("kqgykn96i7bcs1wwhvgw"); // =source_id
+request.amount(new BigDecimal("100.00"));
+request.description("Cargo inicial a mi merchant");
+request.orderId("oid-00051");
+request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
+request.capture(Boolean.TRUE);
+
+Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
+```
+
 
 > Ejemplo de respuesta
 
@@ -297,6 +342,7 @@ Este tipo de cargo requiere una tarjeta guardada o que hayas generado un token. 
 
 Una vez que tengas una tarjeta guardada o un token usa la propiedad <code>source_id</code> para enviar el identificador.
 
+La propiedad 'device_Session_Id' deberá ser generada desde el API JavaScript, véase [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
 
 <aside class="notice">
 Puedes realizar el cargo a la cuenta del comercio o a la cuenta de un cliente.
@@ -339,6 +385,16 @@ $customer = $openpay->customers->get({CUSTOMER_ID});
 $customer->charges->create({REQUEST});
 ?>
 ```
+
+
+```java
+Cliente:
+openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
+
+Comercio:
+openpayAPI.charges().create({REQUEST});
+```
+
 
 > Ejemplo de petición con cliente
 
@@ -384,6 +440,26 @@ $charge = $customer->charges->create($chargeData);
 ?>
 ```
 
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateCardChargeParams request = new CreateCardChargeParams();
+Card card = new Card();
+card.holderName("Juan Perez Ramirez");
+card.cardNumber("4111111111111111");
+card.cvv2("110");
+card.expirationMonth(12);
+card.expirationYear(20);
+request.amount(new BigDecimal("100.00"));
+request.description("Cargo inicial a mi cuenta");
+request.card(card);
+request.orderId("oid-00052");
+request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
+request.capture(Boolean.TRUE);
+
+Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
+```
+
+
 > Ejemplo de respuesta
 
 ```javascript
@@ -420,6 +496,9 @@ $charge = $customer->charges->create($chargeData);
 
 En este tipo de invocación es necesario enviar toda la información de la tarjeta, la cual solo será usada para esta venta y no será almacenada en el sistema. Esto lo puedes usar para realizar ventas directas en donde no requieres la tarjeta para un uso futuro.
 
+
+La propiedad 'device_Session_Id' deberá ser generada desde el API JavaScript, véase [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
+
 ###Petición 
 
 Propiedad | Descripción
@@ -434,6 +513,7 @@ capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se h
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+
 
 ##Cargo en tienda
 
@@ -457,6 +537,15 @@ $customer = $openpay->customers->get({CUSTOMER_ID});
 $customer->charges->create({REQUEST});
 ?>
 ```
+
+```java
+Cliente:
+openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
+
+Comercio:
+openpayAPI.charges().create({REQUEST});
+```
+
 
 > Ejemplo de petición con cliente
 
@@ -486,6 +575,17 @@ $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->create($chargeData);
 ?>
 ```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateStoreChargeParams request = new CreateStoreChargeParams();
+request.amount(new BigDecimal("100.00"));
+request.description("Cargo con tienda");
+request.orderId("oid-00053");
+
+Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
+```
+
 
 > Ejemplo de respuesta
 
@@ -550,6 +650,16 @@ $customer->charges->create({REQUEST});
 ?>
 ```
 
+
+```java
+Cliente:
+openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
+
+Comercio:
+openpayAPI.charges().create({REQUEST});
+```
+
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -571,12 +681,22 @@ $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02c
 $chargeData = array(
     'method' => 'bank_account',
     'amount' => 100,
-    'description' => 'Cargo con tienda',
+    'description' => 'Cargo con banco',
     'order_id' => 'oid-00055');
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->create($chargeData);
 ?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateBankChargeParams request = new CreateBankChargeParams();
+request.amount(new BigDecimal("100.00"));
+request.description("Cargo con banco");
+request.orderId("oid-00053");
+
+Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
 ```
 
 > Ejemplo de respuesta
@@ -645,6 +765,14 @@ $charge->capture({REQUEST});
 ?>
 ```
 
+```java
+Cliente:
+openpayAPI.charges().confirmCapture({CUSTOMER_ID}, {REQUEST});
+
+Comercio:
+openpayAPI.charges().confirmCapture({REQUEST});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -666,6 +794,15 @@ $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->get('tryqihxac3msedn4yxed');
 $charge->capture($captureData);
 ?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+ConfirmCaptureParams request = new ConfirmCaptureParams();
+request.chargeId("tryqihxac3msedn4yxed");
+request.amount(new BigDecimal("100.00"));
+
+Charge charge = api.charges().confirmCapture("ag4nktpdzebjiye1tlze", request);
 ```
 
 > Ejemplo de respuesta
@@ -743,6 +880,14 @@ $charge->refund({REQUEST});
 ?>
 ```
 
+```java
+Cliente:
+openpayAPI.charges().refund({CUSTOMER_ID}, {REQUEST});
+
+Comercio:
+openpayAPI.charges().refund({REQUEST});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -764,6 +909,15 @@ $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 $charge->refund($refundData);
 ?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+RefundParams request = new RefundParams();
+request.chargeId("tryqihxac3msedn4yxed");
+request.description("Monto de cargo devuelto");
+
+Charge charge = api.charges().refund("ag4nktpdzebjiye1tlze", request);
 ```
 
 > Ejemplo de respuesta
@@ -855,6 +1009,14 @@ $charge = $customer->charges->get({TRANSACTION_ID});
 ?>
 ```
 
+```java
+Cliente:
+openpayAPI.charges().get({CUSTOMER_ID}, {TRANSACTION_ID});
+
+Comercio:
+openpayAPI.charges().get({TRANSACTION_ID});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -869,6 +1031,11 @@ $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02c
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 ?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Charge charge = api.charges().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
 ```
 
 > Ejemplo de respuesta
@@ -956,6 +1123,14 @@ $chargeList = $customer->charges->getList({REQUEST});
 ?>
 ```
 
+```java
+Cliente:
+openpayAPI.charges().list({CUSTOMER_ID}, {REQUEST});
+
+Comercio:
+openpayAPI.charges().list({REQUEST});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -976,6 +1151,24 @@ $findData = array(
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
 $chargeList = $customer->charges->getList($findData);
 ?>
+```
+
+```java
+
+final Calendar dateGte = Calendar.getInstance();
+final Calendar dateLte = Calendar.getInstance();
+dateGte.set(2014, 5, 1, 0, 0, 0);
+dateLte.set(2014, 5, 15, 0, 0, 0);
+
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.creationGte(dateGte.getTime());
+request.creationLte(dateLte.getTime());
+request.offset(0);
+request.limit(100);
+request.amount(new BigDecimal("100.00"));
+
+List<Charge> charges = api.charges().list("ag4nktpdzebjiye1tlze", request);
 ```
 
 > Ejemplo de respuesta
@@ -1066,12 +1259,20 @@ Un pago es la transacción que permite extraer los fondos de una cuenta Openpay 
 
 > Definición
 
-```
+```shell
 Comercio
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
 
 Cliente
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
+```
+
+```java
+Cliente:
+openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST}});
+
+Comercio:
+openpayAPI.payouts().create({REQUEST}});
 ```
 
 > Ejemplo de petición con cliente
@@ -1087,6 +1288,18 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
     "description": "Retiro de saldo semanal",
     "order_id": "oid-00021"
 }' 
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateBankPayoutParams request = new CreateBankPayoutParams();
+request.bankAccountId("b7neajnjged4luqhvevr");
+request.amount(new BigDecimal("100.00"));
+request.description("Pago manual al cliente");
+request.orderId("ord-101");
+
+Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
+// Para crear pagos a tarjetas se deberá usar la clase CreateCardPayoutParams
 ```
 
 > Ejemplo de respuesta
@@ -1143,12 +1356,20 @@ Regresa un [objeto de transacción](#objeto-transacción) con la información de
 
 > Definición
 
-```
+```shell
 Comercio
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
 
 Cliente
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
+```
+
+```java
+Cliente:
+openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
+
+Comercio:
+openpayAPI.payouts().create({REQUEST});
 ```
 
 > Ejemplo de petición con cliente
@@ -1167,6 +1388,21 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguz
    "description":"Retiro de saldo semanal",
    "order_id":"oid-1110011"
 }' 
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateBankPayoutParams request = new CreateBankPayoutParams();
+BankAccount bankAccount = new BankAccount();
+bankAccount.holderName("Luis Hernandez");
+bankAccount.alias("CuentaBancoCliente01");
+bankAccount.clabe("032180000118359001");
+request.bankAccount(bankAccount);
+request.amount(new BigDecimal("100.00"));
+request.description("Pago a cuenta de banco");
+request.orderId("ord-102");
+
+Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
 ```
 
 > Ejemplo de respuesta
@@ -1216,12 +1452,20 @@ Regresa un [objeto de transacción](#objeto-transacción) con la información de
 
 > Definición
 
-```
+```shell
 Comercio
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
 
 Cliente
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
+```
+
+```java
+Cliente:
+openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
+
+Comercio:
+openpayAPI.payouts().create({REQUEST});
 ```
 
 > Ejemplo de petición con cliente
@@ -1240,6 +1484,23 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguz
    "description" : "Retiro de saldo semanal",
    "order_id" : "oid-00021"
 } ' 
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateCardPayoutParams request = new CreateCardPayoutParams();
+Card card = new Card();
+card.holderName("Juan Perez Ramirez");
+card.cardNumber("4111111111111111");
+card.cvv2("110");
+card.expirationMonth(12);
+card.expirationYear(20);
+request.card(card);
+request.amount(new BigDecimal("100.00"));
+request.description("Pago a cuenta de banco");
+request.orderId("ord-103");
+
+Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
 ```
 
 > Ejemplo de respuesta
@@ -1294,7 +1555,7 @@ Regresa un [objeto de transacción](#objeto-transacción) con la información de
 ##Obtener un pago
 > Definición
 
-```
+```shell
 Comercio
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts/{TRANSACTION_ID}
 
@@ -1302,11 +1563,24 @@ Comercio
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts/{TRANSACTION_ID}
 ```
 
+```java
+Cliente:
+openpayAPI.payouts().get({CUSTOMER_ID}, {TRANSACTION_ID});
+
+Comercio:
+openpayAPI.payouts().get({TRANSACTION_ID});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts/trwpxhrgfeub9eqdyvqz \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Payout payout = api.payouts().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
 ```
 
 > Ejemplo de respuesta
@@ -1354,12 +1628,12 @@ transaction_id| _**string**_ (requerido)<br/>Identificador del pago a consultar.
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
 
-##Listado de cargos
+##Listado de pagos
 
 > Definición
 
 
-```
+```shell
 Comercio
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
 
@@ -1367,11 +1641,36 @@ Comercio
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
+```java
+Cliente:
+openpayAPI.payouts().list({CUSTOMER_ID}, {REQUEST});
+
+Comercio:
+openpayAPI.payouts().list({REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts?creation[gte]=2013-11-01&limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```java
+final Calendar dateGte = Calendar.getInstance();
+final Calendar dateLte = Calendar.getInstance();
+dateGte.set(2014, 5, 1, 0, 0, 0);
+dateLte.set(2014, 5, 15, 0, 0, 0);
+
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.creationGte(dateGte.getTime());
+request.creationLte(dateLte.getTime());
+request.offset(0);
+request.limit(100);
+request.amount(new BigDecimal("100.00"));
+
+List<Payout> payouts = api.payouts().list("ag4nktpdzebjiye1tlze", request);
 ```
 
 > Ejemplo de respuesta
@@ -1504,8 +1803,12 @@ clabe         |***numeric*** <br/>Cuenta CLABE asociada con la que puede recibir
 
 > Definición
 
-```
+```shell
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
+```
+
+```java
+openpayAPI.customers().create({REQUEST});
 ```
 
 > Ejemplo de petición 
@@ -1519,6 +1822,27 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers \
    "email": "customer_email@me.com",
    "requires_account": false 
    }' 
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Customer request = new Customer();
+request.externalId("idExterno0101");
+request.name("Julian Gerardo");
+request.lastName("López Martínez");
+request.email("julian.martinez@gmail.com");
+request.phoneNumber("4421432915");
+Address address = new Address();
+address.city("Queretaro");
+address.countryCode("MX");
+address.state("Queretaro");
+address.postalCode("79125");
+address.line1("Av. Pie de la cuesta #12");
+address.line2("Desarrollo San Pablo");
+address.line3("Qro. Qro.");
+request.address(address);
+
+request = api.customers().create(request);
 ```
 
 > Ejemplo de respuesta
@@ -1542,13 +1866,13 @@ Crea un objeto cliente.
 
 Propiedad | Descripción
 --------- | ------
-external_id | ***string***   <br/> Identificador externo único para el cliente asignado por el comercio.
-name        | ***string*** (requerido)<br/>Nombre(s) del cliente.
-last_name   | ***string***  <br/>Apellidos del cliente.
-email       | ***string*** (requerido)<br/>Cuenta de correo electrónico del Cliente.
+external_id | ***string*** (Opcional, maxLength = 100)  <br/> Identificador externo único para el cliente asignado por el comercio.
+name        | ***string*** (requerido, maxLength = 100)<br/>Nombre(s) del cliente.
+last_name   | ***string*** (maxLength = 100)<br/>Apellidos del cliente.
+email       | ***string*** (requerido, maxLength = 100))<br/>Cuenta de correo electrónico del Cliente.
 requires_account | ***boolean***  (opcional, default = true) <br/> Enviar con valor **false** si requiere que el cliente se cree sin cuenta para manejo del saldo.
-phone_number| ***string***   <br/>Número telefónico del Cliente.
-[address](#objeto-dirección) | ***object*** <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
+phone_number| ***string*** (maxLength = 100) <br/>Número telefónico del Cliente.
+[address](#objeto-dirección) | ***object*** (opcional) <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
 
 ###Respuesta
 
@@ -1559,8 +1883,12 @@ Un [objeto cliente](#objeto-cliente) en caso que se hayan enviado todos los dato
 
 > Definición
 
-```
+```shell
 PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
+```
+
+```java
+openpayAPI.customers().update({REQUEST});
 ```
 
 > Ejemplo de petición 
@@ -1583,6 +1911,26 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni
    },
    "phone_number":"44209087654"
  }' 
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Customer request = new Customer();
+request.name("Julian Gerardo");
+request.lastName("López Martínez");
+request.email("julian.martinez@gmail.com");
+request.phoneNumber("4421432915");
+Address address = new Address();
+address.city("Queretaro");
+address.countryCode("10");
+address.state("Queretaro");
+address.postalCode("79125");
+address.line1("Av. Pie de la cuesta #12");
+address.line2("Desarrollo San Pablo");
+address.line3("Qro. Qro.");
+request.address(address);
+
+request = api.customers().update(request);
 ```
 
 > Ejemplo de respuesta
@@ -1628,8 +1976,12 @@ Regresa un [objeto cliente](#objeto-cliente) con la información actualizada, o 
 
 > Definición
 
-```
+```shell
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
+```
+
+```java
+openpayAPI.customers().get({CUSTOMER_ID});
 ```
 
 > Ejemplo de petición 
@@ -1638,6 +1990,11 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" 
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Customer customer = api.customers().get("a9pvykxz4g5rg0fplze0");
 ```
 
 > Ejemplo de respuesta
@@ -1679,8 +2036,12 @@ Si el identificador existe regresa un [objeto cliente](#objeto-cliente) con la i
 
 > Definición
 
-```
+```shell
 DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
+```
+
+```java
+openpayAPI.customers().delete({CUSTOMER_ID});
 ```
 
 > Ejemplo de petición 
@@ -1690,6 +2051,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X DELETE
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.customers().delete("a9pvykxz4g5rg0fplze0");
 ```
 
 Elimina un cliente permanentemente. Se cancelarán las suscripciones que tenga. Openpay mantienen los registros de las operaciones.
@@ -1707,8 +2073,12 @@ Si el cliente se borra correctamente la respuesta es vacía, si no se puede borr
 
 > Definición
 
-```
+```shell
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
+```
+
+```java
+openpayAPI.customers().list({REQUEST});
 ```
 
 > Ejemplo de petición 
@@ -1717,6 +2087,22 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers?creation[gte]=2013-11-01&limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" 
+```
+
+```java
+final Calendar dateGte = Calendar.getInstance();
+final Calendar dateLte = Calendar.getInstance();
+dateGte.set(2014, 5, 1, 0, 0, 0);
+dateLte.set(2014, 5, 15, 0, 0, 0);
+
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.creationGte(dateGte.getTime());
+request.creationLte(dateLte.getTime());
+request.offset(0);
+request.limit(100);
+
+api.customers().list(request);
 ```
 
 > Ejemplo de respuesta
