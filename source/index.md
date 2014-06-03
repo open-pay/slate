@@ -5,6 +5,7 @@ language_tabs:
   - shell: cURL
   - php
   - java
+  - csharp
 
 toc_footers:
  - <a href='#'>Sign Up for a Developer Key</a>
@@ -106,6 +107,16 @@ Produccion
 final OpenpayAPI api = new OpenpayAPI("https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 ```
 
+```csharp
+Sandbox
+OpenpayAPI openpayAPI = new OpenpayAPI("sk_3433941e467c4875b178ce26348b0fac", "moiep6umtcnanql3jrxp");
+openpayAPI.Production = false; // Default value = false
+
+Produccion
+OpenpayAPI openpayAPI = new OpenpayAPI("sk_3433941e467c4875b178ce26348b0fac", "moiep6umtcnanql3jrxp");
+openpayAPI.Production = true;
+```
+
 > Producción 
 
 ```shell
@@ -118,6 +129,10 @@ Solo es necesario usar la URI base https://api.openpay.mx
 
 ```java
 //Solo es necesario usar la URI base https://api.openpay.mx
+```
+
+```csharp
+openpayAPI.Production = true;
 ```
 
 
@@ -165,6 +180,10 @@ Openpay regresa objetos de JSON en las respuestas del servicio, incluso en caso 
 
 ```java
 //Para el caso de java, toda operación regresara una instancia de la clase "OpenpayServiceException" la cual contendrá esta información del error.
+```
+
+```csharp
+//Para el caso de C Sharp, toda operación regresara una instancia de la clase "OpenpayException" la cual contendrá esta información del error.
 ```
 
 Propiedad | Descripción
@@ -250,6 +269,13 @@ Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
+```csharp
+Cliente
+openpayAPI.ChargeService.Create({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.ChargeService.Create({REQUEST});
+```
 
 > Ejemplo de petición con cliente
 
@@ -295,6 +321,19 @@ request.capture(Boolean.TRUE);
 Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
 ```
 
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+ChargeRequest request = new ChargeRequest();
+request.Method = "card";
+request.SourceId = "kwkoqpg6fcvfse8k8mg2";
+request.Amount = new Decimal(9.99);
+request.Description = "Testing from .Net";
+request.OrderId = "oid-00051";
+request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
+request.Capture = true;
+
+Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
+```
 
 > Ejemplo de respuesta
 
@@ -381,13 +420,20 @@ $customer->charges->create({REQUEST});
 ?>
 ```
 
-
 ```java
 Cliente
 openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
 
 Comercio
 openpayAPI.charges().create({REQUEST});
+```
+
+```csharp
+Cliente
+openpayAPI.ChargeService.Create({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.ChargeService.Create({REQUEST});
 ```
 
 
@@ -454,6 +500,25 @@ request.capture(Boolean.TRUE);
 Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
 ```
 
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+ChargeRequest request = new ChargeRequest();
+request.Method = "card";
+Card card = new Card();
+card.HolderName = "Juan Perez Ramirez";
+card.CardNumber = "4111111111111111";
+card.Cvv2 = "110";
+card.ExpirationMonth = "12";
+card.ExpirationYear = "20";
+request.Card = card;
+request.Amount = new Decimal(9.99);
+request.Description = "Cargo inicial a mi cuenta";
+request.OrderId = "oid-00052";
+request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
+request.Capture = true;
+
+Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
+```
 
 > Ejemplo de respuesta
 
@@ -541,6 +606,13 @@ Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
+```csharp
+Cliente
+openpayAPI.ChargeService.Create({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.ChargeService.Create({REQUEST});
+```
 
 > Ejemplo de petición con cliente
 
@@ -581,6 +653,16 @@ request.orderId("oid-00053");
 Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
 ```
 
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+ChargeRequest request = new ChargeRequest();
+request.Method = "store";
+request.Amount = new Decimal(100.00);
+request.Description = "Cargo con tienda";
+request.OrderId = "oid-00053";
+
+Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
+```
 
 > Ejemplo de respuesta
 
@@ -645,7 +727,6 @@ $customer->charges->create({REQUEST});
 ?>
 ```
 
-
 ```java
 Cliente
 openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
@@ -654,6 +735,13 @@ Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
+```csharp
+Cliente
+openpayAPI.ChargeService.Create({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.ChargeService.Create({REQUEST});
+```
 
 > Ejemplo de petición con cliente
 
@@ -692,6 +780,17 @@ request.description("Cargo con banco");
 request.orderId("oid-00053");
 
 Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+ChargeRequest request = new ChargeRequest();
+request.Method = "bank_account";
+request.Amount = new Decimal(100.00);
+request.Description = "Cargo con banco";
+request.OrderId = "oid-00053";
+
+Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
 ```
 
 > Ejemplo de respuesta
@@ -768,6 +867,14 @@ Comercio
 openpayAPI.charges().confirmCapture({REQUEST});
 ```
 
+```csharp
+Cliente
+openpayAPI.ChargeService.Capture({CUSTOMER_ID}, {TRANSACTION_ID}, {AMOUNT});
+
+Comercio
+openpayAPI.ChargeService.Capture({TRANSACTION_ID}, {AMOUNT});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -798,6 +905,11 @@ request.chargeId("tryqihxac3msedn4yxed");
 request.amount(new BigDecimal("100.00"));
 
 Charge charge = api.charges().confirmCapture("ag4nktpdzebjiye1tlze", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Charge charge = api.ChargeService.Capture("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", new Decimal(100.00));
 ```
 
 > Ejemplo de respuesta
@@ -883,6 +995,14 @@ Comercio
 openpayAPI.charges().refund({REQUEST});
 ```
 
+```csharp
+Cliente
+openpayAPI.ChargeService.Refund({CUSTOMER_ID}, {TRANSACTION_ID}, {DESCRIPTION});
+
+Comercio
+openpayAPI.ChargeService.Refund({TRANSACTION_ID}, {DESCRIPTION});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -913,6 +1033,11 @@ request.chargeId("tryqihxac3msedn4yxed");
 request.description("Monto de cargo devuelto");
 
 Charge charge = api.charges().refund("ag4nktpdzebjiye1tlze", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Charge charge = api.ChargeService.Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto");
 ```
 
 > Ejemplo de respuesta
@@ -1012,6 +1137,14 @@ Comercio
 openpayAPI.charges().get({TRANSACTION_ID});
 ```
 
+```csharp
+Cliente
+openpayAPI.ChargeService.Get({CUSTOMER_ID}, {TRANSACTION_ID});
+
+Comercio
+openpayAPI.ChargeService.Get({TRANSACTION_ID});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1031,6 +1164,11 @@ $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Charge charge = api.charges().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Charge charge = api.ChargeService.Get("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed");
 ```
 
 > Ejemplo de respuesta
@@ -1126,6 +1264,14 @@ Comercio
 openpayAPI.charges().list({REQUEST});
 ```
 
+```csharp
+Cliente
+openpayAPI.ChargeService.List({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.ChargeService.List({REQUEST});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1149,7 +1295,6 @@ $chargeList = $customer->charges->getList($findData);
 ```
 
 ```java
-
 final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
@@ -1164,6 +1309,18 @@ request.limit(100);
 request.amount(new BigDecimal("100.00"));
 
 List<Charge> charges = api.charges().list("ag4nktpdzebjiye1tlze", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.CreationGte = new Datetime(2014, 5, 1);
+request.CreationLte = new DateTime(2014, 5, 15);
+request.Offset = 0;
+request.Limit = 100;
+request.Amount = new Decimal(100.00);
+
+List<Charge> charges= openpayAPI.ChargeService.List("ag4nktpdzebjiye1tlze", request);
 ```
 
 > Ejemplo de respuesta
