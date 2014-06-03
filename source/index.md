@@ -3828,8 +3828,12 @@ Para que las cuentas de los clientes manejen saldo debieron ser creadas con la p
 ##Cobrar Comisión
 > Definición
 
-```
+```shell
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees
+```
+
+```java
+openpayAPI.fees().create({REQUEST});
 ```
 
 > Ejemplo de petición 
@@ -3844,6 +3848,17 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees \
      "description" : "Cobro de Comisión",
      "order_id" : "oid-1245"
 }' 
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateFeeParams request = new CreateFeeParams();
+request.customerId("a9pvykxz4g5rg0fplze0");
+request.amount(new BigDecimal("100.00"));
+request.description("Cobro de comisión");
+request.orderId("oid-1245");
+
+Fee fee = api.fees().create(request);
 ```
 
 > Ejemplo de respuesta
@@ -3883,8 +3898,12 @@ El [objeto de transacción](#objeto-transacción) de la comisión, con su fecha 
 ##Listado de comisiones
 > Definición
 
-```
+```shell
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees
+```
+
+```java
+openpayAPI.fees().list({REQUEST});
 ```
 
 > Ejemplo de petición 
@@ -3892,6 +3911,22 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees?limit=10" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```java
+final Calendar dateGte = Calendar.getInstance();
+final Calendar dateLte = Calendar.getInstance();
+dateGte.set(2014, 5, 1, 0, 0, 0);
+dateLte.set(2014, 5, 15, 0, 0, 0);
+        
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.creationGte(dateGte.getTime());
+request.creationLte(dateLte.getTime());
+request.offset(0);
+request.limit(100);
+
+List<Fee> fees = api.fees().list(request);
 ```
 
 > Ejemplo de respuesta
