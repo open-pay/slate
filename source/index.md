@@ -99,16 +99,11 @@ El parámetro -u se ocupa para realizar la autenticación HTTP Basic (al agregar
 ```
 
 ```java
-Sintaxis:
-  final OpenpayAPI api = new OpenpayAPI("endPoint", privateKey, merchantId);
+Sandbox:
+final OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 
-Donde:
-  * endPoint: URI del ambiente donde estaremos operando "pruebas o producción"
-  * privateKey: Llave privada del comercio
-  * merchantId: Id público del comercio
-
-Ejemplo:
-  final OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+Produccion:
+final OpenpayAPI api = new OpenpayAPI("https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 ```
 
 > Producción 
@@ -122,7 +117,7 @@ Solo es necesario usar la URI base https://api.openpay.mx
 ```
 
 ```java
-Para ejecutar operaciones en un ambiente de producción, basta con usar la URI base de producción
+Solo es necesario usar la URI base https://api.openpay.mx
 ```
 
 
@@ -169,7 +164,7 @@ Openpay regresa objetos de JSON en las respuestas del servicio, incluso en caso 
 ```
 
 ```java
-Para el caso de java, toda operación regresara una instancia de la clase "OpenpayServiceException" la cual contendrá esta información del error.
+//Para el caso de java, toda operación regresara una instancia de la clase "OpenpayServiceException" la cual contendrá esta información del error.
 ```
 
 Propiedad | Descripción
@@ -2430,7 +2425,7 @@ customer_id |***string*** <br/>Identificador del cliente al que pertenece la tar
 
 > Definición
 
-```
+```shell
 Comercio
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards
 
@@ -2438,7 +2433,15 @@ Cliente
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
 ```
 
-> Ejemplo de petición 
+```java
+Cliente
+openpayAPI.cards().create({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.cards().create({REQUEST});
+```
+
+> Ejemplo de petición con cliente
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards \
@@ -2451,6 +2454,27 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "expiration_month":"12",
    "cvv2":"110"
  }' 
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Card request = new Card();
+request.holderName("Juan Perez Ramirez");
+request.cardNumber("4111111111111111");
+request.cvv2("110");
+request.expirationMonth(12);
+request.expirationYear(20);
+Address address = new Address();
+address.city("Queretaro");
+address.countryCode("10");
+address.state("Queretaro");
+address.postalCode("79125");
+address.line1("Av. Pie de la cuesta #12");
+address.line2("Desarrollo San Pablo");
+address.line3("Qro. Qro.");
+request.address(address);
+
+request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
@@ -2500,7 +2524,7 @@ Regresa un [objeto tarjeta](#objeto-tarjeta) cuando se creó correctamente o una
  
 > Definición
 
-```
+```shell
 Comercio
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards
 
@@ -2508,7 +2532,15 @@ Cliente
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
 ```
 
-> Ejemplo de petición 
+```java
+Cliente
+openpayAPI.cards().create({CUSTOMER_ID}, {RESPONSE});
+
+Comercio
+openpayAPI.cards().create({RESPONSE});
+```
+
+> Ejemplo de petición con cliente
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards \
@@ -2517,6 +2549,14 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -X POST -d '{
       "token_id":"tokgslwpdcrkhlgxqi9a"
    }' 
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Card request = new Card();
+request.tokenId("tokgslwpdcrkhlgxqi9a");
+
+request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
@@ -2553,7 +2593,7 @@ Regresa un [objeto tarjeta](#objeto-tarjeta)
 
 > Definición
 
-```
+```shell
 Comercio
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}
 
@@ -2561,13 +2601,26 @@ Cliente
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
 ```
 
-> Ejemplo de petición 
+```java
+Cliente
+openpayAPI.cards().get({CUSTOMER_ID}, {CARD_ID});
+
+Comercio
+openpayAPI.cards().get({CARD_ID});
+```
+
+> Ejemplo de petición con cliente
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" 
 ``` 
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Card card = api.cards().get("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
+```
 
 > Ejemplo de respuesta
 
@@ -2607,7 +2660,7 @@ Regresa un [objeto tarjeta](#objeto-tarjeta)
 
 > Definición
 
-```
+```shell
 Comercio
 DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}
 
@@ -2615,12 +2668,25 @@ Cliente
 DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
 ```
 
-> Ejemplo de petición 
+```java
+Cliente
+openpayAPI.cards().delete({CUSTOMER_ID}, {CARD_ID});
+
+Comercio
+openpayAPI.cards().delete({CARD_ID});
+```
+
+> Ejemplo de petición con cliente
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -X DELETE
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.cards().delete("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 ```
 
 Elimina una tarjeta del cliente o comercio. Una vez eliminada no se permitirá hacer movimientos, sin embargo, se mantendrán todos los registros de operaciones que haya realizado y se podrán consultar en el dashboard.
@@ -2639,7 +2705,7 @@ Si la tarjeta se borra correctamente la respuesta es vacía, si no se puede borr
 ##Listado de tarjetas
 > Definición
 
-```
+```shell
 Comercio
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
 
@@ -2647,11 +2713,34 @@ Cliente
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
 ```
 
-> Ejemplo de petición 
+```java
+Cliente
+openpayAPI.cards().list({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.cards().list({REQUEST});
+```
+
+> Ejemplo de petición con cliente
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards?limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```java
+final Calendar dateGte = Calendar.getInstance();
+final Calendar dateLte = Calendar.getInstance();
+dateGte.set(2014, 5, 1, 0, 0, 0);
+dateLte.set(2014, 5, 15, 0, 0, 0);
+        
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.creationGte(dateGte.getTime());
+request.creationLte(dateLte.getTime());
+request.offset(0);
+request.limit(100);
+List<Card> cards = api.cards().list("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
