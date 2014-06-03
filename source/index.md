@@ -2102,7 +2102,7 @@ request.creationLte(dateLte.getTime());
 request.offset(0);
 request.limit(100);
 
-api.customers().list(request);
+List<Customer> customers = api.customers().list(request);
 ```
 
 > Ejemplo de respuesta
@@ -2151,15 +2151,19 @@ Regresa un arreglo de [objetos cliente](#objeto-cliente).
 Las transferencias permite transferir fondos entre las cuentas de tus clientes. 
 
 <aside class="notice">
-**Nota:** Si desea realizar una transferencia a un banco consulte la sección de pagos.
+**Nota:** Si desea realizar una transferencia a un banco consulte la [sección de pagos](#pagos-o-retiros).
 </aside>
 
 ##Transferir entre clientes
 
 > Definición
 
-```
+```shell
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/transfers
+```
+
+```java
+openpayAPI.transfers().create({FROM_CUSTOMER_ID}, {REQUEST});
 ```
 
 > Ejemplo de petición 
@@ -2175,6 +2179,18 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
      "order_id" : "oid-1245"
 }' 
 ```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateTransferParams request = new CreateTransferParams();
+request.toCustomerId("ah1ki9jmb50mvlsf9gqn");
+request.amount(new BigDecimal("100.00"));
+request.description("Transferencia del Customer 1 al Customer 2");
+request.orderId("idOrdExt-0101");
+
+Transfer transfer = api.transfers().create("a9pvykxz4g5rg0fplze0", request);
+```
+
 
 > Ejemplo de respuesta
 
@@ -2214,8 +2230,12 @@ Si la transacción se realiza correctamente, la respuesta contendrá un [objeto 
 
 > Definición
 
-```
+```shell
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/transfers/{TRANSACTION_ID}
+```
+
+```java
+openpayAPI.transfers().get({CUSTOMER_ID}, {TRANSACTION_ID});
 ```
 
 > Ejemplo de petición 
@@ -2225,6 +2245,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" 
 ``` 
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Transfer transfer = api.transfers().get("a9pvykxz4g5rg0fplze0", "tr6cxbcefzatd10guvvw");
+```
 
 > Ejemplo de respuesta
 
@@ -2261,8 +2286,12 @@ Regresa un [objeto de transacción](#objeto-transacción)
 
 > Definición
 
-```
+```shell
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/transfers
+```
+
+```java
+openpayAPI.transfers().list({CUSTOMER_ID}, {REQUEST});
 ```
 
 > Ejemplo de petición 
@@ -2270,6 +2299,22 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/tran
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/transfers?limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```java
+final Calendar dateGte = Calendar.getInstance();
+final Calendar dateLte = Calendar.getInstance();
+dateGte.set(2014, 5, 1, 0, 0, 0);
+dateLte.set(2014, 5, 15, 0, 0, 0);
+        
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.creationGte(dateGte.getTime());
+request.creationLte(dateLte.getTime());
+request.offset(0);
+request.limit(100);
+
+List<Transfer> transfers = api.transfers().list("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
