@@ -3099,13 +3099,18 @@ status | ***string*** <br/> Estatus del Plan puede ser active o deleted. Si el p
 status_after_retry | ***string*** <br/> Este campo especifica el status en el que se pondrá la suscripción una vez que se agotaron los intentos. Puede ser: unpaid o cancelled
 trial_days | ***numeric*** <br/> Numero de días de prueba por defecto que tendrá la suscripción.
 
-##Crear una nuevo plan
+##Crear un nuevo plan
  
 > Definición
 
-```
+```shell
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans
 ```
+
+```java
+openpayAPI.plans().create({REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -3122,6 +3127,20 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans \
   "repeat_every": "1"
 }' 
 ```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Plan request = new Plan();
+request.name("Curso de ingles");
+request.amount(new BigDecimal("100.00"));
+request.repeatEvery(1, PlanRepeatUnit.WEEK);
+request.retryTimes(3);
+request.statusAfterRetry(PlanStatusAfterRetry.UNPAID);
+request.trialDays(30);
+
+request = api.plans().create(request);
+```
+
 > Ejemplo de respuesta
 
 ```javascript
@@ -3164,8 +3183,12 @@ Regresa un [objeto plan](#objeto-plan) creado o un error en caso de ocurrir alg�
 
 > Definición
 
-```
+```shell
 PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
+```
+
+```java
+openpayAPI.plans().update({REQUEST});
 ```
 
 > Ejemplo de petición 
@@ -3178,6 +3201,15 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbm
       "name": "Curso de aleman",
       "trial_days": "60"
    }' 
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Plan request = new Plan();
+request.name("Curso de ingles");
+request.trialDays(30);
+
+request = api.plans().update(request);
 ```
 
 > Ejemplo de respuesta
@@ -3213,8 +3245,12 @@ Regresa un [objeto plan](#objeto-plan) con la información actualizada o una [re
 
 > Definición
 
-```
+```shell
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
+```
+
+```java
+openpayAPI.plans().get({PLAN_ID});
 ```
 
 > Ejemplo de petición 
@@ -3223,6 +3259,11 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbmnoevrt \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ``` 
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Plan plan = api.plans().get("p8e6x3hafqqsbmnoevrt");
+```
 
 > Ejemplo de respuesta
 
@@ -3256,8 +3297,12 @@ Regresa un [objeto plan](#objeto-plan)
 
 > Definición
 
-```
+```shell
 DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
+```
+
+```java
+openpayAPI.plans().delete({PLAN_ID});
 ```
 
 > Ejemplo de petición 
@@ -3266,6 +3311,11 @@ DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbmnoevrt \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -X DELETE
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.plans().delete("p8e6x3hafqqsbmnoevrt");
 ```
 
 Al eliminar un plan no se permitirán crear mas suscripciones asociadas a él, sin embargo las suscripciones ya asociadas se mantienen y se continuan cobrando.
@@ -3281,8 +3331,12 @@ Si el plan se borra correctamente la respuesta es vacía, si no se puede borrar 
 ##Listado de planes
 > Definición
 
-```
+```shell
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans
+```
+
+```java
+openpayAPI.plans().list({REQUEST});
 ```
 
 > Ejemplo de petición 
@@ -3290,6 +3344,22 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans?limit=10" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```java
+final Calendar dateGte = Calendar.getInstance();
+final Calendar dateLte = Calendar.getInstance();
+dateGte.set(2014, 5, 1, 0, 0, 0);
+dateLte.set(2014, 5, 15, 0, 0, 0);
+        
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.creationGte(dateGte.getTime());
+request.creationLte(dateLte.getTime());
+request.offset(0);
+request.limit(100);
+
+List<Plan> plans = api.plans().list(request);
 ```
 
 > Ejemplo de respuesta
