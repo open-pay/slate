@@ -4494,6 +4494,10 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees
 openpayAPI.fees().create({REQUEST});
 ```
 
+```csharp
+openpayAPI.FeeService.Create({REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -4517,6 +4521,17 @@ request.description("Cobro de comisión");
 request.orderId("oid-1245");
 
 Fee fee = api.fees().create(request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+FeeRequest request = new FeeRequest();
+request.CustomerId = "a9pvykxz4g5rg0fplze0";
+request.Amount = new Decimal(100.00);
+request.Description = "Cobro de comisión";
+request.OrderId = "oid-1245;
+
+Fee fee = api.FeeService.Create(request);
 ```
 
 > Ejemplo de respuesta
@@ -4564,6 +4579,10 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees
 openpayAPI.fees().list({REQUEST});
 ```
 
+```csharp
+openpayAPI.FeeService.List({REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -4585,6 +4604,17 @@ request.offset(0);
 request.limit(100);
 
 List<Fee> fees = api.fees().list(request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.CreationGte = new Datetime(2014, 5, 1);
+request.CreationLte = new DateTime(2014, 5, 15);
+request.Offset = 0;
+request.Limit = 100;
+
+List<Fee> fees = api.FeeService.List(request);
 ```
 
 > Ejemplo de respuesta
