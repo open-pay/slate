@@ -3,9 +3,9 @@ title: API Reference
 
 language_tabs:
   - shell: cURL
-  - php
-  - java
-  - csharp
+  - php: PHP
+  - java: JAVA
+  - csharp: C#
 
 toc_footers:
  - <a href='#'>Sign Up for a Developer Key</a>
@@ -2066,6 +2066,10 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
 openpayAPI.customers().create({REQUEST});
 ```
 
+```csharp
+openpayAPI.CustomerService.Create({REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2098,6 +2102,26 @@ address.line3("Qro. Qro.");
 request.address(address);
 
 request = api.customers().create(request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Customer request = new Customer();
+request.Name = "Julian Gerardo";
+request.LastName = "López Martínez";
+request.Email = "julian.martinez@gmail.com";
+request.PhoneNumber = "4421432915";
+Address address = new Address();
+address.City = "Queretaro";
+address.CountryCode = "MX";
+address.State = "Queretaro";
+address.PostalCode = "79125";
+address.Line1 = "Av. Pie de la cuesta #12";
+address.Line2 = "Desarrollo San Pablo";
+address.Line3 = "Qro. Qro.";
+request.Address = address;
+
+request = api.CustomerService.Create(request);
 ```
 
 > Ejemplo de respuesta
@@ -2146,6 +2170,10 @@ PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 openpayAPI.customers().update({REQUEST});
 ```
 
+```csharp
+openpayAPI.CustomerService.Update({REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2186,6 +2214,26 @@ address.line3("Qro. Qro.");
 request.address(address);
 
 request = api.customers().update(request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Customer request = new Customer();
+request.Name = "Julian Gerardo";
+request.LastName = "López Martínez";
+request.Email = "julian.martinez@gmail.com";
+request.PhoneNumber = "4421432915";
+Address address = new Address();
+address.City = "Queretaro";
+address.CountryCode = "MX";
+address.State = "Queretaro";
+address.PostalCode = "79125";
+address.Line1 = "Av. Pie de la cuesta #12";
+address.Line2 = "Desarrollo San Pablo";
+address.Line3 = "Qro. Qro.";
+request.Address = address;
+
+request = api.CustomerService.Update(request);
 ```
 
 > Ejemplo de respuesta
@@ -2239,6 +2287,10 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 openpayAPI.customers().get({CUSTOMER_ID});
 ```
 
+```csharp
+openpayAPI.CustomerService.Update({CUSTOMER_ID});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2250,6 +2302,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Customer customer = api.customers().get("a9pvykxz4g5rg0fplze0");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Customer customer = api.CustomerService.Update("a9pvykxz4g5rg0fplze0");
 ```
 
 > Ejemplo de respuesta
@@ -2299,6 +2356,10 @@ DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 openpayAPI.customers().delete({CUSTOMER_ID});
 ```
 
+```csharp
+openpayAPI.CustomerService.Delete({CUSTOMER_ID});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2311,6 +2372,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.customers().delete("a9pvykxz4g5rg0fplze0");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.CustomerService.Delete("a9pvykxz4g5rg0fplze0");
 ```
 
 Elimina un cliente permanentemente. Se cancelarán las suscripciones que tenga. Openpay mantienen los registros de las operaciones.
@@ -2336,6 +2402,10 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
 openpayAPI.customers().list({REQUEST});
 ```
 
+```csharp
+openpayAPI.CustomerService.List({REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2358,6 +2428,17 @@ request.offset(0);
 request.limit(100);
 
 List<Customer> customers = api.customers().list(request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.CreationGte = new Datetime(2014, 5, 1);
+request.CreationLte = new DateTime(2014, 5, 15);
+request.Offset = 0;
+request.Limit = 100;
+
+List<Customer> customers = api.CustomerService.List(request);
 ```
 
 > Ejemplo de respuesta
