@@ -3642,6 +3642,10 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans
 openpayAPI.plans().create({REQUEST});
 ```
 
+```chsarp
+openpayAPI.PlanService.Create({REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -3670,6 +3674,20 @@ request.statusAfterRetry(PlanStatusAfterRetry.UNPAID);
 request.trialDays(30);
 
 request = api.plans().create(request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Plan request = new Plan();
+request.Name = "Curso de ingles";
+request.Amount = new Decimal(100.00);
+request.RepeatEvery = 1;
+request.RepeatUnit = "week";
+request.RetryTimes = 2;
+request.StatusAfterRetry = "unpaid";
+request.TrialDays = 30;
+
+request = api.PlanService.Create(request);
 ```
 
 > Ejemplo de respuesta
@@ -3722,6 +3740,10 @@ PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 openpayAPI.plans().update({REQUEST});
 ```
 
+```csharp
+openpayAPI.PlanService.Update({REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -3737,10 +3759,21 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbm
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan request = new Plan();
+request.setId("p8e6x3hafqqsbmnoevrt");
 request.name("Curso de ingles");
 request.trialDays(30);
 
 request = api.plans().update(request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Plan request = new Plan();
+request.Id = "p8e6x3hafqqsbmnoevrt";
+request.Name = "Curso de ingles";
+request.TrialDays = 30;
+
+request = api.PlanService.Update(request);
 ```
 
 > Ejemplo de respuesta
@@ -3784,6 +3817,10 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 openpayAPI.plans().get({PLAN_ID});
 ```
 
+```csharp
+openpayAPI.PlanService.Get({PLAN_ID});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -3794,6 +3831,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbm
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan plan = api.plans().get("p8e6x3hafqqsbmnoevrt");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Plan plan = api.PlanService.Get("p8e6x3hafqqsbmnoevrt");
 ```
 
 > Ejemplo de respuesta
@@ -3836,6 +3878,10 @@ DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 openpayAPI.plans().delete({PLAN_ID});
 ```
 
+```csharp
+openpayAPI.PlanService.Delete({PLAN_ID});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -3847,6 +3893,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbm
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.plans().delete("p8e6x3hafqqsbmnoevrt");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.PlanService.Delete("p8e6x3hafqqsbmnoevrt");
 ```
 
 Al eliminar un plan no se permitirán crear mas suscripciones asociadas a él, sin embargo las suscripciones ya asociadas se mantienen y se continuan cobrando.
@@ -3870,6 +3921,10 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans
 openpayAPI.plans().list({REQUEST});
 ```
 
+```csharp
+openpayAPI.PlanService.List({REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -3891,6 +3946,18 @@ request.offset(0);
 request.limit(100);
 
 List<Plan> plans = api.plans().list(request);
+```
+
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.CreationGte = new Datetime(2014, 5, 1);
+request.CreationLte = new DateTime(2014, 5, 15);
+request.Offset = 0;
+request.Limit = 100;
+
+List<Plan> plans = api.PlanService.List(request);
 ```
 
 > Ejemplo de respuesta
