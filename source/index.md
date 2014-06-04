@@ -1421,10 +1421,18 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/pay
 
 ```java
 Cliente
-openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST}});
+openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
 
 Comercio
 openpayAPI.payouts().create({REQUEST}});
+```
+
+```csharp
+Cliente
+openpayAPI.PayoutService.Create({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.PayoutService.Create({REQUEST});
 ```
 
 > Ejemplo de petición con cliente
@@ -1445,13 +1453,25 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateBankPayoutParams request = new CreateBankPayoutParams();
-request.bankAccountId("b7neajnjged4luqhvevr");
+request.bankAccountId("b7neajnjged4luqhvevr"); // = destination_id
 request.amount(new BigDecimal("100.00"));
 request.description("Pago manual al cliente");
 request.orderId("ord-101");
 
 Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
 // Para crear pagos a tarjetas se deberá usar la clase CreateCardPayoutParams
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+PayoutRequest request = new PayoutRequest();
+request.Method = "bank_account";
+request.DestinationId = "b7neajnjged4luqhvevr";
+request.Amount = new Decimal(100.00);
+request.Description = "Pago manual al cliente";
+request.OrderId = "ord-101";
+
+Payout = api.PayoutService.Create("ag4nktpdzebjiye1tlze", request);
 ```
 
 > Ejemplo de respuesta
@@ -1524,6 +1544,14 @@ Comercio
 openpayAPI.payouts().create({REQUEST});
 ```
 
+```csharp
+Cliente
+openpayAPI.PayoutService.Create({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.PayoutService.Create({REQUEST});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1555,6 +1583,22 @@ request.description("Pago a cuenta de banco");
 request.orderId("ord-102");
 
 Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+PayoutRequest request = new PayoutRequest();
+request.Method = "bank_account";
+BankAccount bankAccount = new BankAccount();
+bankAccount.HolderName = "Luis Hernandez";
+bankAccount.Alias = "CuentaBancoCliente01";
+bankAccount.CLABE = "032180000118359001";
+request.BankAccount = bankAccount;
+request.Amount = new Decimal(100.00);
+request.Description = "Pago a cuenta de banco";
+request.OrderId = "ord-101";
+
+Payout = api.PayoutService.Create("ag4nktpdzebjiye1tlze", request);
 ```
 
 > Ejemplo de respuesta
@@ -1620,6 +1664,14 @@ Comercio
 openpayAPI.payouts().create({REQUEST});
 ```
 
+```csharp
+Cliente
+openpayAPI.PayoutService.Create({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.PayoutService.Create({REQUEST});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1653,6 +1705,24 @@ request.description("Pago a cuenta de banco");
 request.orderId("ord-103");
 
 Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+PayoutRequest request = new PayoutRequest();
+request.Method = "card";
+Card card = new Card();
+card.HolderName = "Juan Perez Ramirez";
+card.CardNumber = "4111111111111111";
+card.Cvv2 = "110";
+card.ExpirationMonth = "12";
+card.ExpirationYear = "20";
+request.Card = card;
+request.Amount = new Decimal(100.00);
+request.Description = "Pago a cuenta de banco";
+request.OrderId = "ord-101";
+
+Payout = api.PayoutService.Create("ag4nktpdzebjiye1tlze", request);
 ```
 
 > Ejemplo de respuesta
@@ -1723,6 +1793,14 @@ Comercio
 openpayAPI.payouts().get({TRANSACTION_ID});
 ```
 
+```csharp
+Cliente
+openpayAPI.PayoutService.Get({CUSTOMER_ID}, {TRANSACTION_ID});
+
+Comercio
+openpayAPI.PayoutService.Get({TRANSACTION_ID});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1733,6 +1811,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguz
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Payout payout = api.payouts().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Payout = api.PayoutService.Get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
 ```
 
 > Ejemplo de respuesta
@@ -1801,6 +1884,14 @@ Comercio
 openpayAPI.payouts().list({REQUEST});
 ```
 
+```csharp
+Cliente
+openpayAPI.PayoutService.List({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.PayoutService.List({REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -1823,6 +1914,18 @@ request.limit(100);
 request.amount(new BigDecimal("100.00"));
 
 List<Payout> payouts = api.payouts().list("ag4nktpdzebjiye1tlze", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.CreationGte = new Datetime(2014, 5, 1);
+request.CreationLte = new DateTime(2014, 5, 15);
+request.Offset = 0;
+request.Limit = 100;
+request.Amount = new Decimal(100.00);
+
+List<Payout> payouts = api.PayoutService.List("ag4nktpdzebjiye1tlze", request);
 ```
 
 > Ejemplo de respuesta
