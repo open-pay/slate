@@ -2820,6 +2820,14 @@ Comercio
 openpayAPI.cards().create({REQUEST});
 ```
 
+```csharp
+Cliente
+openpayAPI.CardService.Create({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.CardService.Create({REQUEST});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -2854,6 +2862,27 @@ address.line3("Qro. Qro.");
 request.address(address);
 
 request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Card request = new Card();
+request.HolderName = "Juan Perez Ramirez";
+request.CardNumber = "4111111111111111";
+request.Cvv2 = "110";
+request.ExpirationMonth = "12";
+request.ExpirationYear = "20";
+Address address = new Address();
+address.City = "Queretaro";
+address.CountryCode = "MX";
+address.State = "Queretaro";
+address.PostalCode = "79125";
+address.Line1 = "Av. Pie de la cuesta #12";
+address.Line2 = "Desarrollo San Pablo";
+address.Line3 = "Qro. Qro.";
+request.Address = address;
+
+request = api.CardService.Create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
@@ -2919,6 +2948,14 @@ Comercio
 openpayAPI.cards().create({RESPONSE});
 ```
 
+```csharp
+Cliente
+openpayAPI.CardService.Create({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.CardService.Create({REQUEST});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -2936,6 +2973,14 @@ Card request = new Card();
 request.tokenId("tokgslwpdcrkhlgxqi9a");
 
 request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Card request = new Card();
+// tokenid????
+
+request = api.CardService.Create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
@@ -2988,6 +3033,14 @@ Comercio
 openpayAPI.cards().get({CARD_ID});
 ```
 
+```csharp
+Cliente
+openpayAPI.CardService.Get({CUSTOMER_ID}, {CARD_ID});
+
+Comercio
+openpayAPI.CardService.Get({CARD_ID});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -2999,6 +3052,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card card = api.cards().get("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Card card = api.CardService.Get("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 ```
 
 > Ejemplo de respuesta
@@ -3055,6 +3113,14 @@ Comercio
 openpayAPI.cards().delete({CARD_ID});
 ```
 
+```csharp
+Cliente
+openpayAPI.CardService.Delete({CUSTOMER_ID}, {CARD_ID});
+
+Comercio
+openpayAPI.CardService.Delete({CARD_ID});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -3066,6 +3132,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.cards().delete("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.CardService.Delete("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 ```
 
 Elimina una tarjeta del cliente o comercio. Una vez eliminada no se permitirá hacer movimientos, sin embargo, se mantendrán todos los registros de operaciones que haya realizado y se podrán consultar en el dashboard.
@@ -3100,6 +3171,14 @@ Comercio
 openpayAPI.cards().list({REQUEST});
 ```
 
+```csharp
+Cliente
+openpayAPI.CardService.List({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.CardService.List({REQUEST});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -3120,6 +3199,17 @@ request.creationLte(dateLte.getTime());
 request.offset(0);
 request.limit(100);
 List<Card> cards = api.cards().list("a9pvykxz4g5rg0fplze0", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.CreationGte = new Datetime(2014, 5, 1);
+request.CreationLte = new DateTime(2014, 5, 15);
+request.Offset = 0;
+request.Limit = 100;
+
+List<Card> cards = api.CardService.List("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
