@@ -5,6 +5,7 @@ language_tabs:
   - shell: cURL
   - php
   - java
+  - javascript : node.js
 
 toc_footers:
  - <a href='#'>Sign Up for a Developer Key</a>
@@ -106,6 +107,11 @@ Produccion
 final OpenpayAPI api = new OpenpayAPI("https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 ```
 
+```javascript
+var Openpay = require('openpay');
+var openpay = new Openpay('moiep6umtcnanql3jrxp','sk_3433941e467c4875b178ce26348b0fac');
+```
+
 > Producción 
 
 ```shell
@@ -118,6 +124,10 @@ Solo es necesario usar la URI base https://api.openpay.mx
 
 ```java
 //Solo es necesario usar la URI base https://api.openpay.mx
+```
+
+```javascript
+openpay.setProductionReady(true);
 ```
 
 
@@ -153,7 +163,7 @@ Openpay regresa objetos de JSON en las respuestas del servicio, incluso en caso 
 
 > Ejemplo de objeto
 
-```javascript
+```json
 {
     "category" : "request",
     "description" : "The customer with id 'm4hqp35pswl02mmc567' does not exist",
@@ -250,6 +260,25 @@ Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
+```javascript
+// Request
+var chargeRequest = {
+  'method' : 'card',
+  'source_id' : '...', // ID de la tarjeta o token
+  // ...
+}
+
+// Comercio
+openpay.charges.create(chargeRequest, function(error, charge) {
+  // ...
+});
+
+// Cliente
+openpay.customers.charges.create(customerId, chargeRequest, function(error, charge) {
+  // ...
+});
+```
+
 
 > Ejemplo de petición con cliente
 
@@ -295,10 +324,23 @@ request.capture(Boolean.TRUE);
 Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
 ```
 
+```javascript
+var chargeRequest = {
+   'source_id' : 'kqgykn96i7bcs1wwhvgw',
+   'method' : 'card',
+   'amount' : 100,
+   'description' : 'Cargo inicial a mi cuenta',
+   'order_id' : 'oid-00051'
+}
+
+openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function(error, charge) {
+  // ...
+});
+```
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"trzjaozcik8msyqshka4",
    "amount":100.00,
@@ -390,6 +432,26 @@ Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
+```javascript
+// Request
+var chargeRequest = {
+  'method' : 'card',
+  'card' : {
+    // Datos de tarjeta
+  }
+  // ...
+}
+
+// Comercio
+openpay.charges.create(chargeRequest, function(error, charge) {
+  // ...
+});
+
+// Cliente
+openpay.customers.charges.create(customerId, chargeRequest, function(error, charge) {
+  // ...
+});
+```
 
 > Ejemplo de petición con cliente
 
@@ -454,10 +516,29 @@ request.capture(Boolean.TRUE);
 Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
 ```
 
+```javascript
+var chargeRequest = {
+   'card': {
+      'card_number': '4111111111111111',
+      'holder_name': 'Juan Perez Ramirez',
+      'expiration_year': '20',
+      'expiration_month': '12',
+      'cvv2': '110'
+   },
+   'method' : 'card',
+   'amount' : 100,
+   'description' : 'Cargo inicial a mi cuenta',
+   'order_id' : 'oid-00052'
+};
+
+openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function(error, charge) {
+  // ...
+});
+```
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"tr6cxbcefzatd10guvvw",
    "amount":100.00,
@@ -541,6 +622,23 @@ Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
+```javascript
+// Request
+var chargeRequest = {
+  'method' : 'store',
+  // ...
+}
+
+// Comercio
+openpay.charges.create(chargeRequest, function(error, charge) {
+  // ...
+});
+
+// Cliente
+openpay.customers.charges.create(customerId, chargeRequest, function(error, charge) {
+  // ...
+});
+```
 
 > Ejemplo de petición con cliente
 
@@ -581,10 +679,23 @@ request.orderId("oid-00053");
 Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
 ```
 
+```javascript
+var storeChargeRequest = {
+   'method' : 'store',
+   'amount' : 100,
+   'description' : 'Cargo con tienda',
+   'order_id' : 'oid-00053'
+};
+
+openpay.customers.charges.create('ag4nktpdzebjiye1tlze', storeChargeRequest, function(error, charge) {
+  // ...
+});
+```
+
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"trnirkiyobo5qfex55ef",
    "amount":100.00,
@@ -654,6 +765,23 @@ Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
+```javascript
+// Request
+var chargeRequest = {
+  'method' : 'bank_account',
+  // ...
+}
+
+// Comercio
+openpay.charges.create(chargeRequest, function(error, charge) {
+  // ...
+});
+
+// Cliente
+openpay.customers.charges.create(customerId, chargeRequest, function(error, charge) {
+  // ...
+});
+```
 
 > Ejemplo de petición con cliente
 
@@ -694,9 +822,23 @@ request.orderId("oid-00053");
 Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
 ```
 
+```javascript
+var bankChargeRequest = {
+   'method' : 'bank_account',
+   'amount' : 100,
+   'description' : 'Cargo con banco',
+   'order_id' : 'oid-00055'
+};
+
+openpay.customers.charges.create('ag4nktpdzebjiye1tlze', bankChargeRequest, function(error, charge) {
+  // ...
+});
+
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"trnzf2xjwpupjfryyj23",
    "amount":100.00,
@@ -802,7 +944,7 @@ Charge charge = api.charges().confirmCapture("ag4nktpdzebjiye1tlze", request);
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"tryqihxac3msedn4yxed",
    "amount":100.00,
@@ -883,6 +1025,18 @@ Comercio
 openpayAPI.charges().refund({REQUEST});
 ```
 
+```javascript
+// Comercio
+openpay.charges.refund(transactionId, refundRequest, function(error, charge) {
+  // ...
+});
+
+// Cliente
+openpay.customers.charges.refund(customerId, transactionId, refundRequest, function(error, charge) {
+  // ...
+});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -915,9 +1069,19 @@ request.description("Monto de cargo devuelto");
 Charge charge = api.charges().refund("ag4nktpdzebjiye1tlze", request);
 ```
 
+```javascript
+var refundRequest = {
+   'description' : 'devolución'
+};
+
+openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest, function(error, charge) {
+  // ...
+});
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"tr6cxbcefzatd10guvvw",
    "amount":100.00,
@@ -1012,6 +1176,18 @@ Comercio
 openpayAPI.charges().get({TRANSACTION_ID});
 ```
 
+```javascript
+// Comercio
+openpay.charges.get(transactionId, function(error, charge) {
+  // ...
+});
+
+// Cliente
+openpay.customers.charges.get(customerId, transactionId, function(error, charge) {
+  // ...
+});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1033,9 +1209,15 @@ OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98
 Charge charge = api.charges().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
 ```
 
+```javascript
+openpay.customers.charges.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', function(error, charge){
+  // ...
+});
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"tr6cxbcefzatd10guvvw",
    "amount":100.00,
@@ -1126,6 +1308,35 @@ Comercio
 openpayAPI.charges().list({REQUEST});
 ```
 
+```javascript
+// Sin parametros
+
+// Comercio
+openpay.charges.list(function(error, list) {
+  // ...
+});
+
+// Cliente
+openpay.customers.charges.list(customerId, function(error, list) {
+  // ...
+});
+
+// Parametros de busqueda
+var searchParams = {
+  // ...
+}
+
+// Comercio
+openpay.charges.list(searchParams, function(error, list) {
+  // ...
+});
+
+// Cliente
+openpay.customers.charges.list(customerId, searchParams, function(error, list) {
+  // ...
+});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1149,7 +1360,6 @@ $chargeList = $customer->charges->getList($findData);
 ```
 
 ```java
-
 final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
@@ -1166,9 +1376,20 @@ request.amount(new BigDecimal("100.00"));
 List<Charge> charges = api.charges().list("ag4nktpdzebjiye1tlze", request);
 ```
 
+```javascript
+var searchParams = {
+  'creation[gte]' : '2013-11-01',
+  'limit' : 2
+};
+
+openpay.customers.charges.list('ag4nktpdzebjiye1tlze',searchParams, function(error, chargeList) {
+  // ...
+});
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 [
    {
       "id":"tryqihxac3msedn4yxed",
@@ -1270,6 +1491,23 @@ Comercio
 openpayAPI.payouts().create({REQUEST}});
 ```
 
+```javascript
+//Request
+var payoutRequest = {
+    'destination_id' : '...' // ID de la cuenta de banco o de la tarjeta 
+};
+
+// Comercio
+openpay.payouts.create(payoutRequest, function(error, payout) {
+  // ...
+});
+
+// Cliente
+openpay.customers.payouts.create(customerId, payoutRequest, function(error, payout) {
+  // ...
+});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1297,9 +1535,23 @@ Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
 // Para crear pagos a tarjetas se deberá usar la clase CreateCardPayoutParams
 ```
 
+```javascript
+var payoutRequest = {
+    'method': 'card',
+    'destination_id': 'k3d54sd3mdjf75udjfvoc',
+    'amount': 10.50,
+    'description': 'Retiro de saldo semanal',
+    'order_id': 'oid-00021'
+};
+
+openpay.customers.payouts.create('ag4nktpdzebjiye1tlze', payoutRequest, function(error, payout) {
+  // ...
+});
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "amount":10.5,
    "authorization":null,
@@ -1367,6 +1619,27 @@ Comercio
 openpayAPI.payouts().create({REQUEST});
 ```
 
+```javascript
+//Request
+var payoutRequest = {
+    'method' : 'bank_account',
+    'bank_account' : {
+      // ...
+    },
+    // ...
+};
+
+// Comercio
+openpay.payouts.get(payoutRequest, function(error, payout) {
+  // ...
+});
+
+// Cliente
+openpay.customers.payouts.get(customerId, payoutRequest, function(error, payout) {
+  // ...
+});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1400,9 +1673,26 @@ request.orderId("ord-102");
 Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
 ```
 
+```javascript
+var payoutRequest = {
+   'method':'bank_account',
+   'bank_account':{
+      'clabe':'012298026516924616',
+      'holder_name':'Mi empresa'
+   },
+   'amount':10.50,
+   'description':'Retiro de saldo semanal',
+   'order_id':'oid-1110011'
+};
+
+openpay.customers.payouts.create('ag4nktpdzebjiye1tlze', payoutRequest, function(error, payout) {
+  // ...
+});
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"tr4f2atubqchinw71vfs",
    "amount":10.50,
@@ -1463,6 +1753,27 @@ Comercio
 openpayAPI.payouts().create({REQUEST});
 ```
 
+```javascript
+//Request
+var payoutRequest = {
+    'method' : 'card',
+    'card' : {
+      // ...
+    },
+    // ...
+};
+
+// Comercio
+openpay.payouts.create(payoutRequest, function(error, payout) {
+  // ...
+});
+
+// Cliente
+openpay.customers.payouts.create(customerId, payoutRequest, function(error, payout) {
+  // ...
+});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1498,9 +1809,26 @@ request.orderId("ord-103");
 Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
 ```
 
+```javascript
+var payoutRequest = {
+   'method': 'card',
+   'card': {
+      'card_number': '4111111111111111',
+      'holder_name': 'Juan Perez Ramirez'
+   },
+   'amount' : 10.50,
+   'description' : 'Retiro de saldo semanal',
+   'order_id' : 'oid-00021'
+};
+
+openpay.customers.payouts.create('asynwirguzkgq2bizogo', payoutRequest, function(error, payout) {
+  // ...
+});
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"trwpxhrgfeub9eqdyvqz",
    "amount":10.50,
@@ -1566,6 +1894,18 @@ Comercio
 openpayAPI.payouts().get({TRANSACTION_ID});
 ```
 
+```javascript
+// Comercio
+openpay.payouts.get(transactionId, function(error, payout) {
+  // ...
+});
+
+// Cliente
+openpay.customers.payouts.get(customerId, transactionId, function(error, payout) {
+  // ...
+});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1578,9 +1918,15 @@ OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98
 Payout payout = api.payouts().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
 ```
 
+```javascript
+openpay.customers.payouts.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', function(error, payout) {
+  // ...
+});
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"trwpxhrgfeub9eqdyvqz",
    "amount":10.50,
@@ -1644,6 +1990,35 @@ Comercio
 openpayAPI.payouts().list({REQUEST});
 ```
 
+```javascript
+// Sin parametros
+
+// Comercio
+openpay.payouts.list(function(error, list) {
+  // ...
+});
+
+// Cliente
+openpay.customers.payouts.list(customerId, function(error, list) {
+  // ...
+});
+
+// Parametros de busqueda
+var searchParams = {
+  // ...
+}
+
+// Comercio
+openpay.payouts.list(searchParams, function(error, list) {
+  // ...
+});
+
+// Cliente
+openpay.customers.payouts.list(customerId, searchParams, function(error, list) {
+  // ...
+});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -1668,9 +2043,21 @@ request.amount(new BigDecimal("100.00"));
 List<Payout> payouts = api.payouts().list("ag4nktpdzebjiye1tlze", request);
 ```
 
+```javascript
+var searchParams = {
+  'creation[gte]' : '2013-11-01',
+  'limit' : 2
+};
+
+openpay.customers.payouts.list('asynwirguzkgq2bizogo', searchParams, function(error, list) {
+  // ...
+});
+```
+
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 [
    {
       "id":"tr4f2atubqchinw71vfs",
@@ -1757,7 +2144,7 @@ A los clientes les puedes agregar tarjetas y cuentas de banco para despues reali
 
 > Ejemplo de objeto
 
-```javascript
+```json
 {
    "id":"cz4nkhrlcu9k7qd4lwqx",
    "creation_date":"2013-11-08T12:04:46-06:00",
@@ -1806,6 +2193,12 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
 openpayAPI.customers().create({REQUEST});
 ```
 
+```javascript
+openpay.customers.create(customerRequest, function(error, customer) {
+  // ... 
+});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -1840,9 +2233,21 @@ request.address(address);
 request = api.customers().create(request);
 ```
 
+```javascript
+var customerRequest = {
+   'name': 'customer name',
+   'email': 'customer_email@me.com',
+   'requires_account': false 
+   };
+
+openpay.customers.create(customerRequest, function(error, customer) {
+  // ... 
+});
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"anbnldwgni1way3yp2dw",
    "name":"customer name",
@@ -1886,6 +2291,17 @@ PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 openpayAPI.customers().update({REQUEST});
 ```
 
+```javascript
+var customerRequest = {
+  // ...
+}
+
+openpay.customers.update(customerId, customerRequest, function(error, customer) {
+  // ... 
+});
+```
+
+
 > Ejemplo de petición 
 
 ```shell
@@ -1928,9 +2344,29 @@ request.address(address);
 request = api.customers().update(request);
 ```
 
+```javascript
+var customerRequest = {
+    'name': 'customer name',
+    'email': 'customer_email@me.com',
+    'address':{
+      'city':'Queretaro',
+      'state':'Queretaro',
+      'line1':'Calle 10',
+      'postal_code':'76000',
+      'line2':'col. san pablo',
+      'line3':'entre la calle 1 y la 2',
+      'country_code':'MX'
+    }
+};
+
+openpay.customers.update('anbnldwgni1way3yp2dw', customerRequest, function(error, customer) {
+  // ... 
+});
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"anbnldwgni1way3yp2dw",
    "name":"customer name",
@@ -1979,6 +2415,12 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 openpayAPI.customers().get({CUSTOMER_ID});
 ```
 
+```javascript
+openpay.customers.get(customerId, function(error, customer) {
+  // ... 
+});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -1992,9 +2434,15 @@ OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98
 Customer customer = api.customers().get("a9pvykxz4g5rg0fplze0");
 ```
 
+```javascript
+openpay.customers.get('a9pvykxz4g5rg0fplze0', function(error, customer) {
+  // ... 
+});
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"anbnldwgni1way3yp2dw",
    "name":"customer name",
@@ -2039,6 +2487,12 @@ DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 openpayAPI.customers().delete({CUSTOMER_ID});
 ```
 
+```javascript
+openpay.customers.delete(customerId, function(error, customer) {
+  // ... 
+});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2053,7 +2507,13 @@ OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98
 api.customers().delete("a9pvykxz4g5rg0fplze0");
 ```
 
-Elimina un cliente permanentemente. Se cancelarán las suscripciones que tenga. Openpay mantienen los registros de las operaciones.
+```javascript
+openpay.customers.delete('a9pvykxz4g5rg0fplze0', function(error, customer) {
+  // ... 
+});
+```
+
+Elimina un cliente permanentemente. Se cancelarán las suscripciones que tenga. Openpay mantiene los registros de las operaciones.
 
 ###Petición
 
@@ -2074,6 +2534,23 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
 
 ```java
 openpayAPI.customers().list({REQUEST});
+```
+
+```javascript
+// Sin parametros
+openpay.customers.list(function(error, list) {
+  // ...
+});
+
+// Con parametros
+
+var searchParams = {
+  // ...
+}
+
+openpay.customers.list(searchParams, function(error, list) {
+  // ...
+});
 ```
 
 > Ejemplo de petición 
@@ -2100,9 +2577,21 @@ request.limit(100);
 List<Customer> customers = api.customers().list(request);
 ```
 
+```javascript
+var searchParams = {
+  'creation[gte]' : '2013-11-01',
+  'limit' : 2
+};
+
+openpay.customers.list(searchParams, function(error, list) {
+  // ...
+});
+```
+
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 [{
    "id":"cpjdhf754ythr65yu9k7q",
    "creation_date":"2013-11-08T12:04:46-06:00",
@@ -2161,6 +2650,12 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/tra
 openpayAPI.transfers().create({FROM_CUSTOMER_ID}, {REQUEST});
 ```
 
+```javascript
+openpay.customers.transfers.create(customerId, transferRequest, function(error, transfer) {
+  // ...
+});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2186,10 +2681,22 @@ request.orderId("idOrdExt-0101");
 Transfer transfer = api.transfers().create("a9pvykxz4g5rg0fplze0", request);
 ```
 
+```javascript
+var transferRequest = {                                          
+  'customer_id' : 'dvocf97jd20es3tw5laz',
+  'amount' : 12.50,          
+  'description' : 'Transferencia entre cuentas',
+  'order_id' : 'oid-1245'
+};
+
+openpay.customers.transfers.create('ag4nktpdzebjiye1tlze', transferRequest, function(error, transfer) {
+  // ...
+});
+```
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "amount":12.50,
    "authorization":null,
@@ -2203,7 +2710,7 @@ Transfer transfer = api.transfers().create("a9pvykxz4g5rg0fplze0", request);
    "description":"Transferencia entre cuentas",
    "error_message":null,
    "order_id":"oid-1245",
-   "customer_id":"dvocf97jd20es3tw5laz"
+   "customer_id":"a9pvykxz4g5rg0fplze0"
 }
 ```
 
@@ -2233,6 +2740,12 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/tran
 openpayAPI.transfers().get({CUSTOMER_ID}, {TRANSACTION_ID});
 ```
 
+```javascript
+openpay.customers.transfers.get(customerId, transactionId, function(error, transfer) {
+  // ...
+});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2246,9 +2759,15 @@ OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98
 Transfer transfer = api.transfers().get("a9pvykxz4g5rg0fplze0", "tr6cxbcefzatd10guvvw");
 ```
 
+```javascript
+openpay.customers.transfers.get('ag4nktpdzebjiye1tlze', 'twpmbike2jejex3pahzd', function(error, transfer) {
+  // ...
+});
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "amount":12.50,
    "authorization":null,
@@ -2289,6 +2808,18 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/tran
 openpayAPI.transfers().list({CUSTOMER_ID}, {REQUEST});
 ```
 
+```javascript
+// Sin parametros de busqueda
+openpay.customers.transfers.list(customerId, function(error, transfer) {
+  // ...
+});
+
+//Con parametros de busqueda
+openpay.customers.transfers.list(customerId, searchParams, function(error, transfer) {
+  // ...
+});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2312,9 +2843,18 @@ request.limit(100);
 List<Transfer> transfers = api.transfers().list("a9pvykxz4g5rg0fplze0", request);
 ```
 
+```javascript
+var searchParams = {
+  'limit' : 2
+};
+openpay.customers.transfers.list('ag4nktpdzebjiye1tlze', searchParams, function(error, transfer) {
+  // ...
+});
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 [
    {
       "amount":130.00,
@@ -2376,7 +2916,7 @@ Se pueden almacenar multiples tarjetas de débito y/o crédito a nivel cliente o
 
 > Ejemplo de objeto 
 
-```javascript
+```json
 {
    "type":"debit",
    "brand":"mastercard",
@@ -2441,6 +2981,18 @@ Comercio
 openpayAPI.cards().create({REQUEST});
 ```
 
+```javascript
+  // Comercio
+  openpay.cards.create(cardRequest, function(error, card))  {
+    // ...
+  }
+
+  // Cliente
+  openpay.customers.cards.create(customerId, cardRequest, function(error, card))  {
+    // ...
+  }
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -2477,9 +3029,23 @@ request.address(address);
 request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
 ```
 
+```javascript
+var cardRequest = {
+   'card_number':'4111111111111111',
+   'holder_name':'Juan Perez Ramirez',
+   'expiration_year':'20',
+   'expiration_month':'12',
+   'cvv2':'110'
+};
+
+openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(error, card)  {
+    // ...    
+});
+```
+
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"ktrpvymgatocelsciak7",
    "type":"debit",
@@ -2561,7 +3127,7 @@ request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "type":"credit",
    "brand":"visa",
@@ -2624,7 +3190,7 @@ Card card = api.cards().get("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"ktrpvymgatocelsciak7",
    "type":"debit",
@@ -2745,7 +3311,7 @@ List<Card> cards = api.cards().list("a9pvykxz4g5rg0fplze0", request);
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 [
    {
       "id":"kxq1rpdymlcpxekvjsxm",
@@ -2802,7 +3368,7 @@ Se pueden almacenar múltiples cuentas bancarias por cliente o por comercio para
 
 > Ejemplo de objeto 
 
-```javascript
+```json
 {
    "id":"brppwl9nwmruogk2do0j",
    "clabe":"032180000118359719",
@@ -2868,7 +3434,7 @@ request = api.bankAccounts().create("a9pvykxz4g5rg0fplze0", request);
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"buyj4apkwilpp2jfxr9r",
    "clabe":"032XXXXXXXXXX59719",
@@ -2924,7 +3490,7 @@ BankAccount bankAccount = api.bankAccounts().get("a9pvykxz4g5rg0fplze0", "buyj4a
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"buyj4apkwilpp2jfxr9r",
    "clabe":"032XXXXXXXXXX59719",
@@ -3025,7 +3591,7 @@ List<BankAccount> bankAccounts = api.bankAccounts().list("a9pvykxz4g5rg0fplze0",
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 [{
    "id":"brppwl9nwmruogk2do0j",
    "clabe":"032180000118359719",
@@ -3069,7 +3635,7 @@ Los planes son recursos en Openpay que permiten crear plantillas para las suscri
 
 > Ejemplo de objeto 
 
-```javascript
+```json
 {
     "name": "Curso de ingles",
     "status": "active",
@@ -3143,7 +3709,7 @@ request = api.plans().create(request);
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"p8e6x3hafqqsbmnoevrt",
    "name":"Curso de ingles",
@@ -3214,7 +3780,7 @@ request = api.plans().update(request);
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"p8e6x3hafqqsbmnoevrt",
    "name":"Curso de aleman",
@@ -3267,7 +3833,7 @@ Plan plan = api.plans().get("p8e6x3hafqqsbmnoevrt");
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"p8e6x3hafqqsbmnoevrt",
    "name":"Curso de aleman",
@@ -3364,7 +3930,7 @@ List<Plan> plans = api.plans().list(request);
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 [
     {
         "name": "Curso de aleman",
@@ -3421,7 +3987,7 @@ Para poder suscribir algún cliente es necesario primero [crear un plan](#crear-
 
 > Ejemplo de objeto 
 
-```javascript
+```json
 {
     "status": "trial",
     "card": {
@@ -3510,7 +4076,7 @@ request = api.subscriptions().create("a9pvykxz4g5rg0fplze0", request);
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"s0gmyor4yqtyv1miqwr0",
    "status":"trial",
@@ -3596,7 +4162,7 @@ request = api.subscriptions().update(request);
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"s0gmyor4yqtyv1miqwr0",
    "status":"trial",
@@ -3662,7 +4228,7 @@ Subscription subscription = api.subscriptions().get("a9pvykxz4g5rg0fplze0", "s0g
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"s0gmyor4yqtyv1miqwr0",
    "status":"trial",
@@ -3772,7 +4338,7 @@ List<Subscription> subscriptions = api.subscriptions().list("a9pvykxz4g5rg0fplze
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 [
    {
       "id":"s0gmyor4yqtyv1miqwr0",
@@ -3863,7 +4429,7 @@ Fee fee = api.fees().create(request);
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "amount":12.50,
    "authorization":null,
@@ -3931,7 +4497,7 @@ List<Fee> fees = api.fees().list(request);
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 [
    {
       "amount":30.00,
@@ -3997,7 +4563,7 @@ Para usar esta funcionalidad de la API, te recomendamos usar nuestra librería e
 
 > Ejemplo de objeto 
 
-```javascript
+```json
 {
       "id":"tokfa4swch8gr4icy2ma",
       "card":{
@@ -4060,7 +4626,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens \
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"k1n0mscnjwhxqia8q7cm",
    "card":{
@@ -4117,7 +4683,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxq
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "id":"k1n0mscnjwhxqia8q7cm",
    "card":{
@@ -4163,7 +4729,7 @@ El objeto comercio permite consultar la información de tu cuenta a través de l
 
 > Ejemplo de Objeto:
 
-```javascript
+```json
 { 
    "id": "m9lrykwsmljagrfb38rs", 
    "creationDate": "2013-11-13T16:58:40-06:00", 
@@ -4213,7 +4779,7 @@ Merchant merchant = api.merchant().get();
 
 > Ejemplo de respuesta
 
-```javascript
+```json
 {
    "name":"Demo Openpay",
    "email":"demo@openpay.mx",
@@ -4245,7 +4811,7 @@ Información de objetos compartidos en peticiones y respuestas.
 
 > Ejemplo de Objeto:
 
-```javascript
+```json
 {
    "id":"trehwr2zarltvae56vxl",
    "authorization":null,
@@ -4293,7 +4859,7 @@ card| ***objeto*** <br/>Datos de la tarjeta usada en la transacción. Ver objeto
 
 > Ejemplo de Objeto:
 
-```javascript
+```json
 {
    "line1":"Av 5 de Febrero",
    "line2":"Roble 207",
