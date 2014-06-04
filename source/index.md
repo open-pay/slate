@@ -3311,6 +3311,14 @@ Comercio
 openpayAPI.bankAccounts().create({REQUEST});
 ```
 
+```csharp
+Cliente
+openpayAPI.BankAccountService.Create({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.BankAccountService.Create({REQUEST});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -3334,6 +3342,15 @@ request.clabe("032XXXXXXXXXX59719");
 request = api.bankAccounts().create("a9pvykxz4g5rg0fplze0", request);
 ```
 
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BankAccount request = new BankAccount();
+request.HolderName = "Juan Hernández Sánchez";
+request.Alias = "Cuenta principal";
+request.CLABE = "032XXXXXXXXXX59719";
+
+request = api.BankAccountService.Create("a9pvykxz4g5rg0fplze0", request);
+```
 
 > Ejemplo de respuesta
 
@@ -3379,6 +3396,14 @@ Comercio
 openpayAPI.bankAccounts().get({BANK_ACCOUNT_ID});
 ```
 
+```csharp
+Cliente
+openpayAPI.BankAccountService.Get({CUSTOMER_ID}, {BANK_ACCOUNT_ID});
+
+Comercio
+openpayAPI.BankAccountService.Get({BANK_ACCOUNT_ID});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -3389,6 +3414,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 BankAccount bankAccount = api.bankAccounts().get("a9pvykxz4g5rg0fplze0", "buyj4apkwilpp2jfxr9r");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BankAccount bankAccount = api.BankAccountService.Get("a9pvykxz4g5rg0fplze0", "buyj4apkwilpp2jfxr9r");
 ```
 
 > Ejemplo de respuesta
@@ -3431,6 +3461,14 @@ Comercio
 openpayAPI.bankAccounts().delete({BANK_ACCOUNT_ID});
 ```
 
+```csharp
+Cliente
+openpayAPI.BankAccountService.Delete({CUSTOMER_ID}, {BANK_ACCOUNT_ID});
+
+Comercio
+openpayAPI.BankAccountService.Delete({BANK_ACCOUNT_ID});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -3442,6 +3480,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.bankAccounts().delete("a9pvykxz4g5rg0fplze0", "buyj4apkwilpp2jfxr9r");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.BankAccountService.Delete("a9pvykxz4g5rg0fplze0", "buyj4apkwilpp2jfxr9r");
 ```
 
 Elimina la cuenta bancaria asociada al cliente. Las transacciones que se encuentran asociadas a esta cuenta no sufren cambios y se podrán seguir consultando.
@@ -3469,6 +3512,14 @@ Comercio
 openpayAPI.bankAccounts().list({REQUEST});
 ```
 
+```csharp
+Cliente
+openpayAPI.BankAccountService.List({CUSTOMER_ID}, {REQUEST});
+
+Comercio
+openpayAPI.BankAccountService.List({REQUEST});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -3490,6 +3541,17 @@ request.offset(0);
 request.limit(100);
         
 List<BankAccount> bankAccounts = api.bankAccounts().list("a9pvykxz4g5rg0fplze0", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.CreationGte = new Datetime(2014, 5, 1);
+request.CreationLte = new DateTime(2014, 5, 15);
+request.Offset = 0;
+request.Limit = 100;
+
+List<BankAccount> banckAccounts = api.BankAccountService.List("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
