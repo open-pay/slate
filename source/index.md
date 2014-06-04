@@ -2502,6 +2502,10 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/tra
 openpayAPI.transfers().create({FROM_CUSTOMER_ID}, {REQUEST});
 ```
 
+```csharp
+openpayAPI.TransferService.Create({FROM_CUSTOMER_ID}, {REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2527,6 +2531,16 @@ request.orderId("idOrdExt-0101");
 Transfer transfer = api.transfers().create("a9pvykxz4g5rg0fplze0", request);
 ```
 
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+TransferRequest request = new TransferRequest();
+request.CustomerId = "ah1ki9jmb50mvlsf9gqn";
+request.Amount = new Decimal(100.00);
+request.Description = "Transferencia del Customer 1 al Customer 2";
+request.OrderId = "idOrdExt-0101";
+
+Transfer transfer = api.TransferService.Create("a9pvykxz4g5rg0fplze0", request);
+```
 
 > Ejemplo de respuesta
 
@@ -2574,6 +2588,10 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/tran
 openpayAPI.transfers().get({CUSTOMER_ID}, {TRANSACTION_ID});
 ```
 
+```csharp
+openpayAPI.TransferService.Get({CUSTOMER_ID}, {TRANSACTION_ID});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2585,6 +2603,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Transfer transfer = api.transfers().get("a9pvykxz4g5rg0fplze0", "tr6cxbcefzatd10guvvw");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Transfer transfer = api.TransferService.Get("a9pvykxz4g5rg0fplze0", "tr6cxbcefzatd10guvvw");
 ```
 
 > Ejemplo de respuesta
@@ -2630,6 +2653,10 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/tran
 openpayAPI.transfers().list({CUSTOMER_ID}, {REQUEST});
 ```
 
+```csharp
+openpayAPI.TransferService.List({CUSTOMER_ID}, {REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2651,6 +2678,17 @@ request.offset(0);
 request.limit(100);
 
 List<Transfer> transfers = api.transfers().list("a9pvykxz4g5rg0fplze0", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.CreationGte = new Datetime(2014, 5, 1);
+request.CreationLte = new DateTime(2014, 5, 15);
+request.Offset = 0;
+request.Limit = 100;
+
+List<Transfer> transfers = api.TransferService.List("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
