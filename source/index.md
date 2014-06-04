@@ -3948,7 +3948,6 @@ request.limit(100);
 List<Plan> plans = api.plans().list(request);
 ```
 
-
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
@@ -4075,6 +4074,10 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/sub
 openpayAPI.subscriptions().create({CUSTOMER_ID}, {REQUEST});
 ```
 
+```csharp
+openpayAPI.SubscriptionService.Create({CUSTOMER_ID}, {REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -4104,6 +4107,16 @@ request.trialEndDate(trialEndDate.getTime());
 request.sourceId("ktrpvymgatocelsciak7");
 
 request = api.subscriptions().create("a9pvykxz4g5rg0fplze0", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Subscription request = new Subscription();
+request.PlanId = "idPlan-01001";
+request.TrialEndDate = new Datetime(2014, 5, 1);;
+request.CardId = "ktrpvymgatocelsciak7";
+
+request = api.SubscriptionService.Create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
@@ -4161,6 +4174,10 @@ PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subs
 openpayAPI.subscriptions().update({REQUEST});
 ```
 
+```csharp
+openpayAPI.SubscriptionService.Update({CUSTOMER_ID}, {REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -4190,6 +4207,16 @@ request.trialEndDate(trialEndDate.getTime());
 request.sourceId("ktrpvymgatocelsciak7");
 
 request = api.subscriptions().update(request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Subscription request = new Subscription();
+request.PlanId = "idPlan-01001";
+request.TrialEndDate = new Datetime(2014, 5, 1);;
+request.CardId = "ktrpvymgatocelsciak7";
+
+request = api.SubscriptionService.Update("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
@@ -4243,7 +4270,11 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subs
 ```
 
 ```java
-api.subscriptions().get({CUSTOMER_ID}, {SUBSCRIPTION_ID});
+openpayAPI.subscriptions().get({CUSTOMER_ID}, {SUBSCRIPTION_ID});
+```
+
+```csharp
+openpayAPI.SubscriptionService.Get({CUSTOMER_ID}, {SUBSCRIPTION_ID});
 ```
 
 > Ejemplo de petición 
@@ -4256,6 +4287,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription subscription = api.subscriptions().get("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Subscription subscription = api.SubscriptionService.Get("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 ```
 
 > Ejemplo de respuesta
@@ -4311,6 +4347,10 @@ DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/s
 openpayAPI.subscriptions().delete({CUSTOMER_ID}, {SUBSCRIPTION_ID});
 ```
 
+```csharp
+openpayAPI.SubscriptionService.Delete({CUSTOMER_ID}, {SUBSCRIPTION_ID});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -4322,6 +4362,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.subscriptions().delete("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.SubscriptionService.Delete("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 ```
 
 Cancela inmediatamente la suscrupción del cliente. Ya no se realizarán mas cargos a la tarjeta y todos cargos pendientes se cancelarán.
@@ -4345,6 +4390,10 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subs
 openpayAPI.subscriptions().list({CUSTOMER_ID}, {REQUEST});
 ```
 
+```csharp
+openpayAPI.SubscriptionService.List({CUSTOMER_ID}, {REQUEST});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -4366,6 +4415,17 @@ request.offset(0);
 request.limit(100);
 
 List<Subscription> subscriptions = api.subscriptions().list("a9pvykxz4g5rg0fplze0", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+SearchParams request = new SearchParams();
+request.CreationGte = new Datetime(2014, 5, 1);
+request.CreationLte = new DateTime(2014, 5, 15);
+request.Offset = 0;
+request.Limit = 100;
+
+List<Subscription> subscriptions = api.SubscriptionService.List("a9pvykxz4g5rg0fplze0", request);
 ```
 
 > Ejemplo de respuesta
