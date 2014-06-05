@@ -2783,6 +2783,11 @@ openpay.customers.create(customerRequest, function(error, customer) {
 });
 ```
 
+```ruby
+@customers=@openpay.create(:customers)
+@customers.create(hash:request_hash)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2849,6 +2854,32 @@ openpay.customers.create(customerRequest, function(error, customer) {
 });
 ```
 
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@customers=@openpay.create(:customers)
+address_hash={
+      "line1" => "Calle 10",
+      "line2" => "col. san pablo",
+      "line3" => "entre la calle 1 y la 2",
+      "state" => "Queretaro",
+      "city" => "Queretaro",
+      "postal_code" => "76000",
+      "country_code" => "MX"
+   }
+request_hash={
+     "external_id" => nil,
+     "name" => "customer name",
+     "last_name" => nil,
+     "email" => "customer_email@me.com",
+     "requires_account" => true,
+     "phone_number" => "44209087654",
+     "address" => address_hash
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@customers.create(request_hash.to_hash)
+```
+
 > Ejemplo de respuesta
 
 ```json
@@ -2909,6 +2940,10 @@ openpay.customers.update(customerId, customerRequest, function(error, customer) 
 });
 ```
 
+```ruby
+@customers=@openpay.create(:customers)
+@customers.update(hash:request_hash)
+```
 
 > Ejemplo de petición 
 
@@ -2992,6 +3027,32 @@ openpay.customers.update('anbnldwgni1way3yp2dw', customerRequest, function(error
 });
 ```
 
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@customers=@openpay.create(:customers)
+address_hash={
+      "line1" => "Calle 10",
+      "line2" => "col. san pablo",
+      "line3" => "entre la calle 1 y la 2",
+      "state" => "Queretaro",
+      "city" => "Queretaro",
+      "postal_code" => "76000",
+      "country_code" => "MX"
+   }
+request_hash={
+     "external_id" => nil,
+     "name" => "customer name",
+     "last_name" => nil,
+     "email" => "customer_email@me.com",
+     "requires_account" => true,
+     "phone_number" => "44209087654",
+     "address" => address_hash
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@customers.update(request_hash.to_hash)
+```
+
 > Ejemplo de respuesta
 
 ```json
@@ -3053,6 +3114,10 @@ openpay.customers.get(customerId, function(error, customer) {
 });
 ```
 
+```ruby
+@customers=@openpay.create(:customers)
+@customers.get(string:customer_id)
+```
 
 > Ejemplo de petición 
 
@@ -3077,6 +3142,14 @@ openpay.customers.get('a9pvykxz4g5rg0fplze0', function(error, customer) {
   // ... 
 });
 ```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@customers=@openpay.create(:customers)
+
+response_hash=@customers.get("asynwirguzkgq2bizogo")
+```
+
 > Ejemplo de respuesta
 
 ```json
@@ -3134,6 +3207,11 @@ openpay.customers.delete(customerId, function(error, customer) {
 });
 ```
 
+```ruby
+@customers=@openpay.create(:customers)
+@customers.delete(string:customer_id)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -3158,6 +3236,14 @@ openpay.customers.delete('a9pvykxz4g5rg0fplze0', function(error, customer) {
   // ... 
 });
 ```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@customers=@openpay.create(:customers)
+
+response_hash=@customers.delete("asynwirguzkgq2bizogo")
+```
+
 
 Elimina un cliente permanentemente. Se cancelarán las suscripciones que tenga. Openpay mantiene los registros de las operaciones.
 
@@ -3201,6 +3287,11 @@ var searchParams = {
 openpay.customers.list(searchParams, function(error, list) {
   // ...
 });
+```
+
+```ruby
+@customers=@openpay.create(:customers)
+@customers.all(string:customer_id)
 ```
 
 > Ejemplo de petición 
@@ -3247,6 +3338,13 @@ var searchParams = {
 openpay.customers.list(searchParams, function(error, list) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@customers=@openpay.create(:customers)
+
+response_hash=@customers.all("asynwirguzkgq2bizogo")
 ```
 
 > Ejemplo de respuesta
