@@ -646,7 +646,7 @@ openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function
 card_hash={
      "holder_name" => "Juan Perez Ramirez",
      "card_number" => "4111111111111111",
-     "cvv2": "110",
+     "cvv2" => "110",
      "expiration_month" => "12",
      "expiration_year" => "20"
    }
@@ -3810,6 +3810,16 @@ openpay.cards.create(cardRequest, callback);
 openpay.customers.cards.create(customerId, cardRequest, callback);
 ```
 
+```ruby
+#Cliente
+@cards=@openpay.create(:cards)
+@cards.create(hash:request_hash, string:customer_id)
+
+#Comercio
+@cards=@openpay.create(:cards)
+@cards.create(hash:request_hash)
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -3879,6 +3889,31 @@ var cardRequest = {
 openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(error, card)  {
     // ...    
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@cards=@openpay.create(:cards)
+address_hash={
+      "line1" => "Calle 10",
+      "line2" => "col. san pablo",
+      "line3" => "entre la calle 1 y la 2",
+      "state" => "Queretaro",
+      "city" => "Queretaro",
+      "postal_code" => "76000",
+      "country_code" => "MX"
+   }
+request_hash={
+     "holder_name" => "Juan Perez Ramirez",
+     "card_number" => "411111XXXXXX1111",
+     "cvv2" => "110",
+     "expiration_month" => "12",
+     "expiration_year" => "20",
+     "address" => address_hash
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
 ```
 
 > Ejemplo de respuesta
@@ -3960,6 +3995,16 @@ openpay.cards.create(cardRequest, callback);
 openpay.customers.cards.create(customerId, cardRequest, callback);
 ```
 
+```ruby
+#Cliente
+@cards=@openpay.create(:cards)
+@cards.create(hash:request_hash, string:customer_id)
+
+#Comercio
+@cards=@openpay.create(:cards)
+@cards.create(hash:request_hash)
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -3996,6 +4041,18 @@ openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(err
   // ...
 });
 ```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@cards=@openpay.create(:cards)
+request_hash={
+     "token_id" => "tokgslwpdcrkhlgxqi9a"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
+```
+
 
 > Ejemplo de respuesta
 
@@ -4063,6 +4120,16 @@ openpay.cards.get(cardId, callback);
 openpay.customers.cards.get(customerId, cardId, callback);
 ```
 
+```ruby
+#Cliente
+@cards=@openpay.create(:cards)
+@cards.get(string:card_id, string:customer_id)
+
+#Comercio
+@cards=@openpay.create(:cards)
+@cards.get(string:card_id)
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -4085,6 +4152,13 @@ Card card = api.CardService.Get("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 openpay.customers.cards.get('a9pvykxz4g5rg0fplze0', 'ktrpvymgatocelsciak7', function(error, card){
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@cards=@openpay.create(:cards)
+
+response_hash=@cards.get("ktrpvymgatocelsciak7", "asynwirguzkgq2bizogo")
 ```
 
 > Ejemplo de respuesta
@@ -4157,6 +4231,15 @@ openpay.cards.delete(cardId, callback);
 openpay.customers.cards.delete(customerId, cardId, callback);
 ```
 
+```ruby
+#Cliente
+@cards=@openpay.create(:cards)
+@cards.delete(string:card_id, string:customer_id)
+
+#Comercio
+@cards=@openpay.create(:cards)
+@cards.delete(string:card_id)
+```
 
 > Ejemplo de petición con cliente
 
@@ -4180,6 +4263,13 @@ api.CardService.Delete("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 openpay.customers.cards.delete('a9pvykxz4g5rg0fplze0', 'ktrpvymgatocelsciak7', function(error) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@cards=@openpay.create(:cards)
+
+response_hash=@cards.delete("ktrpvymgatocelsciak7", "asynwirguzkgq2bizogo")
 ```
 
 Elimina una tarjeta del cliente o comercio. Una vez eliminada no se permitirá hacer movimientos, sin embargo, se mantendrán todos los registros de operaciones que haya realizado y se podrán consultar en el dashboard.
@@ -4232,6 +4322,16 @@ openpay.cards.list(customerId, callback);
 openpay.cards.list(customerId, searchParams, callback);
 ```
 
+```ruby
+#Cliente
+@cards=@openpay.create(:cards)
+@cards.all(string:customer_id)
+
+#Comercio
+@cards=@openpay.create(:cards)
+@cards.all
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -4273,6 +4373,13 @@ var searchParams = {
 openpay.customers.cards.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@cards=@openpay.create(:cards)
+
+response_hash=@cards.all("asynwirguzkgq2bizogo")
 ```
 
 > Ejemplo de respuesta
