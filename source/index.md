@@ -4310,6 +4310,12 @@ Comercio
 openpayAPI.BankAccountService.Create({REQUEST});
 ```
 
+```javascript
+openpay.customers.bankaccounts.create(customerId, bankaccountRequest, function(error, bankaccount) {
+  // ...
+});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -4341,6 +4347,18 @@ request.Alias = "Cuenta principal";
 request.CLABE = "032XXXXXXXXXX59719";
 
 request = api.BankAccountService.Create("a9pvykxz4g5rg0fplze0", request);
+```
+
+```javascript
+var bankaccountRequest = {
+  'clabe' : '032180000118359719',
+  'alias' : 'Cuenta principal',
+  'holder_name' : 'Juan Hernández Sánchez'
+};
+
+openpay.customers.bankaccounts.create('a9pvykxz4g5rg0fplze0', bankaccountRequest, function(error, bankaccount) {
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
@@ -4395,6 +4413,12 @@ Comercio
 openpayAPI.BankAccountService.Get({BANK_ACCOUNT_ID});
 ```
 
+```javascript
+openpay.customers.bankaccounts.get(customerId, bankaccountId, function(error, bankaccount){
+  // ...
+});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -4410,6 +4434,12 @@ BankAccount bankAccount = api.bankAccounts().get("a9pvykxz4g5rg0fplze0", "buyj4a
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 BankAccount bankAccount = api.BankAccountService.Get("a9pvykxz4g5rg0fplze0", "buyj4apkwilpp2jfxr9r");
+```
+
+```javascript
+openpay.customers.bankaccounts.get('a9pvykxz4g5rg0fplze0', 'buyj4apkwilpp2jfxr9r', function(error, bankaccount){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
@@ -4460,6 +4490,12 @@ Comercio
 openpayAPI.BankAccountService.Delete({BANK_ACCOUNT_ID});
 ```
 
+```javascript
+openpay.customers.bankaccounts.delete(customerId,bankaccountId, function(error){
+  // ...
+});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -4476,6 +4512,12 @@ api.bankAccounts().delete("a9pvykxz4g5rg0fplze0", "buyj4apkwilpp2jfxr9r");
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.BankAccountService.Delete("a9pvykxz4g5rg0fplze0", "buyj4apkwilpp2jfxr9r");
+```
+
+```javascript
+openpay.customers.bankaccounts.delete('a9pvykxz4g5rg0fplze0','buyj4apkwilpp2jfxr9r', function(error){
+  // ...
+});
 ```
 
 Elimina la cuenta bancaria asociada al cliente. Las transacciones que se encuentran asociadas a esta cuenta no sufren cambios y se podrán seguir consultando.
@@ -4511,6 +4553,22 @@ Comercio
 openpayAPI.BankAccountService.List({REQUEST});
 ```
 
+```javascript
+// Sin parametros
+openpay.customers.bankaccounts.list(customerId, function(error, list){
+  // ...
+});
+
+// Con parametros
+var searchParams = {
+  // ...
+};
+
+openpay.customers.bankaccounts.list(customerId, searchParams, function(error, list){
+  // ...
+});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -4543,6 +4601,16 @@ request.Offset = 0;
 request.Limit = 100;
 
 List<BankAccount> banckAccounts = api.BankAccountService.List("a9pvykxz4g5rg0fplze0", request);
+```
+
+```javascript
+var searchParams = {
+  'limit' : 2
+};
+
+openpay.customers.bankaccounts.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
@@ -4637,6 +4705,12 @@ openpayAPI.plans().create({REQUEST});
 openpayAPI.PlanService.Create({REQUEST});
 ```
 
+```javascript
+openpay.plans.create(planRequest, function(error, plan){
+  // ...
+});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -4679,6 +4753,22 @@ request.StatusAfterRetry = "unpaid";
 request.TrialDays = 30;
 
 request = api.PlanService.Create(request);
+```
+
+```javascript
+var planRequest = {
+  'amount': 150.00,
+  'status_after_retry': 'cancelled',
+  'retry_times': 2,
+  'name': 'Curso de ingles',
+  'repeat_unit': 'month',
+  'trial_days': '30',
+  'repeat_every': '1'
+};
+
+openpay.plans.create(planRequest, function(error, plan){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
@@ -4735,6 +4825,12 @@ openpayAPI.plans().update({REQUEST});
 openpayAPI.PlanService.Update({REQUEST});
 ```
 
+```javascript
+openpay.plans.update(planId, planRequest, function(error, plan){
+  // ...
+});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -4765,6 +4861,17 @@ request.Name = "Curso de ingles";
 request.TrialDays = 30;
 
 request = api.PlanService.Update(request);
+```
+
+```javascript
+var planRequest = {
+  'name': 'Curso de aleman',
+  'trial_days': 60
+};
+
+openpay.plans.update(planId, planRequest, function(error, plan){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
@@ -4812,6 +4919,12 @@ openpayAPI.plans().get({PLAN_ID});
 openpayAPI.PlanService.Get({PLAN_ID});
 ```
 
+```javascript
+openpay.plans.get(planId, function(error, plan){
+  // ...
+});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -4827,6 +4940,12 @@ Plan plan = api.plans().get("p8e6x3hafqqsbmnoevrt");
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan plan = api.PlanService.Get("p8e6x3hafqqsbmnoevrt");
+```
+
+```javascript
+openpay.plans.get('p8e6x3hafqqsbmnoevrt', function(error, plan){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
@@ -4873,6 +4992,12 @@ openpayAPI.plans().delete({PLAN_ID});
 openpayAPI.PlanService.Delete({PLAN_ID});
 ```
 
+```javascript
+openpay.plans.delete(planId, function(error){
+  // ...
+});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -4889,6 +5014,12 @@ api.plans().delete("p8e6x3hafqqsbmnoevrt");
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.PlanService.Delete("p8e6x3hafqqsbmnoevrt");
+```
+
+```javascript
+openpay.plans.delete('p8e6x3hafqqsbmnoevrt', function(error){
+  // ...
+});
 ```
 
 Al eliminar un plan no se permitirán crear mas suscripciones asociadas a él, sin embargo las suscripciones ya asociadas se mantienen y se continuan cobrando.
@@ -4914,6 +5045,18 @@ openpayAPI.plans().list({REQUEST});
 
 ```csharp
 openpayAPI.PlanService.List({REQUEST});
+```
+
+```javascript
+// Sin parametros
+openpay.plans.list(function(error, list){
+  // ...
+});
+
+// Con parametros
+openpay.plans.list(searchParams, function(error, list){
+  // ...
+});
 ```
 
 > Ejemplo de petición 
@@ -4948,6 +5091,16 @@ request.Offset = 0;
 request.Limit = 100;
 
 List<Plan> plans = api.PlanService.List(request);
+```
+
+```javascript
+var searchParams = {
+  'limit' : 10
+};
+
+openpay.plans.list(searchParams, function(error, list){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
@@ -5069,6 +5222,13 @@ openpayAPI.subscriptions().create({CUSTOMER_ID}, {REQUEST});
 openpayAPI.SubscriptionService.Create({CUSTOMER_ID}, {REQUEST});
 ```
 
+```javascript
+openpay.customers.subscriptions.create(customerId, subscriptionRequest, function(error, subscription){
+  // ...
+});
+```
+
+
 > Ejemplo de petición 
 
 ```shell
@@ -5109,6 +5269,24 @@ request.CardId = "ktrpvymgatocelsciak7";
 
 request = api.SubscriptionService.Create("a9pvykxz4g5rg0fplze0", request);
 ```
+
+```javascript
+var subscriptionRequest = {
+   'card':{
+      'card_number':'4111111111111111',
+      'holder_name':'Juan Perez Ramirez',
+      'expiration_year':'20',
+      'expiration_month':'12',
+      'cvv2':'110'
+   },
+   'plan_id':'pbi4kb8hpb64x0uud2eb'
+};
+
+openpay.customers.subscriptions.create(customerId, subscriptionRequest, function(error, subscription){
+  // ...
+});
+```
+
 
 > Ejemplo de respuesta
 
@@ -5169,6 +5347,14 @@ openpayAPI.subscriptions().update({REQUEST});
 openpayAPI.SubscriptionService.Update({CUSTOMER_ID}, {REQUEST});
 ```
 
+```javascript
+openpay.customers.subscriptions.update(customerId, subscriptionId, subscriptionRequest, 
+    function(error, subscription){
+  // ...
+});
+```
+
+
 > Ejemplo de petición 
 
 ```shell
@@ -5208,6 +5394,24 @@ request.TrialEndDate = new Datetime(2014, 5, 1);;
 request.CardId = "ktrpvymgatocelsciak7";
 
 request = api.SubscriptionService.Update("a9pvykxz4g5rg0fplze0", request);
+```
+
+```javascript
+var subscriptionRequest = {
+'trial_end_date': '2016-01-11',
+  'card': {
+    'card_number': '343434343434343',
+    'holder_name': 'Juan Perez Ramirez',
+    'expiration_year': '20',
+    'expiration_month': '12',
+    'cvv2':'1234'
+  }
+};
+
+openpay.customers.subscriptions.update('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', subscriptionRequest, 
+    function(error, subscription){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
@@ -5268,6 +5472,12 @@ openpayAPI.subscriptions().get({CUSTOMER_ID}, {SUBSCRIPTION_ID});
 openpayAPI.SubscriptionService.Get({CUSTOMER_ID}, {SUBSCRIPTION_ID});
 ```
 
+```javascript
+openpay.customers.subscriptions.get(customerId, subscriptionId, function(error, subscription){
+  // ...
+});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -5283,6 +5493,12 @@ Subscription subscription = api.subscriptions().get("a9pvykxz4g5rg0fplze0", "s0g
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription subscription = api.SubscriptionService.Get("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
+```
+
+```javascript
+openpay.customers.subscriptions.get('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', function(error, subscription){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
@@ -5342,6 +5558,12 @@ openpayAPI.subscriptions().delete({CUSTOMER_ID}, {SUBSCRIPTION_ID});
 openpayAPI.SubscriptionService.Delete({CUSTOMER_ID}, {SUBSCRIPTION_ID});
 ```
 
+```javascript
+openpay.customers.subscriptions.delete(customerId, subscriptionId, function(error){
+  // ..
+});
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -5358,6 +5580,12 @@ api.subscriptions().delete("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.SubscriptionService.Delete("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
+```
+
+```javascript
+openpay.customers.subscriptions.delete('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', function(error){
+  // ..
+});
 ```
 
 Cancela inmediatamente la suscrupción del cliente. Ya no se realizarán mas cargos a la tarjeta y todos cargos pendientes se cancelarán.
@@ -5383,6 +5611,11 @@ openpayAPI.subscriptions().list({CUSTOMER_ID}, {REQUEST});
 
 ```csharp
 openpayAPI.SubscriptionService.List({CUSTOMER_ID}, {REQUEST});
+```
+
+```javascript
+openpay.customers.subscriptions.list(customerId, callback);
+openpay.customers.subscriptions.list(customerId, searchParams, callback);
 ```
 
 > Ejemplo de petición 
@@ -5417,6 +5650,16 @@ request.Offset = 0;
 request.Limit = 100;
 
 List<Subscription> subscriptions = api.SubscriptionService.List("a9pvykxz4g5rg0fplze0", request);
+```
+
+```javascript
+var searchParams = {
+  'limit' : 2
+};
+
+openpay.customers.subscriptions.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
@@ -5489,6 +5732,10 @@ openpayAPI.fees().create({REQUEST});
 openpayAPI.FeeService.Create({REQUEST});
 ```
 
+```javascript
+openpay.fees.create(feeRequest, callback);
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -5523,6 +5770,19 @@ request.Description = "Cobro de comisión";
 request.OrderId = "oid-1245;
 
 Fee fee = api.FeeService.Create(request);
+```
+
+```javascript
+var feeRequest = {                                            
+     'customer_id' : 'dvocf97jd20es3tw5laz',
+     'amount' : 12.50,          
+     'description' : 'Cobro de Comisión',
+     'order_id' : 'oid-1245'
+};
+
+openpay.fees.create(feeRequest, function(error, fee){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
