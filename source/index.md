@@ -7,6 +7,7 @@ language_tabs:
   - java: JAVA
   - csharp: C#
   - javascript : Node.js
+  - ruby: Ruby
 
 toc_footers:
  - <a href='#'>Sign Up for a Developer Key</a>
@@ -123,6 +124,14 @@ OpenpayAPI openpayAPI = new OpenpayAPI("sk_3433941e467c4875b178ce26348b0fac", "m
 openpayAPI.Production = true;
 ```
 
+```ruby
+Sandbox
+openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+
+Produccion
+openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac", true)
+```
+
 > Producción 
 
 ```shell
@@ -143,6 +152,10 @@ openpayAPI.Production = true;
 
 ```javascript
 openpay.setProductionReady(true);
+```
+
+```ruby
+#Solo es necesario pasar como tercer argumento un "true" cuando se crea el objeto OpenpayApi
 ```
 
 Para realizar peticiones a la API de Openpay, es necesario enviar la llave de API (API Key) en todas tus llamadas a nuestros  servidores. ​La llave la puedes obtener desde el [dashboard](https://sandbox-dashboard.openpay.mx).
@@ -193,6 +206,14 @@ Openpay regresa objetos de JSON en las respuestas del servicio, incluso en caso 
 
 ```csharp
 //Para el caso de C Sharp, toda operación regresara una instancia de la clase "OpenpayException" la cual contendrá esta información del error.
+```
+
+```ruby
+#Para el caso de Ruby, toda operación puede regresar cualquiera de las siguientes excepciones:
+
+# => OpenpayException: Para errores genericos, como acceso a recursos invalidos, etc.
+# => OpenpayConnectionException: Para errores relacionados con problemas en la conexión al servidor.
+# => OpenpayTransactionException: Para errores relacionados durante la ejecución de las operaciones.
 ```
 
 Propiedad | Descripción
@@ -305,6 +326,16 @@ Comercio
 openpayAPI.ChargeService.Create({REQUEST});
 ```
 
+```ruby
+Cliente
+charges=@openpay.create(:charges)
+charges.create({REQUEST}), {CUSTOMER_ID})
+
+Comercio
+charges=@openpay.create(:charges)
+charges.create({REQUEST}))
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -354,7 +385,7 @@ OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpq
 ChargeRequest request = new ChargeRequest();
 request.Method = "card";
 request.SourceId = "kwkoqpg6fcvfse8k8mg2";
-request.Amount = new Decimal(9.99);
+request.Amount = new Decimal(100.00);
 request.Description = "Testing from .Net";
 request.OrderId = "oid-00051";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
@@ -375,6 +406,20 @@ var chargeRequest = {
 openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function(error, charge) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@openpay.create(:charges)
+request_hash={
+    'method' => 'card',
+    'source_id' => 'kqgykn96i7bcs1wwhvgw',
+    'amount' => 100,
+    'description' => 'Cargo inicial a mi merchant',
+    'order_id' => 'oid-00051'}
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
