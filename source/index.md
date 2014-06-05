@@ -97,7 +97,10 @@ El parámetro -u se ocupa para realizar la autenticación HTTP Basic (al agregar
 ```
 
 ```php
-<? $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178ce26348b0fac'); ?>
+<? 
+//Por default se usa el ambiente de sandbox
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178ce26348b0fac'); 
+?>
 ```
 
 ```java
@@ -130,7 +133,9 @@ Solo es necesario usar la URI base https://api.openpay.mx
 ```
 
 ```php
-<? Openpay::setProductionMode(true); ?>
+<? 
+Openpay::setProductionMode(true); 
+?>
 ```
 
 ```java
@@ -262,11 +267,11 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 ```php
 <?
 Comercio
-$openpay->charges->create({REQUEST});
+$openpay->charges->create(chargeRequest);
 
 Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$customer->charges->create({REQUEST});
+$customer = $openpay->customers->get($customerId);
+$customer->charges->create(chargeRequest);
 ?>
 ```
 
@@ -324,7 +329,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$chargeData = array(
+$chargeRequest = array(
     'method' => 'card',
     'source_id' => 'kqgykn96i7bcs1wwhvgw',
     'amount' => 100,
@@ -332,7 +337,7 @@ $chargeData = array(
     'order_id' => 'oid-00051');
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeData);
+$charge = $customer->charges->create($chargeRequest);
 ?>
 ```
 
@@ -453,12 +458,12 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 
 ```php
 <?
-Comercio
-$openpay->charges->create({REQUEST});
+//Comercio
+$openpay->charges->create(chargeRequest);
 
-Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$customer->charges->create({REQUEST});
+//Cliente
+$customer = $openpay->customers->get(customerId);
+$customer->charges->create(chargeRequest);
 ?>
 ```
 
@@ -521,7 +526,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 ```
 
 ```php
-<?php
+<?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
 $card = array(
@@ -531,7 +536,7 @@ $card = array(
     'expiration_month' => '12',
     'cvv2' => '110');
 
-$chargeData = array(
+$chargeRequest = array(
     'method' => 'card',
     'card' => $card,
     'amount' => 100,
@@ -539,7 +544,7 @@ $chargeData = array(
     'order_id' => 'oid-00052');
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeData);
+$charge = $customer->charges->create($chargeRequest);
 ?>
 ```
 
@@ -672,11 +677,11 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 ```php
 <?
 Comercio
-$openpay->charges->create({REQUEST});
+$openpay->charges->create(chargeRequest);
 
 Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$customer->charges->create({REQUEST});
+$customer = $openpay->customers->get(customerId);
+$customer->charges->create(chargeRequest;
 ?>
 ```
 
@@ -732,14 +737,14 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$chargeData = array(
+$chargeRequest = array(
     'method' => 'store',
     'amount' => 100,
     'description' => 'Cargo con tienda',
     'order_id' => 'oid-00053');
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeData);
+$charge = $customer->charges->create($chargeRequest);
 ?>
 ```
 
@@ -832,11 +837,11 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 ```php
 <?
 Comercio
-$openpay->charges->create({REQUEST});
+$openpay->charges->create(chargeRequest);
 
 Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$customer->charges->create({REQUEST});
+$customer = $openpay->customers->get(customerId);
+$customer->charges->create(chargeRequest);
 ?>
 ```
 
@@ -892,14 +897,14 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$chargeData = array(
+$chargeRequest = array(
     'method' => 'bank_account',
     'amount' => 100,
     'description' => 'Cargo con banco',
     'order_id' => 'oid-00055');
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeData);
+$charge = $customer->charges->create($chargeRequest);
 ?>
 ```
 
@@ -994,13 +999,13 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 ```php
 <?
 Comercio
-$charge = $openpay->charges->get({TRANSACTION_ID});
-$charge->capture({REQUEST});
+$charge = $openpay->charges->get(transactionId);
+$charge->capture(captureData);
 
 Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$charge = $customer->charges->get({TRANSACTION_ID});
-$charge->capture({REQUEST});
+$customer = $openpay->customers->get(customerId);
+$charge = $customer->charges->get(transactionId);
+$charge->capture(captureData);
 ?>
 ```
 
@@ -1122,13 +1127,13 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 ```php
 <?
 Comercio
-$charge = $openpay->charges->get({TRANSACTION_ID});
-$charge->refund({REQUEST});
+$charge = $openpay->charges->get(transactionId);
+$charge->refund(refundData);
 
 Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$charge = $customer->charges->get({TRANSACTION_ID});
-$charge->refund({REQUEST});
+$customer = $openpay->customers->get(customerId);
+$charge = $customer->charges->get(transactionId);
+$charge->refund(refundData);
 ?>
 ```
 
@@ -1289,11 +1294,11 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/char
 ```php
 <?
 Comercio
-$charge = $openpay->charges->get({TRANSACTION_ID});
+$charge = $openpay->charges->get(transactionId);
 
 Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$charge = $customer->charges->get({TRANSACTION_ID});
+$customer = $openpay->customers->get(customerId);
+$charge = $customer->charges->get(transactionId);
 ?>
 ```
 
@@ -1433,11 +1438,11 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/char
 ```php
 <?
 Comercio
-$chargeList = $openpay->charges->getList({REQUEST});
+$chargeList = $openpay->charges->getList(searchParams);
 
 Cliente
-$customer = $openpay->customers->get(CUSTOMER_ID);
-$chargeList = $customer->charges->getList({REQUEST});
+$customer = $openpay->customers->get(customerId);
+$chargeList = $customer->charges->getList(searchParams);
 ?>
 ```
 
@@ -1497,14 +1502,14 @@ curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$findData = array(
+$searchParams = array(
     'creation[gte]' => '2013-11-01',
     'creation[lte]' => '2014-11-01',
     'offset' => 0,
     'limit' => 2);
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$chargeList = $customer->charges->getList($findData);
+$chargeList = $customer->charges->getList($searchParams);
 ?>
 ```
 
@@ -1644,12 +1649,23 @@ Cliente
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
+```php
+<?
+Cliente
+$customer = $openpay->customers->get(customerId);
+$payout = $customer->payouts->create(payoutRequest);
+
+Comercio
+$payout = $openpay->payouts->create(payoutRequest);
+?>
+```
+
 ```java
 Cliente
 openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
 
 Comercio
-openpayAPI.payouts().create({REQUEST}});
+openpayAPI.payouts().create({REQUEST});
 ```
 
 ```csharp
@@ -1689,6 +1705,22 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
     "description": "Retiro de saldo semanal",
     "order_id": "oid-00021"
 }' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$payoutRequest = array(
+    'method' => 'card',
+    'destination_id' => 'k3d54sd3mdjf75udjfvoc',
+    'amount' => 1000,
+    'description' => 'Retiro de saldo semanal',
+    'order_id' => 'ORDEN-00021');
+
+$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$payout = $customer->payouts->create($payoutRequest);
+?>
 ```
 
 ```java
@@ -1791,6 +1823,17 @@ Cliente
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
+```php
+<?
+Cliente
+$customer = $openpay->customers->get(customerId);
+$payout = $customer->payouts->create(payoutRequest);
+
+Comercio
+$payout = $openpay->payouts->create(payoutRequest);
+?>
+```
+
 ```java
 Cliente
 openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
@@ -1840,10 +1883,28 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguz
       "clabe":"012298026516924616",
       "holder_name":"Mi empresa"
    },
-   "amount":10.50,
+   "amount":100.00,
    "description":"Retiro de saldo semanal",
    "order_id":"oid-1110011"
 }' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$payoutRequest = array(
+    'method' => 'bank_account',
+    'bank_account' => array(
+        'clabe':'012298026516924616',
+        'holder_name':'Mi empresa'),
+    'amount' => 100.00,
+    'description' => 'Retiro de saldo semanal',
+    'order_id' => 'ORDEN-00021');
+
+$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
+$payout = $customer->payouts->create($payoutRequest);
+?>
 ```
 
 ```java
@@ -1949,6 +2010,17 @@ Cliente
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
+```php
+<?
+Cliente
+$customer = $openpay->customers->get(customerId);
+$payout = $customer->payouts->create(payoutRequest);
+
+Comercio
+$payout = $openpay->payouts->create(payoutRequest);
+?>
+```
+
 ```java
 Cliente
 openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
@@ -1998,10 +2070,28 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguz
       "card_number": "4111111111111111",
       "holder_name": "Juan Perez Ramirez"
    },
-   "amount" : 10.50,
+   "amount" : 100.00,
    "description" : "Retiro de saldo semanal",
-   "order_id" : "oid-00021"
+   "order_id" : "ORDEN-00021"
 } ' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$payoutRequest = array(
+    'method' => 'card',
+    'card' => array(
+        'card_number':'4111111111111111',
+        'holder_name':'Juan Perez Ramirez'),
+    'amount' => 100.00,
+    'description' => 'Retiro de saldo semanal',
+    'order_id' => 'ORDEN-00021');
+
+$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
+$payout = $customer->payouts->create($payoutRequest);
+?>
 ```
 
 ```java
@@ -2116,6 +2206,17 @@ Comercio
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts/{TRANSACTION_ID}
 ```
 
+```php
+<?
+Comercio
+$payout = $openpay->payouts->get(transactionId);
+
+Cliente
+$customer = $openpay->customers->get(customerId);
+$payout = $customer->payouts->get(transactionId);
+?>
+```
+
 ```java
 Cliente
 openpayAPI.payouts().get({CUSTOMER_ID}, {TRANSACTION_ID});
@@ -2149,6 +2250,15 @@ openpay.customers.payouts.get(customerId, transactionId, function(error, payout)
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts/trwpxhrgfeub9eqdyvqz \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
+$payout = $customer->payouts->get('trwpxhrgfeub9eqdyvqz');
+?>
 ```
 
 ```java
@@ -2224,6 +2334,17 @@ Comercio
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
+```php
+<?
+Comercio
+$payoutList = $openpay->payouts->getList(searchParams);
+
+Cliente
+$customer = $openpay->customers->get(customerId);
+$payoutList = $customer->payouts->getList(searchParams);
+?>
+```
+
 ```java
 Cliente
 openpayAPI.payouts().list({CUSTOMER_ID}, {REQUEST});
@@ -2274,6 +2395,20 @@ openpay.customers.payouts.list(customerId, searchParams, function(error, list) {
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts?creation[gte]=2013-11-01&limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$searchParams = array(
+    'creation[gte]' => '2013-11-01',
+    'creation[lte]' => '2017-12-31',
+    'offset' => 0,
+    'limit' => 2);
+
+$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
+$payoutList = $customer->payouts->getList($searchParams);
 ```
 
 ```java
