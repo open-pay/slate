@@ -98,7 +98,10 @@ El parámetro -u se ocupa para realizar la autenticación HTTP Basic (al agregar
 ```
 
 ```php
-<? $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178ce26348b0fac'); ?>
+<? 
+//Por default se usa el ambiente de sandbox
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178ce26348b0fac'); 
+?>
 ```
 
 ```java
@@ -139,7 +142,9 @@ Solo es necesario usar la URI base https://api.openpay.mx
 ```
 
 ```php
-<? Openpay::setProductionMode(true); ?>
+<? 
+Openpay::setProductionMode(true); 
+?>
 ```
 
 ```java
@@ -283,11 +288,11 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 ```php
 <?
 Comercio
-$openpay->charges->create({REQUEST});
+$openpay->charges->create(chargeRequest);
 
 Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$customer->charges->create({REQUEST});
+$customer = $openpay->customers->get($customerId);
+$customer->charges->create(chargeRequest);
 ?>
 ```
 
@@ -344,7 +349,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$chargeData = array(
+$chargeRequest = array(
     'method' => 'card',
     'source_id' => 'kqgykn96i7bcs1wwhvgw',
     'amount' => 100,
@@ -352,7 +357,7 @@ $chargeData = array(
     'order_id' => 'oid-00051');
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeData);
+$charge = $customer->charges->create($chargeRequest);
 ?>
 ```
 
@@ -489,12 +494,12 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 
 ```php
 <?
-Comercio
-$openpay->charges->create({REQUEST});
+//Comercio
+$openpay->charges->create(chargeRequest);
 
-Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$customer->charges->create({REQUEST});
+//Cliente
+$customer = $openpay->customers->get(customerId);
+$customer->charges->create(chargeRequest);
 ?>
 ```
 
@@ -554,7 +559,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 ```
 
 ```php
-<?php
+<?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
 $card = array(
@@ -564,7 +569,7 @@ $card = array(
     'expiration_month' => '12',
     'cvv2' => '110');
 
-$chargeData = array(
+$chargeRequest = array(
     'method' => 'card',
     'card' => $card,
     'amount' => 100,
@@ -572,7 +577,7 @@ $chargeData = array(
     'order_id' => 'oid-00052');
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeData);
+$charge = $customer->charges->create($chargeRequest);
 ?>
 ```
 
@@ -728,11 +733,11 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 ```php
 <?
 Comercio
-$openpay->charges->create({REQUEST});
+$openpay->charges->create(chargeRequest);
 
 Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$customer->charges->create({REQUEST});
+$customer = $openpay->customers->get(customerId);
+$customer->charges->create(chargeRequest;
 ?>
 ```
 
@@ -788,14 +793,14 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$chargeData = array(
+$chargeRequest = array(
     'method' => 'store',
     'amount' => 100,
     'description' => 'Cargo con tienda',
     'order_id' => 'oid-00053');
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeData);
+$charge = $customer->charges->create($chargeRequest);
 ?>
 ```
 
@@ -902,11 +907,11 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 ```php
 <?
 Comercio
-$openpay->charges->create({REQUEST});
+$openpay->charges->create(chargeRequest);
 
 Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$customer->charges->create({REQUEST});
+$customer = $openpay->customers->get(customerId);
+$customer->charges->create(chargeRequest);
 ?>
 ```
 
@@ -962,14 +967,14 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$chargeData = array(
+$chargeRequest = array(
     'method' => 'bank_account',
     'amount' => 100,
     'description' => 'Cargo con banco',
     'order_id' => 'oid-00055');
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeData);
+$charge = $customer->charges->create($chargeRequest);
 ?>
 ```
 
@@ -1078,13 +1083,13 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 ```php
 <?
 Comercio
-$charge = $openpay->charges->get({TRANSACTION_ID});
-$charge->capture({REQUEST});
+$charge = $openpay->charges->get(transactionId);
+$charge->capture(captureData);
 
 Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$charge = $customer->charges->get({TRANSACTION_ID});
-$charge->capture({REQUEST});
+$customer = $openpay->customers->get(customerId);
+$charge = $customer->charges->get(transactionId);
+$charge->capture(captureData);
 ?>
 ```
 
@@ -1223,13 +1228,13 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 ```php
 <?
 Comercio
-$charge = $openpay->charges->get({TRANSACTION_ID});
-$charge->refund({REQUEST});
+$charge = $openpay->charges->get(transactionId);
+$charge->refund(refundData);
 
 Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$charge = $customer->charges->get({TRANSACTION_ID});
-$charge->refund({REQUEST});
+$customer = $openpay->customers->get(customerId);
+$charge = $customer->charges->get(transactionId);
+$charge->refund(refundData);
 ?>
 ```
 
@@ -1403,11 +1408,11 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/char
 ```php
 <?
 Comercio
-$charge = $openpay->charges->get({TRANSACTION_ID});
+$charge = $openpay->charges->get(transactionId);
 
 Cliente
-$customer = $openpay->customers->get({CUSTOMER_ID});
-$charge = $customer->charges->get({TRANSACTION_ID});
+$customer = $openpay->customers->get(customerId);
+$charge = $customer->charges->get(transactionId);
 ?>
 ```
 
@@ -1561,11 +1566,11 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/char
 ```php
 <?
 Comercio
-$chargeList = $openpay->charges->getList({REQUEST});
+$chargeList = $openpay->charges->getList(searchParams);
 
 Cliente
-$customer = $openpay->customers->get(CUSTOMER_ID);
-$chargeList = $customer->charges->getList({REQUEST});
+$customer = $openpay->customers->get(customerId);
+$chargeList = $customer->charges->getList(searchParams);
 ?>
 ```
 
@@ -1598,7 +1603,7 @@ openpay.customers.charges.list(customerId, searchParams, callback);
 ```ruby
 Cliente
 @charges=@openpay.create(:charges)
-@charges.all({CUSTOMER_ID})
+@charges.all(string:customer_id)
 
 Comercio
 @charges=@openpay.create(:charges)
@@ -1616,14 +1621,14 @@ curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$findData = array(
+$searchParams = array(
     'creation[gte]' => '2013-11-01',
     'creation[lte]' => '2014-11-01',
     'offset' => 0,
     'limit' => 2);
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$chargeList = $customer->charges->getList($findData);
+$chargeList = $customer->charges->getList($searchParams);
 ?>
 ```
 
@@ -1670,14 +1675,6 @@ openpay.customers.charges.list('ag4nktpdzebjiye1tlze',searchParams, function(err
 ```ruby
 @openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 @charges=@openpay.create(:charges)
-request_hash={
-     "creation[gte]" => "2014-05-01",
-     "creation[lte]" => "2014-05-15",   
-     "offset" => 0,
-     "limit" => 100,
-     "amount" => 100.00
-   }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@charges.all("ag4nktpdzebjiye1tlze")
 ```
@@ -1778,12 +1775,23 @@ Cliente
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
+```php
+<?
+Cliente
+$customer = $openpay->customers->get(customerId);
+$payout = $customer->payouts->create(payoutRequest);
+
+Comercio
+$payout = $openpay->payouts->create(payoutRequest);
+?>
+```
+
 ```java
 Cliente
 openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
 
 Comercio
-openpayAPI.payouts().create({REQUEST}});
+openpayAPI.payouts().create({REQUEST});
 ```
 
 ```csharp
@@ -1801,6 +1809,17 @@ openpay.payouts.create(payoutRequest, callback);
 // Cliente
 openpay.customers.payouts.create(customerId, payoutRequest, callback);
 ```
+
+```ruby
+Cliente
+@payouts=@openpay.create(:payouts)
+@payouts.create({REQUEST}, {CUSTOMER_ID})
+
+Comercio
+@payouts=@openpay.create(:payouts)
+@payouts.create({REQUEST})
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1816,26 +1835,42 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 }' 
 ```
 
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$payoutRequest = array(
+    'method' => 'card',
+    'destination_id' => 'k3d54sd3mdjf75udjfvoc',
+    'amount' => 1000,
+    'description' => 'Retiro de saldo semanal',
+    'order_id' => 'ORDEN-00021');
+
+$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$payout = $customer->payouts->create($payoutRequest);
+?>
+```
+
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
 CreateBankPayoutParams request = new CreateBankPayoutParams();
-request.bankAccountId("b7neajnjged4luqhvevr"); // = destination_id
-request.amount(new BigDecimal("100.00"));
-request.description("Pago manual al cliente");
-request.orderId("ord-101");
+request.bankAccountId("k3d54sd3mdjf75udjfvoc"); // = destination_id
+request.amount(new BigDecimal("10.50"));
+request.description("Retiro de saldo semanal");
+request.orderId("oid-00021");
 
 Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
 // Para crear pagos a tarjetas se deberá usar la clase CreateCardPayoutParams
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
 PayoutRequest request = new PayoutRequest();
 request.Method = "bank_account";
-request.DestinationId = "b7neajnjged4luqhvevr";
-request.Amount = new Decimal(100.00);
-request.Description = "Pago manual al cliente";
-request.OrderId = "ord-101";
+request.DestinationId = "k3d54sd3mdjf75udjfvoc";
+request.Amount = new Decimal(10.50;
+request.Description = "Retiro de saldo semanal";
+request.OrderId = "oid-00021;
 
 Payout = api.PayoutService.Create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -1852,6 +1887,21 @@ var payoutRequest = {
 openpay.customers.payouts.create('ag4nktpdzebjiye1tlze', payoutRequest, function(error, payout) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@openpay.create(:payouts)
+request_hash={
+     "method" => "bank_account",
+     "destination_id" => "k3d54sd3mdjf75udjfvoc",   
+     "amount" => 10.50,
+     "description" => "Retiro de saldo semanal",
+     "order_id" => "oid-00021"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
@@ -1916,19 +1966,30 @@ Cliente
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
-```java
+```php
+<?
 Cliente
-openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
+$customer = $openpay->customers->get(customerId);
+$payout = $customer->payouts->create(payoutRequest);
 
 Comercio
+$payout = $openpay->payouts->create(payoutRequest);
+?>
+```
+
+```java
+//Cliente
+openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
+
+//Comercio
 openpayAPI.payouts().create({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.PayoutService.Create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.PayoutService.Create({REQUEST});
 ```
 
@@ -1938,6 +1999,16 @@ openpay.payouts.create(payoutRequest, callback);
 
 // Cliente
 openpay.customers.payouts.create(customerId, payoutRequest, callback);
+```
+
+```ruby
+#Cliente
+@payouts=@openpay.create(:payouts)
+@payouts.create({REQUEST}, {CUSTOMER_ID})
+
+#Comercio
+@payouts=@openpay.create(:payouts)
+@payouts.create({REQUEST})
 ```
 
 > Ejemplo de petición con cliente
@@ -1952,23 +2023,41 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguz
       "clabe":"012298026516924616",
       "holder_name":"Mi empresa"
    },
-   "amount":10.50,
+   "amount":100.00,
    "description":"Retiro de saldo semanal",
    "order_id":"oid-1110011"
 }' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$payoutRequest = array(
+    'method' => 'bank_account',
+    'bank_account' => array(
+        'clabe':'012298026516924616',
+        'holder_name':'Mi empresa'),
+    'amount' => 100.00,
+    'description' => 'Retiro de saldo semanal',
+    'order_id' => 'ORDEN-00021');
+
+$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
+$payout = $customer->payouts->create($payoutRequest);
+?>
 ```
 
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateBankPayoutParams request = new CreateBankPayoutParams();
 BankAccount bankAccount = new BankAccount();
-bankAccount.holderName("Luis Hernandez");
-bankAccount.alias("CuentaBancoCliente01");
-bankAccount.clabe("032180000118359001");
+bankAccount.holderName("Mi empresa");
+bankAccount.alias(null);
+bankAccount.clabe("012XXXXXXXXXX24616");
 request.bankAccount(bankAccount);
-request.amount(new BigDecimal("100.00"));
-request.description("Pago a cuenta de banco");
-request.orderId("ord-102");
+request.amount(new BigDecimal("10.50"));
+request.description("Retiro de saldo semanal");
+request.orderId("oid-1110011");
 
 Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -1978,13 +2067,13 @@ OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpq
 PayoutRequest request = new PayoutRequest();
 request.Method = "bank_account";
 BankAccount bankAccount = new BankAccount();
-bankAccount.HolderName = "Luis Hernandez";
-bankAccount.Alias = "CuentaBancoCliente01";
-bankAccount.CLABE = "032180000118359001";
+bankAccount.HolderName = "Mi empresa";
+bankAccount.Alias = null;
+bankAccount.CLABE = "012XXXXXXXXXX24616";
 request.BankAccount = bankAccount;
-request.Amount = new Decimal(100.00);
-request.Description = "Pago a cuenta de banco";
-request.OrderId = "ord-101";
+request.Amount = new Decimal(10.50);
+request.Description = "Retiro de saldo semanal";
+request.OrderId = "oid-1110011";
 
 Payout = api.PayoutService.Create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -2004,6 +2093,26 @@ var payoutRequest = {
 openpay.customers.payouts.create('ag4nktpdzebjiye1tlze', payoutRequest, function(error, payout) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@openpay.create(:payouts)
+bank_account_hash={
+     "holder_name" => "Mi empresa",
+     "alias" => nil,
+     "clabe" => "012XXXXXXXXXX24616"
+   }
+request_hash={
+     "method" => "bank_account",
+     "bank_account" => bank_account_hash,
+     "amount" => 10.50,
+     "description" => "Retiro de saldo semanal",
+     "order_id" => "oid-1110011"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
@@ -2061,6 +2170,17 @@ Cliente
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
+```php
+<?
+Cliente
+$customer = $openpay->customers->get(customerId);
+$payout = $customer->payouts->create(payoutRequest);
+
+Comercio
+$payout = $openpay->payouts->create(payoutRequest);
+?>
+```
+
 ```java
 Cliente
 openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
@@ -2085,6 +2205,16 @@ openpay.payouts.create(payoutRequest, callback);
 openpay.customers.payouts.create(customerId, payoutRequest, callback);
 ```
 
+```ruby
+Cliente
+@payouts=@openpay.create(:payouts)
+@payouts.create({REQUEST}, {CUSTOMER_ID})
+
+Comercio
+@payouts=@openpay.create(:payouts)
+@payouts.create({REQUEST})
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -2097,10 +2227,28 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguz
       "card_number": "4111111111111111",
       "holder_name": "Juan Perez Ramirez"
    },
-   "amount" : 10.50,
+   "amount" : 100.00,
    "description" : "Retiro de saldo semanal",
-   "order_id" : "oid-00021"
+   "order_id" : "ORDEN-00021"
 } ' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$payoutRequest = array(
+    'method' => 'card',
+    'card' => array(
+        'card_number':'4111111111111111',
+        'holder_name':'Juan Perez Ramirez'),
+    'amount' => 100.00,
+    'description' => 'Retiro de saldo semanal',
+    'order_id' => 'ORDEN-00021');
+
+$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
+$payout = $customer->payouts->create($payoutRequest);
+?>
 ```
 
 ```java
@@ -2155,6 +2303,28 @@ openpay.customers.payouts.create('asynwirguzkgq2bizogo', payoutRequest, function
 });
 ```
 
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@openpay.create(:payouts)
+card_hash={
+     "holder_name" => "Juan Perez Ramirez",
+     "card_number" => "411111XXXXXX1111",
+     "cvv2" => "110",
+     "expiration_month" => "12",
+     "expiration_year" => "20"
+   }
+request_hash={
+     "method" => "card",
+     "card" => card_hash,
+     "amount" => 10.50,
+     "description" => "Retiro de saldo semanal",
+     "order_id" => "oid-00021"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@payouts.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
+```
+
 > Ejemplo de respuesta
 
 ```json
@@ -2171,8 +2341,8 @@ openpay.customers.payouts.create('asynwirguzkgq2bizogo', payoutRequest, function
       "address":null,
       "card_number":"411111XXXXXX1111",
       "holder_name":"Juan Perez Ramirez",
-      "expiration_year":null,
-      "expiration_month":null,
+      "expiration_year":"20",
+      "expiration_month":"12",
       "allows_charges":false,
       "allows_payouts":true,
       "bank_name":"Banamex",
@@ -2215,6 +2385,17 @@ Comercio
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts/{TRANSACTION_ID}
 ```
 
+```php
+<?
+Comercio
+$payout = $openpay->payouts->get(transactionId);
+
+Cliente
+$customer = $openpay->customers->get(customerId);
+$payout = $customer->payouts->get(transactionId);
+?>
+```
+
 ```java
 Cliente
 openpayAPI.payouts().get({CUSTOMER_ID}, {TRANSACTION_ID});
@@ -2239,11 +2420,30 @@ openpay.payouts.get(transactionId, callback);
 openpay.customers.payouts.get(customerId, transactionId, callback);
 ```
 
+```ruby
+Cliente
+@payouts=@openpay.create(:payouts)
+@payouts.get(string:transaction_id, string:customer_id)
+
+Comercio
+@payouts=@openpay.create(:payouts)
+@payouts.get(string:transaction_id, string:customer_id)
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts/trwpxhrgfeub9eqdyvqz \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
+$payout = $customer->payouts->get('trwpxhrgfeub9eqdyvqz');
+?>
 ```
 
 ```java
@@ -2261,6 +2461,14 @@ openpay.customers.payouts.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', fu
   // ...
 });
 ```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@openpay.create(:payouts)
+
+response_hash=@payouts.get("tr6cxbcefzatd10guvvw", "asynwirguzkgq2bizogo")
+```
+
 > Ejemplo de respuesta
 
 ```json
@@ -2319,6 +2527,17 @@ Comercio
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
+```php
+<?
+Comercio
+$payoutList = $openpay->payouts->getList(searchParams);
+
+Cliente
+$customer = $openpay->customers->get(customerId);
+$payoutList = $customer->payouts->getList(searchParams);
+?>
+```
+
 ```java
 Cliente
 openpayAPI.payouts().list({CUSTOMER_ID}, {REQUEST});
@@ -2345,11 +2564,35 @@ openpay.customers.payouts.list(customerId, callback);
 openpay.customers.payouts.list(customerId, searchParams, callback);
 ```
 
+```ruby
+Cliente
+@payouts=@openpay.create(:payouts)
+@payouts.all(string:customer_id)
+
+Comercio
+@payouts=@openpay.create(:payouts)
+@payouts.all
+```
+
 > Ejemplo de petición 
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts?creation[gte]=2013-11-01&limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$searchParams = array(
+    'creation[gte]' => '2013-11-01',
+    'creation[lte]' => '2017-12-31',
+    'offset' => 0,
+    'limit' => 2);
+
+$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
+$payoutList = $customer->payouts->getList($searchParams);
 ```
 
 ```java
@@ -2390,6 +2633,13 @@ var searchParams = {
 openpay.customers.payouts.list('asynwirguzkgq2bizogo', searchParams, function(error, list) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@openpay.create(:payouts)
+
+response_hash=@payouts.all("asynwirguzkgq2bizogo")
 ```
 
 > Ejemplo de respuesta
@@ -2538,6 +2788,11 @@ openpayAPI.CustomerService.Create({REQUEST});
 openpay.customers.create(customerRequest, callback);
 ```
 
+```ruby
+@customers=@openpay.create(:customers)
+@customers.create(hash:request_hash)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2604,6 +2859,32 @@ openpay.customers.create(customerRequest, function(error, customer) {
 });
 ```
 
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@customers=@openpay.create(:customers)
+address_hash={
+      "line1" => "Calle 10",
+      "line2" => "col. san pablo",
+      "line3" => "entre la calle 1 y la 2",
+      "state" => "Queretaro",
+      "city" => "Queretaro",
+      "postal_code" => "76000",
+      "country_code" => "MX"
+   }
+request_hash={
+     "external_id" => nil,
+     "name" => "customer name",
+     "last_name" => nil,
+     "email" => "customer_email@me.com",
+     "requires_account" => true,
+     "phone_number" => "44209087654",
+     "address" => address_hash
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@customers.create(request_hash.to_hash)
+```
+
 > Ejemplo de respuesta
 
 ```json
@@ -2658,6 +2939,10 @@ openpayAPI.CustomerService.Update({REQUEST});
 openpay.customers.update(customerId, customerRequest, callback);
 ```
 
+```ruby
+@customers=@openpay.create(:customers)
+@customers.update(hash:request_hash)
+```
 
 > Ejemplo de petición 
 
@@ -2741,6 +3026,32 @@ openpay.customers.update('anbnldwgni1way3yp2dw', customerRequest, function(error
 });
 ```
 
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@customers=@openpay.create(:customers)
+address_hash={
+      "line1" => "Calle 10",
+      "line2" => "col. san pablo",
+      "line3" => "entre la calle 1 y la 2",
+      "state" => "Queretaro",
+      "city" => "Queretaro",
+      "postal_code" => "76000",
+      "country_code" => "MX"
+   }
+request_hash={
+     "external_id" => nil,
+     "name" => "customer name",
+     "last_name" => nil,
+     "email" => "customer_email@me.com",
+     "requires_account" => true,
+     "phone_number" => "44209087654",
+     "address" => address_hash
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@customers.update(request_hash.to_hash)
+```
+
 > Ejemplo de respuesta
 
 ```json
@@ -2800,6 +3111,10 @@ openpayAPI.CustomerService.Update({CUSTOMER_ID});
 openpay.customers.get(customerId, callback);
 ```
 
+```ruby
+@customers=@openpay.create(:customers)
+@customers.get(string:customer_id)
+```
 
 > Ejemplo de petición 
 
@@ -2824,6 +3139,14 @@ openpay.customers.get('a9pvykxz4g5rg0fplze0', function(error, customer) {
   // ... 
 });
 ```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@customers=@openpay.create(:customers)
+
+response_hash=@customers.get("asynwirguzkgq2bizogo")
+```
+
 > Ejemplo de respuesta
 
 ```json
@@ -2879,6 +3202,11 @@ openpayAPI.CustomerService.Delete({CUSTOMER_ID});
 openpay.customers.delete(customerId, callback);
 ```
 
+```ruby
+@customers=@openpay.create(:customers)
+@customers.delete(string:customer_id)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2903,6 +3231,14 @@ openpay.customers.delete('a9pvykxz4g5rg0fplze0', function(error) {
   // ... 
 });
 ```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@customers=@openpay.create(:customers)
+
+response_hash=@customers.delete("asynwirguzkgq2bizogo")
+```
+
 
 Elimina un cliente permanentemente. Se cancelarán las suscripciones que tenga. Openpay mantiene los registros de las operaciones.
 
@@ -2934,6 +3270,11 @@ openpayAPI.CustomerService.List({REQUEST});
 ```javascript
 openpay.customers.list(callback);
 openpay.customers.list(searchParams, callback);
+```
+
+```ruby
+@customers=@openpay.create(:customers)
+@customers.all(string:customer_id)
 ```
 
 > Ejemplo de petición 
@@ -2980,6 +3321,13 @@ var searchParams = {
 openpay.customers.list(searchParams, function(error, list) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@customers=@openpay.create(:customers)
+
+response_hash=@customers.all("asynwirguzkgq2bizogo")
 ```
 
 > Ejemplo de respuesta
