@@ -3553,6 +3553,11 @@ openpay.customers.transfers.create(customerId, transferRequest, function(error, 
 });
 ```
 
+```ruby
+@transfers=@openpay.create(:transfers)
+@transfers.create(hash:request_hash, string:from_customer_id)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -3600,6 +3605,20 @@ var transferRequest = {
 openpay.customers.transfers.create('ag4nktpdzebjiye1tlze', transferRequest, function(error, transfer) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@transfers=@openpay.create(:transfers)
+request_hash={
+     "customer_id" => "dvocf97jd20es3tw5laz",
+     "amount" => 12.50,
+     "description" => "Transferencia entre cuentas",
+     "order_id" => "oid-1245"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@transfers.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
@@ -3658,6 +3677,11 @@ openpay.customers.transfers.get(customerId, transactionId, function(error, trans
 });
 ```
 
+```ruby
+@transfers=@openpay.create(:transfers)
+@transfers.get(string:transaction_id, string:customer_id)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -3680,6 +3704,13 @@ Transfer transfer = api.TransferService.Get("a9pvykxz4g5rg0fplze0", "tr6cxbcefza
 openpay.customers.transfers.get('ag4nktpdzebjiye1tlze', 'twpmbike2jejex3pahzd', function(error, transfer) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@transfers=@openpay.create(:transfers)
+
+response_hash=@transfers.get("twpmbike2jejex3pahzd", "ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
@@ -3741,6 +3772,11 @@ openpay.customers.transfers.list(customerId, searchParams, function(error, trans
 });
 ```
 
+```ruby
+@transfers=@openpay.create(:transfers)
+@transfers.all(string:customer_id)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -3785,6 +3821,12 @@ openpay.customers.transfers.list('ag4nktpdzebjiye1tlze', searchParams, function(
 });
 ```
 
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@transfers=@openpay.create(:transfers)
+
+response_hash=@transfers.all("asynwirguzkgq2bizogo")
+```
 
 > Ejemplo de respuesta
 
