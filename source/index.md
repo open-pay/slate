@@ -300,22 +300,11 @@ openpayAPI.charges().create({REQUEST});
 ```
 
 ```javascript
-// Request
-var chargeRequest = {
-  'method' : 'card',
-  'source_id' : '...', // ID de la tarjeta o token
-  // ...
-}
-
 // Comercio
-openpay.charges.create(chargeRequest, function(error, charge) {
-  // ...
-});
+openpay.charges.create(chargeRequest, callback);
 
 // Cliente
-openpay.customers.charges.create(customerId, chargeRequest, function(error, charge) {
-  // ...
-});
+openpay.customers.charges.create(customerId, chargeRequest, callback);
 ```
 
 ```csharp
@@ -526,24 +515,11 @@ openpayAPI.ChargeService.Create({REQUEST});
 ```
 
 ```javascript
-// Request
-var chargeRequest = {
-  'method' : 'card',
-  'card' : {
-    // Datos de tarjeta
-  }
-  // ...
-}
-
 // Comercio
-openpay.charges.create(chargeRequest, function(error, charge) {
-  // ...
-});
+openpay.charges.create(chargeRequest, callback);
 
 // Cliente
-openpay.customers.charges.create(customerId, chargeRequest, function(error, charge) {
-  // ...
-});
+openpay.customers.charges.create(customerId, chargeRequest, callback);
 ```
 
 ```ruby
@@ -777,21 +753,11 @@ openpayAPI.ChargeService.Create({REQUEST});
 ```
 
 ```javascript
-// Request
-var chargeRequest = {
-  'method' : 'store',
-  // ...
-}
-
 // Comercio
-openpay.charges.create(chargeRequest, function(error, charge) {
-  // ...
-});
+openpay.charges.create(chargeRequest, callback);
 
 // Cliente
-openpay.customers.charges.create(customerId, chargeRequest, function(error, charge) {
-  // ...
-});
+openpay.customers.charges.create(customerId, chargeRequest, callback);
 ```
 
 ```ruby
@@ -961,21 +927,11 @@ openpayAPI.ChargeService.Create({REQUEST});
 ```
 
 ```javascript
-// Request
-var chargeRequest = {
-  'method' : 'bank_account',
-  // ...
-}
-
 // Comercio
-openpay.charges.create(chargeRequest, function(error, charge) {
-  // ...
-});
+openpay.charges.create(chargeRequest, callback);
 
 // Cliente
-openpay.customers.charges.create(customerId, chargeRequest, function(error, charge) {
-  // ...
-});
+openpay.customers.charges.create(customerId, chargeRequest, callback);
 ```
 
 ```ruby
@@ -1295,14 +1251,10 @@ openpayAPI.ChargeService.Refund({TRANSACTION_ID}, {DESCRIPTION});
 
 ```javascript
 // Comercio
-openpay.charges.refund(transactionId, refundRequest, function(error, charge) {
-  // ...
-});
+openpay.charges.refund(transactionId, refundRequest, callback);
 
 // Cliente
-openpay.customers.charges.refund(customerId, transactionId, refundRequest, function(error, charge) {
-  // ...
-});
+openpay.customers.charges.refund(customerId, transactionId, refundRequest, callback);
 ```
 
 ```ruby
@@ -1357,7 +1309,8 @@ var refundRequest = {
    'description' : 'devolución'
 };
 
-openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest, function(error, charge) {
+openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest, 
+    function(error, charge) {
   // ...
 });
 ```
@@ -1476,14 +1429,10 @@ openpayAPI.ChargeService.Get({TRANSACTION_ID});
 
 ```javascript
 // Comercio
-openpay.charges.get(transactionId, function(error, charge) {
-  // ...
-});
+openpay.charges.get(transactionId, callback);
 
 // Cliente
-openpay.customers.charges.get(customerId, transactionId, function(error, charge) {
-  // ...
-});
+openpay.customers.charges.get(customerId, transactionId, callback);
 ```
 
 ```ruby
@@ -1637,32 +1586,13 @@ openpayAPI.ChargeService.List({REQUEST});
 ```
 
 ```javascript
-// Sin parametros
-
 // Comercio
-openpay.charges.list(function(error, list) {
-  // ...
-});
+openpay.charges.list(callback);
+openpay.charges.list(searchParams, callback);
 
 // Cliente
-openpay.customers.charges.list(customerId, function(error, list) {
-  // ...
-});
-
-// Parametros de busqueda
-var searchParams = {
-  // ...
-}
-
-// Comercio
-openpay.charges.list(searchParams, function(error, list) {
-  // ...
-});
-
-// Cliente
-openpay.customers.charges.list(customerId, searchParams, function(error, list) {
-  // ...
-});
+openpay.customers.charges.list(customerId, callback);
+openpay.customers.charges.list(customerId, searchParams, callback);
 ```
 
 ```ruby
@@ -1865,20 +1795,11 @@ openpayAPI.PayoutService.Create({REQUEST});
 ```
 
 ```javascript
-//Request
-var payoutRequest = {
-    'destination_id' : '...' // ID de la cuenta de banco o de la tarjeta 
-};
-
 // Comercio
-openpay.payouts.create(payoutRequest, function(error, payout) {
-  // ...
-});
+openpay.payouts.create(payoutRequest, callback);
 
 // Cliente
-openpay.customers.payouts.create(customerId, payoutRequest, function(error, payout) {
-  // ...
-});
+openpay.customers.payouts.create(customerId, payoutRequest, callback);
 ```
 > Ejemplo de petición con cliente
 
@@ -2012,24 +1933,11 @@ openpayAPI.PayoutService.Create({REQUEST});
 ```
 
 ```javascript
-//Request
-var payoutRequest = {
-    'method' : 'bank_account',
-    'bank_account' : {
-      // ...
-    },
-    // ...
-};
-
 // Comercio
-openpay.payouts.get(payoutRequest, function(error, payout) {
-  // ...
-});
+openpay.payouts.create(payoutRequest, callback);
 
 // Cliente
-openpay.customers.payouts.get(customerId, payoutRequest, function(error, payout) {
-  // ...
-});
+openpay.customers.payouts.create(customerId, payoutRequest, callback);
 ```
 
 > Ejemplo de petición con cliente
@@ -2170,24 +2078,11 @@ openpayAPI.PayoutService.Create({REQUEST});
 ```
 
 ```javascript
-//Request
-var payoutRequest = {
-    'method' : 'card',
-    'card' : {
-      // ...
-    },
-    // ...
-};
-
 // Comercio
-openpay.payouts.create(payoutRequest, function(error, payout) {
-  // ...
-});
+openpay.payouts.create(payoutRequest, callback);
 
 // Cliente
-openpay.customers.payouts.create(customerId, payoutRequest, function(error, payout) {
-  // ...
-});
+openpay.customers.payouts.create(customerId, payoutRequest, callback);
 ```
 
 > Ejemplo de petición con cliente
@@ -2338,14 +2233,10 @@ openpayAPI.PayoutService.Get({TRANSACTION_ID});
 
 ```javascript
 // Comercio
-openpay.payouts.get(transactionId, function(error, payout) {
-  // ...
-});
+openpay.payouts.get(transactionId, callback);
 
 // Cliente
-openpay.customers.payouts.get(customerId, transactionId, function(error, payout) {
-  // ...
-});
+openpay.customers.payouts.get(customerId, transactionId, callback);
 ```
 
 > Ejemplo de petición con cliente
@@ -2445,32 +2336,13 @@ openpayAPI.PayoutService.List({REQUEST});
 ```
 
 ```javascript
-// Sin parametros
-
 // Comercio
-openpay.payouts.list(function(error, list) {
-  // ...
-});
+openpay.payouts.list(callback);
+openpay.payouts.list(searchParams, callback);
 
 // Cliente
-openpay.customers.payouts.list(customerId, function(error, list) {
-  // ...
-});
-
-// Parametros de busqueda
-var searchParams = {
-  // ...
-}
-
-// Comercio
-openpay.payouts.list(searchParams, function(error, list) {
-  // ...
-});
-
-// Cliente
-openpay.customers.payouts.list(customerId, searchParams, function(error, list) {
-  // ...
-});
+openpay.customers.payouts.list(customerId, callback);
+openpay.customers.payouts.list(customerId, searchParams, callback);
 ```
 
 > Ejemplo de petición 
@@ -2663,9 +2535,7 @@ openpayAPI.CustomerService.Create({REQUEST});
 ```
 
 ```javascript
-openpay.customers.create(customerRequest, function(error, customer) {
-  // ... 
-});
+openpay.customers.create(customerRequest, callback);
 ```
 
 > Ejemplo de petición 
@@ -2785,13 +2655,7 @@ openpayAPI.CustomerService.Update({REQUEST});
 ```
 
 ```javascript
-var customerRequest = {
-  // ...
-}
-
-openpay.customers.update(customerId, customerRequest, function(error, customer) {
-  // ... 
-});
+openpay.customers.update(customerId, customerRequest, callback);
 ```
 
 
@@ -2933,9 +2797,7 @@ openpayAPI.CustomerService.Update({CUSTOMER_ID});
 ```
 
 ```javascript
-openpay.customers.get(customerId, function(error, customer) {
-  // ... 
-});
+openpay.customers.get(customerId, callback);
 ```
 
 
@@ -3014,9 +2876,7 @@ openpayAPI.CustomerService.Delete({CUSTOMER_ID});
 ```
 
 ```javascript
-openpay.customers.delete(customerId, function(error, customer) {
-  // ... 
-});
+openpay.customers.delete(customerId, callback);
 ```
 
 > Ejemplo de petición 
@@ -3039,7 +2899,7 @@ api.CustomerService.Delete("a9pvykxz4g5rg0fplze0");
 ```
 
 ```javascript
-openpay.customers.delete('a9pvykxz4g5rg0fplze0', function(error, customer) {
+openpay.customers.delete('a9pvykxz4g5rg0fplze0', function(error) {
   // ... 
 });
 ```
@@ -3072,20 +2932,8 @@ openpayAPI.CustomerService.List({REQUEST});
 ```
 
 ```javascript
-// Sin parametros
-openpay.customers.list(function(error, list) {
-  // ...
-});
-
-// Con parametros
-
-var searchParams = {
-  // ...
-}
-
-openpay.customers.list(searchParams, function(error, list) {
-  // ...
-});
+openpay.customers.list(callback);
+openpay.customers.list(searchParams, callback);
 ```
 
 > Ejemplo de petición 
@@ -3200,9 +3048,7 @@ openpayAPI.TransferService.Create({FROM_CUSTOMER_ID}, {REQUEST});
 ```
 
 ```javascript
-openpay.customers.transfers.create(customerId, transferRequest, function(error, transfer) {
-  // ...
-});
+openpay.customers.transfers.create(customerId, transferRequest, callback);
 ```
 
 > Ejemplo de petición 
@@ -3305,9 +3151,7 @@ openpayAPI.TransferService.Get({CUSTOMER_ID}, {TRANSACTION_ID});
 ```
 
 ```javascript
-openpay.customers.transfers.get(customerId, transactionId, function(error, transfer) {
-  // ...
-});
+openpay.customers.transfers.get(customerId, transactionId, callback);
 ```
 
 > Ejemplo de petición 
@@ -3382,15 +3226,8 @@ openpayAPI.TransferService.List({CUSTOMER_ID}, {REQUEST});
 ```
 
 ```javascript
-// Sin parametros de busqueda
-openpay.customers.transfers.list(customerId, function(error, transfer) {
-  // ...
-});
-
-//Con parametros de busqueda
-openpay.customers.transfers.list(customerId, searchParams, function(error, transfer) {
-  // ...
-});
+openpay.customers.transfers.list(customerId, callback);
+openpay.customers.transfers.list(customerId, searchParams, callback);
 ```
 
 > Ejemplo de petición 
@@ -3576,15 +3413,11 @@ openpayAPI.CardService.Create({REQUEST});
 ```
 
 ```javascript
-  // Comercio
-  openpay.cards.create(cardRequest, function(error, card))  {
-    // ...
-  }
+// Comercio
+openpay.cards.create(cardRequest, callback);
 
-  // Cliente
-  openpay.customers.cards.create(customerId, cardRequest, function(error, card))  {
-    // ...
-  }
+// Cliente
+openpay.customers.cards.create(customerId, cardRequest, callback);
 ```
 
 > Ejemplo de petición con cliente
@@ -3730,20 +3563,11 @@ openpayAPI.CardService.Create({REQUEST});
 ```
 
 ```javascript
-//Request
-var cardRequest = {
-  'token_id' : '...' //ID del Token
-}
-
 // Comercio
-openpay.cards.create(cardRequest, function(error, card))  {
-  // ...
-}
+openpay.cards.create(cardRequest, callback);
 
 // Cliente
-openpay.customers.cards.create(customerId, cardRequest, function(error, card))  {
-  // ...
-}
+openpay.customers.cards.create(customerId, cardRequest, callback);
 ```
 
 > Ejemplo de petición con cliente
@@ -3778,9 +3602,9 @@ var cardRequest = {
   'token_id' : 'tokgslwpdcrkhlgxqi9a'
 }
 
-openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(error, card))  {
+openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(error, card)  {
   // ...
-}
+});
 ```
 
 > Ejemplo de respuesta
@@ -3843,14 +3667,10 @@ openpayAPI.CardService.Get({CARD_ID});
 
 ```javascript
 // Comercio
-openpay.cards.get(cardId, function(error, card) {
-  // ...
-});
+openpay.cards.get(cardId, callback);
 
 // Cliente
-openpay.customers.cards.get(customerId, cardId, function(error, card) {
-  // ...
-});
+openpay.customers.cards.get(customerId, cardId, callback);
 ```
 
 > Ejemplo de petición con cliente
@@ -3941,14 +3761,10 @@ openpayAPI.CardService.Delete({CARD_ID});
 
 ```javascript
 // Comercio
-openpay.cards.delete(cardId, function(error) {
-  // ...
-});
+openpay.cards.delete(cardId, callback);
 
 // Cliente
-openpay.customers.cards.delete(customerId, cardId, function(error) {
-  // ...
-});
+openpay.customers.cards.delete(customerId, cardId, callback);
 ```
 
 
@@ -4017,32 +3833,13 @@ openpayAPI.CardService.List({REQUEST});
 ```
 
 ```javascript
-// Sin parametros
-
 // Comercio
-openpay.cards.list(function(error, list){
-  // ...
-});
+openpay.cards.list(callback);
+openpay.cards.list(searchParams, callback);
 
 // Cliente
-openpay.cards.list(customerId, function(error, list){
-  // ...
-});
-
-// Con parametros
-var searchParams = {
-  // ...
-};
-
-// Comercio
-openpay.cards.list(searchParams, function(error, list){
-  // ...
-});
-
-// Cliente
-openpay.cards.list(customerId, searchParams, function(error, list){
-  // ...
-});
+openpay.cards.list(customerId, callback);
+openpay.cards.list(customerId, searchParams, callback);
 ```
 
 > Ejemplo de petición con cliente
@@ -4196,9 +3993,7 @@ openpayAPI.BankAccountService.Create({REQUEST});
 ```
 
 ```javascript
-openpay.customers.bankaccounts.create(customerId, bankaccountRequest, function(error, bankaccount) {
-  // ...
-});
+openpay.customers.bankaccounts.create(customerId, bankaccountRequest, callback);
 ```
 
 > Ejemplo de petición con cliente
@@ -4299,9 +4094,7 @@ openpayAPI.BankAccountService.Get({BANK_ACCOUNT_ID});
 ```
 
 ```javascript
-openpay.customers.bankaccounts.get(customerId, bankaccountId, function(error, bankaccount){
-  // ...
-});
+openpay.customers.bankaccounts.get(customerId, bankaccountId, callback);
 ```
 
 > Ejemplo de petición con cliente
@@ -4376,9 +4169,7 @@ openpayAPI.BankAccountService.Delete({BANK_ACCOUNT_ID});
 ```
 
 ```javascript
-openpay.customers.bankaccounts.delete(customerId,bankaccountId, function(error){
-  // ...
-});
+openpay.customers.bankaccounts.delete(customerId,bankaccountId, callback);
 ```
 
 > Ejemplo de petición con cliente
@@ -4439,19 +4230,8 @@ openpayAPI.BankAccountService.List({REQUEST});
 ```
 
 ```javascript
-// Sin parametros
-openpay.customers.bankaccounts.list(customerId, function(error, list){
-  // ...
-});
-
-// Con parametros
-var searchParams = {
-  // ...
-};
-
-openpay.customers.bankaccounts.list(customerId, searchParams, function(error, list){
-  // ...
-});
+openpay.customers.bankaccounts.list(customerId, callback);
+openpay.customers.bankaccounts.list(customerId, searchParams, callback);
 ```
 
 > Ejemplo de petición con cliente
@@ -4586,14 +4366,12 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans
 openpayAPI.plans().create({REQUEST});
 ```
 
-```chsarp
+```csharp
 openpayAPI.PlanService.Create({REQUEST});
 ```
 
 ```javascript
-openpay.plans.create(planRequest, function(error, plan){
-  // ...
-});
+openpay.plans.create(planRequest, callback);
 ```
 
 > Ejemplo de petición 
@@ -4711,9 +4489,7 @@ openpayAPI.PlanService.Update({REQUEST});
 ```
 
 ```javascript
-openpay.plans.update(planId, planRequest, function(error, plan){
-  // ...
-});
+openpay.plans.update(planId, planRequest, callback);
 ```
 
 > Ejemplo de petición 
@@ -4805,9 +4581,7 @@ openpayAPI.PlanService.Get({PLAN_ID});
 ```
 
 ```javascript
-openpay.plans.get(planId, function(error, plan){
-  // ...
-});
+openpay.plans.get(planId, callback);
 ```
 
 > Ejemplo de petición 
@@ -4878,9 +4652,7 @@ openpayAPI.PlanService.Delete({PLAN_ID});
 ```
 
 ```javascript
-openpay.plans.delete(planId, function(error){
-  // ...
-});
+openpay.plans.delete(planId, callback);
 ```
 
 > Ejemplo de petición 
@@ -4933,15 +4705,8 @@ openpayAPI.PlanService.List({REQUEST});
 ```
 
 ```javascript
-// Sin parametros
-openpay.plans.list(function(error, list){
-  // ...
-});
-
-// Con parametros
-openpay.plans.list(searchParams, function(error, list){
-  // ...
-});
+openpay.plans.list(callback);
+openpay.plans.list(searchParams, callback);
 ```
 
 > Ejemplo de petición 
@@ -5108,9 +4873,7 @@ openpayAPI.SubscriptionService.Create({CUSTOMER_ID}, {REQUEST});
 ```
 
 ```javascript
-openpay.customers.subscriptions.create(customerId, subscriptionRequest, function(error, subscription){
-  // ...
-});
+openpay.customers.subscriptions.create(customerId, subscriptionRequest, callback);
 ```
 
 
@@ -5233,10 +4996,7 @@ openpayAPI.SubscriptionService.Update({CUSTOMER_ID}, {REQUEST});
 ```
 
 ```javascript
-openpay.customers.subscriptions.update(customerId, subscriptionId, subscriptionRequest, 
-    function(error, subscription){
-  // ...
-});
+openpay.customers.subscriptions.update(customerId, subscriptionId, subscriptionRequest, callback);
 ```
 
 
@@ -5358,9 +5118,7 @@ openpayAPI.SubscriptionService.Get({CUSTOMER_ID}, {SUBSCRIPTION_ID});
 ```
 
 ```javascript
-openpay.customers.subscriptions.get(customerId, subscriptionId, function(error, subscription){
-  // ...
-});
+openpay.customers.subscriptions.get(customerId, subscriptionId, callback);
 ```
 
 > Ejemplo de petición 
@@ -5444,9 +5202,7 @@ openpayAPI.SubscriptionService.Delete({CUSTOMER_ID}, {SUBSCRIPTION_ID});
 ```
 
 ```javascript
-openpay.customers.subscriptions.delete(customerId, subscriptionId, function(error){
-  // ..
-});
+openpay.customers.subscriptions.delete(customerId, subscriptionId, callback);
 ```
 
 > Ejemplo de petición 
@@ -5469,7 +5225,7 @@ api.SubscriptionService.Delete("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 
 ```javascript
 openpay.customers.subscriptions.delete('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', function(error){
-  // ..
+  // ...
 });
 ```
 
@@ -5719,6 +5475,11 @@ openpayAPI.fees().list({REQUEST});
 openpayAPI.FeeService.List({REQUEST});
 ```
 
+```javascript
+openpay.fees.list(callback);
+openpay.fees.list(searchParams, callback);
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -5751,6 +5512,16 @@ request.Offset = 0;
 request.Limit = 100;
 
 List<Fee> fees = api.FeeService.List(request);
+```
+
+```javascript
+var searchParams = {
+  'limit' : 10
+};
+
+openpay.fees.list(searchParams, function(error, list){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
