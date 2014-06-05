@@ -3227,7 +3227,8 @@ List<Transfer> transfers = api.TransferService.List("a9pvykxz4g5rg0fplze0", requ
 var searchParams = {
   'limit' : 2
 };
-openpay.customers.transfers.list('ag4nktpdzebjiye1tlze', searchParams, function(error, transfer) {
+
+openpay.customers.transfers.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list) {
   // ...
 });
 ```
@@ -3524,6 +3525,23 @@ Comercio
 openpayAPI.CardService.Create({REQUEST});
 ```
 
+```javascript
+//Request
+var cardRequest = {
+  'token_id' : '...' //ID del Token
+}
+
+// Comercio
+openpay.cards.create(cardRequest, function(error, card))  {
+  // ...
+}
+
+// Cliente
+openpay.customers.cards.create(customerId, cardRequest, function(error, card))  {
+  // ...
+}
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -3549,6 +3567,16 @@ Card request = new Card();
 // tokenid????
 
 request = api.CardService.Create("a9pvykxz4g5rg0fplze0", request);
+```
+
+```javascript
+var cardRequest = {
+  'token_id' : 'tokgslwpdcrkhlgxqi9a'
+}
+
+openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(error, card))  {
+  // ...
+}
 ```
 
 > Ejemplo de respuesta
@@ -3609,6 +3637,18 @@ Comercio
 openpayAPI.CardService.Get({CARD_ID});
 ```
 
+```javascript
+// Comercio
+openpay.cards.get(cardId, function(error, card) {
+  // ...
+});
+
+// Cliente
+openpay.customers.cards.get(customerId, cardId, function(error, card) {
+  // ...
+});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -3625,6 +3665,12 @@ Card card = api.cards().get("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card card = api.CardService.Get("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
+```
+
+```javascript
+openpay.customers.cards.get('a9pvykxz4g5rg0fplze0', 'ktrpvymgatocelsciak7', function(error, card){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
@@ -3650,7 +3696,7 @@ Card card = api.CardService.Get("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 Obtiene los detalles de una tarjeta solicitándola con su id. 
 
 <aside class="notice">
-**Nota:** Nunca se regresarán datos sensibles como son el código de seguridad y del número de tarjeta sólo se mostraran los 4 últimos dígitos.
+**Nota:** Nunca se regresarán datos sensibles como son el código de seguridad y del número de tarjeta sólo se mostraran los primeros 6 y los últimos 4 dígitos.
 </aside>
 
 ###Petición
@@ -3689,6 +3735,19 @@ Comercio
 openpayAPI.CardService.Delete({CARD_ID});
 ```
 
+```javascript
+// Comercio
+openpay.cards.delete(cardId, function(error) {
+  // ...
+});
+
+// Cliente
+openpay.customers.cards.delete(customerId, cardId, function(error) {
+  // ...
+});
+```
+
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -3705,6 +3764,12 @@ api.cards().delete("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.CardService.Delete("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
+```
+
+```javascript
+openpay.customers.cards.delete('a9pvykxz4g5rg0fplze0', 'ktrpvymgatocelsciak7', function(error) {
+  // ...
+});
 ```
 
 Elimina una tarjeta del cliente o comercio. Una vez eliminada no se permitirá hacer movimientos, sin embargo, se mantendrán todos los registros de operaciones que haya realizado y se podrán consultar en el dashboard.
@@ -3747,6 +3812,35 @@ Comercio
 openpayAPI.CardService.List({REQUEST});
 ```
 
+```javascript
+// Sin parametros
+
+// Comercio
+openpay.cards.list(function(error, list){
+  // ...
+});
+
+// Cliente
+openpay.cards.list(customerId, function(error, list){
+  // ...
+});
+
+// Con parametros
+var searchParams = {
+  // ...
+};
+
+// Comercio
+openpay.cards.list(searchParams, function(error, list){
+  // ...
+});
+
+// Cliente
+openpay.cards.list(customerId, searchParams, function(error, list){
+  // ...
+});
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -3778,6 +3872,16 @@ request.Offset = 0;
 request.Limit = 100;
 
 List<Card> cards = api.CardService.List("a9pvykxz4g5rg0fplze0", request);
+```
+
+```javascript
+var searchParams = {
+  'limit' : 2
+};
+
+openpay.customers.cards.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
