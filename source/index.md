@@ -328,12 +328,12 @@ openpayAPI.ChargeService.Create({REQUEST});
 
 ```ruby
 Cliente
-charges=@openpay.create(:charges)
-charges.create({REQUEST}), {CUSTOMER_ID})
+@charges=@openpay.create(:charges)
+@charges.create({REQUEST}, {CUSTOMER_ID})
 
 Comercio
-charges=@openpay.create(:charges)
-charges.create({REQUEST}))
+@charges=@openpay.create(:charges)
+@charges.create({REQUEST})
 ```
 
 > Ejemplo de petición con cliente
@@ -386,7 +386,7 @@ ChargeRequest request = new ChargeRequest();
 request.Method = "card";
 request.SourceId = "kwkoqpg6fcvfse8k8mg2";
 request.Amount = new Decimal(100.00);
-request.Description = "Testing from .Net";
+request.Description = "Cargo inicial a mi merchant";
 request.OrderId = "oid-00051";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
 request.Capture = true;
@@ -412,11 +412,13 @@ openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function
 @openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 @charges=@openpay.create(:charges)
 request_hash={
-    'method' => 'card',
-    'source_id' => 'kqgykn96i7bcs1wwhvgw',
-    'amount' => 100,
-    'description' => 'Cargo inicial a mi merchant',
-    'order_id' => 'oid-00051'}
+    "method" => "card",
+    "source_id" => "kqgykn96i7bcs1wwhvgw",
+    "amount" => 100.00,
+    "description" => "Cargo inicial a mi merchant",
+    "order_id" => "oid-00051",
+    "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
+  }
 #Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
@@ -544,6 +546,16 @@ openpay.customers.charges.create(customerId, chargeRequest, function(error, char
 });
 ```
 
+```ruby
+Cliente
+@charges=@openpay.create(:charges)
+@charges.create({REQUEST}, {CUSTOMER_ID})
+
+Comercio
+@charges=@openpay.create(:charges)
+@charges.create({REQUEST})
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -645,6 +657,29 @@ var chargeRequest = {
 openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function(error, charge) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@openpay.create(:charges)
+card_hash={
+     "holder_name" => "Juan Perez Ramirez",
+     "card_number" => "4111111111111111",
+     "cvv2": "110",
+     "expiration_month" => "12",
+     "expiration_year" => "20"
+   }
+request_hash={
+     "method" => "card",
+     "card" => card_hash,   
+     "amount" => 100.00,
+     "description" => "Cargo inicial a mi cuenta",
+     "order_id" => "oid-00052",
+     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
@@ -759,6 +794,16 @@ openpay.customers.charges.create(customerId, chargeRequest, function(error, char
 });
 ```
 
+```ruby
+Cliente
+@charges=@openpay.create(:charges)
+@charges.create({REQUEST}, {CUSTOMER_ID})
+
+Comercio
+@charges=@openpay.create(:charges)
+@charges.create({REQUEST})
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -820,6 +865,20 @@ var storeChargeRequest = {
 openpay.customers.charges.create('ag4nktpdzebjiye1tlze', storeChargeRequest, function(error, charge) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@openpay.create(:charges)
+request_hash={
+     "method" => "store",
+     "amount" => 100.00,
+     "description" => "Cargo con tienda",
+     "order_id" => "oid-00053"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
@@ -919,6 +978,16 @@ openpay.customers.charges.create(customerId, chargeRequest, function(error, char
 });
 ```
 
+```ruby
+Cliente
+@charges=@openpay.create(:charges)
+@charges.create({REQUEST}, {CUSTOMER_ID})
+
+Comercio
+@charges=@openpay.create(:charges)
+@charges.create({REQUEST})
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -981,6 +1050,20 @@ openpay.customers.charges.create('ag4nktpdzebjiye1tlze', bankChargeRequest, func
   // ...
 });
 
+```
+
+```ruby
+@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@openpay.create(:charges)
+request_hash={
+     "method" => "bank_account",
+     "amount" => 100.00,
+     "description" => "Cargo con banco",
+     "order_id" => "oid-00053"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
@@ -1065,6 +1148,16 @@ Comercio
 openpayAPI.ChargeService.Capture({TRANSACTION_ID}, {AMOUNT});
 ```
 
+```ruby
+Cliente
+@charges=@openpay.create(:charges)
+@charges.capture({TRANSACTION_ID}, {CUSTOMER_ID})
+
+Comercio
+@charges=@openpay.create(:charges)
+@charges.capture({TRANSACTION_ID})
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1100,6 +1193,13 @@ Charge charge = api.charges().confirmCapture("ag4nktpdzebjiye1tlze", request);
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Charge charge = api.ChargeService.Capture("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", new Decimal(100.00));
+```
+
+```ruby
+@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@openpay.create(:charges)
+
+response_hash=@charges.capture("tryqihxac3msedn4yxed", "ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
@@ -1205,6 +1305,15 @@ openpay.customers.charges.refund(customerId, transactionId, refundRequest, funct
 });
 ```
 
+```ruby
+Cliente
+@charges=@openpay.create(:charges)
+@charges.refund({TRANSACTION_ID}, {DESCRIPTION}, {CUSTOMER_ID})
+
+Comercio
+@charges=@openpay.create(:charges)
+@charges.refund({TRANSACTION_ID}, {DESCRIPTION})
+```
 
 > Ejemplo de petición con cliente
 
@@ -1251,6 +1360,13 @@ var refundRequest = {
 openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest, function(error, charge) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@openpay.create(:charges)
+
+response_hash=@charges.refund("tryqihxac3msedn4yxed", "Monto de cargo devuelto", "ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
@@ -1370,6 +1486,16 @@ openpay.customers.charges.get(customerId, transactionId, function(error, charge)
 });
 ```
 
+```ruby
+Cliente
+@charges=@openpay.create(:charges)
+@charges.get({TRANSACTION_ID}, {CUSTOMER_ID})
+
+Comercio
+@charges=@openpay.create(:charges)
+@charges.get({TRANSACTION_ID})
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1401,6 +1527,14 @@ openpay.customers.charges.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', fu
   // ...
 });
 ```
+
+```ruby
+@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@openpay.create(:charges)
+
+response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag4nktpdzebjiye1tlze")
+```
+
 > Ejemplo de respuesta
 
 ```json
@@ -1531,6 +1665,16 @@ openpay.customers.charges.list(customerId, searchParams, function(error, list) {
 });
 ```
 
+```ruby
+Cliente
+@charges=@openpay.create(:charges)
+@charges.all({CUSTOMER_ID})
+
+Comercio
+@charges=@openpay.create(:charges)
+@charges.all
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1591,6 +1735,21 @@ var searchParams = {
 openpay.customers.charges.list('ag4nktpdzebjiye1tlze',searchParams, function(error, chargeList) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@openpay.create(:charges)
+request_hash={
+     "creation[gte]" => "2014-05-01",
+     "creation[lte]" => "2014-05-15",   
+     "offset" => 0,
+     "limit" => 100,
+     "amount" => 100.00
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@charges.all("ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
