@@ -1668,7 +1668,7 @@ openpay.customers.charges.list(customerId, searchParams, function(error, list) {
 ```ruby
 Cliente
 @charges=@openpay.create(:charges)
-@charges.all({CUSTOMER_ID})
+@charges.all(string:customer_id)
 
 Comercio
 @charges=@openpay.create(:charges)
@@ -1740,14 +1740,6 @@ openpay.customers.charges.list('ag4nktpdzebjiye1tlze',searchParams, function(err
 ```ruby
 @openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 @charges=@openpay.create(:charges)
-request_hash={
-     "creation[gte]" => "2014-05-01",
-     "creation[lte]" => "2014-05-15",   
-     "offset" => 0,
-     "limit" => 100,
-     "amount" => 100.00
-   }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@charges.all("ag4nktpdzebjiye1tlze")
 ```
@@ -1880,6 +1872,17 @@ openpay.customers.payouts.create(customerId, payoutRequest, function(error, payo
   // ...
 });
 ```
+
+```ruby
+Cliente
+@payouts=@openpay.create(:payouts)
+@payouts.create({REQUEST}, {CUSTOMER_ID})
+
+Comercio
+@payouts=@openpay.create(:payouts)
+@payouts.create({REQUEST})
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -1896,25 +1899,25 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
 CreateBankPayoutParams request = new CreateBankPayoutParams();
-request.bankAccountId("b7neajnjged4luqhvevr"); // = destination_id
-request.amount(new BigDecimal("100.00"));
-request.description("Pago manual al cliente");
-request.orderId("ord-101");
+request.bankAccountId("k3d54sd3mdjf75udjfvoc"); // = destination_id
+request.amount(new BigDecimal("10.50"));
+request.description("Retiro de saldo semanal");
+request.orderId("oid-00021");
 
 Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
 // Para crear pagos a tarjetas se deberá usar la clase CreateCardPayoutParams
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
 PayoutRequest request = new PayoutRequest();
 request.Method = "bank_account";
-request.DestinationId = "b7neajnjged4luqhvevr";
-request.Amount = new Decimal(100.00);
-request.Description = "Pago manual al cliente";
-request.OrderId = "ord-101";
+request.DestinationId = "k3d54sd3mdjf75udjfvoc";
+request.Amount = new Decimal(10.50;
+request.Description = "Retiro de saldo semanal";
+request.OrderId = "oid-00021;
 
 Payout = api.PayoutService.Create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -1931,6 +1934,21 @@ var payoutRequest = {
 openpay.customers.payouts.create('ag4nktpdzebjiye1tlze', payoutRequest, function(error, payout) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@openpay.create(:payouts)
+request_hash={
+     "method" => "bank_account",
+     "destination_id" => "k3d54sd3mdjf75udjfvoc",   
+     "amount" => 10.50,
+     "description" => "Retiro de saldo semanal",
+     "order_id" => "oid-00021"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
@@ -1996,18 +2014,18 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/pay
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.payouts().create({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.PayoutService.Create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.PayoutService.Create({REQUEST});
 ```
 
@@ -2032,6 +2050,16 @@ openpay.customers.payouts.get(customerId, payoutRequest, function(error, payout)
 });
 ```
 
+```ruby
+#Cliente
+@payouts=@openpay.create(:payouts)
+@payouts.create({REQUEST}, {CUSTOMER_ID})
+
+#Comercio
+@payouts=@openpay.create(:payouts)
+@payouts.create({REQUEST})
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -2054,13 +2082,13 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguz
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateBankPayoutParams request = new CreateBankPayoutParams();
 BankAccount bankAccount = new BankAccount();
-bankAccount.holderName("Luis Hernandez");
-bankAccount.alias("CuentaBancoCliente01");
-bankAccount.clabe("032180000118359001");
+bankAccount.holderName("Mi empresa");
+bankAccount.alias(null);
+bankAccount.clabe("012XXXXXXXXXX24616");
 request.bankAccount(bankAccount);
-request.amount(new BigDecimal("100.00"));
-request.description("Pago a cuenta de banco");
-request.orderId("ord-102");
+request.amount(new BigDecimal("10.50"));
+request.description("Retiro de saldo semanal");
+request.orderId("oid-1110011");
 
 Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -2070,13 +2098,13 @@ OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpq
 PayoutRequest request = new PayoutRequest();
 request.Method = "bank_account";
 BankAccount bankAccount = new BankAccount();
-bankAccount.HolderName = "Luis Hernandez";
-bankAccount.Alias = "CuentaBancoCliente01";
-bankAccount.CLABE = "032180000118359001";
+bankAccount.HolderName = "Mi empresa";
+bankAccount.Alias = null;
+bankAccount.CLABE = "012XXXXXXXXXX24616";
 request.BankAccount = bankAccount;
-request.Amount = new Decimal(100.00);
-request.Description = "Pago a cuenta de banco";
-request.OrderId = "ord-101";
+request.Amount = new Decimal(10.50);
+request.Description = "Retiro de saldo semanal";
+request.OrderId = "oid-1110011";
 
 Payout = api.PayoutService.Create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -2096,6 +2124,26 @@ var payoutRequest = {
 openpay.customers.payouts.create('ag4nktpdzebjiye1tlze', payoutRequest, function(error, payout) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@openpay.create(:payouts)
+bank_account_hash={
+     "holder_name" => "Mi empresa",
+     "alias" => nil,
+     "clabe" => "012XXXXXXXXXX24616"
+   }
+request_hash={
+     "method" => "bank_account",
+     "bank_account" => bank_account_hash,
+     "amount" => 10.50,
+     "description" => "Retiro de saldo semanal",
+     "order_id" => "oid-1110011"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
@@ -2190,6 +2238,16 @@ openpay.customers.payouts.create(customerId, payoutRequest, function(error, payo
 });
 ```
 
+```ruby
+Cliente
+@payouts=@openpay.create(:payouts)
+@payouts.create({REQUEST}, {CUSTOMER_ID})
+
+Comercio
+@payouts=@openpay.create(:payouts)
+@payouts.create({REQUEST})
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -2260,6 +2318,28 @@ openpay.customers.payouts.create('asynwirguzkgq2bizogo', payoutRequest, function
 });
 ```
 
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@openpay.create(:payouts)
+card_hash={
+     "holder_name" => "Juan Perez Ramirez",
+     "card_number" => "411111XXXXXX1111",
+     "cvv2" => "110",
+     "expiration_month" => "12",
+     "expiration_year" => "20"
+   }
+request_hash={
+     "method" => "card",
+     "card" => card_hash,
+     "amount" => 10.50,
+     "description" => "Retiro de saldo semanal",
+     "order_id" => "oid-00021"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@payouts.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
+```
+
 > Ejemplo de respuesta
 
 ```json
@@ -2276,8 +2356,8 @@ openpay.customers.payouts.create('asynwirguzkgq2bizogo', payoutRequest, function
       "address":null,
       "card_number":"411111XXXXXX1111",
       "holder_name":"Juan Perez Ramirez",
-      "expiration_year":null,
-      "expiration_month":null,
+      "expiration_year":"20",
+      "expiration_month":"12",
       "allows_charges":false,
       "allows_payouts":true,
       "bank_name":"Banamex",
@@ -2348,6 +2428,16 @@ openpay.customers.payouts.get(customerId, transactionId, function(error, payout)
 });
 ```
 
+```ruby
+Cliente
+@payouts=@openpay.create(:payouts)
+@payouts.get(string:transaction_id, string:customer_id)
+
+Comercio
+@payouts=@openpay.create(:payouts)
+@payouts.get(string:transaction_id, string:customer_id)
+```
+
 > Ejemplo de petición con cliente
 
 ```shell
@@ -2370,6 +2460,14 @@ openpay.customers.payouts.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', fu
   // ...
 });
 ```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@openpay.create(:payouts)
+
+response_hash=@payouts.get("tr6cxbcefzatd10guvvw", "asynwirguzkgq2bizogo")
+```
+
 > Ejemplo de respuesta
 
 ```json
@@ -2473,6 +2571,16 @@ openpay.customers.payouts.list(customerId, searchParams, function(error, list) {
 });
 ```
 
+```ruby
+Cliente
+@payouts=@openpay.create(:payouts)
+@payouts.all(string:customer_id)
+
+Comercio
+@payouts=@openpay.create(:payouts)
+@payouts.all
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -2518,6 +2626,13 @@ var searchParams = {
 openpay.customers.payouts.list('asynwirguzkgq2bizogo', searchParams, function(error, list) {
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@openpay.create(:payouts)
+
+response_hash=@payouts.all("asynwirguzkgq2bizogo")
 ```
 
 > Ejemplo de respuesta
