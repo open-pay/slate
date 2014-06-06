@@ -6609,6 +6609,12 @@ Para que las cuentas de los clientes manejen saldo debieron ser creadas con la p
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees
 ```
 
+```php
+<?
+$fee = $openpay->fees->create(feeDataRequest);
+?>
+```
+
 ```java
 openpayAPI.fees().create(CreateFeeParams request);
 ```
@@ -6639,6 +6645,20 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees \
      "description" : "Cobro de Comisión",
      "order_id" : "oid-1245"
 }' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$feeDataRequest = array(
+    'customer_id' => 'a9ualumwnrcxkl42l6mh',
+    'amount' => 12.50,
+    'description' => 'Cobro de Comisión',
+    'order_id' => 'ORDEN-00063');
+
+$fee = $openpay->fees->create($feeDataRequest);
+?>
 ```
 
 ```java
@@ -6730,6 +6750,12 @@ El [objeto de transacción](#objeto-transacción) de la comisión, con su fecha 
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees
 ```
 
+```php
+<?
+$feeList = $openpay->fees->getList(findDataRequest);
+?>
+```
+
 ```java
 openpayAPI.fees().list(SearchParams request);
 ```
@@ -6754,6 +6780,20 @@ openpay.fees.list(searchParams, callback);
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees?limit=10" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$findData = array(
+    'creation[gte]' => '2013-01-01',
+    'creation[lte]' => '2013-12-31',
+    'offset' => 0,
+    'limit' => 5);
+
+$feeList = $openpay->fees->getList($findDataRequest);
+?>
 ```
 
 ```java
