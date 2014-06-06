@@ -7106,6 +7106,14 @@ clabe | ***numeric***   <br/>Cuenta CLABE asociada con la que puede recibir fond
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}
 ```
 
+```php
+<?
+// =============================
+// Funcionalidad no implementada
+// =============================
+?>
+```
+
 ```java
 openpayAPI.merchant().get();
 ```
