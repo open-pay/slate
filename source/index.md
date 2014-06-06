@@ -16,7 +16,7 @@ toc_footers:
 
 # Introducción
 
-La API de Openpay está diseña sobre [REST](http://es.wikipedia.org/wiki/Representational_State_Transfer), por lo que encontrarás que las URL están orientadas a recursos y usamos códigos de respuesta HTTP para indicar los errores en al API.
+La API de Openpay está diseña sobre [REST](http://es.wikipedia.org/wiki/Representational_State_Transfer), por lo tanto encontrarás que las URL están orientadas a recursos y se usa códigos de respuesta HTTP para indicar los errores en la API.
 
 Todas las respuestas de la API están en formato [JSON](http://www.json.org/), incluyendo errores.
 
@@ -67,16 +67,16 @@ Todas las respuestas de la API están en formato [JSON](http://www.json.org/), i
 /subscriptions/{SUBSCRIPTION_ID}
 ```
 
-La API REST de Openpay tiene un ambiente de pruebas (sandbox) y un ambiente de producción. Usa las credenciales que se generaron al momento de tu registro para realizar la integración de tu sistema con Openpay. Una vez que estes listo para pasar a producción y tu solicitud sea aprobada se generarán nuevas credenciales para acceder al ambiente de producción.
+La API REST de Openpay tiene un ambiente de pruebas (sandbox) y un ambiente de producción. Usa las credenciales que se generaron al momento de tu registro para realizar la integración de tu sistema con Openpay. Una vez que estes listo para pasar a producción y tu solicitud sea aprobada, se generarán nuevas credenciales para acceder al ambiente de producción.
 
-La siguientes URIs forman la base de lo endpoints para los ambientes soportados:
+La siguientes URIs forman la base de los endpoints para los ambientes soportados:
 
 * **Pruebas**, URI base: <br/> `https://sandbox-api.openpay.mx`<br/><br/>
 * **Producción**, URI base: <br/>`https://api.openpay.mx`<br/>
 
-Un endpoint completo en formado por la base del ambiente, el identificador del comercio y el recurso. 
+Un endpoint completo esta formado por la URI base del ambiente, el identificador del comercio y el recurso. 
 
-Por ejemplo, si queremos crear un nuevo cliente el endpoint sería:
+Por ejemplo, si queremos crear un nuevo cliente, el endpoint sería:
 
 <code>POST https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers</code>
 
@@ -105,10 +105,10 @@ $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178
 ```
 
 ```java
-Sandbox
+//Sandbox
 final OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 
-Produccion
+//Produccion
 final OpenpayAPI api = new OpenpayAPI("https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 ```
 
@@ -118,20 +118,20 @@ var openpay = new Openpay('moiep6umtcnanql3jrxp','sk_3433941e467c4875b178ce26348
 ```
 
 ```csharp
-Sandbox
+//Sandbox
 OpenpayAPI openpayAPI = new OpenpayAPI("sk_3433941e467c4875b178ce26348b0fac", "moiep6umtcnanql3jrxp");
 openpayAPI.Production = false; // Default value = false
 
-Produccion
+//Produccion
 OpenpayAPI openpayAPI = new OpenpayAPI("sk_3433941e467c4875b178ce26348b0fac", "moiep6umtcnanql3jrxp");
 openpayAPI.Production = true;
 ```
 
 ```ruby
-Sandbox
+#Sandbox
 openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 
-Produccion
+#Produccion
 openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac", true)
 ```
 
@@ -458,7 +458,7 @@ Este tipo de cargo requiere una tarjeta guardada o que hayas generado un token. 
 
 Una vez que tengas una tarjeta guardada o un token usa la propiedad <code>source_id</code> para enviar el identificador.
 
-La propiedad 'device_Session_Id' deberá ser generada desde el API JavaScript, véase [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
+La propiedad <code>device_session_id</code> deberá ser generada desde el API JavaScript, véase [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
 
 <aside class="notice">
 Puedes realizar el cargo a la cuenta del comercio o a la cuenta de un cliente.
@@ -469,11 +469,11 @@ Puedes realizar el cargo a la cuenta del comercio o a la cuenta de un cliente.
 Propiedad | Descripción
 --------- | -----
 method|***string*** (requerido) <br/>Debe contener el valor **card** para hacer un cargo de una tarjeta registrada.
-source_id | ***string*** (requerido) <br/>ID de la tarjeta guardada o el id del token creado de donde se retirarán los fondos.
+source_id | ***string*** (requerido, longitud = 45) <br/>ID de la tarjeta guardada o el id del token creado de donde se retirarán los fondos.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
-device_session_id |  ***string*** (opcional) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
+description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
+order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
+device_session_id |  ***string*** (opcional, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
 capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o pre-autorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
 
 ###Respuesta
@@ -698,7 +698,7 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 En este tipo de invocación es necesario enviar toda la información de la tarjeta, la cual solo será usada para esta venta y no será almacenada en el sistema. Esto lo puedes usar para realizar ventas directas en donde no requieres la tarjeta para un uso futuro.
 
 
-La propiedad 'device_Session_Id' deberá ser generada desde el API JavaScript, véase [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
+La propiedad <code>device_Session_Id</code> deberá ser generada desde el API JavaScript, véase [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
 
 ###Petición 
 
@@ -707,9 +707,9 @@ Propiedad | Descripción
 method|***string*** (requerido) <br/>Debe contener el valor **card** para hacer un cargo de una tarjeta registrada.
 card | ***objeto*** (requerido) <br/> Datos de la tarjeta de la cual se retirarán los fondos. Ver [objeto tarjeta](#crear-una-tarjeta) 
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
-device_session_id |  ***string*** (opcional) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
+description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
+order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
+device_session_id |  ***string*** (opcional, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
 capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o pre-autorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
 
 ###Respuesta
@@ -883,8 +883,8 @@ Propiedad | Descripción
 --------- | -----
 method|***string*** (requerido) <br/>Debe contener el valor **store** para hacer un cargo de una tarjeta registrada.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
+description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
+order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -1049,7 +1049,7 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    }
 }
 ```
-Para un paog en cargo a banco se debe crear un petición de tipo cargo indicando como método **bank_account**. Esto te generará una respuesta con un número de CLABE bancaria y una descripción, estos datos los debes de indicar a tu cliente en un recibo para que realice la transferencia vía SPEI. 
+Para un cargo a banco se debe crear una petición de tipo cargo indicando como método **bank_account**. Esto te generará una respuesta con un número de CLABE bancaria y una descripción, estos datos los debes de indicar a tu cliente en un recibo para que realice la transferencia vía SPEI. 
 
 
 ###Petición 
@@ -1058,8 +1058,8 @@ Propiedad | Descripción
 --------- | -----
 method|***string*** (requerido) <br/>Debe contener el valor **bank_account** para hacer un cargo de una tarjeta registrada.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
+description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
+order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -1402,7 +1402,7 @@ Si deseas realizar una devolución de un cargo hecho a tarjeta puedes ocupar est
 
 Propiedad | Descripción
 --------- | -----
-description | ***string*** (opcional) <br/>Texto libre para describir motivo de la devolución.
+description | ***string*** (opcional, longitud = 250) <br/>Texto libre para describir motivo de la devolución.
 
 
 ###Respuesta
@@ -1560,7 +1560,7 @@ Regresa la información de un cargo generado en cualquier momento solo con conoc
 
 Propiedad | Descripción
 --------- | ------
-transaction_id| _**string**_ (requerido)<br/>Identificador del cargo a consultar.
+transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del cargo a consultar.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -1960,10 +1960,10 @@ Envío un pago a una cuenta bancario o terjeta de débito previamente registrada
 Propiedad | Descripción
 --------- | -----
 method|***string*** (requerido) <br/>Debe contener el valor **card** para realizar un pago a una tarjeta registrado y **bank_account** para realizarlo a una cuenta bancaria registrada.
-destination_id | ***string*** (requerido) <br/>El ID de la cuenta bancaria o tarjeta de débito previamente registrada.
+destination_id | ***string*** (requerido, longitud = 45) <br/>El ID de la cuenta bancaria o tarjeta de débito previamente registrada.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
+description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
+order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
@@ -2165,8 +2165,8 @@ Propiedad | Descripción
 method|***string*** (requerido) <br/>Debe contener el valor **bank_account**.
 bank_account | ***object*** (requerido) <br/>Datos de la cuenta bancaria a la que se enviarán los fondos. <br/><br/> **clabe**.- Número de cuenta CLABE de la cuenta a la que se enviarán los fondos. <br/>**holder_name**.- Nombre del propietario de la cuenta.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
+description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
+order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
@@ -2380,8 +2380,8 @@ Propiedad | Descripción
 method|***string*** (requerido) <br/>Debe contener el valor **card**.
 card | ***object*** (requerido) <br/>Datos de la tarjeta a la que se enviarán los fondos. <br/><br/> **card_number**.- Número de tarjeta de crédito a la que se enviarán los fondos <br/>**holder_name**.- Nombre del tarjeta habiente propietario de la tarjeta.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
+description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
+order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
@@ -2521,7 +2521,7 @@ Regresa la información de un pago realizado. Es necesario conocer el id del pag
 
 Propiedad | Descripción
 --------- | ------
-transaction_id| _**string**_ (requerido)<br/>Identificador del pago a consultar.
+transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del pago a consultar.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
@@ -2727,7 +2727,7 @@ offset| ***numeric*** <br/>Número de registros a omitir al inicio, por defecto 
 limit| ***numeric*** <br/>Número de registros que se requieren, por defecto 10.
 amount| ***numeric*** <br/>Igual al monto.
 amount[gte] | ***numeric*** <br/>Mayor o igual al monto.
-amount[gte] | ***numeric*** <br/>Menor o igual al monto.
+amount[lte] | ***numeric*** <br/>Menor o igual al monto.
 
 ###Respuesta
 
@@ -2919,12 +2919,12 @@ Crea un objeto cliente.
 
 Propiedad | Descripción
 --------- | ------
-external_id | ***string*** (Opcional, maxLength = 100)  <br/> Identificador externo único para el cliente asignado por el comercio.
-name        | ***string*** (requerido, maxLength = 100)<br/>Nombre(s) del cliente.
-last_name   | ***string*** (maxLength = 100)<br/>Apellidos del cliente.
-email       | ***string*** (requerido, maxLength = 100))<br/>Cuenta de correo electrónico del Cliente.
+external_id | ***string*** (opcional, longitud = 100)  <br/> Identificador externo único para el cliente asignado por el comercio.
+name        | ***string*** (requerido, longitud = 100)<br/>Nombre(s) del cliente.
+last_name   | ***string*** (opcional, longitud = 100)<br/>Apellidos del cliente.
+email       | ***string*** (requerido, longitud = 100)<br/>Cuenta de correo electrónico del Cliente.
 requires_account | ***boolean***  (opcional, default = true) <br/> Enviar con valor **false** si requiere que el cliente se cree sin cuenta para manejo del saldo.
-phone_number| ***string*** (maxLength = 100) <br/>Número telefónico del Cliente.
+phone_number| ***string*** (opcional, longitud = 100) <br/>Número telefónico del Cliente.
 [address](#objeto-dirección) | ***object*** (opcional) <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
 
 ###Respuesta
@@ -3093,10 +3093,10 @@ Actualiza uno o más datos del cliente.
 
 Propiedad | Descripción
 --------- | ------
-name| ***string*** (requerido)<br/>Nombre(s) del cliente.
-last_name| ***string*** <br/>Apellidos del cliente.
-email| ***string*** (requerido)<br/>Cuenta de correo electrónico del Cliente.
-phone_number| ***string***  <br/>Número telefónico del Cliente.
+name| ***string*** (requerido, longitud = 100)<br/>Nombre(s) del cliente.
+last_name| ***string*** (opcional, longitud = 100) <br/>Apellidos del cliente.
+email| ***string*** (requerido, longitud = 100)<br/>Cuenta de correo electrónico del Cliente.
+phone_number| ***string*** (opcional, longitud = 100) <br/>Número telefónico del Cliente.
 [address](#objeto-dirección)| ***object*** <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
 
 ###Respuesta
@@ -3188,7 +3188,7 @@ Obtiene la información actual de un cliente existente. Solo es necesario especi
 
 Propiedad | Descripción
 --------- | ------
-id| _**string**_ (requerido)<br/>Identificador único del cliente que se desea obtener.
+id| _**string**_ (requerido, longitud = 45)<br/>Identificador único del cliente que se desea obtener.
 
 ###Respuesta
 
@@ -3258,7 +3258,7 @@ Elimina un cliente permanentemente. Se cancelarán las suscripciones que tenga. 
 
 Propiedad | Descripción
 --------- | ------
-id| _**string**_ (requerido)<br/> Identificador único del cliente a borrar.
+id| _**string**_ (requerido, longitud = 45)<br/> Identificador único del cliente a borrar.
 
 ###Respuesta
 Si el cliente se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo. 
@@ -3504,10 +3504,10 @@ Realiza la transferencia de fondos de una cuenta de cliente a otra. Los fondos s
 
 Propiedad | Descripción
 --------- | ------
-customer_id | ***string*** (requerido) <br/>El ID de Openpay del cliente al que deseas enviarle los fondos.
+customer_id | ***string*** (requerido, longitud = 45) <br/>El ID de Openpay del cliente al que deseas enviarle los fondos.
 amount | ***numeric*** (requerido) <br/>Cantidad a transferir. Debe ser una cantidad mayor a un peso, con hasta dos dígitos decimales.
-description | ***string*** (requerido) <br/>Una descripción asociada a la transferencia.
-order_id | ***string*** (opcional) <br/>Identificador único de la transferencia. Será asignado a la transacción de retiro.
+description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada a la transferencia.
+order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único de la transferencia. Será asignado a la transacción de retiro.
 
 ###Respuesta
 Si la transacción se realiza correctamente, la respuesta contendrá un [objeto de transacción](#objeto-transacción). Este objeto representará el retiro de fondos del cliente actual. En caso de error, se regresará el objeto de error.
@@ -3593,8 +3593,8 @@ Con el identificador del cliente y el identificador de la transferencia, se pued
 ###Petición
 Propiedad | Descripción
 --------- | ------
-customer_id| ***string*** (requerido) <br/> Identificador del cliente
-transaction_id| ***string*** (requerido) <br/> Identificador de la transferencia
+customer_id| ***string*** (requerido, longitud = 45) <br/> Identificador del cliente
+transaction_id| ***string*** (requerido, longitud = 45) <br/> Identificador de la transferencia
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción)
@@ -3958,7 +3958,7 @@ Al momento de guardar la tarjeta se generará un id que podrá ser usado para ha
 
 Propiedad | Descripción
 --------- | ------
-holder_name |***string*** (requerido) <br/>Nombre del tarjeta habiente.
+holder_name |***string*** (requerido, longitud = 80) <br/>Nombre del tarjeta habiente.
 card_number |***numeric*** (requerido) <br/>Numero de tarjeta puede ser de 16 o 19 dígitos.
 cvv2 |***numeric*** (requerido) <br/>Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.
 expiration_month |***numeric*** (requerido) <br/>Mes de expiración tal como aparece en la tarjeta.
@@ -4088,7 +4088,7 @@ Crea una tarjeta a partir de un token obtenido desde el navegador o dispositivo 
 ###Petición
 Propiedad | Descripción
 --------- | ------
-token_id| ***string*** (requerido) <br/> Identificador del token generado en el navegador o dispositivo del cliente.
+token_id| ***string*** (requerido, longitud = 45) <br/> Identificador del token generado en el navegador o dispositivo del cliente.
 
 ###Respuesta
 Regresa un [objeto tarjeta](#objeto-tarjeta)
@@ -4199,7 +4199,7 @@ Obtiene los detalles de una tarjeta solicitándola con su id.
 ###Petición
 Propiedad | Descripción
 --------- | ------
-id| ***string*** (requerido) <br/> Identificador único de la tarjeta
+id| ***string*** (requerido, longitud = 45) <br/> Identificador único de la tarjeta
 
 ###Respuesta
 Regresa un [objeto tarjeta](#objeto-tarjeta)
@@ -4288,7 +4288,7 @@ Para eliminarla sólo es necesario proporcionar el identificador de la tarjeta.
 ###Petición
 Propiedad | Descripción
 --------- | ------
-id| ***string*** (requerido) <br/> Identificador único de la tarjeta
+id| ***string*** (requerido, longitud = 45) <br/> Identificador único de la tarjeta
 
 ###Respuesta
 Si la tarjeta se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo. 
@@ -4580,9 +4580,9 @@ Crea y asigna una cuenta bancaria al cliente espeficado.
 
 Propiedad | Descripción
 --------- | ------
-holder_name | ***string*** (requerido) <br/>Nombre completo del titular.
-alias | ***string*** <br/>Nombre por el cual el se identifica a la cuenta bancaria.
-clabe | ***string*** (requerido) <br/>Número CLABE asignado a la cuenta bancaria.
+holder_name | ***string*** (requerido, longitud = 80) <br/>Nombre completo del titular.
+alias | ***string*** (opcional, longitud = 45)<br/>Nombre por el cual el se identifica a la cuenta bancaria.
+clabe | ***string*** (requerido, longitud = 45) <br/>Número CLABE asignado a la cuenta bancaria.
 
 ###Respuesta
 Regresa un [objeto cuenta bancaria](#objeto-cuenta-bancaria) creado o un error en caso de ocurrir algún problema.
@@ -4664,7 +4664,7 @@ Obtiene los detalles de una cuenta bancaria asignada a un cliente.
 ###Petición
 Propiedad | Descripción
 --------- | ------
-id| ***string*** (requerido) <br/> Identificador único de la cuenta bancaria
+id| ***string*** (requerido, longitud = 45) <br/> Identificador único de la cuenta bancaria
 
 ###Respuesta
 Regresa un [objeto cuenta bancaria](#objeto-cuenta-bancaria)
@@ -4733,7 +4733,7 @@ Elimina la cuenta bancaria asociada al cliente. Las transacciones que se encuent
 ###Petición
 Propiedad | Descripción
 --------- | ------
-id| ***string*** (requerido) <br/> Identificador único de la cuenta bancaria.
+id| ***string*** (requerido, longitud = 45) <br/> Identificador único de la cuenta bancaria.
 
 ###Respuesta
 Si la cuenta bancaria se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo. 
@@ -5020,12 +5020,12 @@ Crea un nuevo plan al se podrán suscribir uno o varios clientes.
 
 Propiedad | Descripción
 --------- | ------
-name | ***string*** (requerido) <br/>Nombre del Plan.
+name | ***string*** (requerido, longitud = 255) <br/>Nombre del Plan.
 amount | ***numeric*** (requerido) <br/>Monto que se aplicara cada vez que se cobre la suscripción. Debe ser una cantidad mayor a cero, con hasta 2 dígitos decimales.
 repeat_every | ***numeric*** (requerido) <br/>Número de unidades tiempo entre los que se cobrara la suscripción. Por ejemplo, repeat_unit=month y repeat_every=2 indica que se cobrara cada 2 meses.
 repeat_unit | ***numeric*** (requerido) <br/>Especifica la frecuencia de cobro. Puede ser semanal(week), mensual(month) o anual(year).
-retry_times | ***numeric*** <br/> Numero de reintentos de cobro de la suscripción. Cuando se agotan los intentos se pone en el estado determinado por el campo status_after_retry.
-status_after_retry | ***string*** (requerido) <br/>Este campo especifica el status en el que se pondrá la suscripción una vez que se agotaron los intentos. Puede ser: unpaid o cancelled
+retry_times | ***numeric*** (opcional) <br/> Numero de reintentos de cobro de la suscripción. Cuando se agotan los intentos se pone en el estado determinado por el campo status_after_retry.
+status_after_retry | ***string*** (requerido, valores = "UNPAID/CANCELLED") <br/>Este campo especifica el status en el que se pondrá la suscripción una vez que se agotaron los intentos. Puede ser: unpaid o cancelled
 trial_days | ***numeric*** (requerido) <br/>Numero de días de prueba por defecto que tendrán las suscripciones que se creen a partir del plan creado.
  
 
@@ -5136,8 +5136,8 @@ Actualiza la información de un plan. Se requiere tener el id del plan y solo se
 ###Petición
 Propiedad | Descripción
 --------- | ------
-name | ***string***  <br/>Nombre del Plan.
-trial_days | ***numeric***  <br/>Numero de días de prueba por defecto que tendrán las suscripciones que se creen a partir del plan creado.
+name | ***string*** (opcional, longitud = 80) <br/>Nombre del Plan.
+trial_days | ***numeric*** (opcional) <br/>Numero de días de prueba por defecto que tendrán las suscripciones que se creen a partir del plan creado.
 
 ###Respuesta
 Regresa un [objeto plan](#objeto-plan) con la información actualizada o una [respuesta de error](#objeto-error) si ocurrió algún problema en la actualización.
@@ -5221,7 +5221,7 @@ Obtiene los detalles de un plan.
 ###Petición
 Propiedad | Descripción
 --------- | ------
-id| ***string*** (requerido) <br/> Identificador del plan.
+id| ***string*** (requerido, longitud = 45) <br/> Identificador del plan.
 
 ###Respuesta
 Regresa un [objeto plan](#objeto-plan)
@@ -5288,7 +5288,7 @@ Al eliminar un plan no se permitirán crear mas suscripciones asociadas a él, s
 ###Petición
 Propiedad | Descripción
 --------- | ------
-id| ***string*** (requerido) <br/> Identificador del plan a eliminar
+id| ***string*** (requerido, longitud = 45) <br/> Identificador del plan a eliminar
 
 ###Respuesta
 Si el plan se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo. 
@@ -5604,9 +5604,9 @@ Crea una suscripción para un cliente existente. Se puede ocupar una tarjeta pre
 ###Petición
 Propiedad | Descripción
 --------- | ------
-plan_id | ***string*** (requerido) <br/> Identificador del plan sobre el que se crea la suscripción.
-trial_end_date | ***string*** (opcional) <br/> Último día de prueba del cliente. Si no se indica se utilizará el valor de trial_days del plan para calcularlo. Si se indica una fecha anterior al día de hoy, se interpretará como una suscripción sin días de prueba.
-source_id | ***string*** (requerido si no se envía card) <br/> Identificador del token o la tarjeta previamente registrada al cliente con la que se cobrará la suscripción. 
+plan_id | ***string*** (requerido, longitud = 45) <br/> Identificador del plan sobre el que se crea la suscripción.
+trial_end_date | ***string*** (opcional, longitud = 10) <br/> Último día de prueba del cliente. Si no se indica se utilizará el valor de trial_days del plan para calcularlo. Si se indica una fecha anterior al día de hoy, se interpretará como una suscripción sin días de prueba. (Con formato yyy-mm-dd)
+source_id | ***string*** (requerido si no se envía card, longitud = 45) <br/> Identificador del token o la tarjeta previamente registrada al cliente con la que se cobrará la suscripción. 
 card | ***object*** (requerido si no se envía source_id) <br/> Medio de pago con el cual se cobrará la suscripción. Ver [objeto tarjeta](#objeto-tarjeta)
 
 ###Respuesta
@@ -5745,8 +5745,8 @@ Actualiza la información de una suscripción activa.
 Propiedad | Descripción
 --------- | ------
 cancel_at_period_end | ***booelan*** (opcional) <br/> Indica si se cancela la suscripción al terminar el periodo.
-trial_end_date | ***string*** (opcional) <br/> Último día de prueba del cliente. Si no se indica se utilizará el valor de trial_days del plan para calcularlo. Si se indica una fecha anterior al día de hoy, se interpretará como una suscripción sin días de prueba.
-source_id | ***string*** (opcional) <br/> Identificador del token o la tarjeta previamente registrada al cliente con la que se cobrará la suscripción. 
+trial_end_date | ***string*** (opcional, longitud = 10) <br/> Último día de prueba del cliente. Si no se indica se utilizará el valor de trial_days del plan para calcularlo. Si se indica una fecha anterior al día de hoy, se interpretará como una suscripción sin días de prueba. (Con formato yyy-mm-dd)
+source_id | ***string*** (opcional, longitud = 45) <br/> Identificador del token o la tarjeta previamente registrada al cliente con la que se cobrará la suscripción. 
 card | ***object*** (opcional) <br/> Medio de pago con el cual se cobrará la suscripción. Ver [objeto tarjeta](#objeto-tarjeta)
 
 ###Respuesta
@@ -5843,7 +5843,7 @@ Obtiene los detalles de la suscripción de un cliente.
 ###Petición
 Propiedad | Descripción
 --------- | ------
-id| ***string*** (requerido) <br/> Identificador de la suscripción
+id| ***string*** (requerido, longitud = 45) <br/> Identificador de la suscripción
 
 ###Respuesta
 Regresa un [objeto suscripción](#objeto-suscripción)
@@ -5911,7 +5911,7 @@ Cancela inmediatamente la suscrupción del cliente. Ya no se realizarán mas car
 ###Petición
 Propiedad | Descripción
 --------- | ------
-id| ***string*** (requerido) <br/> Identificador del plan a eliminar
+id| ***string*** (requerido, longitud = 45) <br/> Identificador del plan a eliminar
 
 ###Respuesta
 Si la suscripción se cancelo correctamente la respuesta es vacía, si no se regresa un [objeto error](#objeto-error) indicando el motivo. 
@@ -6161,10 +6161,10 @@ Cobra una comisión a la cuenta de un cliente.
 
 Propiedad | Descripción
 --------- | ------
-customer_id | ***string*** (requerido) <br/>El identificador único del cliente al que deseas cobrarle la comisión.
+customer_id | ***string*** (requerido, longitud = 45) <br/>El identificador único del cliente al que deseas cobrarle la comisión.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido) <br/>Una descripción asociada al cobro comisión.
-order_id | ***string*** <br/>Identificador único de la comisión. Debe ser único para todas las transacciones.
+description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cobro comisión.
+order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único de la comisión. Debe ser único para todas las transacciones.
  
 ###Regresa
 El [objeto de transacción](#objeto-transacción) de la comisión, con su fecha de creación y su id o una [respuesta de error](#objeto-error).
@@ -6466,7 +6466,7 @@ Obtiene los detalles de un token. Es necesario tener el id.
 ###Petición
 Propiedad | Descripción
 --------- | ------
-id| ***string*** (requerido) <br/> Identificador de token.
+id| ***string*** (requerido, longitud = 45) <br/> Identificador de token.
 
 ###Respuesta
 Regresa un [objeto token](#objeto-token)
@@ -6571,7 +6571,7 @@ Obtiene los detalles la cuenta del comercio. Solo se requiere indicar el id unic
 
 Propiedad     | Descripción
 --------- | -----------
-id | ***requerido*** identificador único del comercio.
+id | ***string*** (requerido, longitud = 45) <br>identificador único del comercio.
 
 ###Respuesta
 Si el identificador es correcto regresa un objeto comercio. 
