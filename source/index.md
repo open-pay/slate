@@ -3499,6 +3499,13 @@ Las transferencias permite transferir fondos entre las cuentas de tus clientes.
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/transfers
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$transfer = $customer->transfers->create(transferDataRequest);
+?>
+```
+
 ```java
 openpayAPI.transfers().create(String customerId, CreateTransferParams request);
 ```
@@ -3528,6 +3535,21 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
      "description" : "Transferencia entre cuentas",
      "order_id" : "oid-1245"
 }' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$transferDataRequest = array(
+    'customer_id' => 'aqedin0owpu0kexr2eor',
+    'amount' => 12.50,
+    'description' => 'Cobro de Comisión',
+    'order_id' => 'ORDEN-00061');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$transfer = $customer->transfers->create($transferDataRequest);
+?>
 ```
 
 ```java
@@ -3620,6 +3642,13 @@ Si la transacción se realiza correctamente, la respuesta contendrá un [objeto 
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/transfers/{TRANSACTION_ID}
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$transfer = $customer->transfers->get(transactionId);
+?>
+```
+
 ```java
 openpayAPI.transfers().get(String customerId, String transactionId);
 ```
@@ -3644,6 +3673,15 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" 
 ``` 
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$transfer = $customer->transfers->get('tyxesptjtx1bodfdjmlb');
+?>
+```
 
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
@@ -3707,6 +3745,13 @@ Regresa un [objeto de transacción](#objeto-transacción)
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/transfers
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$transferList = $customer->transfers->getList(findDataRequest);
+?>
+```
+
 ```java
 openpayAPI.transfers().list(String customerId, SearchParams request);
 ```
@@ -3730,6 +3775,21 @@ openpay.customers.transfers.list(customerId, searchParams, callback);
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/transfers?limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$findDataRequest = array(
+    'creation[gte]' => '2013-01-01',
+    'creation[lte]' => '2013-12-31',
+    'offset' => 0,
+    'limit' => 5);
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$transferList = $customer->transfers->getList($findDataRequest);
+?>
 ```
 
 ```java
