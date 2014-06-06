@@ -2789,6 +2789,12 @@ clabe         |***numeric*** <br/>Cuenta CLABE asociada con la que puede recibir
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
 ```
 
+```php
+<?
+$customer = $openpay->customers->add(customerData);
+?>
+```
+
 ```java
 openpayAPI.customers().create(Customer customer);
 ```
@@ -2817,6 +2823,32 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers \
    "email": "customer_email@me.com",
    "requires_account": false 
    }' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$customerData = array(
+     'external_id' => '',
+     'name' => 'customer name',
+     'last_name' => '',
+     'email' => 'customer_email@me.com',
+     'requires_account' => true,
+     'phone_number' => '44209087654',
+     'address' => array(
+         'line1' => 'Calle 10',
+         'line2' => 'col. san pablo',
+         'line3' => 'entre la calle 1 y la 2',
+         'state' => 'Queretaro',
+         'city' => 'Queretaro',
+         'postal_code' => '76000',
+         'country_code' => 'MX'
+      )
+   );
+
+$customer = $openpay->customers->add($customerData);
+?>
 ```
 
 ```java
@@ -2940,6 +2972,13 @@ Un [objeto cliente](#objeto-cliente) en caso que se hayan enviado todos los dato
 PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$customer->save();
+?>
+```
+
 ```java
 openpayAPI.customers().update(Customer customer);
 ```
@@ -2977,6 +3016,17 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni
    },
    "phone_number":"44209087654"
  }' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$customer->name = 'Juan';
+$customer->last_name = 'Godinez';
+$customer->save();
+?>
 ```
 
 ```java
@@ -3111,6 +3161,12 @@ Regresa un [objeto cliente](#objeto-cliente) con la información actualizada, o 
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+?>
+```
+
 ```java
 openpayAPI.customers().get(String customerId);
 ```
@@ -3134,6 +3190,14 @@ openpay.customers.get(customerId, callback);
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+?>
 ```
 
 ```java
@@ -3202,6 +3266,13 @@ Si el identificador existe regresa un [objeto cliente](#objeto-cliente) con la i
 DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$customer->delete();
+?>
+```
+
 ```java
 openpayAPI.customers().delete(String customerId);
 ```
@@ -3226,6 +3297,15 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X DELETE
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$customer->delete();
+?>
 ```
 
 ```java
@@ -3271,6 +3351,12 @@ Si el cliente se borra correctamente la respuesta es vacía, si no se puede borr
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
 ```
 
+```php
+<?
+$customerList = $openpay->customers->getList(findDataRequest);
+?>
+```
+
 ```java
 openpayAPI.customers().list(SearchParams request);
 ```
@@ -3295,6 +3381,20 @@ openpay.customers.list(searchParams, callback);
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers?creation[gte]=2013-11-01&limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$findDataRequest = array(
+    'creation[gte]' => '2013-01-01',
+    'creation[lte]' => '2013-12-31',
+    'offset' => 0,
+    'limit' => 5);
+
+$customerList = $openpay->customers->getList($findDataRequest);
+?>
 ```
 
 ```java
