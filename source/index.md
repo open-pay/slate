@@ -6089,6 +6089,12 @@ openpayAPI.FeeService.Create({REQUEST});
 openpay.fees.create(feeRequest, callback);
 ```
 
+```ruby
+#Cliente
+@fees=@openpay.create(:fees)
+@fees.create(request_hash)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -6136,6 +6142,20 @@ var feeRequest = {
 openpay.fees.create(feeRequest, function(error, fee){
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@fees=@openpay.create(:fees)
+request_hash={
+     "customer_id" => "dvocf97jd20es3tw5laz",
+     "amount" => 12.50,
+     "description" => "Cobro de Comisión",
+     "order_id" => "oid-1245"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@fees.create(request_hash.to_hash)
 ```
 
 > Ejemplo de respuesta
@@ -6192,6 +6212,12 @@ openpay.fees.list(callback);
 openpay.fees.list(searchParams, callback);
 ```
 
+```ruby
+#Cliente
+@fees=@openpay.create(:fees)
+@fees.all
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -6234,6 +6260,13 @@ var searchParams = {
 openpay.fees.list(searchParams, function(error, list){
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@fees=@openpay.create(:fees)
+
+response_hash=@fees.all
 ```
 
 > Ejemplo de respuesta
@@ -6506,8 +6539,20 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}
 openpayAPI.merchant().get();
 ```
 
+```csharp
+// =============================
+// Funcionalidad no implementada
+// =============================
+```
+
 ```javascript
 openpay.merchant.get(callback);
+```
+
+```ruby
+# =============================
+# Funcionalidad no implementada
+# =============================
 ```
 
 > Ejemplo de petición
