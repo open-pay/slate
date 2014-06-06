@@ -4770,6 +4770,13 @@ creation_date | ***datetime*** <br/>Fecha y hora en que se creó la cuenta banc
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bankaccounts
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$bankaccount = $customer->bankaccounts->add(bankDataRequest);
+?>
+```
+
 ```java
 //Cliente
 openpayAPI.bankAccounts().create(String customerId, BankAccount request);
@@ -4801,6 +4808,20 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "alias":"Cuenta principal",
    "holder_name":"Juan Hernández Sánchez"
 }'
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$bankDataRequest = array(
+    'clabe' => '072910007380090615',
+    'alias' => 'Cuenta principal',
+    'holder_name' => 'Teofilo Velazco');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$bankaccount = $customer->bankaccounts->add($bankDataRequest);
+?>
 ```
 
 ```java
@@ -4883,6 +4904,13 @@ Regresa un [objeto cuenta bancaria](#objeto-cuenta-bancaria) creado o un error e
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bankaccounts/{BANK_ACCOUNT_ID}
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$bankaccount = $customer->bankaccounts->get(bankAccountId);
+?>
+```
+
 ```java
 //Cliente
 openpayAPI.bankAccounts().get(String customerId, String bankAccountId);
@@ -4909,6 +4937,15 @@ openpay.customers.bankaccounts.get(customerId, bankaccountId, callback);
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/bankaccounts/buyj4apkwilpp2jfxr9r \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ``` 
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$bankaccount = $customer->bankaccounts->get('b4vcouaavwuvkpufh0so');
+?>
+```
 
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
@@ -4965,6 +5002,14 @@ Regresa un [objeto cuenta bancaria](#objeto-cuenta-bancaria)
 DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bankaccounts/{BANK_ACCOUNT_ID}
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$bankaccount = $customer->bankaccounts->get(bankAccountId);
+$bankaccount->delete();
+?>
+```
+
 ```java
 //Cliente
 openpayAPI.bankAccounts().delete(String customerId, String bankAccountId);
@@ -4991,6 +5036,16 @@ openpay.customers.bankaccounts.delete(customerId,bankaccountId, callback);
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/bankaccounts/buyj4apkwilpp2jfxr9r \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -X DELETE
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$bankaccount = $customer->bankaccounts->get('b4vcouaavwuvkpufh0so');
+$bankaccount->delete();
+?>
 ```
 
 ```java
@@ -5033,6 +5088,13 @@ Si la cuenta bancaria se borra correctamente la respuesta es vacía, si no se pu
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bankaccounts
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$bankaccountList = $customer->bankaccounts->getList(findDataRequest);
+?>
+```
+
 ```java
 //Cliente
 openpayAPI.bankAccounts().list(String customerId, SearchParams request);
@@ -5059,6 +5121,21 @@ openpay.customers.bankaccounts.list(customerId, searchParams, callback);
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/bankaccounts?limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$findDataRequest = array(
+    'creation[gte]' => '2013-01-01',
+    'creation[lte]' => '2013-12-31',
+    'offset' => 0,
+    'limit' => 5);
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$bankaccountList = $customer->bankaccounts->getList($findDataRequest);
+?>
 ```
 
 ```java
