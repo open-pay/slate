@@ -297,10 +297,10 @@ $customer->charges->create(chargeRequest);
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
@@ -313,21 +313,21 @@ openpay.customers.charges.create(customerId, chargeRequest, callback);
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.ChargeService.Create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.ChargeService.Create({REQUEST});
 ```
 
 ```ruby
-Cliente
+#Cliente
 @charges=@openpay.create(:charges)
-@charges.create({REQUEST}, {CUSTOMER_ID})
+@charges.create(request_hash, customer_id)
 
-Comercio
+#Comercio
 @charges=@openpay.create(:charges)
-@charges.create({REQUEST})
+@charges.create(request_hash)
 ```
 
 > Ejemplo de petición con cliente
@@ -504,37 +504,37 @@ $customer->charges->create(chargeRequest);
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.ChargeService.Create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.ChargeService.Create({REQUEST});
 ```
 
 ```javascript
-// Comercio
+//Comercio
 openpay.charges.create(chargeRequest, callback);
 
-// Cliente
+//Cliente
 openpay.customers.charges.create(customerId, chargeRequest, callback);
 ```
 
 ```ruby
-Cliente
+#Cliente
 @charges=@openpay.create(:charges)
-@charges.create({REQUEST}, {CUSTOMER_ID})
+@charges.create(request_hash, customer_id)
 
-Comercio
+#Comercio
 @charges=@openpay.create(:charges)
-@charges.create({REQUEST})
+@charges.create(request_hash)
 ```
 
 > Ejemplo de petición con cliente
@@ -742,37 +742,37 @@ $customer->charges->create(chargeRequest;
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.ChargeService.Create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.ChargeService.Create({REQUEST});
 ```
 
 ```javascript
-// Comercio
+//Comercio
 openpay.charges.create(chargeRequest, callback);
 
-// Cliente
+//Cliente
 openpay.customers.charges.create(customerId, chargeRequest, callback);
 ```
 
 ```ruby
-Cliente
+#Cliente
 @charges=@openpay.create(:charges)
-@charges.create({REQUEST}, {CUSTOMER_ID})
+@charges.create(request_hash, customer_id)
 
-Comercio
+#Comercio
 @charges=@openpay.create(:charges)
-@charges.create({REQUEST})
+@charges.create(request_hash)
 ```
 
 > Ejemplo de petición con cliente
@@ -916,18 +916,18 @@ $customer->charges->create(chargeRequest);
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.charges().create({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.ChargeService.Create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.ChargeService.Create({REQUEST});
 ```
 
@@ -940,13 +940,13 @@ openpay.customers.charges.create(customerId, chargeRequest, callback);
 ```
 
 ```ruby
-Cliente
+#Cliente
 @charges=@openpay.create(:charges)
-@charges.create({REQUEST}, {CUSTOMER_ID})
+@charges.create(request_hash, customer_id)
 
-Comercio
+#Comercio
 @charges=@openpay.create(:charges)
-@charges.create({REQUEST})
+@charges.create(request_hash)
 ```
 
 > Ejemplo de petición con cliente
@@ -1094,29 +1094,29 @@ $charge->capture(captureData);
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.charges().confirmCapture({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.charges().confirmCapture({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.ChargeService.Capture({CUSTOMER_ID}, {TRANSACTION_ID}, {AMOUNT});
 
-Comercio
+//Comercio
 openpayAPI.ChargeService.Capture({TRANSACTION_ID}, {AMOUNT});
 ```
 
 ```ruby
-Cliente
+#Cliente
 @charges=@openpay.create(:charges)
-@charges.capture({TRANSACTION_ID}, {CUSTOMER_ID})
+@charges.capture(transaction_id, customer_id)
 
-Comercio
+#Comercio
 @charges=@openpay.create(:charges)
-@charges.capture({TRANSACTION_ID})
+@charges.capture(transaction_id)
 ```
 
 > Ejemplo de petición con cliente
@@ -1239,18 +1239,18 @@ $charge->refund(refundData);
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.charges().refund({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.charges().refund({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.ChargeService.Refund({CUSTOMER_ID}, {TRANSACTION_ID}, {DESCRIPTION});
 
-Comercio
+//Comercio
 openpayAPI.ChargeService.Refund({TRANSACTION_ID}, {DESCRIPTION});
 ```
 
@@ -1263,13 +1263,13 @@ openpay.customers.charges.refund(customerId, transactionId, refundRequest, callb
 ```
 
 ```ruby
-Cliente
+#Cliente
 @charges=@openpay.create(:charges)
-@charges.refund({TRANSACTION_ID}, {DESCRIPTION}, {CUSTOMER_ID})
+@charges.refund(transaction_id, description, customer_id)
 
-Comercio
+#Comercio
 @charges=@openpay.create(:charges)
-@charges.refund({TRANSACTION_ID}, {DESCRIPTION})
+@charges.refund(transaction_id, description)
 ```
 
 > Ejemplo de petición con cliente
@@ -1417,18 +1417,18 @@ $charge = $customer->charges->get(transactionId);
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.charges().get({CUSTOMER_ID}, {TRANSACTION_ID});
 
-Comercio
+//Comercio
 openpayAPI.charges().get({TRANSACTION_ID});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.ChargeService.Get({CUSTOMER_ID}, {TRANSACTION_ID});
 
-Comercio
+//Comercio
 openpayAPI.ChargeService.Get({TRANSACTION_ID});
 ```
 
@@ -1441,13 +1441,13 @@ openpay.customers.charges.get(customerId, transactionId, callback);
 ```
 
 ```ruby
-Cliente
+#Cliente
 @charges=@openpay.create(:charges)
-@charges.get({TRANSACTION_ID}, {CUSTOMER_ID})
+@charges.get(transaction_id, customerId)
 
-Comercio
+#Comercio
 @charges=@openpay.create(:charges)
-@charges.get({TRANSACTION_ID})
+@charges.get(transaction_id)
 ```
 
 > Ejemplo de petición con cliente
@@ -1575,18 +1575,18 @@ $chargeList = $customer->charges->getList(searchParams);
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.charges().list({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.charges().list({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.ChargeService.List({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.ChargeService.List({REQUEST});
 ```
 
@@ -1601,11 +1601,11 @@ openpay.customers.charges.list(customerId, searchParams, callback);
 ```
 
 ```ruby
-Cliente
+#Cliente
 @charges=@openpay.create(:charges)
-@charges.all(string:customer_id)
+@charges.all(customer_id)
 
-Comercio
+#Comercio
 @charges=@openpay.create(:charges)
 @charges.all
 ```
@@ -1787,18 +1787,18 @@ $payout = $openpay->payouts->create(payoutRequest);
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.payouts().create({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.PayoutService.Create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.PayoutService.Create({REQUEST});
 ```
 
@@ -1811,13 +1811,13 @@ openpay.customers.payouts.create(customerId, payoutRequest, callback);
 ```
 
 ```ruby
-Cliente
+#Cliente
 @payouts=@openpay.create(:payouts)
-@payouts.create({REQUEST}, {CUSTOMER_ID})
+@payouts.create(request_hash, customer_id)
 
-Comercio
+#Comercio
 @payouts=@openpay.create(:payouts)
-@payouts.create({REQUEST})
+@payouts.create(request_hash)
 ```
 
 > Ejemplo de petición con cliente
@@ -2004,11 +2004,11 @@ openpay.customers.payouts.create(customerId, payoutRequest, callback);
 ```ruby
 #Cliente
 @payouts=@openpay.create(:payouts)
-@payouts.create({REQUEST}, {CUSTOMER_ID})
+@payouts.create(request_hash, customer_id)
 
 #Comercio
 @payouts=@openpay.create(:payouts)
-@payouts.create({REQUEST})
+@payouts.create(request_hash)
 ```
 
 > Ejemplo de petición con cliente
@@ -2182,18 +2182,18 @@ $payout = $openpay->payouts->create(payoutRequest);
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.payouts().create({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.PayoutService.Create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.PayoutService.Create({REQUEST});
 ```
 
@@ -2206,13 +2206,13 @@ openpay.customers.payouts.create(customerId, payoutRequest, callback);
 ```
 
 ```ruby
-Cliente
+#Cliente
 @payouts=@openpay.create(:payouts)
-@payouts.create({REQUEST}, {CUSTOMER_ID})
+@payouts.create(request_hash, customer_id)
 
-Comercio
+#Comercio
 @payouts=@openpay.create(:payouts)
-@payouts.create({REQUEST})
+@payouts.create(request_hash)
 ```
 
 > Ejemplo de petición con cliente
@@ -2397,18 +2397,18 @@ $payout = $customer->payouts->get(transactionId);
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.payouts().get({CUSTOMER_ID}, {TRANSACTION_ID});
 
-Comercio
+//Comercio
 openpayAPI.payouts().get({TRANSACTION_ID});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.PayoutService.Get({CUSTOMER_ID}, {TRANSACTION_ID});
 
-Comercio
+//Comercio
 openpayAPI.PayoutService.Get({TRANSACTION_ID});
 ```
 
@@ -2421,13 +2421,13 @@ openpay.customers.payouts.get(customerId, transactionId, callback);
 ```
 
 ```ruby
-Cliente
+#Cliente
 @payouts=@openpay.create(:payouts)
-@payouts.get(string:transaction_id, string:customer_id)
+@payouts.get(transaction_id, customer_id)
 
-Comercio
+#Comercio
 @payouts=@openpay.create(:payouts)
-@payouts.get(string:transaction_id, string:customer_id)
+@payouts.get(transaction_id, customer_id)
 ```
 
 > Ejemplo de petición con cliente
@@ -2539,18 +2539,18 @@ $payoutList = $customer->payouts->getList(searchParams);
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.payouts().list({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.payouts().list({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.PayoutService.List({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.PayoutService.List({REQUEST});
 ```
 
@@ -2565,11 +2565,11 @@ openpay.customers.payouts.list(customerId, searchParams, callback);
 ```
 
 ```ruby
-Cliente
+#Cliente
 @payouts=@openpay.create(:payouts)
-@payouts.all(string:customer_id)
+@payouts.all(customer_id)
 
-Comercio
+#Comercio
 @payouts=@openpay.create(:payouts)
 @payouts.all
 ```
@@ -2593,6 +2593,7 @@ $searchParams = array(
 
 $customer = $openpay->customers->get('asynwirguzkgq2bizogo');
 $payoutList = $customer->payouts->getList($searchParams);
+?>
 ```
 
 ```java
@@ -2790,7 +2791,7 @@ openpay.customers.create(customerRequest, callback);
 
 ```ruby
 @customers=@openpay.create(:customers)
-@customers.create(hash:request_hash)
+@customers.create(request_hash)
 ```
 
 > Ejemplo de petición 
@@ -2941,7 +2942,7 @@ openpay.customers.update(customerId, customerRequest, callback);
 
 ```ruby
 @customers=@openpay.create(:customers)
-@customers.update(hash:request_hash)
+@customers.update(request_hash)
 ```
 
 > Ejemplo de petición 
@@ -3113,7 +3114,7 @@ openpay.customers.get(customerId, callback);
 
 ```ruby
 @customers=@openpay.create(:customers)
-@customers.get(string:customer_id)
+@customers.get(customer_id)
 ```
 
 > Ejemplo de petición 
@@ -3204,7 +3205,7 @@ openpay.customers.delete(customerId, callback);
 
 ```ruby
 @customers=@openpay.create(:customers)
-@customers.delete(string:customer_id)
+@customers.delete(customer_id)
 ```
 
 > Ejemplo de petición 
@@ -3274,7 +3275,7 @@ openpay.customers.list(searchParams, callback);
 
 ```ruby
 @customers=@openpay.create(:customers)
-@customers.all(string:customer_id)
+@customers.all(customer_id)
 ```
 
 > Ejemplo de petición 
@@ -3401,7 +3402,7 @@ openpay.customers.transfers.create(customerId, transferRequest, callback);
 
 ```ruby
 @transfers=@openpay.create(:transfers)
-@transfers.create(hash:request_hash, string:from_customer_id)
+@transfers.create(request_hash, from_customer_id)
 ```
 
 > Ejemplo de petición 
@@ -3523,7 +3524,7 @@ openpay.customers.transfers.get(customerId, transactionId, callback);
 
 ```ruby
 @transfers=@openpay.create(:transfers)
-@transfers.get(string:transaction_id, string:customer_id)
+@transfers.get(transaction_id, customer_id)
 ```
 
 > Ejemplo de petición 
@@ -3611,7 +3612,7 @@ openpay.customers.transfers.list(customerId, searchParams, callback);
 
 ```ruby
 @transfers=@openpay.create(:transfers)
-@transfers.all(string:customer_id)
+@transfers.all(customer_id)
 ```
 
 > Ejemplo de petición 
@@ -3787,18 +3788,18 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/car
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.cards().create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.cards().create({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.CardService.Create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.CardService.Create({REQUEST});
 ```
 
@@ -3813,11 +3814,11 @@ openpay.customers.cards.create(customerId, cardRequest, callback);
 ```ruby
 #Cliente
 @cards=@openpay.create(:cards)
-@cards.create(hash:request_hash, string:customer_id)
+@cards.create(request_hash, customer_id)
 
 #Comercio
 @cards=@openpay.create(:cards)
-@cards.create(hash:request_hash)
+@cards.create(request_hash)
 ```
 
 > Ejemplo de petición con cliente
@@ -3972,18 +3973,18 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/car
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.cards().create({CUSTOMER_ID}, {RESPONSE});
 
-Comercio
+//Comercio
 openpayAPI.cards().create({RESPONSE});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.CardService.Create({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.CardService.Create({REQUEST});
 ```
 
@@ -3998,11 +3999,11 @@ openpay.customers.cards.create(customerId, cardRequest, callback);
 ```ruby
 #Cliente
 @cards=@openpay.create(:cards)
-@cards.create(hash:request_hash, string:customer_id)
+@cards.create(request_hash, customer_id)
 
 #Comercio
 @cards=@openpay.create(:cards)
-@cards.create(hash:request_hash)
+@cards.create(request_hash)
 ```
 
 > Ejemplo de petición con cliente
@@ -4097,18 +4098,18 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/card
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.cards().get({CUSTOMER_ID}, {CARD_ID});
 
-Comercio
+//Comercio
 openpayAPI.cards().get({CARD_ID});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.CardService.Get({CUSTOMER_ID}, {CARD_ID});
 
-Comercio
+//Comercio
 openpayAPI.CardService.Get({CARD_ID});
 ```
 
@@ -4123,11 +4124,11 @@ openpay.customers.cards.get(customerId, cardId, callback);
 ```ruby
 #Cliente
 @cards=@openpay.create(:cards)
-@cards.get(string:card_id, string:customer_id)
+@cards.get(card_id, customer_id)
 
 #Comercio
 @cards=@openpay.create(:cards)
-@cards.get(string:card_id)
+@cards.get(card_id)
 ```
 
 > Ejemplo de petición con cliente
@@ -4208,18 +4209,18 @@ DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/c
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.cards().delete({CUSTOMER_ID}, {CARD_ID});
 
-Comercio
+//Comercio
 openpayAPI.cards().delete({CARD_ID});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.CardService.Delete({CUSTOMER_ID}, {CARD_ID});
 
-Comercio
+//Comercio
 openpayAPI.CardService.Delete({CARD_ID});
 ```
 
@@ -4234,11 +4235,11 @@ openpay.customers.cards.delete(customerId, cardId, callback);
 ```ruby
 #Cliente
 @cards=@openpay.create(:cards)
-@cards.delete(string:card_id, string:customer_id)
+@cards.delete(card_id, customer_id)
 
 #Comercio
 @cards=@openpay.create(:cards)
-@cards.delete(string:card_id)
+@cards.delete(card_id)
 ```
 
 > Ejemplo de petición con cliente
@@ -4297,18 +4298,18 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/card
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.cards().list({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.cards().list({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.CardService.List({CUSTOMER_ID}, {REQUEST});
 
-Comercio
+//Comercio
 openpayAPI.CardService.List({REQUEST});
 ```
 
@@ -4325,7 +4326,7 @@ openpay.cards.list(customerId, searchParams, callback);
 ```ruby
 #Cliente
 @cards=@openpay.create(:cards)
-@cards.all(string:customer_id)
+@cards.all(customer_id)
 
 #Comercio
 @cards=@openpay.create(:cards)
@@ -4474,23 +4475,23 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/ban
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.bankAccounts().create({CUSTOMER_ID}, {REQUEST});
-
-Comercio
-openpayAPI.bankAccounts().create({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.BankAccountService.Create({CUSTOMER_ID}, {REQUEST});
-
-Comercio
-openpayAPI.BankAccountService.Create({REQUEST});
 ```
 
 ```javascript
 openpay.customers.bankaccounts.create(customerId, bankaccountRequest, callback);
+```
+
+```ruby
+#Cliente
+@bank_accounts=@openpay.create(:bankaccounts)
+@bank_accounts.create(request_hash, customer_id)
 ```
 
 > Ejemplo de petición con cliente
@@ -4538,6 +4539,19 @@ openpay.customers.bankaccounts.create('a9pvykxz4g5rg0fplze0', bankaccountRequest
 });
 ```
 
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@bank_accounts=@openpay.create(:bankaccounts)
+request_hash={
+     "holder_name" => "Juan Hernández Sánchez",
+     "alias" => "Cuenta principal",
+     "clabe" => "032XXXXXXXXXX59719"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@bank_accounts.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
+```
+
 > Ejemplo de respuesta
 
 ```json
@@ -4575,23 +4589,23 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bank
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.bankAccounts().get({CUSTOMER_ID}, {BANK_ACCOUNT_ID});
-
-Comercio
-openpayAPI.bankAccounts().get({BANK_ACCOUNT_ID});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.BankAccountService.Get({CUSTOMER_ID}, {BANK_ACCOUNT_ID});
-
-Comercio
-openpayAPI.BankAccountService.Get({BANK_ACCOUNT_ID});
 ```
 
 ```javascript
 openpay.customers.bankaccounts.get(customerId, bankaccountId, callback);
+```
+
+```ruby
+#Cliente 
+@bank_accounts=@openpay.create(:bankaccounts)
+@bank_accounts.get(customer_id, bankaccount_id)
 ```
 
 > Ejemplo de petición con cliente
@@ -4615,6 +4629,13 @@ BankAccount bankAccount = api.BankAccountService.Get("a9pvykxz4g5rg0fplze0", "bu
 openpay.customers.bankaccounts.get('a9pvykxz4g5rg0fplze0', 'buyj4apkwilpp2jfxr9r', function(error, bankaccount){
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@bank_accounts=@openpay.create(:bankaccounts)
+
+response_hash=@bank_accounts.get("asynwirguzkgq2bizogo", "buyj4apkwilpp2jfxr9r")
 ```
 
 > Ejemplo de respuesta
@@ -4650,23 +4671,23 @@ DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/b
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.bankAccounts().delete({CUSTOMER_ID}, {BANK_ACCOUNT_ID});
-
-Comercio
-openpayAPI.bankAccounts().delete({BANK_ACCOUNT_ID});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.BankAccountService.Delete({CUSTOMER_ID}, {BANK_ACCOUNT_ID});
-
-Comercio
-openpayAPI.BankAccountService.Delete({BANK_ACCOUNT_ID});
 ```
 
 ```javascript
 openpay.customers.bankaccounts.delete(customerId,bankaccountId, callback);
+```
+
+```ruby
+#Cliente
+@bank_accounts=@openpay.create(:bankaccounts)
+@bank_accounts.delete(customer_id, bankaccount_id)
 ```
 
 > Ejemplo de petición con cliente
@@ -4693,6 +4714,13 @@ openpay.customers.bankaccounts.delete('a9pvykxz4g5rg0fplze0','buyj4apkwilpp2jfxr
 });
 ```
 
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@bank_accounts=@openpay.create(:bankaccounts)
+
+response_hash=@bank_accounts.delete("asynwirguzkgq2bizogo", "buyj4apkwilpp2jfxr9r")
+```
+
 Elimina la cuenta bancaria asociada al cliente. Las transacciones que se encuentran asociadas a esta cuenta no sufren cambios y se podrán seguir consultando.
 
 ###Petición
@@ -4711,24 +4739,24 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bank
 ```
 
 ```java
-Cliente
+//Cliente
 openpayAPI.bankAccounts().list({CUSTOMER_ID}, {REQUEST});
-
-Comercio
-openpayAPI.bankAccounts().list({REQUEST});
 ```
 
 ```csharp
-Cliente
+//Cliente
 openpayAPI.BankAccountService.List({CUSTOMER_ID}, {REQUEST});
-
-Comercio
-openpayAPI.BankAccountService.List({REQUEST});
 ```
 
 ```javascript
 openpay.customers.bankaccounts.list(customerId, callback);
 openpay.customers.bankaccounts.list(customerId, searchParams, callback);
+```
+
+```ruby
+#Cliente
+@bank_accounts=@openpay.create(:bankaccounts)
+@bank_accounts.all(customer_id)
 ```
 
 > Ejemplo de petición con cliente
@@ -4773,6 +4801,13 @@ var searchParams = {
 openpay.customers.bankaccounts.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@bank_accounts=@openpay.create(:bankaccounts)
+
+response_hash=@bank_accounts.all("asynwirguzkgq2bizogo")
 ```
 
 > Ejemplo de respuesta
