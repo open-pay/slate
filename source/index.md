@@ -5939,6 +5939,13 @@ card | ***object*** <br/> Medio de pago con el cual se cobrará la suscripción.
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$subscription = $customer->subscriptions->add(subscriptionDataRequest);
+?>
+```
+
 ```java
 openpayAPI.subscriptions().create(String customerId, Subscription request);
 ```
@@ -5973,6 +5980,20 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    },
    "plan_id":"pbi4kb8hpb64x0uud2eb"
 }' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$subscriptionDataRequest = array(
+    "trial_end_date":"2014-01-01", 
+    'plan_id' => 'pduar9iitv4enjftuwyl',
+    'card_id' => 'konvkvcd5ih8ta65umie');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$subscription = $customer->subscriptions->add($subscriptionDataRequest);
+?>
 ```
 
 ```java
@@ -6078,6 +6099,14 @@ Regresa el [objeto suscripción](#objeto-suscripción) creado o una [respuesta d
 PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$subscription = $customer->subscriptions->get(subscriptionId);
+$subscription->save();
+?>
+```
+
 ```java
 openpayAPI.subscriptions().update(Subscription request);
 ```
@@ -6112,6 +6141,17 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
         "cvv2":"1234"
     }
 }' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$subscription = $customer->subscriptions->get('s7ri24srbldoqqlfo4vp');
+$subscription->trial_end_date = '2014-12-31';
+$subscription->save();
+?>
 ```
 
 ```java
@@ -6218,6 +6258,13 @@ Regresa el [objeto suscripción](#objeto-suscripción) actualizado o una [respue
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions/{SUBSCRIPTION_ID}
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$subscription = $customer->subscriptions->get(subscriptionId);
+?>
+```
+
 ```java
 openpayAPI.subscriptions().get(String customerId, String customerId);
 ```
@@ -6242,6 +6289,15 @@ openpay.customers.subscriptions.get(customerId, subscriptionId, callback);
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/subscriptions/s0gmyor4yqtyv1miqwr0 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ``` 
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$subscription = $customer->subscriptions->get('s7ri24srbldoqqlfo4vp');
+?>
+```
 
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
@@ -6315,6 +6371,14 @@ Regresa un [objeto suscripción](#objeto-suscripción)
 DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions/{SUBSCRIPTION_ID}
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$subscription = $customer->subscriptions->get(subscriptionId);
+$subscription->delete();
+?>
+```
+
 ```java
 openpayAPI.subscriptions().delete(String customerId, String subscriptionId);
 ```
@@ -6339,6 +6403,16 @@ openpay.customers.subscriptions.delete(customerId, subscriptionId, callback);
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/subscriptions/s0gmyor4yqtyv1miqwr0 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -X DELETE
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$subscription = $customer->subscriptions->get('s7ri24srbldoqqlfo4vp');
+$subscription->delete();
+?>
 ```
 
 ```java
@@ -6381,6 +6455,13 @@ Si la suscripción se cancelo correctamente la respuesta es vacía, si no se reg
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$subscriptionList = $customer->subscriptions->getList(findDataRequest);
+?>
+```
+
 ```java
 openpayAPI.subscriptions().list(String customerId, SearchParams request);
 ```
@@ -6405,6 +6486,21 @@ openpay.customers.subscriptions.list(customerId, searchParams, callback);
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/subscriptions?limit=10" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$findData = array(
+    'creation[gte]' => '2013-01-01',
+    'creation[lte]' => '2013-12-31',
+    'offset' => 0,
+    'limit' => 5);
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$subscriptionList = $customer->subscriptions->getList($findData);
+?>
 ```
 
 ```java
