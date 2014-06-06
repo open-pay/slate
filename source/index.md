@@ -314,10 +314,10 @@ openpay.customers.charges.create(customerId, chargeRequest, callback);
 
 ```csharp
 //Cliente
-openpayAPI.ChargeService.Create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
 
 //Comercio
-openpayAPI.ChargeService.Create({REQUEST});
+openpayAPI.ChargeService.Create(ChargeRequest request);
 ```
 
 ```ruby
@@ -513,10 +513,10 @@ openpayAPI.charges().create(CreateCardChargeParams request);
 
 ```csharp
 //Cliente
-openpayAPI.ChargeService.Create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
 
 //Comercio
-openpayAPI.ChargeService.Create({REQUEST});
+openpayAPI.ChargeService.Create(ChargeRequest request);
 ```
 
 ```javascript
@@ -751,10 +751,10 @@ openpayAPI.charges().create(CreateStoreChargeParams request);
 
 ```csharp
 //Cliente
-openpayAPI.ChargeService.Create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
 
 //Comercio
-openpayAPI.ChargeService.Create({REQUEST});
+openpayAPI.ChargeService.Create(ChargeRequest request);
 ```
 
 ```javascript
@@ -925,10 +925,10 @@ openpayAPI.charges().create(CreateBankChargeParams request);
 
 ```csharp
 //Cliente
-openpayAPI.ChargeService.Create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
 
 //Comercio
-openpayAPI.ChargeService.Create({REQUEST});
+openpayAPI.ChargeService.Create(ChargeRequest request);
 ```
 
 ```javascript
@@ -1103,10 +1103,10 @@ openpayAPI.charges().confirmCapture(ConfirmCaptureParams request);
 
 ```csharp
 //Cliente
-openpayAPI.ChargeService.Capture({CUSTOMER_ID}, {TRANSACTION_ID}, {AMOUNT});
+openpayAPI.ChargeService.Capture(string customer_id, string transaction_id, Decimal? amount);
 
 //Comercio
-openpayAPI.ChargeService.Capture({TRANSACTION_ID}, {AMOUNT});
+openpayAPI.ChargeService.Capture(string transaction_id, Decimal? amount);
 ```
 
 ```javascript
@@ -1267,10 +1267,10 @@ openpayAPI.charges().refund(RefundParams request);
 
 ```csharp
 //Cliente
-openpayAPI.ChargeService.Refund({CUSTOMER_ID}, {TRANSACTION_ID}, {DESCRIPTION});
+openpayAPI.ChargeService.Refund(string customer_id, string transaction_id, string description);
 
 //Comercio
-openpayAPI.ChargeService.Refund({TRANSACTION_ID}, {DESCRIPTION});
+openpayAPI.ChargeService.Refund(string transaction_id, string description);
 ```
 
 ```javascript
@@ -1445,10 +1445,10 @@ openpayAPI.charges().get(String transactionId);
 
 ```csharp
 //Cliente
-openpayAPI.ChargeService.Get({CUSTOMER_ID}, {TRANSACTION_ID});
+openpayAPI.ChargeService.Get(string customer_id, string transaction_id);
 
 //Comercio
-openpayAPI.ChargeService.Get({TRANSACTION_ID});
+openpayAPI.ChargeService.Get(string transaction_id);
 ```
 
 ```javascript
@@ -1603,10 +1603,10 @@ openpayAPI.charges().list(SearchParams request);
 
 ```csharp
 //Cliente
-openpayAPI.ChargeService.List({CUSTOMER_ID}, {REQUEST});
+openpayAPI.ChargeService.List(string customer_id, SearchParams request = null);
 
 //Comercio
-openpayAPI.ChargeService.List({REQUEST});
+openpayAPI.ChargeService.List(SearchParams request = null);
 ```
 
 ```javascript
@@ -1815,10 +1815,10 @@ openpayAPI.payouts().create(CreateBankPayoutParams request);
 
 ```csharp
 //Cliente
-openpayAPI.PayoutService.Create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.PayoutService.Create(string customer_id, PayoutRequest request);
 
 //Comercio
-openpayAPI.PayoutService.Create({REQUEST});
+openpayAPI.PayoutService.Create(PayoutRequest request);
 ```
 
 ```javascript
@@ -2006,10 +2006,10 @@ openpayAPI.payouts().create(CreateBankPayoutParams request);
 
 ```csharp
 //Cliente
-openpayAPI.PayoutService.Create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.PayoutService.Create(string customer_id, PayoutRequest request);
 
 //Comercio
-openpayAPI.PayoutService.Create({REQUEST});
+openpayAPI.PayoutService.Create(PayoutRequest request);
 ```
 
 ```javascript
@@ -2210,10 +2210,10 @@ openpayAPI.payouts().create(CreateCardPayoutParams request);
 
 ```csharp
 //Cliente
-openpayAPI.PayoutService.Create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.PayoutService.Create(string customer_id, PayoutRequest request);
 
 //Comercio
-openpayAPI.PayoutService.Create({REQUEST});
+openpayAPI.PayoutService.Create(PayoutRequest request);
 ```
 
 ```javascript
@@ -2425,10 +2425,10 @@ openpayAPI.payouts().get(String transactionId);
 
 ```csharp
 //Cliente
-openpayAPI.PayoutService.Get({CUSTOMER_ID}, {TRANSACTION_ID});
+openpayAPI.PayoutService.Get(string customer_id, string transaction_id);
 
 //Comercio
-openpayAPI.PayoutService.Get({TRANSACTION_ID});
+openpayAPI.PayoutService.Get(string transaction_id);
 ```
 
 ```javascript
@@ -2567,10 +2567,10 @@ openpayAPI.payouts().list(SearchParams request);
 
 ```csharp
 //Cliente
-openpayAPI.PayoutService.List({CUSTOMER_ID}, {REQUEST});
+openpayAPI.PayoutService.List(string customer_id, SearchParams request = null);
 
 //Comercio
-openpayAPI.PayoutService.List({REQUEST});
+openpayAPI.PayoutService.List(SearchParams request = null);
 ```
 
 ```javascript
@@ -2801,7 +2801,7 @@ openpayAPI.customers().create(Customer customer);
 ```
 
 ```csharp
-openpayAPI.CustomerService.Create({REQUEST});
+openpayAPI.CustomerService.Create(Customer customer);
 ```
 
 ```javascript
@@ -2952,7 +2952,7 @@ openpayAPI.customers().update(Customer customer);
 ```
 
 ```csharp
-openpayAPI.CustomerService.Update({REQUEST});
+openpayAPI.CustomerService.Update(Customer customer);
 ```
 
 ```javascript
@@ -3124,7 +3124,7 @@ openpayAPI.customers().get(String customerId);
 ```
 
 ```csharp
-openpayAPI.CustomerService.Update({CUSTOMER_ID});
+openpayAPI.CustomerService.Update(string customer_id);
 ```
 
 ```javascript
@@ -3215,7 +3215,7 @@ openpayAPI.customers().delete(String customerId);
 ```
 
 ```csharp
-openpayAPI.CustomerService.Delete({CUSTOMER_ID});
+openpayAPI.CustomerService.Delete(string customer_id);
 ```
 
 ```javascript
@@ -3284,7 +3284,7 @@ openpayAPI.customers().list(SearchParams request);
 ```
 
 ```csharp
-openpayAPI.CustomerService.List({REQUEST});
+openpayAPI.CustomerService.List(SearchParams request = null);
 ```
 
 ```javascript
@@ -3412,7 +3412,7 @@ openpayAPI.transfers().create(String customerId, CreateTransferParams request);
 ```
 
 ```csharp
-openpayAPI.TransferService.Create({FROM_CUSTOMER_ID}, {REQUEST});
+openpayAPI.TransferService.Create(string from_customer_id, TransferRequest request);
 ```
 
 ```javascript
@@ -3534,7 +3534,7 @@ openpayAPI.transfers().get(String customerId, String transactionId);
 ```
 
 ```csharp
-openpayAPI.TransferService.Get({CUSTOMER_ID}, {TRANSACTION_ID});
+openpayAPI.TransferService.Get(string customer_id, string transaction_id);
 ```
 
 ```javascript
@@ -3621,7 +3621,7 @@ openpayAPI.transfers().list(String customerId, SearchParams request);
 ```
 
 ```csharp
-openpayAPI.TransferService.List({CUSTOMER_ID}, {REQUEST});
+openpayAPI.TransferService.List(string customer_id, SearchParams request = null);
 ```
 
 ```javascript
@@ -3816,10 +3816,10 @@ openpayAPI.cards().create(Card request);
 
 ```csharp
 //Cliente
-openpayAPI.CardService.Create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.CardService.Create(string customer_id, Card card);
 
 //Comercio
-openpayAPI.CardService.Create({REQUEST});
+openpayAPI.CardService.Create(Card card);
 ```
 
 ```javascript
@@ -4001,10 +4001,10 @@ openpayAPI.cards().create(Card card);
 
 ```csharp
 //Cliente
-openpayAPI.CardService.Create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.CardService.Create(string customer_id, Card request);
 
 //Comercio
-openpayAPI.CardService.Create({REQUEST});
+openpayAPI.CardService.Create(Card request);
 ```
 
 ```javascript
@@ -4126,10 +4126,10 @@ openpayAPI.cards().get(String cardId);
 
 ```csharp
 //Cliente
-openpayAPI.CardService.Get({CUSTOMER_ID}, {CARD_ID});
+openpayAPI.CardService.Get(string customer_id, string card_id);
 
 //Comercio
-openpayAPI.CardService.Get({CARD_ID});
+openpayAPI.CardService.Get(string card_id);
 ```
 
 ```javascript
@@ -4237,10 +4237,10 @@ openpayAPI.cards().delete(String cardId);
 
 ```csharp
 //Cliente
-openpayAPI.CardService.Delete({CUSTOMER_ID}, {CARD_ID});
+openpayAPI.CardService.Delete(string customer_id, string card_id);
 
 //Comercio
-openpayAPI.CardService.Delete({CARD_ID});
+openpayAPI.CardService.Delete(string card_id);
 ```
 
 ```javascript
@@ -4326,10 +4326,10 @@ openpayAPI.cards().list(SearchParams request);
 
 ```csharp
 //Cliente
-openpayAPI.CardService.List({CUSTOMER_ID}, {REQUEST});
+openpayAPI.CardService.List(string customer_id, SearchParams request = null);
 
 //Comercio
-openpayAPI.CardService.List({REQUEST});
+openpayAPI.CardService.List(SearchParams request = null);
 ```
 
 ```javascript
@@ -4500,7 +4500,7 @@ openpayAPI.bankAccounts().create(String customerId, BankAccount request);
 
 ```csharp
 //Cliente
-openpayAPI.BankAccountService.Create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.BankAccountService.Create(string customer_id, BankAccount request);
 ```
 
 ```javascript
@@ -4614,7 +4614,7 @@ openpayAPI.bankAccounts().get(String customerId, String bankAccountId);
 
 ```csharp
 //Cliente
-openpayAPI.BankAccountService.Get({CUSTOMER_ID}, {BANK_ACCOUNT_ID});
+openpayAPI.BankAccountService.Get(string customer_id, string bank_account_id);
 ```
 
 ```javascript
@@ -4696,7 +4696,7 @@ openpayAPI.bankAccounts().delete(String customerId, String bankAccountId);
 
 ```csharp
 //Cliente
-openpayAPI.BankAccountService.Delete({CUSTOMER_ID}, {BANK_ACCOUNT_ID});
+openpayAPI.BankAccountService.Delete(string customer_id, string bank_account_id);
 ```
 
 ```javascript
@@ -4764,7 +4764,7 @@ openpayAPI.bankAccounts().list(String customerId, SearchParams request);
 
 ```csharp
 //Cliente
-openpayAPI.BankAccountService.List({CUSTOMER_ID}, {REQUEST});
+openpayAPI.BankAccountService.List(string customer_id, SearchParams request = null);
 ```
 
 ```javascript
@@ -4918,7 +4918,7 @@ openpayAPI.plans().create(Plan request);
 ```
 
 ```csharp
-openpayAPI.PlanService.Create({REQUEST});
+openpayAPI.PlanService.Create(Plan plan);
 ```
 
 ```javascript
@@ -5059,7 +5059,7 @@ openpayAPI.plans().update(Plan request);
 ```
 
 ```csharp
-openpayAPI.PlanService.Update({REQUEST});
+openpayAPI.PlanService.Update(Plan plan);
 ```
 
 ```javascript
@@ -5169,7 +5169,7 @@ openpayAPI.plans().get(String planId);
 ```
 
 ```csharp
-openpayAPI.PlanService.Get({PLAN_ID});
+openpayAPI.PlanService.Get(string plan_id);
 ```
 
 ```javascript
@@ -5253,7 +5253,7 @@ openpayAPI.plans().delete(String planId);
 ```
 
 ```csharp
-openpayAPI.PlanService.Delete({PLAN_ID});
+openpayAPI.PlanService.Delete(string plan_id);
 ```
 
 ```javascript
@@ -5319,7 +5319,7 @@ openpayAPI.plans().list(SearchParams request);
 ```
 
 ```csharp
-openpayAPI.PlanService.List({REQUEST});
+openpayAPI.PlanService.List(SearchParams request = null);
 ```
 
 ```javascript
@@ -5500,7 +5500,7 @@ openpayAPI.subscriptions().create(String customerId, Subscription request);
 ```
 
 ```csharp
-openpayAPI.SubscriptionService.Create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.SubscriptionService.Create(string customer_id, Subscription request);
 ```
 
 ```javascript
@@ -5640,7 +5640,7 @@ openpayAPI.subscriptions().update(Subscription request);
 ```
 
 ```csharp
-openpayAPI.SubscriptionService.Update({CUSTOMER_ID}, {REQUEST});
+openpayAPI.SubscriptionService.Update(string customer_id, Subscription subscription);
 ```
 
 ```javascript
@@ -5787,7 +5787,7 @@ openpayAPI.subscriptions().get(String customerId, String customerId);
 ```
 
 ```csharp
-openpayAPI.SubscriptionService.Get({CUSTOMER_ID}, {SUBSCRIPTION_ID});
+openpayAPI.SubscriptionService.Get(string customer_id, string subscription_id);
 ```
 
 ```javascript
@@ -5884,7 +5884,7 @@ openpayAPI.subscriptions().delete(String customerId, String subscriptionId);
 ```
 
 ```csharp
-openpayAPI.SubscriptionService.Delete({CUSTOMER_ID}, {SUBSCRIPTION_ID});
+openpayAPI.SubscriptionService.Delete(string customer_id, string subscription_id);
 ```
 
 ```javascript
@@ -5950,7 +5950,7 @@ openpayAPI.subscriptions().list(String customerId, SearchParams request);
 ```
 
 ```csharp
-openpayAPI.SubscriptionService.List({CUSTOMER_ID}, {REQUEST});
+openpayAPI.SubscriptionService.List(string customer_id, SearchParams request = null);
 ```
 
 ```javascript
@@ -6082,7 +6082,7 @@ openpayAPI.fees().create(CreateFeeParams request);
 ```
 
 ```csharp
-openpayAPI.FeeService.Create({REQUEST});
+openpayAPI.FeeService.Create(FeeRequest request);
 ```
 
 ```javascript
@@ -6184,7 +6184,7 @@ openpayAPI.fees().list(SearchParams request);
 ```
 
 ```csharp
-openpayAPI.FeeService.List({REQUEST});
+openpayAPI.FeeService.List(SearchParams request = null);
 ```
 
 ```javascript
