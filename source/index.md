@@ -3957,6 +3957,17 @@ Cliente
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
 ```
 
+```php
+<?
+//Cliente
+$customer = $openpay->customers->get(customerId);
+$card = $customer->cards->add(cardDataRequest);
+
+//Comercio
+$card = $openpay->cards->add(cardDataRequest);
+?>
+```
+
 ```java
 //Cliente
 openpayAPI.cards().create(String customerId, Card request);
@@ -4004,6 +4015,30 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "expiration_month":"12",
    "cvv2":"110"
  }' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$cardDataRequest = array(
+    'holder_name' => 'Teofilo Velazco',
+    'card_number' => '4916394462033681',
+    'cvv2' => '123',
+    'expiration_month' => '12',
+    'expiration_year' => '15',
+    'address' => array(
+            'line1' => 'Privada Rio No. 12',
+            'line2' => 'Co. El Tintero',
+            'line3' => '',
+            'postal_code' => '76920',
+            'state' => 'Querétaro',
+            'city' => 'Querétaro.',
+            'country_code' => 'MX'));
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$card = $customer->cards->add($cardDataRequest);
+?>
 ```
 
 ```java
@@ -4141,6 +4176,17 @@ Cliente
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
 ```
 
+```php
+<?
+//Cliente
+$customer = $openpay->customers->get(customerId);
+$card = $customer->cards->add(cardDataRequest);
+
+//Comercio
+$card = $openpay->cards->add(cardDataRequest);
+?>
+```
+
 ```java
 //Cliente
 openpayAPI.cards().create(String customerId, Card card);
@@ -4184,6 +4230,19 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -X POST -d '{
       "token_id":"tokgslwpdcrkhlgxqi9a"
    }' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$cardDataRequest = array(
+    'token_id' => 'tokgslwpdcrkhlgxqi9a'
+    );
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$card = $customer->cards->add($cardDataRequest);
+?>
 ```
 
 ```java
@@ -4265,6 +4324,17 @@ Cliente
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
 ```
 
+```php
+<?
+//Cliente
+$customer = $openpay->customers->get(customerId);
+$card = $customer->cards->get(cardId);
+
+//Comercio
+$card = $openpay->cards->get(cardId);
+?>
+```
+
 ```java
 //Cliente
 openpayAPI.cards().get(String customerId, String cardId);
@@ -4306,6 +4376,15 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" 
 ``` 
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$card = $customer->cards->get('k9pn8qtsvr7k7gxoq1r5');
+?>
+```
 
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
@@ -4376,6 +4455,19 @@ Cliente
 DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
 ```
 
+```php
+<?
+//Cliente
+$customer = $openpay->customers->get(customerId);
+$card = $customer->cards->get(cardId);
+$card->delete();
+
+//Comercio
+$card = $openpay->cards->get(cardId);
+$card->delete();
+?>
+```
+
 ```java
 //Cliente
 openpayAPI.cards().delete(String customerId, String cardId);
@@ -4416,6 +4508,16 @@ openpay.customers.cards.delete(customerId, cardId, callback);
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -X DELETE
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$card = $customer->cards->get('k9pn8qtsvr7k7gxoq1r5');
+$card->delete();
+?>
 ```
 
 ```java
@@ -4465,6 +4567,17 @@ Cliente
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
 ```
 
+```php
+<?
+//Clientes
+$customer = $openpay->customers->get(customerId);
+$cardList = $customer->cards->getList(findDataRequest);
+
+//Comercio
+$cardList = $openpay->cards->getList(findDataRequest);
+?>
+```
+
 ```java
 //Cliente
 openpayAPI.cards().list(String customerId, SearchParams request);
@@ -4506,6 +4619,21 @@ openpay.cards.list(customerId, searchParams, callback);
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards?limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$findDataRequest = array(
+    'creation[gte]' => '2013-01-01',
+    'creation[lte]' => '2013-12-31',
+    'offset' => 0,
+    'limit' => 5);
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$cardList = $customer->cards->getList($findDataRequest);
+?>
 ```
 
 ```java
