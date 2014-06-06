@@ -413,7 +413,6 @@ request_hash={
     "order_id" => "oid-00051",
     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
   }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
@@ -658,7 +657,6 @@ request_hash={
      "order_id" => "oid-00052",
      "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
@@ -847,7 +845,6 @@ request_hash={
      "description" => "Cargo con tienda",
      "order_id" => "oid-00053"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
@@ -1022,7 +1019,6 @@ request_hash={
      "description" => "Cargo con banco",
      "order_id" => "oid-00053"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
@@ -1918,7 +1914,6 @@ request_hash={
      "description" => "Retiro de saldo semanal",
      "order_id" => "oid-00021"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
@@ -2129,7 +2124,6 @@ request_hash={
      "description" => "Retiro de saldo semanal",
      "order_id" => "oid-1110011"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
@@ -2339,7 +2333,6 @@ request_hash={
      "description" => "Retiro de saldo semanal",
      "order_id" => "oid-00021"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@payouts.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
 ```
@@ -2900,7 +2893,6 @@ request_hash={
      "phone_number" => "44209087654",
      "address" => address_hash
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@customers.create(request_hash.to_hash)
 ```
@@ -3067,7 +3059,6 @@ request_hash={
      "phone_number" => "44209087654",
      "address" => address_hash
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@customers.update(request_hash.to_hash)
 ```
@@ -3294,7 +3285,7 @@ openpay.customers.list(searchParams, callback);
 
 ```ruby
 @customers=@openpay.create(:customers)
-@customers.all(customer_id)
+@customers.all
 ```
 
 > Ejemplo de petición 
@@ -3347,7 +3338,7 @@ openpay.customers.list(searchParams, function(error, list) {
 @openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
 @customers=@openpay.create(:customers)
 
-response_hash=@customers.all("asynwirguzkgq2bizogo")
+response_hash=@customers.all
 ```
 
 > Ejemplo de respuesta
@@ -3482,7 +3473,6 @@ request_hash={
      "description" => "Transferencia entre cuentas",
      "order_id" => "oid-1245"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@transfers.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
@@ -3931,7 +3921,6 @@ request_hash={
      "expiration_year" => "20",
      "address" => address_hash
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
 ```
@@ -4068,7 +4057,6 @@ openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(err
 request_hash={
      "token_id" => "tokgslwpdcrkhlgxqi9a"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
 ```
@@ -4566,7 +4554,6 @@ request_hash={
      "alias" => "Cuenta principal",
      "clabe" => "032XXXXXXXXXX59719"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@bank_accounts.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
 ```
@@ -5003,7 +4990,6 @@ request_hash={
      "status_after_retry" => "cancelled",
      "trial_days" => "30"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@plans.create(request_hash.to_hash)
 ```
@@ -5122,7 +5108,6 @@ request_hash={
      "name" => "Curso de ingles",
      "trial_days" => "30"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@plans.update(request_hash.to_hash, "p8e6x3hafqqsbmnoevrt")
 ```
@@ -5579,7 +5564,6 @@ request_hash={
      "trial_end_date" => "2014-06-20",
      "source_id" => "ktrpvymgatocelsciak7"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@subscriptions.create(request_hash.to_hash, "a9pvykxz4g5rg0fplze0")
 ```
@@ -5648,9 +5632,6 @@ openpay.customers.subscriptions.update(customerId, subscriptionId, subscriptionR
 ```
 
 ```ruby
-# ===================
-# Aun no implementado
-# ===================
 #Cliente
 @subscriptions=@openpay.create(:subscriptions)
 @subscriptions.update(request_hash, customer_id)
@@ -5716,9 +5697,6 @@ openpay.customers.subscriptions.update('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1mi
 ```
 
 ```ruby
-# ===================
-# Aun no implementado
-# ===================
 @openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
 @subscriptions=@openpay.create(:subscriptions)
 request_hash={
@@ -5727,7 +5705,6 @@ request_hash={
      "trial_end_date" => "2014-06-20",
      "source_id" => "ktrpvymgatocelsciak7"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@subscriptions.update(request_hash.to_hash, "pbi4kb8hpb64x0uud2eb")
 ```
@@ -6153,7 +6130,6 @@ request_hash={
      "description" => "Cobro de Comisión",
      "order_id" => "oid-1245"
    }
-#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
 
 response_hash=@fees.create(request_hash.to_hash)
 ```
@@ -6305,7 +6281,7 @@ response_hash=@fees.all
    }
 ]
 ```
-Regresa los detalles de todas las suscripciones activas para un cliente en específico.
+Regresa los detalles de todas las comisiones cobradas del comercio.
 
 ###Petición
 Se puede realizar búsquedas utilizando los siguiente parámetros.
