@@ -298,10 +298,10 @@ $customer->charges->create(chargeRequest);
 
 ```java
 //Cliente
-openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.charges().create(String customerId, CreateCardChargeParams request);
 
 //Comercio
-openpayAPI.charges().create({REQUEST});
+openpayAPI.charges().create(CreateCardChargeParams request);
 ```
 
 ```javascript
@@ -505,10 +505,10 @@ $customer->charges->create(chargeRequest);
 
 ```java
 //Cliente
-openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.charges().create(String customerId, CreateCardChargeParams request);
 
 //Comercio
-openpayAPI.charges().create({REQUEST});
+openpayAPI.charges().create(CreateCardChargeParams request);
 ```
 
 ```csharp
@@ -743,10 +743,10 @@ $customer->charges->create(chargeRequest;
 
 ```java
 //Cliente
-openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.charges().create(String customerId, CreateStoreChargeParams request);
 
 //Comercio
-openpayAPI.charges().create({REQUEST});
+openpayAPI.charges().create(CreateStoreChargeParams request);
 ```
 
 ```csharp
@@ -917,10 +917,10 @@ $customer->charges->create(chargeRequest);
 
 ```java
 //Cliente
-openpayAPI.charges().create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.charges().create(String customerId, CreateBankChargeParams request);
 
 //Comercio
-openpayAPI.charges().create({REQUEST});
+openpayAPI.charges().create(CreateBankChargeParams request);
 ```
 
 ```csharp
@@ -1095,10 +1095,10 @@ $charge->capture(captureData);
 
 ```java
 //Cliente
-openpayAPI.charges().confirmCapture({CUSTOMER_ID}, {REQUEST});
+openpayAPI.charges().confirmCapture(String customerId, ConfirmCaptureParams request);
 
 //Comercio
-openpayAPI.charges().confirmCapture({REQUEST});
+openpayAPI.charges().confirmCapture(ConfirmCaptureParams request);
 ```
 
 ```csharp
@@ -1259,10 +1259,10 @@ $charge->refund(refundData);
 
 ```java
 //Cliente
-openpayAPI.charges().refund({CUSTOMER_ID}, {REQUEST});
+openpayAPI.charges().refund(String customerId, RefundParams request);
 
 //Comercio
-openpayAPI.charges().refund({REQUEST});
+openpayAPI.charges().refund(RefundParams request);
 ```
 
 ```csharp
@@ -1437,10 +1437,10 @@ $charge = $customer->charges->get(transactionId);
 
 ```java
 //Cliente
-openpayAPI.charges().get({CUSTOMER_ID}, {TRANSACTION_ID});
+openpayAPI.charges().get(String customerId, String transactionId);
 
 //Comercio
-openpayAPI.charges().get({TRANSACTION_ID});
+openpayAPI.charges().get(String transactionId);
 ```
 
 ```csharp
@@ -1595,10 +1595,10 @@ $chargeList = $customer->charges->getList(searchParams);
 
 ```java
 //Cliente
-openpayAPI.charges().list({CUSTOMER_ID}, {REQUEST});
+openpayAPI.charges().list(String customerId, SearchParams request);
 
 //Comercio
-openpayAPI.charges().list({REQUEST});
+openpayAPI.charges().list(SearchParams request);
 ```
 
 ```csharp
@@ -1807,10 +1807,10 @@ $payout = $openpay->payouts->create(payoutRequest);
 
 ```java
 //Cliente
-openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.payouts().create(String customerId, CreateBankPayoutParams request);
 
 //Comercio
-openpayAPI.payouts().create({REQUEST});
+openpayAPI.payouts().create(CreateBankPayoutParams request);
 ```
 
 ```csharp
@@ -1998,10 +1998,10 @@ $payout = $openpay->payouts->create(payoutRequest);
 
 ```java
 //Cliente
-openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.payouts().create(String customerId, CreateBankPayoutParams request);
 
 //Comercio
-openpayAPI.payouts().create({REQUEST});
+openpayAPI.payouts().create(CreateBankPayoutParams request);
 ```
 
 ```csharp
@@ -2202,10 +2202,10 @@ $payout = $openpay->payouts->create(payoutRequest);
 
 ```java
 //Cliente
-openpayAPI.payouts().create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.payouts().create(String customerId, CreateCardPayoutParams request);
 
 //Comercio
-openpayAPI.payouts().create({REQUEST});
+openpayAPI.payouts().create(CreateCardPayoutParams request);
 ```
 
 ```csharp
@@ -2417,10 +2417,10 @@ $payout = $customer->payouts->get(transactionId);
 
 ```java
 //Cliente
-openpayAPI.payouts().get({CUSTOMER_ID}, {TRANSACTION_ID});
+openpayAPI.payouts().get(String customerId, String transactionId);
 
 //Comercio
-openpayAPI.payouts().get({TRANSACTION_ID});
+openpayAPI.payouts().get(String transactionId);
 ```
 
 ```csharp
@@ -2559,10 +2559,10 @@ $payoutList = $customer->payouts->getList(searchParams);
 
 ```java
 //Cliente
-openpayAPI.payouts().list({CUSTOMER_ID}, {REQUEST});
+openpayAPI.payouts().list(String customerId, SearchParams request);
 
 //Comercio
-openpayAPI.payouts().list({REQUEST});
+openpayAPI.payouts().list(SearchParams request);
 ```
 
 ```csharp
@@ -2797,7 +2797,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
 ```
 
 ```java
-openpayAPI.customers().create({REQUEST});
+openpayAPI.customers().create(Customer customer);
 ```
 
 ```csharp
@@ -2948,7 +2948,7 @@ PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```
 
 ```java
-openpayAPI.customers().update({REQUEST});
+openpayAPI.customers().update(Customer customer);
 ```
 
 ```csharp
@@ -3120,7 +3120,7 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```
 
 ```java
-openpayAPI.customers().get({CUSTOMER_ID});
+openpayAPI.customers().get(String customerId);
 ```
 
 ```csharp
@@ -3211,7 +3211,7 @@ DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```
 
 ```java
-openpayAPI.customers().delete({CUSTOMER_ID});
+openpayAPI.customers().delete(String customerId);
 ```
 
 ```csharp
@@ -3280,7 +3280,7 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
 ```
 
 ```java
-openpayAPI.customers().list({REQUEST});
+openpayAPI.customers().list(SearchParams request);
 ```
 
 ```csharp
@@ -3408,7 +3408,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/tra
 ```
 
 ```java
-openpayAPI.transfers().create({FROM_CUSTOMER_ID}, {REQUEST});
+openpayAPI.transfers().create(String customerId, CreateTransferParams request);
 ```
 
 ```csharp
@@ -3530,7 +3530,7 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/tran
 ```
 
 ```java
-openpayAPI.transfers().get({CUSTOMER_ID}, {TRANSACTION_ID});
+openpayAPI.transfers().get(String customerId, String transactionId);
 ```
 
 ```csharp
@@ -3617,7 +3617,7 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/tran
 ```
 
 ```java
-openpayAPI.transfers().list({CUSTOMER_ID}, {REQUEST});
+openpayAPI.transfers().list(String customerId, SearchParams request);
 ```
 
 ```csharp
@@ -3808,10 +3808,10 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/car
 
 ```java
 //Cliente
-openpayAPI.cards().create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.cards().create(String customerId, Card request);
 
 //Comercio
-openpayAPI.cards().create({REQUEST});
+openpayAPI.cards().create(Card request);
 ```
 
 ```csharp
@@ -3993,10 +3993,10 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/car
 
 ```java
 //Cliente
-openpayAPI.cards().create({CUSTOMER_ID}, {RESPONSE});
+openpayAPI.cards().create(String customerId, Card card);
 
 //Comercio
-openpayAPI.cards().create({RESPONSE});
+openpayAPI.cards().create(Card card);
 ```
 
 ```csharp
@@ -4118,10 +4118,10 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/card
 
 ```java
 //Cliente
-openpayAPI.cards().get({CUSTOMER_ID}, {CARD_ID});
+openpayAPI.cards().get(String customerId, String cardId);
 
 //Comercio
-openpayAPI.cards().get({CARD_ID});
+openpayAPI.cards().get(String cardId);
 ```
 
 ```csharp
@@ -4229,10 +4229,10 @@ DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/c
 
 ```java
 //Cliente
-openpayAPI.cards().delete({CUSTOMER_ID}, {CARD_ID});
+openpayAPI.cards().delete(String customerId, String cardId);
 
 //Comercio
-openpayAPI.cards().delete({CARD_ID});
+openpayAPI.cards().delete(String cardId);
 ```
 
 ```csharp
@@ -4318,10 +4318,10 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/card
 
 ```java
 //Cliente
-openpayAPI.cards().list({CUSTOMER_ID}, {REQUEST});
+openpayAPI.cards().list(String customerId, SearchParams request);
 
 //Comercio
-openpayAPI.cards().list({REQUEST});
+openpayAPI.cards().list(SearchParams request);
 ```
 
 ```csharp
@@ -4495,7 +4495,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/ban
 
 ```java
 //Cliente
-openpayAPI.bankAccounts().create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.bankAccounts().create(String customerId, BankAccount request);
 ```
 
 ```csharp
@@ -4609,7 +4609,7 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bank
 
 ```java
 //Cliente
-openpayAPI.bankAccounts().get({CUSTOMER_ID}, {BANK_ACCOUNT_ID});
+openpayAPI.bankAccounts().get(String customerId, String bankAccountId);
 ```
 
 ```csharp
@@ -4691,7 +4691,7 @@ DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/b
 
 ```java
 //Cliente
-openpayAPI.bankAccounts().delete({CUSTOMER_ID}, {BANK_ACCOUNT_ID});
+openpayAPI.bankAccounts().delete(String customerId, String bankAccountId);
 ```
 
 ```csharp
@@ -4759,7 +4759,7 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/bank
 
 ```java
 //Cliente
-openpayAPI.bankAccounts().list({CUSTOMER_ID}, {REQUEST});
+openpayAPI.bankAccounts().list(String customerId, SearchParams request);
 ```
 
 ```csharp
@@ -4914,7 +4914,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans
 ```
 
 ```java
-openpayAPI.plans().create({REQUEST});
+openpayAPI.plans().create(Plan request);
 ```
 
 ```csharp
@@ -5055,7 +5055,7 @@ PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 ```
 
 ```java
-openpayAPI.plans().update({REQUEST});
+openpayAPI.plans().update(Plan request);
 ```
 
 ```csharp
@@ -5165,7 +5165,7 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 ```
 
 ```java
-openpayAPI.plans().get({PLAN_ID});
+openpayAPI.plans().get(String planId);
 ```
 
 ```csharp
@@ -5249,7 +5249,7 @@ DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 ```
 
 ```java
-openpayAPI.plans().delete({PLAN_ID});
+openpayAPI.plans().delete(String planId);
 ```
 
 ```csharp
@@ -5315,7 +5315,7 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans
 ```
 
 ```java
-openpayAPI.plans().list({REQUEST});
+openpayAPI.plans().list(SearchParams request);
 ```
 
 ```csharp
@@ -5496,7 +5496,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/sub
 ```
 
 ```java
-openpayAPI.subscriptions().create({CUSTOMER_ID}, {REQUEST});
+openpayAPI.subscriptions().create(String customerId, Subscription request);
 ```
 
 ```csharp
@@ -5619,7 +5619,7 @@ PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subs
 ```
 
 ```java
-openpayAPI.subscriptions().update({REQUEST});
+openpayAPI.subscriptions().update(Subscription request);
 ```
 
 ```csharp
@@ -5741,7 +5741,7 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subs
 ```
 
 ```java
-openpayAPI.subscriptions().get({CUSTOMER_ID}, {SUBSCRIPTION_ID});
+openpayAPI.subscriptions().get(String customerId, String customerId);
 ```
 
 ```csharp
@@ -5825,7 +5825,7 @@ DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/s
 ```
 
 ```java
-openpayAPI.subscriptions().delete({CUSTOMER_ID}, {SUBSCRIPTION_ID});
+openpayAPI.subscriptions().delete(String customerId, String subscriptionId);
 ```
 
 ```csharp
@@ -5878,7 +5878,7 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subs
 ```
 
 ```java
-openpayAPI.subscriptions().list({CUSTOMER_ID}, {REQUEST});
+openpayAPI.subscriptions().list(String customerId, SearchParams request);
 ```
 
 ```csharp
@@ -5997,7 +5997,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees
 ```
 
 ```java
-openpayAPI.fees().create({REQUEST});
+openpayAPI.fees().create(CreateFeeParams request);
 ```
 
 ```csharp
@@ -6099,7 +6099,7 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees
 ```
 
 ```java
-openpayAPI.fees().list({REQUEST});
+openpayAPI.fees().list(SearchParams request);
 ```
 
 ```csharp
