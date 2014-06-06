@@ -1109,6 +1109,14 @@ openpayAPI.ChargeService.Capture({CUSTOMER_ID}, {TRANSACTION_ID}, {AMOUNT});
 openpayAPI.ChargeService.Capture({TRANSACTION_ID}, {AMOUNT});
 ```
 
+```javascript
+// Comercio
+openpay.charges.capture(transactionId, captureRequest, callback);
+
+// Cliente
+openpay.customers.charges.capture(customerId, transactionId, captureRequest, callback);
+```
+
 ```ruby
 #Cliente
 @charges=@openpay.create(:charges)
@@ -1154,6 +1162,17 @@ Charge charge = api.charges().confirmCapture("ag4nktpdzebjiye1tlze", request);
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Charge charge = api.ChargeService.Capture("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", new Decimal(100.00));
+```
+
+```javascript
+var captureRequest = {
+  'amount' : 100.00
+};
+
+openpay.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', captureRequest, 
+    function(error, charge){
+  // ...
+});
 ```
 
 ```ruby
@@ -6326,6 +6345,10 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}
 openpayAPI.merchant().get();
 ```
 
+```javascript
+openpay.merchant.get(callback);
+```
+
 > Ejemplo de petición
 
 ```shell
@@ -6336,6 +6359,12 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f \
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Merchant merchant = api.merchant().get();
+```
+
+```javascript
+openpay.merchant.get(function(error, merchant){
+  // ...
+});
 ```
 
 > Ejemplo de respuesta
