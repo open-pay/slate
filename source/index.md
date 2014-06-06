@@ -2446,7 +2446,7 @@ openpay.customers.payouts.get(customerId, transactionId, callback);
 
 #Comercio
 @payouts=@openpay.create(:payouts)
-@payouts.get(transaction_id, customer_id)
+@payouts.get(transaction_id)
 ```
 
 > Ejemplo de petición con cliente
@@ -4925,6 +4925,12 @@ openpayAPI.PlanService.Create({REQUEST});
 openpay.plans.create(planRequest, callback);
 ```
 
+```ruby
+#Cliente
+@plans=@openpay.create(:plans)
+@plans.create(request_hash)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -4985,6 +4991,23 @@ openpay.plans.create(planRequest, function(error, plan){
 });
 ```
 
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@plans=@openpay.create(:plans)
+request_hash={
+     "name" => "Curso de ingles",
+     "amount" => 150.00,
+     "repeat_every" => "1",
+     "repeat_unit" => "month",
+     "retry_times" => 2,
+     "status_after_retry" => "cancelled",
+     "trial_days" => "30"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@plans.create(request_hash.to_hash)
+```
+
 > Ejemplo de respuesta
 
 ```json
@@ -5043,6 +5066,12 @@ openpayAPI.PlanService.Update({REQUEST});
 openpay.plans.update(planId, planRequest, callback);
 ```
 
+```ruby
+#Cliente
+@plans=@openpay.create(:plans)
+@plans.update(request_hash, plan_id)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -5084,6 +5113,18 @@ var planRequest = {
 openpay.plans.update(planId, planRequest, function(error, plan){
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@plans=@openpay.create(:plans)
+request_hash={
+     "name" => "Curso de ingles",
+     "trial_days" => "30"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@plans.update(request_hash.to_hash, "p8e6x3hafqqsbmnoevrt")
 ```
 
 > Ejemplo de respuesta
@@ -5135,6 +5176,12 @@ openpayAPI.PlanService.Get({PLAN_ID});
 openpay.plans.get(planId, callback);
 ```
 
+```ruby
+#Cliente
+@plans=@openpay.create(:plans)
+@plans.get(plan_id)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -5156,6 +5203,13 @@ Plan plan = api.PlanService.Get("p8e6x3hafqqsbmnoevrt");
 openpay.plans.get('p8e6x3hafqqsbmnoevrt', function(error, plan){
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@plans=@openpay.create(:plans)
+
+response_hash=@plans.get("p8e6x3hafqqsbmnoevrt")
 ```
 
 > Ejemplo de respuesta
@@ -5206,6 +5260,12 @@ openpayAPI.PlanService.Delete({PLAN_ID});
 openpay.plans.delete(planId, callback);
 ```
 
+```ruby
+#Cliente
+@plans=@openpay.create(:plans)
+@plans.delete(plan_id)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -5228,6 +5288,13 @@ api.PlanService.Delete("p8e6x3hafqqsbmnoevrt");
 openpay.plans.delete('p8e6x3hafqqsbmnoevrt', function(error){
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@plans=@openpay.create(:plans)
+
+response_hash=@plans.delete("p8e6x3hafqqsbmnoevrt")
 ```
 
 Al eliminar un plan no se permitirán crear mas suscripciones asociadas a él, sin embargo las suscripciones ya asociadas se mantienen y se continuan cobrando.
@@ -5258,6 +5325,12 @@ openpayAPI.PlanService.List({REQUEST});
 ```javascript
 openpay.plans.list(callback);
 openpay.plans.list(searchParams, callback);
+```
+
+```ruby
+#Cliente
+@plans=@openpay.create(:plans)
+@plans.all
 ```
 
 > Ejemplo de petición 
@@ -5302,6 +5375,13 @@ var searchParams = {
 openpay.plans.list(searchParams, function(error, list){
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@plans=@openpay.create(:plans)
+
+response_hash=@plans.all
 ```
 
 > Ejemplo de respuesta
