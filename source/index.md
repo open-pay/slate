@@ -1765,7 +1765,7 @@ offset| ***numeric*** <br/>Número de registros a omitir al inicio, por defecto 
 limit| ***numeric*** <br/>Número de registros que se requieren, por defecto 10.
 amount| ***numeric*** <br/>Igual al monto.
 amount[gte] | ***numeric*** <br/>Mayor o igual al monto.
-amount[gte] | ***numeric*** <br/>Menor o igual al monto.
+amount[lte] | ***numeric*** <br/>Menor o igual al monto.
 
 ###Respuesta
 
@@ -2843,6 +2843,7 @@ request = api.customers().create(request);
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Customer request = new Customer();
+request.ExternalId = "idExterno0101";
 request.Name = "Julian Gerardo";
 request.LastName = "López Martínez";
 request.Email = "julian.martinez@gmail.com";
@@ -4036,7 +4037,7 @@ request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card request = new Card();
-// tokenid????
+request.TokenId = "tokgslwpdcrkhlgxqi9a";
 
 request = api.CardService.Create("a9pvykxz4g5rg0fplze0", request);
 ```
