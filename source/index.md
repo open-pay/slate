@@ -5507,6 +5507,11 @@ openpayAPI.SubscriptionService.Create({CUSTOMER_ID}, {REQUEST});
 openpay.customers.subscriptions.create(customerId, subscriptionRequest, callback);
 ```
 
+```ruby
+#Cliente
+@subscriptions=@openpay.create(:subscriptions)
+@subscriptions.create(request_hash, customer_id)
+```
 
 > Ejemplo de petición 
 
@@ -5566,6 +5571,18 @@ openpay.customers.subscriptions.create(customerId, subscriptionRequest, function
 });
 ```
 
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@openpay.create(:subscriptions)
+request_hash={
+     "plan_id" => "pbi4kb8hpb64x0uud2eb",
+     "trial_end_date" => "2014-06-20",
+     "source_id" => "ktrpvymgatocelsciak7"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@subscriptions.create(request_hash.to_hash, "a9pvykxz4g5rg0fplze0")
+```
 
 > Ejemplo de respuesta
 
@@ -5630,6 +5647,14 @@ openpayAPI.SubscriptionService.Update({CUSTOMER_ID}, {REQUEST});
 openpay.customers.subscriptions.update(customerId, subscriptionId, subscriptionRequest, callback);
 ```
 
+```ruby
+# ===================
+# Aun no implementado
+# ===================
+#Cliente
+@subscriptions=@openpay.create(:subscriptions)
+@subscriptions.update(request_hash, customer_id)
+```
 
 > Ejemplo de petición 
 
@@ -5688,6 +5713,23 @@ openpay.customers.subscriptions.update('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1mi
     function(error, subscription){
   // ...
 });
+```
+
+```ruby
+# ===================
+# Aun no implementado
+# ===================
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@openpay.create(:subscriptions)
+request_hash={
+     "plan_id" => "pbi4kb8hpb64x0uud2eb",
+     "cancel_at_period_end" => true,
+     "trial_end_date" => "2014-06-20",
+     "source_id" => "ktrpvymgatocelsciak7"
+   }
+#Se recomienda apoyarse de la clase FactoryGirl para facilitar la generación del Hash de los request.
+
+response_hash=@subscriptions.update(request_hash.to_hash, "pbi4kb8hpb64x0uud2eb")
 ```
 
 > Ejemplo de respuesta
@@ -5752,6 +5794,12 @@ openpayAPI.SubscriptionService.Get({CUSTOMER_ID}, {SUBSCRIPTION_ID});
 openpay.customers.subscriptions.get(customerId, subscriptionId, callback);
 ```
 
+```ruby
+#Cliente
+@subscriptions=@openpay.create(:subscriptions)
+@subscriptions.get(subscription_id,customer_id)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -5773,6 +5821,13 @@ Subscription subscription = api.SubscriptionService.Get("a9pvykxz4g5rg0fplze0", 
 openpay.customers.subscriptions.get('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', function(error, subscription){
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@openpay.create(:subscriptions)
+
+response_hash=@subscriptions.get("s0gmyor4yqtyv1miqwr0", "pbi4kb8hpb64x0uud2eb")
 ```
 
 > Ejemplo de respuesta
@@ -5836,6 +5891,12 @@ openpayAPI.SubscriptionService.Delete({CUSTOMER_ID}, {SUBSCRIPTION_ID});
 openpay.customers.subscriptions.delete(customerId, subscriptionId, callback);
 ```
 
+```ruby
+#Cliente
+@subscriptions=@openpay.create(:subscriptions)
+@subscriptions.delete(subscription_id, customer_id)
+```
+
 > Ejemplo de petición 
 
 ```shell
@@ -5858,6 +5919,13 @@ api.SubscriptionService.Delete("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 openpay.customers.subscriptions.delete('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', function(error){
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@openpay.create(:subscriptions)
+
+@subscriptions.detele("s0gmyor4yqtyv1miqwr0", "pbi4kb8hpb64x0uud2eb")
 ```
 
 Cancela inmediatamente la suscrupción del cliente. Ya no se realizarán mas cargos a la tarjeta y todos cargos pendientes se cancelarán.
@@ -5888,6 +5956,12 @@ openpayAPI.SubscriptionService.List({CUSTOMER_ID}, {REQUEST});
 ```javascript
 openpay.customers.subscriptions.list(customerId, callback);
 openpay.customers.subscriptions.list(customerId, searchParams, callback);
+```
+
+```ruby
+#Cliente
+@subscriptions=@openpay.create(:subscriptions)
+@subscriptions.all(customer_id)
 ```
 
 > Ejemplo de petición 
@@ -5932,6 +6006,13 @@ var searchParams = {
 openpay.customers.subscriptions.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
   // ...
 });
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@openpay.create(:subscriptions)
+
+@subscriptions.all("pbi4kb8hpb64x0uud2eb")
 ```
 
 > Ejemplo de respuesta
