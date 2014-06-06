@@ -5266,6 +5266,12 @@ trial_days | ***numeric*** <br/> Numero de días de prueba por defecto que tendr
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans
 ```
 
+```php
+<?
+$plan = $openpay->plans->add(planDataRequest);
+?>
+```
+
 ```java
 openpayAPI.plans().create(Plan request);
 ```
@@ -5299,6 +5305,24 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans \
   "trial_days": "30",
   "repeat_every": "1"
 }' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$planDataRequest = array(
+    'amount' => 150.00,
+    'status_after_retry' => 'cancelled',
+    'retry_times' => 2,
+    'name' => 'Plan Curso Verano',
+    'repeat_unit' => 'month',
+    'trial_days' => '30',
+    'repeat_every' => '1',
+    'currency' => 'MXN');
+
+$plan = $openpay->plans->add($planDataRequest);
+?>
 ```
 
 ```java
@@ -5406,6 +5430,13 @@ Regresa un [objeto plan](#objeto-plan) creado o un error en caso de ocurrir alg�
 PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 ```
 
+```php
+<?
+$plan = $openpay->plans->get(planId);
+$plan->save();
+?>
+```
+
 ```java
 openpayAPI.plans().update(Plan request);
 ```
@@ -5434,6 +5465,16 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbm
       "name": "Curso de aleman",
       "trial_days": "60"
    }' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$plan = $openpay->plans->get('pduar9iitv4enjftuwyl');
+$plan->name = 'Plan Curso de Verano 2014';
+$plan->save();
+?>
 ```
 
 ```java
@@ -5515,6 +5556,12 @@ Regresa un [objeto plan](#objeto-plan) con la información actualizada o una [re
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 ```
 
+```php
+<?
+$plan = $openpay->plans->get(planId);
+?>
+```
+
 ```java
 openpayAPI.plans().get(String planId);
 ```
@@ -5539,6 +5586,14 @@ openpay.plans.get(planId, callback);
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbmnoevrt \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ``` 
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$plan = $openpay->plans->get('pduar9iitv4enjftuwyl');
+?>
+```
 
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
@@ -5599,6 +5654,14 @@ Regresa un [objeto plan](#objeto-plan)
 DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 ```
 
+```php
+<?
+$customer = $openpay->customers->get(customerId);
+$plan = $openpay->plans->get(planId);
+$plan->delete();
+?>
+```
+
 ```java
 openpayAPI.plans().delete(String planId);
 ```
@@ -5623,6 +5686,16 @@ openpay.plans.delete(planId, callback);
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbmnoevrt \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -X DELETE
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$plan = $openpay->plans->get('pduar9iitv4enjftuwyl');
+$plan->delete();
+?>
 ```
 
 ```java
@@ -5665,6 +5738,12 @@ Si el plan se borra correctamente la respuesta es vacía, si no se puede borrar 
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans
 ```
 
+```php
+<?
+$planList = $openpay->plans->getList(findDataRequest);
+?>
+```
+
 ```java
 openpayAPI.plans().list(SearchParams request);
 ```
@@ -5689,6 +5768,20 @@ openpay.plans.list(searchParams, callback);
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans?limit=10" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$findDataRequest = array(
+    'creation[gte]' => '2013-01-01',
+    'creation[lte]' => '2013-12-31',
+    'offset' => 0,
+    'limit' => 5);
+
+$planList = $openpay->plans->getList($findDataRequest);
+?>
 ```
 
 ```java
