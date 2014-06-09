@@ -2050,8 +2050,8 @@ $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02c
 $payoutRequest = array(
     'method' => 'bank_account',
     'bank_account' => array(
-        'clabe':'012298026516924616',
-        'holder_name':'Mi empresa'),
+        'clabe' => '012298026516924616',
+        'holder_name' => 'Mi empresa'),
     'amount' => 100.00,
     'description' => 'Retiro de saldo semanal',
     'order_id' => 'ORDEN-00021');
@@ -2253,8 +2253,8 @@ $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02c
 $payoutRequest = array(
     'method' => 'card',
     'card' => array(
-        'card_number':'4111111111111111',
-        'holder_name':'Juan Perez Ramirez'),
+        'card_number' => '4111111111111111',
+        'holder_name' => 'Juan Perez Ramirez'),
     'amount' => 100.00,
     'description' => 'Retiro de saldo semanal',
     'order_id' => 'ORDEN-00021');
@@ -5987,7 +5987,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $subscriptionDataRequest = array(
-    "trial_end_date":"2014-01-01", 
+    "trial_end_date" => "2014-01-01", 
     'plan_id' => 'pduar9iitv4enjftuwyl',
     'card_id' => 'konvkvcd5ih8ta65umie');
 
