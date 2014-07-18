@@ -252,6 +252,10 @@ Código    | Error HTTP  |Causa
 --------- | ----------- | --------
 2001  |409 Conflict | La cuenta de banco con esta CLABE ya se encuentra registrada en el cliente.
 2002  |409 Conflict | La tarjeta con este número ya se encuentra registrada en el cliente.
+2003  |409 Conflict | El cliente con este identificador externo (External ID) ya existe.
+2004  |422 Unprocessable Entity | El dígito verificador del número de tarjeta es inválido de acuerdo al algoritmo Luhn.
+2005  |400 Bad Request | La fecha de expiración de la tarjeta es anterior a la fecha actual.
+2006  |400 Bad Request | El código de seguridad de la tarjeta (CVV2) no fue proporcionado.
 
 ###Tarjetas
 Código    | Error HTTP  |Causa
