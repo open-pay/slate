@@ -2589,7 +2589,7 @@ openpay.customers.payouts.list(customerId, searchParams, callback);
 > Ejemplo de petición 
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts?creation[gte]=2013-11-01&limit=2" \
+curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts?creation[gte]=2013-11-01&limit=2&payout_type=AUTOMATIC" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
 ```
 
@@ -2600,6 +2600,7 @@ $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02c
 $searchParams = array(
     'creation[gte]' => '2013-11-01',
     'creation[lte]' => '2017-12-31',
+    'payout_type' => 'AUTOMATIC',
     'offset' => 0,
     'limit' => 2);
 
@@ -2640,6 +2641,7 @@ List<Payout> payouts = api.PayoutService.List("ag4nktpdzebjiye1tlze", request);
 ```javascript
 var searchParams = {
   'creation[gte]' : '2013-11-01',
+  'payout_type' : 'AUTOMATIC',
   'limit' : 2
 };
 
@@ -2728,6 +2730,7 @@ limit| ***numeric*** <br/>Número de registros que se requieren, por defecto 10.
 amount| ***numeric*** <br/>Igual al monto.
 amount[gte] | ***numeric*** <br/>Mayor o igual al monto.
 amount[lte] | ***numeric*** <br/>Menor o igual al monto.
+payout_type | ***string (opcional, ALL, AUTOMATIC o MANUAL)***  <br/>Tipo de payout usado para filtrar las transacciones
 
 ###Respuesta
 
