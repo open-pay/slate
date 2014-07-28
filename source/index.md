@@ -1344,7 +1344,7 @@ openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed',
 @charges=@openpay.create(:charges)
 
 request_hash={
-     "description" => "Devolucion de aportacion"
+     "description" => "Monto de cargo devuelto"
    }
 
 response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4nktpdzebjiye1tlze")
