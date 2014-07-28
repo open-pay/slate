@@ -1284,11 +1284,11 @@ openpay.customers.charges.refund(customerId, transactionId, refundRequest, callb
 ```ruby
 #Cliente
 @charges=@openpay.create(:charges)
-@charges.refund(transaction_id, description, customer_id)
+@charges.refund(transaction_id, request_hash, customer_id)
 
 #Comercio
 @charges=@openpay.create(:charges)
-@charges.refund(transaction_id, description)
+@charges.refund(transaction_id, request_hash)
 ```
 
 > Ejemplo de petición con cliente
@@ -1343,7 +1343,11 @@ openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed',
 @openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 @charges=@openpay.create(:charges)
 
-response_hash=@charges.refund("tryqihxac3msedn4yxed", "Monto de cargo devuelto", "ag4nktpdzebjiye1tlze")
+request_hash={
+     "description" => "Devolucion de aportacion"
+   }
+
+response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 
 > Ejemplo de respuesta
