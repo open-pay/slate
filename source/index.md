@@ -889,7 +889,7 @@ method|***string*** (requerido) <br/>Debe contener el valor **store** para hacer
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
-due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el cargo en tienda en formato ISO 8601. Ejemplo 2014-08-01T00:50:00Z
+due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el cargo en tienda en formato ISO 8601. <br/>Ejemplo formato UTC: 2014-08-01T00:50:00Z Nota: Del lado del servidor se cambiara a hora central<br/>Ejemplo de hora central: 2014-08-01T11:51:23-05:00
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -1065,7 +1065,7 @@ method|***string*** (requerido) <br/>Debe contener el valor **bank_account** par
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
-due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el cargo a banco en formato ISO 8601. Ejemplo 2014-08-01T00:50:00Z
+due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el cargo a banco en formato ISO 8601. <br/>Ejemplo formato UTC: 2014-08-01T00:50:00Z Nota: Del lado del servidor se cambiara a hora central<br/>Ejemplo de hora central: 2014-08-01T11:51:23-05:00
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
