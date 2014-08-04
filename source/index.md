@@ -133,6 +133,15 @@ openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0f
 
 #Produccion
 openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac", true)
+
+
+#Definir timeout para los request's
+#Este cliente maneja un timeout por defecto de 90 seg., para configurar el timeout usado para crear los request a los servicios de Openpay, es necesario definir explícitamente el tipo de ambiente, seguido del nuevo valor del timeout para el request:
+
+#Sintaxis:
+#   openpay_prod=OpenpayApi.new(merchant_id,private_key,isProduction,timeout)
+#Example:
+#   openpay_prod=OpenpayApi.new(merchant_id,private_key,false,30)
 ```
 
 > Producción 
