@@ -265,6 +265,7 @@ Código    | Error HTTP  |Causa
 2004  |422 Unprocessable Entity | El dígito verificador del número de tarjeta es inválido de acuerdo al algoritmo Luhn.
 2005  |400 Bad Request | La fecha de expiración de la tarjeta es anterior a la fecha actual.
 2006  |400 Bad Request | El código de seguridad de la tarjeta (CVV2) no fue proporcionado.
+2007  |412 Precondition Failed | El número de tarjeta es de prueba, sólo puede usarse en Sandbox.
 
 ###Tarjetas
 Código    | Error HTTP  |Causa
@@ -274,6 +275,12 @@ Código    | Error HTTP  |Causa
 3003  |402 Payment Required | La tarjeta no tiene fondos suficientes.
 3004  |402 Payment Required | La tarjeta ha sido identificada como una tarjeta robada.
 3005  |402 Payment Required | La tarjeta ha sido identificada como una tarjeta fraudulenta.
+3006  |412 Precondition Failed | La operación no esta permitida para este cliente o esta transacción.
+3008  |412 Precondition Failed | La tarjeta no es soportada en transacciones en linea.
+3009  |402 Payment Required | La tarjeta fue reportada como perdida.
+3010  |402 Payment Required | El banco ha restringido la tarjeta.
+3011  |402 Payment Required | El banco ha solicitado que la tarjeta sea retenida. Contacte al banco.
+3012  |412 Precondition Failed | Se requiere solicitar al banco autorización para realizar este pago.
 
 ###Cuentas
 Código    | Error HTTP  |Causa
