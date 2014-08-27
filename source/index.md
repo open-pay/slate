@@ -479,6 +479,7 @@ description | ***string*** (requerido, longitud = 250) <br/>Una descripción aso
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 device_session_id |  ***string*** (opcional, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
 capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o pre-autorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
+[customer](#crear-un-nuevo-cliente)|***string*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -715,6 +716,7 @@ description | ***string*** (requerido, longitud = 250) <br/>Una descripción aso
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 device_session_id |  ***string*** (opcional, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
 capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o pre-autorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
+[customer](#crear-un-nuevo-cliente)|***string*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -889,7 +891,8 @@ method|***string*** (requerido) <br/>Debe contener el valor **store** para hacer
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
-due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el cargo en tienda en formato ISO 8601. <br/>Ejemplo formato UTC: 2014-08-01T00:50:00Z Nota: Del lado del servidor se cambiara a hora central<br/>Ejemplo de hora central: 2014-08-01T11:51:23-05:00
+due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el cargo a tienda en formato ISO 8601. <br/><br/>Ejemplo (UTC): 2014-08-01T00:50:00Z <br/>***Nota:*** Del lado del servidor se cambiara a hora central<br/><br/>Ejemplo (Central Time): 2014-08-01T11:51:23-05:00
+[customer](#crear-un-nuevo-cliente)|***string*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -1065,7 +1068,8 @@ method|***string*** (requerido) <br/>Debe contener el valor **bank_account** par
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
-due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el cargo a banco en formato ISO 8601. <br/>Ejemplo formato UTC: 2014-08-01T00:50:00Z Nota: Del lado del servidor se cambiara a hora central<br/>Ejemplo de hora central: 2014-08-01T11:51:23-05:00
+due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el cargo a banco en formato ISO 8601. <br/><br/>Ejemplo (UTC): 2014-08-01T00:50:00Z <br/>***Nota:*** Del lado del servidor se cambiara a hora central<br/><br/>Ejemplo (Central Time): 2014-08-01T11:51:23-05:00
+[customer](#crear-un-nuevo-cliente)|***string*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
