@@ -360,6 +360,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "source_id" : "kqgykn96i7bcs1wwhvgw",
    "method" : "card",
    "amount" : 100,
+   "currency" : "MXN",
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-00051"
 } ' 
@@ -373,6 +374,7 @@ $chargeRequest = array(
     'method' => 'card',
     'source_id' => 'kqgykn96i7bcs1wwhvgw',
     'amount' => 100,
+    'currency' => 'MXN'
     'description' => 'Cargo inicial a mi merchant',
     'order_id' => 'oid-00051');
 
@@ -386,6 +388,7 @@ OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98
 CreateCardChargeParams request = new CreateCardChargeParams();
 request.cardId("kqgykn96i7bcs1wwhvgw"); // =source_id
 request.amount(new BigDecimal("100.00"));
+request.currency("MXN");
 request.description("Cargo inicial a mi merchant");
 request.orderId("oid-00051");
 request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
@@ -400,6 +403,7 @@ ChargeRequest request = new ChargeRequest();
 request.Method = "card";
 request.SourceId = "kwkoqpg6fcvfse8k8mg2";
 request.Amount = new Decimal(100.00);
+request.Currency = "MXN";
 request.Description = "Cargo inicial a mi merchant";
 request.OrderId = "oid-00051";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
@@ -413,6 +417,7 @@ var chargeRequest = {
    'source_id' : 'kqgykn96i7bcs1wwhvgw',
    'method' : 'card',
    'amount' : 100,
+   'currency' : 'MXN',
    'description' : 'Cargo inicial a mi cuenta',
    'order_id' : 'oid-00051'
 }
@@ -429,6 +434,7 @@ request_hash={
     "method" => "card",
     "source_id" => "kqgykn96i7bcs1wwhvgw",
     "amount" => 100.00,
+    "currency" => "MXN",
     "description" => "Cargo inicial a mi merchant",
     "order_id" => "oid-00051",
     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
@@ -464,7 +470,13 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
       "customer_id":"ag4nktpdzebjiye1tlze"
    },
    "status":"completed",
-   "currency":"MXN",
+   "currency":"USD",
+   "exchange_rate" : {
+    "from" : "USD",
+    "date" : "2014-11-21",
+    "value" : 13.61,
+    "to" : "MXN"
+   },
    "creation_date":"2014-05-26T11:02:45-05:00",
    "operation_date":"2014-05-26T11:02:45-05:00",
    "description":"Cargo inicial a mi cuenta",
@@ -491,6 +503,7 @@ Propiedad | Descripción
 method|***string*** (requerido) <br/>Debe contener el valor **card** para hacer un cargo de una tarjeta registrada.
 source_id | ***string*** (requerido, longitud = 45) <br/>ID de la tarjeta guardada o el id del token creado de donde se retirarán los fondos.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
+currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 2 tipos de monedas: Pesos Mexicanos(MXN) y Dólares Americanos(USD).
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 device_session_id |  ***string*** (opcional, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
@@ -573,6 +586,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    },
    "method" : "card",
    "amount" : 100,
+   "currency" : "MXN",
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-00052"
 } ' 
@@ -593,6 +607,7 @@ $chargeRequest = array(
     'method' => 'card',
     'card' => $card,
     'amount' => 100,
+    'currency' => 'MXN',
     'description' => 'Cargo inicial a mi cuenta',
     'order_id' => 'oid-00052');
 
@@ -611,6 +626,7 @@ card.cvv2("110");
 card.expirationMonth(12);
 card.expirationYear(20);
 request.amount(new BigDecimal("100.00"));
+request.currency("MXN");
 request.description("Cargo inicial a mi cuenta");
 request.card(card);
 request.orderId("oid-00052");
@@ -632,6 +648,7 @@ card.ExpirationMonth = "12";
 card.ExpirationYear = "20";
 request.Card = card;
 request.Amount = new Decimal(9.99);
+request.Currency = "MXN";
 request.Description = "Cargo inicial a mi cuenta";
 request.OrderId = "oid-00052";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
@@ -651,6 +668,7 @@ var chargeRequest = {
    },
    'method' : 'card',
    'amount' : 100,
+   'currency' : 'MXN',
    'description' : 'Cargo inicial a mi cuenta',
    'order_id' : 'oid-00052'
 };
@@ -674,6 +692,7 @@ request_hash={
      "method" => "card",
      "card" => card_hash,   
      "amount" => 100.00,
+     "currency" => "MXN",
      "description" => "Cargo inicial a mi cuenta",
      "order_id" => "oid-00052",
      "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
@@ -706,7 +725,13 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
       "bank_code":"002"
    },
    "status":"completed",
-   "currency":"MXN",
+   "currency":"USD",
+   "exchange_rate" : {
+    "from" : "USD",
+    "date" : "2014-11-21",
+    "value" : 13.61,
+    "to" : "MXN"
+   },
    "creation_date":"2014-05-26T11:56:25-05:00",
    "operation_date":"2014-05-26T11:56:25-05:00",
    "description":"Cargo inicial a mi cuenta",
@@ -728,6 +753,7 @@ Propiedad | Descripción
 method|***string*** (requerido) <br/>Debe contener el valor **card** para hacer un cargo de una tarjeta registrada.
 card | ***objeto*** (requerido) <br/> Datos de la tarjeta de la cual se retirarán los fondos. Ver [objeto tarjeta](#crear-una-tarjeta) 
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
+currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 2 tipos de monedas: Pesos Mexicanos(MXN) y Dólares Americanos(USD).
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 device_session_id |  ***string*** (opcional, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
@@ -6924,6 +6950,687 @@ limit| ***numeric*** <br/>Número de registros que se requieren, por defecto 10.
 
 ###Respuesta
 Regresa un arreglo de [objetos transacción](#objeto-transacción) de las comisiones cobradas en orden descendente por fecha, cada uno con el identificador del cliente al que se le realizó.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Webhooks
+Estos permiten notificar al cliente cuando un evento ha sucedido en la plataforma, para que el comercio pueda tomar las acciones correspondientes.
+
+<aside class="notice">
+Para que la Openpay invoque un webhook, es importante que se encuentre verificado.
+</aside>
+
+##Objeto Webhook
+
+> Ejemplo de objeto
+
+```json
+  {
+    "id" : "wxvanstudf4ssme8khmc",
+    "url" : "http://requestb.in/11vxrsf1",
+    "user" : "juanito",
+    "password" : "passjuanito",
+    "event_types" : [
+      "charge.refunded",
+      "charge.failed",
+      "charge.cancelled",
+      "charge.created",
+      "chargeback.accepted"
+    ]
+}
+```
+
+Propiedad | Descripción
+--------- | -----
+id            |***string*** <br/>Identificador único del webhook.
+url           |***string*** <br/>URL del webhook
+user          |***string*** <br/>Nombre de usuario para autenticación básica del webhook.
+password      |***string*** <br/>Contraseña para autenticación básica del webhook.
+event_types   |***array[string]*** <br/>Listado de eventos a los que respondera el webhook.
+
+<aside class="success">
+Los tipos de eventos soportados son:
+</aside>
+
+Evento                     | Categoría      | Descripción
+-------------------------- | -------------- |------------
+charge.refunded            | Cargos         | Informa cuando es reembolsado un cargo.
+charge.failed              | Cargos         | Informa cuando un cargo fallo y no se aplico.
+charge.cancelled           | Cargos         | Informa cuando un cargo es cancelado.
+charge.created             | Cargos         | Informa cuando un cargo es programado.
+charge.succeeded           | Cargos         | Informa cuando un cargo es aplicado.
+charge.rescored.to.decline | Cargos         | Informa cuando a un cargo le es recalculado su score y es declinado.
+subscription.charge.failed | Suscripción    | Informa cuando el cargo de una suscripción fallo.
+payout.created             | Pagos          | Informa cuando un pago fue programado para el siguiente día.
+payout.succeeded           | Pagos          | Informa cuando un pago programado se ha aplicado.
+payout.failed              | Pagos          | Informa cuando un pago fallo.
+transfer.succeeded         | Transferencias | Informa cuando se realiza una transferencia entre dos cuentas Openpay.
+fee.succeeded              | Comisiones     | Informa cuando se cobra un Fee a un Customer.
+fee.refund.succeeded       | Comisiones     | Informa cuando se reembolsa un Fee a un Customer.
+spei.received              | SPEI           | Informa cuando se recibe un pago por SPEI para agregar fondos a la cuenta.
+chargeback.created         | Contracargos   | Informa cuando se recibió un chargeback de una transacción y se esta iniciando la investigación.
+chargeback.rejected        | Contracargos   | Informa cuando un contracargo fue rechazado.
+chargeback.accepted        | Contracargos   | Informa cuando un contracargo fue aceptado.
+order.created              | Orden          | Informa cuando una orden es creada y programada.
+order.activated            | Orden          | Informa cuando una orden es activada.
+order.payment.received     | Orden          | Informa cuando el pago de una orden es recibido.
+order.completed            | Orden          | Informa cuando una orden es completada.
+order.expired              | Orden          | Informa cuando una orden ha expirado.
+order.cancelled            | Orden          | Informa cuando una orden es cancelada.
+order.payment.cancelled    | Orden          | Informa cuando el pago de una orden es cancelado.
+
+
+##Crear un Webhook
+> Definición
+
+```shell
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks
+```
+
+```php
+<?
+$webhook = $openpay->webhooks->create(webhookDataRequest);
+?>
+```
+
+```java
+openpayAPI.webhooks().create(CreateWebhookParams request);
+```
+
+```csharp
+openpayAPI.WebhooksService.Create(WebhookRequest request);
+```
+
+```javascript
+openpay.webhooks.create(webhookRequest, callback);
+```
+
+```ruby
+@webhooks=@openpay.create(:webhooks)
+@webhooks.create(request_hash)
+```
+
+> Ejemplo de petición 
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -H "Content-type: application/json" \
+   -X POST -d '{
+    "url" : "http://requestb.in/11vxrsf1",
+    "user" : "juanito",
+    "password" : "passjuanito",
+    "event_types" : [
+      "charge.refunded",
+      "charge.failed",
+      "charge.cancelled",
+      "charge.created",
+      "chargeback.accepted"
+    ]
+}' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$webhookDataRequest = array(
+    'url' => 'http://requestb.in/11vxrsf1',
+    'user' => 'juanito',
+    'password' => 'passjuanito',
+    'event_types' => array(
+      'charge.refunded',
+      'charge.failed',
+      'charge.cancelled',
+      'charge.created',
+      'chargeback.accepted'
+    )
+    );
+
+$webhook = $openpay->webhooks->create($webhookDataRequest);
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateWebhookParams request = new CreateWebhookParams();
+request.url("http://requestb.in/11vxrsf1");
+request.user("juanito");
+request.password("passjuanito");
+request.addEventType("charge.refunded");
+request.addEventType("charge.failed");
+
+Webhook webhook = api.webhooks().create(request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+WebhookRequest request = new WebhookRequest();
+request.Url = "http://requestb.in/11vxrsf1";
+request.User = "juanito";
+request.Password = "passjuanito";
+request.AddEventType("charge.refunded");
+request.AddEventType("charge.failed");
+
+Webhook webhook = api.WebhookService.Create(request);
+```
+
+```javascript
+var webhookRequest = {                                            
+    'url' : 'http://requestb.in/11vxrsf1',
+    'user' : 'juanito',
+    'password' : 'passjuanito',
+    'event_types' : [
+      'charge.refunded',
+      'charge.failed',
+      'charge.cancelled',
+      'charge.created',
+      'chargeback.accepted'
+    ]
+};
+
+openpay.webhooks.create(webhookRequest, function(error, webhook){
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@webhooks=@openpay.create(:webhooks)
+request_hash={
+    "url" => "http://requestb.in/11vxrsf1",
+    "user" => "juanito",
+    "password" => "passjuanito",
+    "event_types" => [
+      "charge.refunded",
+      "charge.failed",
+      "charge.cancelled",
+      "charge.created",
+      "chargeback.accepted"
+    ]
+   }
+
+response_hash=@webhooks.create(request_hash.to_hash)
+```
+
+> Ejemplo de respuesta
+
+```json
+{
+  "id" : "wkn0t30zfxpmhr5usgfa",
+  "url" : "http://requestb.in/qt3bq0qt",
+  "user" : "juanito",
+  "event_types" : [
+    "charge.succeeded",
+    "charge.created",
+    "charge.cancelled",
+    "charge.failed"
+  ]
+}
+```
+
+Al crear un nuevo webhook se hará una petición a la url indicada con un código de verificación. Dicho código sera solicitado para poder verificar el webhook posteriormente.
+
+Al momento de guardar el webhook se generará un id que podrá ser usado para verificar la URL del webhook, eliminar o simplemente obtener la información no sensible del webhook.
+
+###Petición
+
+Propiedad | Descripción
+--------- | -----
+url           |***string*** <br/>URL del webhook
+user          |***string*** <br/>Nombre de usuario para autenticación básica del webhook.
+password      |***string*** <br/>Contraseña para autenticación básica del webhook.
+event_types   |***array[string]*** <br/>Listado de eventos a los que respondera el webhook.
+
+###Respuesta
+Regresa un [objeto webhook](#objeto-webhook) cuando se creó correctamente o una respuesta de error si ocurrió algún problema en la creación.
+
+
+##Verificar un Webhook
+> Definición
+
+```shell
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}/verify/{VERIFICATION_CODE}
+```
+
+```php
+<?
+$openpay->webhooks->verify({WEBHOOK_ID}, {VERIFICATION_CODE});
+?>
+```
+
+```java
+openpayAPI.webhooks().verify({WEBHOOK_ID}, {VERIFICATION_CODE});
+```
+
+```csharp
+openpayAPI.WebhooksService.Verify({WEBHOOK_ID}, {VERIFICATION_CODE});
+```
+
+```javascript
+openpay.webhooks.verify({WEBHOOK_ID}, {VERIFICATION_CODE});
+```
+
+```ruby
+@webhooks=@openpay.create(:webhooks)
+@webhooks.verify({WEBHOOK_ID}, {VERIFICATION_CODE})
+```
+
+> Ejemplo de petición 
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc/verify/fZnipGry \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -H "Content-type: application/json" \
+   -X POST
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$openpay->webhooks->verify("wxvanstudf4ssme8khmc", "fZnipGry");
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.webhooks().verify("wxvanstudf4ssme8khmc", "fZnipGry");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.WebhookService.Verify("wxvanstudf4ssme8khmc", "fZnipGry");
+```
+
+```javascript
+openpay.webhooks.verify("wxvanstudf4ssme8khmc", "fZnipGry", function(error){
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@webhooks=@openpay.create(:webhooks)
+@webhooks.verify("wxvanstudf4ssme8khmc", "fZnipGry")
+```
+
+Después de verificar el webhook, Openpay comenzara a enviar las notificaciones de los eventos asociados al webhook.
+
+###Petición
+
+No requiere enviar parámetros.
+
+###Respuesta
+Regresa una respuesta http 204.
+
+
+
+##Obtener un Webhook
+
+> Definición
+
+```shell
+GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
+```
+
+```php
+<?
+$webhook = $openpay->webhooks->get(webhookId);
+?>
+```
+
+```java
+openpayAPI.webhooks().get(String webhookId);
+```
+
+```csharp
+openpayAPI.WebhooksService.Get(string webhookId);
+```
+
+```javascript
+openpay.webhooks.get(webhookId, callback);
+```
+
+```ruby
+@webhooks=@openpay.create(:webhooks)
+@webhooks.get(webhookId)
+```
+
+> Ejemplo de petición
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -H "Content-type: application/json" 
+``` 
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$webhook = $openpay->webhooks->get('wxvanstudf4ssme8khmc');
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Webhook webhook = api.webhooks().get("wxvanstudf4ssme8khmc");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Webhook webhook = api.WebhooksService.Get("wxvanstudf4ssme8khmc");
+```
+
+```javascript
+openpay.webhooks.get('wxvanstudf4ssme8khmc', function(error, webhook){
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@webhooks=@openpay.create(:webhooks)
+
+response_hash=@webhooks.get("wxvanstudf4ssme8khmc")
+```
+
+> Ejemplo de respuesta
+
+```json
+  {
+    "id" : "wxvanstudf4ssme8khmc",
+    "url" : "http://requestb.in/11vxrsf1",
+    "user" : "juanito",
+    "event_types" : [
+      "verification",
+      "charge.refunded",
+      "charge.failed",
+      "charge.cancelled",
+      "charge.created",
+      "charge.succeeded",
+      "subscription.charge.failed",
+      "payout.created",
+      "payout.succeeded",
+      "payout.failed",
+      "transfer.succeeded",
+      "fee.succeeded",
+      "spei.received",
+      "chargeback.created",
+      "chargeback.rejected",
+      "chargeback.accepted"
+    ]
+  }
+```
+
+Obtiene los detalles de un webhook solicitándolo con su id. 
+
+<aside class="notice">
+**Nota:** Nunca se regresarán datos sensibles como son el password para accesar al webhook.
+</aside>
+
+###Petición
+Propiedad | Descripción
+--------- | ------
+id| ***string*** (requerido, longitud = 45) <br/> Identificador único del webhook
+
+###Respuesta
+Regresa un [objeto webhook](#objeto-webhook)
+
+
+##Eliminar un Webhook
+
+> Definición
+
+```shell
+DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
+```
+
+```php
+<?
+$webhook = $openpay->webhooks->get(webhookId);
+$webhook->delete();
+?>
+```
+
+```java
+openpayAPI.webhooks().delete(String webhookId);
+```
+
+```csharp
+openpayAPI.WebhooksService.Delete(string webhook_id);
+```
+
+```javascript
+openpay.webhooks.delete(webhookId, callback);
+```
+
+```ruby
+@webhooks=@openpay.create(:webhooks)
+@webhooks.delete(webhook_id)
+```
+
+> Ejemplo de petición con cliente
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -X DELETE
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$webhook = $openpay->webhooks->get('wxvanstudf4ssme8khmc');
+$webhook->delete();
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.webhooks().delete("wxvanstudf4ssme8khmc");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+api.WebhooksService.Delete("wxvanstudf4ssme8khmc");
+```
+
+```javascript
+openpay.webhooks.delete('wxvanstudf4ssme8khmc', function(error) {
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@webhooks=@openpay.create(:webhooks)
+
+response_hash=@webhooks.delete("wxvanstudf4ssme8khmc")
+```
+
+Elimina un webhook del comercio.
+
+Para eliminarlo sólo es necesario proporcionar el identificador del webhook.
+
+###Petición
+Propiedad | Descripción
+--------- | ------
+id| ***string*** (requerido, longitud = 45) <br/> Identificador único del webhook
+
+###Respuesta
+Si el webhook se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo. 
+
+
+
+
+
+
+
+
+##Listado de Webhook
+
+> Definición
+
+```shell
+GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks
+```
+
+```php
+<?
+$webhookList = $openpay->webhooks->getList();
+?>
+```
+
+```java
+openpayAPI.webhooks().list();
+```
+
+```csharp
+openpayAPI.WebhooksService.List();
+```
+
+```javascript
+openpay.webhooks.list(callback);
+```
+
+```ruby
+@webhooks=@openpay.create(:webhooks)
+@webhooks.all
+```
+
+> Ejemplo de petición
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -H "Content-type: application/json" 
+``` 
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$webhookList = $openpay->webhooks->getList('wxvanstudf4ssme8khmc');
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+List<Webhook> webhooks = api.webhooks().list("wxvanstudf4ssme8khmc");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+List<Webhook> webhooks = api.WebhooksService.List("wxvanstudf4ssme8khmc");
+```
+
+```javascript
+openpay.webhooks.list(function(error, list){
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@webhooks=@openpay.create(:webhooks)
+
+response_hash=@webhooks.all
+```
+
+> Ejemplo de respuesta
+
+```json
+[
+  {
+    "id" : "wDashboard185",
+    "event_types" : [
+      "verification",
+      "charge.refunded",
+      "charge.failed",
+      "charge.cancelled",
+      "charge.created",
+      "charge.succeeded",
+      "subscription.charge.failed",
+      "payout.created",
+      "payout.succeeded",
+      "payout.failed",
+      "transfer.succeeded",
+      "fee.succeeded",
+      "spei.received",
+      "chargeback.created",
+      "chargeback.rejected",
+      "chargeback.accepted"
+    ],
+    "url" : "http://requestb.in/11vxrsf1"
+  },
+  {
+    "id" : "wDashboard186",
+    "event_types" : [
+      "verification",
+      "charge.refunded",
+      "charge.failed",
+      "charge.cancelled",
+      "charge.created",
+      "charge.succeeded",
+      "subscription.charge.failed"
+    ],
+    "url" : "http://requestb.in/1fhpiog1"
+  }
+]
+```
+
+Regresa una lista de webhooks registrados por comercio.
+
+<aside class="notice">
+**Nota:** Nunca se regresarán datos sensibles como son el password para accesar al webhook.
+</aside>
+
+###Petición
+
+###Respuesta
+Listado de objetos [objeto webhook](#objeto-webhook) registrados de acuerdo a los parámetros proporcionados.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #Tokens
 
