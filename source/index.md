@@ -7129,22 +7129,6 @@ Regresa un arreglo de [objetos transacción](#objeto-transacción) de las comisi
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Webhooks
 Estos permiten notificar al cliente cuando un evento ha sucedido en la plataforma, para que el comercio pueda tomar las acciones correspondientes.
 
@@ -7172,7 +7156,8 @@ Para que la Openpay invoque un webhook, es importante que se encuentre verificad
       "charge.cancelled",
       "charge.created",
       "chargeback.accepted"
-    ]
+    ],
+    "status":"unverified"
 }
 ```
 
@@ -7183,6 +7168,7 @@ url           |***string*** <br/>URL del webhook
 user          |***string*** <br/>Nombre de usuario para autenticación básica del webhook.
 password      |***string*** <br/>Contraseña para autenticación básica del webhook.
 event_types   |***array[string]*** <br/>Listado de eventos a los que respondera el webhook.
+status        |***string*** <br/>Estado del webhook, indica si esta verificado (verified) o no esta verificado (unverified).
 
 <aside class="success">
 Los tipos de eventos soportados son:
@@ -7362,7 +7348,8 @@ response_hash=@webhooks.create(request_hash.to_hash)
     "charge.created",
     "charge.cancelled",
     "charge.failed"
-  ]
+  ],
+  "status" : "unverified"
 }
 ```
 
@@ -7564,7 +7551,8 @@ response_hash=@webhooks.get("wxvanstudf4ssme8khmc")
       "chargeback.created",
       "chargeback.rejected",
       "chargeback.accepted"
-    ]
+    ],
+    "status" : "unverified"
   }
 ```
 
@@ -7771,7 +7759,8 @@ response_hash=@webhooks.all
       "chargeback.rejected",
       "chargeback.accepted"
     ],
-    "url" : "http://requestb.in/11vxrsf1"
+    "url" : "http://requestb.in/11vxrsf1",
+    "status" : "unverified"
   },
   {
     "id" : "wDashboard186",
@@ -7784,7 +7773,8 @@ response_hash=@webhooks.all
       "charge.succeeded",
       "subscription.charge.failed"
     ],
-    "url" : "http://requestb.in/1fhpiog1"
+    "url" : "http://requestb.in/1fhpiog1",
+    "status" : "verified"
   }
 ]
 ```
