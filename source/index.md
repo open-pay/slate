@@ -362,8 +362,15 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "amount" : 100,
    "currency" : "MXN",
    "description" : "Cargo inicial a mi cuenta",
-   "order_id" : "oid-00051"
-} ' 
+   "order_id" : "oid-00051",
+   "metadata" : {
+      "destino" : "Mexico-Queretaro Corrida 1", 
+      "no_autobus" : "42123", 
+      "no_asiento" : "25",
+      "fecha_compra" : "2014-11-26 19:11:12", 
+      "iva" : "123.32"
+  }
+}'
 ```
 
 ```php
@@ -376,7 +383,15 @@ $chargeRequest = array(
     'amount' => 100,
     'currency' => 'MXN'
     'description' => 'Cargo inicial a mi merchant',
-    'order_id' => 'oid-00051');
+    'order_id' => 'oid-00051',
+    'metadata' => array(
+      'destino' => 'Mexico-Queretaro Corrida 1', 
+      'no_autobus' => '42123', 
+      'no_asiento' => '25',
+      'fecha_compra' => '2014-11-26 19:11:12', 
+      'iva' => '123.32'
+    )
+  );
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->create($chargeRequest);
@@ -393,6 +408,11 @@ request.description("Cargo inicial a mi merchant");
 request.orderId("oid-00051");
 request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
 request.capture(Boolean.TRUE);
+request.addUserField("destino", Mexico-Queretaro Corrida 1");
+request.addUserField("no_autobus", "42123");
+request.addUserField("no_asiento", "25");
+request.addUserField("fecha_compra", "2014-11-26 19:11:12");
+request.addUserField("iva", "123.32");
 
 Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -408,6 +428,11 @@ request.Description = "Cargo inicial a mi merchant";
 request.OrderId = "oid-00051";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
 request.Capture = true;
+request.addUserField("destino", Mexico-Queretaro Corrida 1");
+request.addUserField("no_autobus", "42123");
+request.addUserField("no_asiento", "25");
+request.addUserField("fecha_compra", "2014-11-26 19:11:12");
+request.addUserField("iva", "123.32");
 
 Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -419,7 +444,14 @@ var chargeRequest = {
    'amount' : 100,
    'currency' : 'MXN',
    'description' : 'Cargo inicial a mi cuenta',
-   'order_id' : 'oid-00051'
+   'order_id' : 'oid-00051',
+   'metadata' : {
+      'destino' : 'Mexico-Queretaro Corrida 1', 
+      'no_autobus' : '42123', 
+      'no_asiento' : '25',
+      'fecha_compra' : '2014-11-26 19:11:12', 
+      'iva' : '123.32'
+  }
 }
 
 openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function(error, charge) {
@@ -437,7 +469,14 @@ request_hash={
     "currency" => "MXN",
     "description" => "Cargo inicial a mi merchant",
     "order_id" => "oid-00051",
-    "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
+    "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
+    "metadata" => {
+      "destino" => "Mexico-Queretaro Corrida 1", 
+      "no_autobus" => "42123", 
+      "no_asiento" => "25",
+      "fecha_compra" => "2014-11-26 19:11:12", 
+      "iva" => "123.32"
+    }
   }
 
 response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
@@ -482,7 +521,14 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "description":"Cargo inicial a mi cuenta",
    "error_message":null,
    "order_id":"oid-00051",
-   "customer_id":"ag4nktpdzebjiye1tlze"
+   "customer_id":"ag4nktpdzebjiye1tlze",
+    "metadata" : {
+      "destino" : "Mexico-Queretaro Corrida 1", 
+      "no_autobus" : "42123", 
+      "no_asiento" : "25",
+      "fecha_compra" : "2014-11-26 19:11:12", 
+      "iva" : "123.32"
+    }
 }
 ```
 
@@ -493,7 +539,21 @@ Una vez que tengas una tarjeta guardada o un token usa la propiedad <code>source
 La propiedad <code>device_session_id</code> deberá ser generada desde el API JavaScript, véase [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
 
 <aside class="notice">
-Puedes realizar el cargo a la cuenta del comercio o a la cuenta de un cliente.
+Puedes realizar el cargo a la cuenta del comercio o a la cuenta de un cliente. </br>
+</aside>
+
+***Sistema antifraude personalizado***</br>
+Es posible enviar información adicional a la plataforma Openpay para incrementar su base de conocimientos, esto le permitirá aplicar reglas personalizadas de acuerdo al giro del comercio y de manera oportuna, por consecuencia ayudará a disminuir la generación de contracargos por intento de fraude.
+
+<aside class="notice">
+Para utilizar esta característica es necesario enviar como parte del contenido de la transacción, un campo llamado ***metadata***, el cual contendrá un listado de campos personalizados de antrifraude, con la información propia del comercio que se desea tomar en cuenta al momento de validar y aplicar un cargo. </br>
+</aside>
+
+<aside class="success">
+La funcionalidad de ***sistema antifraude personalizado*** ya esta soportada por los clientes de cURL, PHP, Node.js y Ruby.
+</aside>
+<aside class="warning">
+La funcionalidad de ***sistema antifraude personalizado*** esta en proceso de implementación para los clientes de Java y C#.
 </aside>
 
 ###Petición 
@@ -509,9 +569,36 @@ order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del
 device_session_id |  ***string*** (opcional, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
 capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o pre-autorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
 [customer](#crear-un-nuevo-cliente)|***string*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
+metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+
+###Reglas para creación de campos personalizados de antifraude
+***Criterios generales para definición de Keys-Values***<br>
+* El uso de metadata solo aplican para los cargos con tarjeta<br>
+* Máximo 10 keys-values.
+
+***Criterios para definición de Keys***<br>
+* Deben ser minúsculas, alfanuméricos y solo se acepta guión bajo (sin espacio ni cualquier otro carácter)<br>
+* No deben ser nulos o cadena vacía.<br>
+* Su longitud es máximo de 32 carectares.
+
+***Criterios para definición de Values***<br>
+* Deben tener una longitud maxima de 64 caracteres.<br>
+* El formato de estos valores debe de apegarse a los [tipos de datos reconocidos por el sistema antifraude](#tipos-de-datos-reconocidos-por-el-sistema-antifraude)
+
+###Tipos de datos reconocidos por el sistema antifraude
+Openpay siempre guardará los user field's enviados en la transacción, pero en el sistema antifraude si no coincide el tipo de dato soportado, no los guardará y por lo tanto será imposible usar estos campos para la creación de reglas personalizadas antifraude. Los tipos de datos son:
+
+Tipo de dato   | Descripción
+-------------- | -----
+Numeric        | Puede contener números, signos negativos y punto decimal.
+Date           | Puede contener fecha y hora con el siguiente formato: YYYY-MM-DD o YYYY-MM-DD HH-MI:SS.
+Amount         | Puede contener números sin signo negativo y sin punto decimal.
+Alfanumeric    | Puede contener Puede contener tanto números como letras o ambos.
+
+
 
 ##Cargo a nueva tarjeta
 
@@ -589,6 +676,13 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "currency" : "MXN",
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-00052"
+   "metadata" : {
+      "destino" : "Mexico-Queretaro Corrida 1", 
+      "no_autobus" : "42123", 
+      "no_asiento" : "25",
+      "fecha_compra" : "2014-11-26 19:11:12", 
+      "iva" : "123.32"
+  }
 } ' 
 ```
 
@@ -609,7 +703,15 @@ $chargeRequest = array(
     'amount' => 100,
     'currency' => 'MXN',
     'description' => 'Cargo inicial a mi cuenta',
-    'order_id' => 'oid-00052');
+    'order_id' => 'oid-00052',
+    'metadata' => array(
+      'destino' => 'Mexico-Queretaro Corrida 1', 
+      'no_autobus' => '42123', 
+      'no_asiento' => '25',
+      'fecha_compra' => '2014-11-26 19:11:12', 
+      'iva' => '123.32'
+    )
+  );
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->create($chargeRequest);
@@ -632,6 +734,11 @@ request.card(card);
 request.orderId("oid-00052");
 request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
 request.capture(Boolean.TRUE);
+request.addUserField("destino", Mexico-Queretaro Corrida 1");
+request.addUserField("no_autobus", "42123");
+request.addUserField("no_asiento", "25");
+request.addUserField("fecha_compra", "2014-11-26 19:11:12");
+request.addUserField("iva", "123.32");
 
 Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -653,6 +760,11 @@ request.Description = "Cargo inicial a mi cuenta";
 request.OrderId = "oid-00052";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
 request.Capture = true;
+request.addUserField("destino", Mexico-Queretaro Corrida 1");
+request.addUserField("no_autobus", "42123");
+request.addUserField("no_asiento", "25");
+request.addUserField("fecha_compra", "2014-11-26 19:11:12");
+request.addUserField("iva", "123.32");
 
 Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -670,7 +782,14 @@ var chargeRequest = {
    'amount' : 100,
    'currency' : 'MXN',
    'description' : 'Cargo inicial a mi cuenta',
-   'order_id' : 'oid-00052'
+   'order_id' : 'oid-00052',
+   'metadata' : {
+      'destino' : 'Mexico-Queretaro Corrida 1', 
+      'no_autobus' : '42123', 
+      'no_asiento' : '25',
+      'fecha_compra' : '2014-11-26 19:11:12', 
+      'iva' : '123.32'
+  }
 };
 
 openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function(error, charge) {
@@ -695,7 +814,14 @@ request_hash={
      "currency" => "MXN",
      "description" => "Cargo inicial a mi cuenta",
      "order_id" => "oid-00052",
-     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
+     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
+     "metadata" => {
+      "destino" => "Mexico-Queretaro Corrida 1", 
+      "no_autobus" => "42123", 
+      "no_asiento" => "25",
+      "fecha_compra" => "2014-11-26 19:11:12", 
+      "iva" => "123.32"
+     }
    }
 
 response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
@@ -737,7 +863,14 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "description":"Cargo inicial a mi cuenta",
    "error_message":null,
    "order_id":"oid-00052",
-   "customer_id":"ag4nktpdzebjiye1tlze"
+   "customer_id":"ag4nktpdzebjiye1tlze",
+    "metadata" : {
+      "destino" : "Mexico-Queretaro Corrida 1", 
+      "no_autobus" : "42123", 
+      "no_asiento" : "25",
+      "fecha_compra" : "2014-11-26 19:11:12", 
+      "iva" : "123.32"
+    }
 }
 ```
 
@@ -745,6 +878,21 @@ En este tipo de invocación es necesario enviar toda la información de la tarje
 
 
 La propiedad <code>device_Session_Id</code> deberá ser generada desde el API JavaScript, véase [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
+
+
+***Sistema antifraude personalizado***</br>
+Es posible enviar información adicional a la plataforma Openpay para incrementar su base de conocimientos, esto le permitirá aplicar reglas personalizadas de acuerdo al giro del comercio y de manera oportuna, por consecuencia ayudará a disminuir la generación de contracargos por intento de fraude.
+
+<aside class="notice">
+Para utilizar esta característica es necesario enviar como parte del contenido de la transacción, un campo llamado ***metadata***, el cual contendrá un listado de campos personalizados de antrifraude, con la información propia del comercio que se desea tomar en cuenta al momento de validar y aplicar un cargo. </br>
+</aside>
+
+<aside class="success">
+La funcionalidad de ***sistema antifraude personalizado*** ya esta soportada por los clientes de cURL, PHP, Node.js y Ruby.
+</aside>
+<aside class="warning">
+La funcionalidad de ***sistema antifraude personalizado*** esta en proceso de implementación para los clientes de Java y C#.
+</aside>
 
 ###Petición 
 
@@ -759,9 +907,36 @@ order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del
 device_session_id |  ***string*** (opcional, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
 capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o pre-autorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
 [customer](#crear-un-nuevo-cliente)|***string*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
+metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+
+
+###Reglas para creación de campos personalizados de antifraude
+***Criterios generales para definición de Keys-Values***<br>
+* El uso de metadata solo aplican para los cargos con tarjeta<br>
+* Máximo 10 keys-values.
+
+***Criterios para definición de Keys***<br>
+* Deben ser minúsculas, alfanuméricos y solo se acepta guión bajo (sin espacio ni cualquier otro carácter)<br>
+* No deben ser nulos o cadena vacía.<br>
+* Su longitud es máximo de 32 carectares.
+
+***Criterios para definición de Values***<br>
+* Deben tener una longitud maxima de 64 caracteres.<br>
+* El formato de estos valores debe de apegarse a los [tipos de datos reconocidos por el sistema antifraude](#tipos-de-datos-reconocidos-por-el-sistema-antifraude)
+
+###Tipos de datos reconocidos por el sistema antifraude
+Openpay siempre guardará los user field's enviados en la transacción, pero en el sistema antifraude si no coincide el tipo de dato soportado, no los guardará y por lo tanto será imposible usar estos campos para la creación de reglas personalizadas antifraude. Los tipos de datos son:
+
+Tipo de dato   | Descripción
+-------------- | -----
+Numeric        | Puede contener números, signos negativos y punto decimal.
+Date           | Puede contener fecha y hora con el siguiente formato: YYYY-MM-DD o YYYY-MM-DD HH-MI:SS.
+Amount         | Puede contener números sin signo negativo y sin punto decimal.
+Alfanumeric    | Puede contener Puede contener tanto números como letras o ambos.
+
 
 
 ##Cargo en tienda
@@ -6977,6 +7152,10 @@ Estos permiten notificar al cliente cuando un evento ha sucedido en la plataform
 Para que la Openpay invoque un webhook, es importante que se encuentre verificado.
 </aside>
 
+<aside class="warning">
+**Nota:** Funcionalidad en proceso de implementación.
+</aside>
+
 ##Objeto Webhook
 
 > Ejemplo de objeto
@@ -7038,6 +7217,7 @@ order.payment.cancelled    | Orden          | Informa cuando el pago de una orde
 
 
 ##Crear un Webhook
+
 > Definición
 
 ```shell
@@ -7190,6 +7370,10 @@ Al crear un nuevo webhook se hará una petición a la url indicada con un códig
 
 Al momento de guardar el webhook se generará un id que podrá ser usado para verificar la URL del webhook, eliminar o simplemente obtener la información no sensible del webhook.
 
+<aside class="warning">
+**Nota:** Funcionalidad en proceso de implementación.
+</aside>
+
 ###Petición
 
 Propiedad | Descripción
@@ -7272,6 +7456,10 @@ openpay.webhooks.verify("wxvanstudf4ssme8khmc", "fZnipGry", function(error){
 ```
 
 Después de verificar el webhook, Openpay comenzara a enviar las notificaciones de los eventos asociados al webhook.
+
+<aside class="warning">
+**Nota:** Funcionalidad en proceso de implementación.
+</aside>
 
 ###Petición
 
@@ -7386,6 +7574,10 @@ Obtiene los detalles de un webhook solicitándolo con su id.
 **Nota:** Nunca se regresarán datos sensibles como son el password para accesar al webhook.
 </aside>
 
+<aside class="warning">
+**Nota:** Funcionalidad en proceso de implementación.
+</aside>
+
 ###Petición
 Propiedad | Descripción
 --------- | ------
@@ -7471,6 +7663,10 @@ Elimina un webhook del comercio.
 
 Para eliminarlo sólo es necesario proporcionar el identificador del webhook.
 
+<aside class="warning">
+**Nota:** Funcionalidad en proceso de implementación.
+</aside>
+
 ###Petición
 Propiedad | Descripción
 --------- | ------
@@ -7478,11 +7674,6 @@ id| ***string*** (requerido, longitud = 45) <br/> Identificador único del webho
 
 ###Respuesta
 Si el webhook se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo. 
-
-
-
-
-
 
 
 
@@ -7604,31 +7795,14 @@ Regresa una lista de webhooks registrados por comercio.
 **Nota:** Nunca se regresarán datos sensibles como son el password para accesar al webhook.
 </aside>
 
+<aside class="warning">
+**Nota:** Funcionalidad en proceso de implementación.
+</aside>
+
 ###Petición
 
 ###Respuesta
 Listado de objetos [objeto webhook](#objeto-webhook) registrados de acuerdo a los parámetros proporcionados.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
