@@ -194,6 +194,15 @@ El parámetro -u se ocupa para realizar la autenticación HTTP Basic <span class
 
 <span class="c1">#Produccion</span>
 <span class="n">openpay</span><span class="o">=</span><span class="no">OpenpayApi</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"moiep6umtcnanql3jrxp"</span><span class="p">,</span><span class="s2">"sk_3433941e467c4875b178ce26348b0fac"</span><span class="p">,</span> <span class="kp">true</span><span class="p">)</span>
+
+
+<span class="c1">#Definir timeout para los request's</span>
+<span class="c1">#Este cliente maneja un timeout por defecto de 90 seg., para configurar el timeout usado para crear los request a los servicios de Openpay, es necesario definir explícitamente el tipo de ambiente, seguido del nuevo valor del timeout para el request:</span>
+
+<span class="c1">#Sintaxis:</span>
+<span class="c1">#   openpay_prod=OpenpayApi.new(merchant_id,private_key,isProduction,timeout)</span>
+<span class="c1">#Example:</span>
+<span class="c1">#   openpay_prod=OpenpayApi.new(merchant_id,private_key,false,30)</span>
 </pre>
 <blockquote>
 <p>Producción </p>
@@ -374,6 +383,31 @@ Por razones de seguridad todas las peticiones deben ser vía <strong>HTTPS</stro
 <td>409 Conflict</td>
 <td>La tarjeta con este número ya se encuentra registrada en el cliente.</td>
 </tr>
+<tr>
+<td>2003</td>
+<td>409 Conflict</td>
+<td>El cliente con este identificador externo (External ID) ya existe.</td>
+</tr>
+<tr>
+<td>2004</td>
+<td>422 Unprocessable Entity</td>
+<td>El dígito verificador del número de tarjeta es inválido de acuerdo al algoritmo Luhn.</td>
+</tr>
+<tr>
+<td>2005</td>
+<td>400 Bad Request</td>
+<td>La fecha de expiración de la tarjeta es anterior a la fecha actual.</td>
+</tr>
+<tr>
+<td>2006</td>
+<td>400 Bad Request</td>
+<td>El código de seguridad de la tarjeta (CVV2) no fue proporcionado.</td>
+</tr>
+<tr>
+<td>2007</td>
+<td>412 Precondition Failed</td>
+<td>El número de tarjeta es de prueba, solamente puede usarse en Sandbox.</td>
+</tr>
 </tbody></table>
 
 <h3 id="tarjetas">Tarjetas</h3>
@@ -409,6 +443,36 @@ Por razones de seguridad todas las peticiones deben ser vía <strong>HTTPS</stro
 <td>3005</td>
 <td>402 Payment Required</td>
 <td>La tarjeta ha sido identificada como una tarjeta fraudulenta.</td>
+</tr>
+<tr>
+<td>3006</td>
+<td>412 Precondition Failed</td>
+<td>La operación no esta permitida para este cliente o esta transacción.</td>
+</tr>
+<tr>
+<td>3008</td>
+<td>412 Precondition Failed</td>
+<td>La tarjeta no es soportada en transacciones en linea.</td>
+</tr>
+<tr>
+<td>3009</td>
+<td>402 Payment Required</td>
+<td>La tarjeta fue reportada como perdida.</td>
+</tr>
+<tr>
+<td>3010</td>
+<td>402 Payment Required</td>
+<td>El banco ha restringido la tarjeta.</td>
+</tr>
+<tr>
+<td>3011</td>
+<td>402 Payment Required</td>
+<td>El banco ha solicitado que la tarjeta sea retenida. Contacte al banco.</td>
+</tr>
+<tr>
+<td>3012</td>
+<td>412 Precondition Failed</td>
+<td>Se requiere solicitar al banco autorización para realizar este pago.</td>
 </tr>
 </tbody></table>
 
@@ -485,9 +549,17 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
    "source_id" : "kqgykn96i7bcs1wwhvgw",
    "method" : "card",
    "amount" : 100,
+   "currency" : "MXN",
    "description" : "Cargo inicial a mi cuenta",
-   "order_id" : "oid-00051"
-} '</span> 
+   "order_id" : "oid-00051",
+   "metadata" : {
+      "destino" : "Mexico-Queretaro Corrida 1", 
+      "no_autobus" : "42123", 
+      "no_asiento" : "25",
+      "fecha_compra" : "2014-11-26 19:11:12", 
+      "iva" : "123.32"
+  }
+}'</span>
 </pre><pre class="highlight php"><span class="cp">&lt;?</span>
 <span class="nv">$openpay</span> <span class="o">=</span> <span class="nx">Openpay</span><span class="o">::</span><span class="na">getInstance</span><span class="p">(</span><span class="s1">'mzdtln0bmtms6o3kck8f'</span><span class="p">,</span> <span class="s1">'sk_e568c42a6c384b7ab02cd47d2e407cab'</span><span class="p">);</span>
 
@@ -495,8 +567,17 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
     <span class="s1">'method'</span> <span class="o">=&gt;</span> <span class="s1">'card'</span><span class="p">,</span>
     <span class="s1">'source_id'</span> <span class="o">=&gt;</span> <span class="s1">'kqgykn96i7bcs1wwhvgw'</span><span class="p">,</span>
     <span class="s1">'amount'</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s1">'currency'</span> <span class="o">=&gt;</span> <span class="s1">'MXN'</span>
     <span class="s1">'description'</span> <span class="o">=&gt;</span> <span class="s1">'Cargo inicial a mi merchant'</span><span class="p">,</span>
-    <span class="s1">'order_id'</span> <span class="o">=&gt;</span> <span class="s1">'oid-00051'</span><span class="p">);</span>
+    <span class="s1">'order_id'</span> <span class="o">=&gt;</span> <span class="s1">'oid-00051'</span><span class="p">,</span>
+    <span class="s1">'metadata'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">'destino'</span> <span class="o">=&gt;</span> <span class="s1">'Mexico-Queretaro Corrida 1'</span><span class="p">,</span> 
+      <span class="s1">'no_autobus'</span> <span class="o">=&gt;</span> <span class="s1">'42123'</span><span class="p">,</span> 
+      <span class="s1">'no_asiento'</span> <span class="o">=&gt;</span> <span class="s1">'25'</span><span class="p">,</span>
+      <span class="s1">'fecha_compra'</span> <span class="o">=&gt;</span> <span class="s1">'2014-11-26 19:11:12'</span><span class="p">,</span> 
+      <span class="s1">'iva'</span> <span class="o">=&gt;</span> <span class="s1">'123.32'</span>
+    <span class="p">)</span>
+  <span class="p">);</span>
 
 <span class="nv">$customer</span> <span class="o">=</span> <span class="nv">$openpay</span><span class="o">-&gt;</span><span class="na">customers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'ag4nktpdzebjiye1tlze'</span><span class="p">);</span>
 <span class="nv">$charge</span> <span class="o">=</span> <span class="nv">$customer</span><span class="o">-&gt;</span><span class="na">charges</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="nv">$chargeRequest</span><span class="p">);</span>
@@ -505,29 +586,49 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
 <span class="n">CreateCardChargeParams</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CreateCardChargeParams</span><span class="o">();</span>
 <span class="n">request</span><span class="o">.</span><span class="na">cardId</span><span class="o">(</span><span class="s">"kqgykn96i7bcs1wwhvgw"</span><span class="o">);</span> <span class="c1">// =source_id</span>
 <span class="n">request</span><span class="o">.</span><span class="na">amount</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">"100.00"</span><span class="o">));</span>
+<span class="n">request</span><span class="o">.</span><span class="na">currency</span><span class="o">(</span><span class="s">"MXN"</span><span class="o">);</span>
 <span class="n">request</span><span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">"Cargo inicial a mi merchant"</span><span class="o">);</span>
 <span class="n">request</span><span class="o">.</span><span class="na">orderId</span><span class="o">(</span><span class="s">"oid-00051"</span><span class="o">);</span>
 <span class="n">request</span><span class="o">.</span><span class="na">deviceSessionId</span><span class="o">(</span><span class="s">"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"</span><span class="o">);</span>
 <span class="n">request</span><span class="o">.</span><span class="na">capture</span><span class="o">(</span><span class="n">Boolean</span><span class="o">.</span><span class="na">TRUE</span><span class="o">);</span>
+<span class="n">request</span><span class="o">.</span><span class="na">addUserField</span><span class="o">(</span><span class="s">"destino"</span><span class="o">,</span> <span class="n">Mexico</span><span class="o">-</span><span class="n">Queretaro</span> <span class="n">Corrida</span> <span class="mi">1</span><span class="s">");
+request.addUserField("</span><span class="n">no_autobus</span><span class="s">", "</span><span class="mi">42123</span><span class="s">");
+request.addUserField("</span><span class="n">no_asiento</span><span class="s">", "</span><span class="mi">25</span><span class="s">");
+request.addUserField("</span><span class="n">fecha_compra</span><span class="s">", "</span><span class="mi">2014</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mi">19</span><span class="o">:</span><span class="mi">11</span><span class="o">:</span><span class="mi">12</span><span class="s">");
+request.addUserField("</span><span class="n">iva</span><span class="s">", "</span><span class="mf">123.32</span><span class="s">");
 
-<span class="n">Charge</span> <span class="kt">char</span><span class="n">ge</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="na">charges</span><span class="o">().</span><span class="na">create</span><span class="o">(</span><span class="s">"ag4nktpdzebjiye1tlze"</span><span class="o">,</span> <span class="n">request</span><span class="o">);</span>
+Charge charge = api.charges().create("</span><span class="n">ag4nktpdzebjiye1tlze</span><span class="err">"</span><span class="o">,</span> <span class="n">request</span><span class="o">);</span>
 </pre><pre class="highlight csharp"><span class="n">OpenpayAPI</span> <span class="n">api</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">OpenpayAPI</span><span class="p">(</span><span class="s">"sk_b05586ec98454522ac7d4ccdcaec9128"</span><span class="p">,</span> <span class="s">"maonhzpqm8xp2ydssovf"</span><span class="p">);</span>
 <span class="n">ChargeRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ChargeRequest</span><span class="p">();</span>
 <span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="s">"card"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">SourceId</span> <span class="p">=</span> <span class="s">"kwkoqpg6fcvfse8k8mg2"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">Amount</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Decimal</span><span class="p">(</span><span class="m">100.00</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Currency</span> <span class="p">=</span> <span class="s">"MXN"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">Description</span> <span class="p">=</span> <span class="s">"Cargo inicial a mi merchant"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">OrderId</span> <span class="p">=</span> <span class="s">"oid-00051"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">DeviceSessionId</span> <span class="p">=</span> <span class="s">"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">Capture</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">addUserField</span><span class="p">(</span><span class="s">"destino"</span><span class="p">,</span> <span class="n">Mexico</span><span class="p">-</span><span class="n">Queretaro</span> <span class="n">Corrida</span> <span class="m">1</span><span class="s">");
+</span><span class="n">request</span><span class="p">.</span><span class="nf">addUserField</span><span class="p">(</span><span class="s">"no_autobus"</span><span class="p">,</span> <span class="s">"42123"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">addUserField</span><span class="p">(</span><span class="s">"no_asiento"</span><span class="p">,</span> <span class="s">"25"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">addUserField</span><span class="p">(</span><span class="s">"fecha_compra"</span><span class="p">,</span> <span class="s">"2014-11-26 19:11:12"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">addUserField</span><span class="p">(</span><span class="s">"iva"</span><span class="p">,</span> <span class="s">"123.32"</span><span class="p">);</span>
 
 <span class="n">Charge</span> <span class="n">charge</span> <span class="p">=</span> <span class="n">api</span><span class="p">.</span><span class="n">ChargeService</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"ag4nktpdzebjiye1tlze"</span><span class="p">,</span> <span class="n">request</span><span class="p">);</span>
 </pre><pre class="highlight javascript"><span class="kd">var</span> <span class="nx">chargeRequest</span> <span class="o">=</span> <span class="p">{</span>
    <span class="s1">'source_id'</span> <span class="err">:</span> <span class="s1">'kqgykn96i7bcs1wwhvgw'</span><span class="p">,</span>
    <span class="s1">'method'</span> <span class="err">:</span> <span class="s1">'card'</span><span class="p">,</span>
    <span class="s1">'amount'</span> <span class="err">:</span> <span class="mi">100</span><span class="p">,</span>
+   <span class="s1">'currency'</span> <span class="err">:</span> <span class="s1">'MXN'</span><span class="p">,</span>
    <span class="s1">'description'</span> <span class="err">:</span> <span class="s1">'Cargo inicial a mi cuenta'</span><span class="p">,</span>
-   <span class="s1">'order_id'</span> <span class="err">:</span> <span class="s1">'oid-00051'</span>
+   <span class="s1">'order_id'</span> <span class="err">:</span> <span class="s1">'oid-00051'</span><span class="p">,</span>
+   <span class="s1">'metadata'</span> <span class="err">:</span> <span class="p">{</span>
+      <span class="s1">'destino'</span> <span class="err">:</span> <span class="s1">'Mexico-Queretaro Corrida 1'</span><span class="p">,</span> 
+      <span class="s1">'no_autobus'</span> <span class="err">:</span> <span class="s1">'42123'</span><span class="p">,</span> 
+      <span class="s1">'no_asiento'</span> <span class="err">:</span> <span class="s1">'25'</span><span class="p">,</span>
+      <span class="s1">'fecha_compra'</span> <span class="err">:</span> <span class="s1">'2014-11-26 19:11:12'</span><span class="p">,</span> 
+      <span class="s1">'iva'</span> <span class="err">:</span> <span class="s1">'123.32'</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="nx">openpay</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">charges</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">'ag4nktpdzebjiye1tlze'</span><span class="p">,</span> <span class="nx">chargeRequest</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">charge</span><span class="p">)</span> <span class="p">{</span>
@@ -539,9 +640,17 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
     <span class="s2">"method"</span> <span class="o">=&gt;</span> <span class="s2">"card"</span><span class="p">,</span>
     <span class="s2">"source_id"</span> <span class="o">=&gt;</span> <span class="s2">"kqgykn96i7bcs1wwhvgw"</span><span class="p">,</span>
     <span class="s2">"amount"</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="o">.</span><span class="mo">00</span><span class="p">,</span>
+    <span class="s2">"currency"</span> <span class="o">=&gt;</span> <span class="s2">"MXN"</span><span class="p">,</span>
     <span class="s2">"description"</span> <span class="o">=&gt;</span> <span class="s2">"Cargo inicial a mi merchant"</span><span class="p">,</span>
     <span class="s2">"order_id"</span> <span class="o">=&gt;</span> <span class="s2">"oid-00051"</span><span class="p">,</span>
-    <span class="s2">"device_session_id"</span> <span class="o">=&gt;</span> <span class="s2">"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"</span>
+    <span class="s2">"device_session_id"</span> <span class="o">=&gt;</span> <span class="s2">"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"</span><span class="p">,</span>
+    <span class="s2">"metadata"</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="s2">"destino"</span> <span class="o">=&gt;</span> <span class="s2">"Mexico-Queretaro Corrida 1"</span><span class="p">,</span> 
+      <span class="s2">"no_autobus"</span> <span class="o">=&gt;</span> <span class="s2">"42123"</span><span class="p">,</span> 
+      <span class="s2">"no_asiento"</span> <span class="o">=&gt;</span> <span class="s2">"25"</span><span class="p">,</span>
+      <span class="s2">"fecha_compra"</span> <span class="o">=&gt;</span> <span class="s2">"2014-11-26 19:11:12"</span><span class="p">,</span> 
+      <span class="s2">"iva"</span> <span class="o">=&gt;</span> <span class="s2">"123.32"</span>
+    <span class="p">}</span>
   <span class="p">}</span>
 
 <span class="n">response_hash</span><span class="o">=</span><span class="vi">@charges</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">request_hash</span><span class="p">.</span><span class="nf">to_hash</span><span class="p">,</span> <span class="s2">"ag4nktpdzebjiye1tlze"</span><span class="p">)</span>
@@ -573,13 +682,26 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
       </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="s2">"ag4nktpdzebjiye1tlze"</span><span class="w">
    </span><span class="p">},</span><span class="w">
    </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"MXN"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"exchange_rate"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"from"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-21"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">13.61</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"to"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"MXN"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
    </span><span class="s2">"creation_date"</span><span class="p">:</span><span class="s2">"2014-05-26T11:02:45-05:00"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"operation_date"</span><span class="p">:</span><span class="s2">"2014-05-26T11:02:45-05:00"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Cargo inicial a mi cuenta"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"error_message"</span><span class="p">:</span><span class="err">null</span><span class="p">,</span><span class="w">
    </span><span class="s2">"order_id"</span><span class="p">:</span><span class="s2">"oid-00051"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="s2">"ag4nktpdzebjiye1tlze"</span><span class="w">
+   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="s2">"ag4nktpdzebjiye1tlze"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"metadata"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"destino"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Mexico-Queretaro Corrida 1"</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"no_autobus"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"42123"</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"no_asiento"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"25"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"fecha_compra"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-26 19:11:12"</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"iva"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"123.32"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <p>Este tipo de cargo requiere una tarjeta guardada o que hayas generado un token. Para guardar tarjetas consulta <a href="#crear-una-tarjeta">como crear una tarjeta</a> y para usar tokens consulta la sección <a href="#crear-un-nuevo-token">creación de tokens</a>. </p>
@@ -589,7 +711,21 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
 <p>La propiedad <code>device_session_id</code> deberá ser generada desde el API JavaScript, véase <a href="https://github.com/open-pay/openpay-js#fraud-detection-using-device-data">Fraud detection using device data</a>.</p>
 
 <p><aside class="notice">
-Puedes realizar el cargo a la cuenta del comercio o a la cuenta de un cliente.
+Puedes realizar el cargo a la cuenta del comercio o a la cuenta de un cliente. </br>
+</aside></p>
+
+<p><strong><em>Sistema antifraude personalizado</em></strong></br>
+Es posible enviar información adicional a la plataforma Openpay para incrementar su base de conocimientos, esto le permitirá aplicar reglas personalizadas de acuerdo al giro del comercio y de manera oportuna, por consecuencia ayudará a disminuir la generación de contracargos por intento de fraude.</p>
+
+<p><aside class="notice">
+Para utilizar esta característica es necesario enviar como parte del contenido de la transacción, un campo llamado <strong><em>metadata</em></strong>, el cual contendrá un listado de campos personalizados de antrifraude, con la información propia del comercio que se desea tomar en cuenta al momento de validar y aplicar un cargo. </br>
+</aside></p>
+
+<p><aside class="success">
+La funcionalidad de <strong><em>sistema antifraude personalizado</em></strong> ya esta soportada por los clientes de cURL, PHP, Node.js y Ruby.
+</aside>
+<aside class="warning">
+La funcionalidad de <strong><em>sistema antifraude personalizado</em></strong> esta en proceso de implementación para los clientes de Java y C#.
 </aside></p>
 
 <h3 id="petición">Petición</h3>
@@ -613,6 +749,10 @@ Puedes realizar el cargo a la cuenta del comercio o a la cuenta de un cliente.
 <td><strong><em>numeric</em></strong> (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.</td>
 </tr>
 <tr>
+<td>currency</td>
+<td><strong><em>string</em></strong> (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 2 tipos de monedas: Pesos Mexicanos(MXN) y Dólares Americanos(USD).</td>
+</tr>
+<tr>
 <td>description</td>
 <td><strong><em>string</em></strong> (requerido, longitud = 250) <br/>Una descripción asociada al cargo.</td>
 </tr>
@@ -628,11 +768,62 @@ Puedes realizar el cargo a la cuenta del comercio o a la cuenta de un cliente.
 <td>capture</td>
 <td><strong><em>boolean</em></strong> (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o pre-autorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada.</td>
 </tr>
+<tr>
+<td><a href="#crear-un-nuevo-cliente">customer</a></td>
+<td><strong><em>string</em></strong> (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> <strong>Nota:</strong> Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como <a href="#crear-un-nuevo-cliente">crear un cliente</a> y realize el cargo a nivel cliente.</td>
+</tr>
+<tr>
+<td>metadata</td>
+<td><strong><em>list(key, value)</em></strong> (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las <a href="#reglas-para-creación-de-campos-personalizados-de-antifraude">reglas para creación de campos personalizados de antifraude</a></td>
+</tr>
 </tbody></table>
 
 <h3 id="respuesta">Respuesta</h3>
 
 <p>Regresa un <a href="#objeto-transacción">objeto de transacción</a> con la información del cargo o una <a href="#objeto-error">respuesta de error</a>.</p>
+
+<h3 id="reglas-para-creación-de-campos-personalizados-de-antifraude">Reglas para creación de campos personalizados de antifraude</h3>
+
+<p><strong><em>Criterios generales para definición de Keys-Values</em></strong><br>
+* El uso de metadata solo aplican para los cargos con tarjeta<br>
+* Máximo 10 keys-values.</p>
+
+<p><strong><em>Criterios para definición de Keys</em></strong><br>
+* Deben ser minúsculas, alfanuméricos y solo se acepta guión bajo (sin espacio ni cualquier otro carácter)<br>
+* No deben ser nulos o cadena vacía.<br>
+* Su longitud es máximo de 32 carectares.</p>
+
+<p><strong><em>Criterios para definición de Values</em></strong><br>
+* Deben tener una longitud maxima de 64 caracteres.<br>
+* El formato de estos valores debe de apegarse a los <a href="#tipos-de-datos-reconocidos-por-el-sistema-antifraude">tipos de datos reconocidos por el sistema antifraude</a></p>
+
+<h3 id="tipos-de-datos-reconocidos-por-el-sistema-antifraude">Tipos de datos reconocidos por el sistema antifraude</h3>
+
+<p>Openpay siempre guardará los user field&rsquo;s enviados en la transacción, pero en el sistema antifraude si no coincide el tipo de dato soportado, no los guardará y por lo tanto será imposible usar estos campos para la creación de reglas personalizadas antifraude. Los tipos de datos son:</p>
+
+<table><thead>
+<tr>
+<th>Tipo de dato</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Numeric</td>
+<td>Puede contener números, signos negativos y punto decimal.</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>Puede contener fecha y hora con el siguiente formato: YYYY-MM-DD o YYYY-MM-DD HH-MI:SS.</td>
+</tr>
+<tr>
+<td>Amount</td>
+<td>Puede contener números sin signo negativo y sin punto decimal.</td>
+</tr>
+<tr>
+<td>Alfanumeric</td>
+<td>Puede contener Puede contener tanto números como letras o ambos.</td>
+</tr>
+</tbody></table>
 
 <h2 id="cargo-a-nueva-tarjeta">Cargo a nueva tarjeta</h2>
 
@@ -691,8 +882,16 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
    },
    "method" : "card",
    "amount" : 100,
+   "currency" : "MXN",
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-00052"
+   "metadata" : {
+      "destino" : "Mexico-Queretaro Corrida 1", 
+      "no_autobus" : "42123", 
+      "no_asiento" : "25",
+      "fecha_compra" : "2014-11-26 19:11:12", 
+      "iva" : "123.32"
+  }
 } '</span> 
 </pre><pre class="highlight php"><span class="cp">&lt;?</span>
 <span class="nv">$openpay</span> <span class="o">=</span> <span class="nx">Openpay</span><span class="o">::</span><span class="na">getInstance</span><span class="p">(</span><span class="s1">'mzdtln0bmtms6o3kck8f'</span><span class="p">,</span> <span class="s1">'sk_e568c42a6c384b7ab02cd47d2e407cab'</span><span class="p">);</span>
@@ -708,8 +907,17 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
     <span class="s1">'method'</span> <span class="o">=&gt;</span> <span class="s1">'card'</span><span class="p">,</span>
     <span class="s1">'card'</span> <span class="o">=&gt;</span> <span class="nv">$card</span><span class="p">,</span>
     <span class="s1">'amount'</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s1">'currency'</span> <span class="o">=&gt;</span> <span class="s1">'MXN'</span><span class="p">,</span>
     <span class="s1">'description'</span> <span class="o">=&gt;</span> <span class="s1">'Cargo inicial a mi cuenta'</span><span class="p">,</span>
-    <span class="s1">'order_id'</span> <span class="o">=&gt;</span> <span class="s1">'oid-00052'</span><span class="p">);</span>
+    <span class="s1">'order_id'</span> <span class="o">=&gt;</span> <span class="s1">'oid-00052'</span><span class="p">,</span>
+    <span class="s1">'metadata'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">'destino'</span> <span class="o">=&gt;</span> <span class="s1">'Mexico-Queretaro Corrida 1'</span><span class="p">,</span> 
+      <span class="s1">'no_autobus'</span> <span class="o">=&gt;</span> <span class="s1">'42123'</span><span class="p">,</span> 
+      <span class="s1">'no_asiento'</span> <span class="o">=&gt;</span> <span class="s1">'25'</span><span class="p">,</span>
+      <span class="s1">'fecha_compra'</span> <span class="o">=&gt;</span> <span class="s1">'2014-11-26 19:11:12'</span><span class="p">,</span> 
+      <span class="s1">'iva'</span> <span class="o">=&gt;</span> <span class="s1">'123.32'</span>
+    <span class="p">)</span>
+  <span class="p">);</span>
 
 <span class="nv">$customer</span> <span class="o">=</span> <span class="nv">$openpay</span><span class="o">-&gt;</span><span class="na">customers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'ag4nktpdzebjiye1tlze'</span><span class="p">);</span>
 <span class="nv">$charge</span> <span class="o">=</span> <span class="nv">$customer</span><span class="o">-&gt;</span><span class="na">charges</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="nv">$chargeRequest</span><span class="p">);</span>
@@ -723,13 +931,19 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
 <span class="n">card</span><span class="o">.</span><span class="na">expirationMonth</span><span class="o">(</span><span class="mi">12</span><span class="o">);</span>
 <span class="n">card</span><span class="o">.</span><span class="na">expirationYear</span><span class="o">(</span><span class="mi">20</span><span class="o">);</span>
 <span class="n">request</span><span class="o">.</span><span class="na">amount</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">"100.00"</span><span class="o">));</span>
+<span class="n">request</span><span class="o">.</span><span class="na">currency</span><span class="o">(</span><span class="s">"MXN"</span><span class="o">);</span>
 <span class="n">request</span><span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">"Cargo inicial a mi cuenta"</span><span class="o">);</span>
 <span class="n">request</span><span class="o">.</span><span class="na">card</span><span class="o">(</span><span class="n">card</span><span class="o">);</span>
 <span class="n">request</span><span class="o">.</span><span class="na">orderId</span><span class="o">(</span><span class="s">"oid-00052"</span><span class="o">);</span>
 <span class="n">request</span><span class="o">.</span><span class="na">deviceSessionId</span><span class="o">(</span><span class="s">"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"</span><span class="o">);</span>
 <span class="n">request</span><span class="o">.</span><span class="na">capture</span><span class="o">(</span><span class="n">Boolean</span><span class="o">.</span><span class="na">TRUE</span><span class="o">);</span>
+<span class="n">request</span><span class="o">.</span><span class="na">addUserField</span><span class="o">(</span><span class="s">"destino"</span><span class="o">,</span> <span class="n">Mexico</span><span class="o">-</span><span class="n">Queretaro</span> <span class="n">Corrida</span> <span class="mi">1</span><span class="s">");
+request.addUserField("</span><span class="n">no_autobus</span><span class="s">", "</span><span class="mi">42123</span><span class="s">");
+request.addUserField("</span><span class="n">no_asiento</span><span class="s">", "</span><span class="mi">25</span><span class="s">");
+request.addUserField("</span><span class="n">fecha_compra</span><span class="s">", "</span><span class="mi">2014</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">26</span> <span class="mi">19</span><span class="o">:</span><span class="mi">11</span><span class="o">:</span><span class="mi">12</span><span class="s">");
+request.addUserField("</span><span class="n">iva</span><span class="s">", "</span><span class="mf">123.32</span><span class="s">");
 
-<span class="n">Charge</span> <span class="kt">char</span><span class="n">ge</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="na">charges</span><span class="o">().</span><span class="na">create</span><span class="o">(</span><span class="s">"ag4nktpdzebjiye1tlze"</span><span class="o">,</span> <span class="n">request</span><span class="o">);</span>
+Charge charge = api.charges().create("</span><span class="n">ag4nktpdzebjiye1tlze</span><span class="err">"</span><span class="o">,</span> <span class="n">request</span><span class="o">);</span>
 </pre><pre class="highlight csharp"><span class="n">OpenpayAPI</span> <span class="n">api</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">OpenpayAPI</span><span class="p">(</span><span class="s">"sk_b05586ec98454522ac7d4ccdcaec9128"</span><span class="p">,</span> <span class="s">"maonhzpqm8xp2ydssovf"</span><span class="p">);</span>
 <span class="n">ChargeRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ChargeRequest</span><span class="p">();</span>
 <span class="n">request</span><span class="p">.</span><span class="n">Method</span> <span class="p">=</span> <span class="s">"card"</span><span class="p">;</span>
@@ -741,10 +955,16 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
 <span class="n">card</span><span class="p">.</span><span class="n">ExpirationYear</span> <span class="p">=</span> <span class="s">"20"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">Card</span> <span class="p">=</span> <span class="n">card</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">Amount</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Decimal</span><span class="p">(</span><span class="m">9.99</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Currency</span> <span class="p">=</span> <span class="s">"MXN"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">Description</span> <span class="p">=</span> <span class="s">"Cargo inicial a mi cuenta"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">OrderId</span> <span class="p">=</span> <span class="s">"oid-00052"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">DeviceSessionId</span> <span class="p">=</span> <span class="s">"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"</span><span class="p">;</span>
 <span class="n">request</span><span class="p">.</span><span class="n">Capture</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">addUserField</span><span class="p">(</span><span class="s">"destino"</span><span class="p">,</span> <span class="n">Mexico</span><span class="p">-</span><span class="n">Queretaro</span> <span class="n">Corrida</span> <span class="m">1</span><span class="s">");
+</span><span class="n">request</span><span class="p">.</span><span class="nf">addUserField</span><span class="p">(</span><span class="s">"no_autobus"</span><span class="p">,</span> <span class="s">"42123"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">addUserField</span><span class="p">(</span><span class="s">"no_asiento"</span><span class="p">,</span> <span class="s">"25"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">addUserField</span><span class="p">(</span><span class="s">"fecha_compra"</span><span class="p">,</span> <span class="s">"2014-11-26 19:11:12"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">addUserField</span><span class="p">(</span><span class="s">"iva"</span><span class="p">,</span> <span class="s">"123.32"</span><span class="p">);</span>
 
 <span class="n">Charge</span> <span class="n">charge</span> <span class="p">=</span> <span class="n">api</span><span class="p">.</span><span class="n">ChargeService</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"ag4nktpdzebjiye1tlze"</span><span class="p">,</span> <span class="n">request</span><span class="p">);</span>
 </pre><pre class="highlight javascript"><span class="kd">var</span> <span class="nx">chargeRequest</span> <span class="o">=</span> <span class="p">{</span>
@@ -757,8 +977,16 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
    <span class="p">},</span>
    <span class="s1">'method'</span> <span class="err">:</span> <span class="s1">'card'</span><span class="p">,</span>
    <span class="s1">'amount'</span> <span class="err">:</span> <span class="mi">100</span><span class="p">,</span>
+   <span class="s1">'currency'</span> <span class="err">:</span> <span class="s1">'MXN'</span><span class="p">,</span>
    <span class="s1">'description'</span> <span class="err">:</span> <span class="s1">'Cargo inicial a mi cuenta'</span><span class="p">,</span>
-   <span class="s1">'order_id'</span> <span class="err">:</span> <span class="s1">'oid-00052'</span>
+   <span class="s1">'order_id'</span> <span class="err">:</span> <span class="s1">'oid-00052'</span><span class="p">,</span>
+   <span class="s1">'metadata'</span> <span class="err">:</span> <span class="p">{</span>
+      <span class="s1">'destino'</span> <span class="err">:</span> <span class="s1">'Mexico-Queretaro Corrida 1'</span><span class="p">,</span> 
+      <span class="s1">'no_autobus'</span> <span class="err">:</span> <span class="s1">'42123'</span><span class="p">,</span> 
+      <span class="s1">'no_asiento'</span> <span class="err">:</span> <span class="s1">'25'</span><span class="p">,</span>
+      <span class="s1">'fecha_compra'</span> <span class="err">:</span> <span class="s1">'2014-11-26 19:11:12'</span><span class="p">,</span> 
+      <span class="s1">'iva'</span> <span class="err">:</span> <span class="s1">'123.32'</span>
+  <span class="p">}</span>
 <span class="p">};</span>
 
 <span class="nx">openpay</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">charges</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">'ag4nktpdzebjiye1tlze'</span><span class="p">,</span> <span class="nx">chargeRequest</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">charge</span><span class="p">)</span> <span class="p">{</span>
@@ -777,9 +1005,17 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
      <span class="s2">"method"</span> <span class="o">=&gt;</span> <span class="s2">"card"</span><span class="p">,</span>
      <span class="s2">"card"</span> <span class="o">=&gt;</span> <span class="n">card_hash</span><span class="p">,</span>   
      <span class="s2">"amount"</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="o">.</span><span class="mo">00</span><span class="p">,</span>
+     <span class="s2">"currency"</span> <span class="o">=&gt;</span> <span class="s2">"MXN"</span><span class="p">,</span>
      <span class="s2">"description"</span> <span class="o">=&gt;</span> <span class="s2">"Cargo inicial a mi cuenta"</span><span class="p">,</span>
      <span class="s2">"order_id"</span> <span class="o">=&gt;</span> <span class="s2">"oid-00052"</span><span class="p">,</span>
-     <span class="s2">"device_session_id"</span> <span class="o">=&gt;</span> <span class="s2">"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"</span>
+     <span class="s2">"device_session_id"</span> <span class="o">=&gt;</span> <span class="s2">"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"</span><span class="p">,</span>
+     <span class="s2">"metadata"</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="s2">"destino"</span> <span class="o">=&gt;</span> <span class="s2">"Mexico-Queretaro Corrida 1"</span><span class="p">,</span> 
+      <span class="s2">"no_autobus"</span> <span class="o">=&gt;</span> <span class="s2">"42123"</span><span class="p">,</span> 
+      <span class="s2">"no_asiento"</span> <span class="o">=&gt;</span> <span class="s2">"25"</span><span class="p">,</span>
+      <span class="s2">"fecha_compra"</span> <span class="o">=&gt;</span> <span class="s2">"2014-11-26 19:11:12"</span><span class="p">,</span> 
+      <span class="s2">"iva"</span> <span class="o">=&gt;</span> <span class="s2">"123.32"</span>
+     <span class="p">}</span>
    <span class="p">}</span>
 
 <span class="n">response_hash</span><span class="o">=</span><span class="vi">@charges</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">request_hash</span><span class="p">.</span><span class="nf">to_hash</span><span class="p">,</span> <span class="s2">"ag4nktpdzebjiye1tlze"</span><span class="p">)</span>
@@ -808,18 +1044,45 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
       </span><span class="s2">"bank_code"</span><span class="p">:</span><span class="s2">"002"</span><span class="w">
    </span><span class="p">},</span><span class="w">
    </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"MXN"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"exchange_rate"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"from"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-21"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">13.61</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"to"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"MXN"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
    </span><span class="s2">"creation_date"</span><span class="p">:</span><span class="s2">"2014-05-26T11:56:25-05:00"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"operation_date"</span><span class="p">:</span><span class="s2">"2014-05-26T11:56:25-05:00"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Cargo inicial a mi cuenta"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"error_message"</span><span class="p">:</span><span class="err">null</span><span class="p">,</span><span class="w">
    </span><span class="s2">"order_id"</span><span class="p">:</span><span class="s2">"oid-00052"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="s2">"ag4nktpdzebjiye1tlze"</span><span class="w">
+   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="s2">"ag4nktpdzebjiye1tlze"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"metadata"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"destino"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Mexico-Queretaro Corrida 1"</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"no_autobus"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"42123"</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"no_asiento"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"25"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"fecha_compra"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-26 19:11:12"</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"iva"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"123.32"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <p>En este tipo de invocación es necesario enviar toda la información de la tarjeta, la cual solo será usada para esta venta y no será almacenada en el sistema. Esto lo puedes usar para realizar ventas directas en donde no requieres la tarjeta para un uso futuro.</p>
 
 <p>La propiedad <code>device_Session_Id</code> deberá ser generada desde el API JavaScript, véase <a href="https://github.com/open-pay/openpay-js#fraud-detection-using-device-data">Fraud detection using device data</a>.</p>
+
+<p><strong><em>Sistema antifraude personalizado</em></strong></br>
+Es posible enviar información adicional a la plataforma Openpay para incrementar su base de conocimientos, esto le permitirá aplicar reglas personalizadas de acuerdo al giro del comercio y de manera oportuna, por consecuencia ayudará a disminuir la generación de contracargos por intento de fraude.</p>
+
+<p><aside class="notice">
+Para utilizar esta característica es necesario enviar como parte del contenido de la transacción, un campo llamado <strong><em>metadata</em></strong>, el cual contendrá un listado de campos personalizados de antrifraude, con la información propia del comercio que se desea tomar en cuenta al momento de validar y aplicar un cargo. </br>
+</aside></p>
+
+<p><aside class="success">
+La funcionalidad de <strong><em>sistema antifraude personalizado</em></strong> ya esta soportada por los clientes de cURL, PHP, Node.js y Ruby.
+</aside>
+<aside class="warning">
+La funcionalidad de <strong><em>sistema antifraude personalizado</em></strong> esta en proceso de implementación para los clientes de Java y C#.
+</aside></p>
 
 <h3 id="petición">Petición</h3>
 
@@ -842,6 +1105,10 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
 <td><strong><em>numeric</em></strong> (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.</td>
 </tr>
 <tr>
+<td>currency</td>
+<td><strong><em>string</em></strong> (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 2 tipos de monedas: Pesos Mexicanos(MXN) y Dólares Americanos(USD).</td>
+</tr>
+<tr>
 <td>description</td>
 <td><strong><em>string</em></strong> (requerido, longitud = 250) <br/>Una descripción asociada al cargo.</td>
 </tr>
@@ -857,11 +1124,62 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
 <td>capture</td>
 <td><strong><em>boolean</em></strong> (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o pre-autorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada.</td>
 </tr>
+<tr>
+<td><a href="#crear-un-nuevo-cliente">customer</a></td>
+<td><strong><em>string</em></strong> (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> <strong>Nota:</strong> Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como <a href="#crear-un-nuevo-cliente">crear un cliente</a> y realize el cargo a nivel cliente.</td>
+</tr>
+<tr>
+<td>metadata</td>
+<td><strong><em>list(key, value)</em></strong> (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las <a href="#reglas-para-creación-de-campos-personalizados-de-antifraude">reglas para creación de campos personalizados de antifraude</a></td>
+</tr>
 </tbody></table>
 
 <h3 id="respuesta">Respuesta</h3>
 
 <p>Regresa un <a href="#objeto-transacción">objeto de transacción</a> con la información del cargo o una <a href="#objeto-error">respuesta de error</a>.</p>
+
+<h3 id="reglas-para-creación-de-campos-personalizados-de-antifraude">Reglas para creación de campos personalizados de antifraude</h3>
+
+<p><strong><em>Criterios generales para definición de Keys-Values</em></strong><br>
+* El uso de metadata solo aplican para los cargos con tarjeta<br>
+* Máximo 10 keys-values.</p>
+
+<p><strong><em>Criterios para definición de Keys</em></strong><br>
+* Deben ser minúsculas, alfanuméricos y solo se acepta guión bajo (sin espacio ni cualquier otro carácter)<br>
+* No deben ser nulos o cadena vacía.<br>
+* Su longitud es máximo de 32 carectares.</p>
+
+<p><strong><em>Criterios para definición de Values</em></strong><br>
+* Deben tener una longitud maxima de 64 caracteres.<br>
+* El formato de estos valores debe de apegarse a los <a href="#tipos-de-datos-reconocidos-por-el-sistema-antifraude">tipos de datos reconocidos por el sistema antifraude</a></p>
+
+<h3 id="tipos-de-datos-reconocidos-por-el-sistema-antifraude">Tipos de datos reconocidos por el sistema antifraude</h3>
+
+<p>Openpay siempre guardará los user field&rsquo;s enviados en la transacción, pero en el sistema antifraude si no coincide el tipo de dato soportado, no los guardará y por lo tanto será imposible usar estos campos para la creación de reglas personalizadas antifraude. Los tipos de datos son:</p>
+
+<table><thead>
+<tr>
+<th>Tipo de dato</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Numeric</td>
+<td>Puede contener números, signos negativos y punto decimal.</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>Puede contener fecha y hora con el siguiente formato: YYYY-MM-DD o YYYY-MM-DD HH-MI:SS.</td>
+</tr>
+<tr>
+<td>Amount</td>
+<td>Puede contener números sin signo negativo y sin punto decimal.</td>
+</tr>
+<tr>
+<td>Alfanumeric</td>
+<td>Puede contener Puede contener tanto números como letras o ambos.</td>
+</tr>
+</tbody></table>
 
 <h2 id="cargo-en-tienda">Cargo en tienda</h2>
 
@@ -1014,6 +1332,14 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
 <tr>
 <td>order_id</td>
 <td><strong><em>string</em></strong> (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.</td>
+</tr>
+<tr>
+<td>due_date</td>
+<td><strong><em>datetime</em></strong> (opcional) <br/>Fecha de vigencia para hacer el cargo a tienda en formato ISO 8601. <br/><br/>Ejemplo (UTC): 2014-08-01T00:50:00Z <br/><strong><em>Nota:</em></strong> Del lado del servidor se cambiara a hora central<br/><br/>Ejemplo (Central Time): 2014-08-01T11:51:23-05:00</td>
+</tr>
+<tr>
+<td><a href="#crear-un-nuevo-cliente">customer</a></td>
+<td><strong><em>string</em></strong> (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> <strong>Nota:</strong> Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como <a href="#crear-un-nuevo-cliente">crear un cliente</a> y realize el cargo a nivel cliente.</td>
 </tr>
 </tbody></table>
 
@@ -1174,6 +1500,14 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
 <tr>
 <td>order_id</td>
 <td><strong><em>string</em></strong> (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.</td>
+</tr>
+<tr>
+<td>due_date</td>
+<td><strong><em>datetime</em></strong> (opcional) <br/>Fecha de vigencia para hacer el cargo a banco en formato ISO 8601. <br/><br/>Ejemplo (UTC): 2014-08-01T00:50:00Z <br/><strong><em>Nota:</em></strong> Del lado del servidor se cambiara a hora central<br/><br/>Ejemplo (Central Time): 2014-08-01T11:51:23-05:00</td>
+</tr>
+<tr>
+<td><a href="#crear-un-nuevo-cliente">customer</a></td>
+<td><strong><em>string</em></strong> (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> <strong>Nota:</strong> Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como <a href="#crear-un-nuevo-cliente">crear un cliente</a> y realize el cargo a nivel cliente.</td>
 </tr>
 </tbody></table>
 
@@ -1357,11 +1691,11 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
 </span><span class="nx">openpay</span><span class="p">.</span><span class="nx">customers</span><span class="p">.</span><span class="nx">charges</span><span class="p">.</span><span class="nx">refund</span><span class="p">(</span><span class="nx">customerId</span><span class="p">,</span> <span class="nx">transactionId</span><span class="p">,</span> <span class="nx">refundRequest</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
 </pre><pre class="highlight ruby"><span class="c1">#Cliente</span>
 <span class="vi">@charges</span><span class="o">=</span><span class="vi">@openpay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:charges</span><span class="p">)</span>
-<span class="vi">@charges</span><span class="p">.</span><span class="nf">refund</span><span class="p">(</span><span class="n">transaction_id</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">)</span>
+<span class="vi">@charges</span><span class="p">.</span><span class="nf">refund</span><span class="p">(</span><span class="n">transaction_id</span><span class="p">,</span> <span class="n">request_hash</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">)</span>
 
 <span class="c1">#Comercio</span>
 <span class="vi">@charges</span><span class="o">=</span><span class="vi">@openpay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:charges</span><span class="p">)</span>
-<span class="vi">@charges</span><span class="p">.</span><span class="nf">refund</span><span class="p">(</span><span class="n">transaction_id</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
+<span class="vi">@charges</span><span class="p">.</span><span class="nf">refund</span><span class="p">(</span><span class="n">transaction_id</span><span class="p">,</span> <span class="n">request_hash</span><span class="p">)</span>
 </pre>
 <blockquote>
 <p>Ejemplo de petición con cliente</p>
@@ -1400,7 +1734,11 @@ POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span 
 </pre><pre class="highlight ruby"><span class="vi">@openpay</span><span class="o">=</span><span class="no">OpenpayApi</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"moiep6umtcnanql3jrxp"</span><span class="p">,</span><span class="s2">"sk_3433941e467c4875b178ce26348b0fac"</span><span class="p">)</span>
 <span class="vi">@charges</span><span class="o">=</span><span class="vi">@openpay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:charges</span><span class="p">)</span>
 
-<span class="n">response_hash</span><span class="o">=</span><span class="vi">@charges</span><span class="p">.</span><span class="nf">refund</span><span class="p">(</span><span class="s2">"tryqihxac3msedn4yxed"</span><span class="p">,</span> <span class="s2">"Monto de cargo devuelto"</span><span class="p">,</span> <span class="s2">"ag4nktpdzebjiye1tlze"</span><span class="p">)</span>
+<span class="n">request_hash</span><span class="o">=</span><span class="p">{</span>
+     <span class="s2">"description"</span> <span class="o">=&gt;</span> <span class="s2">"Monto de cargo devuelto"</span>
+   <span class="p">}</span>
+
+<span class="n">response_hash</span><span class="o">=</span><span class="vi">@charges</span><span class="p">.</span><span class="nf">refund</span><span class="p">(</span><span class="s2">"tryqihxac3msedn4yxed"</span><span class="p">,</span> <span class="n">request_hash</span><span class="p">.</span><span class="nf">to_hash</span><span class="p">,</span> <span class="s2">"ag4nktpdzebjiye1tlze"</span><span class="p">)</span>
 </pre>
 <blockquote>
 <p>Ejemplo de respuesta</p>
@@ -2554,7 +2892,7 @@ GET https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span c
 <blockquote>
 <p>Ejemplo de petición </p>
 </blockquote>
-<pre class="highlight shell">curl -g <span class="s2">"https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts?creation[gte]=2013-11-01&amp;limit=2"</span> <span class="se">\</span>
+<pre class="highlight shell">curl -g <span class="s2">"https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts?creation[gte]=2013-11-01&amp;limit=2&amp;payout_type=AUTOMATIC"</span> <span class="se">\</span>
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
 </pre><pre class="highlight php"><span class="cp">&lt;?</span>
 <span class="nv">$openpay</span> <span class="o">=</span> <span class="nx">Openpay</span><span class="o">::</span><span class="na">getInstance</span><span class="p">(</span><span class="s1">'mzdtln0bmtms6o3kck8f'</span><span class="p">,</span> <span class="s1">'sk_e568c42a6c384b7ab02cd47d2e407cab'</span><span class="p">);</span>
@@ -2562,6 +2900,7 @@ GET https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span c
 <span class="nv">$searchParams</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">'creation[gte]'</span> <span class="o">=&gt;</span> <span class="s1">'2013-11-01'</span><span class="p">,</span>
     <span class="s1">'creation[lte]'</span> <span class="o">=&gt;</span> <span class="s1">'2017-12-31'</span><span class="p">,</span>
+    <span class="s1">'payout_type'</span> <span class="o">=&gt;</span> <span class="s1">'AUTOMATIC'</span><span class="p">,</span>
     <span class="s1">'offset'</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s1">'limit'</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">);</span>
 
@@ -2593,6 +2932,7 @@ GET https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span c
 <span class="n">List</span><span class="p">&lt;</span><span class="n">Payout</span><span class="p">&gt;</span> <span class="n">payouts</span> <span class="p">=</span> <span class="n">api</span><span class="p">.</span><span class="n">PayoutService</span><span class="p">.</span><span class="nf">List</span><span class="p">(</span><span class="s">"ag4nktpdzebjiye1tlze"</span><span class="p">,</span> <span class="n">request</span><span class="p">);</span>
 </pre><pre class="highlight javascript"><span class="kd">var</span> <span class="nx">searchParams</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'creation[gte]'</span> <span class="err">:</span> <span class="s1">'2013-11-01'</span><span class="p">,</span>
+  <span class="s1">'payout_type'</span> <span class="err">:</span> <span class="s1">'AUTOMATIC'</span><span class="p">,</span>
   <span class="s1">'limit'</span> <span class="err">:</span> <span class="mi">2</span>
 <span class="p">};</span>
 
@@ -2705,6 +3045,10 @@ GET https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span c
 <tr>
 <td>amount[lte]</td>
 <td><strong><em>numeric</em></strong> <br/>Menor o igual al monto.</td>
+</tr>
+<tr>
+<td>payout_type</td>
+<td><strong><em>string (opcional, ALL, AUTOMATIC o MANUAL)</em></strong>  <br/>Tipo de payout usado para filtrar las transacciones</td>
 </tr>
 </tbody></table>
 
@@ -6566,6 +6910,658 @@ Para que las cuentas de los clientes manejen saldo debieron ser creadas con la p
 <h3 id="respuesta">Respuesta</h3>
 
 <p>Regresa un arreglo de <a href="#objeto-transacción">objetos transacción</a> de las comisiones cobradas en orden descendente por fecha, cada uno con el identificador del cliente al que se le realizó.</p>
+
+<h1 id="webhooks">Webhooks</h1>
+
+<p>Estos permiten notificar al cliente cuando un evento ha sucedido en la plataforma, para que el comercio pueda tomar las acciones correspondientes.</p>
+
+<p><aside class="notice">
+Para que la Openpay invoque un webhook, es importante que se encuentre verificado.
+</aside></p>
+
+<p><aside class="warning">
+<strong>Nota:</strong> Funcionalidad en proceso de implementación.
+</aside></p>
+
+<h2 id="objeto-webhook">Objeto Webhook</h2>
+
+<blockquote>
+<p>Ejemplo de objeto</p>
+</blockquote>
+<pre class="highlight json"><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"wxvanstudf4ssme8khmc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://requestb.in/11vxrsf1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"juanito"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"password"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"passjuanito"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"event_types"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"charge.refunded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.failed"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.cancelled"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.created"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"chargeback.accepted"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+<table><thead>
+<tr>
+<th>Propiedad</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td><strong><em>string</em></strong> <br/>Identificador único del webhook.</td>
+</tr>
+<tr>
+<td>url</td>
+<td><strong><em>string</em></strong> <br/>URL del webhook</td>
+</tr>
+<tr>
+<td>user</td>
+<td><strong><em>string</em></strong> <br/>Nombre de usuario para autenticación básica del webhook.</td>
+</tr>
+<tr>
+<td>password</td>
+<td><strong><em>string</em></strong> <br/>Contraseña para autenticación básica del webhook.</td>
+</tr>
+<tr>
+<td>event_types</td>
+<td><strong><em>array[string]</em></strong> <br/>Listado de eventos a los que respondera el webhook.</td>
+</tr>
+</tbody></table>
+
+<p><aside class="success">
+Los tipos de eventos soportados son:
+</aside></p>
+
+<table><thead>
+<tr>
+<th>Evento</th>
+<th>Categoría</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>charge.refunded</td>
+<td>Cargos</td>
+<td>Informa cuando es reembolsado un cargo.</td>
+</tr>
+<tr>
+<td>charge.failed</td>
+<td>Cargos</td>
+<td>Informa cuando un cargo fallo y no se aplico.</td>
+</tr>
+<tr>
+<td>charge.cancelled</td>
+<td>Cargos</td>
+<td>Informa cuando un cargo es cancelado.</td>
+</tr>
+<tr>
+<td>charge.created</td>
+<td>Cargos</td>
+<td>Informa cuando un cargo es programado.</td>
+</tr>
+<tr>
+<td>charge.succeeded</td>
+<td>Cargos</td>
+<td>Informa cuando un cargo es aplicado.</td>
+</tr>
+<tr>
+<td>charge.rescored.to.decline</td>
+<td>Cargos</td>
+<td>Informa cuando a un cargo le es recalculado su score y es declinado.</td>
+</tr>
+<tr>
+<td>subscription.charge.failed</td>
+<td>Suscripción</td>
+<td>Informa cuando el cargo de una suscripción fallo.</td>
+</tr>
+<tr>
+<td>payout.created</td>
+<td>Pagos</td>
+<td>Informa cuando un pago fue programado para el siguiente día.</td>
+</tr>
+<tr>
+<td>payout.succeeded</td>
+<td>Pagos</td>
+<td>Informa cuando un pago programado se ha aplicado.</td>
+</tr>
+<tr>
+<td>payout.failed</td>
+<td>Pagos</td>
+<td>Informa cuando un pago fallo.</td>
+</tr>
+<tr>
+<td>transfer.succeeded</td>
+<td>Transferencias</td>
+<td>Informa cuando se realiza una transferencia entre dos cuentas Openpay.</td>
+</tr>
+<tr>
+<td>fee.succeeded</td>
+<td>Comisiones</td>
+<td>Informa cuando se cobra un Fee a un Customer.</td>
+</tr>
+<tr>
+<td>fee.refund.succeeded</td>
+<td>Comisiones</td>
+<td>Informa cuando se reembolsa un Fee a un Customer.</td>
+</tr>
+<tr>
+<td>spei.received</td>
+<td>SPEI</td>
+<td>Informa cuando se recibe un pago por SPEI para agregar fondos a la cuenta.</td>
+</tr>
+<tr>
+<td>chargeback.created</td>
+<td>Contracargos</td>
+<td>Informa cuando se recibió un chargeback de una transacción y se esta iniciando la investigación.</td>
+</tr>
+<tr>
+<td>chargeback.rejected</td>
+<td>Contracargos</td>
+<td>Informa cuando un contracargo fue rechazado.</td>
+</tr>
+<tr>
+<td>chargeback.accepted</td>
+<td>Contracargos</td>
+<td>Informa cuando un contracargo fue aceptado.</td>
+</tr>
+<tr>
+<td>order.created</td>
+<td>Orden</td>
+<td>Informa cuando una orden es creada y programada.</td>
+</tr>
+<tr>
+<td>order.activated</td>
+<td>Orden</td>
+<td>Informa cuando una orden es activada.</td>
+</tr>
+<tr>
+<td>order.payment.received</td>
+<td>Orden</td>
+<td>Informa cuando el pago de una orden es recibido.</td>
+</tr>
+<tr>
+<td>order.completed</td>
+<td>Orden</td>
+<td>Informa cuando una orden es completada.</td>
+</tr>
+<tr>
+<td>order.expired</td>
+<td>Orden</td>
+<td>Informa cuando una orden ha expirado.</td>
+</tr>
+<tr>
+<td>order.cancelled</td>
+<td>Orden</td>
+<td>Informa cuando una orden es cancelada.</td>
+</tr>
+<tr>
+<td>order.payment.cancelled</td>
+<td>Orden</td>
+<td>Informa cuando el pago de una orden es cancelado.</td>
+</tr>
+</tbody></table>
+
+<h2 id="crear-un-webhook">Crear un Webhook</h2>
+
+<blockquote>
+<p>Definición</p>
+</blockquote>
+<pre class="highlight shell">POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span class="o">}</span>/webhooks
+</pre><pre class="highlight php"><span class="cp">&lt;?</span>
+<span class="nv">$webhook</span> <span class="o">=</span> <span class="nv">$openpay</span><span class="o">-&gt;</span><span class="na">webhooks</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="nx">webhookDataRequest</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</pre><pre class="highlight java"><span class="n">openpayAPI</span><span class="o">.</span><span class="na">webhooks</span><span class="o">().</span><span class="na">create</span><span class="o">(</span><span class="n">CreateWebhookParams</span> <span class="n">request</span><span class="o">);</span>
+</pre><pre class="highlight csharp"><span class="n">openpayAPI</span><span class="p">.</span><span class="n">WebhooksService</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">WebhookRequest</span> <span class="n">request</span><span class="p">);</span>
+</pre><pre class="highlight javascript"><span class="nx">openpay</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">webhookRequest</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+</pre><pre class="highlight ruby"><span class="vi">@webhooks</span><span class="o">=</span><span class="vi">@openpay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:webhooks</span><span class="p">)</span>
+<span class="vi">@webhooks</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">request_hash</span><span class="p">)</span>
+</pre>
+<blockquote>
+<p>Ejemplo de petición </p>
+</blockquote>
+<pre class="highlight shell">curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks <span class="se">\</span>
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: <span class="se">\</span>
+   -H <span class="s2">"Content-type: application/json"</span> <span class="se">\</span>
+   -X POST -d <span class="s1">'{
+    "url" : "http://requestb.in/11vxrsf1",
+    "user" : "juanito",
+    "password" : "passjuanito",
+    "event_types" : [
+      "charge.refunded",
+      "charge.failed",
+      "charge.cancelled",
+      "charge.created",
+      "chargeback.accepted"
+    ]
+}'</span> 
+</pre><pre class="highlight php"><span class="cp">&lt;?</span>
+<span class="nv">$openpay</span> <span class="o">=</span> <span class="nx">Openpay</span><span class="o">::</span><span class="na">getInstance</span><span class="p">(</span><span class="s1">'moiep6umtcnanql3jrxp'</span><span class="p">,</span> <span class="s1">'sk_3433941e467c1055b178ce26348b0fac'</span><span class="p">);</span>
+
+<span class="nv">$webhookDataRequest</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'url'</span> <span class="o">=&gt;</span> <span class="s1">'http://requestb.in/11vxrsf1'</span><span class="p">,</span>
+    <span class="s1">'user'</span> <span class="o">=&gt;</span> <span class="s1">'juanito'</span><span class="p">,</span>
+    <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'passjuanito'</span><span class="p">,</span>
+    <span class="s1">'event_types'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">'charge.refunded'</span><span class="p">,</span>
+      <span class="s1">'charge.failed'</span><span class="p">,</span>
+      <span class="s1">'charge.cancelled'</span><span class="p">,</span>
+      <span class="s1">'charge.created'</span><span class="p">,</span>
+      <span class="s1">'chargeback.accepted'</span>
+    <span class="p">)</span>
+    <span class="p">);</span>
+
+<span class="nv">$webhook</span> <span class="o">=</span> <span class="nv">$openpay</span><span class="o">-&gt;</span><span class="na">webhooks</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="nv">$webhookDataRequest</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</pre><pre class="highlight java"><span class="n">OpenpayAPI</span> <span class="n">api</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OpenpayAPI</span><span class="o">(</span><span class="s">"https://sandbox-api.openpay.mx"</span><span class="o">,</span> <span class="s">"sk_b05586ec98454522ac7d4ccdcaec9128"</span><span class="o">,</span> <span class="s">"maonhzpqm8xp2ydssovf"</span><span class="o">);</span>
+<span class="n">CreateWebhookParams</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CreateWebhookParams</span><span class="o">();</span>
+<span class="n">request</span><span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://requestb.in/11vxrsf1"</span><span class="o">);</span>
+<span class="n">request</span><span class="o">.</span><span class="na">user</span><span class="o">(</span><span class="s">"juanito"</span><span class="o">);</span>
+<span class="n">request</span><span class="o">.</span><span class="na">password</span><span class="o">(</span><span class="s">"passjuanito"</span><span class="o">);</span>
+<span class="n">request</span><span class="o">.</span><span class="na">addEventType</span><span class="o">(</span><span class="s">"charge.refunded"</span><span class="o">);</span>
+<span class="n">request</span><span class="o">.</span><span class="na">addEventType</span><span class="o">(</span><span class="s">"charge.failed"</span><span class="o">);</span>
+
+<span class="n">Webhook</span> <span class="n">webhook</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="na">webhooks</span><span class="o">().</span><span class="na">create</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
+</pre><pre class="highlight csharp"><span class="n">OpenpayAPI</span> <span class="n">api</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">OpenpayAPI</span><span class="p">(</span><span class="s">"sk_b05586ec98454522ac7d4ccdcaec9128"</span><span class="p">,</span> <span class="s">"maonhzpqm8xp2ydssovf"</span><span class="p">);</span>
+<span class="n">WebhookRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">WebhookRequest</span><span class="p">();</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Url</span> <span class="p">=</span> <span class="s">"http://requestb.in/11vxrsf1"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">User</span> <span class="p">=</span> <span class="s">"juanito"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="n">Password</span> <span class="p">=</span> <span class="s">"passjuanito"</span><span class="p">;</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">AddEventType</span><span class="p">(</span><span class="s">"charge.refunded"</span><span class="p">);</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">AddEventType</span><span class="p">(</span><span class="s">"charge.failed"</span><span class="p">);</span>
+
+<span class="n">Webhook</span> <span class="n">webhook</span> <span class="p">=</span> <span class="n">api</span><span class="p">.</span><span class="n">WebhookService</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</pre><pre class="highlight javascript"><span class="kd">var</span> <span class="nx">webhookRequest</span> <span class="o">=</span> <span class="p">{</span>                                            
+    <span class="s1">'url'</span> <span class="err">:</span> <span class="s1">'http://requestb.in/11vxrsf1'</span><span class="p">,</span>
+    <span class="s1">'user'</span> <span class="err">:</span> <span class="s1">'juanito'</span><span class="p">,</span>
+    <span class="s1">'password'</span> <span class="err">:</span> <span class="s1">'passjuanito'</span><span class="p">,</span>
+    <span class="s1">'event_types'</span> <span class="err">:</span> <span class="p">[</span>
+      <span class="s1">'charge.refunded'</span><span class="p">,</span>
+      <span class="s1">'charge.failed'</span><span class="p">,</span>
+      <span class="s1">'charge.cancelled'</span><span class="p">,</span>
+      <span class="s1">'charge.created'</span><span class="p">,</span>
+      <span class="s1">'chargeback.accepted'</span>
+    <span class="p">]</span>
+<span class="p">};</span>
+
+<span class="nx">openpay</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">webhookRequest</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">webhook</span><span class="p">){</span>
+  <span class="c1">// ...
+</span><span class="p">});</span>
+</pre><pre class="highlight ruby"><span class="vi">@openpay</span><span class="o">=</span><span class="no">OpenpayApi</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"mzdtln0bmtms6o3kck8f"</span><span class="p">,</span><span class="s2">"sk_e568c42a6c384b7ab02cd47d2e407cab"</span><span class="p">)</span>
+<span class="vi">@webhooks</span><span class="o">=</span><span class="vi">@openpay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:webhooks</span><span class="p">)</span>
+<span class="n">request_hash</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"url"</span> <span class="o">=&gt;</span> <span class="s2">"http://requestb.in/11vxrsf1"</span><span class="p">,</span>
+    <span class="s2">"user"</span> <span class="o">=&gt;</span> <span class="s2">"juanito"</span><span class="p">,</span>
+    <span class="s2">"password"</span> <span class="o">=&gt;</span> <span class="s2">"passjuanito"</span><span class="p">,</span>
+    <span class="s2">"event_types"</span> <span class="o">=&gt;</span> <span class="o">[</span>
+      <span class="s2">"charge.refunded"</span><span class="p">,</span>
+      <span class="s2">"charge.failed"</span><span class="p">,</span>
+      <span class="s2">"charge.cancelled"</span><span class="p">,</span>
+      <span class="s2">"charge.created"</span><span class="p">,</span>
+      <span class="s2">"chargeback.accepted"</span>
+    <span class="o">]</span>
+   <span class="p">}</span>
+
+<span class="n">response_hash</span><span class="o">=</span><span class="vi">@webhooks</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">request_hash</span><span class="p">.</span><span class="nf">to_hash</span><span class="p">)</span>
+</pre>
+<blockquote>
+<p>Ejemplo de respuesta</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"wkn0t30zfxpmhr5usgfa"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://requestb.in/qt3bq0qt"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"user"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"juanito"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"event_types"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"charge.succeeded"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"charge.created"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"charge.cancelled"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"charge.failed"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+<p>Al crear un nuevo webhook se hará una petición a la url indicada con un código de verificación. Dicho código sera solicitado para poder verificar el webhook posteriormente.</p>
+
+<p>Al momento de guardar el webhook se generará un id que podrá ser usado para verificar la URL del webhook, eliminar o simplemente obtener la información no sensible del webhook.</p>
+
+<p><aside class="warning">
+<strong>Nota:</strong> Funcionalidad en proceso de implementación.
+</aside></p>
+
+<h3 id="petición">Petición</h3>
+
+<table><thead>
+<tr>
+<th>Propiedad</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url</td>
+<td><strong><em>string</em></strong> <br/>URL del webhook</td>
+</tr>
+<tr>
+<td>user</td>
+<td><strong><em>string</em></strong> <br/>Nombre de usuario para autenticación básica del webhook.</td>
+</tr>
+<tr>
+<td>password</td>
+<td><strong><em>string</em></strong> <br/>Contraseña para autenticación básica del webhook.</td>
+</tr>
+<tr>
+<td>event_types</td>
+<td><strong><em>array[string]</em></strong> <br/>Listado de eventos a los que respondera el webhook.</td>
+</tr>
+</tbody></table>
+
+<h3 id="respuesta">Respuesta</h3>
+
+<p>Regresa un <a href="#objeto-webhook">objeto webhook</a> cuando se creó correctamente o una respuesta de error si ocurrió algún problema en la creación.</p>
+
+<h2 id="verificar-un-webhook">Verificar un Webhook</h2>
+
+<blockquote>
+<p>Definición</p>
+</blockquote>
+<pre class="highlight shell">POST https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span class="o">}</span>/webhooks/<span class="o">{</span>WEBHOOK_ID<span class="o">}</span>/verify/<span class="o">{</span>VERIFICATION_CODE<span class="o">}</span>
+</pre><pre class="highlight php"><span class="cp">&lt;?</span>
+<span class="nv">$openpay</span><span class="o">-&gt;</span><span class="na">webhooks</span><span class="o">-&gt;</span><span class="na">verify</span><span class="p">({</span><span class="nx">WEBHOOK_ID</span><span class="p">},</span> <span class="p">{</span><span class="nx">VERIFICATION_CODE</span><span class="p">});</span>
+<span class="cp">?&gt;</span>
+</pre><pre class="highlight java"><span class="n">openpayAPI</span><span class="o">.</span><span class="na">webhooks</span><span class="o">().</span><span class="na">verify</span><span class="o">({</span><span class="n">WEBHOOK_ID</span><span class="o">},</span> <span class="o">{</span><span class="n">VERIFICATION_CODE</span><span class="o">});</span>
+</pre><pre class="highlight csharp"><span class="n">openpayAPI</span><span class="p">.</span><span class="n">WebhooksService</span><span class="p">.</span><span class="nf">Verify</span><span class="p">({</span><span class="n">WEBHOOK_ID</span><span class="p">},</span> <span class="p">{</span><span class="n">VERIFICATION_CODE</span><span class="p">});</span>
+</pre><pre class="highlight javascript"><span class="nx">openpay</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">verify</span><span class="p">({</span><span class="nx">WEBHOOK_ID</span><span class="p">},</span> <span class="p">{</span><span class="nx">VERIFICATION_CODE</span><span class="p">});</span>
+</pre><pre class="highlight ruby"><span class="vi">@webhooks</span><span class="o">=</span><span class="vi">@openpay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:webhooks</span><span class="p">)</span>
+<span class="vi">@webhooks</span><span class="p">.</span><span class="nf">verify</span><span class="p">({</span><span class="no">WEBHOOK_ID</span><span class="p">},</span> <span class="p">{</span><span class="no">VERIFICATION_CODE</span><span class="p">})</span>
+</pre>
+<blockquote>
+<p>Ejemplo de petición </p>
+</blockquote>
+<pre class="highlight shell">curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc/verify/fZnipGry <span class="se">\</span>
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: <span class="se">\</span>
+   -H <span class="s2">"Content-type: application/json"</span> <span class="se">\</span>
+   -X POST
+</pre><pre class="highlight php"><span class="cp">&lt;?</span>
+<span class="nv">$openpay</span> <span class="o">=</span> <span class="nx">Openpay</span><span class="o">::</span><span class="na">getInstance</span><span class="p">(</span><span class="s1">'moiep6umtcnanql3jrxp'</span><span class="p">,</span> <span class="s1">'sk_3433941e467c1055b178ce26348b0fac'</span><span class="p">);</span>
+<span class="nv">$openpay</span><span class="o">-&gt;</span><span class="na">webhooks</span><span class="o">-&gt;</span><span class="na">verify</span><span class="p">(</span><span class="s2">"wxvanstudf4ssme8khmc"</span><span class="p">,</span> <span class="s2">"fZnipGry"</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</pre><pre class="highlight java"><span class="n">OpenpayAPI</span> <span class="n">api</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OpenpayAPI</span><span class="o">(</span><span class="s">"https://sandbox-api.openpay.mx"</span><span class="o">,</span> <span class="s">"sk_b05586ec98454522ac7d4ccdcaec9128"</span><span class="o">,</span> <span class="s">"maonhzpqm8xp2ydssovf"</span><span class="o">);</span>
+<span class="n">api</span><span class="o">.</span><span class="na">webhooks</span><span class="o">().</span><span class="na">verify</span><span class="o">(</span><span class="s">"wxvanstudf4ssme8khmc"</span><span class="o">,</span> <span class="s">"fZnipGry"</span><span class="o">);</span>
+</pre><pre class="highlight csharp"><span class="n">OpenpayAPI</span> <span class="n">api</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">OpenpayAPI</span><span class="p">(</span><span class="s">"sk_b05586ec98454522ac7d4ccdcaec9128"</span><span class="p">,</span> <span class="s">"maonhzpqm8xp2ydssovf"</span><span class="p">);</span>
+<span class="n">api</span><span class="p">.</span><span class="n">WebhookService</span><span class="p">.</span><span class="nf">Verify</span><span class="p">(</span><span class="s">"wxvanstudf4ssme8khmc"</span><span class="p">,</span> <span class="s">"fZnipGry"</span><span class="p">);</span>
+</pre><pre class="highlight javascript"><span class="nx">openpay</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">verify</span><span class="p">(</span><span class="s2">"wxvanstudf4ssme8khmc"</span><span class="p">,</span> <span class="s2">"fZnipGry"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span>
+  <span class="c1">// ...
+</span><span class="p">});</span>
+</pre><pre class="highlight ruby"><span class="vi">@openpay</span><span class="o">=</span><span class="no">OpenpayApi</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"mzdtln0bmtms6o3kck8f"</span><span class="p">,</span><span class="s2">"sk_e568c42a6c384b7ab02cd47d2e407cab"</span><span class="p">)</span>
+<span class="vi">@webhooks</span><span class="o">=</span><span class="vi">@openpay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:webhooks</span><span class="p">)</span>
+<span class="vi">@webhooks</span><span class="p">.</span><span class="nf">verify</span><span class="p">(</span><span class="s2">"wxvanstudf4ssme8khmc"</span><span class="p">,</span> <span class="s2">"fZnipGry"</span><span class="p">)</span>
+</pre>
+<p>Después de verificar el webhook, Openpay comenzara a enviar las notificaciones de los eventos asociados al webhook.</p>
+
+<p><aside class="warning">
+<strong>Nota:</strong> Funcionalidad en proceso de implementación.
+</aside></p>
+
+<h3 id="petición">Petición</h3>
+
+<p>No requiere enviar parámetros.</p>
+
+<h3 id="respuesta">Respuesta</h3>
+
+<p>Regresa una respuesta http 204.</p>
+
+<h2 id="obtener-un-webhook">Obtener un Webhook</h2>
+
+<blockquote>
+<p>Definición</p>
+</blockquote>
+<pre class="highlight shell">GET https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span class="o">}</span>/webhooks/<span class="o">{</span>WEBHOOK_ID<span class="o">}</span>
+</pre><pre class="highlight php"><span class="cp">&lt;?</span>
+<span class="nv">$webhook</span> <span class="o">=</span> <span class="nv">$openpay</span><span class="o">-&gt;</span><span class="na">webhooks</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">webhookId</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</pre><pre class="highlight java"><span class="n">openpayAPI</span><span class="o">.</span><span class="na">webhooks</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">String</span> <span class="n">webhookId</span><span class="o">);</span>
+</pre><pre class="highlight csharp"><span class="n">openpayAPI</span><span class="p">.</span><span class="n">WebhooksService</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="kt">string</span> <span class="n">webhookId</span><span class="p">);</span>
+</pre><pre class="highlight javascript"><span class="nx">openpay</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">webhookId</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+</pre><pre class="highlight ruby"><span class="vi">@webhooks</span><span class="o">=</span><span class="vi">@openpay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:webhooks</span><span class="p">)</span>
+<span class="vi">@webhooks</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">webhookId</span><span class="p">)</span>
+</pre>
+<blockquote>
+<p>Ejemplo de petición</p>
+</blockquote>
+<pre class="highlight shell">curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc <span class="se">\</span>
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: <span class="se">\</span>
+   -H <span class="s2">"Content-type: application/json"</span> 
+</pre><pre class="highlight php"><span class="cp">&lt;?</span>
+<span class="nv">$openpay</span> <span class="o">=</span> <span class="nx">Openpay</span><span class="o">::</span><span class="na">getInstance</span><span class="p">(</span><span class="s1">'moiep6umtcnanql3jrxp'</span><span class="p">,</span> <span class="s1">'sk_3433941e467c1055b178ce26348b0fac'</span><span class="p">);</span>
+
+<span class="nv">$webhook</span> <span class="o">=</span> <span class="nv">$openpay</span><span class="o">-&gt;</span><span class="na">webhooks</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'wxvanstudf4ssme8khmc'</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</pre><pre class="highlight java"><span class="n">OpenpayAPI</span> <span class="n">api</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OpenpayAPI</span><span class="o">(</span><span class="s">"https://sandbox-api.openpay.mx"</span><span class="o">,</span> <span class="s">"sk_b05586ec98454522ac7d4ccdcaec9128"</span><span class="o">,</span> <span class="s">"maonhzpqm8xp2ydssovf"</span><span class="o">);</span>
+<span class="n">Webhook</span> <span class="n">webhook</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="na">webhooks</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"wxvanstudf4ssme8khmc"</span><span class="o">);</span>
+</pre><pre class="highlight csharp"><span class="n">OpenpayAPI</span> <span class="n">api</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">OpenpayAPI</span><span class="p">(</span><span class="s">"sk_b05586ec98454522ac7d4ccdcaec9128"</span><span class="p">,</span> <span class="s">"maonhzpqm8xp2ydssovf"</span><span class="p">);</span>
+<span class="n">Webhook</span> <span class="n">webhook</span> <span class="p">=</span> <span class="n">api</span><span class="p">.</span><span class="n">WebhooksService</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">"wxvanstudf4ssme8khmc"</span><span class="p">);</span>
+</pre><pre class="highlight javascript"><span class="nx">openpay</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'wxvanstudf4ssme8khmc'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">webhook</span><span class="p">){</span>
+  <span class="c1">// ...
+</span><span class="p">});</span>
+</pre><pre class="highlight ruby"><span class="vi">@openpay</span><span class="o">=</span><span class="no">OpenpayApi</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"mzdtln0bmtms6o3kck8f"</span><span class="p">,</span><span class="s2">"sk_e568c42a6c384b7ab02cd47d2e407cab"</span><span class="p">)</span>
+<span class="vi">@webhooks</span><span class="o">=</span><span class="vi">@openpay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:webhooks</span><span class="p">)</span>
+
+<span class="n">response_hash</span><span class="o">=</span><span class="vi">@webhooks</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s2">"wxvanstudf4ssme8khmc"</span><span class="p">)</span>
+</pre>
+<blockquote>
+<p>Ejemplo de respuesta</p>
+</blockquote>
+<pre class="highlight json"><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"wxvanstudf4ssme8khmc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://requestb.in/11vxrsf1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"juanito"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"event_types"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"verification"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.refunded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.failed"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.cancelled"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.created"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.succeeded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"subscription.charge.failed"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout.created"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout.succeeded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout.failed"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"transfer.succeeded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"fee.succeeded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"spei.received"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"chargeback.created"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"chargeback.rejected"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"chargeback.accepted"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></pre>
+<p>Obtiene los detalles de un webhook solicitándolo con su id. </p>
+
+<p><aside class="notice">
+<strong>Nota:</strong> Nunca se regresarán datos sensibles como son el password para accesar al webhook.
+</aside></p>
+
+<p><aside class="warning">
+<strong>Nota:</strong> Funcionalidad en proceso de implementación.
+</aside></p>
+
+<h3 id="petición">Petición</h3>
+
+<table><thead>
+<tr>
+<th>Propiedad</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td><strong><em>string</em></strong> (requerido, longitud = 45) <br/> Identificador único del webhook</td>
+</tr>
+</tbody></table>
+
+<h3 id="respuesta">Respuesta</h3>
+
+<p>Regresa un <a href="#objeto-webhook">objeto webhook</a></p>
+
+<h2 id="eliminar-un-webhook">Eliminar un Webhook</h2>
+
+<blockquote>
+<p>Definición</p>
+</blockquote>
+<pre class="highlight shell">DELETE https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span class="o">}</span>/webhooks/<span class="o">{</span>WEBHOOK_ID<span class="o">}</span>
+</pre><pre class="highlight php"><span class="cp">&lt;?</span>
+<span class="nv">$webhook</span> <span class="o">=</span> <span class="nv">$openpay</span><span class="o">-&gt;</span><span class="na">webhooks</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">webhookId</span><span class="p">);</span>
+<span class="nv">$webhook</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</pre><pre class="highlight java"><span class="n">openpayAPI</span><span class="o">.</span><span class="na">webhooks</span><span class="o">().</span><span class="na">delete</span><span class="o">(</span><span class="n">String</span> <span class="n">webhookId</span><span class="o">);</span>
+</pre><pre class="highlight csharp"><span class="n">openpayAPI</span><span class="p">.</span><span class="n">WebhooksService</span><span class="p">.</span><span class="nf">Delete</span><span class="p">(</span><span class="kt">string</span> <span class="n">webhook_id</span><span class="p">);</span>
+</pre><pre class="highlight javascript"><span class="nx">openpay</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">webhookId</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+</pre><pre class="highlight ruby"><span class="vi">@webhooks</span><span class="o">=</span><span class="vi">@openpay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:webhooks</span><span class="p">)</span>
+<span class="vi">@webhooks</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="n">webhook_id</span><span class="p">)</span>
+</pre>
+<blockquote>
+<p>Ejemplo de petición con cliente</p>
+</blockquote>
+<pre class="highlight shell">curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc <span class="se">\</span>
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: <span class="se">\</span>
+   -X DELETE
+</pre><pre class="highlight php"><span class="cp">&lt;?</span>
+<span class="nv">$openpay</span> <span class="o">=</span> <span class="nx">Openpay</span><span class="o">::</span><span class="na">getInstance</span><span class="p">(</span><span class="s1">'moiep6umtcnanql3jrxp'</span><span class="p">,</span> <span class="s1">'sk_3433941e467c1055b178ce26348b0fac'</span><span class="p">);</span>
+
+<span class="nv">$webhook</span> <span class="o">=</span> <span class="nv">$openpay</span><span class="o">-&gt;</span><span class="na">webhooks</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'wxvanstudf4ssme8khmc'</span><span class="p">);</span>
+<span class="nv">$webhook</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</pre><pre class="highlight java"><span class="n">OpenpayAPI</span> <span class="n">api</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OpenpayAPI</span><span class="o">(</span><span class="s">"https://sandbox-api.openpay.mx"</span><span class="o">,</span> <span class="s">"sk_b05586ec98454522ac7d4ccdcaec9128"</span><span class="o">,</span> <span class="s">"maonhzpqm8xp2ydssovf"</span><span class="o">);</span>
+<span class="n">api</span><span class="o">.</span><span class="na">webhooks</span><span class="o">().</span><span class="na">delete</span><span class="o">(</span><span class="s">"wxvanstudf4ssme8khmc"</span><span class="o">);</span>
+</pre><pre class="highlight csharp"><span class="n">OpenpayAPI</span> <span class="n">api</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">OpenpayAPI</span><span class="p">(</span><span class="s">"sk_b05586ec98454522ac7d4ccdcaec9128"</span><span class="p">,</span> <span class="s">"maonhzpqm8xp2ydssovf"</span><span class="p">);</span>
+<span class="n">api</span><span class="p">.</span><span class="n">WebhooksService</span><span class="p">.</span><span class="nf">Delete</span><span class="p">(</span><span class="s">"wxvanstudf4ssme8khmc"</span><span class="p">);</span>
+</pre><pre class="highlight javascript"><span class="nx">openpay</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s1">'wxvanstudf4ssme8khmc'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">});</span>
+</pre><pre class="highlight ruby"><span class="vi">@openpay</span><span class="o">=</span><span class="no">OpenpayApi</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"mzdtln0bmtms6o3kck8f"</span><span class="p">,</span><span class="s2">"sk_e568c42a6c384b7ab02cd47d2e407cab"</span><span class="p">)</span>
+<span class="vi">@webhooks</span><span class="o">=</span><span class="vi">@openpay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:webhooks</span><span class="p">)</span>
+
+<span class="n">response_hash</span><span class="o">=</span><span class="vi">@webhooks</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="s2">"wxvanstudf4ssme8khmc"</span><span class="p">)</span>
+</pre>
+<p>Elimina un webhook del comercio.</p>
+
+<p>Para eliminarlo sólo es necesario proporcionar el identificador del webhook.</p>
+
+<p><aside class="warning">
+<strong>Nota:</strong> Funcionalidad en proceso de implementación.
+</aside></p>
+
+<h3 id="petición">Petición</h3>
+
+<table><thead>
+<tr>
+<th>Propiedad</th>
+<th>Descripción</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td><strong><em>string</em></strong> (requerido, longitud = 45) <br/> Identificador único del webhook</td>
+</tr>
+</tbody></table>
+
+<h3 id="respuesta">Respuesta</h3>
+
+<p>Si el webhook se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un <a href="#objeto-error">objeto error</a> indicando el motivo. </p>
+
+<h2 id="listado-de-webhook">Listado de Webhook</h2>
+
+<blockquote>
+<p>Definición</p>
+</blockquote>
+<pre class="highlight shell">GET https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span class="o">}</span>/webhooks
+</pre><pre class="highlight php"><span class="cp">&lt;?</span>
+<span class="nv">$webhookList</span> <span class="o">=</span> <span class="nv">$openpay</span><span class="o">-&gt;</span><span class="na">webhooks</span><span class="o">-&gt;</span><span class="na">getList</span><span class="p">();</span>
+<span class="cp">?&gt;</span>
+</pre><pre class="highlight java"><span class="n">openpayAPI</span><span class="o">.</span><span class="na">webhooks</span><span class="o">().</span><span class="na">list</span><span class="o">();</span>
+</pre><pre class="highlight csharp"><span class="n">openpayAPI</span><span class="p">.</span><span class="n">WebhooksService</span><span class="p">.</span><span class="nf">List</span><span class="p">();</span>
+</pre><pre class="highlight javascript"><span class="nx">openpay</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">list</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+</pre><pre class="highlight ruby"><span class="vi">@webhooks</span><span class="o">=</span><span class="vi">@openpay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:webhooks</span><span class="p">)</span>
+<span class="vi">@webhooks</span><span class="p">.</span><span class="nf">all</span>
+</pre>
+<blockquote>
+<p>Ejemplo de petición</p>
+</blockquote>
+<pre class="highlight shell">curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks <span class="se">\</span>
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: <span class="se">\</span>
+   -H <span class="s2">"Content-type: application/json"</span> 
+</pre><pre class="highlight php"><span class="cp">&lt;?</span>
+<span class="nv">$openpay</span> <span class="o">=</span> <span class="nx">Openpay</span><span class="o">::</span><span class="na">getInstance</span><span class="p">(</span><span class="s1">'moiep6umtcnanql3jrxp'</span><span class="p">,</span> <span class="s1">'sk_3433941e467c1055b178ce26348b0fac'</span><span class="p">);</span>
+
+<span class="nv">$webhookList</span> <span class="o">=</span> <span class="nv">$openpay</span><span class="o">-&gt;</span><span class="na">webhooks</span><span class="o">-&gt;</span><span class="na">getList</span><span class="p">(</span><span class="s1">'wxvanstudf4ssme8khmc'</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</pre><pre class="highlight java"><span class="n">OpenpayAPI</span> <span class="n">api</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OpenpayAPI</span><span class="o">(</span><span class="s">"https://sandbox-api.openpay.mx"</span><span class="o">,</span> <span class="s">"sk_b05586ec98454522ac7d4ccdcaec9128"</span><span class="o">,</span> <span class="s">"maonhzpqm8xp2ydssovf"</span><span class="o">);</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Webhook</span><span class="o">&gt;</span> <span class="n">webhooks</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="na">webhooks</span><span class="o">().</span><span class="na">list</span><span class="o">(</span><span class="s">"wxvanstudf4ssme8khmc"</span><span class="o">);</span>
+</pre><pre class="highlight csharp"><span class="n">OpenpayAPI</span> <span class="n">api</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">OpenpayAPI</span><span class="p">(</span><span class="s">"sk_b05586ec98454522ac7d4ccdcaec9128"</span><span class="p">,</span> <span class="s">"maonhzpqm8xp2ydssovf"</span><span class="p">);</span>
+<span class="n">List</span><span class="p">&lt;</span><span class="n">Webhook</span><span class="p">&gt;</span> <span class="n">webhooks</span> <span class="p">=</span> <span class="n">api</span><span class="p">.</span><span class="n">WebhooksService</span><span class="p">.</span><span class="nf">List</span><span class="p">(</span><span class="s">"wxvanstudf4ssme8khmc"</span><span class="p">);</span>
+</pre><pre class="highlight javascript"><span class="nx">openpay</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">list</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">list</span><span class="p">){</span>
+  <span class="c1">// ...
+</span><span class="p">});</span>
+</pre><pre class="highlight ruby"><span class="vi">@openpay</span><span class="o">=</span><span class="no">OpenpayApi</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"mzdtln0bmtms6o3kck8f"</span><span class="p">,</span><span class="s2">"sk_e568c42a6c384b7ab02cd47d2e407cab"</span><span class="p">)</span>
+<span class="vi">@webhooks</span><span class="o">=</span><span class="vi">@openpay</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:webhooks</span><span class="p">)</span>
+
+<span class="n">response_hash</span><span class="o">=</span><span class="vi">@webhooks</span><span class="p">.</span><span class="nf">all</span>
+</pre>
+<blockquote>
+<p>Ejemplo de respuesta</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"wDashboard185"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"event_types"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"verification"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.refunded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.failed"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.cancelled"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.created"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.succeeded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"subscription.charge.failed"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout.created"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout.succeeded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payout.failed"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"transfer.succeeded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"fee.succeeded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"spei.received"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"chargeback.created"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"chargeback.rejected"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"chargeback.accepted"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://requestb.in/11vxrsf1"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"wDashboard186"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"event_types"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"verification"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.refunded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.failed"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.cancelled"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.created"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"charge.succeeded"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"subscription.charge.failed"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://requestb.in/1fhpiog1"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+<p>Regresa una lista de webhooks registrados por comercio.</p>
+
+<p><aside class="notice">
+<strong>Nota:</strong> Nunca se regresarán datos sensibles como son el password para accesar al webhook.
+</aside></p>
+
+<p><aside class="warning">
+<strong>Nota:</strong> Funcionalidad en proceso de implementación.
+</aside></p>
+
+<h3 id="petición">Petición</h3>
+
+<h3 id="respuesta">Respuesta</h3>
+
+<p>Listado de objetos <a href="#objeto-webhook">objeto webhook</a> registrados de acuerdo a los parámetros proporcionados.</p>
 
 <h1 id="tokens">Tokens</h1>
 
