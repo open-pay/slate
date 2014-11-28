@@ -7212,20 +7212,20 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks
 
 ```php
 <?
-$webhook = $openpay->webhooks->create(webhookDataRequest);
+$webhook = $openpay->webhooks->create(webhook);
 ?>
 ```
 
 ```java
-openpayAPI.webhooks().create(CreateWebhookParams request);
+openpayAPI.webhooks().create(Webhook request);
 ```
 
 ```csharp
-openpayAPI.WebhooksService.Create(WebhookRequest request);
+openpayAPI.WebhooksService.Create(Webhook request);
 ```
 
 ```javascript
-openpay.webhooks.create(webhookRequest, callback);
+openpay.webhooks.create(webhook, callback);
 ```
 
 ```ruby
@@ -7257,7 +7257,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks \
 <?
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$webhookDataRequest = array(
+$webhook = array(
     'url' => 'http://requestb.in/11vxrsf1',
     'user' => 'juanito',
     'password' => 'passjuanito',
@@ -7270,13 +7270,13 @@ $webhookDataRequest = array(
     )
     );
 
-$webhook = $openpay->webhooks->create($webhookDataRequest);
+$webhook = $openpay->webhooks->create($webhook);
 ?>
 ```
 
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-CreateWebhookParams request = new CreateWebhookParams();
+Webhook request = new Webhook();
 request.url("http://requestb.in/11vxrsf1");
 request.user("juanito");
 request.password("passjuanito");
@@ -7288,7 +7288,7 @@ Webhook webhook = api.webhooks().create(request);
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-WebhookRequest request = new WebhookRequest();
+Webhook request = new Webhook();
 request.Url = "http://requestb.in/11vxrsf1";
 request.User = "juanito";
 request.Password = "passjuanito";
@@ -7299,7 +7299,7 @@ Webhook webhook = api.WebhookService.Create(request);
 ```
 
 ```javascript
-var webhookRequest = {                                            
+var webhook_params = {                                            
     'url' : 'http://requestb.in/11vxrsf1',
     'user' : 'juanito',
     'password' : 'passjuanito',
@@ -7312,7 +7312,7 @@ var webhookRequest = {
     ]
 };
 
-openpay.webhooks.create(webhookRequest, function(error, webhook){
+openpay.webhooks.create(webhook_params, function(error, webhook){
   // ...
 });
 ```
@@ -7383,25 +7383,25 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}/verif
 
 ```php
 <?
-$openpay->webhooks->verify({WEBHOOK_ID}, {VERIFICATION_CODE});
+$openpay->webhooks->verify(webhookId, verificationCode);
 ?>
 ```
 
 ```java
-openpayAPI.webhooks().verify({WEBHOOK_ID}, {VERIFICATION_CODE});
+openpayAPI.webhooks().verify(String webhookId, String verificationCode);
 ```
 
 ```csharp
-openpayAPI.WebhooksService.Verify({WEBHOOK_ID}, {VERIFICATION_CODE});
+openpayAPI.WebhooksService.Verify(string webhook_id, string verification_code);
 ```
 
 ```javascript
-openpay.webhooks.verify({WEBHOOK_ID}, {VERIFICATION_CODE});
+openpay.webhooks.verify(webhook_id, verification_code);
 ```
 
 ```ruby
 @webhooks=@openpay.create(:webhooks)
-@webhooks.verify({WEBHOOK_ID}, {VERIFICATION_CODE})
+@webhooks.verify(webhook_id, verification_code)
 ```
 
 > Ejemplo de petición 
@@ -7708,18 +7708,18 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks \
 <?
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$webhookList = $openpay->webhooks->getList('wxvanstudf4ssme8khmc');
+$webhookList = $openpay->webhooks->getList();
 ?>
 ```
 
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-List<Webhook> webhooks = api.webhooks().list("wxvanstudf4ssme8khmc");
+List<Webhook> webhooks = api.webhooks().list();
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-List<Webhook> webhooks = api.WebhooksService.List("wxvanstudf4ssme8khmc");
+List<Webhook> webhooks = api.WebhooksService.List();
 ```
 
 ```javascript
