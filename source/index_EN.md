@@ -6944,9 +6944,6 @@ Weebhooks allow to notify a business party when an event has occurred in the pla
 Openpay requires that the webhook is verified before executing it.
 </aside>
 
-<aside class="warning">
-**Note:** This feature is currently in development.
-</aside>
 
 ##Webhook Object
 
@@ -7165,9 +7162,6 @@ To create a new webhook you need to request in URL indicated with a verification
 
 When you save webhooks an ID will be generated that can be used to verify the webhook URL, eliminate it or simply get not sensitive webhook information.
 
-<aside class="warning">
-**Note:** This feature is currently in development.
-</aside>
 
 ###Request
 
@@ -7252,9 +7246,6 @@ openpay.webhooks.verify("wxvanstudf4ssme8khmc", "fZnipGry", function(error){
 
 After verifying a webhook, Openpay will start sending event notifications to the associated events.
 
-<aside class="warning">
-**Note:** This feature is currently in development.
-</aside>
 
 ###Request
 
@@ -7370,9 +7361,6 @@ Get a list of the webhook details by ID.
 **Note:** Sensitive data like the password will never be included in the response.
 </aside>
 
-<aside class="warning">
-**Nota:** This feature is currently in development.
-</aside>
 
 ###Request
 Property | Description
@@ -7459,9 +7447,6 @@ Delete a webhook from the merchant.
 
 To delete a webhook you only need to provide the ID.
 
-<aside class="warning">
-**Nota:** This feature is currently in development.
-</aside>
 
 ###Request
 Property | Description
@@ -7592,9 +7577,6 @@ Returns a list registered by the merchant.
 **Nota:** Never return sensitive data like the webhook password access.
 </aside>
 
-<aside class="warning">
-**Nota:** Not yet implemented
-</aside>
 
 ###Request
 
