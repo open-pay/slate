@@ -549,12 +549,6 @@ Es posible enviar información adicional a la plataforma Openpay para incrementa
 Para utilizar esta característica es necesario enviar como parte del contenido de la transacción, un campo llamado ***metadata***, el cual contendrá un listado de campos personalizados de antrifraude, con la información propia del comercio que se desea tomar en cuenta al momento de validar y aplicar un cargo. </br>
 </aside>
 
-<aside class="success">
-La funcionalidad de ***sistema antifraude personalizado*** ya esta soportada por los clientes de cURL, PHP, Node.js y Ruby.
-</aside>
-<aside class="warning">
-La funcionalidad de ***sistema antifraude personalizado*** esta en proceso de implementación para los clientes de Java y C#.
-</aside>
 
 ###Petición 
 
@@ -887,12 +881,6 @@ Es posible enviar información adicional a la plataforma Openpay para incrementa
 Para utilizar esta característica es necesario enviar como parte del contenido de la transacción, un campo llamado ***metadata***, el cual contendrá un listado de campos personalizados de antrifraude, con la información propia del comercio que se desea tomar en cuenta al momento de validar y aplicar un cargo. </br>
 </aside>
 
-<aside class="success">
-La funcionalidad de ***sistema antifraude personalizado*** ya esta soportada por los clientes de cURL, PHP, Node.js y Ruby.
-</aside>
-<aside class="warning">
-La funcionalidad de ***sistema antifraude personalizado*** esta en proceso de implementación para los clientes de Java y C#.
-</aside>
 
 ###Petición 
 
@@ -7136,9 +7124,6 @@ Estos permiten notificar al cliente cuando un evento ha sucedido en la plataform
 Para que la Openpay invoque un webhook, es importante que se encuentre verificado.
 </aside>
 
-<aside class="warning">
-**Nota:** Funcionalidad en proceso de implementación.
-</aside>
 
 ##Objeto Webhook
 
@@ -7357,9 +7342,6 @@ Al crear un nuevo webhook se hará una petición a la url indicada con un códig
 
 Al momento de guardar el webhook se generará un id que podrá ser usado para verificar la URL del webhook, eliminar o simplemente obtener la información no sensible del webhook.
 
-<aside class="warning">
-**Nota:** Funcionalidad en proceso de implementación.
-</aside>
 
 ###Petición
 
@@ -7444,9 +7426,6 @@ openpay.webhooks.verify("wxvanstudf4ssme8khmc", "fZnipGry", function(error){
 
 Después de verificar el webhook, Openpay comenzara a enviar las notificaciones de los eventos asociados al webhook.
 
-<aside class="warning">
-**Nota:** Funcionalidad en proceso de implementación.
-</aside>
 
 ###Petición
 
@@ -7562,9 +7541,6 @@ Obtiene los detalles de un webhook solicitándolo con su id.
 **Nota:** Nunca se regresarán datos sensibles como son el password para accesar al webhook.
 </aside>
 
-<aside class="warning">
-**Nota:** Funcionalidad en proceso de implementación.
-</aside>
 
 ###Petición
 Propiedad | Descripción
@@ -7651,9 +7627,6 @@ Elimina un webhook del comercio.
 
 Para eliminarlo sólo es necesario proporcionar el identificador del webhook.
 
-<aside class="warning">
-**Nota:** Funcionalidad en proceso de implementación.
-</aside>
 
 ###Petición
 Propiedad | Descripción
@@ -7785,9 +7758,6 @@ Regresa una lista de webhooks registrados por comercio.
 **Nota:** Nunca se regresarán datos sensibles como son el password para accesar al webhook.
 </aside>
 
-<aside class="warning">
-**Nota:** Funcionalidad en proceso de implementación.
-</aside>
 
 ###Petición
 
