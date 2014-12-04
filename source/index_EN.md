@@ -6962,7 +6962,7 @@ Openpay requires that the webhook is verified before executing it.
       "charge.created",
       "chargeback.accepted"
     ],
-    "status":"unverified"
+    "status":"verified"
 }
 ```
 
@@ -7154,13 +7154,11 @@ response_hash=@webhooks.create(request_hash.to_hash)
     "charge.cancelled",
     "charge.failed"
   ],
-  "status" : "unverified"
+  "status" : "verified"
 }
 ```
 
-To create a new webhook you need to request in URL indicated with a verification code.  That code will be later required to verify the webhook.
-
-When you save webhooks an ID will be generated that can be used to verify the webhook URL, eliminate it or simply get not sensitive webhook information.
+When you save webhooks an ID will be generated that can be used to eliminate it or simply get not sensitive webhook information.
 
 
 ###Request
@@ -7174,85 +7172,6 @@ event_types   |***array[string]*** <br/>List of events where the webhook will be
 
 ###Response
 Returns a [webhook object](#webhook-object) when it was successfully created or an error response if there was an error on creation.
-
-
-##Webhook verification
-> Definition
-
-```shell
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}/verify/{VERIFICATION_CODE}
-```
-
-```php
-<?
-$openpay->webhooks->verify(webhookId, verificationCode);
-?>
-```
-
-```java
-openpayAPI.webhooks().verify(String webhookId, String verificationCode);
-```
-
-```csharp
-openpayAPI.WebhooksService.Verify(string webhook_id, string verification_code);
-```
-
-```javascript
-openpay.webhooks.verify(webhook_id, verification_code);
-```
-
-```ruby
-@webhooks=@openpay.create(:webhooks)
-@webhooks.verify(webhook_id, verification_code)
-```
-
->Request example
-
-```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc/verify/fZnipGry \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" \
-   -X POST
-```
-
-```php
-<?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
-$openpay->webhooks->verify("wxvanstudf4ssme8khmc", "fZnipGry");
-?>
-```
-
-```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-api.webhooks().verify("wxvanstudf4ssme8khmc", "fZnipGry");
-```
-
-```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-api.WebhookService.Verify("wxvanstudf4ssme8khmc", "fZnipGry");
-```
-
-```javascript
-openpay.webhooks.verify("wxvanstudf4ssme8khmc", "fZnipGry", function(error){
-  // ...
-});
-```
-
-```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@webhooks=@openpay.create(:webhooks)
-@webhooks.verify("wxvanstudf4ssme8khmc", "fZnipGry")
-```
-
-After verifying a webhook, Openpay will start sending event notifications to the associated events.
-
-
-###Request
-
-Doesn't require any parameters.
-
-###Response
-Returns an HTTP 204 response.
 
 
 
@@ -7351,7 +7270,7 @@ response_hash=@webhooks.get("wxvanstudf4ssme8khmc")
       "chargeback.rejected",
       "chargeback.accepted"
     ],
-    "status" : "unverified"
+    "status" : "verified"
   }
 ```
 
@@ -7552,7 +7471,7 @@ response_hash=@webhooks.all
       "chargeback.accepted"
     ],
     "url" : "http://requestb.in/11vxrsf1",
-    "status" : "unverified"
+    "status" : "verified"
   },
   {
     "id" : "wDashboard186",
