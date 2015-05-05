@@ -91,7 +91,7 @@ Todos los ejemplos de está documentación están apuntados al ambiente de prueb
 > Ejemplo de autenticación
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges/ \
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 
 El parámetro -u se ocupa para realizar la autenticación HTTP Basic (al agregar dos puntos después de la llave privada se previene el uso de contraseña)
@@ -180,7 +180,7 @@ Existen 2 tipos de llaves de API:
 Para llamadas entre servidores y con acceso total a todas las operaciones de la API (nunca debe ser  compartida).
 
 <aside class="warning">
-Manten está llave segura y nunca la compartas con nadie.
+Manten esta llave segura y nunca la compartas con nadie.
 </aside>
 
 * **Pública.-**
@@ -210,7 +210,10 @@ Openpay regresa objetos de JSON en las respuestas del servicio, incluso en caso 
     "description" : "The customer with id 'm4hqp35pswl02mmc567' does not exist",
     "http_code" : 404,
     "error_code" : 1005,
-    "request_id" : "1981cdb8-19cb-4bad-8256-e95d58bc035c"
+    "request_id" : "1981cdb8-19cb-4bad-8256-e95d58bc035c",
+    "fraud_rules": [
+        "Billing <> BIN Country for VISA/MC"
+    ]
 }
 ```
 
@@ -219,7 +222,7 @@ Openpay regresa objetos de JSON en las respuestas del servicio, incluso en caso 
 ```
 
 ```csharp
-//Para el caso de C Sharp, toda operación regresara una instancia de la clase "OpenpayException" la cual contendrá esta información del error.
+//Para el caso de C Sharp, toda operación regresará una instancia de la clase "OpenpayException" la cual contendrá esta información del error.
 ```
 
 ```ruby
@@ -237,6 +240,7 @@ error_code  |***numeric*** <br/>El código del error de Openpay indicando el pro
 description |***string*** <br/>Descripción del error.
 http_code   |***string*** <br/>Código de error HTTP de la respuesta.
 request_id  |***string*** <br/>Identificador de la petición.
+fraud_rules  |***array*** <br/> Arreglo con la lista de coincidencia de reglas definidas para deteccion de fraudes.
 
 ##Códigos de error
 
@@ -350,10 +354,10 @@ openpayAPI.ChargeService.Create(ChargeRequest request);
 @charges.create(request_hash)
 ```
 
-> Ejemplo de petición con cliente
+> Ejemplo de petición con comercio
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -363,19 +367,24 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "currency" : "MXN",
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-00051",
-   "metadata" : {
-      "destino" : "Mexico-Queretaro Corrida 1", 
-      "no_autobus" : "42123", 
-      "no_asiento" : "25",
-      "fecha_compra" : "2014-11-26 19:11:12", 
-      "iva" : "123.32"
-  }
+   "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
+   "customer" : {
+   	    "name" : "Juan",
+   	    "last_name" : "Vazquez Juarez",
+   	    "phone_number" : "4423456723",
+   	    "email" : "juan.vazquez@empresa.com.mx"
+   }
 }'
 ```
 
 ```php
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$customer => array(
+   	 'name' : 'Juan',
+   	 'last_name' : 'Vazquez Juarez',
+   	 'phone_number' : '4423456723',
+   	 'email' : 'juan.vazquez@empresa.com.mx');
 
 $chargeRequest = array(
     'method' => 'card',
@@ -384,42 +393,42 @@ $chargeRequest = array(
     'currency' => 'MXN'
     'description' => 'Cargo inicial a mi merchant',
     'order_id' => 'oid-00051',
-    'metadata' => array(
-      'destino' => 'Mexico-Queretaro Corrida 1', 
-      'no_autobus' => '42123', 
-      'no_asiento' => '25',
-      'fecha_compra' => '2014-11-26 19:11:12', 
-      'iva' => '123.32'
-    )
-  );
+    'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
+    'customer' => $customer);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeRequest);
+$charge = $openpay->charges->create($chargeRequest);
 ?>
 ```
 
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateCardChargeParams request = new CreateCardChargeParams();
+Customer customer = new Customer();
+customer.setName("Juan");
+customer.setLastName("Vazquez Juarez");
+customer.setPhoneNumber("4423456723");
+customer.setEmail("juan.vazquez@empresa.com.mx");
+
 request.cardId("kqgykn96i7bcs1wwhvgw"); // =source_id
 request.amount(new BigDecimal("100.00"));
 request.currency("MXN");
 request.description("Cargo inicial a mi merchant");
 request.orderId("oid-00051");
 request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
-request.capture(Boolean.TRUE);
-request.addUserField("destino", "Mexico-Queretaro Corrida 1");
-request.addUserField("no_autobus", "42123");
-request.addUserField("no_asiento", "25");
-request.addUserField("fecha_compra", "2014-11-26 19:11:12");
-request.addUserField("iva", "123.32");
+request.setCustomer(customer);
 
-Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
+Charge charge = api.charges().create(request);
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 ChargeRequest request = new ChargeRequest();
+Customer customer = new Customer();
+customer.Name = "Juan";
+customer.LastName = "Vazquez Juarez";
+customer.PhoneNumber = "4423456723";
+customer.Email = "juan.vazquez@empresa.com.mx";
+
 request.Method = "card";
 request.SourceId = "kwkoqpg6fcvfse8k8mg2";
 request.Amount = new Decimal(100.00);
@@ -427,14 +436,9 @@ request.Currency = "MXN";
 request.Description = "Cargo inicial a mi merchant";
 request.OrderId = "oid-00051";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
-request.Capture = true;
-request.addUserField("destino", "Mexico-Queretaro Corrida 1");
-request.addUserField("no_autobus", "42123");
-request.addUserField("no_asiento", "25");
-request.addUserField("fecha_compra", "2014-11-26 19:11:12");
-request.addUserField("iva", "123.32");
+request.Customer = customer;
 
-Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
+Charge charge = api.ChargeService.Create(request);
 ```
 
 ```javascript
@@ -445,16 +449,16 @@ var chargeRequest = {
    'currency' : 'MXN',
    'description' : 'Cargo inicial a mi cuenta',
    'order_id' : 'oid-00051',
-   'metadata' : {
-      'destino' : 'Mexico-Queretaro Corrida 1', 
-      'no_autobus' : '42123', 
-      'no_asiento' : '25',
-      'fecha_compra' : '2014-11-26 19:11:12', 
-      'iva' : '123.32'
-  }
+   'device_session_id' : 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
+   'customer' : {
+   	    'name' : 'Juan',
+   	    'last_name' : 'Vazquez Juarez',
+   	    'phone_number' : '4423456723',
+   	    'email' : 'juan.vazquez@empresa.com.mx'
+   }
 }
 
-openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function(error, charge) {
+openpay.charges.create(chargeRequest, function(error, charge) {
   // ...
 });
 ```
@@ -462,6 +466,13 @@ openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function
 ```ruby
 @openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 @charges=@openpay.create(:charges)
+customer_hash={
+    "name" => "Juan",
+    "last_name" => "Vazquez Juarez",
+    "phone_number" => "4423456723",
+    "email" => "juan.vazquez@empresa.com.mx"
+}
+
 request_hash={
     "method" => "card",
     "source_id" => "kqgykn96i7bcs1wwhvgw",
@@ -470,16 +481,10 @@ request_hash={
     "description" => "Cargo inicial a mi merchant",
     "order_id" => "oid-00051",
     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
-    "metadata" => {
-      "destino" => "Mexico-Queretaro Corrida 1", 
-      "no_autobus" => "42123", 
-      "no_asiento" => "25",
-      "fecha_compra" => "2014-11-26 19:11:12", 
-      "iva" => "123.32"
-    }
-  }
+    "customer" => customer_hash
+}
 
-response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
+response_hash=@charges.create(request_hash.to_hash)
 ```
 
 > Ejemplo de respuesta
@@ -505,30 +510,21 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
       "allows_payouts":true,
       "creation_date":"2014-05-26T11:02:16-05:00",
       "bank_name":"Banamex",
-      "bank_code":"002",
-      "customer_id":"ag4nktpdzebjiye1tlze"
+      "bank_code":"002"
    },
    "status":"completed",
    "currency":"USD",
    "exchange_rate" : {
-    "from" : "USD",
-    "date" : "2014-11-21",
-    "value" : 13.61,
-    "to" : "MXN"
+      "from" : "USD",
+      "date" : "2014-11-21",
+      "value" : 13.61,
+      "to" : "MXN"
    },
    "creation_date":"2014-05-26T11:02:45-05:00",
    "operation_date":"2014-05-26T11:02:45-05:00",
    "description":"Cargo inicial a mi cuenta",
    "error_message":null,
-   "order_id":"oid-00051",
-   "customer_id":"ag4nktpdzebjiye1tlze",
-    "metadata" : {
-      "destino" : "Mexico-Queretaro Corrida 1", 
-      "no_autobus" : "42123", 
-      "no_asiento" : "25",
-      "fecha_compra" : "2014-11-26 19:11:12", 
-      "iva" : "123.32"
-    }
+   "order_id":"oid-00051"
 }
 ```
 
@@ -543,10 +539,10 @@ Puedes realizar el cargo a la cuenta del comercio o a la cuenta de un cliente. <
 </aside>
 
 ***Sistema antifraude personalizado***</br>
-Es posible enviar información adicional a la plataforma Openpay para incrementar su base de conocimientos, esto le permitirá aplicar reglas personalizadas de acuerdo al giro del comercio y de manera oportuna, por consecuencia ayudará a disminuir la generación de contracargos por intento de fraude.
+Es posible enviar información adicional a la plataforma Openpay para incrementar su base de conocimientos, esto le permitirá aplicar reglas personalizadas de acuerdo al giro del comercio y de manera oportuna, con el propósito de detectar con la mayor efectividad posible los intentos de fraude.
 
 <aside class="notice">
-Para utilizar esta característica es necesario enviar como parte del contenido de la transacción, un campo llamado ***metadata***, el cual contendrá un listado de campos personalizados de antrifraude, con la información propia del comercio que se desea tomar en cuenta al momento de validar y aplicar un cargo. </br>
+Para utilizar esta característica es necesario enviar como parte del contenido de la transacción, la propiedad <code>metadata</code>, el cual contendrá un listado de campos personalizados de antrifraude, con la información propia del comercio que se desea tomar en cuenta al momento de validar y aplicar un cargo. Póngase en contacto con el departamento de soporte de Openpay para habilitar esta funcion. </br>
 </aside>
 
 
@@ -554,44 +550,19 @@ Para utilizar esta característica es necesario enviar como parte del contenido 
 
 Propiedad | Descripción
 --------- | -----
-method|***string*** (requerido) <br/>Debe contener el valor **card** para hacer un cargo de una tarjeta registrada.
+method|***string*** (requerido) <br/>Debe contener el valor **card** para indicat que el cargo se hará de una tarjeta.
 source_id | ***string*** (requerido, longitud = 45) <br/>ID de la tarjeta guardada o el id del token creado de donde se retirarán los fondos.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 2 tipos de monedas: Pesos Mexicanos(MXN) y Dólares Americanos(USD).
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
-device_session_id |  ***string*** (opcional, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
-capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o pre-autorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
-[customer](#crear-un-nuevo-cliente)|***string*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
+device_session_id |  ***string*** (requerido, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta antifraudes
+capture |  ***boolean*** (requerido, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o preautorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
+[customer](#crear-un-nuevo-cliente)|***objeto*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realice el cargo a nivel cliente.
 metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
-
-###Reglas para creación de campos personalizados de antifraude
-***Criterios generales para definición de Keys-Values***<br>
-* El uso de metadata solo aplican para los cargos con tarjeta<br>
-* Máximo 10 keys-values.
-
-***Criterios para definición de Keys***<br>
-* Deben ser minúsculas, alfanuméricos y solo se acepta guión bajo (sin espacio ni cualquier otro carácter)<br>
-* No deben ser nulos o cadena vacía.<br>
-* Su longitud es máximo de 32 carectares.
-
-***Criterios para definición de Values***<br>
-* Deben tener una longitud maxima de 64 caracteres.<br>
-* El formato de estos valores debe de apegarse a los [tipos de datos reconocidos por el sistema antifraude](#tipos-de-datos-reconocidos-por-el-sistema-antifraude)
-
-###Tipos de datos reconocidos por el sistema antifraude
-Openpay siempre guardará los user field's enviados en la transacción, pero en el sistema antifraude si no coincide el tipo de dato soportado, no los guardará y por lo tanto será imposible usar estos campos para la creación de reglas personalizadas antifraude. Los tipos de datos son:
-
-Tipo de dato   | Descripción
--------------- | -----
-Numeric        | Puede contener números, signos negativos y punto decimal.
-Date           | Puede contener fecha y hora con el siguiente formato: YYYY-MM-DD o YYYY-MM-DD HH-MI:SS.
-Amount         | Puede contener números sin signo negativo y sin punto decimal.
-Alfanumeric    | Puede contener Puede contener tanto números como letras o ambos.
-
 
 
 ##Cargo a nueva tarjeta
@@ -651,10 +622,10 @@ openpay.customers.charges.create(customerId, chargeRequest, callback);
 @charges.create(request_hash)
 ```
 
-> Ejemplo de petición con cliente
+> Ejemplo de petición con comercio
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -670,6 +641,13 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "currency" : "MXN",
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-00052"
+   "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
+   "customer" : {
+   	    "name" : "Juan",
+   	    "last_name" : "Vazquez Juarez",
+   	    "phone_number" : "4423456723",
+   	    "email" : "juan.vazquez@empresa.com.mx"
+   },
    "metadata" : {
       "destino" : "Mexico-Queretaro Corrida 1", 
       "no_autobus" : "42123", 
@@ -691,6 +669,12 @@ $card = array(
     'expiration_month' => '12',
     'cvv2' => '110');
 
+$customer => array(
+   	 'name' => 'Juan',
+   	 'last_name' => 'Vazquez Juarez',
+   	 'phone_number' => '4423456723',
+   	 'email' => 'juan.vazquez@empresa.com.mx');
+
 $chargeRequest = array(
     'method' => 'card',
     'card' => $card,
@@ -698,6 +682,8 @@ $chargeRequest = array(
     'currency' => 'MXN',
     'description' => 'Cargo inicial a mi cuenta',
     'order_id' => 'oid-00052',
+    'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
+    'customer' => $customer,
     'metadata' => array(
       'destino' => 'Mexico-Queretaro Corrida 1', 
       'no_autobus' => '42123', 
@@ -707,34 +693,40 @@ $chargeRequest = array(
     )
   );
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeRequest);
+$charge = $openpay->charges->create($chargeRequest);
 ?>
 ```
 
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateCardChargeParams request = new CreateCardChargeParams();
+Customer customer = new Customer();
+customer.setName("Juan");
+customer.setLastName("Vazquez Juarez");
+customer.setPhoneNumber("4423456723");
+customer.setEmail("juan.vazquez@empresa.com.mx");
+
 Card card = new Card();
 card.holderName("Juan Perez Ramirez");
 card.cardNumber("4111111111111111");
 card.cvv2("110");
 card.expirationMonth(12);
 card.expirationYear(20);
+
 request.amount(new BigDecimal("100.00"));
 request.currency("MXN");
 request.description("Cargo inicial a mi cuenta");
 request.card(card);
 request.orderId("oid-00052");
 request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
-request.capture(Boolean.TRUE);
+request.setCustomer(customer);
 request.addUserField("destino", "Mexico-Queretaro Corrida 1");
 request.addUserField("no_autobus", "42123");
 request.addUserField("no_asiento", "25");
 request.addUserField("fecha_compra", "2014-11-26 19:11:12");
 request.addUserField("iva", "123.32");
 
-Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
+Charge charge = api.charges().create(request);
 ```
 
 ```csharp
@@ -747,20 +739,26 @@ card.CardNumber = "4111111111111111";
 card.Cvv2 = "110";
 card.ExpirationMonth = "12";
 card.ExpirationYear = "20";
+Customer customer = new Customer();
+customer.Name = "Juan";
+customer.LastName = "Vazquez Juarez";
+customer.PhoneNumber = "4423456723";
+customer.Email = "juan.vazquez@empresa.com.mx";
+
 request.Card = card;
 request.Amount = new Decimal(9.99);
 request.Currency = "MXN";
 request.Description = "Cargo inicial a mi cuenta";
 request.OrderId = "oid-00052";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
-request.Capture = true;
+request.Customer = customer;
 request.addUserField("destino", "Mexico-Queretaro Corrida 1");
 request.addUserField("no_autobus", "42123");
 request.addUserField("no_asiento", "25");
 request.addUserField("fecha_compra", "2014-11-26 19:11:12");
 request.addUserField("iva", "123.32");
 
-Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
+Charge charge = api.ChargeService.Create(request);
 ```
 
 ```javascript
@@ -777,6 +775,13 @@ var chargeRequest = {
    'currency' : 'MXN',
    'description' : 'Cargo inicial a mi cuenta',
    'order_id' : 'oid-00052',
+	'device_session_id' : 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
+   'customer' : {
+   	    'name' : 'Juan',
+   	    'last_name' : 'Vazquez Juarez',
+   	    'phone_number' : '4423456723',
+   	    'email' : 'juan.vazquez@empresa.com.mx'
+   },
    'metadata' : {
       'destino' : 'Mexico-Queretaro Corrida 1', 
       'no_autobus' : '42123', 
@@ -786,7 +791,7 @@ var chargeRequest = {
   }
 };
 
-openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function(error, charge) {
+openpay.charges.create(chargeRequest, function(error, charge) {
   // ...
 });
 ```
@@ -801,6 +806,12 @@ card_hash={
      "expiration_month" => "12",
      "expiration_year" => "20"
    }
+customer_hash={
+    "name" => "Juan",
+    "last_name" => "Vazquez Juarez",
+    "phone_number" => "4423456723",
+    "email" => "juan.vazquez@empresa.com.mx"
+   }
 request_hash={
      "method" => "card",
      "card" => card_hash,   
@@ -809,16 +820,17 @@ request_hash={
      "description" => "Cargo inicial a mi cuenta",
      "order_id" => "oid-00052",
      "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
+     "customer" => customer_hash,
      "metadata" => {
-      "destino" => "Mexico-Queretaro Corrida 1", 
-      "no_autobus" => "42123", 
-      "no_asiento" => "25",
-      "fecha_compra" => "2014-11-26 19:11:12", 
-      "iva" => "123.32"
+        "destino" => "Mexico-Queretaro Corrida 1", 
+        "no_autobus" => "42123", 
+        "no_asiento" => "25",
+        "fecha_compra" => "2014-11-26 19:11:12", 
+        "iva" => "123.32"
      }
    }
 
-response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
+response_hash=@charges.create(request_hash.to_hash)
 ```
 
 > Ejemplo de respuesta
@@ -857,8 +869,7 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "description":"Cargo inicial a mi cuenta",
    "error_message":null,
    "order_id":"oid-00052",
-   "customer_id":"ag4nktpdzebjiye1tlze",
-    "metadata" : {
+   "metadata" : {
       "destino" : "Mexico-Queretaro Corrida 1", 
       "no_autobus" : "42123", 
       "no_asiento" : "25",
@@ -878,7 +889,7 @@ La propiedad <code>device_Session_Id</code> deberá ser generada desde el API Ja
 Es posible enviar información adicional a la plataforma Openpay para incrementar su base de conocimientos, esto le permitirá aplicar reglas personalizadas de acuerdo al giro del comercio y de manera oportuna, por consecuencia ayudará a disminuir la generación de contracargos por intento de fraude.
 
 <aside class="notice">
-Para utilizar esta característica es necesario enviar como parte del contenido de la transacción, un campo llamado ***metadata***, el cual contendrá un listado de campos personalizados de antrifraude, con la información propia del comercio que se desea tomar en cuenta al momento de validar y aplicar un cargo. </br>
+Para utilizar esta característica es necesario enviar como parte del contenido de la transacción, la propiedad <code>metadata</code>, el cual contendrá un listado de campos personalizados de antrifraude, con la información propia del comercio que se desea tomar en cuenta al momento de validar y aplicar un cargo. Póngase en contacto con el departamento de soporte de Openpay para habilitar esta funcion. </br>
 </aside>
 
 
@@ -886,13 +897,13 @@ Para utilizar esta característica es necesario enviar como parte del contenido 
 
 Propiedad | Descripción
 --------- | -----
-method|***string*** (requerido) <br/>Debe contener el valor **card** para hacer un cargo de una tarjeta registrada.
+method|***string*** (requerido) <br/>Debe contener el valor **card** para indicar que se hace el cargo de una tarjeta.
 card | ***objeto*** (requerido) <br/> Datos de la tarjeta de la cual se retirarán los fondos. Ver [objeto tarjeta](#crear-una-tarjeta) 
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 2 tipos de monedas: Pesos Mexicanos(MXN) y Dólares Americanos(USD).
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
-device_session_id |  ***string*** (opcional, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
+device_session_id |  ***string*** (requerido, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
 capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o pre-autorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
 [customer](#crear-un-nuevo-cliente)|***string*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
 metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
@@ -916,7 +927,7 @@ Regresa un [objeto de transacción](#objeto-transacción) con la información de
 * El formato de estos valores debe de apegarse a los [tipos de datos reconocidos por el sistema antifraude](#tipos-de-datos-reconocidos-por-el-sistema-antifraude)
 
 ###Tipos de datos reconocidos por el sistema antifraude
-Openpay siempre guardará los user field's enviados en la transacción, pero en el sistema antifraude si no coincide el tipo de dato soportado, no los guardará y por lo tanto será imposible usar estos campos para la creación de reglas personalizadas antifraude. Los tipos de datos son:
+Openpay siempre guardará los campos personalizados enviados en la transacción, para asegurarse que los campos son usados para el sistema antifarudes porngase en contacto con nuestro departamento de soporte. Los tipos de datos son:
 
 Tipo de dato   | Descripción
 -------------- | -----
@@ -994,7 +1005,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "method" : "store",
    "amount" : 100,
    "description" : "Cargo con tienda",
-   "order_id" : "oid-00053"
+   "order_id" : "oid-00053",
+   "due_date" : "2014-05-20T13:45:00"
 } ' 
 ```
 
@@ -1006,7 +1018,8 @@ $chargeRequest = array(
     'method' => 'store',
     'amount' => 100,
     'description' => 'Cargo con tienda',
-    'order_id' => 'oid-00053');
+    'order_id' => 'oid-00053',
+    'due_date' => '2014-05-28T13:45:00');
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->create($chargeRequest);
@@ -1015,10 +1028,13 @@ $charge = $customer->charges->create($chargeRequest);
 
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Calendar dueDate = Calendar.getInstance();
+dueDate.set(2014, 5, 28, 13, 45, 0);
 CreateStoreChargeParams request = new CreateStoreChargeParams();
 request.amount(new BigDecimal("100.00"));
 request.description("Cargo con tienda");
 request.orderId("oid-00053");
+request.dueDate(dueDate.getTime());
 
 Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -1030,6 +1046,7 @@ request.Method = "store";
 request.Amount = new Decimal(100.00);
 request.Description = "Cargo con tienda";
 request.OrderId = "oid-00053";
+request.DueDate = new DateTime(2014, 5, 28, 13, 45, 0);
 
 Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -1039,7 +1056,8 @@ var storeChargeRequest = {
    'method' : 'store',
    'amount' : 100,
    'description' : 'Cargo con tienda',
-   'order_id' : 'oid-00053'
+   'order_id' : 'oid-00053',
+   'due_date' : '2014-05-28T13:45:00'
 };
 
 openpay.customers.charges.create('ag4nktpdzebjiye1tlze', storeChargeRequest, function(error, charge) {
@@ -1055,6 +1073,7 @@ request_hash={
      "amount" => 100.00,
      "description" => "Cargo con tienda",
      "order_id" => "oid-00053"
+     "due_date" => "2014-05-28T13:45:00"
    }
 
 response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
@@ -1074,6 +1093,7 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "currency":"MXN",
    "creation_date":"2014-05-26T13:48:25-05:00",
    "operation_date":"2014-05-26T13:48:25-05:00",
+   "due_date":"2014-05-28T13:45:00-05:00",
    "description":"Cargo con tienda",
    "error_message":null,
    "order_id":"oid-00053",
@@ -1092,11 +1112,11 @@ Para un pago en una tienda de conveniencia se debe crear un petición de tipo ca
 
 Propiedad | Descripción
 --------- | -----
-method|***string*** (requerido) <br/>Debe contener el valor **store** para hacer un cargo de una tarjeta registrada.
+method|***string*** (requerido) <br/>Debe contener el valor **store** para indicar que el pago se hará en tienda.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
-due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el cargo a tienda en formato ISO 8601. <br/><br/>Ejemplo (UTC): 2014-08-01T00:50:00Z <br/>***Nota:*** Del lado del servidor se cambiara a hora central<br/><br/>Ejemplo (Central Time): 2014-08-01T11:51:23-05:00
+due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el pago en la tienda en formato ISO 8601. <br/><br/>Ejemplo (UTC): 2014-08-01T00:50:00Z <br/>***Nota:*** Del lado del servidor se cambiara a hora central<br/><br/>Ejemplo (Central Time): 2014-08-01T11:51:23-05:00
 [customer](#crear-un-nuevo-cliente)|***string*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
 
 ###Respuesta
@@ -1169,7 +1189,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "method" : "bank_account",
    "amount" : 100,
    "description" : "Cargo con banco",
-   "order_id" : "oid-00055"
+   "order_id" : "oid-00055",
+   "due_date"
 } ' 
 ```
 
@@ -1269,7 +1290,7 @@ Para un cargo a banco se debe crear una petición de tipo cargo indicando como m
 
 Propiedad | Descripción
 --------- | -----
-method|***string*** (requerido) <br/>Debe contener el valor **bank_account** para hacer un cargo de una tarjeta registrada.
+method|***string*** (requerido) <br/>Debe contener el valor **bank_account** para indicar que se pagará con transferencia bancaria.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
@@ -2985,7 +3006,12 @@ A los clientes les puedes agregar tarjetas y cuentas de banco para despues reali
       "state":"Querétaro",
       "city":"Querétaro",
       "country_code":"MX"
-   }
+   },
+   "store": {
+       "reference": "OPENPAY02DQ35YOY7",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323"
 }
 ```
 
@@ -3001,6 +3027,7 @@ status        |***string*** <br/>Estatus de la cuenta del cliente puede ser acti
 balance       |***numeric*** <br/>Saldo en la cuenta con dos decimales.
 clabe         |***numeric*** <br/>Cuenta CLABE asociada con la que puede recibir fondos realizando una  transferencia desde cualquier banco en México.
 [address](#objeto-dirección) |***object*** <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
+[store](#objeto-store) |***object*** <br/>Contiene la referencia que se puede utilizar para realizar depósitos en tiendas de conveniencia, también se incluye la url para generar el código de barra.
 
 
 ##Crear un nuevo cliente
@@ -3056,7 +3083,7 @@ $customerData = array(
      'name' => 'customer name',
      'last_name' => '',
      'email' => 'customer_email@me.com',
-     'requires_account' => true,
+     'requires_account' => false,
      'phone_number' => '44209087654',
      'address' => array(
          'line1' => 'Calle 10',
@@ -3081,6 +3108,7 @@ request.name("Julian Gerardo");
 request.lastName("López Martínez");
 request.email("julian.martinez@gmail.com");
 request.phoneNumber("4421432915");
+request.requiresAccount(false);
 Address address = new Address();
 address.city("Queretaro");
 address.countryCode("MX");
@@ -3102,6 +3130,7 @@ request.Name = "Julian Gerardo";
 request.LastName = "López Martínez";
 request.Email = "julian.martinez@gmail.com";
 request.PhoneNumber = "4421432915";
+request.RequiresAccount = false;
 Address address = new Address();
 address.City = "Queretaro";
 address.CountryCode = "MX";
@@ -3144,7 +3173,7 @@ request_hash={
      "name" => "customer name",
      "last_name" => nil,
      "email" => "customer_email@me.com",
-     "requires_account" => true,
+     "requires_account" => false,
      "phone_number" => "44209087654",
      "address" => address_hash
    }
@@ -3163,7 +3192,12 @@ response_hash=@customers.create(request_hash.to_hash)
    "phone_number":null,
    "address":null,
    "creation_date":"2014-05-20T16:47:47-05:00",
-   "external_id":null
+   "external_id":null,
+   "store": {
+       "reference": "OPENPAY02DQ35YOY7",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323"
 }
 ```
 
@@ -3354,6 +3388,11 @@ response_hash=@customers.update(request_hash.to_hash)
       "postal_code":"76000",
       "country_code":"MX"
    },
+   "store": {
+       "reference": "OPENPAY02DQ35YOY7",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323",
    "creation_date":"2014-05-20T16:47:47-05:00",
    "external_id":null
 }
@@ -3463,6 +3502,11 @@ response_hash=@customers.get("asynwirguzkgq2bizogo")
       "postal_code":"76000",
       "country_code":"MX"
    },
+   "store": {
+       "reference": "OPENPAY02DQ35YOY7",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323",
    "creation_date":"2014-05-20T16:47:47-05:00",
    "external_id":null
 }
@@ -3675,7 +3719,12 @@ response_hash=@customers.all
    "email":"rodrigo.velazco@payments.com",
    "phone_number":"4425667045",
    "status":"active",
-   "balance":142.5
+   "balance":142.5,
+   "store": {
+       "reference": "OPENPAY02DQ35YOY7",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323"
 }, {
    "id":"cz4nkhrlcu9k7qd4lwqx",
    "creation_date":"2013-11-07T14:54:46-06:00",
@@ -3684,7 +3733,12 @@ response_hash=@customers.all
    "email":"eriberto.rodriguez@payments.com",
    "phone_number":"442",
    "status":"active",
-   "balance":103
+   "balance":103,
+   "store": {
+       "reference": "OPENPAY02DQWERWJ3",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQWERWJ3?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323"
 }]
 ```
 Regresa una lista de los cliente registrados, si desea delimitar el resultado se pueden utilizar los filtros.
@@ -3838,7 +3892,12 @@ response_hash=@transfers.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "description":"Transferencia entre cuentas",
    "error_message":null,
    "order_id":"oid-1245",
-   "customer_id":"a9pvykxz4g5rg0fplze0"
+   "customer_id":"a9pvykxz4g5rg0fplze0",
+   "store": {
+       "reference": "OPENPAY02DQ35YOY7",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323"
 }
 ```
 
@@ -4450,7 +4509,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
-      "token_id":"tokgslwpdcrkhlgxqi9a"
+      "token_id":"tokgslwpdcrkhlgxqi9a",
+      "device_session_id":"8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o"
    }' 
 ```
 
@@ -4459,7 +4519,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $cardDataRequest = array(
-    'token_id' => 'tokgslwpdcrkhlgxqi9a'
+    'token_id' => 'tokgslwpdcrkhlgxqi9a',
+    'device_session_id' => '8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o'
     );
 
 $customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
@@ -4471,6 +4532,7 @@ $card = $customer->cards->add($cardDataRequest);
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card request = new Card();
 request.tokenId("tokgslwpdcrkhlgxqi9a");
+request.deviceSessionId("8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o");
 
 request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
 ```
@@ -4479,13 +4541,15 @@ request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card request = new Card();
 request.TokenId = "tokgslwpdcrkhlgxqi9a";
+request.DeviceSessionId = "8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o";
 
 request = api.CardService.Create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 ```javascript
 var cardRequest = {
-  'token_id' : 'tokgslwpdcrkhlgxqi9a'
+  'token_id' : 'tokgslwpdcrkhlgxqi9a',
+  'device_session_id' : '8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o'
 }
 
 openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(error, card)  {
@@ -4497,7 +4561,8 @@ openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(err
 @openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
 @cards=@openpay.create(:cards)
 request_hash={
-     "token_id" => "tokgslwpdcrkhlgxqi9a"
+     "token_id" => "tokgslwpdcrkhlgxqi9a",
+     "device_session_id" => "8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o"
    }
 
 response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
@@ -4530,6 +4595,7 @@ Crea una tarjeta a partir de un token obtenido desde el navegador o dispositivo 
 Propiedad | Descripción
 --------- | ------
 token_id| ***string*** (requerido, longitud = 45) <br/> Identificador del token generado en el navegador o dispositivo del cliente.
+device_session_id| ***string*** (requerido, longitud = 255) <br> Identificador del dispositivo generado con la herramienta antifraudes
 
 ###Respuesta
 Regresa un [objeto tarjeta](#objeto-tarjeta)
@@ -8052,3 +8118,20 @@ postal_code | ***string*** (requerido) <br/>Código postal del tarjeta habiente
 state | ***string*** (requerido) <br/>Estado del tarjeta habiente
 city | ***string*** (requerido) <br/>Ciudad del tarjeta habiente
 country_code | ***string*** (requerido) <br/>Código del país del tarjeta habiente a dos caracteres en formato ISO_3166-1
+
+##Objeto Store
+
+> Ejemplo de Objeto:
+
+```json
+{
+   "reference":"OPENPAY02DQ35YOY7",
+   "barcode_url":"https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+}
+```
+
+Propiedad | Descripción
+--------- | -----------
+reference | ***string*** <br/> Es la referencia con la que se puede ir a la tienda y realizar depósitos a la cuenta de Openpay.
+barcode_url | ***string*** <br/>Es la url con la cual se puede obtener el codigo de barras de la referencia.
+

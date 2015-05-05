@@ -28,7 +28,7 @@ All the API responses are in [JSON](http://www.json.org/) format, including the 
 <br/>
 <br/>
 
-> a) By Business
+> a) By Merchant
 
 ```
 /v1/{MERCHANT_ID}/...
@@ -75,7 +75,7 @@ The following URIs are the basis of the endpoints for the supported environments
 * **Test**, URI base: <br/> `https://sandbox-api.openpay.mx`<br/><br/>
 * **Production**, URI base: <br/>`https://api.openpay.mx`<br/>
 
-A complete endpoint consists of the base URI of the environment, the identifier of the business and the resource.
+A complete endpoint consists of the base URI of the environment, the identifier of the Merchant and the resource.
 
 For example, if we want to create a new customer, the endpoint would be::
 
@@ -92,7 +92,7 @@ In order to create a complete request is necessary to send the right HTTP header
 > Authentication example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges/ \
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 
 The -u parameter is responsible for the HTTP basic authentication (adding two points after the private key prevents the use of password)
@@ -181,7 +181,7 @@ There are 2 types of API keys:
 For calls between servers and full access to all API operations (should never be shared).
 
 <aside class="warning">
-Keep this key safe and never share it with anyone.
+Keep this key safe and never share it to anyone.
 </aside>
 
 * **Public.-**
@@ -194,7 +194,7 @@ To make calls with your public key use the [Openpay.js] library(#)
 For API authentication you must use the [basic access authentication]http://es.wikipedia.org/wiki/Autenticación_de_acceso_básica), where the API key is the username. The password is not required and it should be left blank for purposes of simplicity
 
 <aside class="notice">
-For safety reasons, all requests must be via **HTTPS**.
+For security reasons, all requests must be through **HTTPS**.
 </aside>
 
 #Errors
@@ -211,7 +211,10 @@ Openpay returns JSON objects in the service responses.
     "description" : "The customer with id 'm4hqp35pswl02mmc567' does not exist",
     "http_code" : 404,
     "error_code" : 1005,
-    "request_id" : "1981cdb8-19cb-4bad-8256-e95d58bc035c"
+    "request_id" : "1981cdb8-19cb-4bad-8256-e95d58bc035c",
+    "fraud_rules": [
+        "Billing <> BIN Country for VISA/MC"
+    ]
 }
 ```
 
@@ -237,6 +240,7 @@ error_code  |***numeric*** <br/>Openpay numeric error code indicating a problem 
 description |***string*** <br/>Error description.
 http_code   |***string*** <br/>HTTP error code  of the response.
 request_id  |***string*** <br/> Request identifier.
+fraud_rules |***array*** <br/> Array with antifraud rules broken according to fraud detection rules.
 
 ##Error codes
 
@@ -270,7 +274,7 @@ Code    | HTTP Error |Cause
 ###Cards
 Code    | HTTP Error |Cause
 --------- | ----------- | --------
-3001 | 402 Payment Required | The card was declined.
+3001 | 402 percent Required | The card was declined.
 3002 | 402 Payment Required | The card has expired.
 3003 | 402 Payment Required | The card has insufficient funds.
 3004 | 402 Payment Required | The card has been identified as a stolen card.
@@ -289,7 +293,7 @@ Code    | HTTP Error |Cause
 
 
 #Charges
-Charges can be made to cards, shops and banks. Each charge is assigned with an unique identifier in the system.
+Charges can be made to cards, stores and banks. Each charge is assigned with an unique identifier in the system.
 
 You can do card charges by using a saved card id, using a token or you can send the card information at the time of invocation.
 
@@ -298,7 +302,7 @@ You can do card charges by using a saved card id, using a token or you can send 
 > Definition
 
 ```shell
-Business
+Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
 
 Customer
@@ -307,7 +311,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 
 ```php
 <?
-Business
+Merchant
 $openpay->charges->create(chargeRequest);
 
 Customer
@@ -320,12 +324,12 @@ $customer->charges->create(chargeRequest);
 //Customer
 openpayAPI.charges().create(String customerId, CreateCardChargeParams request);
 
-//Business
+//Merchant
 openpayAPI.charges().create(CreateCardChargeParams request);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.charges.create(chargeRequest, callback);
 
 // Customer
@@ -336,7 +340,7 @@ openpay.customers.charges.create(customerId, chargeRequest, callback);
 //Customer
 openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
 
-//Business
+//Merchant
 openpayAPI.ChargeService.Create(ChargeRequest request);
 ```
 
@@ -345,15 +349,15 @@ openpayAPI.ChargeService.Create(ChargeRequest request);
 @charges=@openpay.create(:charges)
 @charges.create(request_hash, customer_id)
 
-#Business
+#Merchant
 @charges=@openpay.create(:charges)
 @charges.create(request_hash)
 ```
 
-> Customer request example 
-> 
+> Merchant request example 
+
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -361,41 +365,66 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "method" : "card",
    "amount" : 100,
    "description" : "Cargo inicial a mi cuenta",
-   "order_id" : "oid-00051"
-} ' 
+   "order_id" : "oid-00051",
+   "device_session_id":"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
+   "customer" : {
+   	    "name" : "Juan",
+   	    "last_name" : "Vazquez Juarez",
+   	    "phone_number" : "4423456723",
+   	    "email" : "juan.vazquez@empresa.com.mx"
+   }
+}' 
 ```
 
 ```php
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$customer => array(
+   	 'name' => 'Juan',
+   	 'last_name' => 'Vazquez Juarez',
+   	 'phone_number' => '4423456723',
+   	 'email' => 'juan.vazquez@empresa.com.mx');
 
 $chargeRequest = array(
     'method' => 'card',
     'source_id' => 'kqgykn96i7bcs1wwhvgw',
     'amount' => 100,
     'description' => 'Cargo inicial a mi merchant',
-    'order_id' => 'oid-00051');
+    'order_id' => 'oid-00051'
+    'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
+    'customer' => $customer);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeRequest);
+$charge = $openpay->charges->create($chargeRequest);
 ?>
 ```
 
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateCardChargeParams request = new CreateCardChargeParams();
+Customer customer = new Customer();
+customer.setName("Juan");
+customer.setLastName("Vazquez Juarez");
+customer.setPhoneNumber("4423456723");
+customer.setEmail("juan.vazquez@empresa.com.mx");
+
 request.cardId("kqgykn96i7bcs1wwhvgw"); // =source_id
 request.amount(new BigDecimal("100.00"));
 request.description("Cargo inicial a mi merchant");
 request.orderId("oid-00051");
 request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
-request.capture(Boolean.TRUE);
+request.setCustomer(customer);
 
-Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
+Charge charge = api.charges().create(request);
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Customer customer = new Customer();
+customer.Name = "Juan";
+customer.LastName = "Vazquez Juarez";
+customer.PhoneNumber = "4423456723";
+customer.Email = "juan.vazquez@empresa.com.mx";
+
 ChargeRequest request = new ChargeRequest();
 request.Method = "card";
 request.SourceId = "kwkoqpg6fcvfse8k8mg2";
@@ -403,9 +432,9 @@ request.Amount = new Decimal(100.00);
 request.Description = "Cargo inicial a mi merchant";
 request.OrderId = "oid-00051";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
-request.Capture = true;
+request.Customer = customer;
 
-Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
+Charge charge = api.ChargeService.Create(request);
 ```
 
 ```javascript
@@ -414,10 +443,17 @@ var chargeRequest = {
    'method' : 'card',
    'amount' : 100,
    'description' : 'Cargo inicial a mi cuenta',
-   'order_id' : 'oid-00051'
+   'order_id' : 'oid-00051',
+   'device_session_id' : 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
+   'customer' : {
+   	    'name' : 'Juan',
+   	    'last_name' : 'Vazquez Juarez',
+   	    'phone_number' : '4423456723',
+   	    'email' : 'juan.vazquez@empresa.com.mx'
+   }
 }
 
-openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function(error, charge) {
+openpay.charges.create(chargeRequest, function(error, charge) {
   // ...
 });
 ```
@@ -425,16 +461,23 @@ openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function
 ```ruby
 @openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 @charges=@openpay.create(:charges)
+customer_hash={
+    "name" => "Juan",
+    "last_name" => "Vazquez Juarez",
+    "phone_number" => "4423456723",
+    "email" => "juan.vazquez@empresa.com.mx"
+}
 request_hash={
     "method" => "card",
     "source_id" => "kqgykn96i7bcs1wwhvgw",
     "amount" => 100.00,
     "description" => "Cargo inicial a mi merchant",
     "order_id" => "oid-00051",
-    "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
-  }
+    "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
+    "customer" => customer_hash
+}
 
-response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
+response_hash=@charges.create(request_hash.to_hash)
 ```
 
 > Response example
@@ -469,34 +512,40 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "operation_date":"2014-05-26T11:02:45-05:00",
    "description":"Cargo inicial a mi cuenta",
    "error_message":null,
-   "order_id":"oid-00051",
-   "customer_id":"ag4nktpdzebjiye1tlze"
+   "order_id":"oid-00051"
 }
 ```
 
-This type of charge requires a saved card or that you have generated a token. To save cards read [Create a card] (#create-a-card) and to use tokens visit the [Creation of tokens] (#create-a-new-token) section.
+This type of charge requires a saved card or a previously generated token. To save cards read [Create a card] (#create-a-card) and to use tokens visit the [Creation of tokens] (#create-a-new-token) section.
 
 Once you have a saved card or token use the <code>source_id</code> property to send the identifier.
 
-The <code>device_session_id</code> property must be generated from the JavaScript API, see [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
+The <code>device_session_id</code> property must be generated using JavaScript API, see [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
 
 <aside class="notice">
-You can charge the business account or the customer account.
+You can charge the merchant account or the customer account.
+</aside>
+
+***Customized antifraud system***</br>
+You can send extra data to Openpay in order to increase number of variables and get better results in antifraud detection for your transactions.
+
+<aside class="notice">
+If you want to use this feature you need to send <code>metadata</code> property with all fields you think can help to decide when a transaction is a fraud trying. Call support line to enable this feature</br>
 </aside>
 
 ###Request 
 
 Property | Description
 --------- | -----
-method|***string*** (required) <br/>It must contain the **card** value in order to a make charge of a registered card.
+method|***string*** (required) <br/>It must contain the **card** value in order to specify the charge will be made from card.
 source_id | ***string*** (required, length = 45) <br/>Saved ID card or token id created from where the funds are withdrawn.
-amount | ***numeric*** (required) <br/>Amount of charge. Must be an amount greater than zero, with up to two decimal digits.
+amount | ***numeric*** (required) <br/>Amount to charge. Must be an amount greater than zero, with up to two decimal digits.
 description | ***string*** (required, length = 250) <br/>A description associated to the charge.
 order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
-device_session_id |  ***string*** (optional, length = 255) <br/>Identifier of the device generated by the anti-fraud tool.
-capture |  ***boolean*** (optional, default = true) <br/>Indicates whether the charge is made immediately or not , when the value is false the charge is handled as authorized (or pre-authorization) and the amount is only to be confirmed or canceled in a second call.
-[customer](#create-a-new-customer)|***string*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created.
-<br/><br/> **Note:** This parameter can be used only by creating the charge at the business level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
+device_session_id |  ***string*** (required, length = 255) <br/>Identifier of the device generated by the antifraud tool.
+capture | ***boolean*** (optional, default = true) <br/>Indicates whether the charge is made immediately or not , when the value is false the charge is handled as authorized (or pre-authorization) and the amount is only to be confirmed or canceled in a second call.
+[customer](#create-a-new-customer)| ***object*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the merchant level<br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
+metadata |  ***list(key, value)*** (optional) <br/>Field list to send antifraud system, It must be according to [Rules to send custom antifraud fields] (#custom-to-send-antifraud-fields).
 
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
@@ -506,7 +555,7 @@ Returns a [transaction object](#transaction-object) with the charge information 
 > Definition
 
 ```shell
-Business
+Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
 
 Customer
@@ -515,7 +564,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 
 ```php
 <?
-//Business
+//Merchant
 $openpay->charges->create(chargeRequest);
 
 //Customer
@@ -528,7 +577,7 @@ $customer->charges->create(chargeRequest);
 //Customer
 openpayAPI.charges().create(String customerId, CreateCardChargeParams request);
 
-//Business
+//Merchant
 openpayAPI.charges().create(CreateCardChargeParams request);
 ```
 
@@ -536,12 +585,12 @@ openpayAPI.charges().create(CreateCardChargeParams request);
 //Customer
 openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
 
-//Business
+//Merchant
 openpayAPI.ChargeService.Create(ChargeRequest request);
 ```
 
 ```javascript
-//Business
+//Merchant
 openpay.charges.create(chargeRequest, callback);
 
 //Customer
@@ -553,15 +602,15 @@ openpay.customers.charges.create(customerId, chargeRequest, callback);
 @charges=@openpay.create(:charges)
 @charges.create(request_hash, customer_id)
 
-#Business
+#Merchant
 @charges=@openpay.create(:charges)
 @charges.create(request_hash)
 ```
 
-> Customer request example
+> Merchant request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -575,7 +624,21 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "method" : "card",
    "amount" : 100,
    "description" : "Cargo inicial a mi cuenta",
-   "order_id" : "oid-00052"
+   "order_id" : "oid-00052",
+   "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
+   "customer" : {
+   	    "name" : "Juan",
+   	    "last_name" : "Vazquez Juarez",
+   	    "phone_number" : "4423456723",
+   	    "email" : "juan.vazquez@empresa.com.mx"
+   },
+   "metadata" : {
+      "destination" : "Mexico-Queretaro Corrida 1", 
+      "bus_number" : "42123", 
+      "seat_no" : "25",
+      "sale_date" : "2014-11-26 19:11:12", 
+      "fees" : "13.32"
+   }
 } ' 
 ```
 
@@ -589,16 +652,29 @@ $card = array(
     'expiration_year' => '20',
     'expiration_month' => '12',
     'cvv2' => '110');
+$metadata = array(
+    'destination' => 'Mexico-Queretaro Corrida 1', 
+    'bus_number' => '42123", 
+    'seat_no' => '25',
+    'travel_date' => '2014-11-26 19:11:12', 
+    'fees' => '13.32');
+$customer => array(
+   	 'name' => 'Juan',
+   	 'last_name' => 'Vazquez Juarez',
+   	 'phone_number' => '4423456723',
+   	 'email' => 'juan.vazquez@empresa.com.mx');
 
 $chargeRequest = array(
     'method' => 'card',
     'card' => $card,
     'amount' => 100,
     'description' => 'Cargo inicial a mi cuenta',
-    'order_id' => 'oid-00052');
+    'order_id' => 'oid-00052',
+    'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
+    'customer' => $customer,
+    'metadata' => $metadata);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeRequest);
+$charge = $openpay->charges->create($chargeRequest);
 ?>
 ```
 
@@ -611,14 +687,26 @@ card.cardNumber("4111111111111111");
 card.cvv2("110");
 card.expirationMonth(12);
 card.expirationYear(20);
+
+Customer customer = new Customer();
+customer.setName("Juan");
+customer.setLastName("Vazquez Juarez");
+customer.setPhoneNumber("4423456723");
+customer.setEmail("juan.vazquez@empresa.com.mx");
+
 request.amount(new BigDecimal("100.00"));
 request.description("Cargo inicial a mi cuenta");
 request.card(card);
 request.orderId("oid-00052");
 request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
-request.capture(Boolean.TRUE);
+request.setCustomer(customer);
+request.addUserField("desctination", "Mexico-Queretaro Corrida 1");
+request.addUserField("bus_no", "42123");
+request.addUserField("seat_no", "25");
+request.addUserField("travel_date", "2014-11-26 19:11:12");
+request.addUserField("fees", "123.32");
 
-Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
+Charge charge = api.charges().create(request);
 ```
 
 ```csharp
@@ -631,14 +719,26 @@ card.CardNumber = "4111111111111111";
 card.Cvv2 = "110";
 card.ExpirationMonth = "12";
 card.ExpirationYear = "20";
+
+Customer customer = new Customer();
+customer.Name = "Juan";
+customer.LastName = "Vazquez Juarez";
+customer.PhoneNumber = "4423456723";
+customer.Email = "juan.vazquez@empresa.com.mx";
+
 request.Card = card;
 request.Amount = new Decimal(9.99);
 request.Description = "Cargo inicial a mi cuenta";
 request.OrderId = "oid-00052";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
-request.Capture = true;
+request.Customer = customer;
+request.addUserField("destination", "Mexico-Queretaro Corrida 1");
+request.addUserField("bus_no", "42123");
+request.addUserField("seat_no", "25");
+request.addUserField("travel_date", "2014-11-26 19:11:12");
+request.addUserField("fees", "123.32");
 
-Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
+Charge charge = api.ChargeService.Create(request);
 ```
 
 ```javascript
@@ -653,10 +753,24 @@ var chargeRequest = {
    'method' : 'card',
    'amount' : 100,
    'description' : 'Cargo inicial a mi cuenta',
-   'order_id' : 'oid-00052'
+   'order_id' : 'oid-00052',
+   'device_session_id' : 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
+   'customer' : {
+   	    'name' : 'Juan',
+   	    'last_name' : 'Vazquez Juarez',
+   	    'phone_number' : '4423456723',
+   	    'email' : 'juan.vazquez@empresa.com.mx'
+   },
+   'metadata' : {
+      'destination' : 'Mexico-Queretaro Corrida 1', 
+      'bus_number' : '42123', 
+      'seat_no' : '25',
+      'travel_date' : '2014-11-26 19:11:12', 
+      'fee' : '13.32'
+  }
 };
 
-openpay.customers.charges.create('ag4nktpdzebjiye1tlze', chargeRequest, function(error, charge) {
+openpay.charges.create(chargeRequest, function(error, charge) {
   // ...
 });
 ```
@@ -671,16 +785,31 @@ card_hash={
      "expiration_month" => "12",
      "expiration_year" => "20"
    }
+customer_hash={
+    "name" => "Juan",
+    "last_name" => "Vazquez Juarez",
+    "phone_number" => "4423456723",
+    "email" => "juan.vazquez@empresa.com.mx"
+   }
+metadata_hash={
+      "destination" => "Mexico-Queretaro Corrida 1", 
+      "bus_number" => "42123", 
+      "seat_no" => "25",
+      "sale_date" => "2014-11-26 19:11:12", 
+      "fee" => "13.32"
+   }
 request_hash={
      "method" => "card",
      "card" => card_hash,   
      "amount" => 100.00,
      "description" => "Cargo inicial a mi cuenta",
      "order_id" => "oid-00052",
-     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
+     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
+     "customer" => customer_hash,
+     "metadata" => metadata_hash
    }
 
-response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
+response_hash=@charges.create(request_hash.to_hash)
 ```
 
 > Response example
@@ -713,29 +842,69 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "description":"Cargo inicial a mi cuenta",
    "error_message":null,
    "order_id":"oid-00052",
-   "customer_id":"ag4nktpdzebjiye1tlze"
+   "metadata" : {
+      "destination" : "Mexico-Queretaro Corrida 1", 
+      "bus_number" : "42123", 
+      "seat_no" : "25",
+      "sale_date" : "2014-11-26 19:11:12", 
+      "fee" : "13.32"
+  }
 }
 ```
 
-In this type of invocation it is necessary to send all the card information, which will only be used for this sale and will not be stored in the system. This can be used for direct sales which do not require the card for future use.
+In this type of invocation it is necessary to send all the card information, which will only be used for this transaction and will not be stored in the system. This can be used for direct sales which do not require the card for future use.
 
-The <code>device_Session_Id</code> property must be generated from the JavaScript API, see [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
+The <code>device_Session_Id</code> property must be generated using the JavaScript API, see [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
+
+***Customized antifraud system***</br>
+You can send extra data to Openpay in order to increase variable number and get better results in antifraud detection for your transactions.
+
+<aside class="notice">
+If you want to use this fact you need to send <code>metadata</code> property with all fields you think can help to decide when a transaction is a fraud trying. Call support line to enable this feature. </br>
+</aside>
+
 
 ###Request 
 
 Property | Descripction
 --------- | -----
-method|***string*** (required) <br/>It must contain the **card** value in oreder to make a charge of a registered card .
+method|***string*** (required) <br/>It must contain the **card** value it means the charge will be made from card.
 card | ***object*** (required) <br/> Data of the card which the funds will be withdrawn. See [Card Object](#create-a-card) 
 amount | ***numeric*** (required) <br/>Amount of charge. Must be an amount greater than zero, with up to two decimal digits.
 description | ***string*** (required, length = 250) <br/>A description associated to the charge.
 order_id | ***string*** (optional, length = 100) <br/>Unique identifier of the charge. Must be unique among all transactions.
-device_session_id |  ***string*** (optional, length = 255) <br/>Identifier of the device generated by the anti-fraud tool.
+device_session_id |  ***string*** (required, length = 255) <br/>Identifier of the device generated by the anti-fraud tool.
 capture |  ***boolean*** (optional, default = true) <br/>Indicates whether the charge is made immediately or not , when the value is false the charge is handled as authorized (or pre-authorization) and the amount is only to be confirmed or canceled in a second call. 
-[customer](#create-a-new-customer)|***string*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the business level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
+[customer](#create-a-new-customer)|***string*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level<br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
+metadata |  ***list(key, value)*** (optional) <br/>Field list to send antifraud system, It must be according to [Rules to send custom antifraud fields] (#rules-to-send-custom-antifraud-fields).
 
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
+
+###Rules to send custom antifraud fields
+***Characteristics for List***<br>
+	* It is only valid for card charges<br>
+	* You can send up to 10 fields<br>
+	
+***Characteristics for keys***<br>
+* They must be lower case alphanuméric characters or underscore.<br>
+* They must not be empty nor null.<br>
+* String length up to 32 characters.<br>
+
+***Characteristics for values***<br>
+* String length up to 32 characters.<br>
+* They must fit to [allowed antifraud field](#allowed-antifraud-fields)<br>
+
+###Allowed antifraud fields
+Openpay will save all fields you send, If you need this fields to be considered in antifraud system please call our technical support department. Allowed types are:
+
+Data type   | Description
+-------------- | -----
+Numeric        | Signed or unsigned numbers and decimal point are allowed.
+Date           | Dates in format: YYYY-MM-DD oo YYYY-MM-DD HH-MI:SS.
+Amount         | Unsigned numbers widhout decimal point.
+Alfanumeric    | Strings and numbers are allowed.
+
 
 
 ##Charge via store
@@ -743,7 +912,7 @@ Returns a [transaction object](#transaction-object) with the charge information 
 > Definition
 
 ```shell
-Business
+Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
 
 Customer
@@ -752,7 +921,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 
 ```php
 <?
-Business
+Merchant
 $openpay->charges->create(chargeRequest);
 
 Customer
@@ -765,7 +934,7 @@ $customer->charges->create(chargeRequest;
 //Customer
 openpayAPI.charges().create(String customerId, CreateStoreChargeParams request);
 
-//Business
+//Merchant
 openpayAPI.charges().create(CreateStoreChargeParams request);
 ```
 
@@ -773,12 +942,12 @@ openpayAPI.charges().create(CreateStoreChargeParams request);
 //Customer
 openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
 
-//Business
+//Merchant
 openpayAPI.ChargeService.Create(ChargeRequest request);
 ```
 
 ```javascript
-//Business
+//Merchant
 openpay.charges.create(chargeRequest, callback);
 
 //Customer
@@ -790,7 +959,7 @@ openpay.customers.charges.create(customerId, chargeRequest, callback);
 @charges=@openpay.create(:charges)
 @charges.create(request_hash, customer_id)
 
-#Business
+#Merchant
 @charges=@openpay.create(:charges)
 @charges.create(request_hash)
 ```
@@ -805,8 +974,9 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "method" : "store",
    "amount" : 100,
    "description" : "Cargo con tienda",
-   "order_id" : "oid-00053"
-} ' 
+   "order_id" : "oid-00053",
+   "due_date" : "2014-05-28T13:45:00"
+}' 
 ```
 
 ```php
@@ -817,7 +987,8 @@ $chargeRequest = array(
     'method' => 'store',
     'amount' => 100,
     'description' => 'Cargo con tienda',
-    'order_id' => 'oid-00053');
+    'order_id' => 'oid-00053',
+    'due_date' => '2014-05-28T13:45:00');
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->create($chargeRequest);
@@ -826,10 +997,13 @@ $charge = $customer->charges->create($chargeRequest);
 
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Calendar dueDate = Calendar.getInstance();
+dueDate.set(2014, 5, 28, 13, 45, 0);
 CreateStoreChargeParams request = new CreateStoreChargeParams();
 request.amount(new BigDecimal("100.00"));
 request.description("Cargo con tienda");
-request.orderId("oid-00053");
+request.orderId("oid-00053"
+request.dueDate(dueDate.getTime());
 
 Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -841,6 +1015,7 @@ request.Method = "store";
 request.Amount = new Decimal(100.00);
 request.Description = "Cargo con tienda";
 request.OrderId = "oid-00053";
+request.DueDate = new DateTime(2014, 5, 28, 13, 45, 0);
 
 Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
 ```
@@ -850,7 +1025,8 @@ var storeChargeRequest = {
    'method' : 'store',
    'amount' : 100,
    'description' : 'Cargo con tienda',
-   'order_id' : 'oid-00053'
+   'order_id' : 'oid-00053',
+   'due_date' : '2014-05-28T13:45:00'
 };
 
 openpay.customers.charges.create('ag4nktpdzebjiye1tlze', storeChargeRequest, function(error, charge) {
@@ -865,7 +1041,8 @@ request_hash={
      "method" => "store",
      "amount" => 100.00,
      "description" => "Cargo con tienda",
-     "order_id" => "oid-00053"
+     "order_id" => "oid-00053",
+     "due_date" => "2014-05-28T13:45:00"
    }
 
 response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
@@ -885,6 +1062,7 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "currency":"MXN",
    "creation_date":"2014-05-26T13:48:25-05:00",
    "operation_date":"2014-05-26T13:48:25-05:00",
+   "due_date":"2014-05-28T13:45:00-05:00",
    "description":"Cargo con tienda",
    "error_message":null,
    "order_id":"oid-00053",
@@ -903,12 +1081,12 @@ For payments at a convenience store you should create a charge type request by i
 
 Property | Description
 --------- | -----
-method|***string*** (required) <br/>It must constains the **store** value in order to make a charge to a registered card.
+method|***string*** (required) <br/>It must constains the **store** value in order to specify you want to pay at store.
 amount | ***numeric*** (required) <br/>Amount of charge. Must be an amount greater than zero, with up to two decimal digits.
 description | ***string*** (required, length = 250) <br/>A description associated to the charge.
 order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
 due_date | ***datetime*** (optional) <br/>Due date for making the payment in the store in  ISO 8601 format. <br/><br/>Example (UTC): 2014-08-01T00:50:00Z <br/>***Note:*** On the server side the date will be changeg to central time<br/><br/>Example (Central Time): 2014-08-01T11:51:23-05:00
-[customer](#create-a-new-customer)|***string*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the business level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer leve.
+[customer](#create-a-new-customer)|***string*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer leve.
 
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
@@ -918,7 +1096,7 @@ Returns a [transaction object](#transaction-object) with the charge information 
 > Definition
 
 ```shell
-Business
+Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
 
 Customer
@@ -927,7 +1105,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 
 ```php
 <?
-Business
+Merchant
 $openpay->charges->create(chargeRequest);
 
 Customer
@@ -940,7 +1118,7 @@ $customer->charges->create(chargeRequest);
 //Customer
 openpayAPI.charges().create(String customerId, CreateBankChargeParams request);
 
-//Business
+//Merchant
 openpayAPI.charges().create(CreateBankChargeParams request);
 ```
 
@@ -948,12 +1126,12 @@ openpayAPI.charges().create(CreateBankChargeParams request);
 //Customer
 openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
 
-//Business
+//Merchant
 openpayAPI.ChargeService.Create(ChargeRequest request);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.charges.create(chargeRequest, callback);
 
 // Customer
@@ -965,7 +1143,7 @@ openpay.customers.charges.create(customerId, chargeRequest, callback);
 @charges=@openpay.create(:charges)
 @charges.create(request_hash, customer_id)
 
-#Business
+#Merchant
 @charges=@openpay.create(:charges)
 @charges.create(request_hash)
 ```
@@ -1080,22 +1258,22 @@ For a charge via bank you must create a charge type request  by indicating ** ba
 
 Property | Description
 --------- | -----
-method|***string*** (required) <br/>It must contain the **bank_account** value in order to a make charge of a registered card.
+method|***string*** (required) <br/>It must contain the **bank_account** value to specify the pay will be made with bank transfer.
 amount | ***numeric*** (required) <br/>Amount of charge. Must be an amount greater than zero, with up to two decimal digits.
 description | ***string*** (required, length = 250) <br/>A description associated to the charge.
 order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
 due_date | ***datetime*** (optional) <br/>>Due date for making the bank charge in the ISO 8601 format. <br/><br/>Example (UTC): 2014-08-01T00:50:00Z <br/>***Note:*** On the server side the date will be changed to central time<br/><br/>Example (Central Time): 2014-08-01T11:51:23-05:00
-[customer](#create-a-new-customer)|***string*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the business level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
+[customer](#create-a-new-customer)|***string*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
 
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
 
-##Confirm a charge
+##Confirming a charge
 
 > Definition
 
 ```shell
-Business
+Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/capture
 
 Customer
@@ -1104,7 +1282,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 
 ```php
 <?
-Business
+Merchant
 $charge = $openpay->charges->get(transactionId);
 $charge->capture(captureData);
 
@@ -1119,7 +1297,7 @@ $charge->capture(captureData);
 //Customer
 openpayAPI.charges().confirmCapture(String customerId, ConfirmCaptureParams request);
 
-//Business
+//Merchant
 openpayAPI.charges().confirmCapture(ConfirmCaptureParams request);
 ```
 
@@ -1127,12 +1305,12 @@ openpayAPI.charges().confirmCapture(ConfirmCaptureParams request);
 //Customer
 openpayAPI.ChargeService.Capture(string customer_id, string transaction_id, Decimal? amount);
 
-//Business
+//Merchant
 openpayAPI.ChargeService.Capture(string transaction_id, Decimal? amount);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.charges.capture(transactionId, captureRequest, callback);
 
 // Customer
@@ -1144,7 +1322,7 @@ openpay.customers.charges.capture(customerId, transactionId, captureRequest, cal
 @charges=@openpay.create(:charges)
 @charges.capture(transaction_id, customer_id)
 
-#Business
+#Merchant
 @charges=@openpay.create(:charges)
 @charges.capture(transaction_id)
 ```
@@ -1254,12 +1432,12 @@ amount | ***numeric*** (required) <br/>Amount to confirm. It can be less than or
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
 
-##Charge refund
+##Refunding a charge
 
 > Definition
 
 ```shell
-Business
+Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/refund
 
 Customer
@@ -1268,7 +1446,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 
 ```php
 <?
-Business
+Merchant
 $charge = $openpay->charges->get(transactionId);
 $charge->refund(refundData);
 
@@ -1283,7 +1461,7 @@ $charge->refund(refundData);
 //Customer
 openpayAPI.charges().refund(String customerId, RefundParams request);
 
-//Business
+//Merchant
 openpayAPI.charges().refund(RefundParams request);
 ```
 
@@ -1291,12 +1469,12 @@ openpayAPI.charges().refund(RefundParams request);
 //Customer
 openpayAPI.ChargeService.Refund(string customer_id, string transaction_id, string description);
 
-//Business
+//Merchant
 openpayAPI.ChargeService.Refund(string transaction_id, string description);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.charges.refund(transactionId, refundRequest, callback);
 
 // Customer
@@ -1308,7 +1486,7 @@ openpay.customers.charges.refund(customerId, transactionId, refundRequest, callb
 @charges=@openpay.create(:charges)
 @charges.refund(transaction_id, request_hash, customer_id)
 
-#Business
+#Merchant
 @charges=@openpay.create(:charges)
 @charges.refund(transaction_id, request_hash)
 ```
@@ -1443,16 +1621,16 @@ Returns a [transaction object](#transaction-object) with the charge information 
 > Definition
 
 ```shell
-Business
+Merchant
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}
 
-Business
+Merchant
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}
 ```
 
 ```php
 <?
-Business
+Merchant
 $charge = $openpay->charges->get(transactionId);
 
 Customer
@@ -1465,7 +1643,7 @@ $charge = $customer->charges->get(transactionId);
 //Customer
 openpayAPI.charges().get(String customerId, String transactionId);
 
-//Business
+//Merchant
 openpayAPI.charges().get(String transactionId);
 ```
 
@@ -1473,12 +1651,12 @@ openpayAPI.charges().get(String transactionId);
 //Customer
 openpayAPI.ChargeService.Get(string customer_id, string transaction_id);
 
-//Business
+//Merchant
 openpayAPI.ChargeService.Get(string transaction_id);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.charges.get(transactionId, callback);
 
 // Customer
@@ -1490,7 +1668,7 @@ openpay.customers.charges.get(customerId, transactionId, callback);
 @charges=@openpay.create(:charges)
 @charges.get(transaction_id, customerId)
 
-#Business
+#Merchant
 @charges=@openpay.create(:charges)
 @charges.get(transaction_id)
 ```
@@ -1584,7 +1762,7 @@ response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag4nktpdzebjiye1tlze")
 }
 ```
 
-Returns the information of a charge generated in any moment, only by knowing the charge id.
+Returns the information of a charge generated at any moment, only by knowing the charge id.
 
 ###Request
 
@@ -1601,16 +1779,16 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 
 ```shell
-Business
+Merchant
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
 
-Business
+Merchant
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
 <?
-Business
+Merchant
 $chargeList = $openpay->charges->getList(searchParams);
 
 Customer
@@ -1623,7 +1801,7 @@ $chargeList = $customer->charges->getList(searchParams);
 //Customer
 openpayAPI.charges().list(String customerId, SearchParams request);
 
-//Business
+//Merchant
 openpayAPI.charges().list(SearchParams request);
 ```
 
@@ -1631,12 +1809,12 @@ openpayAPI.charges().list(SearchParams request);
 //Customer
 openpayAPI.ChargeService.List(string customer_id, SearchParams request = null);
 
-//Business
+//Merchant
 openpayAPI.ChargeService.List(SearchParams request = null);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.charges.list(callback);
 openpay.charges.list(searchParams, callback);
 
@@ -1650,7 +1828,7 @@ openpay.customers.charges.list(customerId, searchParams, callback);
 @charges=@openpay.create(:charges)
 @charges.all(customer_id)
 
-#Business
+#Merchant
 @charges=@openpay.create(:charges)
 @charges.all
 ```
@@ -1781,7 +1959,7 @@ response_hash=@charges.all("ag4nktpdzebjiye1tlze")
    }
 ]
 ```
-Gets a list of the charges made by business or customer.
+Gets a list of the charges made by Merchant or customer.
 
 ###Request
 You can search using the following parameters as filters.
@@ -1801,19 +1979,19 @@ amount[lte] | ***numeric*** <br/>Less than or equal to the amount.
 
 Returns an array of [transaction objects](#transaction-object) charges in descending order by creation date.
 
-#Payments or withdrawals
-A payment is the transaction that allows to extract funds from a Openpay account and send the funds to a bank account or a debit card. Payments can be made from the accounts of the customers or from the business account.
+#Payouts or withdrawals
+A payout is the transaction that allows to extract funds from a Openpay account and send the funds to a bank account or a debit card. Payouts can be made from the accounts of the customers or from the Merchant account.
 
 <aside class="notice">
-**Note:**  All payment transactions will be returned in **IN_PROGRESS** status meaning that it is scheduled for the next day when the operation takes place the status will change to **completed** and if there are configured WebHooks, a notification will be sent.
+**Note:**  All payout transactions will be returned in **IN_PROGRESS** status meaning that it is scheduled for the next day when the operation takes place the status will change to **completed** and if there are configured WebHooks, a notification will be sent.
 </aside>
 
-##Payment to a registered id
+##Payout to a registered id
 
 > Definition
 
 ```shell
-Business
+Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
 
 Customer
@@ -1826,7 +2004,7 @@ Customer
 $customer = $openpay->customers->get(customerId);
 $payout = $customer->payouts->create(payoutRequest);
 
-Business
+Merchant
 $payout = $openpay->payouts->create(payoutRequest);
 ?>
 ```
@@ -1835,7 +2013,7 @@ $payout = $openpay->payouts->create(payoutRequest);
 //Customer
 openpayAPI.payouts().create(String customerId, CreateBankPayoutParams request);
 
-//Business
+//Merchant
 openpayAPI.payouts().create(CreateBankPayoutParams request);
 ```
 
@@ -1843,12 +2021,12 @@ openpayAPI.payouts().create(CreateBankPayoutParams request);
 //Customer
 openpayAPI.PayoutService.Create(string customer_id, PayoutRequest request);
 
-//Business
+//Merchant
 openpayAPI.PayoutService.Create(PayoutRequest request);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.payouts.create(payoutRequest, callback);
 
 // Customer
@@ -1860,7 +2038,7 @@ openpay.customers.payouts.create(customerId, payoutRequest, callback);
 @payouts=@openpay.create(:payouts)
 @payouts.create(request_hash, customer_id)
 
-#Business
+#Merchant
 @payouts=@openpay.create(:payouts)
 @payouts.create(request_hash)
 ```
@@ -1983,28 +2161,28 @@ response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 }
 ```
 
-Sends a payment to a bank account or debit card previously registered. Refer to [create a bank account] (#create-a-bank-account)
+Sends a payout to a bank account or debit card previously registered. Refer to [create a bank account] (#create-a-bank-account)
 
 ###Request 
 
 Property | Description
 --------- | -----
-method|***string*** (required) <br/>It must contain the **card** value in order to a make payment to a registered card, and the **bank_account** for the payment to a registered bankc account.
+method|***string*** (required) <br/>It must contain the **card** value in order to a make payout to a registered card, and the **bank_account** for the payout to a registered bank account.
 destination_id | ***string*** (required, length = 45) <br/>ID of the bank account and registered the debit card.
-amount | ***numeric*** (required) <br/>Amount of payment. Must be an amount greater than zero, with up to two decimal digits.
+amount | ***numeric*** (required) <br/>Amount of payout. Must be an amount greater than zero, with up to two decimal digits.
 description | ***string*** (required, length = 250) <br/>A description associated to the payment.
-order_id | ***string*** (optional, length = 100) <br/>Unique identifier of payment. Must be unique among all transactions.
+order_id | ***string*** (optional, length = 100) <br/>Unique identifier of payout. Must be unique among all transactions.
 
 
 ###Response
-Returns a [transaction object](#transaction-object) with the payment information or with an [error response](#error-object).
+Returns a [transaction object](#transaction-object) with the payout information or with an [error response](#error-object).
 
 ##Pament to a bank account
 
 > Definition
 
 ```shell
-Business
+Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
 
 Customer
@@ -2017,7 +2195,7 @@ Customer
 $customer = $openpay->customers->get(customerId);
 $payout = $customer->payouts->create(payoutRequest);
 
-Business
+Merchant
 $payout = $openpay->payouts->create(payoutRequest);
 ?>
 ```
@@ -2034,12 +2212,12 @@ openpayAPI.payouts().create(CreateBankPayoutParams request);
 //Customer
 openpayAPI.PayoutService.Create(string customer_id, PayoutRequest request);
 
-//Business
+//Merchant
 openpayAPI.PayoutService.Create(PayoutRequest request);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.payouts.create(payoutRequest, callback);
 
 // Customer
@@ -2051,7 +2229,7 @@ openpay.customers.payouts.create(customerId, payoutRequest, callback);
 @payouts=@openpay.create(:payouts)
 @payouts.create(request_hash, customer_id)
 
-#Business
+#Merchant
 @payouts=@openpay.create(:payouts)
 @payouts.create(request_hash)
 ```
@@ -2195,19 +2373,19 @@ Property | Description
 --------- | -----
 method|***string*** (required) <br/>It must contain the **bank_account** value.
 bank_account | ***object*** (required) <br/>Data of the bank account where the funds will be sent. <br/><br/> **clabe**.- CLABE account number where the funds will be sent. <br/>**holder_name**.- Name of the account owner .
-amount | ***numeric*** (required) <br/>Amount of payment. Must be an amount greater than zero, with up to two decimal digits.
+amount | ***numeric*** (required) <br/>Amount of payout. Must be an amount greater than zero, with up to two decimal digits.
 description | ***string*** (required, length = 250) <br/>A description associated to the payment.
-order_id | ***string*** (optional, length = 100) <br/>Unique identifier of payment. Must be unique among all transactions.
+order_id | ***string*** (optional, length = 100) <br/>Unique identifier of payout. Must be unique among all transactions.
 
 ###Response
-Returns a [transaction object](#transaction-object) with the payment information or with an [error response](#error-object).
+Returns a [transaction object](#transaction-object) with the payout information or with an [error response](#error-object).
 
-##Payment to a debit card.
+##Payout to a debit card.
 
 > Definition
 
 ```shell
-Business
+Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
 
 Customer
@@ -2220,7 +2398,7 @@ Customer
 $customer = $openpay->customers->get(customerId);
 $payout = $customer->payouts->create(payoutRequest);
 
-Business
+Merchant
 $payout = $openpay->payouts->create(payoutRequest);
 ?>
 ```
@@ -2229,7 +2407,7 @@ $payout = $openpay->payouts->create(payoutRequest);
 //Customer
 openpayAPI.payouts().create(String customerId, CreateCardPayoutParams request);
 
-//Business
+//Merchant
 openpayAPI.payouts().create(CreateCardPayoutParams request);
 ```
 
@@ -2237,12 +2415,12 @@ openpayAPI.payouts().create(CreateCardPayoutParams request);
 //Customer
 openpayAPI.PayoutService.Create(string customer_id, PayoutRequest request);
 
-//Business
+//Merchant
 openpayAPI.PayoutService.Create(PayoutRequest request);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.payouts.create(payoutRequest, callback);
 
 // Customer
@@ -2254,7 +2432,7 @@ openpay.customers.payouts.create(customerId, payoutRequest, callback);
 @payouts=@openpay.create(:payouts)
 @payouts.create(request_hash, customer_id)
 
-#Business
+#Merchant
 @payouts=@openpay.create(:payouts)
 @payouts.create(request_hash)
 ```
@@ -2410,27 +2588,27 @@ Property | Description
 --------- | -----
 method|***string*** (required) <br/>It must contain the **card** value.
 card | ***object*** (required) <br/>Data of the card where the funds will be sent. <br/><br/> **card_number**.- Card number where the funds will be sent. <br/>**holder_name**.- Name of the card owner (cardholder).
-amount | ***numeric*** (required) <br/>Amount of payment. Must be an amount greater than zero, with up to two decimal digits.
+amount | ***numeric*** (required) <br/>Amount of payout. Must be an amount greater than zero, with up to two decimal digits.
 description | ***string*** (required, length = 250) <br/>A description associated to the payment.
-order_id | ***string*** (optional, length = 100) <br/>Unique identifier of payment. Must be unique among all transactions.
+order_id | ***string*** (optional, length = 100) <br/>Unique identifier of payout. Must be unique among all transactions.
 
 ###Response
-Returns a [transaction object](#transaction-object) with the payment information or with an [error response](#error-object).
+Returns a [transaction object](#transaction-object) with the payout information or with an [error response](#error-object).
 
-##Get a payment
+##Get a payout
 > Definition
 
 ```shell
-Business
+Merchant
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts/{TRANSACTION_ID}
 
-Business
+Customer
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts/{TRANSACTION_ID}
 ```
 
 ```php
 <?
-Business
+Merchant
 $payout = $openpay->payouts->get(transactionId);
 
 Customer
@@ -2443,7 +2621,7 @@ $payout = $customer->payouts->get(transactionId);
 //Customer
 openpayAPI.payouts().get(String customerId, String transactionId);
 
-//Business
+//Merchant
 openpayAPI.payouts().get(String transactionId);
 ```
 
@@ -2451,12 +2629,12 @@ openpayAPI.payouts().get(String transactionId);
 //Customer
 openpayAPI.PayoutService.Get(string customer_id, string transaction_id);
 
-//Business
+//Merchant
 openpayAPI.PayoutService.Get(string transaction_id);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.payouts.get(transactionId, callback);
 
 // Customer
@@ -2468,7 +2646,7 @@ openpay.customers.payouts.get(customerId, transactionId, callback);
 @payouts=@openpay.create(:payouts)
 @payouts.get(transaction_id, customer_id)
 
-#Business
+#Merchant
 @payouts=@openpay.create(:payouts)
 @payouts.get(transaction_id)
 ```
@@ -2546,33 +2724,33 @@ response_hash=@payouts.get("tr6cxbcefzatd10guvvw", "asynwirguzkgq2bizogo")
 }
 ```
 
-Returns de information of the payment. You must know the payment id.
+Returns de information of the payout. You must know the payout id.
 
 ###Request
 
 Property | Description
 --------- | ------
-transaction_id| _**string**_ (required, length = 45)<br/>Id of the payment you want to get.
+transaction_id| _**string**_ (required, length = 45)<br/>Id of the payout you want to get.
 
 ###Response
-Returns a [transaction object](#transaction-object) with the payment information or with an [error response](#error-object).
+Returns a [transaction object](#transaction-object) with the payout information or with an [error response](#error-object).
 
-##List of payments
+##List of payouts
 
 > Definition
 
 
 ```shell
-Business
+Merchant
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
 
-Business
+Customer
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
 ```php
 <?
-Business
+Merchant
 $payoutList = $openpay->payouts->getList(searchParams);
 
 Customer
@@ -2585,7 +2763,7 @@ $payoutList = $customer->payouts->getList(searchParams);
 //Customer
 openpayAPI.payouts().list(String customerId, SearchParams request);
 
-//Business
+//Merchant
 openpayAPI.payouts().list(SearchParams request);
 ```
 
@@ -2593,12 +2771,12 @@ openpayAPI.payouts().list(SearchParams request);
 //Customer
 openpayAPI.PayoutService.List(string customer_id, SearchParams request = null);
 
-//Business
+//Merchant
 openpayAPI.PayoutService.List(SearchParams request = null);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.payouts.list(callback);
 openpay.payouts.list(searchParams, callback);
 
@@ -2612,7 +2790,7 @@ openpay.customers.payouts.list(customerId, searchParams, callback);
 @payouts=@openpay.create(:payouts)
 @payouts.all(customer_id)
 
-#Business
+#Merchant
 @payouts=@openpay.create(:payouts)
 @payouts.all
 ```
@@ -2746,7 +2924,7 @@ response_hash=@payouts.all("asynwirguzkgq2bizogo")
    }
 ]
 ```
-Gets a list of payments made at business or customer level.
+Gets a list of payouts made at Merchant or customer level.
 
 ###Request
 
@@ -2762,17 +2940,17 @@ limit| ***numeric*** <br/>Number of required records, default 10.
 amount| ***numeric*** <br/>Same as the amount.
 amount[gte] | ***numeric*** <br/>Greater than or equal to the amount.
 amount[lte] | ***numeric*** <br/>Less than or equal to the amount.
-payout_type | ***string (opcional, ALL, AUTOMATIC o MANUAL)***  <br/>Payout type used to filter the transactions
+payout_type | ***string (opfional, ALL, AUTOMATIC o MANUAL)***  <br/>Payout type used to filter the transactions
 
 ###Response
-Returns a list of [transaction objects](#transaction-object) payments in descending order by creation date.
+Returns a list of [transaction objects](#transaction-object) payouts in descending order by creation date.
 
 
 #Customers
 
-Customers are Openpay resources that are handled within the business account and can represent users, customers or partners according to the type of business.
+Customers are Openpay resources that are handled within the Merchant account and can represent users, customers or partners according to the type of Merchant.
 
-You can add cards and bank accounts  to the customers so you can make transactions like Charges, Transfers or Payments.
+You can add cards and bank accounts  to the customers so you can make transactions like Charges, Transfers or Payouts.
 
 ##Customer object
 
@@ -2797,7 +2975,12 @@ You can add cards and bank accounts  to the customers so you can make transactio
       "state":"Querétaro",
       "city":"Querétaro",
       "country_code":"MX"
-   }
+   },
+   "store": {
+       "reference": "OPENPAY02DQ35YOY7",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323"
 }
 ```
 
@@ -2813,7 +2996,7 @@ status        |***string*** <br/>Account status of the customer can be active or
 balance       |***numeric*** <br/>Account balance with two decimal digits.
 clabe         |***numeric*** <br/>CLABE account used to receive funds by transfer from any bank in Mexico.
 [address](#addres-object) |***object*** <br/>Address of the customer. It is usually used as shipping address.
-
+[store](#store-object) |_*object**_ <br/>Contains reference string to go to Store and make deposits, the url to generate barcode is contained too.
 
 ##Create a new customer
 
@@ -2868,7 +3051,7 @@ $customerData = array(
      'name' => 'customer name',
      'last_name' => '',
      'email' => 'customer_email@me.com',
-     'requires_account' => true,
+     'requires_account' => false,
      'phone_number' => '44209087654',
      'address' => array(
          'line1' => 'Calle 10',
@@ -2893,6 +3076,7 @@ request.name("Julian Gerardo");
 request.lastName("López Martínez");
 request.email("julian.martinez@gmail.com");
 request.phoneNumber("4421432915");
+request.requiresAccount(false);
 Address address = new Address();
 address.city("Queretaro");
 address.countryCode("MX");
@@ -2914,6 +3098,7 @@ request.Name = "Julian Gerardo";
 request.LastName = "López Martínez";
 request.Email = "julian.martinez@gmail.com";
 request.PhoneNumber = "4421432915";
+request.RequiresAccount = false;
 Address address = new Address();
 address.City = "Queretaro";
 address.CountryCode = "MX";
@@ -2956,7 +3141,7 @@ request_hash={
      "name" => "customer name",
      "last_name" => nil,
      "email" => "customer_email@me.com",
-     "requires_account" => true,
+     "requires_account" => false,
      "phone_number" => "44209087654",
      "address" => address_hash
    }
@@ -2975,7 +3160,12 @@ response_hash=@customers.create(request_hash.to_hash)
    "phone_number":null,
    "address":null,
    "creation_date":"2014-05-20T16:47:47-05:00",
-   "external_id":null
+   "external_id":null,
+   "store": {
+       "reference": "OPENPAY02DQ35YOY7",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323"
 }
 ```
 
@@ -2985,7 +3175,7 @@ Create a customer object.
 
 Property | Description
 --------- | ------
-external_id | ***string*** (optional, length = 100)  <br/> Unique external identifier of the customer assigned to the business.
+external_id | ***string*** (optional, length = 100)  <br/> Unique external identifier of the customer assigned for the Merchant.
 name        | ***string*** (required, length = 100)<br/>Name of the customer.
 last_name   | ***string*** (optional, length = 100)<br/>Last name of the customer.
 email       | ***string*** (required, length = 100)<br/>Email of the customer.
@@ -3140,7 +3330,6 @@ request_hash={
      "name" => "customer name",
      "last_name" => nil,
      "email" => "customer_email@me.com",
-     "requires_account" => true,
      "phone_number" => "44209087654",
      "address" => address_hash
    }
@@ -3166,6 +3355,11 @@ response_hash=@customers.update(request_hash.to_hash)
       "postal_code":"76000",
       "country_code":"MX"
    },
+   "store": {
+      "reference": "OPENPAY02DQ35YOY7",
+      "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323",
    "creation_date":"2014-05-20T16:47:47-05:00",
    "external_id":null
 }
@@ -3276,6 +3470,11 @@ response_hash=@customers.get("asynwirguzkgq2bizogo")
       "postal_code":"76000",
       "country_code":"MX"
    },
+   "store": {
+       "reference": "OPENPAY02DQ35YOY7",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323",
    "creation_date":"2014-05-20T16:47:47-05:00",
    "external_id":null
 }
@@ -3489,6 +3688,11 @@ response_hash=@customers.all
    "phone_number":"4425667045",
    "status":"active",
    "balance":142.5
+   "store": {
+       "reference": "OPENPAY02DQ35YOY7",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323"
 }, {
    "id":"cz4nkhrlcu9k7qd4lwqx",
    "creation_date":"2013-11-07T14:54:46-06:00",
@@ -3497,7 +3701,12 @@ response_hash=@customers.all
    "email":"eriberto.rodriguez@payments.com",
    "phone_number":"442",
    "status":"active",
-   "balance":103
+   "balance":103,
+   "store": {
+       "reference": "OPENPAY02DQ35DRE4",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35DRE4?width=1&height=45&text=false"
+  },
+  "clabe": "646180109400423323"
 }]
 ```
 Returns a list of registered customers, if you want to delimit the result you may use filters.
@@ -3523,7 +3732,7 @@ Returns an array of [customer object](#customer-object).
 The transfers allow to send funds between accounts of your customers. 
 
 <aside class="notice">
-**Note:** If you want to make a transfer to a bank see the [payments section](#payments-or-withdrawals).
+**Note:** If you want to make a transfer to a bank see the [payouts section](#payouts-or-withdrawals).
 </aside>
 
 ##Transfers between customers
@@ -3651,7 +3860,12 @@ response_hash=@transfers.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "description":"Transferencia entre cuentas",
    "error_message":null,
    "order_id":"oid-1245",
-   "customer_id":"a9pvykxz4g5rg0fplze0"
+   "customer_id":"a9pvykxz4g5rg0fplze0",
+   "store": {
+       "reference": "OPENPAY02DQ35YOY7",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323"
 }
 ```
 
@@ -3929,7 +4143,7 @@ List of [[transaction objects] (#transaction-object) of the transfers made, each
 #Cards
 Within the Openpay platform you can add cards to the customer's account, delete them, recover some in specific and list them.
 
-You can store multiple debit and / or credit cards at business or customer level for making charges later without the need to enter the information again.
+You can store multiple debit and / or credit cards at Merchant or customer level for making charges later without the need to enter the information again.
 
 ##Card Object
 
@@ -3978,14 +4192,14 @@ brand |***string*** <br/>Card brand: visa, mastercard, carnet or american expres
 type |***string*** <br/>Card Type: debit, credit, cash, etc.
 bank_name |***string*** <br/>Name of the issuing bank.
 bank_code |***string*** <br/>Code of the issuing bank.
-customer_id |***string*** <br/>Customer identifier to which the card belongs. If the card is at business level this value is null.
+customer_id |***string*** <br/>Customer identifier to which the card belongs. If the card is at Merchant level this value is null.
 
 ##Create a card
 
 > Definition
 
 ```shell
-Business
+Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards
 
 Customer
@@ -3998,7 +4212,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/car
 $customer = $openpay->customers->get(customerId);
 $card = $customer->cards->add(cardDataRequest);
 
-//Business
+//Merchant
 $card = $openpay->cards->add(cardDataRequest);
 ?>
 ```
@@ -4007,7 +4221,7 @@ $card = $openpay->cards->add(cardDataRequest);
 //Customer
 openpayAPI.cards().create(String customerId, Card request);
 
-//Business
+//Merchant
 openpayAPI.cards().create(Card request);
 ```
 
@@ -4015,12 +4229,12 @@ openpayAPI.cards().create(Card request);
 //Customer
 openpayAPI.CardService.Create(string customer_id, Card card);
 
-//Business
+//Merchant
 openpayAPI.CardService.Create(Card card);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.cards.create(cardRequest, callback);
 
 // Customer
@@ -4032,7 +4246,7 @@ openpay.customers.cards.create(customerId, cardRequest, callback);
 @cards=@openpay.create(:cards)
 @cards.create(request_hash, customer_id)
 
-#Business
+#Merchant
 @cards=@openpay.create(:cards)
 @cards.create(request_hash)
 ```
@@ -4176,13 +4390,13 @@ response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
 }
 ```
  
-When a card is created the customer must be specified, if the customer is not specified the card will be registered for the business account. Once the card is saved, it can not obtain the number and security code.
+When a card is created the customer must be specified, if the customer is not specified the card will be registered for the Merchant account. Once the card is saved, it can not obtain the number and security code.
 
 <aside class = "notice">
 **Note:** When stored in Openpay, all cards  are validated by making an authorization for $ 10.00 which is returned at the time.
 </aside>
 
-When saving a card, an ID will be created which can be used to make card charges, payments to a card or just for getting the not sensitive card information.
+When saving a card, an ID will be created which can be used to make card charges, payouts to a card or just for getting the not sensitive card information.
 
 ###Request
 
@@ -4204,7 +4418,7 @@ Returns a [card object](#card-object) when it is created correctly or returns an
 > Definition
 
 ```shell
-Business
+Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards
 
 Customer
@@ -4217,7 +4431,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/car
 $customer = $openpay->customers->get(customerId);
 $card = $customer->cards->add(cardDataRequest);
 
-//Business
+//Merchant
 $card = $openpay->cards->add(cardDataRequest);
 ?>
 ```
@@ -4226,7 +4440,7 @@ $card = $openpay->cards->add(cardDataRequest);
 //Customer
 openpayAPI.cards().create(String customerId, Card card);
 
-//Business
+//Merchant
 openpayAPI.cards().create(Card card);
 ```
 
@@ -4234,12 +4448,12 @@ openpayAPI.cards().create(Card card);
 //Customer
 openpayAPI.CardService.Create(string customer_id, Card request);
 
-//Business
+//Merchant
 openpayAPI.CardService.Create(Card request);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.cards.create(cardRequest, callback);
 
 // Customer
@@ -4251,7 +4465,7 @@ openpay.customers.cards.create(customerId, cardRequest, callback);
 @cards=@openpay.create(:cards)
 @cards.create(request_hash, customer_id)
 
-#Business
+#Merchant
 @cards=@openpay.create(:cards)
 @cards.create(request_hash)
 ```
@@ -4263,7 +4477,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
-      "token_id":"tokgslwpdcrkhlgxqi9a"
+      "token_id":"tokgslwpdcrkhlgxqi9a",
+      "device_session_id":"8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o"
    }' 
 ```
 
@@ -4272,7 +4487,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $cardDataRequest = array(
-    'token_id' => 'tokgslwpdcrkhlgxqi9a'
+    'token_id' => 'tokgslwpdcrkhlgxqi9a',
+    'device_session_id' => '8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o'
     );
 
 $customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
@@ -4284,6 +4500,7 @@ $card = $customer->cards->add($cardDataRequest);
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card request = new Card();
 request.tokenId("tokgslwpdcrkhlgxqi9a");
+request.deviceSessionId("8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o");
 
 request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
 ```
@@ -4292,13 +4509,15 @@ request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card request = new Card();
 request.TokenId = "tokgslwpdcrkhlgxqi9a";
+request.DeviceSessionId = "8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o";
 
 request = api.CardService.Create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 ```javascript
 var cardRequest = {
-  'token_id' : 'tokgslwpdcrkhlgxqi9a'
+  'token_id' : 'tokgslwpdcrkhlgxqi9a',
+  'device_session_id' : '8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o'
 }
 
 openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(error, card)  {
@@ -4310,7 +4529,8 @@ openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(err
 @openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
 @cards=@openpay.create(:cards)
 request_hash={
-     "token_id" => "tokgslwpdcrkhlgxqi9a"
+     "token_id" => "tokgslwpdcrkhlgxqi9a",
+     "device_session_id" => "8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o"
    }
 
 response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
@@ -4343,6 +4563,7 @@ Creates a card from a token obtained from the browser or from the customer’s d
 Property | Description
 --------- | ------
 token_id| ***string*** (required, length = 45) <br/> Token identifier generated in the the browser or in the customer’s device.
+device_session_id| ***string*** (required, length = 255) <br/> Identifier of the device generated by the antifraud tool.
 
 ###Response
 Returns a [card object](#card-object)
@@ -4352,7 +4573,7 @@ Returns a [card object](#card-object)
 > Definition
 
 ```shell
-Business
+Merchant
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}
 
 Customer
@@ -4365,7 +4586,7 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/card
 $customer = $openpay->customers->get(customerId);
 $card = $customer->cards->get(cardId);
 
-//Business
+//Merchant
 $card = $openpay->cards->get(cardId);
 ?>
 ```
@@ -4374,7 +4595,7 @@ $card = $openpay->cards->get(cardId);
 //Customer
 openpayAPI.cards().get(String customerId, String cardId);
 
-//Business
+//Merchant
 openpayAPI.cards().get(String cardId);
 ```
 
@@ -4382,12 +4603,12 @@ openpayAPI.cards().get(String cardId);
 //Customer
 openpayAPI.CardService.Get(string customer_id, string card_id);
 
-//Business
+//Merchant
 openpayAPI.CardService.Get(string card_id);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.cards.get(cardId, callback);
 
 // Customer
@@ -4399,12 +4620,12 @@ openpay.customers.cards.get(customerId, cardId, callback);
 @cards=@openpay.create(:cards)
 @cards.get(card_id, customer_id)
 
-#Business
+#Merchant
 @cards=@openpay.create(:cards)
 @cards.get(card_id)
 ```
 
-> REquest example
+> Request example
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
@@ -4483,7 +4704,7 @@ Returns a [card object](#card-object)
 > Definition
 
 ```shell
-Business
+Merchant
 DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}
 
 Customer
@@ -4497,7 +4718,7 @@ $customer = $openpay->customers->get(customerId);
 $card = $customer->cards->get(cardId);
 $card->delete();
 
-//Business
+//Merchant
 $card = $openpay->cards->get(cardId);
 $card->delete();
 ?>
@@ -4507,7 +4728,7 @@ $card->delete();
 //Customer
 openpayAPI.cards().delete(String customerId, String cardId);
 
-//Business
+//Merchant
 openpayAPI.cards().delete(String cardId);
 ```
 
@@ -4515,12 +4736,12 @@ openpayAPI.cards().delete(String cardId);
 //Customer
 openpayAPI.CardService.Delete(string customer_id, string card_id);
 
-//Business
+//Merchant
 openpayAPI.CardService.Delete(string card_id);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.cards.delete(cardId, callback);
 
 // Customer
@@ -4532,7 +4753,7 @@ openpay.customers.cards.delete(customerId, cardId, callback);
 @cards=@openpay.create(:cards)
 @cards.delete(card_id, customer_id)
 
-#Business
+#Merchant
 @cards=@openpay.create(:cards)
 @cards.delete(card_id)
 ```
@@ -4579,7 +4800,7 @@ response_hash=@cards.delete("ktrpvymgatocelsciak7", "asynwirguzkgq2bizogo")
 ```
 
 
-Deletes a card of the customer or business. After deleting it won’t be possible to make movements with that card, however, all records of the transactions you have made will be kept and will be available on the dashboard.
+Deletes a card of the customer or Merchant. After deleting it won’t be possible to make movements with that card, however, all records of the transactions you have made will be kept and will be available on the dashboard.
 
 To remove it is only necessary to provide the card identifier.
 
@@ -4596,7 +4817,7 @@ If the card is removed correctly the answer is empty, if it can not be deleted a
 > Definition
 
 ```shell
-Business
+Merchant
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
 
 Customer
@@ -4609,7 +4830,7 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/card
 $customer = $openpay->customers->get(customerId);
 $cardList = $customer->cards->getList(findDataRequest);
 
-//Business
+//Merchant
 $cardList = $openpay->cards->getList(findDataRequest);
 ?>
 ```
@@ -4618,7 +4839,7 @@ $cardList = $openpay->cards->getList(findDataRequest);
 //Customer
 openpayAPI.cards().list(String customerId, SearchParams request);
 
-//Business
+//Merchant
 openpayAPI.cards().list(SearchParams request);
 ```
 
@@ -4626,12 +4847,12 @@ openpayAPI.cards().list(SearchParams request);
 //Customer
 openpayAPI.CardService.List(string customer_id, SearchParams request = null);
 
-//Business
+//Merchant
 openpayAPI.CardService.List(SearchParams request = null);
 ```
 
 ```javascript
-// Business
+// Merchant
 openpay.cards.list(callback);
 openpay.cards.list(searchParams, callback);
 
@@ -4645,7 +4866,7 @@ openpay.cards.list(customerId, searchParams, callback);
 @cards=@openpay.create(:cards)
 @cards.all(customer_id)
 
-#Business
+#Merchant
 @cards=@openpay.create(:cards)
 @cards.all
 ```
@@ -4750,7 +4971,7 @@ response_hash=@cards.all("asynwirguzkgq2bizogo")
 ]
 ```
 
-Returns a list of registered business or customer cards, if you want to narrow the result you can use filters.
+Returns a list of registered Merchant or customer cards, if you want to narrow the result you can use filters.
 
 ### Request
 You can search using the following parameters as filters.
@@ -4768,7 +4989,7 @@ List of [card objects] (#card-object) registered according to the parameters pro
 
 #Bank Accounts
 
-You can store multiple bank accounts by business or customer for withdraw funds later.
+You can store multiple bank accounts by Merchant or customer for withdraw funds later.
 
 ##Bank account object
 
@@ -6640,7 +6861,7 @@ A list of [subscription objects](#subscription-object) for a customer. Sort by c
 
 
 #Fees
-If the customer accounts were created to handle their own balance, a fee can be charged which will be shown in the business account.
+If the customer accounts were created to handle their own balance, a fee can be charged which will be shown in the Merchant account.
 
 <aside class="notice">
 In order to have customer accounts where they handle their balance they should have been created with the property ***requires_account=true***.  See [customer creation](#create-a-new-customer).
@@ -6921,7 +7142,7 @@ response_hash=@fees.all
    }
 ]
 ```
-Returns the details of every fee charged by the business.
+Returns the details of every fee charged by the Merchant.
 
 ###Request
 It can be done using the following parameters:
@@ -6938,7 +7159,7 @@ limit| ***numeric*** <br/>Number of records to return, by default is 10.
 Returns an array of [transaction object](#transaction-object) for the charged fees  in descending order, each one with the identifier of the customer to whom it was made.
 
 #Webhooks
-Weebhooks allow to notify a business party when an event has occurred in the platform, so the business can take the corresponding actions.
+Weebhooks allow to notify a Merchant party when an event has occurred in the platform, so the Merchant can take the corresponding actions.
 
 <aside class="notice">
 Openpay requires that the webhook is verified before executing it.
@@ -6988,13 +7209,13 @@ charge.created             | Charge         | Reports when a charge is scheduled
 charge.succeeded           | Charge         | Reports when a charge is applied.
 charge.rescored.to.decline | Charge         | Reports when a charge' score is recalculated and is declined.
 subscription.charge.failed | Subscription    | Reports when the charge to a subscription fails.
-payout.created             | Payout          | Reports when a payment has been scheduled for the next day. 
-payout.succeeded           | Payout          | Reports when a payment has been applied.
-payout.failed              | Payout          | Reports when a payment has failed.
+payout.created             | Payout          | Reports when a payout has been scheduled for the next day. 
+payout.succeeded           | Payout          | Reports when a payout has been applied.
+payout.failed              | Payout          | Reports when a payout has failed.
 transfer.succeeded         | Transfer | Reports when a transfer has been performed between to Openpay accounts.
 fee.succeeded              | Fee     | Reports when a fee is charged successfully to a customer.
 fee.refund.succeeded       | Fee     | Reports when a fee has been successfully refunded to a customer.
-spei.received              | SPEI           | Reports when a payment has been received by SPEI for adding funds to the account.
+spei.received              | SPEI           | Reports when a payout has been received by SPEI for adding funds to the account.
 chargeback.created         | Chargeback   | Reports when a chargeback of a transaction was receive and a transaction has been initiated.
 chargeback.rejected        | Chargeback   | Reports when a chargeback has been rejected.
 chargeback.accepted        | Chargeback   | Reports when a chargeback has been accepted.
@@ -7510,7 +7731,7 @@ To use this API functionality we recommend using our JavaScript library for your
 
 **Features**
 
-* Tokens are created at business level.
+* Tokens are created at Merchant level.
 * Tokens are not link to any customer.
 * After a token has been created it can only be use once to make a charge.
 
@@ -7520,25 +7741,25 @@ To use this API functionality we recommend using our JavaScript library for your
 
 ```json
 {
-      "id":"tokfa4swch8gr4icy2ma",
-      "card":{
-         "card_number":"1111",
-         "holder_name":"Juan Perez Ramirez",
-         "expiration_year":"20",
-         "expiration_month":"04",
-         "address":{
-            "line1":"Av 5 de febrero",
-            "line2":"Roble 207",
-            "line3":"Queretaro",
-            "state":"Queretaro",
-            "city":"Queretaro",
-            "postal_code":"76900",
-            "country_code":"MX"
-         },
-         "creation_date":"2014-01-30T13:53:11-06:00",
-         "brand":"visa"
-      }
-   }
+    "id":"tokfa4swch8gr4icy2ma",
+    "card":{
+       "card_number":"1111",
+       "holder_name":"Juan Perez Ramirez",
+       "expiration_year":"20",
+       "expiration_month":"04",
+       "address":{
+          "line1":"Av 5 de febrero",
+          "line2":"Roble 207",
+          "line3":"Queretaro",
+          "state":"Queretaro",
+          "city":"Queretaro",
+          "postal_code":"76900",
+          "country_code":"MX"
+       },
+       "creation_date":"2014-01-30T13:53:11-06:00",
+       "brand":"visa"
+    }
+}
 ```
 
 Property | Description
@@ -7848,7 +8069,7 @@ status| ***string*** <br/>Current transaction status.  Possible values: complete
 amount| ***numeric*** <br/>Transaction full amount, including two decimal places.
 description|***string*** <br/>Transaction description.
 error_message| ***string*** <br/>If the transaction is in *failed* status, this field will include the error message.
-customer_id| ***string*** <br/>Unique identifier for the customer who this transaction belongs.  If the value is null the transaction belongs to business account.
+customer_id| ***string*** <br/>Unique identifier for the customer who this transaction belongs.  If the value is null the transaction belongs to Merchant account.
 currency| ***string*** <br/>Currency used in the operation by default is MXN (Mexican pesos).
 bank_account| ***object*** <br/>Bank account data used for the transaction.  Se th *BankAccount* object.
 card| ***object*** <br/>Credit card data used in the transaction.  Se the *Card* object.
@@ -7878,3 +8099,19 @@ postal_code | ***string*** (required) <br/>Zip code
 state | ***string*** (required) <br/>State
 city | ***string*** (required) <br/>City
 country_code | ***string*** (required) <br/>Country code, in the two character format: ISO_3166-1.
+
+## Store object
+
+> Object example:
+
+```json
+{
+   "reference":"OPENPAY02DQ35YOY7",
+   "barcode_url":"https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+}
+```
+
+Property | Description
+--------- | -----------
+reference | ***string*** <br/>Payment reference to go stores and make deposits to Openpay account
+barcode_url | ***string*** <br/>It is the url that generates the bar code of reference.
