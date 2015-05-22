@@ -1253,7 +1253,6 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 For a charge via bank you must create a charge type request  by indicating ** bank_account** as method. This will generate a response with a CLABE account number and a description, you have to indicate these data in a receipt so your customer can do the wire transfer via SPEI.
 
-
 ###Request 
 
 Property | Description
@@ -1263,6 +1262,192 @@ amount | ***numeric*** (required) <br/>Amount of charge. Must be an amount great
 description | ***string*** (required, length = 250) <br/>A description associated to the charge.
 order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
 due_date | ***datetime*** (optional) <br/>>Due date for making the bank charge in the ISO 8601 format. <br/><br/>Example (UTC): 2014-08-01T00:50:00Z <br/>***Note:*** On the server side the date will be changed to central time<br/><br/>Example (Central Time): 2014-08-01T11:51:23-05:00
+[customer](#create-a-new-customer)|***string*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
+
+###Response
+Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
+
+##Charge with bitcoin
+
+> Definition
+
+```shell
+Merchant
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+
+Customer
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+```
+
+```php
+<?
+Merchant
+$openpay->charges->create(chargeRequest);
+
+Customer
+$customer = $openpay->customers->get(customerId);
+$customer->charges->create(chargeRequest);
+?>
+```
+
+```java
+//Customer
+openpayAPI.charges().create(String customerId, CreateBitcoinChargeParams request);
+
+//Merchant
+openpayAPI.charges().create(CreateBitcoinChargeParams request);
+```
+
+```csharp
+//Customer
+openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
+
+//Merchant
+openpayAPI.ChargeService.Create(ChargeRequest request);
+```
+
+```javascript
+// Merchant
+openpay.charges.create(chargeRequest, callback);
+
+// Customer
+openpay.customers.charges.create(customerId, chargeRequest, callback);
+```
+
+```ruby
+#Customer
+@charges=@openpay.create(:charges)
+@charges.create(request_hash, customer_id)
+
+#Merchant
+@charges=@openpay.create(:charges)
+@charges.create(request_hash)
+```
+
+> customer request example
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -H "Content-type: application/json" \
+   -X POST -d '{
+   "method" : "bitcoin",
+   "amount" : 100,
+   "description" : "Cargo con bitcoin",
+   "order_id" : "oid-00055"
+} ' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$chargeRequest = array(
+    'method' => 'bitcoin',
+    'amount' => 100,
+    'description' => 'Cargo con bitcoin',
+    'order_id' => 'oid-00055');
+
+$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$charge = $customer->charges->create($chargeRequest);
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateBitcoinChargeParams request = new CreateBitcoinChargeParams();
+request.amount(new BigDecimal("100.00"));
+request.description("Cargo con bitcoin");
+request.orderId("oid-00053");
+
+Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+ChargeRequest request = new ChargeRequest();
+request.Method = "bitcoin";
+request.Amount = new Decimal(100.00);
+request.Description = "Cargo con bitcoin";
+request.OrderId = "oid-00053";
+
+Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
+```
+
+```javascript
+var bitcoinChargeRequest = {
+   'method' : 'bitcoin',
+   'amount' : 100,
+   'description' : 'Cargo con bitcoin',
+   'order_id' : 'oid-00055'
+};
+
+openpay.customers.charges.create('ag4nktpdzebjiye1tlze', bitcoinChargeRequest, function(error, charge) {
+  // ...
+});
+
+```
+
+```ruby
+@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@openpay.create(:charges)
+request_hash={
+     "method" => "bitcoin",
+     "amount" => 100.00,
+     "description" => "Cargo con bitcoin",
+     "order_id" => "oid-00053"
+   }
+
+response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
+```
+
+> Response example
+
+```json
+{
+  "id" : "trnzf2xjwpupjfryyj23",
+  "description" : "Cargo con bitcoins",
+  "currency" : "MXN",
+  "error_message" : null,
+  "order_id":"oid-00055",
+  "customer_id":"ag4nktpdzebjiye1tlze",
+  "authorization" : "G1YgUCkMzL37EQtApgP1wu",
+  "amount" : 100,
+  "operation_type" : "in",
+  "payment_method" : {
+    "requires_refund_address" : true,
+    "amount_due" : 0.009851,
+    "payment_url_bip21" : "bitcoin:mmYqnh7AHt5JZyhjgDtJK5gdjL3e1tGtx1?amount=0.009851",
+    "amount_bitcoins" : 0.009851,
+    "type" : "bitcoin",
+    "payment_address" : "mmYqnh7AHt5JZyhjgDtJK5gdjL3e1tGtx1",
+    "exchange_rate" : {
+      "from" : "MXN",
+      "rate" : 3603.75,
+      "date" : "2015-05-14",
+      "to" : "BTC"
+    }
+  },
+  "transaction_type" : "charge",
+  "creation_date" : "2015-05-14T10:48:46-05:00",
+  "operation_date" : "2015-05-14T10:48:46-05:00",
+  "conciliated" : false,
+  "due_date" : "2015-05-14T11:48:46-05:00",
+  "status" : "charge_pending",
+  "method" : "bitcoin"
+}
+```
+For a charge with bitcoins you must create a charge type request  by indicating ** bitcoin** as method. This will generate a response with all required information to pay with bitcoins and a description, you have to indicate these data in a receipt so your customer can do the payment inside bitcoin network.
+
+
+###Request 
+
+Property | Description
+--------- | -----
+method|***string*** (required) <br/>It must contain the **bitcoin** value to specify the pay will be made with a bitcoin transfer.
+amount | ***numeric*** (required) <br/>Amount of charge. Must be an amount greater than zero, with up to two decimal digits.
+description | ***string*** (required, length = 250) <br/>A description associated to the charge.
+order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
 [customer](#create-a-new-customer)|***string*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
 
 ###Response

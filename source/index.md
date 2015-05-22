@@ -1325,10 +1325,10 @@ $customer->charges->create(chargeRequest);
 
 ```java
 //Cliente
-openpayAPI.charges().create(String customerId, CreateBankChargeParams request);
+openpayAPI.charges().create(String customerId, CreateBitcoinChargeParams request);
 
 //Comercio
-openpayAPI.charges().create(CreateBankChargeParams request);
+openpayAPI.charges().create(CreateBitcoinChargeParams request);
 ```
 
 ```csharp
@@ -1409,14 +1409,14 @@ Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```javascript
-var bankChargeRequest = {
+var bitcoinChargeRequest = {
    'method' : 'bitcoin',
    'amount' : 35.5,
    'description' : 'Cargo con bitcoins',
    'order_id' : 'oid-00055'
 };
 
-openpay.customers.charges.create('ag4nktpdzebjiye1tlze', bankChargeRequest, function(error, charge) {
+openpay.customers.charges.create('ag4nktpdzebjiye1tlze', bitcoinChargeRequest, function(error, charge) {
   // ...
 });
 
@@ -1450,17 +1450,17 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
   "operation_type" : "in",
   "payment_method" : {
     "requires_refund_address" : true,
+    "amount_due" : 0.009851,
+    "payment_url_bip21" : "bitcoin:mmYqnh7AHt5JZyhjgDtJK5gdjL3e1tGtx1?amount=0.009851",
+    "amount_bitcoins" : 0.009851,
+    "type" : "bitcoin",
+    "payment_address" : "mmYqnh7AHt5JZyhjgDtJK5gdjL3e1tGtx1",
     "exchange_rate" : {
       "from" : "MXN",
       "rate" : 3603.75,
       "date" : "2015-05-14",
       "to" : "BTC"
-    },
-    "amount_due" : 0.009851,
-    "payment_url_bip21" : "bitcoin:mmYqnh7AHt5JZyhjgDtJK5gdjL3e1tGtx1?amount=0.009851",
-    "amount_bitcoins" : 0.009851,
-    "type" : "bitcoin",
-    "payment_address" : "mmYqnh7AHt5JZyhjgDtJK5gdjL3e1tGtx1"
+    }
   },
   "transaction_type" : "charge",
   "creation_date" : "2015-05-14T10:48:46-05:00",
