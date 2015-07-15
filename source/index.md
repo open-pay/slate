@@ -557,9 +557,11 @@ currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 device_session_id |  ***string*** (requerido, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta antifraudes
-capture |  ***boolean*** (requerido, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o preautorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
+capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o preautorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
 [customer](#crear-un-nuevo-cliente)|***objeto*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realice el cargo a nivel cliente.
 metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
+use_card_points | ***boolean*** (opcional, default = false) <br/>Indica si se desea que el cargo se intente realizar con los puntos de la tarjeta. Solo se debe usar si la propiedad points_card de la tarjeta es true, de otra forma ocurrirá un error.
+
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -907,6 +909,7 @@ device_session_id |  ***string*** (requerido, longitud = 255) <br/>Identificador
 capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o pre-autorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
 [customer](#crear-un-nuevo-cliente)|***string*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
 metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
+use_card_points | ***boolean*** (opcional, default = false) <br/>Indica si se desea que el cargo se intente realizar con los puntos de la tarjeta. Solo se debe usar si la propiedad points_card de la tarjeta es true, de otra forma ocurrirá un error.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -4391,7 +4394,8 @@ Se pueden almacenar multiples tarjetas de débito y/o crédito a nivel cliente o
    "creation_date":"2013-12-12T17:50:00-06:00",
    "bank_name":"DESCONOCIDO",
    "bank_code":"000",
-   "customer_id":"a2b79p8xmzeyvmolqfja"
+   "customer_id":"a2b79p8xmzeyvmolqfja",
+   "points_card":true
 }
 ```
 
@@ -4412,6 +4416,7 @@ type |***string*** <br/>Tipo de la tarjeta: debit, credit, cash, etc.
 bank_name |***string*** <br/>Nombre del banco emisor.
 bank_code |***string*** <br/>Código del banco emisor.
 customer_id |***string*** <br/>Identificador del cliente al que pertenece la tarjeta. Si la tarjeta es a nivel comercio este valor será null.
+points_card |***boolean*** <br/>Indica si la tarjeta soporta el pago con puntos.
 
 ##Crear una tarjeta
 
@@ -7974,7 +7979,8 @@ Para usar esta funcionalidad de la API, te recomendamos usar nuestra librería e
             "country_code":"MX"
          },
          "creation_date":"2014-01-30T13:53:11-06:00",
-         "brand":"visa"
+         "brand":"visa",
+         "points_card":false
       }
    }
 ```
@@ -8279,6 +8285,7 @@ customer_id| ***string*** <br/>Identificar único del cliente al cual pertence l
 currency| ***string*** <br/>Moneda usada en la operación, por default es MXN. 
 bank_account| ***objeto*** <br/>Datos de la cuenta bancaria usada en la transacción. Ver objeto BankAccoount
 card| ***objeto*** <br/>Datos de la tarjeta usada en la transacción. Ver objeto Card
+card_points| ***objeto*** <br/>Datos de los puntos de la tarjeta usados para el pago, si fueron utilizados. Ver [objeto CardPoints](#objeto-cardpoints) 
 
 ##Objeto Dirección
 
@@ -8321,4 +8328,24 @@ Propiedad | Descripción
 --------- | -----------
 reference | ***string*** <br/> Es la referencia con la que se puede ir a la tienda y realizar depósitos a la cuenta de Openpay.
 barcode_url | ***string*** <br/>Es la url con la cual se puede obtener el codigo de barras de la referencia.
+
+##Objeto CardPoints
+
+> Ejemplo de Objeto:
+
+```json
+{
+    "used": 134,
+    "remaining": 300,
+    "caption": "TRANSACCION APROBADA. ME OBLIGO EN LOS TERMINOS Y CONDICIONES DEL PROGRAMA RECOMPENSAS SANTANDER. PARA CUALQUIER DUDA O ACLARACION LLAME AL 01800 RECOMPE (73-266-73).",
+    "amount": 10
+}
+```
+
+Propiedad | Descripción
+--------- | -----------
+used | ***numeric*** <br/> Cantidad de puntos usados para realizar este pago.
+remaining | ***numeric*** <br/> Cantidad de puntos restantes en la tarjeta después de realizar el pago.
+amount | ***numeric*** <br/>Monto de la transacción que fue pagado mediante puntos.
+caption | ***string*** (opcional) <br/> Mensaje a mostrar al cliente en su recibo o ticket de compra.
 
