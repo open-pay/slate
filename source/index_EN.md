@@ -546,6 +546,7 @@ device_session_id |  ***string*** (required, length = 255) <br/>Identifier of th
 capture | ***boolean*** (optional, default = true) <br/>Indicates whether the charge is made immediately or not , when the value is false the charge is handled as authorized (or pre-authorization) and the amount is only to be confirmed or canceled in a second call.
 [customer](#create-a-new-customer)| ***object*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the merchant level<br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
 metadata |  ***list(key, value)*** (optional) <br/>Field list to send antifraud system, It must be according to [Rules to send custom antifraud fields] (#custom-to-send-antifraud-fields).
+use_card_points | ***boolean*** (optional, default = false) <br/>Indicates whether the charge should try to use reward points or not. This should only be used when the points_card property of a card or token is true, otherwise an error will be returned.
 
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
@@ -877,6 +878,7 @@ device_session_id |  ***string*** (required, length = 255) <br/>Identifier of th
 capture |  ***boolean*** (optional, default = true) <br/>Indicates whether the charge is made immediately or not , when the value is false the charge is handled as authorized (or pre-authorization) and the amount is only to be confirmed or canceled in a second call. 
 [customer](#create-a-new-customer)|***string*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level<br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
 metadata |  ***list(key, value)*** (optional) <br/>Field list to send antifraud system, It must be according to [Rules to send custom antifraud fields] (#rules-to-send-custom-antifraud-fields).
+use_card_points | ***boolean*** (optional, default = false) <br/>Indicates whether the charge should try to use reward points or not. This should only be used when the points_card property of a card or token is true, otherwise an error will be returned.
 
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
@@ -4357,7 +4359,8 @@ You can store multiple debit and / or credit cards at Merchant or customer level
    "creation_date":"2013-12-12T17:50:00-06:00",
    "bank_name":"DESCONOCIDO",
    "bank_code":"000",
-   "customer_id":"a2b79p8xmzeyvmolqfja"
+   "customer_id":"a2b79p8xmzeyvmolqfja",
+   "points_card":true
 }
 ```
 
@@ -4378,6 +4381,7 @@ type |***string*** <br/>Card Type: debit, credit, cash, etc.
 bank_name |***string*** <br/>Name of the issuing bank.
 bank_code |***string*** <br/>Code of the issuing bank.
 customer_id |***string*** <br/>Customer identifier to which the card belongs. If the card is at Merchant level this value is null.
+points_card |***boolean*** <br/>Indicates whether the card allows the use of reward points.
 
 ##Create a card
 
@@ -7942,7 +7946,8 @@ To use this API functionality we recommend using our JavaScript library for your
           "country_code":"MX"
        },
        "creation_date":"2014-01-30T13:53:11-06:00",
-       "brand":"visa"
+       "brand":"visa",
+       "points_card":false
     }
 }
 ```
@@ -8256,8 +8261,9 @@ description|***string*** <br/>Transaction description.
 error_message| ***string*** <br/>If the transaction is in *failed* status, this field will include the error message.
 customer_id| ***string*** <br/>Unique identifier for the customer who this transaction belongs.  If the value is null the transaction belongs to Merchant account.
 currency| ***string*** <br/>Currency used in the operation by default is MXN (Mexican pesos).
-bank_account| ***object*** <br/>Bank account data used for the transaction.  Se th *BankAccount* object.
-card| ***object*** <br/>Credit card data used in the transaction.  Se the *Card* object.
+bank_account| ***object*** <br/>Bank account data used for the transaction.  See the *BankAccount* object.
+card| ***object*** <br/>Credit card data used in the transaction.  See the *Card* object.
+card_points| ***object*** <br/>Contains information about the reward points used for payment, if they were used. See the [CardPoints object](#cardpoints-object) 
 
 ## Address Object
 
@@ -8300,3 +8306,24 @@ Property | Description
 --------- | -----------
 reference | ***string*** <br/>Payment reference to go stores and make deposits to Openpay account
 barcode_url | ***string*** <br/>It is the url that generates the bar code of reference.
+
+##Cardpoints Object
+
+> Object example:
+
+```json
+{
+    "used": 134,
+    "remaining": 300,
+    "caption": "TRANSACCION APROBADA. ME OBLIGO EN LOS TERMINOS Y CONDICIONES DEL PROGRAMA RECOMPENSAS SANTANDER. PARA CUALQUIER DUDA O ACLARACION LLAME AL 01800 RECOMPE (73-266-73).",
+    "amount": 10
+}
+```
+
+Property | Description
+--------- | -----------
+used | ***numeric*** <br/> Amount of points used in the payment.
+remaining | ***numeric*** <br/> Amount of points remaining in the card after the payment.
+amount | ***numeric*** <br/>Transaction amount paid using points.
+caption | ***string*** (opcional) <br/> A message to be shown to the customer in their ticket or receipt.
+
