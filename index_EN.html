@@ -754,6 +754,10 @@ If you want to use this feature you need to send <code>metadata</code> property 
 <td>metadata</td>
 <td><strong><em>list(key, value)</em></strong> (optional) <br/>Field list to send antifraud system, It must be according to <a href="#custom-to-send-antifraud-fields">Rules to send custom antifraud fields</a>.</td>
 </tr>
+<tr>
+<td>use_card_points</td>
+<td><strong><em>boolean</em></strong> (optional, default = false) <br/>Indicates whether the charge should try to use reward points or not. This should only be used when the points_card property of a card or token is true, otherwise an error will be returned.</td>
+</tr>
 </tbody></table>
 
 <h3 id="response">Response</h3>
@@ -1083,6 +1087,10 @@ If you want to use this fact you need to send <code>metadata</code> property wit
 <tr>
 <td>metadata</td>
 <td><strong><em>list(key, value)</em></strong> (optional) <br/>Field list to send antifraud system, It must be according to <a href="#rules-to-send-custom-antifraud-fields">Rules to send custom antifraud fields</a>.</td>
+</tr>
+<tr>
+<td>use_card_points</td>
+<td><strong><em>boolean</em></strong> (optional, default = false) <br/>Indicates whether the charge should try to use reward points or not. This should only be used when the points_card property of a card or token is true, otherwise an error will be returned.</td>
 </tr>
 </tbody></table>
 
@@ -4324,7 +4332,8 @@ GET https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span c
    </span><span class="s2">"creation_date"</span><span class="p">:</span><span class="s2">"2013-12-12T17:50:00-06:00"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"bank_name"</span><span class="p">:</span><span class="s2">"DESCONOCIDO"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"bank_code"</span><span class="p">:</span><span class="s2">"000"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="s2">"a2b79p8xmzeyvmolqfja"</span><span class="w">
+   </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="s2">"a2b79p8xmzeyvmolqfja"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"points_card"</span><span class="p">:</span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <table><thead>
@@ -4392,6 +4401,10 @@ GET https://sandbox-api.openpay.mx/v1/<span class="o">{</span>MERCHANT_ID<span c
 <tr>
 <td>customer_id</td>
 <td><strong><em>string</em></strong> <br/>Customer identifier to which the card belongs. If the card is at Merchant level this value is null.</td>
+</tr>
+<tr>
+<td>points_card</td>
+<td><strong><em>boolean</em></strong> <br/>Indicates whether the card allows the use of reward points.</td>
 </tr>
 </tbody></table>
 
@@ -7721,7 +7734,8 @@ The supported event type are:
           </span><span class="s2">"country_code"</span><span class="p">:</span><span class="s2">"MX"</span><span class="w">
        </span><span class="p">},</span><span class="w">
        </span><span class="s2">"creation_date"</span><span class="p">:</span><span class="s2">"2014-01-30T13:53:11-06:00"</span><span class="p">,</span><span class="w">
-       </span><span class="s2">"brand"</span><span class="p">:</span><span class="s2">"visa"</span><span class="w">
+       </span><span class="s2">"brand"</span><span class="p">:</span><span class="s2">"visa"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"points_card"</span><span class="p">:</span><span class="kc">false</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
@@ -8117,11 +8131,15 @@ The supported event type are:
 </tr>
 <tr>
 <td>bank_account</td>
-<td><strong><em>object</em></strong> <br/>Bank account data used for the transaction.  Se th <em>BankAccount</em> object.</td>
+<td><strong><em>object</em></strong> <br/>Bank account data used for the transaction.  See the <em>BankAccount</em> object.</td>
 </tr>
 <tr>
 <td>card</td>
-<td><strong><em>object</em></strong> <br/>Credit card data used in the transaction.  Se the <em>Card</em> object.</td>
+<td><strong><em>object</em></strong> <br/>Credit card data used in the transaction.  See the <em>Card</em> object.</td>
+</tr>
+<tr>
+<td>card_points</td>
+<td><strong><em>object</em></strong> <br/>Contains information about the reward points used for payment, if they were used. See the <a href="#cardpoints-object">CardPoints object</a></td>
 </tr>
 </tbody></table>
 
@@ -8199,6 +8217,42 @@ The supported event type are:
 <tr>
 <td>barcode_url</td>
 <td><strong><em>string</em></strong> <br/>It is the url that generates the bar code of reference.</td>
+</tr>
+</tbody></table>
+
+<h2 id="cardpoints-object">Cardpoints Object</h2>
+
+<blockquote>
+<p>Object example:</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"used"</span><span class="p">:</span><span class="w"> </span><span class="mi">134</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"remaining"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRANSACCION APROBADA. ME OBLIGO EN LOS TERMINOS Y CONDICIONES DEL PROGRAMA RECOMPENSAS SANTANDER. PARA CUALQUIER DUDA O ACLARACION LLAME AL 01800 RECOMPE (73-266-73)."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>used</td>
+<td><strong><em>numeric</em></strong> <br/> Amount of points used in the payment.</td>
+</tr>
+<tr>
+<td>remaining</td>
+<td><strong><em>numeric</em></strong> <br/> Amount of points remaining in the card after the payment.</td>
+</tr>
+<tr>
+<td>amount</td>
+<td><strong><em>numeric</em></strong> <br/>Transaction amount paid using points.</td>
+</tr>
+<tr>
+<td>caption</td>
+<td><strong><em>string</em></strong> (opcional) <br/> A message to be shown to the customer in their ticket or receipt.</td>
 </tr>
 </tbody></table>
 
