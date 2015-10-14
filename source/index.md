@@ -381,10 +381,10 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 $customer => array(
-   	 'name' : 'Juan',
-   	 'last_name' : 'Vazquez Juarez',
-   	 'phone_number' : '4423456723',
-   	 'email' : 'juan.vazquez@empresa.com.mx');
+   	 'name' => 'Juan',
+   	 'last_name' => 'Vazquez Juarez',
+   	 'phone_number' => '4423456723',
+   	 'email' => 'juan.vazquez@empresa.com.mx');
 
 $chargeRequest = array(
     'method' => 'card',
