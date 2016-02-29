@@ -2769,6 +2769,146 @@ transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del pa
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
 
+##Cancelar un pago
+> Definición
+
+```shell
+Comercio
+DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts/{TRANSACTION_ID}
+
+Comercio
+DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts/{TRANSACTION_ID}
+```
+
+```php
+<?
+Comercio
+$payout = $openpay->payouts->delete(transactionId);
+
+Cliente
+$customer = $openpay->customers->get(customerId);
+$payout = $customer->payouts->delete(transactionId);
+?>
+```
+
+```java
+//Cliente
+openpayAPI.payouts().cancel(String customerId, String transactionId);
+
+//Comercio
+openpayAPI.payouts().cancel(String transactionId);
+```
+
+```csharp
+//Cliente
+openpayAPI.PayoutService.Cancel(string customer_id, string transaction_id);
+
+//Comercio
+openpayAPI.PayoutService.Cancel(string transaction_id);
+```
+
+```javascript
+// Comercio
+openpay.payouts.delete(transactionId, callback);
+
+// Cliente
+openpay.customers.payouts.delete(customerId, transactionId, callback);
+```
+
+```ruby
+#Cliente
+@payouts=@openpay.create(:payouts)
+@payouts.delete(transaction_id, customer_id)
+
+#Comercio
+@payouts=@openpay.create(:payouts)
+@payouts.delete(transaction_id)
+```
+
+> Ejemplo de petición con cliente
+
+```shell
+curl -X DELETE https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts/trozeipf364jqrsbt3ej \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
+$payout = $customer->payouts->delete('trozeipf364jqrsbt3ej');
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Payout payout = api.payouts().cancel("ag4nktpdzebjiye1tlze", "trozeipf364jqrsbt3ej");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Payout = api.PayoutService.Cancel("ag4nktpdzebjiye1tlze", "trozeipf364jqrsbt3ej");
+```
+
+```javascript
+openpay.customers.payouts.delete('ag4nktpdzebjiye1tlze', 'trozeipf364jqrsbt3ej', function(error, payout) {
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@openpay.create(:payouts)
+
+response_hash=@payouts.delete("trozeipf364jqrsbt3ej", "asynwirguzkgq2bizogo")
+```
+
+> Ejemplo de respuesta
+
+```json
+{
+   "id":"trozeipf364jqrsbt3ej",
+   "amount":10.50,
+   "authorization":"TROZEIPF364JQRSBT3EJ",
+   "method":"card",
+   "operation_type":"out",
+   "transaction_type":"payout",
+   "card":{
+      "type":"debit",
+      "brand":"visa",
+      "address":null,
+      "card_number":"411111XXXXXX1111",
+      "holder_name":"Juan Perez Ramirez",
+      "expiration_year":null,
+      "expiration_month":null,
+      "allows_charges":false,
+      "allows_payouts":true,
+      "bank_name":"Banamex",
+      "bank_code":"002"
+   },
+   "status":"cancelled",
+   "currency":"MXN",
+   "creation_date":"2014-05-26T17:04:26-05:00",
+   "operation_date":"2014-05-26T17:06:28-05:00",
+   "description":"Retiro de saldo semanal",
+   "error_message":null,
+   "order_id":"oid-00021",
+   "customer_id":"asynwirguzkgq2bizogo"
+}
+```
+
+Cancela un pago previamente programado en estado in_progress, es decir el pago no debe estar completado. Es necesario conocer el id del pago.
+
+###Petición
+
+Propiedad | Descripción
+--------- | ------
+transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del pago a cancelar.
+
+###Respuesta
+Regresa un [objeto de transacción](#objeto-transacción) con la información del pago cancelado o una [respuesta de error](#objeto-error).
+
 ##Listado de pagos
 
 > Definición
