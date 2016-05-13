@@ -559,6 +559,7 @@ order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del
 device_session_id |  ***string*** (requerido, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta antifraudes
 capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o preautorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
 [customer](#crear-un-nuevo-cliente)|***objeto*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realice el cargo a nivel cliente.
+[payment_plan](#objeto-paymentplan)|***objeto*** (opcional) <br/>Datos del plan de meses sin intereses que se desea utilizar en el cargo. Ver [Objeto PaymentPlan](#objeto-paymentplan).
 metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
 use_card_points | ***boolean*** (opcional, default = false) <br/>Indica si se desea que el cargo se intente realizar con los puntos de la tarjeta. Solo se debe usar si la propiedad points_card de la tarjeta es true, de otra forma ocurrirá un error.
 
@@ -8281,6 +8282,22 @@ Propiedad | Descripción
 --------- | -----------
 reference | ***string*** <br/> Es la referencia con la que se puede ir a la tienda y realizar depósitos a la cuenta de Openpay.
 barcode_url | ***string*** <br/>Es la url con la cual se puede obtener el codigo de barras de la referencia.
+
+
+##Objeto PaymentPlan
+
+> Ejemplo de Objeto:
+
+```json
+{
+   "payments":"6"
+}
+```
+
+Propiedad | Descripción
+--------- | -----------
+payments | ***numeric*** <br/> Es el número de pagos en los cuales se pretende realizar un cargo a meses sin intereses (3, 6, 9, 12, 18).
+
 
 ##Objeto CardPoints
 
