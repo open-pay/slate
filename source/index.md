@@ -270,6 +270,7 @@ Código    | Error HTTP  |Causa
 2005  |400 Bad Request | La fecha de expiración de la tarjeta es anterior a la fecha actual.
 2006  |400 Bad Request | El código de seguridad de la tarjeta (CVV2) no fue proporcionado.
 2007  |412 Precondition Failed | El número de tarjeta es de prueba, solamente puede usarse en Sandbox.
+2008  |412 Precondition Failed | La tarjeta consultada no es valida para puntos.
 
 ###Tarjetas
 Código    | Error HTTP  |Causa
@@ -380,7 +381,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
 ```php
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
-$customer => array(
+$customer = array(
    	 'name' => 'Juan',
    	 'last_name' => 'Vazquez Juarez',
    	 'phone_number' => '4423456723',
@@ -558,10 +559,11 @@ description | ***string*** (requerido, longitud = 250) <br/>Una descripción aso
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 device_session_id |  ***string*** (requerido, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta antifraudes
 capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o preautorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
-[customer](#crear-un-nuevo-cliente)|***objeto*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realice el cargo a nivel cliente.
+[customer](#crear-un-nuevo-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realice el cargo a nivel cliente.
 [payment_plan](#objeto-paymentplan)|***objeto*** (opcional) <br/>Datos del plan de meses sin intereses que se desea utilizar en el cargo. Ver [Objeto PaymentPlan](#objeto-paymentplan).
 metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
-use_card_points | ***boolean*** (opcional, default = false) <br/>Indica si se desea que el cargo se intente realizar con los puntos de la tarjeta. Solo se debe usar si la propiedad points_card de la tarjeta es true, de otra forma ocurrirá un error.
+use_card_points | ***string*** (opcional, default = NONE) <br/> <table><tr><td><strong>ONLY_POINTS</strong></td> <td>Cargo solo con puntos (<a href="#consulta-de-puntos">Consulta de puntos</a>)</td></tr><tr><td><strong>MIXED</strong></td>       <td>Cargo con pesos y puntos</td></tr><tr><td><strong>NONE</strong></td>        <td>Cargo solo con pesos</td></tr></table>Los valores que indican puntos solo se deben usarse si la propiedad points_card de la tarjeta es true, de otra forma ocurrirá un error.
+
 
 
 ###Respuesta
@@ -672,7 +674,7 @@ $card = array(
     'expiration_month' => '12',
     'cvv2' => '110');
 
-$customer => array(
+$customer = array(
    	 'name' => 'Juan',
    	 'last_name' => 'Vazquez Juarez',
    	 'phone_number' => '4423456723',
@@ -908,9 +910,9 @@ description | ***string*** (requerido, longitud = 250) <br/>Una descripción aso
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 device_session_id |  ***string*** (requerido, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta anti-fraudes
 capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o pre-autorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
-[customer](#crear-un-nuevo-cliente)|***string*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
+[customer](#crear-un-nuevo-cliente)|***string*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
 metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
-use_card_points | ***boolean*** (opcional, default = false) <br/>Indica si se desea que el cargo se intente realizar con los puntos de la tarjeta. Solo se debe usar si la propiedad points_card de la tarjeta es true, de otra forma ocurrirá un error.
+use_card_points | ***string*** (opcional, default = NONE) <br/> <table><tr><td><strong>ONLY_POINTS</strong></td> <td>Cargo solo con puntos (<a href="#consulta-de-puntos">Consulta de puntos</a>)</td></tr><tr><td><strong>MIXED</strong></td>       <td>Cargo con pesos y puntos</td></tr><tr><td><strong>NONE</strong></td>        <td>Cargo solo con pesos</td></tr></table>
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -1105,7 +1107,9 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "payment_method":{
       "type":"store",
       "reference":"000020TRNIRKIYOBO5QFEX55EF0100009",
+      "walmart_reference":"0101990000001065",
       "barcode_url":"https://sandbox-api.openpay.mx/barcode/000020TRNIRKIYOBO5QFEX55EF0100009?width=1&height=45&text=false"
+      "barcode_walmart_url":"https://sandbox-api.openpay.mx/barcode/0101990000001065?width=1&height=45&text=false"
    }
 }
 ```
@@ -1121,7 +1125,7 @@ amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantida
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el pago en la tienda en formato ISO 8601. <br/><br/>Ejemplo (UTC): 2014-08-01T00:50:00Z <br/>***Nota:*** Del lado del servidor se cambiara a hora central<br/><br/>Ejemplo (Central Time): 2014-08-01T11:51:23-05:00
-[customer](#crear-un-nuevo-cliente)|***string*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
+[customer](#crear-un-nuevo-cliente)|***string*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -3742,7 +3746,8 @@ response_hash=@customers.delete("asynwirguzkgq2bizogo")
 ```
 
 
-Elimina un cliente permanentemente. Se cancelarán las suscripciones que tenga. Openpay mantiene los registros de las operaciones.
+Elimina un cliente permanentemente. Openpay mantiene los registros de las operaciones.
+El cliente no se podrá borrar si su saldo es mayor a 0 (para cliente con manejo de saldo)
 
 ###Petición
 
@@ -4876,6 +4881,141 @@ id| ***string*** (requerido, longitud = 45) <br/> Identificador único de la tar
 
 ###Respuesta
 Regresa un [objeto tarjeta](#objeto-tarjeta)
+
+##Consulta de puntos
+
+> Definición
+
+```shell
+Comercio
+GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}/points
+
+Cliente
+GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}/points
+
+Token
+GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}/points
+```
+
+```php
+<?
+//Clientes
+$customer = $openpay->customers->get(customerId);
+$pointsBalance = $customer->cards->get(cardId)->get("points");
+//Comercio
+$pointsBalance = $openpay->cards->get(cardId)->get("points");
+//Token
+$pointsBalance = $openpay->get("tokens")->get(tokenId)->get("points");
+?>
+```
+
+```java
+//Cliente
+openpayAPI.cards().getPoints(String customerId, String cardId);
+//Comercio
+openpayAPI.cards().getPoints(String cardId);
+```
+
+```csharp
+//Cliente
+openpayAPI.CardService.getPoints(string customer_id, string cardId);
+//Comercio
+openpayAPI.CardService.getPoints(string cardId);
+```
+
+```javascript
+// Comercio
+openpay.cards.getPoints(cardId, callback);
+// Cliente
+openpay.cards.getPoints(customerId, cardId, callback);
+```
+
+```ruby
+// Comercio
+@cards=@openpay.create(:cards)
+@cards.getPoints(card_id)
+// Cliente
+@cards=@openpay.create(:cards)
+@cards.getPoints(card_id, customer_id)
+```
+
+> Ejemplo de petición con cliente
+
+```shell
+curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7/points" \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+``` 
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$cardId =  'tfghdfghtertdfbsd';
+$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$pointsBalance = $customer->cards->get(cardId)->get("points");
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128",
+"maonhzpqm8xp2ydssovf");
+CardPointsBalance points = api.cards().getPoints("a9pvykxz4g5rg0fplze0", "tnasugabhdgq456wr");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CardPointsBalance points = api.CardService.getPoints("a9pvykxz4g5rg0fplze0", "tnasugabhdgq456wr");
+```
+
+```javascript
+openpay.customers.cards.getPoints('ag4nktpdzebjiye1tlze', 'tnasugabhdgq456wr', function(error, list){
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@cards=@openpay.create(:cards)
+
+response_hash=@cards.getPoints("asynwirguzkgq2bizogo","tnasugabhdgq456wr")
+```
+
+> Ejemplo de respuesta
+
+```json
+[
+   {
+      "remaining_points":"300",
+      "remaining_mxn":"22.5"
+   }
+]
+```
+
+Regresa un el balance de puntos de la tarjeta. Solo aplicable a puntos Santander.
+
+###Petición
+Puedes consultar los puntos de una tarjeta perteneciente a un comercio o un cliente mediante el id de la tarjeta
+
+Propiedad | Descripción
+--------- | ------
+id| ***string*** (requerido, longitud = 45) <br/> Identificador único de la tarjeta
+
+También puedes consultar los puntos de la tarjeta de un comercio mediante el token de la tarjeta
+
+Propiedad | Descripción
+--------- | ------
+id| ***string*** (requerido, longitud = 45) <br/> Identificador de token
+
+
+###Respuesta
+Propiedad | Descripción
+--------- | ------
+remaining_points| Cantidad de puntos restante
+remaining_mxn| Saldo de puntos restante en pesos
+
+<aside class="notice">
+**Nota:** Al consutar una tarjeta que no permita puntos se regresará el codigo de error [2008](#errores)
+</aside>
+
 
 ##Eliminar una tarjeta
 
@@ -8184,9 +8324,177 @@ Propiedad     | Descripción
 id | ***string*** (requerido, longitud = 45) <br>identificador único del comercio.
 
 ###Respuesta
-Si el identificador es correcto regresa un objeto comercio. 
+Si el identificador es correcto regresa un objeto comercio.
 
+#Tiendas
 
+El objeto representa una tienda de conveniencia
+
+##Objeto Tienda
+
+> Ejemplo de Objeto:
+
+```json
+{
+    "id_store": 4913,
+    "id": 115,
+    "name": "0503 SAN PABLO -QRO",
+    "last_update": "2016-02-04T00:52:16-06:00",
+    "status": "active",
+    "geolocation": {
+      "lng": -100.421865,
+      "lat": 20.618171,
+      "place_id": "ChIJwSN2wpNa04URsDryLW517lg"
+    },
+    "address": {
+      "line1": "AV. 5 DE FEBRERO KM 7.5 NO 1341",
+      "line2": "SAN PABLO",
+      "line3": null,
+      "state": "QUERETARO",
+      "city": "QUERETARO",
+      "postal_code": "76030",
+      "country_code": "MX"
+    },
+    "paynet_chain": {
+      "name": "EXTRA",
+      "logo": "http://www.openpay.mx/logotipos/extra.png",
+      "thumb": "http://www.openpay.mx/thumb/extra.png",
+      "max_amount": 99999.99
+    }
+  }
+```
+
+Propiedad | Descripción
+--------- | -----------
+id_store|***string*** <br/>Identificador único asignado al momento de su creación.
+id|***string*** <br/>Identificador único por cadena.
+name|***datetime*** <br/>Nombre de la tienda.
+last_update|***string*** <br/>Fecha de la ultima actualizacion de la tienda en formato ISO 8601.
+[geolocation](#objeto-geolocation)| ***objeto*** <br/Representacion geografica de la tienda por medio de coordenadas, Latitud y Longitud.
+[address](#objeto-dirección)|***objeto*** <br/>Direccion de la tienda.
+[paynet_chain](#objeto-paynetchain)|***objeto*** <br/>Cadena paynet a la que pertence.
+
+##Obtener lista de tiendas por ubicación
+
+> Definición
+
+```shell
+GET https://api.openpay.mx/stores?latitud={latitud}&longitud={longitud}&kilometers={radio}&amount={monto}
+```
+
+```php
+<?
+// =============================
+// Funcionalidad no implementada
+// =============================
+?>
+```
+
+```java
+// =============================
+// Funcionalidad no implementada
+// =============================
+```
+
+```csharp
+// =============================
+// Funcionalidad no implementada
+// =============================
+```
+
+```javascript
+// =============================
+// Funcionalidad no implementada
+// =============================
+```
+
+```ruby
+# =============================
+# Funcionalidad no implementada
+# =============================
+```
+
+> Ejemplo de petición
+
+```shell
+curl https://api.openpay.mx/stores?latitud=20.618975&longitud=-100.422290&kilometers=1.5&amount=4000 \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+```
+
+> Ejemplo de respuesta
+
+```json
+[
+  {
+    "id_store": 4913,
+    "id": 115,
+    "name": "0503 SAN PABLO -QRO",
+    "last_update": "2016-02-04T00:52:16-06:00",
+    "status": "active",
+    "geolocation": {
+      "lng": -100.421865,
+      "lat": 20.618171,
+      "place_id": "ChIJwSN2wpNa04URsDryLW517lg"
+    },
+    "address": {
+      "line1": "AV. 5 DE FEBRERO KM 7.5 NO 1341",
+      "line2": "SAN PABLO",
+      "line3": null,
+      "state": "QUERETARO",
+      "city": "QUERETARO",
+      "postal_code": "76030",
+      "country_code": "MX"
+    },
+    "paynet_chain": {
+      "name": "EXTRA",
+      "logo": "http://www.openpay.mx/logotipos/extra.png",
+      "thumb": "http://www.openpay.mx/thumb/extra.png",
+      "max_amount": 99999.99
+    }
+  },
+  {
+    "id_store": 4726,
+    "id": 68,
+    "name": "ASTURIANO TECNOLOGICO",
+    "last_update": "2016-02-04T00:52:16-06:00",
+    "status": "active",
+    "geolocation": {
+      "lng": -100.410136,
+      "lat": 20.61632,
+      "place_id": "EktQcm9sIFRlY25vbMOzZ2ljbyBOdGUgOTk5LCBTYW4gUGFibG8sIFNhbnRpYWdvIGRlIFF1ZXLDqXRhcm8sIFFyby4sIE3DqXhpY28"
+    },
+    "address": {
+      "line1": "PROLONGACION TECNOLOGICO NORTE #999",
+      "line2": "SAN PABLO",
+      "line3": null,
+      "state": "QUERETARO",
+      "city": "QUERETARO",
+      "postal_code": "76159",
+      "country_code": "MX"
+    },
+    "paynet_chain": {
+      "name": "EL ASTURIANO",
+      "logo": "http://www.openpay.mx/logotipos/asturiano.png",
+      "thumb": "http://www.openpay.mx/thumb/asturiano.png",
+      "max_amount": 99999.99
+    }
+  }
+]
+```
+
+Obtiene los detalles la cuenta del comercio. Solo se requiere indicar el id unico del comercio que se quiere obtener.
+
+###Petición
+
+Propiedad     | Descripción
+--------- | -----------
+latitud | ***numeric*** (requerido) <br>Latitud de la ubicacion geografica de la tienda 
+longitud | ***numeric*** (requerido) <br>Longitud de la ubicacion geografica de la tienda 
+kilometers | ***numeric*** (requerido) <br>Distancia del radio de la busqueda en kilometros
+amount | ***numeric*** (requerido) <br>Monto de la compra
+
+###Respuesta
+Si se encuentran tiendas cerca del rango se devolverá un arreglo con las tiendas encontradas.
 
 #Objetos Comunes
 
@@ -8212,10 +8520,12 @@ Información de objetos compartidos en peticiones y respuestas.
    "error_message":null,
    "customer_id":"afk4csrazjp1udezj1po",
    "bank_account":{
+      "rfc":ONE316015PM1,
+      "mobile":null,
       "alias":null,
       "bank_name":"BANCOMER",
       "creation_date":"2013-11-14T18:29:34-06:00",
-      "clabe":"012298026516924616",
+      "clabe":"012XXXXXXXXXX24616",
       "holder_name":"Juan Tapia Trejo",
       "bank_code":"012"
    }
@@ -8318,4 +8628,42 @@ used | ***numeric*** <br/> Cantidad de puntos usados para realizar este pago.
 remaining | ***numeric*** <br/> Cantidad de puntos restantes en la tarjeta después de realizar el pago.
 amount | ***numeric*** <br/>Monto de la transacción que fue pagado mediante puntos.
 caption | ***string*** (opcional) <br/> Mensaje a mostrar al cliente en su recibo o ticket de compra.
+
+##Objeto Geolocation
+
+> Ejemplo de Objeto:
+
+```json
+{
+  "lng": -100.421865,
+  "lat": 20.618171,
+  "place_id": "ChIJwSN2wpNa04URsDryLW517lg"
+}
+```
+
+Propiedad | Descripción
+--------- | -----------
+lng | ***numeric*** <br/> Longitud, coordenada geografica.
+lat | ***numeric*** <br/> Latitud, coordenada geografica.
+place_id | ***string*** <br/>Identificacdor unico en google maps
+
+##Objeto PaynetChain
+
+> Ejemplo de Objeto:
+
+```json
+{
+      "name": "EXTRA",
+      "logo": "http://www.openpay.mx/logotipos/extra.png",
+      "thumb": "http://www.openpay.mx/thumb/extra.png",
+      "max_amount": 99999.99
+    }
+```
+
+Propiedad | Descripción
+--------- | -----------
+name | ***string*** <br/> Nombre de la cadena.
+logo | ***string*** <br/> Url de la imagen del logotipo de la cadena.
+thumb | ***string*** <br/> Url de la imagen miniatura del logotipo de la cadena.
+max_amount | ***numeric*** <br/>Monto máximo de pago que aceptan las tiendas de la cadena
 
