@@ -1,7 +1,3 @@
-//= require ./lib/_energize
-//= require ./app/_lang
-//= require ./app/_search
-//= require ./app/_toc
 /*! jQuery UI - v1.10.3 - 2013-09-16
 * http://jqueryui.com
 * Includes: jquery.ui.widget.js

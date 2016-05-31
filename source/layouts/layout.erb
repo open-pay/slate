@@ -25,7 +25,7 @@ under the License.
     <%= stylesheet_link_tag "screen", media: 'screen' %>
     <%= stylesheet_link_tag "print", media: 'print' %>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-      <%= javascript_include_tag  "all" %>
+    <%= javascript_include_tag  "all" %>
     
     <script>
       $(function() {
@@ -55,9 +55,9 @@ under the License.
             <% current_page.data.language_tabs.each do |lang| %>
               <% if lang.is_a? Hash %>
                 '<%= lang.keys[0] %>',
-    <% else %>
+              <% else %>
                 '<%= lang %>',
-    <% end %>
+              <% end %>
             <% end %>
           <% end %>
         ]);
@@ -71,11 +71,11 @@ under the License.
       <div id="toc">
       </div>
       <% if current_page.data.toc_footers %>
-        <ul class="toc-footer">
-          <% current_page.data.toc_footers.each do |footer| %>
-            <li><%= footer %></li>
-          <% end %>
-        </ul>
+      <ul class="toc-footer">
+        <% current_page.data.toc_footers.each do |footer| %>
+          <li><%= footer %></li>
+        <% end %>
+      </ul>
       <% end %>
     </div>
     <div class="page-wrapper">
@@ -95,10 +95,9 @@ under the License.
                 <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
               <% end %>
             <% end %>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
-    </div>
     </div>
     <!-- ClickDesk Live Chat Service for websites -->
   <script type='text/javascript'>
