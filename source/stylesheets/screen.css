@@ -574,6 +574,11 @@ color: #ff8e00;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
+
+.content pre code {
+	background-color: transparent;
+}
+
 .content pre>p, .content blockquote>p {
 	margin: 0
 }
