@@ -4597,13 +4597,14 @@ response_hash=@cards.getPoints("asynwirguzkgq2bizogo","tnasugabhdgq456wr")
 ```json
 [
    {
+      "points_type": "santander",
       "remaining_points":"300",
       "remaining_mxn":"22.5"
    }
 ]
 ```
 
-Returns the card point balance. Is applicable only for Santander points.
+Returns the card point balance. Is applicable only for Santander and Scotiabank points.
 
 ###Request
 
@@ -4624,6 +4625,7 @@ id| ***string*** (required, length = 45) <br/> Identifier token
 
 Property | Description
 --------- | ------
+points_type|  Points type accepted by the card (Santander or Scotiabank)
 remaining_points| Number of remaining points
 remaining_mxn| Balance remaining points in pesos
 

@@ -4610,13 +4610,14 @@ response_hash=@cards.getPoints("asynwirguzkgq2bizogo","tnasugabhdgq456wr")
 ```json
 [
    {
+      "points_type": "santander",
       "remaining_points":"300",
       "remaining_mxn":"22.5"
    }
 ]
 ```
 
-Regresa un el balance de puntos de la tarjeta. Solo aplicable a puntos Santander.
+Regresa un el balance de puntos de la tarjeta. Solo aplicable a puntos Santander y Scotiabank.
 
 ###Petición
 Puedes consultar los puntos de una tarjeta perteneciente a un comercio o un cliente mediante el id de la tarjeta
@@ -4635,6 +4636,7 @@ id| ***string*** (requerido, longitud = 45) <br/> Identificador de token
 ###Respuesta
 Propiedad | Descripción
 --------- | ------
+points_type|  Tipo de puntos aceptados por la tarjeta (Santander ó Scotiabank)
 remaining_points| Cantidad de puntos restante
 remaining_mxn| Saldo de puntos restante en pesos
 
