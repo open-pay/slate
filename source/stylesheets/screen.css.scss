@@ -1,3 +1,6 @@
+@import 'variables';
+@import 'icon-font';
+
 /*! normalize.css v2.0.1 | MIT License | git.io/normalize */article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
 	display: block
 }
@@ -295,6 +298,66 @@ html, body {
 	background-color: #FFF /* #393939 */;
 	font-size: 13px;
 	font-weight: bold;
+
+  &>.search {
+    position: relative;
+
+    input {
+      background: #FFF;
+      border-width: 0 0 1px 0;
+      border-color: $search-box-border-color;
+      padding: 6px 0 6px 20px;
+      box-sizing: border-box;
+      margin: $nav-v-padding $nav-padding;
+      width: $nav-width - 30;
+      outline: none;
+      color: $nav-text;
+      border-radius: 0; /* ios has a default border radius */
+    }
+
+    &:before {
+      position: absolute;
+      top: 17px;
+      left: $nav-padding;
+      color: $nav-text;
+      @extend %icon-search;
+    }
+  }
+
+  .search-results {
+    margin-top: 0;
+    box-sizing: border-box;
+    height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition-property: height, margin;
+    transition-duration: 180ms;
+    transition-timing-function: ease-in-out;
+    &.visible {
+      height: 30%;
+      margin-bottom: 1em;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    background-color: #FAFAFA;
+
+    li {
+      margin: 1em $nav-padding;
+      line-height: 1;
+    }
+
+    a {
+      color: $nav-text;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+
 }
 .tocify-wrapper>img {
 	display: block;

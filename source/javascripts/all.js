@@ -1,3 +1,4 @@
+//= require ./app/_search
 /*! jQuery UI - v1.10.3 - 2013-09-16
 * http://jqueryui.com
 * Includes: jquery.ui.widget.js
@@ -26,3 +27,4 @@ License for the specific language governing permissions and limitations
 under the License.
 */
 languages=[];
+
