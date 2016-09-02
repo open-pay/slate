@@ -22,6 +22,7 @@ The Openpay API is designed on [REST](http://es.wikipedia.org/wiki/Representatio
 
 All the API responses are in [JSON](http://www.json.org/) format, including the errors.
 
+In the case to use the existents Openpay API clients ([Java](https://github.com/open-pay/openpay-java), [Php](https://github.com/open-pay/openpay-php), [C#](https://github.com/open-pay/openpay-dotnet), [Python](https://github.com/open-pay/openpay-python), [Ruby](https://github.com/open-pay/openpay-ruby), [NodeJS](https://github.com/open-pay/openpay-node)), the responses are specifically of type defined in the clients and their respective languajes.
 
 # API Endpoints
 
@@ -736,7 +737,7 @@ amount | ***numeric*** (required) <br/>Amount of charge. Must be an amount great
 description | ***string*** (required, length = 250) <br/>A description associated to the charge.
 order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
 due_date | ***datetime*** (optional) <br/>Due date for making the payment in the store in  ISO 8601 format. <br/><br/>Example (UTC): 2014-08-01T00:50:00Z <br/>***Note:*** On the server side the date will be changeg to central time<br/><br/>Example (Central Time): 2014-08-01T11:51:23-05:00
-[customer](#create-a-new-customer)|***string*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer leve.
+[customer](#create-a-new-customer)|***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer leve.
 
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
@@ -912,7 +913,7 @@ amount | ***numeric*** (required) <br/>Amount of charge. Must be an amount great
 description | ***string*** (required, length = 250) <br/>A description associated to the charge.
 order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
 due_date | ***datetime*** (optional) <br/>>Due date for making the bank charge in the ISO 8601 format. <br/><br/>Example (UTC): 2014-08-01T00:50:00Z <br/>***Note:*** On the server side the date will be changed to central time<br/><br/>Example (Central Time): 2014-08-01T11:51:23-05:00
-[customer](#create-a-new-customer)|***string*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
+[customer](#create-a-new-customer)|***object*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
 
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
@@ -2021,7 +2022,7 @@ Sends a payment to a bank account.
 Property | Description
 --------- | -----
 method|***string*** (required) <br/>It must contain the **bank_account** value.
-bank_account | ***object*** (required) <br/>Data of the bank account where the funds will be sent. <br/><br/> **clabe**.- CLABE account number where the funds will be sent. <br/>**holder_name**.- Name of the account owner .
+[bank_account](#bank-account-object)  | ***object*** (required) <br/>Data of the bank account where the funds will be sent. <br/><br/> **clabe**.- CLABE account number where the funds will be sent. <br/>**holder_name**.- Name of the account owner .
 amount | ***numeric*** (required) <br/>Amount of payout. Must be an amount greater than zero, with up to two decimal digits.
 description | ***string*** (required, length = 250) <br/>A description associated to the payment.
 order_id | ***string*** (optional, length = 100) <br/>Unique identifier of payout. Must be unique among all transactions.
@@ -2236,7 +2237,7 @@ Sends a payment to a debit card. In  case the used card is not debit, the funds 
 Property | Description
 --------- | -----
 method|***string*** (required) <br/>It must contain the **card** value.
-card | ***object*** (required) <br/>Data of the card where the funds will be sent. <br/><br/> **card_number**.- Card number where the funds will be sent. <br/>**holder_name**.- Name of the card owner (cardholder).
+[card](#card-object) | ***object*** (required) <br/>Data of the card where the funds will be sent. <br/><br/> **card_number**.- Card number where the funds will be sent. <br/>**holder_name**.- Name of the card owner (cardholder).
 amount | ***numeric*** (required) <br/>Amount of payout. Must be an amount greater than zero, with up to two decimal digits.
 description | ***string*** (required, length = 250) <br/>A description associated to the payment.
 order_id | ***string*** (optional, length = 100) <br/>Unique identifier of payout. Must be unique among all transactions.

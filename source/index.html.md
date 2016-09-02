@@ -20,6 +20,8 @@ La API de Openpay está diseña sobre [REST](http://es.wikipedia.org/wiki/Repres
 
 Todas las respuestas de la API están en formato [JSON](http://www.json.org/), incluyendo errores.
 
+En el caso de usar los clientes existentes del API de Openpay ([Java](https://github.com/open-pay/openpay-java), [Php](https://github.com/open-pay/openpay-php), [C#](https://github.com/open-pay/openpay-dotnet), [Python](https://github.com/open-pay/openpay-python), [Ruby](https://github.com/open-pay/openpay-ruby), [NodeJS](https://github.com/open-pay/openpay-node)), las respuestas son específicamente del tipo definido en dichos clientes en sus respectivos lenguajes.
+
 # API Endpoints
 
 > Recurso disponibles
@@ -751,7 +753,7 @@ amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantida
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el pago en la tienda en formato ISO 8601. <br/><br/>Ejemplo (UTC): 2014-08-01T00:50:00Z <br/>***Nota:*** Del lado del servidor se cambiara a hora central<br/><br/>Ejemplo (Central Time): 2014-08-01T11:51:23-05:00
-[customer](#crear-un-nuevo-cliente)|***string*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
+[customer](#crear-un-nuevo-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -929,7 +931,7 @@ amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantida
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el cargo a banco en formato ISO 8601. <br/><br/>Ejemplo (UTC): 2014-08-01T00:50:00Z <br/>***Nota:*** Del lado del servidor se cambiara a hora central<br/><br/>Ejemplo (Central Time): 2014-08-01T11:51:23-05:00
-[customer](#crear-un-nuevo-cliente)|***string*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
+[customer](#crear-un-nuevo-cliente)|***objeto*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -2037,7 +2039,7 @@ Envía un pago a una cuenta bancaria.
 Propiedad | Descripción
 --------- | -----
 method|***string*** (requerido) <br/>Debe contener el valor **bank_account**.
-bank_account | ***object*** (requerido) <br/>Datos de la cuenta bancaria a la que se enviarán los fondos. <br/><br/> **clabe**.- Número de cuenta CLABE de la cuenta a la que se enviarán los fondos. <br/>**holder_name**.- Nombre del propietario de la cuenta.
+[bank_account](#objeto-cuenta-bancaria) | ***object*** (requerido) <br/>Datos de la cuenta bancaria a la que se enviarán los fondos. <br/><br/> **clabe**.- Número de cuenta CLABE de la cuenta a la que se enviarán los fondos. <br/>**holder_name**.- Nombre del propietario de la cuenta.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
@@ -2252,7 +2254,7 @@ Envío un pago tarjeta de débito. En dado caso que la tarjeta usada no sea déb
 Propiedad | Descripción
 --------- | -----
 method|***string*** (requerido) <br/>Debe contener el valor **card**.
-card | ***object*** (requerido) <br/>Datos de la tarjeta a la que se enviarán los fondos. <br/><br/> **card_number**.- Número de tarjeta de crédito a la que se enviarán los fondos <br/>**holder_name**.- Nombre del tarjeta habiente propietario de la tarjeta.
+[card](#objeto-tarjeta) | ***objeto*** (requerido) <br/>Datos de la tarjeta a la que se enviarán los fondos. <br/><br/> **card_number**.- Número de tarjeta de crédito a la que se enviarán los fondos <br/>**holder_name**.- Nombre del tarjeta habiente propietario de la tarjeta.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
