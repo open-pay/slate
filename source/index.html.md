@@ -6947,6 +6947,133 @@ order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único de 
 ###Regresa
 El [objeto de transacción](#objeto-transacción) de la comisión, con su fecha de creación y su id o una [respuesta de error](#objeto-error).
 
+
+##Devolver Comisión
+> Definición
+
+```shell
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees/{TRANSACTION_ID}/refund
+```
+
+```php
+<?
+$fee = $openpay->fees->get(transactionId);
+$fee->refund(refundData);
+?>
+```
+
+```java
+openpayAPI.fees().refund(String transactionId, RefundParams request);
+```
+
+```csharp
+openpayAPI.FeeService.Refund(string transaction_id, RefundRequest request);
+```
+
+```javascript
+openpay.fees.refund(transactionId, feeRequest, callback);
+```
+
+```ruby
+#Cliente
+@fees=@openpay.create(:fees)
+@fees.refund(transaction_id, refund_hash)
+```
+
+> Ejemplo de petición 
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees/trzjaozcik8msyqshka4/refund \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -H "Content-type: application/json" \
+   -X POST -d '{                                            
+     "description" : "Devolución de Comisión"
+}' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$refundData = array(
+    'description' => 'Devolución de Comisión'
+    );
+
+$fee = $openpay->fees->get("trzjaozcik8msyqshka4");
+$fee->refund($refundData);
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+RefundParams request = new RefundParams();
+request.description("Devolución de comisión");
+
+Fee fee = api.fees().refund("trzjaozcik8msyqshka4", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+RefundRequest request = new RefundRequest();
+request.Description = "Devolución de comisión";
+
+Fee fee = api.FeeService.Refund("trzjaozcik8msyqshka4", request);
+```
+
+```javascript
+var refundRequest = {                                            
+     'description' : 'Devolución de Comisión'
+};
+
+openpay.fees.refund("trzjaozcik8msyqshka4", refundRequest, function(error, refund){
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@fees=@openpay.create(:fees)
+refund_hash={
+     "description" => "Devolución de Comisión"
+   }
+
+response_hash=@fees.refund("mzdtln0bmtms6o3kck8f", refund_hash.to_hash)
+```
+
+> Ejemplo de respuesta
+
+```json
+{
+  "id": "th8tafyrkakdbyry3kxi",
+  "authorization": null,
+  "method": "customer",
+  "operation_type": "in",
+  "transaction_type": "refund",
+  "status": "completed",
+  "conciliated": true,
+  "creation_date": "2016-09-06T11:56:57-05:00",
+  "operation_date": "2016-09-06T11:56:57-05:00",
+  "description": "devolución de comisión merchant03",
+  "error_message": null,
+  "order_id": null,
+  "customer_id": "ar2btmquidjhykdaztp6",
+  "amount": 11.11,
+  "currency": "MXN"
+}
+```
+
+Devuelve una comisión a la cuenta de un cliente.
+
+###Petición
+
+Propiedad | Descripción
+--------- | ------
+description | ***string*** (opcional, longitud = 250) <br/>Una descripción asociada al reembolso de la comisión.
+ 
+###Regresa
+El [objeto de transacción](#objeto-transacción) del reembolso, con su fecha de creación y su id o una [respuesta de error](#objeto-error).
+
+
 ##Listado de comisiones
 > Definición
 

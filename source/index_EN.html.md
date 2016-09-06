@@ -6946,6 +6946,133 @@ order_id | ***string*** (optional, length = 100) <br/>Unique fee identifier.  It
 ###Response
 The [transaction object](#transaction-object) of the fee including the creation date and id or an [error response](#error-object).
 
+
+##Refund Fee
+> Definition
+
+```shell
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees/{TRANSACTION_ID}/refund
+```
+
+```php
+<?
+$fee = $openpay->fees->get(transactionId);
+$fee->refund(refundData);
+?>
+```
+
+```java
+openpayAPI.fees().refund(String transactionId, RefundParams request);
+```
+
+```csharp
+openpayAPI.FeeService.Refund(string transaction_id, RefundRequest request);
+```
+
+```javascript
+openpay.fees.refund(transactionId, feeRequest, callback);
+```
+
+```ruby
+#Cliente
+@fees=@openpay.create(:fees)
+@fees.refund(transaction_id, refund_hash)
+```
+
+> Request example 
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees/trzjaozcik8msyqshka4/refund \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -H "Content-type: application/json" \
+   -X POST -d '{                                            
+     "description" : "Fee Refund"
+}' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$refundData = array(
+    'description' => 'Fee Refund'
+    );
+
+$fee = $openpay->fees->get("trzjaozcik8msyqshka4");
+$fee->refund($refundData);
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+RefundParams request = new RefundParams();
+request.description("Fee Refund");
+
+Fee fee = api.fees().refund("trzjaozcik8msyqshka4", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+RefundRequest request = new RefundRequest();
+request.Description = "Fee Refund";
+
+Fee fee = api.FeeService.Refund("trzjaozcik8msyqshka4", request);
+```
+
+```javascript
+var refundRequest = {                                            
+     'description' : 'Fee Refund'
+};
+
+openpay.fees.refund("trzjaozcik8msyqshka4", refundRequest, function(error, refund){
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@fees=@openpay.create(:fees)
+refund_hash={
+     "description" => "Fee Refund"
+   }
+
+response_hash=@fees.refund("mzdtln0bmtms6o3kck8f", refund_hash.to_hash)
+```
+
+> Response example
+
+```json
+{
+  "id": "th8tafyrkakdbyry3kxi",
+  "authorization": null,
+  "method": "customer",
+  "operation_type": "in",
+  "transaction_type": "refund",
+  "status": "completed",
+  "conciliated": true,
+  "creation_date": "2016-09-06T11:56:57-05:00",
+  "operation_date": "2016-09-06T11:56:57-05:00",
+  "description": "fee refund merchant03",
+  "error_message": null,
+  "order_id": null,
+  "customer_id": "ar2btmquidjhykdaztp6",
+  "amount": 11.11,
+  "currency": "MXN"
+}
+```
+
+Refund a fee to the customer account.
+
+###Request
+
+Property | Description
+--------- | ------
+description | ***string*** (optional, length = 250) <br/> A description associated with the fee charge.
+ 
+###Response
+The [transaction object](#transaction-object) of the refund including the creation date and id or an [error response](#error-object).
+
+
 ##Fee  list
 > Definition
 
@@ -7079,6 +7206,9 @@ response_hash=@fees.all
    }
 ]
 ```
+
+
+
 Returns the details of every fee charged by the Merchant.
 
 ###Request
