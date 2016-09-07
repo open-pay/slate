@@ -1634,6 +1634,7 @@ Puede realizar una búsqueda utilizando los siguiente parámetros como filtros.
 
 Propiedad | Descripción
 --------- | ------
+order_id| ***string*** <br/>Identificador único de la orden generado por el comercio y asociado a la transaccion mediante el campo order_id de la petición del cargo.
 creation| ***date*** <br/>Igual a la fecha de creación. Formato yyyy-mm-dd
 creation[gte]| ***date*** <br/>Mayor a la fecha de creación. Formato yyyy-mm-dd
 creation[lte]| ***date*** <br/>Menor a la fecha de creación. Formato yyyy-mm-dd
@@ -3525,6 +3526,7 @@ Puede realizar una búsqueda utilizando los siguiente parámetros como filtros.
 
 Propiedad | Descripción
 --------- | ------
+external_id| _**string**_ <br/>Identificador único del cliente  asignado por el comercio que se desea obtener.
 creation| ***date*** <br/>Igual a la fecha de creación del cliente. Formato yyyy-mm-dd
 creation[gte]| ***date*** <br/>Mayor a la fecha de creación del cliente .Formato yyyy-mm-dd
 creation[lte]| ***date*** <br/>Menor a la fecha de creación del cliente .Formato yyyy-mm-dd
