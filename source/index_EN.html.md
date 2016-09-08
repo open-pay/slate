@@ -552,6 +552,8 @@ capture | ***boolean*** (optional, default = true) <br/>Indicates whether the ch
 [payment_plan](#objetc-paymentplan)|***object*** (opcional) <br/>Plan data months without interest is desired as use in the charge. Refer to [PaymentPlan Object](#paymentplan-objetc).
 metadata |  ***list(key, value)*** (optional) <br/>Field list to send antifraud system, It must be according to [Rules to send custom antifraud fields] (#custom-to-send-antifraud-fields).
 use_card_points | ***string*** (optional, default = NONE) <br/> <table><tr><td><strong>ONLY_POINTS</strong></td> <td>Charge only with points (<a href="#consulta-de-puntos">Points card</a>)</td></tr><tr><td><strong>MIXED</strong></td><td>Charge with points and pesos</td></tr><tr><td><strong>NONE</strong></td>        <td>Charge only with pesos</td></tr></table>The values that indicate points must be used only if the points_card property is true, otherwise an error will occur.
+send_email | ***boolean*** (optional) <br/>Used in redirect charges. Indicates if is need send a email that redirect to the openpay payment form.
+redirect_url | ***string*** (optional) <br/>Used in redirect charges. It indicates the url to which redirect after a successful transaction in the openpay payment form.
 
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
@@ -1261,6 +1263,7 @@ You can use this method f you want to make a charge refund to a card. The amount
 Property | Description
 --------- | -----
 description | ***string*** (optional, length = 250) <br/>Text to describe the refund reason.
+amount | ***numeric*** (opcional) <br/>Amount to refund. Must be an amount greater than zero and lesser or equal than the original amount, with up to two decimal digits.
 
 
 ###Response

@@ -565,8 +565,8 @@ capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se h
 [payment_plan](#objeto-paymentplan)|***objeto*** (opcional) <br/>Datos del plan de meses sin intereses que se desea utilizar en el cargo. Ver [Objeto PaymentPlan](#objeto-paymentplan).
 metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
 use_card_points | ***string*** (opcional, default = NONE) <br/> <table><tr><td><strong>ONLY_POINTS</strong></td> <td>Cargo solo con puntos (<a href="#consulta-de-puntos">Consulta de puntos</a>)</td></tr><tr><td><strong>MIXED</strong></td>       <td>Cargo con pesos y puntos</td></tr><tr><td><strong>NONE</strong></td>        <td>Cargo solo con pesos</td></tr></table>Los valores que indican puntos solo se deben usarse si la propiedad points_card de la tarjeta es true, de otra forma ocurrirá un error.
-
-
+send_email | ***boolean*** (opcional) <br/>Usado para cargos de tipo redirect. Indica se si desea enviar un email que direccione al formulario de pago de openpay.
+redirect_url | ***string*** (opcional) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de openpay.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -1279,6 +1279,7 @@ Si deseas realizar una devolución de un cargo hecho a tarjeta puedes ocupar est
 Propiedad | Descripción
 --------- | -----
 description | ***string*** (opcional, longitud = 250) <br/>Texto libre para describir motivo de la devolución.
+amount | ***numeric*** (opcional) <br/>Cantidad a reembolsar. Debe ser una cantidad mayor a cero y menor o igual al cargo original, con hasta dos dígitos decimales.
 
 
 ###Respuesta
