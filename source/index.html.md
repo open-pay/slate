@@ -2754,6 +2754,288 @@ payout_type | ***string (opcional, ALL, AUTOMATIC o MANUAL)***  <br/>Tipo de pay
 
 Regresa un listado de [objetos de transacción](#objeto-transacción) de los pagos en orden descendente por fecha de creación.
 
+##Resumen de Pagos
+
+> Definición
+
+```shell
+GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/reports/payout/{TRANSACTION_ID}
+```
+
+```php
+<?
+$transactionsPayout = $openpay->transactionsPayout->get(transactionId);
+?>
+```
+
+```java
+openpayAPI.transactionsPayout().getResume(String transactionId);
+```
+
+```csharp
+openpayAPI.PayoutReportService.Get(string transaction_id);
+```
+
+```javascript
+openpay.transactionsPayout.get(transactionId, callback);
+```
+
+```ruby
+@transactionsPayout=@openpay.create(:transactionsPayout)
+@transactionsPayout.get(transaction_id)
+```
+
+> Ejemplo de petición
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/reports/payout/trwpxhrgfeub9eqdyvqz \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$payout = $openpay->transactionsPayout->get('trwpxhrgfeub9eqdyvqz');
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+
+TransactionsPayoutResume payoutResume = transactionsPayout().getResume("tr6cxbcefzatd10guvvw");
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+
+PayoutSummary payoutSummary = api.PayoutReportService.Get("tr6cxbcefzatd10guvvw");
+```
+
+```javascript
+openpay.transactionsPayout.get('tr6cxbcefzatd10guvvw', function(error, payout) {
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@transactionsPayout=@openpay.create(:transactionsPayout)
+
+response_hash=@transactionsPayout.get("tr6cxbcefzatd10guvvw")
+```
+
+> Ejemplo de respuesta
+
+```json
+{
+  "in": 2700,
+  "out": 2400,
+  "charged_adjustments": 0,
+  "refunded_adjustments": 0
+}
+```
+
+Regresa el resumen de un pago realizado. Es necesario conocer el id del pago.
+
+###Petición
+
+Propiedad | Descripción
+--------- | ------
+transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del pago a consultar.
+
+###Respuesta
+Regresa un [objeto de resumen de pagos](#objeto-resumen-de-pagos) con el resumen del pago o una [respuesta de error](#objeto-error).
+
+##Objeto Resumen de Pagos
+
+> Ejemplo de objeto 
+
+```json
+{
+   "in":2700,
+   "out":2400,
+   "charged_adjustments":0,
+   "refunded_adjustments":0
+}
+```
+
+Propiedad | Descripción
+--------- | ------
+in | ***numeric*** <br/> Monto total de entrada, Debe ser una cantidad con hasta 2 dígitos decimales.
+out | ***numeric*** <br/> Monto total de salida, Debe ser una cantidad con hasta 2 dígitos decimales.
+charged_adjustments | ***numeric*** <br/> Monto total de cargos de ajuste, Debe ser una cantidad con hasta 2 dígitos decimales.
+refunded_adjustments | ***numeric*** <br/> Monto total de cargos de devolución, Debe ser una cantidad con hasta 2 dígitos decimales.
+
+##Detalle de Pagos
+
+> Definición
+
+```shell
+GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/reports/payout/{TRANSACTION_ID}/detail
+```
+
+```php
+<?
+$transactionsPayout = $openpay->transactionsPayout->getDetails(transactionId, searchParams);
+?>
+```
+
+```java
+openpayAPI.transactionsPayout().getDetails(String transactionId, TransactionsPayoutType transactionsPayoutType, PaginationParams paginationParams);
+```
+
+```csharp
+openpayAPI.PayoutReportService.Detail(string transaction_id, PayoutReportDetailSearchParams searchParams);
+```
+
+```javascript
+openpay.transactionsPayout.getDetails(transactionId, searchParams, callback);
+```
+
+```ruby
+@transactionsPayout=@openpay.create(:transactionsPayout)
+@transactionsPayout.getDetails(transaction_id, searchParams)
+```
+
+> Ejemplo de petición
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/reports/payout/trwpxhrgfeub9eqdyvqz/detail?detail_type=IN \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$searchParams = array(
+    'payout_type' => 'IN',
+    'offset' => 0,
+    'limit' => 100);
+
+$payout = $openpay->transactionsPayout->getDetails('trwpxhrgfeub9eqdyvqz', $searchParams);
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+
+      PaginationParams paginationParams = new PaginationParams();
+      paginationParams.offset(0);
+      paginationParams.limit(100);
+
+List<GenericTransaction> payoutTransactions = transactionsPayout().getDetails("tr6cxbcefzatd10guvvw", TransactionsPayoutType.IN, paginationParams);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+PayoutReportDetailSearchParams searchParams = new PayoutReportDetailSearchParams();
+searchParams.DetailType = "IN";
+searchParams.Offset = 0;
+searchParams.Limit = 100;
+
+List<Transaction> transactions = api.PayoutReportService.Detail("tr6cxbcefzatd10guvvw", searchParam);
+```
+
+```javascript
+var searchParams = {
+  'detail_type' : 'IN',
+  'offset' : 0,
+  'limit' : 100
+};
+
+openpay.transactionsPayout.get('tr6cxbcefzatd10guvvw', searchParams, function(error, payout) {
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@transactionsPayout=@openpay.create(:transactionsPayout)
+
+search_params_hash={
+     "detail_type" => "IN",
+     "offset" => 0,
+     "limit" => 100
+   }
+
+response_hash=@transactionsPayout.getDetails("tr6cxbcefzatd10guvvw", search_params_hash.to_hash)
+```
+
+> Ejemplo de respuesta
+
+```json
+[
+  {
+    "id": "trqcwapqeilg596zwrvr",
+    "authorization": "7BXqDL1fjb",
+    "method": "bank_account",
+    "operation_type": "in",
+    "transaction_type": "charge",
+    "status": "completed",
+    "conciliated": true,
+    "creation_date": "2016-09-13T12:57:34-05:00",
+    "operation_date": "2016-09-13T12:57:34-05:00",
+    "description": "mexzhpxok3houd5lbvz1",
+    "error_message": null,
+    "order_id": null,
+    "bank_account": {
+      "clabe": "113XXXXXXXXXX09568",
+      "bank_code": "113",
+      "bank_name": "VE POR MAS",
+      "rfc": "OPE130906HN4",
+      "holder_name": "persona003"
+    },
+    "amount": 700,
+    "currency": "MXN"
+  },
+  {
+    "id": "tru6lsl6xpvseqp87vjd",
+    "authorization": "FPVYiN4nyw",
+    "method": "bank_account",
+    "operation_type": "in",
+    "transaction_type": "charge",
+    "card": {
+      "type": "debit",
+      "brand": "mastercard",
+      "address": null,
+      "card_number": "555555XXXXXX4444",
+      "holder_name": "persona003",
+      "expiration_year": null,
+      "expiration_month": null,
+      "allows_charges": false,
+      "allows_payouts": false,
+      "bank_name": "MASARI",
+      "bank_code": "602"
+    },
+    "status": "completed",
+    "conciliated": true,
+    "creation_date": "2016-09-13T12:57:16-05:00",
+    "operation_date": "2016-09-13T12:57:16-05:00",
+    "description": "mexzhpxok3houd5lbvz1",
+    "error_message": null,
+    "order_id": null,
+    "amount": 2000,
+    "currency": "MXN"
+  }
+]
+```
+
+Regresa el listado las transaferencias involucradas en un pago realizado. Es necesario conocer el id del pago.
+
+###Petición
+
+Propiedad | Descripción
+--------- | ------
+transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del pago a consultar.
+detail_type| _**string**_(***IN***, ***OUT***, ***CHARGED_ADJUSTMENTS***, ***REFUNDED_ADJUSTMENTS***) <br/>Tipo de detalle.
+offset| _**numeric**_ <br/> Número de registros a omitir al inicio, por defecto 0.
+limit| _**numeric**_ <br/> Número de registros que se requieren, por defecto 10.
+
+###Respuesta
+Regresa un listado de [objetos transacción](#objeto-transacci-n) o una [respuesta de error](#objeto-error).
+
 
 #Clientes
 
