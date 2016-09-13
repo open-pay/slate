@@ -4542,16 +4542,16 @@ $pointsBalance = $openpay->get("tokens")->get(tokenId)->get("points");
 
 ```java
 //Cliente
-openpayAPI.cards().getPoints(String customerId, String cardId);
+openpayAPI.cards().points(String customerId, String cardId);
 //Comercio
-openpayAPI.cards().getPoints(String cardId);
+openpayAPI.cards().points(String cardId);
 ```
 
 ```csharp
 //Cliente
-openpayAPI.CardService.getPoints(string customer_id, string cardId);
+openpayAPI.CardService.Points(string customer_id, string cardId);
 //Comercio
-openpayAPI.CardService.getPoints(string cardId);
+openpayAPI.CardService.Points(string cardId);
 ```
 
 ```javascript
@@ -4589,12 +4589,12 @@ $pointsBalance = $customer->cards->get(cardId)->get("points");
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128",
 "maonhzpqm8xp2ydssovf");
-CardPointsBalance points = api.cards().getPoints("a9pvykxz4g5rg0fplze0", "tnasugabhdgq456wr");
+PointsBalance points = api.cards().points("a9pvykxz4g5rg0fplze0", "knasugabhdgq456wr");
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-CardPointsBalance points = api.CardService.getPoints("a9pvykxz4g5rg0fplze0", "tnasugabhdgq456wr");
+PointsBalance points = api.CardService.Points("a9pvykxz4g5rg0fplze0", "knasugabhdgq456wr");
 ```
 
 ```javascript
@@ -4622,7 +4622,7 @@ response_hash=@cards.getPoints("asynwirguzkgq2bizogo","tnasugabhdgq456wr")
 ]
 ```
 
-Regresa un el balance de puntos de la tarjeta. Solo aplicable a puntos Santander y Scotiabank.
+Regresa un el balance de puntos de la tarjeta. Solo aplicable a puntos Santander, Scotiabank y Bancomer.
 
 ###Petición
 Puedes consultar los puntos de una tarjeta perteneciente a un comercio o un cliente mediante el id de la tarjeta
@@ -4641,7 +4641,7 @@ id| ***string*** (requerido, longitud = 45) <br/> Identificador de token
 ###Respuesta
 Propiedad | Descripción
 --------- | ------
-points_type|  Tipo de puntos aceptados por la tarjeta (Santander ó Scotiabank)
+points_type|  Tipo de puntos aceptados por la tarjeta (Santander, Scotiabank ó Bancomer)
 remaining_points| Cantidad de puntos restante
 remaining_mxn| Saldo de puntos restante en pesos
 

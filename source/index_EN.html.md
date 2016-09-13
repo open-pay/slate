@@ -4528,18 +4528,18 @@ $pointsBalance = $openpay->get("tokens")->get(tokenId)->get("points");
 
 ```java
 //Customer
-openpayAPI.cards().getPoints(String customerId, String cardId);
+openpayAPI.cards().points(String customerId, String cardId);
 
 //Merchant
-openpayAPI.cards().getPoints(String cardId);
+openpayAPI.cards().points(String cardId);
 ```
 
 ```csharp
 //Customer
-openpayAPI.CardService.getPoints(string customer_id, string cardId);
+openpayAPI.CardService.Points(string customer_id, string cardId);
 
 //Merchant
-openpayAPI.CardService.getPoints(string cardId);
+openpayAPI.CardService.Points(string cardId);
 ```
 
 ```javascript
@@ -4579,12 +4579,12 @@ $pointsBalance = $customer->cards->get(cardId)->get("points");
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128",
 "maonhzpqm8xp2ydssovf");
-CardPointsBalance points = api.cards().getPoints("a9pvykxz4g5rg0fplze0", "tnasugabhdgq456wr");
+PointsBalance points = api.cards().points("a9pvykxz4g5rg0fplze0", "knasugabhdgq456wr");
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-CardPointsBalance points = api.CardService.getPoints("a9pvykxz4g5rg0fplze0", "tnasugabhdgq456wr");
+PointsBalance points = api.CardService.Points("a9pvykxz4g5rg0fplze0", "knasugabhdgq456wr");
 ```
 
 ```javascript
@@ -4612,7 +4612,7 @@ response_hash=@cards.getPoints("asynwirguzkgq2bizogo","tnasugabhdgq456wr")
 ]
 ```
 
-Returns the card point balance. Is applicable only for Santander and Scotiabank points.
+Returns the card point balance. Is applicable only for Santander, Scotiabank and Bancomer points.
 
 ###Request
 
@@ -4633,7 +4633,7 @@ id| ***string*** (required, length = 45) <br/> Identifier token
 
 Property | Description
 --------- | ------
-points_type|  Points type accepted by the card (Santander or Scotiabank)
+points_type|  Points type accepted by the card (Santander, Scotiabank or Bancomer)
 remaining_points| Number of remaining points
 remaining_mxn| Balance remaining points in pesos
 
