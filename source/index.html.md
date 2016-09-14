@@ -3029,7 +3029,7 @@ Regresa el listado las transaferencias involucradas en un pago realizado. Es nec
 Propiedad | Descripción
 --------- | ------
 transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del pago a consultar.
-detail_type| _**string**_(***IN***, ***OUT***, ***CHARGED_ADJUSTMENTS***, ***REFUNDED_ADJUSTMENTS***) <br/>Tipo de detalle.
+detail_type| _**string**_ (***IN***, ***OUT***, ***CHARGED_ADJUSTMENTS***, ***REFUNDED_ADJUSTMENTS***) <br/>Tipo de detalle.
 offset| _**numeric**_ <br/> Número de registros a omitir al inicio, por defecto 0.
 limit| _**numeric**_ <br/> Número de registros que se requieren, por defecto 10.
 
