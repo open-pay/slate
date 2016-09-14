@@ -3022,7 +3022,7 @@ response_hash=@transactionsPayout.getDetails("tr6cxbcefzatd10guvvw", search_para
 ]
 ```
 
-Regresa el listado las transaferencias involucradas en un pago realizado. Es necesario conocer el id del pago.
+Regresa el listado las transacciones involucradas en un pago realizado. Es necesario conocer el id del pago.
 
 ###Petición
 
