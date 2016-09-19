@@ -571,6 +571,247 @@ redirect_url | ***string*** (opcional) <br/>Usado para cargos de tipo redirect. 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
 
+##Con terminal virtual
+
+> Definición
+
+```shell
+Comercio
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+
+Cliente
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+```
+
+```php
+<?
+Comercio
+$openpay->charges->create(chargeRequest);
+
+Cliente
+$customer = $openpay->customers->get($customerId);
+$customer->charges->create(chargeRequest);
+?>
+```
+
+```java
+//Cliente
+openpayAPI.charges().create(String customerId, CreateCardChargeParams request);
+
+//Comercio
+openpayAPI.charges().create(CreateCardChargeParams request);
+```
+
+```javascript
+// Comercio
+openpay.charges.create(chargeRequest, callback);
+
+// Cliente
+openpay.customers.charges.create(customerId, chargeRequest, callback);
+```
+
+```csharp
+//Cliente
+openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
+
+//Comercio
+openpayAPI.ChargeService.Create(ChargeRequest request);
+```
+
+```ruby
+#Cliente
+@charges=@openpay.create(:charges)
+@charges.create(request_hash, customer_id)
+
+#Comercio
+@charges=@openpay.create(:charges)
+@charges.create(request_hash)
+```
+
+> Ejemplo de petición con comercio
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -H "Content-type: application/json" \
+   -X POST -d '{
+   "method" : "card",
+   "amount" : 100,
+   "description" : "Cargo inicial a mi cuenta",
+   "order_id" : "oid-00051",
+   "customer" : {
+        "name" : "Juan",
+        "last_name" : "Vazquez Juarez",
+        "phone_number" : "4423456723",
+        "email" : "juan.vazquez@empresa.com.mx"
+   },
+   "confirm" : "false",
+   "send_email":"false",
+   "redirect_url":"http://www.openpay.mx/index.html"
+}'
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$customer = array(
+     'name' => 'Juan',
+     'last_name' => 'Vazquez Juarez',
+     'phone_number' => '4423456723',
+     'email' => 'juan.vazquez@empresa.com.mx');
+
+$chargeRequest = array(
+    "method" : "card",
+    'amount' => 100,
+    'description' => 'Cargo terminal virtual a mi merchant',
+    'customer' => $customer,
+    'send_email' => false,
+    'confirm' => false,
+    'redirect_url' => 'http://www.openpay.mx/index.html')
+;
+
+$charge = $openpay->charges->create($chargeRequest);
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateCardChargeParams request = new CreateCardChargeParams();
+Customer customer = new Customer();
+customer.setName("Juan");
+customer.setLastName("Vazquez Juarez");
+customer.setPhoneNumber("4423456723");
+customer.setEmail("juan.vazquez@empresa.com.mx");
+
+request.amount(new BigDecimal("100.00"));
+request.description("Cargo inicial a mi merchant");
+request.orderId("oid-00051");
+request.setCustomer(customer);
+request.setSendEmail(false);
+request.setConfirm(false);
+request.setRedirectUrl("http://www.openpay.mx/index.html");
+
+Charge charge = api.charges().create(request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+ChargeRequest request = new ChargeRequest();
+Customer customer = new Customer();
+customer.Name = "Juan";
+customer.LastName = "Vazquez Juarez";
+customer.PhoneNumber = "4423456723";
+customer.Email = "juan.vazquez@empresa.com.mx";
+
+request.Method = "card";
+request.Amount = new Decimal(100.00);
+request.Description = "Cargo inicial a mi merchant";
+request.OrderId = "oid-00051";
+request.Confirm = false;
+request.SendEmail = false;
+request.RedirectUrl = "http://www.openpay.mx/index.html";
+request.Customer = customer;
+
+Charge charge = api.ChargeService.Create(request);
+```
+
+```javascript
+var chargeRequest = {
+   'method' : 'card',
+   'amount' : 100,
+   'description' : 'Cargo inicial a mi cuenta',
+   'order_id' : 'oid-00051',
+   'customer' : {
+        'name' : 'Juan',
+        'last_name' : 'Vazquez Juarez',
+        'phone_number' : '4423456723',
+        'email' : 'juan.vazquez@empresa.com.mx'
+   },
+  'send_email' : false,
+  'confirm' : false,
+  'redirect_url' : 'http://www.openpay.mx/index.html')
+}
+
+openpay.charges.create(chargeRequest, function(error, charge) {
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@openpay.create(:charges)
+customer_hash={
+    "name" => "Juan",
+    "last_name" => "Vazquez Juarez",
+    "phone_number" => "4423456723",
+    "email" => "juan.vazquez@empresa.com.mx"
+}
+
+request_hash={
+    "method" => "card",
+    "amount" => 100.00,
+    "description" => "Cargo inicial a mi merchant",
+    "order_id" => "oid-00051",
+    "customer" => customer_hash,
+    "send_email" => false,
+    "confirm" => false,
+    "redirect_url" => "http://www.openpay.mx/index.html"
+}
+
+response_hash=@charges.create(request_hash.to_hash)
+```
+
+> Ejemplo de respuesta
+
+```json
+
+{
+  "id": "trq7yrthx5vc4gtjdkwg",
+  "authorization": null,
+  "method": "card",
+  "operation_type": "in",
+  "transaction_type": "charge",
+  "status": "charge_pending",
+  "conciliated": false,
+  "creation_date": "2016-09-09T18:52:02-05:00",
+  "operation_date": "2016-09-09T18:52:02-05:00",
+  "description": "Cargo desde terminal virtual de 111",
+  "error_message": null,
+  "amount": 100,
+  "currency": "MXN",
+  "payment_method": {
+    "type": "redirect",
+    "url": "https://sandbox-api.openpay.mx/v1/mexzhpxok3houd5lbvz1/charges/trq7yrthx5vc4gtjdkwg/card_capture"
+  },
+  "customer": {
+    "name": "Juan",
+    "last_name": "Vazquez Juarez",
+    "email": "juan.vazquez@empresa.com.mx",
+    "phone_number": "4423456723",
+    "creation_date": "2016-09-09T18:52:02-05:00",
+    "clabe": null,
+    "external_id": null
+  }
+}
+```
+
+Este tipo de cargo no requiere una tarjeta guardada o que hayas generado un token.
+
+###Petición 
+
+Propiedad | Descripción
+--------- | -----
+method|***string*** (requerido en card) <br/>Debe contener el valor **card** para indicat que el cargo se hará de una tarjeta.
+amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
+description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
+order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
+[customer](#crear-un-nuevo-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realice el cargo a nivel cliente.
+confirm |  ***boolean*** (requerido en false) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o preautorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
+send_email | ***boolean*** (opcional) <br/>Indica se si desea enviar un email que direccione al formulario de pago de openpay.
+redirect_url | ***string*** (requerido) <br/>Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de openpay.
+
+###Respuesta
+Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
 
 ##Cargo en tienda
 
