@@ -976,9 +976,9 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "payment_method":{
       "type":"store",
       "reference":"000020TRNIRKIYOBO5QFEX55EF0100009",
-      "walmart_reference":"0101990000001065",
-      "barcode_url":"https://sandbox-api.openpay.mx/barcode/000020TRNIRKIYOBO5QFEX55EF0100009?width=1&height=45&text=false"
-      "barcode_walmart_url":"https://sandbox-api.openpay.mx/barcode/0101990000001065?width=1&height=45&text=false"
+      "paybin_reference":"0101990000001065",
+      "barcode_url":"https://sandbox-api.openpay.mx/barcode/000020TRNIRKIYOBO5QFEX55EF0100009?width=1&height=45&text=false",
+      "barcode_paybin_url":"https://sandbox-api.openpay.mx/barcode/0101990000001065?width=1&height=45&text=false"
    }
 }
 ```
@@ -8867,14 +8867,18 @@ country_code | ***string*** (requerido) <br/>Código del país del tarjeta habie
 ```json
 {
    "reference":"OPENPAY02DQ35YOY7",
-   "barcode_url":"https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   "barcode_url":"https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false",
+   "paybin_reference":"0101990000001065",
+   "barcode_paybin_url":"https://sandbox-api.openpay.mx/barcode/0101990000001065?width=1&height=45&text=false"
 }
 ```
 
-Propiedad | Descripción
---------- | -----------
-reference | ***string*** <br/> Es la referencia con la que se puede ir a la tienda y realizar depósitos a la cuenta de Openpay.
-barcode_url | ***string*** <br/>Es la url con la cual se puede obtener el codigo de barras de la referencia.
+Propiedad           | Descripción
+---------           | -----------
+reference           | ***string*** <br/>Es la referencia con la que se puede ir a la tienda y realizar depósitos a la cuenta de Openpay.
+barcode_url         | ***string*** <br/>Es la url con la cual se puede obtener el codigo de barras de la referencia.
+paybin_reference   | ***string*** <br/>Es la referencia con la que se puede ir cualquier tienda que acepte Paybin.
+barcode_paybin_url | ***string*** <br/>Es la url con la cual se puede obtener el codigo de barras de la referencia Paybin.
 
 
 ##Objeto PaymentPlan

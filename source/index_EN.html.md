@@ -963,9 +963,9 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "payment_method":{
       "type":"store",
       "reference":"000020TRNIRKIYOBO5QFEX55EF0100009",
-      "walmart_reference":"0101990000001065",
-      "barcode_url":"https://sandbox-api.openpay.mx/barcode/000020TRNIRKIYOBO5QFEX55EF0100009?width=1&height=45&text=false"
-      "barcode_walmart_url":"https://sandbox-api.openpay.mx/barcode/0101990000001065?width=1&height=45&text=false"
+      "paybin_reference":"0101990000001065",
+      "barcode_url":"https://sandbox-api.openpay.mx/barcode/000020TRNIRKIYOBO5QFEX55EF0100009?width=1&height=45&text=false",
+      "barcode_paybin_url":"https://sandbox-api.openpay.mx/barcode/0101990000001065?width=1&height=45&text=false"
    }
 }
 ```
@@ -8875,7 +8875,9 @@ country_code | ***string*** (required) <br/>Country code, in the two character f
 ```json
 {
    "reference":"OPENPAY02DQ35YOY7",
-   "barcode_url":"https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   "barcode_url":"https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false",
+   "paybin_reference":"0101990000001065",
+   "barcode_paybin_url":"https://sandbox-api.openpay.mx/barcode/0101990000001065?width=1&height=45&text=false"
 }
 ```
 
@@ -8883,6 +8885,8 @@ Property | Description
 --------- | -----------
 reference | ***string*** <br/>Payment reference to go stores and make deposits to Openpay account
 barcode_url | ***string*** <br/>It is the url that generates the bar code of reference.
+paybin_reference | ***string*** <br/>Paybin reference to go store and make deposits to Openpay
+barcode_paybin_url | ***string*** <br/>It is the url that generates the bar code of paybin reference.
 
 ##PaymentPlan Object
 
