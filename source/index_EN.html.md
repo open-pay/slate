@@ -1140,13 +1140,16 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "customer_id":"ag4nktpdzebjiye1tlze",
    "payment_method":{
       "type":"bank_transfer",
-      "bank":"STP",
-      "clabe":"646180109400135624",
-      "name":"0021589"
+      "agreement" : "1411217",
+      "bank":"BBVA Bancomer",
+      "clabe":"012914002014112176",
+      "name":"11030021342311520255"
    }
 }
 ```
-For a charge via bank you must create a charge type request  by indicating ** bank_account** as method. This will generate a response with a CLABE account number and a description, you have to indicate these data in a receipt so your customer can do the wire transfer via SPEI.
+For a charge via bank you must create a charge type request  by indicating ** bank_account** as method. This will 
+generate a response with a Bancomer CIE agreement number, a CLABE account number and a reference, you have to indicate 
+these data in a receipt so your customer can do the wire transfer via SPEI.
 
 ###Request 
 
@@ -1847,9 +1850,10 @@ response_hash=@charges.all("ag4nktpdzebjiye1tlze")
       "customer_id":"ag4nktpdzebjiye1tlze",
       "payment_method":{
          "type":"bank_transfer",
-         "bank":"STP",
-         "clabe":"646180109400135624",
-         "name":"0021589"
+         "agreement" : "1411217",
+         "bank":"BBVA Bancomer",
+         "clabe":"012914002014112176",
+         "name":"11030021342311520255"
       }
    }
 ]

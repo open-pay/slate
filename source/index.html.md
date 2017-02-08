@@ -1154,13 +1154,16 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "customer_id":"ag4nktpdzebjiye1tlze",
    "payment_method":{
       "type":"bank_transfer",
-      "bank":"STP",
-      "clabe":"646180109400135624",
-      "name":"0021589"
+      "agreement" : "1411217",
+      "bank":"BBVA Bancomer",
+      "clabe":"012914002014112176",
+      "name":"11030021342311520255"
    }
 }
 ```
-Para un cargo a banco se debe crear una petición de tipo cargo indicando como método **bank_account**. Esto te generará una respuesta con un número de CLABE bancaria y una descripción, estos datos los debes de indicar a tu cliente en un recibo para que realice la transferencia vía SPEI. 
+Para un cargo a banco se debe crear una petición de tipo cargo indicando como método **bank_account**. Esto te generará 
+una respuesta con un número de convenio CIE Bancomer, número de CLABE bancaria y una referencia, estos datos los debes 
+de indicar a tu cliente en un recibo para que realice la transferencia vía SPEI. 
 
 
 ###Petición 
@@ -1862,9 +1865,10 @@ response_hash=@charges.all("ag4nktpdzebjiye1tlze")
       "customer_id":"ag4nktpdzebjiye1tlze",
       "payment_method":{
          "type":"bank_transfer",
-         "bank":"STP",
-         "clabe":"646180109400135624",
-         "name":"0021589"
+         "agreement" : "1411217",
+         "bank":"BBVA Bancomer",
+         "clabe":"012914002014112176",
+         "name":"11030021342311520255"
       }
    }
 ]
