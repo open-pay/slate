@@ -1874,6 +1874,7 @@ limit| ***numeric*** <br/>Number of required records, default 10.
 amount| ***numeric*** <br/>Same as the amount.
 amount[gte] | ***numeric*** <br/>Greater than or equal to the amount.
 amount[lte] | ***numeric*** <br/>Less than or equal to the amount.
+[status](#object-transaction-status) | ***TransactionStatus*** <br/>Estado de la transacción (IN_PROGRESS,COMPLETED,REFUNDED,CHARGEBACK_PENDING,CHARGEBACK_ACCEPTED,CHARGEBACK_ADJUSTMENT,CHARGE_PENDING,CANCELLED,FAILED).
 
 ###Response
 
@@ -8963,3 +8964,17 @@ name | ***string*** <br/> Chain name.
 logo | ***string*** <br/> URL logo image chain.
 thumb | ***string*** <br/> URL thumbnail image chain.
 max_amount | ***numeric*** <br/>Maximum payment amount that accept chain stores
+
+##Object Transaction Status
+
+Value | Description
+--------- | -----------
+IN_PROGRESS| Transaction is in progress
+COMPLETED| Transaction was succesfully completed
+REFUNDED| Transaction that has been refunded
+CHARGEBACK_PENDING| Transaction that has a pending chargeback
+CHARGEBACK_ACCEPTED| Transaction that has an accepted chargeback
+CHARGEBACK_ADJUSTMENT| Transaction that has an ajust for chargeback
+CHARGE_PENDING| Transaction that is waiting to be paid 
+CANCELLED| Transaction that was not paid and has been cancelled
+FAILED| Transaction that was paid but ocurred an error

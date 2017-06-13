@@ -1592,6 +1592,7 @@ limit| ***numeric*** <br/>Número de registros que se requieren, por defecto 10.
 amount| ***numeric*** <br/>Igual al monto.
 amount[gte] | ***numeric*** <br/>Mayor o igual al monto.
 amount[lte] | ***numeric*** <br/>Menor o igual al monto.
+[status](#objeto-transaction-status) | ***TransactionStatus*** <br/>Estado de la transacción (IN_PROGRESS,COMPLETED,REFUNDED,CHARGEBACK_PENDING,CHARGEBACK_ACCEPTED,CHARGEBACK_ADJUSTMENT,CHARGE_PENDING,CANCELLED,FAILED).
 
 ###Respuesta
 

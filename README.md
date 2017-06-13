@@ -51,6 +51,8 @@ You're going to need:
 # either run this to run locally
 bundle install
 bundle exec middleman server
+# generates build directory
+bundle exec middleman build
 
 # OR run this to run with vagrant
 vagrant up

@@ -173,3 +173,17 @@ logo | ***string*** <br/> Url de la imagen del logotipo de la cadena.
 thumb | ***string*** <br/> Url de la imagen miniatura del logotipo de la cadena.
 max_amount | ***numeric*** <br/>Monto máximo de pago que aceptan las tiendas de la cadena
 
+##Objeto Transaction Status
+
+Value | Description
+--------- | -----------
+IN_PROGRESS | Transacción en proceso
+COMPLETED | Transacción ejecutadá correctamente
+REFUNDED | Transacción reembolsada
+CHARGEBACK_PENDING | Transacción con contracargo pendiente
+CHARGEBACK_ACCEPTED | Transacción con contracargo aceptado
+CHARGEBACK_ADJUSTMENT | Transacción con ajuste de contracargo
+CHARGE_PENDING | Transacción de cargo que no ha sido pagada 
+CANCELLED | Transacción de cargo que no fue pagada y se ha cancelado
+FAILED | Transacción que se intentó pagar pero ocurrió algún error
+
