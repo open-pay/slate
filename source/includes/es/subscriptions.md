@@ -97,7 +97,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
       "holder_name":"Juan Perez Ramirez",
       "expiration_year":"20",
       "expiration_month":"12",
-      "cvv2":"110"
+      "cvv2":"110",
+      "device_session_id":"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
    },
    "plan_id":"pbi4kb8hpb64x0uud2eb"
 }' 
@@ -108,9 +109,15 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $subscriptionDataRequest = array(
-    "trial_end_date" => "2014-01-01", 
-    'plan_id' => 'pduar9iitv4enjftuwyl',
-    'card_id' => 'konvkvcd5ih8ta65umie');
+    'trial_end_date' => '2014-01-01', 
+    'plan_id' => 'pbi4kb8hpb64x0uud2eb',
+    'card' => array(
+         'card_number' => '4111111111111111',
+         'holder_name' => 'Juan Perez Ramirez',
+         'expiration_year' => '20',
+         'expiration_month' => '12',
+         'cvv2' => '110',
+         'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f'));
 
 $customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
 $subscription = $customer->subscriptions->add($subscriptionDataRequest);
@@ -123,9 +130,16 @@ trialEndDate.set(2014, 5, 1, 0, 0, 0);
         
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
-request.planId("idPlan-01001");
+request.planId("pbi4kb8hpb64x0uud2eb");
 request.trialEndDate(trialEndDate.getTime());
-request.sourceId("ktrpvymgatocelsciak7");
+Card card = new Card();
+card.cardNumber("4111111111111111");
+card.holderName("Juan Perez Ramirez");
+card.cvv2("110");
+card.expirationMonth(12);
+card.expirationYear(20);
+card.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
+request.card(card);
 
 request = api.subscriptions().create("a9pvykxz4g5rg0fplze0", request);
 ```
@@ -134,8 +148,15 @@ request = api.subscriptions().create("a9pvykxz4g5rg0fplze0", request);
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.PlanId = "idPlan-01001";
-request.TrialEndDate = new Datetime(2014, 5, 1);;
-request.CardId = "ktrpvymgatocelsciak7";
+request.TrialEndDate = new Datetime(2014, 5, 1);
+Card card = new Card();
+card.HolderName = "Juan Perez Ramirez";
+card.CardNumber = "4111111111111111";
+card.Cvv2 = "110";
+card.ExpirationMonth = "12";
+card.ExpirationYear = "20";
+card.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
+request.Card = card;
 
 request = api.SubscriptionService.Create("a9pvykxz4g5rg0fplze0", request);
 ```
@@ -147,7 +168,8 @@ var subscriptionRequest = {
       'holder_name':'Juan Perez Ramirez',
       'expiration_year':'20',
       'expiration_month':'12',
-      'cvv2':'110'
+      'cvv2':'110',
+      'device_session_id':'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f'
    },
    'plan_id':'pbi4kb8hpb64x0uud2eb'
 };
@@ -160,10 +182,18 @@ openpay.customers.subscriptions.create(customerId, subscriptionRequest, function
 ```ruby
 @openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
 @subscriptions=@openpay.create(:subscriptions)
+card_hash={
+     "holder_name" => "Juan Perez Ramirez",
+     "card_number" => "4111111111111111",
+     "cvv2" => "110",
+     "expiration_month" => "12",
+     "expiration_year" => "20",
+     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
+   }
 request_hash={
      "plan_id" => "pbi4kb8hpb64x0uud2eb",
      "trial_end_date" => "2014-06-20",
-     "source_id" => "ktrpvymgatocelsciak7"
+     "card" => card_hash
    }
 
 response_hash=@subscriptions.create(request_hash.to_hash, "a9pvykxz4g5rg0fplze0")
@@ -198,8 +228,8 @@ response_hash=@subscriptions.create(request_hash.to_hash, "a9pvykxz4g5rg0fplze0"
    "customer_id":"ag4nktpdzebjiye1tlze"
 }
 ```
- 
-Crea una suscripción para un cliente existente. Se puede ocupar una tarjeta previamente creada o se pueden enviar los datos de la tarjeta en donde se realizarán los cargos.
+
+Crea una suscripción para un cliente existente. Se puede ocupar una tarjeta previamente creada o se pueden enviar los datos de la tarjeta en donde se realizarán los cargos, estos últimos pueden incluir la propiedad <code>device_session_id</code> para usar la herramienta antifraudes, véase [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
 
 ###Petición
 Propiedad | Descripción

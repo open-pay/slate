@@ -1,7 +1,7 @@
 #Tarjetas
 Dentro de la plataforma Openpay podrás agregar tarjetas a la cuenta del cliente, eliminarlas, recuperar alguna en específico y listarlas​.
 
-Se pueden almacenar multiples tarjetas de débito y/o crédito a nivel cliente o a nivel comercio para realizar cargos posteriormente sin la necesidad de introducir nuevamente la información.
+Se pueden almacenar múltiples tarjetas de débito y/o crédito a nivel cliente o a nivel comercio para realizar cargos posteriormente sin la necesidad de introducir nuevamente la información.
 
 ##Objeto Tarjeta
 
@@ -40,13 +40,13 @@ Propiedad | Descripción
 id            |***string*** <br/>Identificador único de la tarjeta.
 creation_date |***datetime*** <br/>Fecha y hora en que se creó la tarjeta en formato ISO 8601
 holder_name |***string***  <br/>Nombre del tarjeta habiente.
-card_number |***numeric***  <br/>Numero de tarjeta puede ser de 16 o 19 dígitos.
+card_number |***numeric***  <br/>Número de tarjeta, puede ser de 16 o 19 dígitos.
 cvv2 |***numeric***  <br/>Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.
 expiration_month |***numeric***  <br/>Mes de expiración tal como aparece en la tarjeta.
 expiration_year |***numeric***  <br/>Año de expiración tal como aparece en la tarjeta.
 [address](#objeto-dirección) |***object*** <br/>Dirección de facturación del tarjeta habiente.
 allows_charges |***boolean*** <br/>Permite conocer si se pueden realizar cargos a la tarjeta.
-allows_payouts |***boolean*** <br/>Permite conocer si se pueden realizar envío de pagos a la tarjeta. 
+allows_payouts |***boolean*** <br/>Permite conocer si se pueden realizar envíos de pagos a la tarjeta. 
 brand |***string*** <br/>Marca de la tarjeta: visa, mastercard, carnet o american express.
 type |***string*** <br/>Tipo de la tarjeta: debit, credit, cash, etc.
 bank_name |***string*** <br/>Nombre del banco emisor.
@@ -122,7 +122,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "holder_name":"Juan Perez Ramirez",
    "expiration_year":"20",
    "expiration_month":"12",
-   "cvv2":"110"
+   "cvv2":"110",
+   "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
  }' 
 ```
 
@@ -136,6 +137,7 @@ $cardDataRequest = array(
     'cvv2' => '123',
     'expiration_month' => '12',
     'expiration_year' => '15',
+    'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
     'address' => array(
             'line1' => 'Privada Rio No. 12',
             'line2' => 'Co. El Tintero',
@@ -158,6 +160,7 @@ request.cardNumber("4111111111111111");
 request.cvv2("110");
 request.expirationMonth(12);
 request.expirationYear(20);
+request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
 Address address = new Address();
 address.city("Queretaro");
 address.countryCode("10");
@@ -179,6 +182,7 @@ request.CardNumber = "4111111111111111";
 request.Cvv2 = "110";
 request.ExpirationMonth = "12";
 request.ExpirationYear = "20";
+request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
 Address address = new Address();
 address.City = "Queretaro";
 address.CountryCode = "MX";
@@ -198,7 +202,8 @@ var cardRequest = {
    'holder_name':'Juan Perez Ramirez',
    'expiration_year':'20',
    'expiration_month':'12',
-   'cvv2':'110'
+   'cvv2':'110',
+   'device_session_id':'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f'
 };
 
 openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(error, card)  {
@@ -224,6 +229,7 @@ request_hash={
      "cvv2" => "110",
      "expiration_month" => "12",
      "expiration_year" => "20",
+     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
      "address" => address_hash
    }
 
@@ -258,6 +264,8 @@ Cuando se crea una tarjeta debe especificarse cliente, si no se especifica el cl
 
 Al momento de guardar la tarjeta se generará un id que podrá ser usado para hacer cargos a la tarjeta, envíos a una tarjeta o simplemente obtener la información no sensible de la tarjeta.
 
+Cuando se crea una tarjeta puede usarse o no la implementación del sistema antifraude. La propiedad <code>device_session_id</code> deberá ser generada desde el API JavaScript, véase [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
+
 ###Petición
 
 Propiedad | Descripción
@@ -267,6 +275,7 @@ card_number |***numeric*** (requerido) <br/>Numero de tarjeta puede ser de 16 o 
 cvv2 |***numeric*** (requerido) <br/>Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.
 expiration_month |***numeric*** (requerido) <br/>Mes de expiración tal como aparece en la tarjeta.
 expiration_year |***numeric*** (requerido) <br/>Año de expiración tal como aparece en la tarjeta.
+device_session_id | ***string*** (opcional, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta antifraudes.
 [address](#objeto-dirección) |***object*** <br/>Dirección de facturación del tarjeta habiente.
 
 ###Respuesta

@@ -1113,7 +1113,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
-   "description" : "devolución"
+   "description" : "devolución",
+   "amount" : 100.00
 } ' 
 ```
 
@@ -1121,7 +1122,9 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$refundData = array('description' => 'devolución' );
+$refundData = array(
+    'description' => 'devolución',
+    'amount' => 100);
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
@@ -1134,18 +1137,20 @@ OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98
 RefundParams request = new RefundParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.description("Monto de cargo devuelto");
+request.amount(new BigDecimal("100.00"));
 
 Charge charge = api.charges().refund("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.ChargeService.Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto");
+Charge charge = api.ChargeService.Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
 ```
 
 ```javascript
 var refundRequest = {
-   'description' : 'devolución'
+   'description' : 'devolución',
+   'amount' : 100.00
 };
 
 openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest, 
@@ -1159,7 +1164,8 @@ openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed',
 @charges=@openpay.create(:charges)
 
 request_hash={
-     "description" => "Monto de cargo devuelto"
+     "description" => "Monto de cargo devuelto",
+     "amount" => 100.00
    }
 
 response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4nktpdzebjiye1tlze")
@@ -1214,7 +1220,7 @@ response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4
    "customer_id":"ag4nktpdzebjiye1tlze"
 }
 ```
-Si deseas realizar una devolución de un cargo hecho a tarjeta puedes ocupar este método. El monto a devolver será por el total del cargo. Ten en cuenta que la devolución puede tardar en aparecer en el estado de cuenta de tu cliente de 1 a 3 días hábiles
+Si deseas realizar una devolución de un cargo hecho a tarjeta puedes ocupar este método. El monto a devolver será por el total del cargo o un monto menor. Ten en cuenta que la devolución puede tardar en aparecer en el estado de cuenta de tu cliente de 1 a 3 días hábiles.
 
 <aside class="notice">
 **Nota:** Solo se pueden hacer devoluciones de cargos a tarjeta.

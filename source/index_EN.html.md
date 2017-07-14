@@ -1395,7 +1395,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
-   "description" : "devolución"
+   "description" : "devolución",
+   "amount" : 100.00
 } ' 
 ```
 
@@ -1403,7 +1404,9 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 <?
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$refundData = array('description' => 'devolución' );
+$refundData = array(
+    'description' => 'devolución',
+    'amount' => 100);
 
 $customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
@@ -1416,18 +1419,20 @@ OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98
 RefundParams request = new RefundParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.description("Monto de cargo devuelto");
+request.amount(new BigDecimal("100.00"));
 
 Charge charge = api.charges().refund("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.ChargeService.Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto");
+Charge charge = api.ChargeService.Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
 ```
 
 ```javascript
 var refundRequest = {
-   'description' : 'devolución'
+   'description' : 'devolución',
+   'amount' : 100.00
 };
 
 openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest, 
@@ -1441,7 +1446,8 @@ openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed',
 @charges=@openpay.create(:charges)
 
 request_hash={
-     "description" => "Monto de cargo devuelto"
+     "description" => "Monto de cargo devuelto",
+     "amount" => 100.00
    }
 
 response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4nktpdzebjiye1tlze")
@@ -1496,7 +1502,7 @@ response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4
    "customer_id":"ag4nktpdzebjiye1tlze"
 }
 ```
-You can use this method f you want to make a charge refund to a card. The amount to be returned will be the total charge. Note that the refund may be delayed in the statement of your customer for 1-3 business days.
+You can use this method if you want to make a charge refund to a card. The amount to be returned will be the total charge or a lower amount. Note that the refund may be delayed in the statement of your customer for 1-3 business days.
 
 <aside class="notice">
 **Note:** Only charges via card can be refunded.
@@ -4588,7 +4594,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "holder_name":"Juan Perez Ramirez",
    "expiration_year":"20",
    "expiration_month":"12",
-   "cvv2":"110"
+   "cvv2":"110",
+   "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
  }' 
 ```
 
@@ -4602,6 +4609,7 @@ $cardDataRequest = array(
     'cvv2' => '123',
     'expiration_month' => '12',
     'expiration_year' => '15',
+    'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
     'address' => array(
             'line1' => 'Privada Rio No. 12',
             'line2' => 'Co. El Tintero',
@@ -4624,6 +4632,7 @@ request.cardNumber("4111111111111111");
 request.cvv2("110");
 request.expirationMonth(12);
 request.expirationYear(20);
+request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
 Address address = new Address();
 address.city("Queretaro");
 address.countryCode("10");
@@ -4645,6 +4654,7 @@ request.CardNumber = "4111111111111111";
 request.Cvv2 = "110";
 request.ExpirationMonth = "12";
 request.ExpirationYear = "20";
+request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
 Address address = new Address();
 address.City = "Queretaro";
 address.CountryCode = "MX";
@@ -4664,7 +4674,8 @@ var cardRequest = {
    'holder_name':'Juan Perez Ramirez',
    'expiration_year':'20',
    'expiration_month':'12',
-   'cvv2':'110'
+   'cvv2':'110',
+   'device_session_id':'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f'
 };
 
 openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(error, card)  {
@@ -4690,6 +4701,7 @@ request_hash={
      "cvv2" => "110",
      "expiration_month" => "12",
      "expiration_year" => "20",
+     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
      "address" => address_hash
    }
 
@@ -4724,6 +4736,8 @@ When a card is created the customer must be specified, if the customer is not sp
 
 When saving a card, an ID will be created which can be used to make card charges, payouts to a card or just for getting the not sensitive card information.
 
+You can use the antifraud system implementation. The <code>device_session_id</code> property must be generated using JavaScript API, see [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
+
 ###Request
 
 Property | Description
@@ -4733,6 +4747,7 @@ card_number |***numeric*** (required) <br/>Card Number, it can be 16 or 19 digit
 cvv2 |***numeric*** (required) <br/>Security code as it appears on the back of the card. Usually 3 digits.
 expiration_month |***numeric*** (required) <br/>Expiration month as it appears on the card.
 expiration_year |***numeric*** (required) <br/>Expiration year as it appears on the card.
+device_session_id | ***string*** (optional, length = 255) <br/>Device identifier generated by antifraud tool.
 [address](#address-object) |***object*** <br/>Billing address of cardholder.
 
 ###Response
@@ -6707,7 +6722,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
       "holder_name":"Juan Perez Ramirez",
       "expiration_year":"20",
       "expiration_month":"12",
-      "cvv2":"110"
+      "cvv2":"110",
+      "device_session_id":"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
    },
    "plan_id":"pbi4kb8hpb64x0uud2eb"
 }' 
@@ -6718,9 +6734,15 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $subscriptionDataRequest = array(
-    "trial_end_date" => "2014-01-01", 
-    'plan_id' => 'pduar9iitv4enjftuwyl',
-    'card_id' => 'konvkvcd5ih8ta65umie');
+    'trial_end_date' => '2014-01-01', 
+    'plan_id' => 'pbi4kb8hpb64x0uud2eb',
+    'card' => array(
+         'card_number' => '4111111111111111',
+         'holder_name' => 'Juan Perez Ramirez',
+         'expiration_year' => '20',
+         'expiration_month' => '12',
+         'cvv2' => '110',
+         'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f'));
 
 $customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
 $subscription = $customer->subscriptions->add($subscriptionDataRequest);
@@ -6733,9 +6755,16 @@ trialEndDate.set(2014, 5, 1, 0, 0, 0);
         
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
-request.planId("idPlan-01001");
+request.planId("pbi4kb8hpb64x0uud2eb");
 request.trialEndDate(trialEndDate.getTime());
-request.sourceId("ktrpvymgatocelsciak7");
+Card card = new Card();
+card.cardNumber("4111111111111111");
+card.holderName("Juan Perez Ramirez");
+card.cvv2("110");
+card.expirationMonth(12);
+card.expirationYear(20);
+card.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
+request.card(card);
 
 request = api.subscriptions().create("a9pvykxz4g5rg0fplze0", request);
 ```
@@ -6744,8 +6773,15 @@ request = api.subscriptions().create("a9pvykxz4g5rg0fplze0", request);
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.PlanId = "idPlan-01001";
-request.TrialEndDate = new Datetime(2014, 5, 1);;
-request.CardId = "ktrpvymgatocelsciak7";
+request.TrialEndDate = new Datetime(2014, 5, 1);
+Card card = new Card();
+card.HolderName = "Juan Perez Ramirez";
+card.CardNumber = "4111111111111111";
+card.Cvv2 = "110";
+card.ExpirationMonth = "12";
+card.ExpirationYear = "20";
+card.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
+request.Card = card;
 
 request = api.SubscriptionService.Create("a9pvykxz4g5rg0fplze0", request);
 ```
@@ -6757,7 +6793,8 @@ var subscriptionRequest = {
       'holder_name':'Juan Perez Ramirez',
       'expiration_year':'20',
       'expiration_month':'12',
-      'cvv2':'110'
+      'cvv2':'110',
+      'device_session_id':'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f'
    },
    'plan_id':'pbi4kb8hpb64x0uud2eb'
 };
@@ -6770,10 +6807,18 @@ openpay.customers.subscriptions.create(customerId, subscriptionRequest, function
 ```ruby
 @openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
 @subscriptions=@openpay.create(:subscriptions)
+card_hash={
+     "holder_name" => "Juan Perez Ramirez",
+     "card_number" => "4111111111111111",
+     "cvv2" => "110",
+     "expiration_month" => "12",
+     "expiration_year" => "20",
+     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
+   }
 request_hash={
      "plan_id" => "pbi4kb8hpb64x0uud2eb",
      "trial_end_date" => "2014-06-20",
-     "source_id" => "ktrpvymgatocelsciak7"
+     "card" => card_hash
    }
 
 response_hash=@subscriptions.create(request_hash.to_hash, "a9pvykxz4g5rg0fplze0")
@@ -6809,7 +6854,7 @@ response_hash=@subscriptions.create(request_hash.to_hash, "a9pvykxz4g5rg0fplze0"
 }
 ```
  
-Create a new subscription for an existing customer.  You can use an existing card or you can send the info of the card where the charges will be made.
+Create a new subscription for an existing customer.  You can use an existing card or you can send the info of the card where the charges will be made, in these you can include the property <code>device_session_id</code> to use the antifraud tool, see [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
 
 
 ###Request
