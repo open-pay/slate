@@ -74,6 +74,7 @@ Código    | Error HTTP  |Causa
 2006  |400 Bad Request | El código de seguridad de la tarjeta (CVV2) no fue proporcionado.
 2007  |412 Precondition Failed | El número de tarjeta es de prueba, solamente puede usarse en Sandbox.
 2008  |412 Precondition Failed | La tarjeta consultada no es valida para puntos.
+2009  |412 Precondition Failed | El código de seguridad de la tarjeta (CVV2) no no es valido.
 
 ###Tarjetas
 Código    | Error HTTP  |Causa
