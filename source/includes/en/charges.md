@@ -245,6 +245,7 @@ Property | Description
 --------- | -----
 method|***string*** (required) <br/>It must contain the **card** value in order to specify the charge will be made from card.
 source_id | ***string*** (required, length = 45) <br/>Saved ID card or token id created from where the funds are withdrawn.
+cvv2 |***numeric***  (length = 3 or 4) <br/>Security code as it appears on the back of the card. Usually 3 digits.<br/>It's used only charges with [Stored Cards](#create-a-card).
 amount | ***numeric*** (required) <br/>Amount to charge. Must be an amount greater than zero, with up to two decimal digits.
 description | ***string*** (required, length = 250) <br/>A description associated to the charge.
 order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
