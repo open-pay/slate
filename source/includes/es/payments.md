@@ -1,5 +1,5 @@
 #Pagos o retiros
-Un pago es la transacción que permite extraer los fondos de una cuenta Openpay y enviarlos a una cuenta bancaria o una tarjeta de débito. Los pagos se pueden realizar desde las cuentas de los clientes o desde tu cuenta de comercio.
+Un pago es la transacción que permite extraer los fondos de una cuenta Openpay y enviarlos a una cuenta bancaria. Los pagos se pueden realizar desde las cuentas de los clientes o desde tu cuenta de comercio.
 
 <aside class="notice">
 **Nota:** Todas las transacciones de pago se regresarán en status **in_progress** lo cual significa que se programó para el día siguiente, cuando se efectúe la operación se cambiará el estado a **completed** y si se tienen webhooks configurados se enviará la notificación.
@@ -69,8 +69,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
-    "method": "card",
-    "destination_id": "k3d54sd3mdjf75udjfvoc",
+    "method": "bank_account",
+    "destination_id": "b3d54sd3mdjf75udjfvoc",
     "amount": 10.50,
     "description": "Retiro de saldo semanal",
     "order_id": "oid-00021"
@@ -82,8 +82,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
 $payoutRequest = array(
-    'method' => 'card',
-    'destination_id' => 'k3d54sd3mdjf75udjfvoc',
+    'method' => 'bank_account',
+    'destination_id' => 'a3d54sd3mdjf75udjfvoc',
     'amount' => 1000,
     'description' => 'Retiro de saldo semanal',
     'order_id' => 'ORDEN-00021');
@@ -96,20 +96,19 @@ $payout = $customer->payouts->create($payoutRequest);
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
 CreateBankPayoutParams request = new CreateBankPayoutParams();
-request.bankAccountId("k3d54sd3mdjf75udjfvoc"); // = destination_id
+request.bankAccountId("b3d54sd3mdjf75udjfvoc"); // = destination_id
 request.amount(new BigDecimal("10.50"));
 request.description("Retiro de saldo semanal");
 request.orderId("oid-00021");
 
 Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
-// Para crear pagos a tarjetas se deberá usar la clase CreateCardPayoutParams
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
 PayoutRequest request = new PayoutRequest();
 request.Method = "bank_account";
-request.DestinationId = "k3d54sd3mdjf75udjfvoc";
+request.DestinationId = "b3d54sd3mdjf75udjfvoc";
 request.Amount = new Decimal(10.50;
 request.Description = "Retiro de saldo semanal";
 request.OrderId = "oid-00021;
@@ -119,8 +118,8 @@ Payout = api.PayoutService.Create("ag4nktpdzebjiye1tlze", request);
 
 ```javascript
 var payoutRequest = {
-    'method': 'card',
-    'destination_id': 'k3d54sd3mdjf75udjfvoc',
+    'method': 'bank_account',
+    'destination_id': 'b3d54sd3mdjf75udjfvoc',
     'amount': 10.50,
     'description': 'Retiro de saldo semanal',
     'order_id': 'oid-00021'
@@ -136,7 +135,7 @@ openpay.customers.payouts.create('ag4nktpdzebjiye1tlze', payoutRequest, function
 @payouts=@openpay.create(:payouts)
 request_hash={
      "method" => "bank_account",
-     "destination_id" => "k3d54sd3mdjf75udjfvoc",   
+     "destination_id" => "b3d54sd3mdjf75udjfvoc",   
      "amount" => 10.50,
      "description" => "Retiro de saldo semanal",
      "order_id" => "oid-00021"
@@ -151,24 +150,17 @@ response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 {
    "amount":10.5,
    "authorization":null,
-   "method":"card",
+   "method":"bank_account",
    "currency":"MXN",
    "operation_type":"out",
    "transaction_type":"payout",
-   "card":{
-      "id":"k3d54sd3mdjf75udjfvoc",
-      "type":"debit",
-      "brand":"visa",
-      "address":null,
-      "card_number":"411111XXXXXX1111",
-      "holder_name":"Juan Perez Ramirez",
-      "expiration_year":null,
-      "expiration_month":null,
-      "allows_payouts":false,
-      "allows_charges":true,
-      "creation_date":"2013-11-15T13:42:00-06:00",
+   "bank_account":{
+      "id":"b3d54sd3mdjf75udjfvoc",
+      "clabe":"012XXXXXXXXXX24616",
+      "bank_code":"012",
       "bank_name":"BANCOMER",
-      "bank_code":"012"
+      "alias":null,
+      "holder_name":"Mi empresa"
    },
    "status":"in_progress",
    "id":"tm50pl40gf6awvalw1ei",
@@ -180,14 +172,14 @@ response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 }
 ```
 
-Envío un pago a una cuenta bancario o terjeta de débito previamente registrada. Consulte como [crear una cuenta de bancaria](#crear-una-cuenta-bancaria)
+Envío un pago a una cuenta bancaria previamente registrada. Consulte como [crear una cuenta de bancaria](#crear-una-cuenta-bancaria)
 
 ###Petición 
 
 Propiedad | Descripción
 --------- | -----
-method|***string*** (requerido) <br/>Debe contener el valor **card** para realizar un pago a una tarjeta registrado y **bank_account** para realizarlo a una cuenta bancaria registrada.
-destination_id | ***string*** (requerido, longitud = 45) <br/>El ID de la cuenta bancaria o tarjeta de débito previamente registrada.
+method|***string*** (requerido) <br/>Debe contener el valor **bank_account**.
+destination_id | ***string*** (requerido, longitud = 45) <br/>El ID de la cuenta bancaria previamente registrada.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
@@ -398,221 +390,6 @@ order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
 
-##Pago a tarjeta de débito
-
-> Definición
-
-```shell
-Comercio
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
-
-Cliente
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
-```
-
-```php
-<?
-Cliente
-$customer = $openpay->customers->get(customerId);
-$payout = $customer->payouts->create(payoutRequest);
-
-Comercio
-$payout = $openpay->payouts->create(payoutRequest);
-?>
-```
-
-```java
-//Cliente
-openpayAPI.payouts().create(String customerId, CreateCardPayoutParams request);
-
-//Comercio
-openpayAPI.payouts().create(CreateCardPayoutParams request);
-```
-
-```csharp
-//Cliente
-openpayAPI.PayoutService.Create(string customer_id, PayoutRequest request);
-
-//Comercio
-openpayAPI.PayoutService.Create(PayoutRequest request);
-```
-
-```javascript
-// Comercio
-openpay.payouts.create(payoutRequest, callback);
-
-// Cliente
-openpay.customers.payouts.create(customerId, payoutRequest, callback);
-```
-
-```ruby
-#Cliente
-@payouts=@openpay.create(:payouts)
-@payouts.create(request_hash, customer_id)
-
-#Comercio
-@payouts=@openpay.create(:payouts)
-@payouts.create(request_hash)
-```
-
-> Ejemplo de petición con cliente
-
-```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" \
-   -X POST -d '{
-   "method": "card",
-   "card": {
-      "card_number": "4111111111111111",
-      "holder_name": "Juan Perez Ramirez"
-   },
-   "amount" : 100.00,
-   "description" : "Retiro de saldo semanal",
-   "order_id" : "ORDEN-00021"
-} ' 
-```
-
-```php
-<?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
-
-$payoutRequest = array(
-    'method' => 'card',
-    'card' => array(
-        'card_number' => '4111111111111111',
-        'holder_name' => 'Juan Perez Ramirez'),
-    'amount' => 100.00,
-    'description' => 'Retiro de saldo semanal',
-    'order_id' => 'ORDEN-00021');
-
-$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
-$payout = $customer->payouts->create($payoutRequest);
-?>
-```
-
-```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-CreateCardPayoutParams request = new CreateCardPayoutParams();
-Card card = new Card();
-card.holderName("Juan Perez Ramirez");
-card.cardNumber("4111111111111111");
-card.cvv2("110");
-card.expirationMonth(12);
-card.expirationYear(20);
-request.card(card);
-request.amount(new BigDecimal("100.00"));
-request.description("Pago a cuenta de banco");
-request.orderId("ord-103");
-
-Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
-```
-
-```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-PayoutRequest request = new PayoutRequest();
-request.Method = "card";
-Card card = new Card();
-card.HolderName = "Juan Perez Ramirez";
-card.CardNumber = "4111111111111111";
-card.Cvv2 = "110";
-card.ExpirationMonth = "12";
-card.ExpirationYear = "20";
-request.Card = card;
-request.Amount = new Decimal(100.00);
-request.Description = "Pago a cuenta de banco";
-request.OrderId = "ord-101";
-
-Payout = api.PayoutService.Create("ag4nktpdzebjiye1tlze", request);
-```
-
-```javascript
-var payoutRequest = {
-   'method': 'card',
-   'card': {
-      'card_number': '4111111111111111',
-      'holder_name': 'Juan Perez Ramirez'
-   },
-   'amount' : 10.50,
-   'description' : 'Retiro de saldo semanal',
-   'order_id' : 'oid-00021'
-};
-
-openpay.customers.payouts.create('asynwirguzkgq2bizogo', payoutRequest, function(error, payout) {
-  // ...
-});
-```
-
-```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@payouts=@openpay.create(:payouts)
-card_hash={
-     "holder_name" => "Juan Perez Ramirez",
-     "card_number" => "411111XXXXXX1111",
-     "cvv2" => "110",
-     "expiration_month" => "12",
-     "expiration_year" => "20"
-   }
-request_hash={
-     "method" => "card",
-     "card" => card_hash,
-     "amount" => 10.50,
-     "description" => "Retiro de saldo semanal",
-     "order_id" => "oid-00021"
-   }
-
-response_hash=@payouts.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
-```
-
-> Ejemplo de respuesta
-
-```json
-{
-   "id":"trwpxhrgfeub9eqdyvqz",
-   "amount":10.50,
-   "authorization":null,
-   "method":"card",
-   "operation_type":"out",
-   "transaction_type":"payout",
-   "card":{
-      "type":"debit",
-      "brand":"visa",
-      "address":null,
-      "card_number":"411111XXXXXX1111",
-      "holder_name":"Juan Perez Ramirez",
-      "expiration_year":"20",
-      "expiration_month":"12",
-      "allows_charges":false,
-      "allows_payouts":true,
-      "bank_name":"Banamex",
-      "bank_code":"002"
-   },
-   "status":"in_progress",
-   "currency":"MXN",
-   "creation_date":"2014-05-26T17:04:26-05:00",
-   "operation_date":"2014-05-26T17:04:26-05:00",
-   "description":"Retiro de saldo semanal",
-   "error_message":null,
-   "order_id":"oid-00021",
-   "customer_id":"asynwirguzkgq2bizogo"
-}
-```
-
-Envío un pago tarjeta de débito. En dado caso que la tarjeta usada no sea débito los fondos se regresarán a la cuenta de donde fueron retirados.
-
-###Petición 
-
-Propiedad | Descripción
---------- | -----
-method|***string*** (requerido) <br/>Debe contener el valor **card**.
-[card](#objeto-tarjeta) | ***objeto*** (requerido) <br/>Datos de la tarjeta a la que se enviarán los fondos. <br/><br/> **card_number**.- Número de tarjeta de crédito a la que se enviarán los fondos <br/>**holder_name**.- Nombre del tarjeta habiente propietario de la tarjeta.
-amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
-
-###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
-
 ##Obtener un pago
 > Definición
 
@@ -715,21 +492,15 @@ response_hash=@payouts.get("tr6cxbcefzatd10guvvw", "asynwirguzkgq2bizogo")
    "id":"trwpxhrgfeub9eqdyvqz",
    "amount":10.50,
    "authorization":"TRWPXHRGFEUB9EQDYVQZ",
-   "method":"card",
+   "method":"bank_account",
    "operation_type":"out",
    "transaction_type":"payout",
-   "card":{
-      "type":"debit",
-      "brand":"visa",
-      "address":null,
-      "card_number":"411111XXXXXX1111",
-      "holder_name":"Juan Perez Ramirez",
-      "expiration_year":null,
-      "expiration_month":null,
-      "allows_charges":false,
-      "allows_payouts":true,
-      "bank_name":"Banamex",
-      "bank_code":"002"
+   "bank_account":{
+      "clabe":"012XXXXXXXXXX24616",
+      "bank_code":"012",
+      "bank_name":"BANCOMER",
+      "alias":null,
+      "holder_name":"Mi empresa"
    },
    "status":"completed",
    "currency":"MXN",
@@ -855,21 +626,15 @@ response_hash=@payouts.delete("trozeipf364jqrsbt3ej", "asynwirguzkgq2bizogo")
    "id":"trozeipf364jqrsbt3ej",
    "amount":10.50,
    "authorization":"TROZEIPF364JQRSBT3EJ",
-   "method":"card",
+   "method":"bank_account",
    "operation_type":"out",
    "transaction_type":"payout",
-   "card":{
-      "type":"debit",
-      "brand":"visa",
-      "address":null,
-      "card_number":"411111XXXXXX1111",
-      "holder_name":"Juan Perez Ramirez",
-      "expiration_year":null,
-      "expiration_month":null,
-      "allows_charges":false,
-      "allows_payouts":true,
-      "bank_name":"Banamex",
-      "bank_code":"002"
+   "bank_account":{
+      "clabe":"012XXXXXXXXXX24616",
+      "bank_code":"012",
+      "bank_name":"BANCOMER",
+      "alias":null,
+      "holder_name":"Mi empresa"
    },
    "status":"cancelled",
    "currency":"MXN",
@@ -1055,21 +820,15 @@ response_hash=@payouts.all("asynwirguzkgq2bizogo")
       "id":"trwpxhrgfeub9eqdyvqz",
       "amount":10.50,
       "authorization":"TRWPXHRGFEUB9EQDYVQZ",
-      "method":"card",
+      "method":"bank_account",
       "operation_type":"out",
       "transaction_type":"payout",
-      "card":{
-         "type":"debit",
-         "brand":"visa",
-         "address":null,
-         "card_number":"411111XXXXXX1111",
-         "holder_name":"Juan Perez Ramirez",
-         "expiration_year":null,
-         "expiration_month":null,
-         "allows_charges":false,
-         "allows_payouts":true,
-         "bank_name":"Banamex",
-         "bank_code":"002"
+      "bank_account":{
+         "clabe":"012XXXXXXXXXX24616",
+         "bank_code":"012",
+         "bank_name":"BANCOMER",
+         "alias":null,
+         "holder_name":"Mi empresa"
       },
       "status":"completed",
       "currency":"MXN",
@@ -1342,7 +1101,7 @@ response_hash=@transactionsPayout.getDetails("tr6cxbcefzatd10guvvw", search_para
   {
     "id": "tru6lsl6xpvseqp87vjd",
     "authorization": "FPVYiN4nyw",
-    "method": "bank_account",
+    "method": "card",
     "operation_type": "in",
     "transaction_type": "charge",
     "card": {
