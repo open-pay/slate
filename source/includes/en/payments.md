@@ -1,68 +1,68 @@
-#Pagos o retiros
-Un pago es la transacción que permite extraer los fondos de una cuenta Openpay y enviarlos a una cuenta bancaria. Los pagos se pueden realizar desde las cuentas de los clientes o desde tu cuenta de comercio.
+#Payouts or withdrawals
+A payout is the transaction that allows to extract funds from a Openpay account and send the funds to a bank account. Payouts can be made from the accounts of the customers or from the Merchant account.
 
 <aside class="notice">
-**Nota:** Todas las transacciones de pago se regresarán en status **in_progress** lo cual significa que se programó para el día siguiente, cuando se efectúe la operación se cambiará el estado a **completed** y si se tienen webhooks configurados se enviará la notificación.
+**Note:**  All payout transactions will be returned in **IN_PROGRESS** status meaning that it is scheduled for the next day when the operation takes place the status will change to **completed** and if there are configured WebHooks, a notification will be sent.
 </aside>
 
-##Pago a id registrado
+##Payout to a registered id
 
-> Definición
+> Definition
 
 ```shell
-Comercio
+Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
 
-Cliente
+Customer
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
 ```php
 <?
-Cliente
+Customer
 $customer = $openpay->customers->get(customerId);
 $payout = $customer->payouts->create(payoutRequest);
 
-Comercio
+Merchant
 $payout = $openpay->payouts->create(payoutRequest);
 ?>
 ```
 
 ```java
-//Cliente
+//Customer
 openpayAPI.payouts().create(String customerId, CreateBankPayoutParams request);
 
-//Comercio
+//Merchant
 openpayAPI.payouts().create(CreateBankPayoutParams request);
 ```
 
 ```csharp
-//Cliente
+//Customer
 openpayAPI.PayoutService.Create(string customer_id, PayoutRequest request);
 
-//Comercio
+//Merchant
 openpayAPI.PayoutService.Create(PayoutRequest request);
 ```
 
 ```javascript
-// Comercio
+// Merchant
 openpay.payouts.create(payoutRequest, callback);
 
-// Cliente
+// Customer
 openpay.customers.payouts.create(customerId, payoutRequest, callback);
 ```
 
 ```ruby
-#Cliente
+#Customer
 @payouts=@openpay.create(:payouts)
 @payouts.create(request_hash, customer_id)
 
-#Comercio
+#Merchant
 @payouts=@openpay.create(:payouts)
 @payouts.create(request_hash)
 ```
 
-> Ejemplo de petición con cliente
+> Customer request example
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/payouts \
@@ -83,7 +83,7 @@ $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02c
 
 $payoutRequest = array(
     'method' => 'bank_account',
-    'destination_id' => 'a3d54sd3mdjf75udjfvoc',
+    'destination_id' => 'b3d54sd3mdjf75udjfvoc',
     'amount' => 1000,
     'description' => 'Retiro de saldo semanal',
     'order_id' => 'ORDEN-00021');
@@ -144,7 +144,7 @@ request_hash={
 response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 
-> Ejemplo de respuesta
+> Response example
 
 ```json
 {
@@ -172,46 +172,47 @@ response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 }
 ```
 
-Envío un pago a una cuenta bancaria previamente registrada. Consulte como [crear una cuenta de bancaria](#crear-una-cuenta-bancaria)
+Sends a payout to a previously registered bank account. Refer to [create a bank account] (#create-a-bank-account)
 
-###Petición 
+###Request 
 
-Propiedad | Descripción
+Property | Description
 --------- | -----
-method|***string*** (requerido) <br/>Debe contener el valor **bank_account**.
-destination_id | ***string*** (requerido, longitud = 45) <br/>El ID de la cuenta bancaria previamente registrada.
-amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
+method|***string*** (required) <br/>It must contain the value **bank_account**.
+destination_id | ***string*** (required, length = 45) <br/>ID of the registered bank account.
+amount | ***numeric*** (required) <br/>Amount of payout. Must be an amount greater than zero, with up to two decimal digits.
+description | ***string*** (required, length = 250) <br/>A description associated to the payment.
+order_id | ***string*** (optional, length = 100) <br/>Unique identifier of payout. Must be unique among all transactions.
 
-###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
 
-##Pago a cuenta bancaria
+###Response
+Returns a [transaction object](#transaction-object) with the payout information or with an [error response](#error-object).
 
-> Definición
+##Payment to a bank account
+
+> Definition
 
 ```shell
-Comercio
+Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
 
-Cliente
+Customer
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
 ```php
 <?
-Cliente
+Customer
 $customer = $openpay->customers->get(customerId);
 $payout = $customer->payouts->create(payoutRequest);
 
-Comercio
+Merchant
 $payout = $openpay->payouts->create(payoutRequest);
 ?>
 ```
 
 ```java
-//Cliente
+//Customere
 openpayAPI.payouts().create(String customerId, CreateBankPayoutParams request);
 
 //Comercio
@@ -219,32 +220,32 @@ openpayAPI.payouts().create(CreateBankPayoutParams request);
 ```
 
 ```csharp
-//Cliente
+//Customer
 openpayAPI.PayoutService.Create(string customer_id, PayoutRequest request);
 
-//Comercio
+//Merchant
 openpayAPI.PayoutService.Create(PayoutRequest request);
 ```
 
 ```javascript
-// Comercio
+// Merchant
 openpay.payouts.create(payoutRequest, callback);
 
-// Cliente
+// Customer
 openpay.customers.payouts.create(customerId, payoutRequest, callback);
 ```
 
 ```ruby
-#Cliente
+#Customer
 @payouts=@openpay.create(:payouts)
 @payouts.create(request_hash, customer_id)
 
-#Comercio
+#Merchant
 @payouts=@openpay.create(:payouts)
 @payouts.create(request_hash)
 ```
 
-> Ejemplo de petición con cliente
+> Customer request example
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts \
@@ -347,7 +348,7 @@ request_hash={
 response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 
-> Ejemplo de respuesta
+> Response example
 
 ```json
 {
@@ -375,78 +376,78 @@ response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 }
 ```
 
-Envía un pago a una cuenta bancaria.
+Sends a payment to a bank account.
 
-###Petición 
+###Request 
 
-Propiedad | Descripción
+Property | Description
 --------- | -----
-method|***string*** (requerido) <br/>Debe contener el valor **bank_account**.
-[bank_account](#objeto-cuenta-bancaria) | ***object*** (requerido) <br/>Datos de la cuenta bancaria a la que se enviarán los fondos. <br/><br/> **clabe**.- Número de cuenta CLABE de la cuenta a la que se enviarán los fondos. <br/>**holder_name**.- Nombre del propietario de la cuenta.
-amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
+method|***string*** (required) <br/>It must contain the **bank_account** value.
+[bank_account](#bank-account-object)  | ***object*** (required) <br/>Data of the bank account where the funds will be sent. <br/><br/> **clabe**.- CLABE account number where the funds will be sent. <br/>**holder_name**.- Name of the account owner .
+amount | ***numeric*** (required) <br/>Amount of payout. Must be an amount greater than zero, with up to two decimal digits.
+description | ***string*** (required, length = 250) <br/>A description associated to the payment.
+order_id | ***string*** (optional, length = 100) <br/>Unique identifier of payout. Must be unique among all transactions.
 
-###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
+###Response
+Returns a [transaction object](#transaction-object) with the payout information or with an [error response](#error-object).
 
-##Obtener un pago
-> Definición
+##Get a payout
+> Definition
 
 ```shell
-Comercio
+Merchant
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts/{TRANSACTION_ID}
 
-Comercio
+Customer
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts/{TRANSACTION_ID}
 ```
 
 ```php
 <?
-Comercio
+Merchant
 $payout = $openpay->payouts->get(transactionId);
 
-Cliente
+Customer
 $customer = $openpay->customers->get(customerId);
 $payout = $customer->payouts->get(transactionId);
 ?>
 ```
 
 ```java
-//Cliente
+//Customer
 openpayAPI.payouts().get(String customerId, String transactionId);
 
-//Comercio
+//Merchant
 openpayAPI.payouts().get(String transactionId);
 ```
 
 ```csharp
-//Cliente
+//Customer
 openpayAPI.PayoutService.Get(string customer_id, string transaction_id);
 
-//Comercio
+//Merchant
 openpayAPI.PayoutService.Get(string transaction_id);
 ```
 
 ```javascript
-// Comercio
+// Merchant
 openpay.payouts.get(transactionId, callback);
 
-// Cliente
+// Customer
 openpay.customers.payouts.get(customerId, transactionId, callback);
 ```
 
 ```ruby
-#Cliente
+#Customer
 @payouts=@openpay.create(:payouts)
 @payouts.get(transaction_id, customer_id)
 
-#Comercio
+#Merchant
 @payouts=@openpay.create(:payouts)
 @payouts.get(transaction_id)
 ```
 
-> Ejemplo de petición con cliente
+> Customer request example
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts/trwpxhrgfeub9eqdyvqz \
@@ -485,7 +486,7 @@ openpay.customers.payouts.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', fu
 response_hash=@payouts.get("tr6cxbcefzatd10guvvw", "asynwirguzkgq2bizogo")
 ```
 
-> Ejemplo de respuesta
+> Response example
 
 ```json
 {
@@ -513,74 +514,74 @@ response_hash=@payouts.get("tr6cxbcefzatd10guvvw", "asynwirguzkgq2bizogo")
 }
 ```
 
-Regresa la información de un pago realizado. Es necesario conocer el id del pago.
+Returns de information of the payout. You must know the payout id.
 
-###Petición
+###Request
 
-Propiedad | Descripción
+Property | Description
 --------- | ------
-transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del pago a consultar.
+transaction_id| _**string**_ (required, length = 45)<br/>Id of the payout you want to get.
 
-###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
+###Response
+Returns a [transaction object](#transaction-object) with the payout information or with an [error response](#error-object).
 
-##Cancelar un pago
-> Definición
+##Cancel a payout
+> Definition
 
 ```shell
-Comercio
+Merchant
 DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts/{TRANSACTION_ID}
 
-Comercio
+Customer
 DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts/{TRANSACTION_ID}
 ```
 
 ```php
 <?
-Comercio
+Merchant
 $payout = $openpay->payouts->delete(transactionId);
 
-Cliente
+Customer
 $customer = $openpay->customers->get(customerId);
 $payout = $customer->payouts->delete(transactionId);
 ?>
 ```
 
 ```java
-//Cliente
+//Customer
 openpayAPI.payouts().cancel(String customerId, String transactionId);
 
-//Comercio
+//Merchant
 openpayAPI.payouts().cancel(String transactionId);
 ```
 
 ```csharp
-//Cliente
+//Customer
 openpayAPI.PayoutService.Cancel(string customer_id, string transaction_id);
 
-//Comercio
+//Merchant
 openpayAPI.PayoutService.Cancel(string transaction_id);
 ```
 
 ```javascript
-// Comercio
+// Merchant
 openpay.payouts.delete(transactionId, callback);
 
-// Cliente
+// Customer
 openpay.customers.payouts.delete(customerId, transactionId, callback);
 ```
 
 ```ruby
-#Cliente
+#Customer
 @payouts=@openpay.create(:payouts)
 @payouts.delete(transaction_id, customer_id)
 
-#Comercio
+#Merchant
 @payouts=@openpay.create(:payouts)
 @payouts.delete(transaction_id)
 ```
 
-> Ejemplo de petición con cliente
+> Customer request example
 
 ```shell
 curl -X DELETE https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts/trozeipf364jqrsbt3ej \
@@ -607,7 +608,7 @@ Payout = api.PayoutService.Cancel("ag4nktpdzebjiye1tlze", "trozeipf364jqrsbt3ej"
 ```
 
 ```javascript
-openpay.customers.payouts.delete('ag4nktpdzebjiye1tlze', 'trozeipf364jqrsbt3ej', function(error, payout) {
+openpay.customers.payouts.delete('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', function(error, payout) {
   // ...
 });
 ```
@@ -619,7 +620,7 @@ openpay.customers.payouts.delete('ag4nktpdzebjiye1tlze', 'trozeipf364jqrsbt3ej',
 response_hash=@payouts.delete("trozeipf364jqrsbt3ej", "asynwirguzkgq2bizogo")
 ```
 
-> Ejemplo de respuesta
+> Response example
 
 ```json
 {
@@ -642,83 +643,83 @@ response_hash=@payouts.delete("trozeipf364jqrsbt3ej", "asynwirguzkgq2bizogo")
    "operation_date":"2014-05-26T17:06:28-05:00",
    "description":"Retiro de saldo semanal",
    "error_message":null,
-   "order_id":"oid-00021",
+   "order_id":"oid-00025",
    "customer_id":"asynwirguzkgq2bizogo"
 }
 ```
 
-Cancela un pago previamente programado en estado in_progress, es decir el pago no debe estar completado. Es necesario conocer el id del pago.
+Cancels a payout in in_progress status, it means not yet completed. You must know the payout id.
 
-###Petición
+###Request
 
-Propiedad | Descripción
+Property | Description
 --------- | ------
-transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del pago a cancelar.
+transaction_id| _**string**_ (required, length = 45)<br/>Payout Id you want to cancel.
 
-###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del pago cancelado o una [respuesta de error](#objeto-error).
+###Response
+Returns a [transaction object](#transaction-object) with the cancelled payout or with an [error response](#error-object).
 
-##Listado de pagos
+##List of payouts
 
-> Definición
+> Definition
 
 
 ```shell
-Comercio
+Merchant
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
 
-Comercio
+Customer
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
 ```php
 <?
-Comercio
+Merchant
 $payoutList = $openpay->payouts->getList(searchParams);
 
-Cliente
+Customer
 $customer = $openpay->customers->get(customerId);
 $payoutList = $customer->payouts->getList(searchParams);
 ?>
 ```
 
 ```java
-//Cliente
+//Customer
 openpayAPI.payouts().list(String customerId, SearchParams request);
 
-//Comercio
+//Merchant
 openpayAPI.payouts().list(SearchParams request);
 ```
 
 ```csharp
-//Cliente
+//Customer
 openpayAPI.PayoutService.List(string customer_id, SearchParams request = null);
 
-//Comercio
+//Merchant
 openpayAPI.PayoutService.List(SearchParams request = null);
 ```
 
 ```javascript
-// Comercio
+// Merchant
 openpay.payouts.list(callback);
 openpay.payouts.list(searchParams, callback);
 
-// Cliente
+// Customer
 openpay.customers.payouts.list(customerId, callback);
 openpay.customers.payouts.list(customerId, searchParams, callback);
 ```
 
 ```ruby
-#Cliente
+#Customer
 @payouts=@openpay.create(:payouts)
 @payouts.all(customer_id)
 
-#Comercio
+#Merchant
 @payouts=@openpay.create(:payouts)
 @payouts.all
 ```
 
-> Ejemplo de petición 
+> Request example 
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts?creation[gte]=2013-11-01&limit=2&payout_type=AUTOMATIC" \
@@ -789,7 +790,7 @@ openpay.customers.payouts.list('asynwirguzkgq2bizogo', searchParams, function(er
 response_hash=@payouts.all("asynwirguzkgq2bizogo")
 ```
 
-> Ejemplo de respuesta
+> Response example
 
 ```json
 [
@@ -841,30 +842,31 @@ response_hash=@payouts.all("asynwirguzkgq2bizogo")
    }
 ]
 ```
-Obtiene un listado de los pagos realizados a nivel comercio o cliente.
+Gets a list of payouts made at Merchant or customer level.
 
-###Petición
-Puede realizar una búsqueda utilizando los siguiente parámetros como filtros.
+###Request
 
-Propiedad | Descripción
+You can search using the following parameters as filters.
+
+Property | Description
 --------- | ------
-creation| ***date*** <br/>Igual a la fecha de creación. Formato yyyy-mm-dd
-creation[gte]| ***date*** <br/>Mayor a la fecha de creación. Formato yyyy-mm-dd
-creation[lte]| ***date*** <br/>Menor a la fecha de creación. Formato yyyy-mm-dd
-offset| ***numeric*** <br/>Número de registros a omitir al inicio, por defecto 0.
-limit| ***numeric*** <br/>Número de registros que se requieren, por defecto 10.
-amount| ***numeric*** <br/>Igual al monto.
-amount[gte] | ***numeric*** <br/>Mayor o igual al monto.
-amount[lte] | ***numeric*** <br/>Menor o igual al monto.
-payout_type | ***string (opcional, ALL, AUTOMATIC o MANUAL)***  <br/>Tipo de payout usado para filtrar las transacciones
+creation| ***date*** <br/>Same as creation date. Format yyyy-mm-dd
+creation[gte]| ***date*** <br/>After the creation date. Format yyyy-mm-dd
+creation[lte]| ***date*** <br/>Before the creation date. Format yyyy-mm-dd
+offset| ***numeric*** <br/>Number of records to skip at the beginning, default 0.
+limit| ***numeric*** <br/>Number of required records, default 10.
+amount| ***numeric*** <br/>Same as the amount.
+amount[gte] | ***numeric*** <br/>Greater than or equal to the amount.
+amount[lte] | ***numeric*** <br/>Less than or equal to the amount.
+payout_type | ***string (opfional, ALL, AUTOMATIC o MANUAL)***  <br/>Payout type used to filter the transactions
 
-###Respuesta
+###Response
 
-Regresa un listado de [objetos de transacción](#objeto-transacción) de los pagos en orden descendente por fecha de creación.
+Returns a list of [transaction objects](#transaction-object) payouts in descending order by creation date.
 
-##Resumen de Pagos
+##Summary Payouts
 
-> Definición
+> Definition
 
 ```shell
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/reports/payout/{TRANSACTION_ID}
@@ -893,7 +895,7 @@ openpay.transactionsPayout.get(transactionId, callback);
 @transactionsPayout.get(transaction_id)
 ```
 
-> Ejemplo de petición
+> Request example
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/reports/payout/trwpxhrgfeub9eqdyvqz \
@@ -933,7 +935,7 @@ openpay.transactionsPayout.get('tr6cxbcefzatd10guvvw', function(error, payout) {
 response_hash=@transactionsPayout.get("tr6cxbcefzatd10guvvw")
 ```
 
-> Ejemplo de respuesta
+> Response example
 
 ```json
 {
@@ -943,21 +945,20 @@ response_hash=@transactionsPayout.get("tr6cxbcefzatd10guvvw")
   "refunded_adjustments": 0
 }
 ```
+Return the summary of the payout. You must know the payout id.
 
-Regresa el resumen de un pago realizado. Es necesario conocer el id del pago.
+###Request
 
-###Petición
-
-Propiedad | Descripción
+Property | Description
 --------- | ------
-transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del pago a consultar.
+transaction_id| _**string**_ (required, length = 45)<br/>Id of the payout you want to get.
 
-###Respuesta
-Regresa un [objeto de resumen de pagos](#objeto-resumen-de-pagos) con el resumen del pago o una [respuesta de error](#objeto-error).
+###Response
+Returns a [summary payouts object](#summary-payout-object) with the summary of the payout or a [error response](#error-object).
 
-##Objeto Resumen de Pagos
+##Summary Payout Object
 
-> Ejemplo de objeto 
+> Object example
 
 ```json
 {
@@ -968,16 +969,16 @@ Regresa un [objeto de resumen de pagos](#objeto-resumen-de-pagos) con el resumen
 }
 ```
 
-Propiedad | Descripción
+Property | Description
 --------- | ------
-in | ***numeric*** <br/> Monto total de entrada, Debe ser una cantidad con hasta 2 dígitos decimales.
-out | ***numeric*** <br/> Monto total de salida, Debe ser una cantidad con hasta 2 dígitos decimales.
-charged_adjustments | ***numeric*** <br/> Monto total de cargos de ajuste, Debe ser una cantidad con hasta 2 dígitos decimales.
-refunded_adjustments | ***numeric*** <br/> Monto total de cargos de devolución, Debe ser una cantidad con hasta 2 dígitos decimales.
+in | ***numeric*** <br/> Total amount in, Must be an amount with up to two decimal digits.
+out | ***numeric*** <br/> Total amount out, Must be an amount with up to two decimal digits.
+charged_adjustments | ***numeric*** <br/> Total amount of adjustment charges, Must be an amount with up to two decimal digits.
+refunded_adjustments | ***numeric*** <br/> Total amount of refund charges, Must be an amount with up to two decimal digits.
 
-##Detalle de Pagos
+##Payout Detail
 
-> Definición
+> Definition
 
 ```shell
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/reports/payout/{TRANSACTION_ID}/detail
@@ -1006,7 +1007,7 @@ openpay.transactionsPayout.getDetails(transactionId, searchParams, callback);
 @transactionsPayout.getDetails(transaction_id, searchParams)
 ```
 
-> Ejemplo de petición
+> Request example
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/reports/payout/trwpxhrgfeub9eqdyvqz/detail?detail_type=IN \
@@ -1071,7 +1072,7 @@ search_params_hash={
 response_hash=@transactionsPayout.getDetails("tr6cxbcefzatd10guvvw", search_params_hash.to_hash)
 ```
 
-> Ejemplo de respuesta
+> Response example
 
 ```json
 [
@@ -1130,16 +1131,17 @@ response_hash=@transactionsPayout.getDetails("tr6cxbcefzatd10guvvw", search_para
 ]
 ```
 
-Regresa el listado las transacciones involucradas en un pago realizado. Es necesario conocer el id del pago.
+Returns a list of the transactions involved in a payout. You must know the payout id.
 
 ###Petición
 
 Propiedad | Descripción
 --------- | ------
-transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del pago a consultar.
-detail_type| _**string**_ (***IN***, ***OUT***, ***CHARGED_ADJUSTMENTS***, ***REFUNDED_ADJUSTMENTS***) <br/>Tipo de detalle.
-offset| _**numeric**_ <br/> Número de registros a omitir al inicio, por defecto 0.
-limit| _**numeric**_ <br/> Número de registros que se requieren, por defecto 10.
+transaction_id| _**string**_ (required, length = 45)<br/>Id of the payout you want to get.
+detail_type| _**string**_ (***IN***, ***OUT***, ***CHARGED_ADJUSTMENTS***, ***REFUNDED_ADJUSTMENTS***) <br/>The detail type.
+offset| _**numeric**_ <br/> Number of records to skip at the beginning, default 0.
+limit| _**numeric**_ <br/> Number of required records, default 10.
 
-###Respuesta
-Regresa un listado de [objetos transacción](#objeto-transacci-n) o una [respuesta de error](#objeto-error).
+###Response
+Return a list of [transaction objects](#transaction-object) in descending order by creation date or a [error response](#error-object).
+
