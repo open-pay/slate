@@ -14,18 +14,7 @@ includes:
   - es/authentication
   - es/errors
   - es/charges
-  - es/payments
-  - es/customers
-  - es/transfers
-  - es/cards
-  - es/bank_accounts
-  - es/plans
-  - es/subscriptions
-  - es/fees
-  - es/webhooks
   - es/tokens
-  - es/merchant
-  - es/stores
   - es/common_objects
 
 toc_footers:

@@ -79,26 +79,6 @@ state | ***string*** (requerido) <br/>Estado del tarjeta habiente
 city | ***string*** (requerido) <br/>Ciudad del tarjeta habiente
 country_code | ***string*** (requerido) <br/>Código del país del tarjeta habiente a dos caracteres en formato ISO_3166-1
 
-##Objeto Store
-
-> Ejemplo de Objeto:
-
-```json
-{
-   "reference":"OPENPAY02DQ35YOY7",
-   "barcode_url":"https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false",
-   "paybin_reference":"0101990000001065",
-   "barcode_paybin_url":"https://sandbox-api.openpay.mx/barcode/0101990000001065?width=1&height=45&text=false"
-}
-```
-
-Propiedad           | Descripción
----------           | -----------
-reference           | ***string*** <br/>Es la referencia con la que se puede ir a la tienda y realizar depósitos a la cuenta de Openpay.
-barcode_url         | ***string*** <br/>Es la url con la cual se puede obtener el codigo de barras de la referencia.
-paybin_reference   | ***string*** <br/>Es la referencia con la que se puede ir cualquier tienda que acepte Paybin.
-barcode_paybin_url | ***string*** <br/>Es la url con la cual se puede obtener el codigo de barras de la referencia Paybin.
-
 
 ##Objeto PaymentPlan
 
@@ -135,43 +115,6 @@ remaining | ***numeric*** <br/> Cantidad de puntos restantes en la tarjeta despu
 amount | ***numeric*** <br/>Monto de la transacción que fue pagado mediante puntos.
 caption | ***string*** (opcional) <br/> Mensaje a mostrar al cliente en su recibo o ticket de compra.
 
-##Objeto Geolocation
-
-> Ejemplo de Objeto:
-
-```json
-{
-  "lng": -100.421865,
-  "lat": 20.618171,
-  "place_id": "ChIJwSN2wpNa04URsDryLW517lg"
-}
-```
-
-Propiedad | Descripción
---------- | -----------
-lng | ***numeric*** <br/> Longitud, coordenada geografica.
-lat | ***numeric*** <br/> Latitud, coordenada geografica.
-place_id | ***string*** <br/>Identificacdor unico en google maps
-
-##Objeto PaynetChain
-
-> Ejemplo de Objeto:
-
-```json
-{
-      "name": "EXTRA",
-      "logo": "http://www.openpay.mx/logotipos/extra.png",
-      "thumb": "http://www.openpay.mx/thumb/extra.png",
-      "max_amount": 99999.99
-    }
-```
-
-Propiedad | Descripción
---------- | -----------
-name | ***string*** <br/> Nombre de la cadena.
-logo | ***string*** <br/> Url de la imagen del logotipo de la cadena.
-thumb | ***string*** <br/> Url de la imagen miniatura del logotipo de la cadena.
-max_amount | ***numeric*** <br/>Monto máximo de pago que aceptan las tiendas de la cadena
 
 ##Objeto Transaction Status
 
