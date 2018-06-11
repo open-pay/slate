@@ -1019,7 +1019,7 @@ PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/card
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/kysc8pycq8hnlzivk1x4 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
-   -X POST -d '{
+   -X PUT -d '{
       "cvv2":"000"
    }' 
 ```
