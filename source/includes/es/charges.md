@@ -271,6 +271,7 @@ metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personaliza
 use_card_points | ***string*** (opcional, default = NONE) <br/> <table><tr><td><strong>ONLY_POINTS</strong></td> <td>Cargo solo con puntos (<a href="#consulta-de-puntos">Consulta de puntos</a>)</td></tr><tr><td><strong>MIXED</strong></td>       <td>Cargo con pesos y puntos</td></tr><tr><td><strong>NONE</strong></td>        <td>Cargo solo con pesos</td></tr></table>Los valores que indican puntos solo se deben usarse si la propiedad points_card de la tarjeta es true, de otra forma ocurrirá un error.
 send_email | ***boolean*** (opcional) <br/>Usado para cargos de tipo redirect. Indica se si desea enviar un email que direccione al formulario de pago de openpay.
 redirect_url | ***string*** (opcional) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de openpay.
+use_3d_secure | ***string*** (opcional) <br/> Se debe especificar este parámetro en `true` para manejar 3D Secure.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).

@@ -991,3 +991,61 @@ limit| ***numeric*** <br/>Número de registros que se requieren, por defecto 10.
 
 ###Respuesta
 Listado de [objetos tarjeta](#objeto-tarjeta) registrados de acuerdo a los parámetros proporcionados, ordenadas por fecha de creación en orden descendente.
+
+## Actualizar código de seguridad de tarjeta
+
+> Definición
+
+```shell
+Comercio
+PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}
+
+Cliente
+PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
+```
+
+> Ejemplo de petición con cliente
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/kysc8pycq8hnlzivk1x4 \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -H "Content-type: application/json" \
+   -X POST -d '{
+      "cvv2":"000"
+   }' 
+```
+
+```javascript
+```
+
+> Ejemplo de respuesta
+
+```json
+{
+   "type":"credit",
+   "brand":"visa",
+   "id":"kso4st83wxaibffyt6su",
+   "card_number":"424242XXXXXX4242",
+   "holder_name":"Juan Perez Ramirez",
+   "expiration_year":"15",
+   "expiration_month":"12",
+   "allows_charges":true,
+   "allows_payouts":false,
+   "creation_date":"2014-02-12T10:57:09-06:00",
+   "bank_name":"BANCOMER",
+   "bank_code":"012",
+   "customer_id":"a2b79p8xmzeyvmolqfja"
+}
+```
+
+Actualiza el código de seguridad de una tarjeta desde el navegador o dispositivo del cliente. Esta forma evita que la información sensible de la tarjeta pase por tus servidores.
+Debe usarse antes de hacer el cargo con una tarjeta previamente almacenada para poder ser usado en el próximo cargo.
+
+###Petición
+Propiedad | Descripción
+--------- | ------
+cvv2      | ***string*** (requerido, longitud = 3,4) <br/> Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.
+
+###Respuesta
+Regresa un [objeto tarjeta](#objeto-tarjeta)
+

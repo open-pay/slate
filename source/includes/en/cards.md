@@ -1001,3 +1001,60 @@ limit| ***numeric*** <br/>Number of required records, default 10.
 ###Response
 List of [card objects] (#card-object) registered according to the parameters provided, sorted by creation date in descending order.
 
+## Updating Card Security Code
+
+> Definition
+
+```shell
+Merchant
+PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}
+
+Customer
+PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
+```
+
+> Request example
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/kysc8pycq8hnlzivk1x4 \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -H "Content-type: application/json" \
+   -X POST -d '{
+      "cvv2":"000"
+   }' 
+```
+
+```javascript
+```
+
+> Response example
+
+```json
+{
+   "type":"credit",
+   "brand":"visa",
+   "id":"kso4st83wxaibffyt6su",
+   "card_number":"424242XXXXXX4242",
+   "holder_name":"Juan Perez Ramirez",
+   "expiration_year":"15",
+   "expiration_month":"12",
+   "allows_charges":true,
+   "allows_payouts":false,
+   "creation_date":"2014-02-12T10:57:09-06:00",
+   "bank_name":"BANCOMER",
+   "bank_code":"012",
+   "customer_id":"a2b79p8xmzeyvmolqfja"
+}
+```
+
+Updates the card security code from the browser of from the customer's device. This prevents the security code from passing through your servers.
+The security code must be updated before any charges done with stored cards, so it can be used in the next transaction.
+
+###Request
+Property  | Description
+--------- | ------
+cvv2      | ***string*** (requerido, longitud = 3,4) <br/> Security code as it appears on the back of the card. Usually 3 digits..
+
+###Response
+Returns a [card object](#card-object)
+
