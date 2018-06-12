@@ -1040,10 +1040,10 @@ The security code must be updated before any charges done with stored cards, so 
 ###Request
 Property  | Description
 --------- | ------
-holder_name |***string***  <br/>Name of the cardholder.
-cvv2 |***numeric***  <br/>Security code as it appears on the back of the card. Usually 3 digits.
-expiration_month |***numeric***  <br/>Expiration month as it appears on the card.
-expiration_year |***numeric***  <br/>Expiration year as it appears on the card.
+holder_name |***string*** (optional) <br/>Name of the cardholder.
+cvv2 |***numeric*** (optional) <br/>Security code as it appears on the back of the card. Usually 3 digits.
+expiration_month |***numeric*** (optional) <br/>Expiration month as it appears on the card.
+expiration_year |***numeric*** (optional) <br/>Expiration year as it appears on the card.
 merchant_id | **string** (optional) <br/> Merchant ID to use to validate this card. Used only when using groups.
 
 ###Response

@@ -1031,10 +1031,10 @@ Debe usarse antes de hacer el cargo con una tarjeta previamente almacenada para 
 ###Petición
 Propiedad | Descripción
 --------- | ------
-holder_name |***string***  <br/>Nombre del tarjeta habiente.
-cvv2      | ***string*** (requerido, longitud = 3,4) <br/> Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.
-expiration_month |***numeric***  <br/>Mes de expiración tal como aparece en la tarjeta.
-expiration_year |***numeric***  <br/>Año de expiración tal como aparece en la tarjeta.
+holder_name |***string*** (opcional) <br/>Nombre del tarjeta habiente.
+cvv2      | ***string*** (opcional) <br/> Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.
+expiration_month |***numeric*** (opcional) <br/>Mes de expiración tal como aparece en la tarjeta.
+expiration_year |***numeric*** (opcional) <br/>Año de expiración tal como aparece en la tarjeta.
 merchant_id | ***string*** (opcional) <br/> ID del comercio. Usado solamente cuando se usan grupos.
 
 
