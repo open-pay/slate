@@ -704,6 +704,184 @@ due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el pago e
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
 
+
+
+
+##Cargo con Qropay
+
+> Definición
+
+```shell
+Comercio
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+
+Cliente
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+```
+
+```php
+<?
+Comercio
+$openpay->charges->create(chargeRequest);
+
+Cliente
+$customer = $openpay->customers->get(customerId);
+$customer->charges->create(chargeRequest;
+?>
+```
+
+```java
+//Cliente
+openpayAPI.charges().create(String customerId, CreateQroPayChargeParams request);
+
+//Comercio
+openpayAPI.charges().create(CreateQroPayChargeParams request);
+```
+
+```csharp
+//Cliente
+openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
+
+//Comercio
+openpayAPI.ChargeService.Create(ChargeRequest request);
+```
+
+```javascript
+//Comercio
+openpay.charges.create(chargeRequest, callback);
+
+//Cliente
+openpay.customers.charges.create(customerId, chargeRequest, callback);
+```
+
+```ruby
+#Cliente
+@charges=@openpay.create(:charges)
+@charges.create(request_hash, customer_id)
+
+#Comercio
+@charges=@openpay.create(:charges)
+@charges.create(request_hash)
+```
+
+> Ejemplo de petición con cliente
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -H "Content-type: application/json" \
+   -X POST -d '{
+   "method" : "qropay",
+   "amount" : 949,
+   "description" : "Cargo qropay"
+} ' 
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$chargeRequest = array(
+    'method' => 'qropay',
+    'amount' => 949,
+    'description' => 'Cargo qropay');
+
+$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$charge = $customer->charges->create($chargeRequest);
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateQroPayChargeParams request = new CreateQroPayChargeParams();
+request.amount(new BigDecimal("949.00"));
+request.description("Cargo qropay");
+
+Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+ChargeRequest request = new ChargeRequest();
+request.Method = "qropay";
+request.Amount = new Decimal(949.00);
+request.Description = "Cargo qropay";
+
+Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
+```
+
+```javascript
+var storeChargeRequest = {
+   'method' : 'qropay',
+   'amount' : 949,
+   'description' : 'Cargo qropay'
+};
+
+openpay.customers.charges.create('ag4nktpdzebjiye1tlze', storeChargeRequest, function(error, charge) {
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@openpay.create(:charges)
+request_hash={
+     "method" => "qropay",
+     "amount" => 949.00,
+     "description" => "Cargo qropay"
+   }
+
+response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
+```
+
+> Ejemplo de respuesta
+
+```json
+{
+    "id": "trfu5m6xzn6hiyn9jkzm",
+    "authorization": null,
+    "operation_type": "in",
+    "method": "qropay",
+    "transaction_type": "charge",
+    "status": "charge_pending",
+    "conciliated": false,
+    "creation_date": "2018-04-25T18:45:16-05:00",
+    "operation_date": "2018-04-25T18:45:16-05:00",
+    "description": "Cargo qropay",
+    "error_message": null,
+    "order_id": null,
+    "due_date": "2018-04-26T23:59:59-05:00",
+    "payment_method": {
+        "type": "qropay",
+        "qr_code": "https://sandbox-api.openpay.mx/qropay/mc2mzbvwpmnps8q0on6q/trfu5m6xzn6hiyn9jkzm/qrcode"
+    },
+    "amount": 949,
+    "currency": "MXN",
+    "fee": {
+        "amount": 11.49,
+        "tax": 0,
+        "currency": "MXN"
+    }
+}
+```
+
+Para un pago usando un Qropay se debe crear un petición de tipo cargo indicando como método **qropay**. Esto generará una respuesta con una URL a un código QR en formato PNG.
+
+###Petición 
+
+Propiedad | Descripción
+--------- | -----
+method|***string*** (requerido) <br/>Debe contener el valor **qropay** para indicar que el pago se hará en tienda.
+amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
+description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
+due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el pago en la tienda en formato ISO 8601. <br/><br/>Ejemplo (UTC): 2014-08-01T00:50:00Z <br/>***Nota:*** Del lado del servidor se cambiara a hora central<br/><br/>Ejemplo (Central Time): 2014-08-01T11:51:23-05:00
+[customer](#crear-un-nuevo-cliente)|***objeto*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
+
+###Respuesta
+Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+
+
+
 ##Cargo en banco
 
 > Definición
