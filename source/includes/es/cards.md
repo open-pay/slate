@@ -992,11 +992,11 @@ limit| ***numeric*** <br/>Número de registros que se requieren, por defecto 10.
 ###Respuesta
 Listado de [objetos tarjeta](#objeto-tarjeta) registrados de acuerdo a los parámetros proporcionados, ordenadas por fecha de creación en orden descendente.
 
-## Actualizar código de seguridad de tarjeta
+## Actualizar tarjeta
 
 > Definición
 
-```shell
+```plaintext
 Comercio
 PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}
 
@@ -1025,8 +1025,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 }
 ```
 
-Actualiza el código de seguridad de una tarjeta desde el navegador o dispositivo del cliente. Esta forma evita que la información sensible de la tarjeta pase por tus servidores.
-Debe usarse antes de hacer el cargo con una tarjeta previamente almacenada para poder ser usado en el próximo cargo.
+Actualiza los datos de una tarjeta desde el navegador o dispositivo del cliente. También permite enviar un cvv2 que se usará en el próximo cargo que se realice a esta tarjeta.
+De esta forma evita que la información sensible de la tarjeta pase por tus servidores.
 
 ###Petición
 Propiedad | Descripción
@@ -1035,7 +1035,7 @@ holder_name |***string*** (opcional) <br/>Nombre del tarjeta habiente.
 cvv2      | ***string*** (opcional) <br/> Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.
 expiration_month |***numeric*** (opcional) <br/>Mes de expiración tal como aparece en la tarjeta.
 expiration_year |***numeric*** (opcional) <br/>Año de expiración tal como aparece en la tarjeta.
-merchant_id | ***string*** (opcional) <br/> ID del comercio. Usado solamente cuando se usan grupos.
+merchant_id | ***string*** (condicional) <br/> ID del comercio. Usado solamente cuando se usa un grupo de comercio.
 
 
 ###Respuesta

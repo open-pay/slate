@@ -1001,11 +1001,11 @@ limit| ***numeric*** <br/>Number of required records, default 10.
 ###Response
 List of [card objects] (#card-object) registered according to the parameters provided, sorted by creation date in descending order.
 
-## Updating Card Security Code
+## Updating a card
 
 > Definition
 
-```shell
+```plaintext
 Merchant
 PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}
 
@@ -1034,17 +1034,17 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 }
 ```
 
-Updates the card security code from the browser of from the customer's device. This prevents the security code from passing through your servers.
-The security code must be updated before any charges done with stored cards, so it can be used in the next transaction.
+Updates the card data from the browser or from the customer's device.  It also allows to send a cvv2 code that will be used in the next transaction done with this card.
+This prevents sensitive information from passing through your servers.
 
 ###Request
 Property  | Description
 --------- | ------
 holder_name |***string*** (optional) <br/>Name of the cardholder.
-cvv2 |***numeric*** (optional) <br/>Security code as it appears on the back of the card. Usually 3 digits.
+cvv2 |***string***  (optional)<br/>Security code as it appears on the back of the card. Usually 3 digits.
 expiration_month |***numeric*** (optional) <br/>Expiration month as it appears on the card.
 expiration_year |***numeric*** (optional) <br/>Expiration year as it appears on the card.
-merchant_id | **string** (optional) <br/> Merchant ID to use to validate this card. Used only when using groups.
+merchant_id | **string** (conditional) <br/> Merchant ID to use to validate this card. Required when using a merchant group.
 
 ###Response
 Returns an empty JSON object. Please consider that this response may be extended in the future.
