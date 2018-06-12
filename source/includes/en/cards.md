@@ -1031,19 +1031,6 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 
 ```json
 {
-   "type":"credit",
-   "brand":"visa",
-   "id":"kso4st83wxaibffyt6su",
-   "card_number":"424242XXXXXX4242",
-   "holder_name":"Juan Perez Ramirez",
-   "expiration_year":"15",
-   "expiration_month":"12",
-   "allows_charges":true,
-   "allows_payouts":false,
-   "creation_date":"2014-02-12T10:57:09-06:00",
-   "bank_name":"BANCOMER",
-   "bank_code":"012",
-   "customer_id":"a2b79p8xmzeyvmolqfja"
 }
 ```
 
@@ -1053,8 +1040,12 @@ The security code must be updated before any charges done with stored cards, so 
 ###Request
 Property  | Description
 --------- | ------
-cvv2      | ***string*** (requerido, longitud = 3,4) <br/> Security code as it appears on the back of the card. Usually 3 digits..
+holder_name |***string***  <br/>Name of the cardholder.
+cvv2 |***numeric***  <br/>Security code as it appears on the back of the card. Usually 3 digits.
+expiration_month |***numeric***  <br/>Expiration month as it appears on the card.
+expiration_year |***numeric***  <br/>Expiration year as it appears on the card.
+merchant_id | **string** (optional) <br/> Merchant ID to use to validate this card. Used only when using groups.
 
 ###Response
-Returns a [card object](#card-object)
+Returns an empty JSON object. Please consider that this response may be extended in the future.
 

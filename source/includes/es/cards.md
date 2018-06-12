@@ -1022,19 +1022,6 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 
 ```json
 {
-   "type":"credit",
-   "brand":"visa",
-   "id":"kso4st83wxaibffyt6su",
-   "card_number":"424242XXXXXX4242",
-   "holder_name":"Juan Perez Ramirez",
-   "expiration_year":"15",
-   "expiration_month":"12",
-   "allows_charges":true,
-   "allows_payouts":false,
-   "creation_date":"2014-02-12T10:57:09-06:00",
-   "bank_name":"BANCOMER",
-   "bank_code":"012",
-   "customer_id":"a2b79p8xmzeyvmolqfja"
 }
 ```
 
@@ -1044,8 +1031,13 @@ Debe usarse antes de hacer el cargo con una tarjeta previamente almacenada para 
 ###Petición
 Propiedad | Descripción
 --------- | ------
+holder_name |***string***  <br/>Nombre del tarjeta habiente.
 cvv2      | ***string*** (requerido, longitud = 3,4) <br/> Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.
+expiration_month |***numeric***  <br/>Mes de expiración tal como aparece en la tarjeta.
+expiration_year |***numeric***  <br/>Año de expiración tal como aparece en la tarjeta.
+merchant_id | ***string*** (opcional) <br/> ID del comercio. Usado solamente cuando se usan grupos.
+
 
 ###Respuesta
-Regresa un [objeto tarjeta](#objeto-tarjeta)
+Actualmente regresa un JSON sin datos. Considerar que se podría extender la respuesta en el futuro.
 
