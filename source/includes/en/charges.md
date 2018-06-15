@@ -685,7 +685,7 @@ amount | ***numeric*** (required) <br/>Amount of charge. Must be an amount great
 description | ***string*** (required, length = 250) <br/>A description associated to the charge.
 order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
 due_date | ***datetime*** (optional) <br/>Due date for making the payment in the store in  ISO 8601 format. <br/><br/>Example (UTC): 2014-08-01T00:50:00Z <br/>***Note:*** On the server side the date will be changeg to central time<br/><br/>Example (Central Time): 2014-08-01T11:51:23-05:00
-[customer](#create-a-new-customer)|***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer leve.
+[customer](#create-a-new-customer)|***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
 
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
@@ -694,7 +694,7 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 > Definition
 
-```shell
+```plaintext--endpoints
 Merchant
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
 
@@ -1589,3 +1589,147 @@ amount[lte] | ***numeric*** <br/>Less than or equal to the amount.
 ###Response
 
 Returns an array of [transaction objects](#transaction-object) charges in descending order by creation date.
+
+## With Alipay
+
+> Definition
+
+```plaintext--endpoints
+Merchant
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+
+Customer
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+```
+
+> Customer request example
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -H "Content-type: application/json" \
+   -X POST -d '{
+   "description": "Cargo Alipay",
+   "amount": "2000.00",
+   "method": "alipay",
+   "order_id": "oid-00053",
+   "redirect_url" : "http://www.example.com/myRedirectUrl"
+} '
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+
+$chargeRequest = array(
+    'method' => 'alipay',
+    'amount' => 100,
+    'description' => 'Cargo Alipay',
+    'order_id' => 'oid-00055',
+    'redirect_url' => 'http://www.example.com/myRedirectUrl');
+
+$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$charge = $customer->charges->create($chargeRequest);
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "mzdtln0bmtms6o3kck8f");
+CreateAlipayChargeParams request = new CreateAlipayChargeParams();
+request.amount(new BigDecimal("100.00"));
+request.description("Cargo Alipay");
+request.orderId("oid-00053");
+request.redirectUrl("http://www.example.com/myRedirectUrl")
+
+Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+ChargeRequest request = new ChargeRequest();
+request.Method = "alipay";
+request.Amount = new Decimal(100.00);
+request.Description = "Cargo Alipay";
+request.OrderId = "oid-00053";
+request.RedirectUrl ="http://www.example.com/myRedirectUrl";
+
+Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
+```
+
+```javascript
+var alipayChargeRequest = {
+   'method' : 'alipay',
+   'amount' : 100,
+   'description' : 'Cargo Alipay',
+   'order_id' : 'oid-00055',
+   'redirect_url' : 'http://www.example.com/myRedirectUrl'
+};
+
+openpay.customers.charges.create('ag4nktpdzebjiye1tlze', alipayChargeRequest, function(error, charge) {
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@openpay.create(:charges)
+request_hash={
+     "method" => "alipay",
+     "amount" => 100.00,
+     "description" => "Cargo Alipay",
+     "order_id" => "oid-00053",
+     "redirect_url" => "http://www.example.com/myRedirectUrl"
+   }
+
+response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
+```
+
+> Response example
+
+```json
+{
+    "id": "truq1dwjz0kmssvpbrlj",
+    "authorization": null,
+    "operation_type": "in",
+    "method": "alipay",
+    "transaction_type": "charge",
+    "status": "charge_pending",
+    "conciliated": false,
+    "creation_date": "2018-06-14T12:42:11-05:00",
+    "operation_date": "2018-06-14T12:42:11-05:00",
+    "description": "Cargo Alipay",
+    "error_message": null,
+    "order_id": null,
+    "due_date": "2018-06-15T12:42:11-05:00",
+    "payment_method": {
+        "type": "redirect",
+        "url": "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges/truq1dwjo0kmssvqbrlj/redirect/"
+    },
+    "amount": 2000,
+    "currency": "MXN",
+    "fee": {
+        "amount": 2.00  ,
+        "tax": 0,
+        "currency": "MXN"
+    }
+}
+```
+
+To start a transaction using Alipay you should create a charge type request by indicating **alipay** as method. 
+This will generate a response with an URL which will redirect the customer to the Alipay website
+where they can then enter their account details, or scan the QR Code in their mobile app.
+
+
+### Request 
+
+Property    | Description
+----------- | -----
+method      | ***string*** (required) <br/>It must constains the **alipat** value in order to specify you want the customer to pay using Alipay.
+amount      | ***numeric*** (required) <br/>Amount of charge. Must be an amount greater than zero, with up to two decimal digits.
+description | ***string*** (required, length = 250) <br/>A description associated to the charge.
+order_id    | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
+due_date    | ***datetime*** (optional) <br/>Due date for making the payment in Alipay in  ISO 8601 format. The customer may have an additional 15 minutes after this date after they login to their Alipay account to complete payment. <br/><br/>Example (UTC): 2014-08-01T00:50:00Z <br/>***Note:*** On the server side the date will be changeg to central time<br/><br/>Example (Central Time): 2014-08-01T11:51:23-05:00
+[customer](#create-a-new-customer)|***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
+
+### Response
+Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
