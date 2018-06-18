@@ -1641,7 +1641,7 @@ request.description("Cargo Alipay");
 request.orderId("oid-00053");
 request.redirectUrl("http://www.example.com/myRedirectUrl")
 
-Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
+Charge charge = api.charges().createCharge("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
