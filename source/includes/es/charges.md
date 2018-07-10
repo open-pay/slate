@@ -1,7 +1,7 @@
 #Cargos
-Los cargos se pueden realizar cargos a tarjetas, tiendas y bancos. A cada cargo se le asigna un identificador único en el sistema.
+Los cargos se pueden realizar a tarjetas de crédito o debito. A cada cargo se le asigna un identificador único en el sistema.
 
-En cargos a tarjeta puedes hacerlo a una tarjeta guardada usando el id de la tarjeta, usando un token o puedes enviar la información de la tarjeta al momento de la invocación.
+En cargos a tarjeta puedes hacerlo usando un token o desplegando un formulario para que el usuario capture los datos de la tarjeta.
 
 ##Con token
 
@@ -73,7 +73,6 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    "currency" : "MXN",
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-00051",
-   "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
    "customer" : {
    	    "name" : "Juan",
    	    "last_name" : "Vazquez Juarez",
@@ -99,7 +98,6 @@ $chargeRequest = array(
     'currency' => 'MXN'
     'description' => 'Cargo inicial a mi merchant',
     'order_id' => 'oid-00051',
-    'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
     'customer' => $customer);
 
 $charge = $openpay->charges->create($chargeRequest);
@@ -120,7 +118,6 @@ request.amount(new BigDecimal("100.00"));
 request.currency("MXN");
 request.description("Cargo inicial a mi merchant");
 request.orderId("oid-00051");
-request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
 request.setCustomer(customer);
 
 Charge charge = api.charges().create(request);
@@ -141,7 +138,6 @@ request.Amount = new Decimal(100.00);
 request.Currency = "MXN";
 request.Description = "Cargo inicial a mi merchant";
 request.OrderId = "oid-00051";
-request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
 request.Customer = customer;
 
 Charge charge = api.ChargeService.Create(request);
@@ -155,7 +151,6 @@ var chargeRequest = {
    'currency' : 'MXN',
    'description' : 'Cargo inicial a mi cuenta',
    'order_id' : 'oid-00051',
-   'device_session_id' : 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
    'customer' : {
    	    'name' : 'Juan',
    	    'last_name' : 'Vazquez Juarez',
@@ -186,7 +181,6 @@ request_hash={
     "currency" => "MXN",
     "description" => "Cargo inicial a mi merchant",
     "order_id" => "oid-00051",
-    "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
     "customer" => customer_hash
 }
 
@@ -234,25 +228,23 @@ response_hash=@charges.create(request_hash.to_hash)
 }
 ```
 
-Este tipo de cargo requiere que hayas generado un token. Para usar tokens consulta la sección [creación de tokens](#crear-un-nuevo-token). 
+Este tipo de cargo requiere que hayas generado un token. Para usar tokens consulta la sección [creación de tokens](#crear-un-nuevo-token).
 
 Una vez que tengas un token usa la propiedad <code>token</code> para enviar el identificador.
 
-La propiedad <code>device_session_id</code> deberá ser generada desde el API JavaScript, véase [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
-
 <aside class="notice">
-Puedes realizar el cargo a la cuenta del comercio o a la cuenta de un cliente. </br>
+Puedes realizar el cargo a la cuenta del comercio. </br>
 </aside>
 
 ***Sistema antifraude personalizado***</br>
-Es posible enviar información adicional a la plataforma Openpay para incrementar su base de conocimientos, esto le permitirá aplicar reglas personalizadas de acuerdo al giro del comercio y de manera oportuna, con el propósito de detectar con la mayor efectividad posible los intentos de fraude.
+Es posible enviar información adicional a la plataforma para incrementar su base de conocimientos, esto le permitirá aplicar reglas personalizadas de acuerdo al giro del comercio y de manera oportuna, con el propósito de detectar con la mayor efectividad posible los intentos de fraude.
 
 <aside class="notice">
-Para utilizar esta característica es necesario enviar como parte del contenido de la transacción, la propiedad <code>metadata</code>, el cual contendrá un listado de campos personalizados de antrifraude, con la información propia del comercio que se desea tomar en cuenta al momento de validar y aplicar un cargo. Póngase en contacto con el departamento de soporte de Openpay para habilitar esta funcion. </br>
+Para utilizar esta característica es necesario enviar como parte del contenido de la transacción, la propiedad <code>metadata</code>, el cual contendrá un listado de campos personalizados de antrifraude, con la información propia del comercio que se desea tomar en cuenta al momento de validar y aplicar un cargo. Póngase en contacto con el departamento de soporte para habilitar esta funcion. </br>
 </aside>
 
 
-###Petición 
+###Petición
 
 Propiedad | Descripción
 --------- | -----
@@ -269,11 +261,10 @@ use_card_points | ***string*** (opcional, default = NONE) <br/> <table><tr><td><
 use_3d_secure | ***string*** (opcional) <br/>Por defecto el valor es TRUE, si el comercio tiene habilitada la configuración para no utilizar 3d secure, entonces podrá enviar el parámetro en FALSE.
 token | ***string*** (requerido, longitud = 45) <br/>ID de la tarjeta guardada o el id del token creado de donde se retirarán los fondos.
 metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
-device_session_id |  ***string*** (requerido, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta antifraudes
-capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o preautorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
+capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o preautorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada.
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 
 
@@ -344,7 +335,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -H "Content-type: application/json" \
    -X POST -d '{
     "amount" : 100.00
-} ' 
+} '
 ```
 
 ```php
@@ -378,7 +369,7 @@ var captureRequest = {
   'amount' : 100.00
 };
 
-openpay.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', captureRequest, 
+openpay.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', captureRequest,
     function(error, charge){
   // ...
 });
@@ -431,7 +422,7 @@ Confirmar un cargo creado con la propieda de <code>capture = "false"</code>,  es
 </aside>
 
 
-###Petición 
+###Petición
 
 Propiedad | Descripción
 --------- | -----
@@ -439,7 +430,7 @@ amount | ***numeric*** (requerido) <br/>Cantidad a confirmar. Puede ser menor o 
 
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 ##Devolver un cargo
 
@@ -509,7 +500,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -X POST -d '{
    "description" : "devolución",
    "amount" : 100.00
-} ' 
+} '
 ```
 
 ```php
@@ -547,7 +538,7 @@ var refundRequest = {
    'amount' : 100.00
 };
 
-openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest, 
+openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest,
     function(error, charge) {
   // ...
 });
@@ -621,7 +612,7 @@ Si deseas realizar una devolución de un cargo hecho a tarjeta puedes ocupar est
 </aside>
 
 
-###Petición 
+###Petición
 
 Propiedad | Descripción
 --------- | -----
@@ -630,7 +621,7 @@ amount | ***numeric*** (opcional) <br/>Cantidad a reembolsar. Debe ser una canti
 
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 
 ##Obtener un cargo
@@ -787,5 +778,4 @@ Propiedad | Descripción
 transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del cargo a consultar.
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
-
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).

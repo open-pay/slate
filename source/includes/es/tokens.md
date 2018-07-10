@@ -2,7 +2,7 @@
 
 El objetivo de generar tokens es que se capture la información de la tarjeta desde el navegador o dispositivo del usuario final para que dicha información no viaje a través de tu servidor y así puede evitar o reducir certificaciones PCI.
 
-Para usar esta funcionalidad de la API, te recomendamos usar nuestra librería en JavaScript para cuando tu aplicación este en Web y nuestros SDK's de Android o iOS para cuando este en móvil.
+Para usar esta funcionalidad de la API, te recomendamos usar nuestra librería en JavaScript para cuando tu aplicación este en Web.
 
 **Características**
 
@@ -12,7 +12,7 @@ Para usar esta funcionalidad de la API, te recomendamos usar nuestra librería e
 
 ##Objeto Token
 
-> Ejemplo de objeto 
+> Ejemplo de objeto
 
 ```json
 {
@@ -52,7 +52,7 @@ card | ***object*** <br/>Datos de la tarjeta asociada al token. Ver [objeto tarj
 POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/tokens
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens \
@@ -73,7 +73,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens \
       "line3":"col carrillo",
       "state":"Queretaro"
    }
-}' 
+}'
 ```
 
 > Ejemplo de respuesta
@@ -101,7 +101,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens \
 }
 ```
 
-Para la creación de un token en Openpay es necesario enviar el objeto con la información a registrar. Una vez guardado el token no se puede obtener el número y código de seguridad ya que esta información es encriptada.
+Para la creación de un token es necesario enviar el objeto con la información a registrar. Una vez guardado el token no se puede obtener el número y código de seguridad ya que esta información es encriptada.
 
 ###Petición
 
@@ -126,12 +126,12 @@ Regresa el [objeto token](#objeto-token) creado o una [respuesta de error](#obje
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxqia8q7cm \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
-``` 
+```
 
 > Ejemplo de respuesta
 
@@ -158,7 +158,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxq
 }
 ```
 
-Obtiene los detalles de un token. Es necesario tener el id. 
+Obtiene los detalles de un token. Es necesario tener el id.
 
 <aside class="notice">
 **Nota:** Nunca se regresarán datos sensibles como son el código de seguridad y del número de tarjeta.
@@ -171,4 +171,3 @@ id| ***string*** (requerido, longitud = 45) <br/> Identificador de token.
 
 ###Respuesta
 Regresa un [objeto token](#objeto-token)
-

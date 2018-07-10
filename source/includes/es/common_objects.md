@@ -39,7 +39,7 @@ Propiedad | Descripción
 id | _**string**_ <br/> Identificador único asignado por Openpay al momento de su creación.
 authorization | ***string*** <br/>Número de autorización generado por el procesador.
 transaction_type| ***string*** <br/>Tipo de transacción que fue creada: fee, charge, payout, transfer.
-operation_type| ***string*** <br/>Tipo de afectación en la cuenta: in, out. 
+operation_type| ***string*** <br/>Tipo de afectación en la cuenta: in, out.
 method| ***string*** <br/>Tipo de método usado en la transacción: card, bank o customer.
 creation_date| ***datetime***  <br/>Fecha de creación de la transacción en formato ISO 8601.
 order_id| ***string*** <br/>Referencia única o número de orden/transacción.
@@ -48,10 +48,10 @@ amount| ***numeric*** <br/>Cantidad de la transacción a dos decimales.
 description|***string*** <br/>Descripción de la transacción.
 error_message| ***string*** <br/>Si la transacción está en status: failed, en este campo se mostrará la razón del fallo.
 customer_id| ***string*** <br/>Identificar único del cliente al cual pertence la transacción. Si es valor es nulo, la transacción pertenece a la cuenta del comercio.
-currency| ***string*** <br/>Moneda usada en la operación, por default es MXN. 
+currency| ***string*** <br/>Moneda usada en la operación, por default es MXN.
 bank_account| ***objeto*** <br/>Datos de la cuenta bancaria usada en la transacción. Ver objeto BankAccoount
 card| ***objeto*** <br/>Datos de la tarjeta usada en la transacción. Ver objeto Card
-card_points| ***objeto*** <br/>Datos de los puntos de la tarjeta usados para el pago, si fueron utilizados. Ver [objeto CardPoints](#objeto-cardpoints) 
+card_points| ***objeto*** <br/>Datos de los puntos de la tarjeta usados para el pago, si fueron utilizados. Ver [objeto CardPoints](#objeto-cardpoints)
 
 ##Objeto Dirección
 
@@ -65,7 +65,7 @@ card_points| ***objeto*** <br/>Datos de los puntos de la tarjeta usados para el 
    "state":"Queretaro",
    "city":"Querétaro",
    "postal_code":"76900",
-   "country_code":"MX" 
+   "country_code":"MX"
 }
 ```
 
@@ -86,15 +86,17 @@ country_code | ***string*** (requerido) <br/>Código del país del tarjeta habie
 
 ```json
 {
-   "payments":"6"
+   "payments":"6",
+   "payments_type": "WITH_INTEREST",
+   "deferred_months": "3"
 }
 ```
 
 Propiedad | Descripción
 --------- | -----------
-payments | ***numeric*** <br/> Es el número de pagos en los cuales se pretende realizar un cargo a meses sin intereses (3, 6, 9, 12, 18).
-
-
+payments | ***numeric*** <br/> Es el número de pagos en los cuales se pretende realizar un cargo a meses con/sin intereses (3, 6, 9, 12, 18).
+payments_type | ***string*** <br/> Indica el tipo de pagos:  <br/>***WITHOUT_INTEREST*** (meses ***sin*** intereses)  <br/>***WITH_INTEREST*** (meses ***con*** intereses)  
+deferred_months | ***numeric*** <br/> Indica la cantidad de meses que será diferido el pago inicial (1,2,3,6).
 ##Objeto CardPoints
 
 > Ejemplo de Objeto:
@@ -126,7 +128,6 @@ REFUNDED | Transacción reembolsada
 CHARGEBACK_PENDING | Transacción con contracargo pendiente
 CHARGEBACK_ACCEPTED | Transacción con contracargo aceptado
 CHARGEBACK_ADJUSTMENT | Transacción con ajuste de contracargo
-CHARGE_PENDING | Transacción de cargo que no ha sido pagada 
+CHARGE_PENDING | Transacción de cargo que no ha sido pagada
 CANCELLED | Transacción de cargo que no fue pagada y se ha cancelado
 FAILED | Transacción que se intentó pagar pero ocurrió algún error
-

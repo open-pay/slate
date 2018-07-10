@@ -1,7 +1,7 @@
 
 #Errores
 
-Openpay regresa objetos de JSON en las respuestas del servicio, incluso en caso de errores por lo que cuando exista un error.
+El API regresa objetos de JSON en las respuestas del servicio, incluso en caso de errores por lo que cuando exista un error.
 
 ##Objeto Error
 
@@ -38,7 +38,7 @@ Openpay regresa objetos de JSON en las respuestas del servicio, incluso en caso 
 
 Propiedad | Descripción
 --------- | -----
-category    |***string*** <br/>**request:** Indica un error causado por datos enviados por el cliente. Por ejemplo, una petición inválida, un intento de una transacción sin fondos, o una transferencia a una cuenta que no existe. <br/><br/>**internal:** Indica un error del lado de Openpay, y ocurrira muy raramente. <br/><br/>**gateway:** Indica un error durante la transacción de los fondos de una tarjeta a la cuenta de Openpay o de la cuenta hacia un banco o tarjeta.
+category    |***string*** <br/>**request:** Indica un error causado por datos enviados por el cliente. Por ejemplo, una petición inválida, un intento de una transacción sin fondos, o una transferencia a una cuenta que no existe. <br/><br/>**internal:** Indica un error del lado del API, y ocurrira muy raramente. <br/><br/>**gateway:** Indica un error durante la transacción de los fondos de una tarjeta a la cuenta de Openpay o de la cuenta hacia un banco o tarjeta.
 error_code  |***numeric*** <br/>El código del error de Openpay indicando el problema que ocurrió.
 description |***string*** <br/>Descripción del error.
 http_code   |***string*** <br/>Código de error HTTP de la respuesta.
@@ -50,14 +50,14 @@ fraud_rules  |***array*** <br/> Arreglo con la lista de coincidencia de reglas d
 ###Generales
 Código    | Error HTTP  |Causa
 --------- | ----------- | --------
-1000  |500 Internal Server Error  |Ocurrió un error interno en el servidor de Openpay
+1000  |500 Internal Server Error  |Ocurrió un error interno en el servidor
 1001  |400 Bad Request   |El formato de la petición no es JSON, los campos no tienen el formato correcto, o la petición no tiene campos que son requeridos.
 1002  |401 Unauthorized  |La llamada no esta autenticada o la autenticación es incorrecta.
 1003  |422 Unprocessable Entity  |La operación no se pudo completar por que el valor de uno o más de los parametros no es correcto.
 1004  |503 Service Unavailable |Un servicio necesario para el procesamiento de la transacción no se encuentra disponible.
 1005  |404 Not Found | Uno de los recursos requeridos no existe.
 1006  |409 Conflict  | Ya existe una transacción con el mismo ID de orden.
-1007  |402 Payment Required | La transferencia de fondos entre una cuenta de banco o tarjeta y la cuenta de Openpay no fue aceptada.
+1007  |402 Payment Required | La transferencia de fondos entre una cuenta de banco o tarjeta y la cuenta no fue aceptada.
 1008  |423 Locked | Una de las cuentas requeridas en la petición se encuentra desactivada.
 1009  |413 Request Entity too large  | El cuerpo de la petición es demasiado grande.
 1010  |403 Forbidden  |Se esta utilizando la llave pública para hacer una llamada que requiere la llave privada, o bien, se esta usando la llave privada desde JavaScript.
