@@ -1730,6 +1730,7 @@ description | ***string*** (required, length = 250) <br/>A description associate
 order_id    | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
 due_date    | ***datetime*** (optional) <br/>Due date for making the payment in Alipay in  ISO 8601 format. The customer may have an additional 15 minutes after this date after they login to their Alipay account to complete payment. <br/><br/>Example (UTC): 2014-08-01T00:50:00Z <br/>***Note:*** On the server side the date will be changeg to central time<br/><br/>Example (Central Time): 2014-08-01T11:51:23-05:00
 [customer](#create-a-new-customer)|***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
+redirect_url | ***string*** (required) <br/>It indicates the url to which redirect after a successful transaction in the openpay payment form, when a request is receiven in this url, merchant must get id attribute to request for the transaction final result.
 
 ### Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
