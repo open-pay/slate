@@ -6,27 +6,16 @@ language_tabs:
   - php: PHP
   - java: JAVA
   - csharp: C#
-  - javascript : Node.js
+  #- javascript : Node.js
   - ruby: Ruby
 
 includes:
-  - en/endpoints
-  - en/authentication
-  - en/errors
-  - en/charges
-  - en/payments
-  - en/customers
-  - en/transfers
-  - en/cards
-  - en/bank_accounts
-  - en/plans
-  - en/subscriptions
-  - en/fees
-  - en/webhooks
-  - en/tokens
-  - en/merchant
-  - en/stores
-  - en/common_objects
+  - es/endpoints
+  - es/authentication
+  - es/errors
+  - es/charges
+  - es/tokens
+  - es/common_objects
 
 toc_footers:
  - <a href='#'>Sign Up for a Developer Key</a>

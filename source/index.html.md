@@ -3,11 +3,11 @@ title: API Reference
 
 language_tabs:
   - shell: cURL
-#  - php: PHP
+  - php: PHP
   - java: JAVA
-#  - csharp: C#
-#  - javascript : Node.js
-#  - ruby: Ruby
+  - csharp: C#
+# - javascript : Node.js
+  - ruby: Ruby
 
 includes:
   - es/endpoints

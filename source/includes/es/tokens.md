@@ -32,8 +32,7 @@ Para usar esta funcionalidad de la API, te recomendamos usar nuestra librería e
             "country_code":"MX"
          },
          "creation_date":"2014-01-30T13:53:11-06:00",
-         "brand":"visa",
-         "points_card":false
+         "brand":"visa"
       }
    }
 ```
@@ -74,6 +73,80 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens \
       "state":"Queretaro"
    }
 }'
+```
+
+```java
+BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx/", "sk_08453429e4c54220a3a82ab4d974c31a", "miklpzr4nsvsucghm2qp");
+
+List<Parameter> request = new ArrayList<Parameter>(Arrays.asList(
+        new SingleParameter("card_number", "4111111111111111"),
+        new SingleParameter("cvv2", "295"),
+        new SingleParameter("expiration_month", "12"),
+        new SingleParameter("expiration_year", "20"),
+        new SingleParameter("holder_name", "Juan Perez Lopez")));
+
+Token tokenCreated = this.api.tokens().create(request);
+
+```
+```csharp
+BancomerAPI bancomerAPI = new BancomerAPI("sk_08453429e4c54220a3a82ab4d974c31a", "miklpzr4nsvsucghm2qp");
+
+List<IParameter> request = new List<IParameter>{
+    new SingleParameter("holder_nane", "Juan Perez Ramirez"),
+    new SingleParameter("card_number", "4111111111111111"),
+    new SingleParameter("cvv2", "022"),
+    new SingleParameter("expiration_month", "12"),
+    new SingleParameter("expiration_year", "20"),
+};
+
+Token tokenCreated = bancomerAPI.TokenService.Create(request);
+```
+```ruby
+@bancomer=BancomerApi.new('mywvupjjs9xdnryxtplq', 'sk_92b25d3baec149e6b428d81abfe37006')
+@tokens=@bancomer.create(:tokens)
+
+token_hash={
+    card_number '4111111111111111'
+    holder_name 'Vicente Olmos'
+    expiration_month '09'
+    expiration_year '20'
+    cvv2 '111'
+    address { {
+        postal_code: '76190',
+        state: 'QRO',
+        line1: 'LINE1',
+        line2: 'LINE2',
+        line3: 'LINE3',
+        country_code: 'MX',
+        city: 'Queretaro',
+    } }
+}
+
+token=@tokens.create(token_hash)
+```
+
+```php
+<?
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$address = array(
+    'postal_code' => '76190',
+    'state' => 'QRO',
+    'line1' => 'LINE1',
+    'line2' => 'LINE2'
+    'line3' => 'LINE3',
+    'country_code' => 'MX',
+    'city' => 'Queretaro');
+
+$request = array(
+   	 'card_number' => 'Juan',
+   	 'holder_name' => 'Vazquez Juarez',
+   	 'expiration_month' => '12',
+   	 'expiration_year' => '22',
+   	 'cvv2' => '111',
+   	 'address' => $address);
+
+$token = bancomer->tokens->create($request);
+?>
 ```
 
 > Ejemplo de respuesta
@@ -131,6 +204,27 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxqia8q7cm \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+```
+
+```java
+//Token
+bancomerAPI.tokens().get(String tokenId);
+```
+
+```php
+<?
+$token = $bancomer->tokens->get(tokenId);
+?>
+```
+
+```ruby
+#Token
+@tokens=@bancomer.create(:tokens)
+@tokens.get(token_id)
+```
+
+```csharp
+bancomerAPI.TokenService.Get(String token_id);
 ```
 
 > Ejemplo de respuesta
