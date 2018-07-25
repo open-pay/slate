@@ -28,26 +28,18 @@ $customer->charges->create(chargeRequest);
 
 ```java
 //Cliente
-openpayAPI.charges().create(String customerId, CreateCardChargeParams request);
+openpayAPI.charges().create(String customerId, List<Parameter> request);
 
 //Comercio
-openpayAPI.charges().create(CreateCardChargeParams request);
-```
-
-```javascript
-// Comercio
-openpay.charges.create(chargeRequest, callback);
-
-// Cliente
-openpay.customers.charges.create(customerId, chargeRequest, callback);
+openpayAPI.charges().create(List<Parameter> request);
 ```
 
 ```csharp
 //Cliente
-openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
+openpayAPI.ChargeService.Create(string customer_id, List<IParameter> request);
 
 //Comercio
-openpayAPI.ChargeService.Create(ChargeRequest request);
+openpayAPI.ChargeService.Create(List<IParameter> request);
 ```
 
 ```ruby
@@ -67,11 +59,11 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
-   "source_id" : "kqgykn96i7bcs1wwhvgw",
-   "method" : "card",
+   "affiliation_bbva" : "720939",
    "amount" : 100,
-   "currency" : "MXN",
    "description" : "Cargo inicial a mi cuenta",
+   "currency" : "MXN",
+   "token" : "krv3y6yucurt47w2sv1d",
    "order_id" : "oid-00051",
    "customer" : {
    	    "name" : "Juan",
@@ -141,27 +133,6 @@ request.OrderId = "oid-00051";
 request.Customer = customer;
 
 Charge charge = api.ChargeService.Create(request);
-```
-
-```javascript
-var chargeRequest = {
-   'source_id' : 'kqgykn96i7bcs1wwhvgw',
-   'method' : 'card',
-   'amount' : 100,
-   'currency' : 'MXN',
-   'description' : 'Cargo inicial a mi cuenta',
-   'order_id' : 'oid-00051',
-   'customer' : {
-   	    'name' : 'Juan',
-   	    'last_name' : 'Vazquez Juarez',
-   	    'phone_number' : '4423456723',
-   	    'email' : 'juan.vazquez@empresa.com.mx'
-   }
-}
-
-openpay.charges.create(chargeRequest, function(error, charge) {
-  // ...
-});
 ```
 
 ```ruby
