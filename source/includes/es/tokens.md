@@ -52,26 +52,16 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/tokens
 ```
 
 ```java
-//Customer
-bancomerAPI.tokens().create(String customerId, List<Parameter> request);
-
 //Merchant
 bancomerAPI.tokens().create(List<Parameter> request);
 ```
 
 ```csharp
-//Customer
-bancomerAPI.TokenService.Create(string customer_id, List<IParameter> request);
-
 //Merchant
 bancomerAPI.TokenService.Create(List<IParameter> request);
 ```
 
 ```ruby
-#Customer
-@tokens=@openpay.create(:tokens)
-@tokens.create(request_hash, customer_id)
-
 #Merchant
 @tokens=@openpay.create(:tokens)
 @tokens.create(request_hash)
@@ -79,10 +69,6 @@ bancomerAPI.TokenService.Create(List<IParameter> request);
 
 ```php
 <?
-//Customer
-$customer = bancomer->customers->get(customerId);
-$token = $customer->tokens->create($tokenRequest);
-
 //Merchant
 $token = $bancomer->tokens->create($tokenRequest);
 ?>
