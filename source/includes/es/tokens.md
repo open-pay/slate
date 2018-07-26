@@ -218,19 +218,11 @@ Regresa el [objeto token](#objeto-token) creado o una [respuesta de error](#obje
 
 > Definición
 
-```
+```shell
 GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}
 ```
 
-> Ejemplo de petición
-
-```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxqia8q7cm \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
-```
-
 ```java
-//Token
 bancomerAPI.tokens().get(String tokenId);
 ```
 
@@ -241,13 +233,44 @@ $token = $bancomer->tokens->get(tokenId);
 ```
 
 ```ruby
-#Token
 @tokens=@bancomer.create(:tokens)
 @tokens.get(token_id)
 ```
 
 ```csharp
 bancomerAPI.TokenService.Get(String token_id);
+```
+
+> Ejemplo de petición
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxqia8q7cm \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+```
+
+```java
+BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Token token = api.tokens().get("tr6cxbcefzatd10guvvw");
+```
+
+```php
+<?
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+
+$token = $bancomer->tokens->get('a9ualumwnrcxkl42l6mh');
+?>
+```
+
+```ruby
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@tokens=@bancomer.create(:tokens)
+
+response_hash=@tokens.get("ag4nktpdzebjiye1tlze")
+```
+
+```csharp
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Token token = api.TokenService.Get("tr6cxbcefzatd10guvvw");
 ```
 
 > Ejemplo de respuesta

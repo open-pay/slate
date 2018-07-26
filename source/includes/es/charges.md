@@ -64,13 +64,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    "description" : "Cargo inicial a mi cuenta",
    "currency" : "MXN",
    "token" : "krv3y6yucurt47w2sv1d",
-   "order_id" : "oid-00051",
-   "customer" : {
-   	    "name" : "Juan",
-   	    "last_name" : "Vazquez Juarez",
-   	    "phone_number" : "4423456723",
-   	    "email" : "juan.vazquez@empresa.com.mx"
-   }
+   "order_id" : "oid-00051"
 }'
 ```
 
