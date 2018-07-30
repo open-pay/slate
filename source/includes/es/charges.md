@@ -18,37 +18,37 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 ```php
 <?
 Comercio
-$openpay->charges->create(chargeRequest);
+$bancomer->charges->create(chargeRequest);
 
 Cliente
-$customer = $openpay->customers->get($customerId);
+$customer = $bancomer->customers->get($customerId);
 $customer->charges->create(chargeRequest);
 ?>
 ```
 
 ```java
 //Cliente
-openpayAPI.charges().create(String customerId, List<Parameter> request);
+bancomerAPI.charges().create(String customerId, List<Parameter> request);
 
 //Comercio
-openpayAPI.charges().create(List<Parameter> request);
+bancomerAPI.charges().create(List<Parameter> request);
 ```
 
 ```csharp
 //Cliente
-openpayAPI.ChargeService.Create(string customer_id, List<IParameter> request);
+bancomerAPI.ChargeService.Create(string customer_id, List<IParameter> request);
 
 //Comercio
-openpayAPI.ChargeService.Create(List<IParameter> request);
+bancomerAPI.ChargeService.Create(List<IParameter> request);
 ```
 
 ```ruby
 #Cliente
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.create(request_hash, customer_id)
 
 #Comercio
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.create(request_hash)
 ```
 
@@ -148,13 +148,13 @@ $chargeRequest = array(
     'order_id' => 'oid-00051'
     'token' => $token['id']);
 
-$charge = $openpay->charges->create($chargeRequest);
+$charge = $bancomer->charges->create($chargeRequest);
 ?>
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
+@bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@bancomer.create(:charges)
 customer_hash={
     "name" => "Juan",
     "last_name" => "Vazquez Juarez",
@@ -244,7 +244,7 @@ description | ***string*** (requerido, longitud = 250) <br/>Una descripción aso
 [customer](#crear-un-nuevo-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realice el cargo a nivel cliente.
 customer_language | ***string*** (requerido, longitud = 2) <br/>Idioma a usarse en el recibo y la pantalla de compra, actualmente se aceptan dos valores SP-Español En-Inglés.
 [payment_plan](#objeto-paymentplan)|***objeto*** (opcional) <br/>Datos del plan de meses sin intereses que se desea utilizar en el cargo. Ver [Objeto PaymentPlan](#objeto-paymentplan).
-redirect_url | ***string*** (opcional) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de openpay.
+redirect_url | ***string*** (opcional) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de bancomer.
 use_card_points | ***string*** (opcional, default = NONE) <br/> <table><tr><td><strong>ONLY_POINTS</strong></td> <td>Cargo solo con puntos (<a href="#consulta-de-puntos">Consulta de puntos</a>)</td></tr><tr><td><strong>MIXED</strong></td>       <td>Cargo con pesos y puntos</td></tr><tr><td><strong>NONE</strong></td>        <td>Cargo solo con pesos</td></tr></table>Los valores que indican puntos solo se deben usarse si la propiedad points_card de la tarjeta es true, de otra forma ocurrirá un error.
 use_3d_secure | ***string*** (opcional) <br/>Por defecto el valor es TRUE, si el comercio tiene habilitada la configuración para no utilizar 3d secure, entonces podrá enviar el parámetro en FALSE.
 token | ***string*** (requerido, longitud = 45) <br/>ID de la tarjeta guardada o el id del token creado de donde se retirarán los fondos.
@@ -271,11 +271,11 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 ```php
 <?
 Comercio
-$charge = $openpay->charges->get(transactionId);
+$charge = $bancomer->charges->get(transactionId);
 $charge->capture(captureData);
 
 Cliente
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $charge = $customer->charges->get(transactionId);
 $charge->capture(captureData);
 ?>
@@ -283,27 +283,27 @@ $charge->capture(captureData);
 
 ```java
 //Cliente
-openpayAPI.charges().confirmCapture(String customerId, ConfirmCaptureParams request);
+bancomerAPI.charges().confirmCapture(String customerId, ConfirmCaptureParams request);
 
 //Comercio
-openpayAPI.charges().confirmCapture(ConfirmCaptureParams request);
+bancomerAPI.charges().confirmCapture(ConfirmCaptureParams request);
 ```
 
 ```csharp
 //Cliente
-openpayAPI.ChargeService.Capture(string customer_id, string transaction_id, Decimal? amount);
+bancomerAPI.ChargeService.Capture(string customer_id, string transaction_id, Decimal? amount);
 
 //Comercio
-openpayAPI.ChargeService.Capture(string transaction_id, Decimal? amount);
+bancomerAPI.ChargeService.Capture(string transaction_id, Decimal? amount);
 ```
 
 ```ruby
 #Cliente
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.capture(transaction_id, customer_id)
 
 #Comercio
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.capture(transaction_id)
 ```
 
@@ -320,18 +320,18 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
 $captureData = array('amount' => 100.00);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $bancomer->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->get('tryqihxac3msedn4yxed');
 $charge->capture($captureData);
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 ConfirmCaptureParams request = new ConfirmCaptureParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.amount(new BigDecimal("100.00"));
@@ -340,13 +340,13 @@ Charge charge = api.charges().confirmCapture("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Charge charge = api.ChargeService.Capture("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", new Decimal(100.00));
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
+@bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@bancomer.create(:charges)
 
 response_hash=@charges.capture("tryqihxac3msedn4yxed", "ag4nktpdzebjiye1tlze")
 ```
@@ -416,11 +416,11 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cha
 ```php
 <?
 Comercio
-$charge = $openpay->charges->get(transactionId);
+$charge = $bancomer->charges->get(transactionId);
 $charge->refund(refundData);
 
 Cliente
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $charge = $customer->charges->get(transactionId);
 $charge->refund(refundData);
 ?>
@@ -428,27 +428,27 @@ $charge->refund(refundData);
 
 ```java
 //Cliente
-openpayAPI.charges().refund(String customerId, RefundParams request);
+bancomerAPI.charges().refund(String customerId, RefundParams request);
 
 //Comercio
-openpayAPI.charges().refund(RefundParams request);
+bancomerAPI.charges().refund(RefundParams request);
 ```
 
 ```csharp
 //Cliente
-openpayAPI.ChargeService.Refund(string customer_id, string transaction_id, string description);
+bancomerAPI.ChargeService.Refund(string customer_id, string transaction_id, string description);
 
 //Comercio
-openpayAPI.ChargeService.Refund(string transaction_id, string description);
+bancomerAPI.ChargeService.Refund(string transaction_id, string description);
 ```
 
 ```ruby
 #Cliente
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.refund(transaction_id, request_hash, customer_id)
 
 #Comercio
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.refund(transaction_id, request_hash)
 ```
 
@@ -466,20 +466,20 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
 $refundData = array(
     'description' => 'devolución',
     'amount' => 100);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $bancomer->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 $charge->refund($refundData);
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 RefundParams request = new RefundParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.description("Monto de cargo devuelto");
@@ -489,13 +489,13 @@ Charge charge = api.charges().refund("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Charge charge = api.ChargeService.Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
+@bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@bancomer.create(:charges)
 
 request_hash={
      "description" => "Monto de cargo devuelto",
@@ -587,37 +587,37 @@ GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/char
 ```php
 <?
 Comercio
-$charge = $openpay->charges->get(transactionId);
+$charge = $bancomer->charges->get(transactionId);
 
 Cliente
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $charge = $customer->charges->get(transactionId);
 ?>
 ```
 
 ```java
 //Cliente
-openpayAPI.charges().get(String customerId, String transactionId);
+bancomerAPI.charges().get(String customerId, String transactionId);
 
 //Comercio
-openpayAPI.charges().get(String transactionId);
+bancomerAPI.charges().get(String transactionId);
 ```
 
 ```csharp
 //Cliente
-openpayAPI.ChargeService.Get(string customer_id, string transaction_id);
+bancomerAPI.ChargeService.Get(string customer_id, string transaction_id);
 
 //Comercio
-openpayAPI.ChargeService.Get(string transaction_id);
+bancomerAPI.ChargeService.Get(string transaction_id);
 ```
 
 ```ruby
 #Cliente
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.get(transaction_id, customerId)
 
 #Comercio
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.get(transaction_id)
 ```
 
@@ -630,26 +630,26 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $bancomer->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Charge charge = api.charges().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Charge charge = api.ChargeService.Get("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed");
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
+@bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@bancomer.create(:charges)
 
 response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag4nktpdzebjiye1tlze")
 ```

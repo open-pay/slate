@@ -63,7 +63,7 @@ bancomerAPI.TokenService.Create(List<IParameter> request);
 
 ```ruby
 #Merchant
-@tokens=@openpay.create(:tokens)
+@tokens=@bancomer.create(:tokens)
 @tokens.create(request_hash)
 ```
 

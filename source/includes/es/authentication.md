@@ -13,48 +13,48 @@ El parámetro -u se ocupa para realizar la autenticación HTTP Basic (al agregar
 ```php
 <?
 //Por default se usa el ambiente de sandbox
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178ce26348b0fac');
 ?>
 ```
 
 ```java
 //Sandbox
-final OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+final BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 
 //Produccion
-final OpenpayAPI api = new OpenpayAPI("https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+final BancomerAPI api = new BancomerAPI("https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 ```
 
 ```javascript
-var Openpay = require('openpay');
-var openpay = new Openpay('moiep6umtcnanql3jrxp','sk_3433941e467c4875b178ce26348b0fac');
+var Bancomer = require('bancomer');
+var bancomer = new Bancomer('moiep6umtcnanql3jrxp','sk_3433941e467c4875b178ce26348b0fac');
 ```
 
 ```csharp
 //Sandbox
-OpenpayAPI openpayAPI = new OpenpayAPI("sk_3433941e467c4875b178ce26348b0fac", "moiep6umtcnanql3jrxp");
-openpayAPI.Production = false; // Default value = false
+BancomerAPI bancomerAPI = new BancomerAPI("sk_3433941e467c4875b178ce26348b0fac", "moiep6umtcnanql3jrxp");
+bancomerAPI.Production = false; // Default value = false
 
 //Produccion
-OpenpayAPI openpayAPI = new OpenpayAPI("sk_3433941e467c4875b178ce26348b0fac", "moiep6umtcnanql3jrxp");
-openpayAPI.Production = true;
+BancomerAPI bancomerAPI = new BancomerAPI("sk_3433941e467c4875b178ce26348b0fac", "moiep6umtcnanql3jrxp");
+bancomerAPI.Production = true;
 ```
 
 ```ruby
 #Sandbox
-openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 
 #Produccion
-openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac", true)
+bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac", true)
 
 
 #Definir timeout para los request's
 #Este cliente maneja un timeout por defecto de 90 seg., para configurar el timeout usado para crear los request a los servicios, es necesario definir explícitamente el tipo de ambiente, seguido del nuevo valor del timeout para el request:
 
 #Sintaxis:
-#   openpay_prod=OpenpayApi.new(merchant_id,private_key,isProduction,timeout)
+#   bancomer_prod=BancomerApi.new(merchant_id,private_key,isProduction,timeout)
 #Example:
-#   openpay_prod=OpenpayApi.new(merchant_id,private_key,false,30)
+#   bancomer_prod=BancomerApi.new(merchant_id,private_key,false,30)
 ```
 
 > Producción
@@ -65,7 +65,7 @@ Solo es necesario usar la URI base https://api.openpay.mx
 
 ```php
 <?
-Openpay::setProductionMode(true);
+Bancomer::setProductionMode(true);
 ?>
 ```
 
@@ -74,18 +74,18 @@ Openpay::setProductionMode(true);
 ```
 
 ```csharp
-openpayAPI.Production = true;
+bancomerAPI.Production = true;
 ```
 
 ```javascript
-openpay.setProductionReady(true);
+bancomer.setProductionReady(true);
 ```
 
 ```ruby
-#Solo es necesario pasar como tercer argumento un "true" cuando se crea el objeto OpenpayApi
+#Solo es necesario pasar como tercer argumento un "true" cuando se crea el objeto BancomerApi
 ```
 
-Para realizar peticiones a la API, es necesario enviar la llave de API (API Key) en todas tus llamadas a nuestros  servidores. ​La llave la puedes obtener desde el [dashboard](https://sandbox-bancomer.openpay.mx/login).
+Para realizar peticiones a la API, es necesario enviar la llave de API (API Key) en todas tus llamadas a nuestros  servidores. ​La llave la puedes obtener desde el [dashboard](https://sandbox-bancomer.bancomer.mx/login).
 
 Existen 2 tipos de llaves de API:
 
@@ -100,7 +100,7 @@ Manten esta llave segura y nunca la compartas con nadie.
 Sólo se debe utilizar en llamadas desde JavaScript. Esta llave sólo tiene permitido realizar crear tokens
 
 <aside class="notice">
-Para hacer llamadas con tu llave pública utiliza la librería [Openpay.js](#)
+Para hacer llamadas con tu llave pública utiliza la librería [Bancomer.js](#)
 </aside>
 
 Para la autenticación al API debes usar [autenticación de acceso básica](http://es.wikipedia.org/wiki/Autenticación_de_acceso_básica), donde la llave de API es el nombre de usuario. La contraseña no es requerida y debe dejarse en blanco por fines de simplicidad.
