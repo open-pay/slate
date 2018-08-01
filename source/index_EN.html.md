@@ -27,6 +27,7 @@ includes:
   - en/merchant
   - en/stores
   - en/common_objects
+  - en/electronic_invoice
 
 toc_footers:
  - <a href='#'>Sign Up for a Developer Key</a>
