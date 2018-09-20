@@ -108,8 +108,8 @@ List<Parameter> request = new ArrayList<Parameter>(Arrays.asList(
         new SingleParameter("expiration_year", "20"),
         new SingleParameter("holder_name", "Juan Perez Lopez")));
 
-Token tokenCreated = this.api.tokens().create(request);
-
+Map tokenAsMap = this.api.tokens().create(request);
+ParameterContainer token = new ParameterContainer("token", tokenAsMap);
 ```
 ```csharp
 BancomerAPI bancomerAPI = new BancomerAPI("sk_08453429e4c54220a3a82ab4d974c31a", "miklpzr4nsvsucghm2qp");
@@ -122,7 +122,8 @@ List<IParameter> request = new List<IParameter>{
     new SingleParameter("expiration_year", "20"),
 };
 
-Token tokenCreated = bancomerAPI.TokenService.Create(request);
+Dictionary<String, Object> tokenDictionary = bancomerAPI.TokenService.Create(request);
+ParameterContainer token = new ParameterContainer("token", tokenDictionary);
 ```
 ```ruby
 @bancomer=BancomerApi.new('mywvupjjs9xdnryxtplq', 'sk_92b25d3baec149e6b428d81abfe37006')
@@ -250,7 +251,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxq
 
 ```java
 BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Token token = api.tokens().get("tr6cxbcefzatd10guvvw");
+Map tokenAsMap = api.tokens().get("tr6cxbcefzatd10guvvw");
+ParameterContainer token = new ParameterContainer("token", tokenAsMap);
 ```
 
 ```php
@@ -270,7 +272,8 @@ response_hash=@tokens.get("ag4nktpdzebjiye1tlze")
 
 ```csharp
 BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Token token = api.TokenService.Get("tr6cxbcefzatd10guvvw");
+Dictionary<String, Object> tokenDictionary = api.TokenService.Get("tr6cxbcefzatd10guvvw");
+ParameterContainer token = new ParameterContainer("token", tokenDictionary);
 ```
 
 > Ejemplo de respuesta

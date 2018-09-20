@@ -78,7 +78,8 @@ List<IParameter> tokenRequest = List<IParameter>{
     new SingleParameter("expiration_year", "20"),
 };
 
-Token token = api.TokenService.Create(tokenRequest)
+Dictionary<String, Object> tokenDictionary = bancomerAPI.TokenService.Create(tokenRequest);
+ParameterContainer token = new ParameterContainer("token", tokenDictionary);
 
 List<IParameter> request = List<IParameter> {
     new SingleParameter("affiliation_bbva", "720931"),
@@ -88,12 +89,13 @@ List<IParameter> request = List<IParameter> {
     new SingleParameter("capture", "TRUE"),
     new SingleParameter("use_3d_secure", "FALSE"),
     new SingleParameter("use_card_points", "NONE"),
-    new SingleParameter("token", token.Id),
+    new SingleParameter("token", token.GetSingleValue("id").ParameterValue),
     new SingleParameter("currency", "MXN"),
     new SingleParameter("order_id", "oid-00051")
 };
 
-Charge charge = api.ChargeService.Create(request);
+Dictionary<String, Object> chargeDictionary = bancomerAPI.ChargeService.Create(request);
+ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 ```
 
 ```java
@@ -106,7 +108,8 @@ List<Parameter> tokenRequest = new ArrayList<Parameter>(Arrays.asList(
     new SingleParameter("expiration_year", "20"),
     new SingleParameter("holder_name", "Juan Perez Lopez")));
 
-Token token = api.tokens().create(tokenRequest);
+Map tokenAsMap = api.tokens().create(tokenRequest);
+ParameterContainer token = new ParameterContainer("token", tokenAsMap);
 
 List<Parameter> request = new ArrayList<Parameter>(Arrays.asList(
     new SingleParameter("affiliation_bbva", "720931"),
@@ -116,13 +119,14 @@ List<Parameter> request = new ArrayList<Parameter>(Arrays.asList(
     new SingleParameter("capture", "true"),
     new SingleParameter("use_3d_secure", "false"),
     new SingleParameter("use_card_points", "NONE"),
-    new SingleParameter("token", token.getId();),
+    new SingleParameter("token", token.getSingleValue("id").getParameterValue()),
     new SingleParameter("currency", "MXN"),
     new SingleParameter("order_id", "oid-00051")
 
 ));
 
-Charge charge = api.charges().create(request);
+Map chargeAsMap = api.charges().create(request);
+ParameterContainer charge = new ParameterContainer("charge", chargeAsMap);
 ```
 
 ```php
@@ -336,12 +340,14 @@ ConfirmCaptureParams request = new ConfirmCaptureParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.amount(new BigDecimal("100.00"));
 
-Charge charge = api.charges().confirmCapture("ag4nktpdzebjiye1tlze", request);
+Map chargeAsMap = api.charges().confirmCapture("ag4nktpdzebjiye1tlze", request);
+ParameterContainer charge = new ParameterContainer("charge", chargeAsMap);
 ```
 
 ```csharp
 BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.ChargeService.Capture("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", new Decimal(100.00));
+Dictionary<String, Object> chargeDictionary = api.ChargeService.Capture("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", new Decimal(100.00));
+ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 ```
 
 ```ruby
@@ -485,12 +491,14 @@ request.chargeId("tryqihxac3msedn4yxed");
 request.description("Monto de cargo devuelto");
 request.amount(new BigDecimal("100.00"));
 
-Charge charge = api.charges().refund("ag4nktpdzebjiye1tlze", request);
+Map chargeAsMap = api.charges().refund("ag4nktpdzebjiye1tlze", request);
+ParameterContainer charge = new ParameterContainer("charge", chargeAsMap);
 ```
 
 ```csharp
 BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.ChargeService.Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
+Dictionary<String, Object> chargeDictionary = api.ChargeService.Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
+ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 ```
 
 ```ruby
@@ -639,12 +647,14 @@ $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 
 ```java
 BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.charges().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
+Map chargeAsMap = api.charges().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
+ParameterContainer charge = new ParameterContainer("charge", chargeAsMap);
 ```
 
 ```csharp
 BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.ChargeService.Get("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed");
+Dictionary<String, Object> chargeDictionary = api.ChargeService.Get("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed");
+ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 ```
 
 ```ruby

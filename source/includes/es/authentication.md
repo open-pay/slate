@@ -25,11 +25,6 @@ final BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "moiep
 final BancomerAPI api = new BancomerAPI("https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 ```
 
-```javascript
-var Bancomer = require('bancomer');
-var bancomer = new Bancomer('moiep6umtcnanql3jrxp','sk_3433941e467c4875b178ce26348b0fac');
-```
-
 ```csharp
 //Sandbox
 BancomerAPI bancomerAPI = new BancomerAPI("sk_3433941e467c4875b178ce26348b0fac", "moiep6umtcnanql3jrxp");
@@ -75,10 +70,6 @@ Bancomer::setProductionMode(true);
 
 ```csharp
 bancomerAPI.Production = true;
-```
-
-```javascript
-bancomer.setProductionReady(true);
 ```
 
 ```ruby
