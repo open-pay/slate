@@ -14,6 +14,7 @@ includes:
   - es/authentication
   - es/errors
   - es/charges
+  - es/qropay
   - es/tokens
   - es/common_objects
 
