@@ -99,7 +99,8 @@ ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI(
+        "https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 
 List<Parameter> tokenRequest = new ArrayList<Parameter>(Arrays.asList(
     new SingleParameter("card_number", "4111111111111111"),
@@ -335,7 +336,8 @@ $charge->capture($captureData);
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI(
+        "https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 ConfirmCaptureParams request = new ConfirmCaptureParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.amount(new BigDecimal("100.00"));
@@ -346,7 +348,8 @@ ParameterContainer charge = new ParameterContainer("charge", chargeAsMap);
 
 ```csharp
 BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Dictionary<String, Object> chargeDictionary = api.ChargeService.Capture("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", new Decimal(100.00));
+Dictionary<String, Object> chargeDictionary = api.ChargeService
+                                        .Capture("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", new Decimal(100.00));
 ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 ```
 
@@ -485,7 +488,8 @@ $charge->refund($refundData);
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI(
+        "https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 RefundParams request = new RefundParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.description("Monto de cargo devuelto");
@@ -497,7 +501,8 @@ ParameterContainer charge = new ParameterContainer("charge", chargeAsMap);
 
 ```csharp
 BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Dictionary<String, Object> chargeDictionary = api.ChargeService.Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
+Dictionary<String, Object> chargeDictionary = api.ChargeService
+            .Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
 ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 ```
 
@@ -646,7 +651,8 @@ $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI(
+        "https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Map chargeAsMap = api.charges().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
 ParameterContainer charge = new ParameterContainer("charge", chargeAsMap);
 ```

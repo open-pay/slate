@@ -7,7 +7,8 @@
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 
-El parámetro -u se ocupa para realizar la autenticación HTTP Basic (al agregar dos puntos después de la llave privada se previene el uso de contraseña)
+El parámetro -u se ocupa para realizar la autenticación HTTP Basic 
+(al agregar dos puntos después de la llave privada se previene el uso de contraseña)
 ```
 
 ```php
@@ -19,10 +20,12 @@ $bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b1
 
 ```java
 //Sandbox
-final BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+final BancomerAPI api = new BancomerAPI(
+        "https://sandbox-api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 
 //Produccion
-final BancomerAPI api = new BancomerAPI("https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+final BancomerAPI api = new BancomerAPI(
+        "https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 ```
 
 ```csharp
@@ -44,7 +47,8 @@ bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b
 
 
 #Definir timeout para los request's
-#Este cliente maneja un timeout por defecto de 90 seg., para configurar el timeout usado para crear los request a los servicios, es necesario definir explícitamente el tipo de ambiente, seguido del nuevo valor del timeout para el request:
+#Este cliente maneja un timeout por defecto de 90 seg., para configurar el timeout usado para crear los request a los 
+# servicios, es necesario definir explícitamente el tipo de ambiente, seguido del nuevo valor del timeout para el request:
 
 #Sintaxis:
 #   bancomer_prod=BancomerApi.new(merchant_id,private_key,isProduction,timeout)

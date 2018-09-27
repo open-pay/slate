@@ -58,7 +58,8 @@ $charge = $bancomer->charges->create($chargeRequest);
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI(
+        "https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 
 List<Parameter> request = new ArrayList<Parameter>(Arrays.asList(
     new SingleParameter("method", "qropay"),
@@ -136,12 +137,12 @@ Si la petición es correcta recibirás una respuesta con la información del car
 Propiedad | Descripción
 --------- | -----
 method | ***string*** (requerido) <br/>Debe contener el valor qropay para indicar que el pago se hará con codigo QR.
-amount | ***numeric*** (requerido) <br/>Debe contener el valor qropay para indicar que el pago se hará con codigo QR.
+amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 
 ###Respuesta
 
-Regresa un objeto de transacción con la información del cargo o una respuesta de error.
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 ##Estado del Pago
 
