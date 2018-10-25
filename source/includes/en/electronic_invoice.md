@@ -173,6 +173,7 @@ Field 			| Description
 ---------		| ---------
 aerolineas	| Optional ([Object Complement Airlines](#complement-airlines-object)) <br> Complement for Airline.
 pagos		| Optional ([Object Complement Payment](#complement-payment-object)) <br> Complement of payments.
+donatarias  | Optional ([Object Complement Donee](#complement-donee-object)) <br> Complement of donee.
 
 ##Complement Airlines Object
 Field 			| Description         	
@@ -206,6 +207,13 @@ cert_pago			| Optional (byte[]) <br> Payment certificate.
 sello_pago			| Optional (byte[]) <br> Payment stamp.
 cad_pago			| Optional (1-8192 Alphanumeric) <br> Chain.
 docto_relacionados	| Optional (Arrangement [DoctoRelacionado Object](#doctorelacionado-object)).
+
+##Complement Donee Object
+Field 			| Description
+---------		| ---------
+no_autorizacion		| Required <br> Authorization number
+fecha_autorizacion	| Required <br> Authorization date (YYYY-MM-DD)
+leyenda 			| Required <br> Caption
 
 ##Request Response Generation Object
 Field 			| Description         	

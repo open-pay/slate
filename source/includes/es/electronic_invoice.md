@@ -174,6 +174,7 @@ Campo 			| Descripción
 ---------		| ---------
 aerolineas	| Opcional ([Objeto Complemento Aerolíneas](#objeto-complemento-aerol-neas)) <br> Complemento para aerolíneas.
 pagos		| Opcional ([Objeto Complemento Pago](#objeto-complemento-pago)) <br> Complementos de pago.
+donatarias  | Opcional ([Objeto Complemento Donatarias](#objeto-complemento-donatarias)) <br> Complemento Donatarias.
 
 
 ##Objeto Complemento Aerolíneas
@@ -210,6 +211,13 @@ cert_pago			| Opcional (byte[]) <br> Certificado de pago.
 sello_pago			| Opcional (byte[]) <br> Sello de pago.
 cad_pago			| Opcional (1-8192 Alfanumérico) <br> Cadena.
 docto_relacionados	| Opcional (Arreglo [Objeto DoctoRelacionado](#objeto-doctorelacionado)).
+
+##Objeto Complemento Donatarias
+Campo 			| Descripción         	
+---------		| ---------
+no_autorizacion		| Requerido <br> Número de autorización
+fecha_autorizacion	| Requerido <br> Fecha de autorización (YYYY-MM-DD)
+leyenda 			| Requerido <br> Leyenda
 
 ##Objeto Respuesta de solicitud de generación
 Campo 			| Descripción         	
