@@ -262,7 +262,7 @@ use_3d_secure | ***boolean*** (optional) <br/> Used to specify if 3D Secure shou
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
 
-##With virtual terminal
+##With redirect
 
 > Definition
 

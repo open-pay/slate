@@ -276,7 +276,7 @@ use_3d_secure | ***string*** (opcional) <br/> Se debe especificar este parámetr
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
 
-##Con terminal virtual
+##Con redireccionamiento
 
 > Definición
 
