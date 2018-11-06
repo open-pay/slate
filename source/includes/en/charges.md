@@ -60,7 +60,7 @@ openpayAPI.ChargeService.Create(ChargeRequest request);
 @charges.create(request_hash)
 ```
 
-> Merchant request example 
+> Merchant request example
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
@@ -79,7 +79,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    	    "phone_number" : "4423456723",
    	    "email" : "juan.vazquez@empresa.com.mx"
    }
-}' 
+}'
 ```
 
 ```php
@@ -239,7 +239,7 @@ You can send extra data to Openpay in order to increase number of variables and 
 If you want to use this feature you need to send <code>metadata</code> property with all fields you think can help to decide when a transaction is a fraud trying. Call support line to enable this feature</br>
 </aside>
 
-###Request 
+###Request
 
 Property | Description
 --------- | -----
@@ -262,7 +262,7 @@ use_3d_secure | ***boolean*** (optional) <br/> Used to specify if 3D Secure shou
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
 
-##With virtual terminal
+##With redirect
 
 > Definition
 
@@ -488,7 +488,7 @@ response_hash=@charges.create(request_hash.to_hash)
 
 This type of charge don't requires a saved card or a previously generated token
 
-###Request 
+###Request
 
 Property | Description
 --------- | -----
@@ -573,7 +573,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "description" : "Cargo con tienda",
    "order_id" : "oid-00053",
    "due_date" : "2014-05-28T13:45:00"
-}' 
+}'
 ```
 
 ```php
@@ -676,7 +676,7 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 
 For payments at a convenience store you should create a charge type request by indicating **store** as method. This will generate a response with a reference number and a URL with a barcode, which you must use to create a receipt so your customer can make the payment in one of the convenience stores. The barcode is Code 128 type.
 
-###Request 
+###Request
 
 Property | Description
 --------- | -----
@@ -758,7 +758,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "amount" : 100,
    "description" : "Cargo con banco",
    "order_id" : "oid-00055"
-} ' 
+} '
 ```
 
 ```php
@@ -851,11 +851,11 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    }
 }
 ```
-For a charge via bank you must create a charge type request  by indicating ** bank_account** as method. This will 
-generate a response with a Bancomer CIE agreement number, a CLABE account number and a reference, you have to indicate 
+For a charge via bank you must create a charge type request  by indicating ** bank_account** as method. This will
+generate a response with a Bancomer CIE agreement number, a CLABE account number and a reference, you have to indicate
 these data in a receipt so your customer can do the wire transfer via SPEI.
 
-###Request 
+###Request
 
 Property | Description
 --------- | -----
@@ -994,12 +994,12 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 }
 ```
 
-To start a transaction using Alipay you should create a charge type request by indicating **alipay** as method. 
+To start a transaction using Alipay you should create a charge type request by indicating **alipay** as method.
 This will generate a response with an URL which will redirect the customer to the Alipay website
 where they can then enter their account details, or scan the QR Code in their mobile app.
 
 
-### Request 
+### Request
 
 Property    | Description
 ----------- | -----
@@ -1081,7 +1081,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -H "Content-type: application/json" \
    -X POST -d '{
     "amount" : 100.00
-} ' 
+} '
 ```
 
 ```php
@@ -1115,7 +1115,7 @@ var captureRequest = {
   'amount' : 100.00
 };
 
-openpay.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', captureRequest, 
+openpay.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', captureRequest,
     function(error, charge){
   // ...
 });
@@ -1168,7 +1168,7 @@ Confirm a charge created with the <code>capture = "false" </code> property, this
 </aside>
 
 
-###Request 
+###Request
 
 Property | Description
 --------- | -----
@@ -1246,7 +1246,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -X POST -d '{
    "description" : "devolución",
    "amount" : 100.00
-} ' 
+} '
 ```
 
 ```php
@@ -1284,7 +1284,7 @@ var refundRequest = {
    'amount' : 100.00
 };
 
-openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest, 
+openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest,
     function(error, charge) {
   // ...
 });
@@ -1358,7 +1358,7 @@ You can use this method if you want to make a charge refund to a card. The amoun
 </aside>
 
 
-###Request 
+###Request
 
 Property | Description
 --------- | -----
@@ -1590,7 +1590,7 @@ openpay.customers.charges.list(customerId, searchParams, callback);
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges?creation[gte]=2013-11-01&limit=2" \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
 ```php

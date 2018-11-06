@@ -234,7 +234,7 @@ response_hash=@charges.create(request_hash.to_hash)
 }
 ```
 
-Este tipo de cargo requiere una tarjeta guardada o que hayas generado un token. Para guardar tarjetas consulta [como crear una tarjeta](#crear-una-tarjeta) y para usar tokens consulta la sección [creación de tokens](#crear-un-nuevo-token). 
+Este tipo de cargo requiere una tarjeta guardada o que hayas generado un token. Para guardar tarjetas consulta [como crear una tarjeta](#crear-una-tarjeta) y para usar tokens consulta la sección [creación de tokens](#crear-un-nuevo-token).
 
 Una vez que tengas una tarjeta guardada o un token usa la propiedad <code>source_id</code> para enviar el identificador.
 
@@ -252,7 +252,7 @@ Para utilizar esta característica es necesario enviar como parte del contenido 
 </aside>
 
 
-###Petición 
+###Petición
 
 Propiedad | Descripción
 --------- | -----
@@ -264,7 +264,7 @@ currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 device_session_id |  ***string*** (requerido, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta antifraudes
-capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o preautorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada. 
+capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o preautorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada.
 [customer](#crear-un-nuevo-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realice el cargo a nivel cliente.
 [payment_plan](#objeto-paymentplan)|***objeto*** (opcional) <br/>Datos del plan de meses sin intereses que se desea utilizar en el cargo. Ver [Objeto PaymentPlan](#objeto-paymentplan).
 metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
@@ -276,7 +276,7 @@ use_3d_secure | ***string*** (opcional) <br/> Se debe especificar este parámetr
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
 
-##Con terminal virtual
+##Con redireccionamiento
 
 > Definición
 
@@ -502,7 +502,7 @@ response_hash=@charges.create(request_hash.to_hash)
 
 Este tipo de cargo no requiere una tarjeta guardada o que hayas generado un token.
 
-###Petición 
+###Petición
 
 Propiedad | Descripción
 --------- | -----
@@ -587,7 +587,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "description" : "Cargo con tienda",
    "order_id" : "oid-00053",
    "due_date" : "2014-05-20T13:45:00"
-} ' 
+} '
 ```
 
 ```php
@@ -690,7 +690,7 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 
 Para un pago en una tienda de conveniencia se debe crear un petición de tipo cargo indicando como método **store**. Esto generará una respuesta con un número de referencia y una URL a un código de barras, los cuales debes de utilizar para crear un recibo a tu cliente y que con él pueda realizar el pago en una de las tienda de conveniencia aceptadas. El código de barras es de tipo Code 128.
 
-###Petición 
+###Petición
 
 Propiedad | Descripción
 --------- | -----
@@ -773,7 +773,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "description" : "Cargo con banco",
    "order_id" : "oid-00055",
    "due_date"
-} ' 
+} '
 ```
 
 ```php
@@ -866,12 +866,12 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    }
 }
 ```
-Para un cargo a banco se debe crear una petición de tipo cargo indicando como método **bank_account**. Esto te generará 
-una respuesta con un número de convenio CIE Bancomer, número de CLABE bancaria y una referencia, estos datos los debes 
-de indicar a tu cliente en un recibo para que realice la transferencia vía SPEI. 
+Para un cargo a banco se debe crear una petición de tipo cargo indicando como método **bank_account**. Esto te generará
+una respuesta con un número de convenio CIE Bancomer, número de CLABE bancaria y una referencia, estos datos los debes
+de indicar a tu cliente en un recibo para que realice la transferencia vía SPEI.
 
 
-###Petición 
+###Petición
 
 Propiedad | Descripción
 --------- | -----
@@ -1011,10 +1011,10 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 
 Para realizar una transacción con un pago mediante Alipay es necesario indicar el método de pago como **alipay**.
 La respuesta de esta transacción generará una URL de pago en la que el usaurio podrá introducir sus datos de cuenta
-de Alipay, o escanear un código de barras que le permitirá pagar mediante la aplicación móvil. 
+de Alipay, o escanear un código de barras que le permitirá pagar mediante la aplicación móvil.
 
 
-###Petición 
+###Petición
 
 Propiedad   | Descripción
 ----------- | -----
@@ -1096,7 +1096,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -H "Content-type: application/json" \
    -X POST -d '{
     "amount" : 100.00
-} ' 
+} '
 ```
 
 ```php
@@ -1130,7 +1130,7 @@ var captureRequest = {
   'amount' : 100.00
 };
 
-openpay.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', captureRequest, 
+openpay.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', captureRequest,
     function(error, charge){
   // ...
 });
@@ -1183,7 +1183,7 @@ Confirmar un cargo creado con la propieda de <code>capture = "false"</code>,  es
 </aside>
 
 
-###Petición 
+###Petición
 
 Propiedad | Descripción
 --------- | -----
@@ -1261,7 +1261,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -X POST -d '{
    "description" : "devolución",
    "amount" : 100.00
-} ' 
+} '
 ```
 
 ```php
@@ -1299,7 +1299,7 @@ var refundRequest = {
    'amount' : 100.00
 };
 
-openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest, 
+openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest,
     function(error, charge) {
   // ...
 });
@@ -1373,7 +1373,7 @@ Si deseas realizar una devolución de un cargo hecho a tarjeta puedes ocupar est
 </aside>
 
 
-###Petición 
+###Petición
 
 Propiedad | Descripción
 --------- | -----
@@ -1749,4 +1749,3 @@ amount[lte] | ***numeric*** <br/>Menor o igual al monto.
 ###Respuesta
 
 Regresa un arreglo de [objetos de transacción](#objeto-transacción) de los cargos en orden descendente por fecha de creación.
-
