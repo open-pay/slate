@@ -590,7 +590,6 @@ color: #ff8e00;
 	background-color: rgba(0,0,0,0.08);
 	padding: 3px;
 	border-radius: 3px;
-	display: block;
 }
 .content aside {
 	padding-top: 1em;
@@ -629,6 +628,7 @@ color: #ff8e00;
 
 .content pre code {
 	background-color: transparent;
+	display: block;
 }
 
 .content pre>p, .content blockquote>p {
