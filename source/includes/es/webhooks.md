@@ -78,7 +78,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks
 
 ```php
 <?
-$webhook = $openpay->webhooks->create(webhook);
+$webhook = $openpay->webhooks->add(webhook);
 ?>
 ```
 
@@ -99,7 +99,7 @@ openpay.webhooks.create(webhook, callback);
 @webhooks.create(request_hash)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks \
@@ -116,7 +116,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks \
       "charge.created",
       "chargeback.accepted"
     ]
-}' 
+}'
 ```
 
 ```php
@@ -136,7 +136,7 @@ $webhook = array(
     )
     );
 
-$webhook = $openpay->webhooks->create($webhook);
+$webhook = $openpay->webhooks->add($webhook);
 ?>
 ```
 
@@ -274,8 +274,8 @@ openpay.webhooks.get(webhookId, callback);
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" 
-``` 
+   -H "Content-type: application/json"
+```
 
 ```php
 <?
@@ -337,7 +337,7 @@ response_hash=@webhooks.get("wxvanstudf4ssme8khmc")
   }
 ```
 
-Obtiene los detalles de un webhook solicitándolo con su id. 
+Obtiene los detalles de un webhook solicitándolo con su id.
 
 <aside class="notice">
 **Nota:** Nunca se regresarán datos sensibles como son el password para accesar al webhook.
@@ -436,7 +436,7 @@ Propiedad | Descripción
 id| ***string*** (requerido, longitud = 45) <br/> Identificador único del webhook
 
 ###Respuesta
-Si el webhook se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo. 
+Si el webhook se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo.
 
 
 
@@ -476,8 +476,8 @@ openpay.webhooks.list(callback);
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" 
-``` 
+   -H "Content-type: application/json"
+```
 
 ```php
 <?
@@ -565,4 +565,3 @@ Regresa una lista de webhooks registrados por comercio.
 
 ###Respuesta
 Listado de objetos [objeto webhook](#objeto-webhook) registrados de acuerdo a los parámetros proporcionados.
-

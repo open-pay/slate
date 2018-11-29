@@ -49,7 +49,7 @@ charge.created             | Charge         | Reports when a charge is scheduled
 charge.succeeded           | Charge         | Reports when a charge is applied.
 charge.rescored.to.decline | Charge         | Reports when a charge' score is recalculated and is declined.
 subscription.charge.failed | Subscription    | Reports when the charge to a subscription fails.
-payout.created             | Payout          | Reports when a payout has been scheduled for the next day. 
+payout.created             | Payout          | Reports when a payout has been scheduled for the next day.
 payout.succeeded           | Payout          | Reports when a payout has been applied.
 payout.failed              | Payout          | Reports when a payout has failed.
 transfer.succeeded         | Transfer | Reports when a transfer has been performed between to Openpay accounts.
@@ -78,7 +78,7 @@ POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks
 
 ```php
 <?
-$webhook = $openpay->webhooks->create(webhook);
+$webhook = $openpay->webhooks->add(webhook);
 ?>
 ```
 
@@ -116,7 +116,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks \
       "charge.created",
       "chargeback.accepted"
     ]
-}' 
+}'
 ```
 
 ```php
@@ -136,7 +136,7 @@ $webhook = array(
     )
     );
 
-$webhook = $openpay->webhooks->create($webhook);
+$webhook = $openpay->webhooks->add($webhook);
 ?>
 ```
 
@@ -272,8 +272,8 @@ openpay.webhooks.get(webhookId, callback);
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" 
-``` 
+   -H "Content-type: application/json"
+```
 
 ```php
 <?
@@ -335,7 +335,7 @@ response_hash=@webhooks.get("wxvanstudf4ssme8khmc")
   }
 ```
 
-Get a list of the webhook details by ID. 
+Get a list of the webhook details by ID.
 
 <aside class="notice">
 **Note:** Sensitive data like the password will never be included in the response.
@@ -473,8 +473,8 @@ openpay.webhooks.list(callback);
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" 
-``` 
+   -H "Content-type: application/json"
+```
 
 ```php
 <?
@@ -562,4 +562,3 @@ Returns a list registered by the merchant.
 
 ###Response
 The list of [webhook objects](#webhook-objects) registered according to the given parameters.
-
