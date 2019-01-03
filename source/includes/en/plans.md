@@ -42,7 +42,7 @@ trial_days | ***numeric*** <br/> Number of trial days this subscription will hav
 > Definition
 
 ```shell
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/plans
 ```
 
 ```php
@@ -72,7 +72,7 @@ openpay.plans.create(planRequest, callback);
 > Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/plans \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -105,7 +105,7 @@ $plan = $openpay->plans->add($planDataRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan request = new Plan();
 request.name("Curso de ingles");
 request.amount(new BigDecimal("100.00"));
@@ -206,7 +206,7 @@ Returns the created [plan object](#plan-object) or an error in case an issue occ
 > Definition
 
 ```shell
-PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
+PUT https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 ```
 
 ```php
@@ -237,7 +237,7 @@ openpay.plans.update(planId, planRequest, callback);
 > Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbmnoevrt \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbmnoevrt \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X PUT -d '{
@@ -257,7 +257,7 @@ $plan->save();
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan request = new Plan();
 request.setId("p8e6x3hafqqsbmnoevrt");
 request.name("Curso de ingles");
@@ -333,7 +333,7 @@ Returns a [plan object](#plan-object) with the updated information or an [error 
 > Definition
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 ```
 
 ```php
@@ -363,7 +363,7 @@ openpay.plans.get(planId, callback);
 > Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbmnoevrt \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbmnoevrt \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ``` 
 
@@ -376,7 +376,7 @@ $plan = $openpay->plans->get('pduar9iitv4enjftuwyl');
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan plan = api.plans().get("p8e6x3hafqqsbmnoevrt");
 ```
 
@@ -431,7 +431,7 @@ Returns a [plan object](#plan-object)
 > Definition
 
 ```shell
-DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans/{PLAN_ID}
+DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 ```
 
 ```php
@@ -463,7 +463,7 @@ openpay.plans.delete(planId, callback);
 > Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbmnoevrt \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbmnoevrt \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -X DELETE
 ```
@@ -479,7 +479,7 @@ $plan->delete();
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.plans().delete("p8e6x3hafqqsbmnoevrt");
 ```
 
@@ -516,7 +516,7 @@ If the plan is deleted correctly the response will be empty, if it cannot be del
 > Definition
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/plans
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/plans
 ```
 
 ```php
@@ -547,7 +547,7 @@ openpay.plans.list(searchParams, callback);
 > Request example
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans?limit=10" \
+curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/plans?limit=10" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
 ```
 
@@ -571,7 +571,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
         
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());

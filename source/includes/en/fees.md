@@ -9,7 +9,7 @@ In order to have customer accounts where they handle their balance they should h
 > Definition
 
 ```shell
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/fees
 ```
 
 ```php
@@ -39,7 +39,7 @@ openpay.fees.create(feeRequest, callback);
 > Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/fees \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{                                            
@@ -65,7 +65,7 @@ $fee = $openpay->fees->create($feeDataRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateFeeParams request = new CreateFeeParams();
 request.customerId("a9pvykxz4g5rg0fplze0");
 request.amount(new BigDecimal("100.00"));
@@ -152,7 +152,7 @@ The [transaction object](#transaction-object) of the fee including the creation 
 > Definition
 
 ```shell
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees/{TRANSACTION_ID}/refund
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/fees/{TRANSACTION_ID}/refund
 ```
 
 ```php
@@ -183,7 +183,7 @@ openpay.fees.refund(transactionId, feeRequest, callback);
 > Request example 
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees/trzjaozcik8msyqshka4/refund \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/fees/trzjaozcik8msyqshka4/refund \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{                                            
@@ -205,7 +205,7 @@ $fee->refund($refundData);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 RefundParams request = new RefundParams();
 request.description("Fee Refund");
 
@@ -278,7 +278,7 @@ The [transaction object](#transaction-object) of the refund including the creati
 > Definition
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/fees
 ```
 
 ```php
@@ -309,7 +309,7 @@ openpay.fees.list(searchParams, callback);
 > Ejemplo de peticiÃ³n 
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees?limit=10" \
+curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/fees?limit=10" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
 ```
 
@@ -333,7 +333,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
         
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());

@@ -30,7 +30,7 @@ You can add cards and bank accounts  to the customers so you can make transactio
    },
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+       "barcode_url": "https://sand-api.ecommercebbva.com/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
    "clabe": "646180109400423323"
 }
@@ -55,7 +55,7 @@ clabe         |***numeric*** <br/>CLABE account used to receive funds by transfe
 > Definition
 
 ```shell
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers
 ```
 
 ```php
@@ -84,7 +84,7 @@ openpay.customers.create(customerRequest, callback);
 > Request example 
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -121,7 +121,7 @@ $customer = $openpay->customers->add($customerData);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Customer request = new Customer();
 request.externalId("idExterno0101");
 request.name("Julian Gerardo");
@@ -215,7 +215,7 @@ response_hash=@customers.create(request_hash.to_hash)
    "external_id":null,
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+       "barcode_url": "https://sand-api.ecommercebbva.com/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
    "clabe": "646180109400423323"
 }
@@ -245,7 +245,7 @@ Returns a [customer object](#customer-object) when all the data were sent correc
 > Definition
 
 ```shell
-PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
+PUT https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```
 
 ```php
@@ -275,7 +275,7 @@ openpay.customers.update(customerId, customerRequest, callback);
 > Request example 
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X PUT -d '{
@@ -306,7 +306,7 @@ $customer->save();
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Customer request = new Customer();
 request.name("Julian Gerardo");
 request.lastName("López Martínez");
@@ -409,7 +409,7 @@ response_hash=@customers.update(request_hash.to_hash)
    },
    "store": {
       "reference": "OPENPAY02DQ35YOY7",
-      "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+      "barcode_url": "https://sand-api.ecommercebbva.com/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
    "clabe": "646180109400423323",
    "creation_date":"2014-05-20T16:47:47-05:00",
@@ -439,7 +439,7 @@ Returns a [customer object](#customer-object) with the updated info, or returns 
 > Definition
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```
 
 ```php
@@ -468,7 +468,7 @@ openpay.customers.get(customerId, callback);
 > Request example 
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" 
 ```
@@ -482,7 +482,7 @@ $customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Customer customer = api.customers().get("a9pvykxz4g5rg0fplze0");
 ```
 
@@ -524,7 +524,7 @@ response_hash=@customers.get("asynwirguzkgq2bizogo")
    },
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+       "barcode_url": "https://sand-api.ecommercebbva.com/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
    "clabe": "646180109400423323",
    "creation_date":"2014-05-20T16:47:47-05:00",
@@ -549,7 +549,7 @@ If the identifier exists, it returns a [customer object](#customer-object) with 
 > Definition
 
 ```shell
-DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
+DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```
 
 ```php
@@ -579,7 +579,7 @@ openpay.customers.delete(customerId, callback);
 > Request example 
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X DELETE
@@ -595,7 +595,7 @@ $customer->delete();
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.customers().delete("a9pvykxz4g5rg0fplze0");
 ```
 
@@ -634,7 +634,7 @@ If the customer is deleted correctly, it returns an empty response, if the custo
 > Definition
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers
 ```
 
 ```php
@@ -664,7 +664,7 @@ openpay.customers.list(searchParams, callback);
 > Request example 
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers?creation[gte]=2013-11-01&limit=2" \
+curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers?creation[gte]=2013-11-01&limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" 
 ```
@@ -689,7 +689,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
 
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -742,7 +742,7 @@ response_hash=@customers.all
    "balance":142.5
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+       "barcode_url": "https://sand-api.ecommercebbva.com/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
    "clabe": "646180109400423323"
 }, {
@@ -756,7 +756,7 @@ response_hash=@customers.all
    "balance":103,
    "store": {
        "reference": "OPENPAY02DQ35DRE4",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35DRE4?width=1&height=45&text=false"
+       "barcode_url": "https://sand-api.ecommercebbva.com/barcode/OPENPAY02DQ35DRE4?width=1&height=45&text=false"
   },
   "clabe": "646180109400423323"
 }]

@@ -73,7 +73,7 @@ order.payment.cancelled    | Orden          | Informa cuando el pago de una orde
 > Definición
 
 ```shell
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/webhooks
 ```
 
 ```php
@@ -102,7 +102,7 @@ openpay.webhooks.create(webhook, callback);
 > Ejemplo de petición 
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/webhooks \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -141,7 +141,7 @@ $webhook = $openpay->webhooks->create($webhook);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Webhook request = new Webhook();
 request.url("http://requestb.in/11vxrsf1");
 request.user("juanito");
@@ -243,7 +243,7 @@ Regresa un [objeto webhook](#objeto-webhook) cuando se creó correctamente o una
 > Definición
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
 ```
 
 ```php
@@ -272,7 +272,7 @@ openpay.webhooks.get(webhookId, callback);
 > Ejemplo de petición
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" 
 ``` 
@@ -286,7 +286,7 @@ $webhook = $openpay->webhooks->get('wxvanstudf4ssme8khmc');
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Webhook webhook = api.webhooks().get("wxvanstudf4ssme8khmc");
 ```
 
@@ -358,7 +358,7 @@ Regresa un [objeto webhook](#objeto-webhook)
 > Definición
 
 ```shell
-DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
+DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
 ```
 
 ```php
@@ -388,7 +388,7 @@ openpay.webhooks.delete(webhookId, callback);
 > Ejemplo de petición con cliente
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -X DELETE
 ```
@@ -403,7 +403,7 @@ $webhook->delete();
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.webhooks().delete("wxvanstudf4ssme8khmc");
 ```
 
@@ -445,7 +445,7 @@ Si el webhook se borra correctamente la respuesta es vacía, si no se puede borr
 > Definición
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/webhooks
 ```
 
 ```php
@@ -474,7 +474,7 @@ openpay.webhooks.list(callback);
 > Ejemplo de petición
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/webhooks \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" 
 ``` 
@@ -488,7 +488,7 @@ $webhookList = $openpay->webhooks->getList();
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 List<Webhook> webhooks = api.webhooks().list();
 ```
 

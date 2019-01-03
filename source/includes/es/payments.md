@@ -11,10 +11,10 @@ Un pago es la transacción que permite extraer los fondos de una cuenta Openpay 
 
 ```shell
 Comercio
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/payouts
 
 Cliente
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
 ```php
@@ -65,7 +65,7 @@ openpay.customers.payouts.create(customerId, payoutRequest, callback);
 > Ejemplo de petición con cliente
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/payouts \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/payouts \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -94,7 +94,7 @@ $payout = $customer->payouts->create($payoutRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
 CreateBankPayoutParams request = new CreateBankPayoutParams();
 request.bankAccountId("b3d54sd3mdjf75udjfvoc"); // = destination_id
 request.amount(new BigDecimal("10.50"));
@@ -193,10 +193,10 @@ Regresa un [objeto de transacción](#objeto-transacción) con la información de
 
 ```shell
 Comercio
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/payouts
 
 Cliente
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
 ```php
@@ -247,7 +247,7 @@ openpay.customers.payouts.create(customerId, payoutRequest, callback);
 > Ejemplo de petición con cliente
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -281,7 +281,7 @@ $payout = $customer->payouts->create($payoutRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateBankPayoutParams request = new CreateBankPayoutParams();
 BankAccount bankAccount = new BankAccount();
 bankAccount.holderName("Mi empresa");
@@ -395,10 +395,10 @@ Regresa un [objeto de transacción](#objeto-transacción) con la información de
 
 ```shell
 Comercio
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts/{TRANSACTION_ID}
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/payouts/{TRANSACTION_ID}
 
 Comercio
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts/{TRANSACTION_ID}
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts/{TRANSACTION_ID}
 ```
 
 ```php
@@ -449,7 +449,7 @@ openpay.customers.payouts.get(customerId, transactionId, callback);
 > Ejemplo de petición con cliente
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts/trwpxhrgfeub9eqdyvqz \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts/trwpxhrgfeub9eqdyvqz \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
@@ -463,7 +463,7 @@ $payout = $customer->payouts->get('trwpxhrgfeub9eqdyvqz');
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Payout payout = api.payouts().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
 ```
 
@@ -529,10 +529,10 @@ Regresa un [objeto de transacción](#objeto-transacción) con la información de
 
 ```shell
 Comercio
-DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts/{TRANSACTION_ID}
+DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/payouts/{TRANSACTION_ID}
 
 Comercio
-DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts/{TRANSACTION_ID}
+DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts/{TRANSACTION_ID}
 ```
 
 ```php
@@ -583,7 +583,7 @@ openpay.customers.payouts.delete(customerId, transactionId, callback);
 > Ejemplo de petición con cliente
 
 ```shell
-curl -X DELETE https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts/trozeipf364jqrsbt3ej \
+curl -X DELETE https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts/trozeipf364jqrsbt3ej \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
@@ -597,7 +597,7 @@ $payout = $customer->payouts->delete('trozeipf364jqrsbt3ej');
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Payout payout = api.payouts().cancel("ag4nktpdzebjiye1tlze", "trozeipf364jqrsbt3ej");
 ```
 
@@ -665,10 +665,10 @@ Regresa un [objeto de transacción](#objeto-transacción) con la información de
 
 ```shell
 Comercio
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/payouts
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/payouts
 
 Comercio
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/payouts
 ```
 
 ```php
@@ -721,7 +721,7 @@ openpay.customers.payouts.list(customerId, searchParams, callback);
 > Ejemplo de petición 
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts?creation[gte]=2013-11-01&limit=2&payout_type=AUTOMATIC" \
+curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/asynwirguzkgq2bizogo/payouts?creation[gte]=2013-11-01&limit=2&payout_type=AUTOMATIC" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
 ```
 
@@ -747,7 +747,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
 
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -867,7 +867,7 @@ Regresa un listado de [objetos de transacción](#objeto-transacción) de los pag
 > Definición
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/reports/payout/{TRANSACTION_ID}
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/reports/payout/{TRANSACTION_ID}
 ```
 
 ```php
@@ -896,7 +896,7 @@ openpay.transactionsPayout.get(transactionId, callback);
 > Ejemplo de petición
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/reports/payout/trwpxhrgfeub9eqdyvqz \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/reports/payout/trwpxhrgfeub9eqdyvqz \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
@@ -909,7 +909,7 @@ $payout = $openpay->transactionsPayout->get('trwpxhrgfeub9eqdyvqz');
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 
 TransactionsPayoutResume payoutResume = transactionsPayout().getResume("tr6cxbcefzatd10guvvw");
 ```
@@ -980,7 +980,7 @@ refunded_adjustments | ***numeric*** <br/> Monto total de cargos de devolución,
 > Definición
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/reports/payout/{TRANSACTION_ID}/detail
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/reports/payout/{TRANSACTION_ID}/detail
 ```
 
 ```php
@@ -1009,7 +1009,7 @@ openpay.transactionsPayout.getDetails(transactionId, searchParams, callback);
 > Ejemplo de petición
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/reports/payout/trwpxhrgfeub9eqdyvqz/detail?detail_type=IN \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/reports/payout/trwpxhrgfeub9eqdyvqz/detail?detail_type=IN \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
@@ -1027,7 +1027,7 @@ $payout = $openpay->transactionsPayout->getDetails('trwpxhrgfeub9eqdyvqz', $sear
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 
       PaginationParams paginationParams = new PaginationParams();
       paginationParams.offset(0);

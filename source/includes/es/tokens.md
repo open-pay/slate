@@ -48,7 +48,7 @@ card | ***object*** <br/>Datos de la tarjeta asociada al token. Ver [objeto tarj
 > Definición
 
 ```shell
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/tokens
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/tokens
 ```
 
 ```java
@@ -77,7 +77,7 @@ $token = $bancomer->tokens->create($tokenRequest);
 > Ejemplo de petición
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/tokens \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -99,7 +99,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens \
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx/", "sk_08453429e4c54220a3a82ab4d974c31a", "miklpzr4nsvsucghm2qp");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com/", "sk_08453429e4c54220a3a82ab4d974c31a", "miklpzr4nsvsucghm2qp");
 
 List<Parameter> request = new ArrayList<Parameter>(Arrays.asList(
         new SingleParameter("card_number", "4111111111111111"),
@@ -220,7 +220,7 @@ Regresa el [objeto token](#objeto-token) creado o una [respuesta de error](#obje
 > Definición
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}
 ```
 
 ```java
@@ -245,12 +245,12 @@ bancomerAPI.TokenService.Get(String token_id);
 > Ejemplo de petición
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxqia8q7cm \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxqia8q7cm \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Map tokenAsMap = api.tokens().get("tr6cxbcefzatd10guvvw");
 ParameterContainer token = new ParameterContainer("token", tokenAsMap);
 ```

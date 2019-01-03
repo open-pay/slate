@@ -28,10 +28,10 @@ El código QR estará disponible mientras no se exceda su tiempo de expiración.
 
 ```plaintext--endpoints
 Comercio
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges
 
 Cliente
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 > Ejemplo de petición con cliente
@@ -43,7 +43,7 @@ curl -u sk_e568c42a6c384b7ab02cd47d2e407cab \
    "method" : "qropay",
    "amount" : 949.00,
    "description" : "Cargo qropay"
-}' https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges
+}' https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/charges
 ```
 
 ```php
@@ -59,7 +59,7 @@ $charge = $bancomer->charges->create($chargeRequest);
 
 ```java
 BancomerAPI api = new BancomerAPI(
-        "https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+        "https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 
 List<Parameter> request = new ArrayList<Parameter>(Arrays.asList(
     new SingleParameter("method", "qropay"),
@@ -115,7 +115,7 @@ response_hash=@charges.create(request_hash.to_hash)
     "due_date": "2018-04-26T23:59:59-05:00",
     "payment_method": {
         "type": "qropay",
-        "qr_code": "https://sandbox-api.openpay.mx/qropay/mc2mzbvwpmnps8q0on6q/trfu5m6xzn6hiyn9jkzm/qrcode"
+        "qr_code": "https://sand-api.ecommercebbva.com/qropay/mc2mzbvwpmnps8q0on6q/trfu5m6xzn6hiyn9jkzm/qrcode"
     },
     "amount": 949,
     "currency": "MXN",

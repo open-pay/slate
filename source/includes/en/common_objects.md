@@ -86,9 +86,9 @@ country_code | ***string*** (required) <br/>Country code, in the two character f
 ```json
 {
    "reference":"OPENPAY02DQ35YOY7",
-   "barcode_url":"https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false",
+   "barcode_url":"https://sand-api.ecommercebbva.com/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false",
    "paybin_reference":"0101990000001065",
-   "barcode_paybin_url":"https://sandbox-api.openpay.mx/barcode/0101990000001065?width=1&height=45&text=false"
+   "barcode_paybin_url":"https://sand-api.ecommercebbva.com/barcode/0101990000001065?width=1&height=45&text=false"
 }
 ```
 

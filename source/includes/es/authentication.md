@@ -4,7 +4,7 @@
 > Ejemplo de autenticación
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 
 El parámetro -u se ocupa para realizar la autenticación HTTP Basic 
@@ -21,11 +21,11 @@ $bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b1
 ```java
 //Sandbox
 final BancomerAPI api = new BancomerAPI(
-        "https://sandbox-api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+        "https://sand-api.ecommercebbva.com", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 
 //Produccion
 final BancomerAPI api = new BancomerAPI(
-        "https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+        "https://api.ecommercebbva.com", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 ```
 
 ```csharp
@@ -59,7 +59,7 @@ bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b
 > Producción
 
 ```shell
-Solo es necesario usar la URI base https://api.openpay.mx
+Solo es necesario usar la URI base https://api.ecommercebbva.com
 ```
 
 ```php
@@ -69,7 +69,7 @@ Bancomer::setProductionMode(true);
 ```
 
 ```java
-//Solo es necesario usar la URI base https://api.openpay.mx
+//Solo es necesario usar la URI base https://api.ecommercebbva.com
 ```
 
 ```csharp

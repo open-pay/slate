@@ -9,10 +9,10 @@ You can do card charges by using a saved card id, using a token or you can send 
 
 ```shell
 Merchant
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges
 
 Customer
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
@@ -63,7 +63,7 @@ openpayAPI.ChargeService.Create(ChargeRequest request);
 > Merchant request example 
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -105,7 +105,7 @@ $charge = $openpay->charges->create($chargeRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateCardChargeParams request = new CreateCardChargeParams();
 Customer customer = new Customer();
 customer.setName("Juan");
@@ -267,10 +267,10 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 ```shell
 Merchant
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges
 
 Customer
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
@@ -321,7 +321,7 @@ openpayAPI.ChargeService.Create(ChargeRequest request);
 > Merchant request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -365,7 +365,7 @@ $charge = $openpay->charges->create($chargeRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateCardChargeParams request = new CreateCardChargeParams();
 Customer customer = new Customer();
 customer.setName("Juan");
@@ -471,7 +471,7 @@ response_hash=@charges.create(request_hash.to_hash)
   "currency": "MXN",
   "payment_method": {
     "type": "redirect",
-    "url": "https://sandbox-api.openpay.mx/v1/mexzhpxok3houd5lbvz1/charges/trq7yrthx5vc4gtjdkwg/card_capture"
+    "url": "https://sand-api.ecommercebbva.com/v1/mexzhpxok3houd5lbvz1/charges/trq7yrthx5vc4gtjdkwg/card_capture"
   },
   "customer": {
     "name": "Juan",
@@ -509,10 +509,10 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 ```shell
 Merchant
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges
 
 Customer
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
@@ -563,7 +563,7 @@ openpay.customers.charges.create(customerId, chargeRequest, callback);
 > Customer request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -592,7 +592,7 @@ $charge = $customer->charges->create($chargeRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Calendar dueDate = Calendar.getInstance();
 dueDate.set(2014, 5, 28, 13, 45, 0);
 CreateStoreChargeParams request = new CreateStoreChargeParams();
@@ -667,8 +667,8 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
       "type":"store",
       "reference":"000020TRNIRKIYOBO5QFEX55EF0100009",
       "paybin_reference":"0101990000001065",
-      "barcode_url":"https://sandbox-api.openpay.mx/barcode/000020TRNIRKIYOBO5QFEX55EF0100009?width=1&height=45&text=false",
-      "barcode_paybin_url":"https://sandbox-api.openpay.mx/barcode/0101990000001065?width=1&height=45&text=false"
+      "barcode_url":"https://sand-api.ecommercebbva.com/barcode/000020TRNIRKIYOBO5QFEX55EF0100009?width=1&height=45&text=false",
+      "barcode_paybin_url":"https://sand-api.ecommercebbva.com/barcode/0101990000001065?width=1&height=45&text=false"
    }
 }
 ```
@@ -695,10 +695,10 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 ```shell
 Merchant
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges
 
 Customer
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
@@ -749,7 +749,7 @@ openpay.customers.charges.create(customerId, chargeRequest, callback);
 > customer request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -776,7 +776,7 @@ $charge = $customer->charges->create($chargeRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateBankChargeParams request = new CreateBankChargeParams();
 request.amount(new BigDecimal("100.00"));
 request.description("Cargo con banco");
@@ -874,10 +874,10 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 ```shell
 Merchant
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/capture
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/capture
 
 Customer
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/capture
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/capture
 ```
 
 ```php
@@ -930,7 +930,7 @@ openpay.customers.charges.capture(customerId, transactionId, captureRequest, cal
 > Customer request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tryqihxac3msedn4yxed/capture \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tryqihxac3msedn4yxed/capture \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -951,7 +951,7 @@ $charge->capture($captureData);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 ConfirmCaptureParams request = new ConfirmCaptureParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.amount(new BigDecimal("100.00"));
@@ -1038,10 +1038,10 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 ```shell
 Merchant
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/refund
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/refund
 
 Customer
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/refund
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/refund
 ```
 
 ```php
@@ -1094,7 +1094,7 @@ openpay.customers.charges.refund(customerId, transactionId, refundRequest, callb
 > Customer request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tr6cxbcefzatd10guvvw/refund \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tr6cxbcefzatd10guvvw/refund \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -1118,7 +1118,7 @@ $charge->refund($refundData);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 RefundParams request = new RefundParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.description("Monto de cargo devuelto");
@@ -1229,10 +1229,10 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 ```shell
 Merchant
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}
 
 Merchant
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}
 ```
 
 ```php
@@ -1283,7 +1283,7 @@ openpay.customers.charges.get(customerId, transactionId, callback);
 > Customer request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tr6cxbcefzatd10guvvw \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tr6cxbcefzatd10guvvw \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
@@ -1297,7 +1297,7 @@ $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Charge charge = api.charges().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
 ```
 
@@ -1387,10 +1387,10 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 ```shell
 Merchant
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges
 
 Merchant
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
@@ -1443,7 +1443,7 @@ openpay.customers.charges.list(customerId, searchParams, callback);
 > Customer request example
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges?creation[gte]=2013-11-01&limit=2" \
+curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges?creation[gte]=2013-11-01&limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
 ```
 
@@ -1468,7 +1468,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
 
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());

@@ -51,7 +51,7 @@ last_update|***string*** <br/>Fecha de la ultima actualizacion de la tienda en f
 > Definición
 
 ```shell
-GET https://api.openpay.mx/stores?latitud={latitud}&longitud={longitud}&kilometers={radio}&amount={monto}
+GET https://api.ecommercebbva.com/stores?latitud={latitud}&longitud={longitud}&kilometers={radio}&amount={monto}
 ```
 
 ```php
@@ -89,7 +89,7 @@ GET https://api.openpay.mx/stores?latitud={latitud}&longitud={longitud}&kilomete
 > Ejemplo de petición
 
 ```shell
-curl https://api.openpay.mx/stores?latitud=20.618975&longitud=-100.422290&kilometers=1.5&amount=4000 \
+curl https://api.ecommercebbva.com/stores?latitud=20.618975&longitud=-100.422290&kilometers=1.5&amount=4000 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 

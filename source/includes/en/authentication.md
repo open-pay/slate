@@ -3,7 +3,7 @@
 > Authentication example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 
 The -u parameter is responsible for the HTTP basic authentication (adding two points after the private key prevents the use of password)
@@ -18,10 +18,10 @@ $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178
 
 ```java
 //Sandbox
-final OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+final OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 
 //Production
-final OpenpayAPI api = new OpenpayAPI("https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+final OpenpayAPI api = new OpenpayAPI("https://api.ecommercebbva.com", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 ```
 
 ```javascript
@@ -59,7 +59,7 @@ openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0f
 > Production 
 
 ```shell
-You only need to use the URI base https://api.openpay.mx
+You only need to use the URI base https://api.ecommercebbva.com
 ```
 
 ```php
@@ -69,7 +69,7 @@ Openpay::setProductionMode(true);
 ```
 
 ```java
-//You only need to use the URI base https://api.openpay.mx
+//You only need to use the URI base https://api.ecommercebbva.com
 ```
 
 ```csharp

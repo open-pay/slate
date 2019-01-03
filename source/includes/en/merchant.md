@@ -38,7 +38,7 @@ clabe | ***numeric***   <br/>Linked CLABE account where funds can be received fr
 
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}
 ```
 
 
@@ -82,12 +82,12 @@ Ruby
 > Request example:
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Merchant merchant = api.merchant().get();
 ```
 

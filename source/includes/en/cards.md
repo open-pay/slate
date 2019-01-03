@@ -60,10 +60,10 @@ points_card |***boolean*** <br/>Indicates whether the card allows the use of rew
 
 ```shell
 Merchant
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/cards
 
 Customer
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
 ```
 
 ```php
@@ -114,7 +114,7 @@ openpay.customers.cards.create(customerId, cardRequest, callback);
 > Customer Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -153,7 +153,7 @@ $card = $customer->cards->add($cardDataRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card request = new Card();
 request.holderName("Juan Perez Ramirez");
 request.cardNumber("4111111111111111");
@@ -288,10 +288,10 @@ Returns a [card object](#card-object) when it is created correctly or returns an
 
 ```shell
 Merchant
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/cards
 
 Customer
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
 ```
 
 ```php
@@ -342,7 +342,7 @@ openpay.customers.cards.create(customerId, cardRequest, callback);
 > Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -366,7 +366,7 @@ $card = $customer->cards->add($cardDataRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card request = new Card();
 request.tokenId("tokgslwpdcrkhlgxqi9a");
 request.deviceSessionId("8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o");
@@ -443,10 +443,10 @@ Returns a [card object](#card-object)
 
 ```shell
 Merchant
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/cards/{CARD_ID}
 
 Customer
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
 ```
 
 ```php
@@ -497,7 +497,7 @@ openpay.customers.cards.get(customerId, cardId, callback);
 > Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" 
 ``` 
@@ -512,7 +512,7 @@ $card = $customer->cards->get('k9pn8qtsvr7k7gxoq1r5');
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card card = api.cards().get("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 ```
 
@@ -574,13 +574,13 @@ Returns a [card object](#card-object)
 
 ```shell
 Merchant
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}/points
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/cards/{CARD_ID}/points
 
 Customer
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}/points
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}/points
 
 Token
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}/points
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}/points
 
 ```
 
@@ -635,7 +635,7 @@ openpay.cards.getPoints(customerId, cardId, callback);
 > Customer request example
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7/points" \
+curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7/points" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ``` 
 
@@ -649,7 +649,7 @@ $pointsBalance = $customer->cards->get(cardId)->get("points");
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128",
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128",
 "maonhzpqm8xp2ydssovf");
 PointsBalance points = api.cards().points("a9pvykxz4g5rg0fplze0", "knasugabhdgq456wr");
 ```
@@ -719,10 +719,10 @@ remaining_mxn| Balance remaining points in pesos
 
 ```shell
 Merchant
-DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}
+DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/cards/{CARD_ID}
 
 Customer
-DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
+DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
 ```
 
 ```php
@@ -775,7 +775,7 @@ openpay.customers.cards.delete(customerId, cardId, callback);
 > Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
+curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -X DELETE
 ```
@@ -791,7 +791,7 @@ $card->delete();
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.cards().delete("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 ```
 
@@ -832,10 +832,10 @@ If the card is removed correctly the answer is empty, if it can not be deleted a
 
 ```shell
 Merchant
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers
 
 Customer
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
+GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
 ```
 
 ```php
@@ -888,7 +888,7 @@ openpay.cards.list(customerId, searchParams, callback);
 > Request example
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards?limit=2" \
+curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards?limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
 ```
 
@@ -913,7 +913,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
         
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
