@@ -144,7 +144,7 @@ description | ***string*** (requerido, longitud = 250) <br/>Una descripción aso
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único de la comisión. Debe ser único para todas las transacciones.
  
 ###Regresa
-El [objeto de transacción](#objeto-transacción) de la comisión, con su fecha de creación y su id o una [respuesta de error](#objeto-error).
+El [objeto de transacción](#objeto-transacci-n) de la comisión, con su fecha de creación y su id o una [respuesta de error](#objeto-error).
 
 
 ##Devolver Comisión
@@ -270,7 +270,7 @@ Propiedad | Descripción
 description | ***string*** (opcional, longitud = 250) <br/>Una descripción asociada al reembolso de la comisión.
  
 ###Regresa
-El [objeto de transacción](#objeto-transacción) del reembolso, con su fecha de creación y su id o una [respuesta de error](#objeto-error).
+El [objeto de transacción](#objeto-transacci-n) del reembolso, con su fecha de creación y su id o una [respuesta de error](#objeto-error).
 
 
 ##Listado de comisiones
@@ -420,4 +420,4 @@ offset| ***numeric*** <br/>Número de registros a omitir al inicio, por defecto 
 limit| ***numeric*** <br/>Número de registros que se requieren, por defecto 10.
 
 ###Respuesta
-Regresa un arreglo de [objetos transacción](#objeto-transacción) de las comisiones cobradas en orden descendente por fecha, cada uno con el identificador del cliente al que se le realizó.
+Regresa un arreglo de [objetos transacción](#objeto-transacci-n) de las comisiones cobradas en orden descendente por fecha, cada uno con el identificador del cliente al que se le realizó.
