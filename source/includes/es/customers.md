@@ -47,7 +47,7 @@ phone_number  |***numeric*** <br/>Número telefónico del Cliente.
 status        |***string*** <br/>Estatus de la cuenta del cliente puede ser active o deleted. Si la cuenta se encuentra en estatus deleted no se permite realizar ninguna transacción.
 balance       |***numeric*** <br/>Saldo en la cuenta con dos decimales.
 clabe         |***numeric*** <br/>Cuenta CLABE asociada con la que puede recibir fondos realizando una  transferencia desde cualquier banco en México.
-[address](#objeto-dirección) |***object*** <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
+[address](#objeto-direcci-n) |***object*** <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
 [store](#objeto-store) |***object*** <br/>Contiene la referencia que se puede utilizar para realizar depósitos en tiendas de conveniencia, también se incluye la url para generar el código de barra.
 
 
@@ -234,7 +234,7 @@ last_name   | ***string*** (opcional, longitud = 100)<br/>Apellidos del cliente.
 email       | ***string*** (requerido, longitud = 100)<br/>Cuenta de correo electrónico del Cliente.
 requires_account | ***boolean***  (opcional, default = true) <br/> Enviar con valor **false** si requiere que el cliente se cree sin cuenta para manejo del saldo.
 phone_number| ***string*** (opcional, longitud = 100) <br/>Número telefónico del Cliente.
-[address](#objeto-dirección) | ***object*** (opcional) <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
+[address](#objeto-direcci-n) | ***object*** (opcional) <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
 
 ###Respuesta
 
@@ -429,7 +429,7 @@ name| ***string*** (requerido, longitud = 100)<br/>Nombre(s) del cliente.
 last_name| ***string*** (opcional, longitud = 100) <br/>Apellidos del cliente.
 email| ***string*** (requerido, longitud = 100)<br/>Cuenta de correo electrónico del Cliente.
 phone_number| ***string*** (opcional, longitud = 100) <br/>Número telefónico del Cliente.
-[address](#objeto-dirección)| ***object*** <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
+[address](#objeto-direcci-n)| ***object*** <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
 
 ###Respuesta
 

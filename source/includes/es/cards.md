@@ -44,7 +44,7 @@ card_number |***numeric***  <br/>Número de tarjeta, puede ser de 16 o 19 dígit
 cvv2 |***numeric***  <br/>Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.
 expiration_month |***numeric***  <br/>Mes de expiración tal como aparece en la tarjeta.
 expiration_year |***numeric***  <br/>Año de expiración tal como aparece en la tarjeta.
-[address](#objeto-dirección) |***object*** <br/>Dirección de facturación del tarjeta habiente.
+[address](#objeto-direcci-n) |***object*** <br/>Dirección de facturación del tarjeta habiente.
 allows_charges |***boolean*** <br/>Permite conocer si se pueden realizar cargos a la tarjeta.
 allows_payouts |***boolean*** <br/>Permite conocer si se pueden realizar envíos de pagos a la tarjeta. 
 brand |***string*** <br/>Marca de la tarjeta: visa, mastercard, carnet o american express.
@@ -276,7 +276,7 @@ cvv2 |***numeric*** (requerido) <br/>Código de seguridad como aparece en la par
 expiration_month |***numeric*** (requerido) <br/>Mes de expiración tal como aparece en la tarjeta.
 expiration_year |***numeric*** (requerido) <br/>Año de expiración tal como aparece en la tarjeta.
 device_session_id | ***string*** (opcional, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta antifraudes.
-[address](#objeto-dirección) |***object*** <br/>Dirección de facturación del tarjeta habiente.
+[address](#objeto-direcci-n) |***object*** <br/>Dirección de facturación del tarjeta habiente.
 
 ###Respuesta
 Regresa un [objeto tarjeta](#objeto-tarjeta) cuando se creó correctamente o una [respuesta de error](#objeto-error) si ocurrió algún problema en la creación.

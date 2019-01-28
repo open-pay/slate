@@ -152,7 +152,7 @@ description | ***string*** (requerido, longitud = 250) <br/>Una descripción aso
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único de la transferencia. Será asignado a la transacción de retiro.
 
 ###Respuesta
-Si la transacción se realiza correctamente, la respuesta contendrá un [objeto de transacción](#objeto-transacción). Este objeto representará el retiro de fondos del cliente actual. En caso de error, se regresará el objeto de error.
+Si la transacción se realiza correctamente, la respuesta contendrá un [objeto de transacción](#objeto-transacci-n). Este objeto representará el retiro de fondos del cliente actual. En caso de error, se regresará el objeto de error.
 
 ##Obtener una transferencia
 
@@ -255,7 +255,7 @@ customer_id| ***string*** (requerido, longitud = 45) <br/> Identificador del cli
 transaction_id| ***string*** (requerido, longitud = 45) <br/> Identificador de la transferencia
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción)
+Regresa un [objeto de transacción](#objeto-transacci-n)
 
 ##Listado de transferencias
 
@@ -407,4 +407,4 @@ offset| ***numeric*** <br/>Número de registros a omitir al inicio, por defecto 
 limit| ***numeric*** <br/>Número de registros que se requieren, por defecto 10.
 
 ###Respuesta
-Listado de [objetos transacción](#objeto-transacción) de las transferencias realizadas, cada uno con el identificador del cliente al que se le realizó. Las transacciones serán listadas en orden descendente por fecha de creación.
+Listado de [objetos transacción](#objeto-transacci-n) de las transferencias realizadas, cada uno con el identificador del cliente al que se le realizó. Las transacciones serán listadas en orden descendente por fecha de creación.

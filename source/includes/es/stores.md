@@ -43,7 +43,7 @@ id|***string*** <br/>Identificador único por cadena.
 name|***datetime*** <br/>Nombre de la tienda.
 last_update|***string*** <br/>Fecha de la ultima actualizacion de la tienda en formato ISO 8601.
 [geolocation](#objeto-geolocation)| ***objeto*** <br/Representacion geografica de la tienda por medio de coordenadas, Latitud y Longitud.
-[address](#objeto-dirección)|***objeto*** <br/>Direccion de la tienda.
+[address](#objeto-direcci-n)|***objeto*** <br/>Direccion de la tienda.
 [paynet_chain](#objeto-paynetchain)|***objeto*** <br/>Cadena paynet a la que pertence.
 
 ##Obtener lista de tiendas por ubicación

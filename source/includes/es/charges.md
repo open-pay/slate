@@ -1,7 +1,7 @@
 #Cargos
-Los cargos se pueden realizar cargos a tarjetas, tiendas y bancos. A cada cargo se le asigna un identificador único en el sistema.
+Los cargos se pueden realizar a tarjetas, tiendas y bancos. A cada cargo se le asigna un identificador único en el sistema.
 
-En cargos a tarjeta puedes hacerlo a una tarjeta guardada usando el id de la tarjeta, usando un token o puedes enviar la información de la tarjeta al momento de la invocación.
+Los cargos a tarjeta puedes hacerlos a una tarjeta guardada usando el id de la tarjeta, usando un token o puedes enviar la información de la tarjeta al momento de la invocación.
 
 ##Con id de tarjeta o token
 
@@ -270,11 +270,11 @@ capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se h
 metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
 use_card_points | ***string*** (opcional, default = NONE) <br/> <table><tr><td><strong>ONLY_POINTS</strong></td> <td>Cargo solo con puntos (<a href="#consulta-de-puntos">Consulta de puntos</a>)</td></tr><tr><td><strong>MIXED</strong></td>       <td>Cargo con pesos y puntos</td></tr><tr><td><strong>NONE</strong></td>        <td>Cargo solo con pesos</td></tr></table>Los valores que indican puntos solo se deben usarse si la propiedad points_card de la tarjeta es true, de otra forma ocurrirá un error.
 send_email | ***boolean*** (opcional) <br/>Usado para cargos de tipo redirect. Indica se si desea enviar un email que direccione al formulario de pago de openpay.
-redirect_url | ***string*** (opcional) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de openpay.
+redirect_url | ***string*** (requerido) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de openpay. <br/><br/> **Nota:** Este parámetro solo se puede utilizar si se especifica el manejo de 3D Secure.
 use_3d_secure | ***string*** (opcional) <br/> Se debe especificar este parámetro en `true` para manejar 3D Secure.
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 ##Con redireccionamiento
 
@@ -516,7 +516,7 @@ send_email | ***boolean*** (opcional) <br/>Indica se si desea enviar un email qu
 redirect_url | ***string*** (requerido) <br/>Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de openpay.
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 ##Cargo en tienda
 
@@ -702,7 +702,7 @@ due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el pago e
 [customer](#crear-un-nuevo-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 ##Cargo en banco
 
@@ -883,7 +883,7 @@ due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el cargo 
 [customer](#crear-un-nuevo-cliente)|***objeto*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 ##Cargo en Alipay
 
@@ -1010,7 +1010,7 @@ response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 ```
 
 Para realizar una transacción con un pago mediante Alipay es necesario indicar el método de pago como **alipay**.
-La respuesta de esta transacción generará una URL de pago en la que el usaurio podrá introducir sus datos de cuenta
+La respuesta de esta transacción generará una URL de pago en la que el usuario podrá introducir sus datos de cuenta
 de Alipay, o escanear un código de barras que le permitirá pagar mediante la aplicación móvil.
 
 
@@ -1027,7 +1027,7 @@ due_date    | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el pag
 redirect_url | ***string*** (requerido) <br/>Indica la url a la que redireccionar despues de una transaccion exitosa, al recibir la llamada en esta url el comercio deberá tomar el atributo id con el id de la transacción para consultar el resultado.
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 ##Confirmar un cargo
 
@@ -1187,11 +1187,11 @@ Confirmar un cargo creado con la propieda de <code>capture = "false"</code>,  es
 
 Propiedad | Descripción
 --------- | -----
-amount | ***numeric*** (requerido) <br/>Cantidad a confirmar. Puede ser menor o igual al monto capturado hasta dos dígitos decimales.
+amount | ***numeric*** (opcional) <br/>Cantidad a confirmar. Puede ser menor o igual al monto capturado hasta dos dígitos decimales.
 
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 ##Devolver un cargo
 
@@ -1382,7 +1382,7 @@ amount | ***numeric*** (opcional) <br/>Cantidad a reembolsar. Debe ser una canti
 
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 
 ##Obtener un cargo
@@ -1539,7 +1539,7 @@ Propiedad | Descripción
 transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del cargo a consultar.
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del cargo o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 ##Listado de cargos
 
@@ -1748,4 +1748,4 @@ amount[lte] | ***numeric*** <br/>Menor o igual al monto.
 
 ###Respuesta
 
-Regresa un arreglo de [objetos de transacción](#objeto-transacción) de los cargos en orden descendente por fecha de creación.
+Regresa un arreglo de [objetos de transacción](#objeto-transacci-n) de los cargos en orden descendente por fecha de creación.

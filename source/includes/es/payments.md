@@ -185,7 +185,7 @@ description | ***string*** (requerido, longitud = 250) <br/>Una descripción aso
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del pago o una [respuesta de error](#objeto-error).
 
 ##Pago a cuenta bancaria
 
@@ -388,7 +388,7 @@ description | ***string*** (requerido, longitud = 250) <br/>Una descripción aso
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del pago o una [respuesta de error](#objeto-error).
 
 ##Obtener un pago
 > Definición
@@ -522,7 +522,7 @@ Propiedad | Descripción
 transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del pago a consultar.
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del pago o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del pago o una [respuesta de error](#objeto-error).
 
 ##Cancelar un pago
 > Definición
@@ -656,7 +656,7 @@ Propiedad | Descripción
 transaction_id| _**string**_ (requerido, longitud = 45)<br/>Identificador del pago a cancelar.
 
 ###Respuesta
-Regresa un [objeto de transacción](#objeto-transacción) con la información del pago cancelado o una [respuesta de error](#objeto-error).
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del pago cancelado o una [respuesta de error](#objeto-error).
 
 ##Listado de pagos
 
@@ -860,7 +860,7 @@ payout_type | ***string (opcional, ALL, AUTOMATIC o MANUAL)***  <br/>Tipo de pay
 
 ###Respuesta
 
-Regresa un listado de [objetos de transacción](#objeto-transacción) de los pagos en orden descendente por fecha de creación.
+Regresa un listado de [objetos de transacción](#objeto-transacci-n) de los pagos en orden descendente por fecha de creación.
 
 ##Resumen de Pagos
 
