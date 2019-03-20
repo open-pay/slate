@@ -52,7 +52,7 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}
 
 
 ```java
-openpayAPI.merchant().get();
+bancomerAPI.merchant().get();
 
 ```
 
@@ -65,7 +65,7 @@ openpayAPI.merchant().get();
 
 
 ```javascript
-openpay.merchant.get(callback);
+bancomer.merchant.get(callback);
 ```
 
 Ruby
@@ -87,12 +87,12 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f \
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Merchant merchant = api.merchant().get();
 ```
 
 ```javascript
-openpay.merchant.get(function(error, merchant){
+bancomer.merchant.get(function(error, merchant){
   // ...
 });
 ```
@@ -101,8 +101,8 @@ openpay.merchant.get(function(error, merchant){
 
 ```json
 {
-   "name":"Demo Openpay",
-   "email":"demo@openpay.mx",
+   "name":"Demo Bancomer",
+   "email":"demo@bancomer.mx",
    "phone":"(442) 258-1039",
    "status":"active",
    "balance":218.73,

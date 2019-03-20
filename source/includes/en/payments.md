@@ -1,5 +1,5 @@
 #Payouts or withdrawals
-A payout is the transaction that allows to extract funds from a Openpay account and send the funds to a bank account. Payouts can be made from the accounts of the customers or from the Merchant account.
+A payout is the transaction that allows to extract funds from a Bancomer account and send the funds to a bank account. Payouts can be made from the accounts of the customers or from the Merchant account.
 
 <aside class="notice">
 **Note:**  All payout transactions will be returned in **IN_PROGRESS** status meaning that it is scheduled for the next day when the operation takes place the status will change to **completed** and if there are configured WebHooks, a notification will be sent.
@@ -20,45 +20,45 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```php
 <?
 Customer
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $payout = $customer->payouts->create(payoutRequest);
 
 Merchant
-$payout = $openpay->payouts->create(payoutRequest);
+$payout = $bancomer->payouts->create(payoutRequest);
 ?>
 ```
 
 ```java
 //Customer
-openpayAPI.payouts().create(String customerId, CreateBankPayoutParams request);
+bancomerAPI.payouts().create(String customerId, CreateBankPayoutParams request);
 
 //Merchant
-openpayAPI.payouts().create(CreateBankPayoutParams request);
+bancomerAPI.payouts().create(CreateBankPayoutParams request);
 ```
 
 ```csharp
 //Customer
-openpayAPI.PayoutService.Create(string customer_id, PayoutRequest request);
+bancomerAPI.PayoutService.Create(string customer_id, PayoutRequest request);
 
 //Merchant
-openpayAPI.PayoutService.Create(PayoutRequest request);
+bancomerAPI.PayoutService.Create(PayoutRequest request);
 ```
 
 ```javascript
 // Merchant
-openpay.payouts.create(payoutRequest, callback);
+bancomer.payouts.create(payoutRequest, callback);
 
 // Customer
-openpay.customers.payouts.create(customerId, payoutRequest, callback);
+bancomer.customers.payouts.create(customerId, payoutRequest, callback);
 ```
 
 ```ruby
 #Customer
-@payouts=@openpay.create(:payouts)
+@payouts=@bancomer.create(:payouts)
 @payouts.create(request_hash, customer_id)
 
 #Merchant
-@payouts=@openpay.create(:payouts)
+@payouts=@bancomer.create(:payouts)
 @payouts.create(request_hash)
 ```
 
@@ -79,7 +79,7 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
 $payoutRequest = array(
     'method' => 'bank_account',
@@ -88,13 +88,13 @@ $payoutRequest = array(
     'description' => 'Retiro de saldo semanal',
     'order_id' => 'ORDEN-00021');
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $bancomer->customers->get('ag4nktpdzebjiye1tlze');
 $payout = $customer->payouts->create($payoutRequest);
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
 CreateBankPayoutParams request = new CreateBankPayoutParams();
 request.bankAccountId("b3d54sd3mdjf75udjfvoc"); // = destination_id
 request.amount(new BigDecimal("10.50"));
@@ -105,7 +105,7 @@ Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
+BancomerAPI api = new BancomerAPI("sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
 PayoutRequest request = new PayoutRequest();
 request.Method = "bank_account";
 request.DestinationId = "b3d54sd3mdjf75udjfvoc";
@@ -125,14 +125,14 @@ var payoutRequest = {
     'order_id': 'oid-00021'
 };
 
-openpay.customers.payouts.create('ag4nktpdzebjiye1tlze', payoutRequest, function(error, payout) {
+bancomer.customers.payouts.create('ag4nktpdzebjiye1tlze', payoutRequest, function(error, payout) {
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@payouts=@openpay.create(:payouts)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@bancomer.create(:payouts)
 request_hash={
      "method" => "bank_account",
      "destination_id" => "b3d54sd3mdjf75udjfvoc",   
@@ -203,45 +203,45 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```php
 <?
 Customer
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $payout = $customer->payouts->create(payoutRequest);
 
 Merchant
-$payout = $openpay->payouts->create(payoutRequest);
+$payout = $bancomer->payouts->create(payoutRequest);
 ?>
 ```
 
 ```java
 //Customere
-openpayAPI.payouts().create(String customerId, CreateBankPayoutParams request);
+bancomerAPI.payouts().create(String customerId, CreateBankPayoutParams request);
 
 //Comercio
-openpayAPI.payouts().create(CreateBankPayoutParams request);
+bancomerAPI.payouts().create(CreateBankPayoutParams request);
 ```
 
 ```csharp
 //Customer
-openpayAPI.PayoutService.Create(string customer_id, PayoutRequest request);
+bancomerAPI.PayoutService.Create(string customer_id, PayoutRequest request);
 
 //Merchant
-openpayAPI.PayoutService.Create(PayoutRequest request);
+bancomerAPI.PayoutService.Create(PayoutRequest request);
 ```
 
 ```javascript
 // Merchant
-openpay.payouts.create(payoutRequest, callback);
+bancomer.payouts.create(payoutRequest, callback);
 
 // Customer
-openpay.customers.payouts.create(customerId, payoutRequest, callback);
+bancomer.customers.payouts.create(customerId, payoutRequest, callback);
 ```
 
 ```ruby
 #Customer
-@payouts=@openpay.create(:payouts)
+@payouts=@bancomer.create(:payouts)
 @payouts.create(request_hash, customer_id)
 
 #Merchant
-@payouts=@openpay.create(:payouts)
+@payouts=@bancomer.create(:payouts)
 @payouts.create(request_hash)
 ```
 
@@ -265,7 +265,7 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/asynwi
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
 $payoutRequest = array(
     'method' => 'bank_account',
@@ -276,13 +276,13 @@ $payoutRequest = array(
     'description' => 'Retiro de saldo semanal',
     'order_id' => 'ORDEN-00021');
 
-$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
+$customer = $bancomer->customers->get('asynwirguzkgq2bizogo');
 $payout = $customer->payouts->create($payoutRequest);
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateBankPayoutParams request = new CreateBankPayoutParams();
 BankAccount bankAccount = new BankAccount();
 bankAccount.holderName("Mi empresa");
@@ -297,7 +297,7 @@ Payout payout = api.payouts().create("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 PayoutRequest request = new PayoutRequest();
 request.Method = "bank_account";
 BankAccount bankAccount = new BankAccount();
@@ -324,14 +324,14 @@ var payoutRequest = {
    'order_id':'oid-1110011'
 };
 
-openpay.customers.payouts.create('ag4nktpdzebjiye1tlze', payoutRequest, function(error, payout) {
+bancomer.customers.payouts.create('ag4nktpdzebjiye1tlze', payoutRequest, function(error, payout) {
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@payouts=@openpay.create(:payouts)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@bancomer.create(:payouts)
 bank_account_hash={
      "holder_name" => "Mi empresa",
      "alias" => nil,
@@ -405,45 +405,45 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 ```php
 <?
 Merchant
-$payout = $openpay->payouts->get(transactionId);
+$payout = $bancomer->payouts->get(transactionId);
 
 Customer
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $payout = $customer->payouts->get(transactionId);
 ?>
 ```
 
 ```java
 //Customer
-openpayAPI.payouts().get(String customerId, String transactionId);
+bancomerAPI.payouts().get(String customerId, String transactionId);
 
 //Merchant
-openpayAPI.payouts().get(String transactionId);
+bancomerAPI.payouts().get(String transactionId);
 ```
 
 ```csharp
 //Customer
-openpayAPI.PayoutService.Get(string customer_id, string transaction_id);
+bancomerAPI.PayoutService.Get(string customer_id, string transaction_id);
 
 //Merchant
-openpayAPI.PayoutService.Get(string transaction_id);
+bancomerAPI.PayoutService.Get(string transaction_id);
 ```
 
 ```javascript
 // Merchant
-openpay.payouts.get(transactionId, callback);
+bancomer.payouts.get(transactionId, callback);
 
 // Customer
-openpay.customers.payouts.get(customerId, transactionId, callback);
+bancomer.customers.payouts.get(customerId, transactionId, callback);
 ```
 
 ```ruby
 #Customer
-@payouts=@openpay.create(:payouts)
+@payouts=@bancomer.create(:payouts)
 @payouts.get(transaction_id, customer_id)
 
 #Merchant
-@payouts=@openpay.create(:payouts)
+@payouts=@bancomer.create(:payouts)
 @payouts.get(transaction_id)
 ```
 
@@ -456,32 +456,32 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/asynwi
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
+$customer = $bancomer->customers->get('asynwirguzkgq2bizogo');
 $payout = $customer->payouts->get('trwpxhrgfeub9eqdyvqz');
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Payout payout = api.payouts().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Payout = api.PayoutService.Get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
 ```
 
 ```javascript
-openpay.customers.payouts.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', function(error, payout) {
+bancomer.customers.payouts.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', function(error, payout) {
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@payouts=@openpay.create(:payouts)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@bancomer.create(:payouts)
 
 response_hash=@payouts.get("tr6cxbcefzatd10guvvw", "asynwirguzkgq2bizogo")
 ```
@@ -539,45 +539,45 @@ DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_I
 ```php
 <?
 Merchant
-$payout = $openpay->payouts->delete(transactionId);
+$payout = $bancomer->payouts->delete(transactionId);
 
 Customer
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $payout = $customer->payouts->delete(transactionId);
 ?>
 ```
 
 ```java
 //Customer
-openpayAPI.payouts().cancel(String customerId, String transactionId);
+bancomerAPI.payouts().cancel(String customerId, String transactionId);
 
 //Merchant
-openpayAPI.payouts().cancel(String transactionId);
+bancomerAPI.payouts().cancel(String transactionId);
 ```
 
 ```csharp
 //Customer
-openpayAPI.PayoutService.Cancel(string customer_id, string transaction_id);
+bancomerAPI.PayoutService.Cancel(string customer_id, string transaction_id);
 
 //Merchant
-openpayAPI.PayoutService.Cancel(string transaction_id);
+bancomerAPI.PayoutService.Cancel(string transaction_id);
 ```
 
 ```javascript
 // Merchant
-openpay.payouts.delete(transactionId, callback);
+bancomer.payouts.delete(transactionId, callback);
 
 // Customer
-openpay.customers.payouts.delete(customerId, transactionId, callback);
+bancomer.customers.payouts.delete(customerId, transactionId, callback);
 ```
 
 ```ruby
 #Customer
-@payouts=@openpay.create(:payouts)
+@payouts=@bancomer.create(:payouts)
 @payouts.delete(transaction_id, customer_id)
 
 #Merchant
-@payouts=@openpay.create(:payouts)
+@payouts=@bancomer.create(:payouts)
 @payouts.delete(transaction_id)
 ```
 
@@ -590,32 +590,32 @@ curl -X DELETE https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/custom
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
+$customer = $bancomer->customers->get('asynwirguzkgq2bizogo');
 $payout = $customer->payouts->delete('trozeipf364jqrsbt3ej');
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Payout payout = api.payouts().cancel("ag4nktpdzebjiye1tlze", "trozeipf364jqrsbt3ej");
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Payout = api.PayoutService.Cancel("ag4nktpdzebjiye1tlze", "trozeipf364jqrsbt3ej");
 ```
 
 ```javascript
-openpay.customers.payouts.delete('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', function(error, payout) {
+bancomer.customers.payouts.delete('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', function(error, payout) {
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@payouts=@openpay.create(:payouts)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@bancomer.create(:payouts)
 
 response_hash=@payouts.delete("trozeipf364jqrsbt3ej", "asynwirguzkgq2bizogo")
 ```
@@ -675,47 +675,47 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 ```php
 <?
 Merchant
-$payoutList = $openpay->payouts->getList(searchParams);
+$payoutList = $bancomer->payouts->getList(searchParams);
 
 Customer
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $payoutList = $customer->payouts->getList(searchParams);
 ?>
 ```
 
 ```java
 //Customer
-openpayAPI.payouts().list(String customerId, SearchParams request);
+bancomerAPI.payouts().list(String customerId, SearchParams request);
 
 //Merchant
-openpayAPI.payouts().list(SearchParams request);
+bancomerAPI.payouts().list(SearchParams request);
 ```
 
 ```csharp
 //Customer
-openpayAPI.PayoutService.List(string customer_id, SearchParams request = null);
+bancomerAPI.PayoutService.List(string customer_id, SearchParams request = null);
 
 //Merchant
-openpayAPI.PayoutService.List(SearchParams request = null);
+bancomerAPI.PayoutService.List(SearchParams request = null);
 ```
 
 ```javascript
 // Merchant
-openpay.payouts.list(callback);
-openpay.payouts.list(searchParams, callback);
+bancomer.payouts.list(callback);
+bancomer.payouts.list(searchParams, callback);
 
 // Customer
-openpay.customers.payouts.list(customerId, callback);
-openpay.customers.payouts.list(customerId, searchParams, callback);
+bancomer.customers.payouts.list(customerId, callback);
+bancomer.customers.payouts.list(customerId, searchParams, callback);
 ```
 
 ```ruby
 #Customer
-@payouts=@openpay.create(:payouts)
+@payouts=@bancomer.create(:payouts)
 @payouts.all(customer_id)
 
 #Merchant
-@payouts=@openpay.create(:payouts)
+@payouts=@bancomer.create(:payouts)
 @payouts.all
 ```
 
@@ -728,7 +728,7 @@ curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/as
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
 $searchParams = array(
     'creation[gte]' => '2013-11-01',
@@ -737,7 +737,7 @@ $searchParams = array(
     'offset' => 0,
     'limit' => 2);
 
-$customer = $openpay->customers->get('asynwirguzkgq2bizogo');
+$customer = $bancomer->customers->get('asynwirguzkgq2bizogo');
 $payoutList = $customer->payouts->getList($searchParams);
 ?>
 ```
@@ -748,7 +748,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
 
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -760,7 +760,7 @@ List<Payout> payouts = api.payouts().list("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.CreationGte = new Datetime(2014, 5, 1);
 request.CreationLte = new DateTime(2014, 5, 15);
@@ -778,14 +778,14 @@ var searchParams = {
   'limit' : 2
 };
 
-openpay.customers.payouts.list('asynwirguzkgq2bizogo', searchParams, function(error, list) {
+bancomer.customers.payouts.list('asynwirguzkgq2bizogo', searchParams, function(error, list) {
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@payouts=@openpay.create(:payouts)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@payouts=@bancomer.create(:payouts)
 
 response_hash=@payouts.all("asynwirguzkgq2bizogo")
 ```
@@ -874,24 +874,24 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/reports/payout/{TRANSACT
 
 ```php
 <?
-$transactionsPayout = $openpay->transactionsPayout->get(transactionId);
+$transactionsPayout = $bancomer->transactionsPayout->get(transactionId);
 ?>
 ```
 
 ```java
-openpayAPI.transactionsPayout().getResume(String transactionId);
+bancomerAPI.transactionsPayout().getResume(String transactionId);
 ```
 
 ```csharp
-openpayAPI.PayoutReportService.Get(string transaction_id);
+bancomerAPI.PayoutReportService.Get(string transaction_id);
 ```
 
 ```javascript
-openpay.transactionsPayout.get(transactionId, callback);
+bancomer.transactionsPayout.get(transactionId, callback);
 ```
 
 ```ruby
-@transactionsPayout=@openpay.create(:transactionsPayout)
+@transactionsPayout=@bancomer.create(:transactionsPayout)
 @transactionsPayout.get(transaction_id)
 ```
 
@@ -904,33 +904,33 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/reports/payout/t
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$payout = $openpay->transactionsPayout->get('trwpxhrgfeub9eqdyvqz');
+$payout = $bancomer->transactionsPayout->get('trwpxhrgfeub9eqdyvqz');
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 
 TransactionsPayoutResume payoutResume = transactionsPayout().getResume("tr6cxbcefzatd10guvvw");
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 
 PayoutSummary payoutSummary = api.PayoutReportService.Get("tr6cxbcefzatd10guvvw");
 ```
 
 ```javascript
-openpay.transactionsPayout.get('tr6cxbcefzatd10guvvw', function(error, payout) {
+bancomer.transactionsPayout.get('tr6cxbcefzatd10guvvw', function(error, payout) {
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@transactionsPayout=@openpay.create(:transactionsPayout)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@transactionsPayout=@bancomer.create(:transactionsPayout)
 
 response_hash=@transactionsPayout.get("tr6cxbcefzatd10guvvw")
 ```
@@ -986,24 +986,24 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/reports/payout/{TRANSACT
 
 ```php
 <?
-$transactionsPayout = $openpay->transactionsPayout->getDetails(transactionId, searchParams);
+$transactionsPayout = $bancomer->transactionsPayout->getDetails(transactionId, searchParams);
 ?>
 ```
 
 ```java
-openpayAPI.transactionsPayout().getDetails(String transactionId, TransactionsPayoutType transactionsPayoutType, PaginationParams paginationParams);
+bancomerAPI.transactionsPayout().getDetails(String transactionId, TransactionsPayoutType transactionsPayoutType, PaginationParams paginationParams);
 ```
 
 ```csharp
-openpayAPI.PayoutReportService.Detail(string transaction_id, PayoutReportDetailSearchParams searchParams);
+bancomerAPI.PayoutReportService.Detail(string transaction_id, PayoutReportDetailSearchParams searchParams);
 ```
 
 ```javascript
-openpay.transactionsPayout.getDetails(transactionId, searchParams, callback);
+bancomer.transactionsPayout.getDetails(transactionId, searchParams, callback);
 ```
 
 ```ruby
-@transactionsPayout=@openpay.create(:transactionsPayout)
+@transactionsPayout=@bancomer.create(:transactionsPayout)
 @transactionsPayout.getDetails(transaction_id, searchParams)
 ```
 
@@ -1016,19 +1016,19 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/reports/payout/t
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
 $searchParams = array(
     'payout_type' => 'IN',
     'offset' => 0,
     'limit' => 100);
 
-$payout = $openpay->transactionsPayout->getDetails('trwpxhrgfeub9eqdyvqz', $searchParams);
+$payout = $bancomer->transactionsPayout->getDetails('trwpxhrgfeub9eqdyvqz', $searchParams);
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 
       PaginationParams paginationParams = new PaginationParams();
       paginationParams.offset(0);
@@ -1038,7 +1038,7 @@ List<GenericTransaction> payoutTransactions = transactionsPayout().getDetails("t
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 PayoutReportDetailSearchParams searchParams = new PayoutReportDetailSearchParams();
 searchParams.DetailType = "IN";
 searchParams.Offset = 0;
@@ -1054,14 +1054,14 @@ var searchParams = {
   'limit' : 100
 };
 
-openpay.transactionsPayout.get('tr6cxbcefzatd10guvvw', searchParams, function(error, payout) {
+bancomer.transactionsPayout.get('tr6cxbcefzatd10guvvw', searchParams, function(error, payout) {
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@transactionsPayout=@openpay.create(:transactionsPayout)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@transactionsPayout=@bancomer.create(:transactionsPayout)
 
 search_params_hash={
      "detail_type" => "IN",

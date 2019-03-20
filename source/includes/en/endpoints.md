@@ -10,42 +10,13 @@
 ```
 /v1/{MERCHANT_ID}/...
 
-/fees
-/fees/{FEE_ID}
 /charges
 /charges/{TRANSACTION_ID}
-/payouts
-/payouts/{TRANSACTION_ID}
-/cards
-/cards/{CARD_ID}
-/customers
-/customers/{CUSTOMER_ID}
-/plans
-/plans/{PLAN_ID}
 ​/tokens
 /tokens/{TOKEN_ID}
 ```
 
-> b) By Customer
-
-```
-/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/...
-
-/cards
-/cards/{CARD_ID}
-/bankaccounts
-/bankaccounts/{BANKACCOUNT_ID}
-/charges
-/charges/{TRANSACTION_ID}
-/payouts
-/payouts/{TRANSACTION_ID}
-/transfers
-/transfers/{TRANSACTION_ID}
-/subscriptions
-/subscriptions/{SUBSCRIPTION_ID}
-```
-
-The Openpay REST API has a test environment (sandbox) and a production environment. For integrating your system with Openpay, use the credentials that were generated when you signed up. Once you are ready to move to production environment and your request is approved, new credentials will be generated for accessing the production environment.
+The Bancomer REST API has a test environment (sandbox) and a production environment. For integrating your system with Bancomer, use the credentials that were generated when you signed up. Once you are ready to move to production environment and your request is approved, new credentials will be generated for accessing the production environment.
 
 The following URIs are the basis of the endpoints for the supported environments:
 

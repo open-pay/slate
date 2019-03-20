@@ -152,7 +152,7 @@ Returns a [transaction object](#transaction-object) with the charge information 
 <html>
     <head>
     ...
-        <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay-qropay.v1.js"></script>
+        <script type="text/javascript" src="https://bancomer.s3.amazonaws.com/bancomer-qropay.v1.js"></script>
     ...
         <script type="text/javascript">
             //merchantId    = Your merchant id
@@ -171,7 +171,7 @@ Returns a [transaction object](#transaction-object) with the charge information 
 </html>
 ```
 
-The JavaScript library [qropay] (https://openpay.s3.amazonaws.com/openpay-qropay.v1.js) is offered to insert an HTML document with the status of the QR code charge via an `iframe` tag. To use it you simply have to import it to your website. Done the previous thing you will be able to insert in `body` a label `div` in which an `iframe` will be inserted that will show an HTML document with the status of the position.
+The JavaScript library [qropay] (https://bancomer.s3.amazonaws.com/bancomer-qropay.v1.js) is offered to insert an HTML document with the status of the QR code charge via an `iframe` tag. To use it you simply have to import it to your website. Done the previous thing you will be able to insert in `body` a label `div` in which an `iframe` will be inserted that will show an HTML document with the status of the position.
 
 ***Example of iframe with cargo status:***</br> 
 <img src="https://www.openpay.mx/img/qropay/charge_completed.gif">

@@ -40,28 +40,28 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 
 ```php
 <?
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $bankaccount = $customer->bankaccounts->add(bankDataRequest);
 ?>
 ```
 
 ```java
 //Customer
-openpayAPI.bankAccounts().create(String customerId, BankAccount request);
+BancomerAPI.bankAccounts().create(String customerId, BankAccount request);
 ```
 
 ```csharp
 //Customer
-openpayAPI.BankAccountService.Create(string customer_id, BankAccount request);
+BancomerAPI.BankAccountService.Create(string customer_id, BankAccount request);
 ```
 
 ```javascript
-openpay.customers.bankaccounts.create(customerId, bankaccountRequest, callback);
+bancomerAPI.customers.bankaccounts.create(customerId, bankaccountRequest, callback);
 ```
 
 ```ruby
 #Customer
-@bank_accounts=@openpay.create(:bankaccounts)
+@bank_accounts=@bancomer.create(:bankaccounts)
 @bank_accounts.create(request_hash, customer_id)
 ```
 
@@ -80,20 +80,20 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $bankDataRequest = array(
     'clabe' => '072910007380090615',
     'alias' => 'Cuenta principal',
     'holder_name' => 'Teofilo Velazco');
 
-$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
 $bankaccount = $customer->bankaccounts->add($bankDataRequest);
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 BankAccount request = new BankAccount();
 request.holderName("Juan Hernández Sánchez");
 request.alias("Cuenta principal");
@@ -103,7 +103,7 @@ request = api.bankAccounts().create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 BankAccount request = new BankAccount();
 request.HolderName = "Juan Hernández Sánchez";
 request.Alias = "Cuenta principal";
@@ -119,14 +119,14 @@ var bankaccountRequest = {
   'holder_name' : 'Juan Hernández Sánchez'
 };
 
-openpay.customers.bankaccounts.create('a9pvykxz4g5rg0fplze0', bankaccountRequest, function(error, bankaccount) {
+bancomer.customers.bankaccounts.create('a9pvykxz4g5rg0fplze0', bankaccountRequest, function(error, bankaccount) {
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@bank_accounts=@openpay.create(:bankaccounts)
+@bancomer=Bancomer.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@bank_accounts=@bancomer.create(:bankaccounts)
 request_hash={
      "holder_name" => "Juan Hernández Sánchez",
      "alias" => "Cuenta principal",
@@ -174,28 +174,28 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 
 ```php
 <?
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $bankaccount = $customer->bankaccounts->get(bankAccountId);
 ?>
 ```
 
 ```java
 //Customer
-openpayAPI.bankAccounts().get(String customerId, String bankAccountId);
+bancomerAPI.bankAccounts().get(String customerId, String bankAccountId);
 ```
 
 ```csharp
 //Customer
-openpayAPI.BankAccountService.Get(string customer_id, string bank_account_id);
+bancomerAPI.BankAccountService.Get(string customer_id, string bank_account_id);
 ```
 
 ```javascript
-openpay.customers.bankaccounts.get(customerId, bankaccountId, callback);
+bancomerAPI.customers.bankaccounts.get(customerId, bankaccountId, callback);
 ```
 
 ```ruby
 #Customer 
-@bank_accounts=@openpay.create(:bankaccounts)
+@bank_accounts=@bancomer.create(:bankaccounts)
 @bank_accounts.get(customer_id, bankaccount_id)
 ```
 
@@ -208,32 +208,32 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
 $bankaccount = $customer->bankaccounts->get('b4vcouaavwuvkpufh0so');
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 BankAccount bankAccount = api.bankAccounts().get("a9pvykxz4g5rg0fplze0", "buyj4apkwilpp2jfxr9r");
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 BankAccount bankAccount = api.BankAccountService.Get("a9pvykxz4g5rg0fplze0", "buyj4apkwilpp2jfxr9r");
 ```
 
 ```javascript
-openpay.customers.bankaccounts.get('a9pvykxz4g5rg0fplze0', 'buyj4apkwilpp2jfxr9r', function(error, bankaccount){
+bancomerAPI.customers.bankaccounts.get('a9pvykxz4g5rg0fplze0', 'buyj4apkwilpp2jfxr9r', function(error, bankaccount){
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@bank_accounts=@openpay.create(:bankaccounts)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@bank_accounts=@bancomer.create(:bankaccounts)
 
 response_hash=@bank_accounts.get("asynwirguzkgq2bizogo", "buyj4apkwilpp2jfxr9r")
 ```
@@ -272,7 +272,7 @@ DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_I
 
 ```php
 <?
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $bankaccount = $customer->bankaccounts->get(bankAccountId);
 $bankaccount->delete();
 ?>
@@ -280,21 +280,21 @@ $bankaccount->delete();
 
 ```java
 //Customer
-openpayAPI.bankAccounts().delete(String customerId, String bankAccountId);
+bancomerAPI.bankAccounts().delete(String customerId, String bankAccountId);
 ```
 
 ```csharp
 //Customer
-openpayAPI.BankAccountService.Delete(string customer_id, string bank_account_id);
+bancomerAPI.BankAccountService.Delete(string customer_id, string bank_account_id);
 ```
 
 ```javascript
-openpay.customers.bankaccounts.delete(customerId,bankaccountId, callback);
+bancomer.customers.bankaccounts.delete(customerId,bankaccountId, callback);
 ```
 
 ```ruby
 #Customer
-@bank_accounts=@openpay.create(:bankaccounts)
+@bank_accounts=@bancomer.create(:bankaccounts)
 @bank_accounts.delete(customer_id, bankaccount_id)
 ```
 
@@ -308,33 +308,33 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
 $bankaccount = $customer->bankaccounts->get('b4vcouaavwuvkpufh0so');
 $bankaccount->delete();
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.bankAccounts().delete("a9pvykxz4g5rg0fplze0", "buyj4apkwilpp2jfxr9r");
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.BankAccountService.Delete("a9pvykxz4g5rg0fplze0", "buyj4apkwilpp2jfxr9r");
 ```
 
 ```javascript
-openpay.customers.bankaccounts.delete('a9pvykxz4g5rg0fplze0','buyj4apkwilpp2jfxr9r', function(error){
+bancomer.customers.bankaccounts.delete('a9pvykxz4g5rg0fplze0','buyj4apkwilpp2jfxr9r', function(error){
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@bank_accounts=@openpay.create(:bankaccounts)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@bank_accounts=@bancomer.create(:bankaccounts)
 
 response_hash=@bank_accounts.delete("asynwirguzkgq2bizogo", "buyj4apkwilpp2jfxr9r")
 ```
@@ -358,29 +358,29 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 
 ```php
 <?
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $bankaccountList = $customer->bankaccounts->getList(findDataRequest);
 ?>
 ```
 
 ```java
 //Customer
-openpayAPI.bankAccounts().list(String customerId, SearchParams request);
+bancomerAPI.bankAccounts().list(String customerId, SearchParams request);
 ```
 
 ```csharp
 //Customer
-openpayAPI.BankAccountService.List(string customer_id, SearchParams request = null);
+bancomerAPI.BankAccountService.List(string customer_id, SearchParams request = null);
 ```
 
 ```javascript
-openpay.customers.bankaccounts.list(customerId, callback);
-openpay.customers.bankaccounts.list(customerId, searchParams, callback);
+bancomer.customers.bankaccounts.list(customerId, callback);
+bancomer.customers.bankaccounts.list(customerId, searchParams, callback);
 ```
 
 ```ruby
 #Customer
-@bank_accounts=@openpay.create(:bankaccounts)
+@bank_accounts=@bancomer.create(:bankaccounts)
 @bank_accounts.all(customer_id)
 ```
 
@@ -393,7 +393,7 @@ curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag
 
 ```php
 <?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $findDataRequest = array(
     'creation[gte]' => '2013-01-01',
@@ -401,7 +401,7 @@ $findDataRequest = array(
     'offset' => 0,
     'limit' => 5);
 
-$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
 $bankaccountList = $customer->bankaccounts->getList($findDataRequest);
 ?>
 ```
@@ -412,7 +412,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
         
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -423,7 +423,7 @@ List<BankAccount> bankAccounts = api.bankAccounts().list("a9pvykxz4g5rg0fplze0",
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.CreationGte = new Datetime(2014, 5, 1);
 request.CreationLte = new DateTime(2014, 5, 15);
@@ -438,14 +438,14 @@ var searchParams = {
   'limit' : 2
 };
 
-openpay.customers.bankaccounts.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
+bancomer.customers.bankaccounts.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@bank_accounts=@openpay.create(:bankaccounts)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@bank_accounts=@bancomer.create(:bankaccounts)
 
 response_hash=@bank_accounts.all("asynwirguzkgq2bizogo")
 ```

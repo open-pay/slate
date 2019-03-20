@@ -131,3 +131,50 @@ CHARGEBACK_ADJUSTMENT | Transacción con ajuste de contracargo
 CHARGE_PENDING | Transacción de cargo que no ha sido pagada
 CANCELLED | Transacción de cargo que no fue pagada y se ha cancelado
 FAILED | Transacción que se intentó pagar pero ocurrió algún error
+
+
+##Objeto Cliente
+
+> Ejemplo de Objeto:
+
+```json
+{
+   "id":"cz4nkhrlcu9k7qd4lwqx",
+   "creation_date":"2013-11-08T12:04:46-06:00",
+   "name":"Rodrigo",
+   "last_name":"Velazco Perez",
+   "email":"rodrigo.velazco@payments.com", 
+   "phone_number":"4425667045",
+   "external_id":"cliente1",
+   "status":"active",
+   "balance":103,
+   "address":{
+      "line1":"Av. 5 de febrero No. 1080 int Roble 207",
+      "line2":"Carrillo puerto",
+      "line3":"Zona industrial carrillo puerto",
+      "postal_code":"06500",
+      "state":"Querétaro",
+      "city":"Querétaro",
+      "country_code":"MX"
+   },
+   "store": {
+       "reference": "OPENPAY02DQ35YOY7",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323"
+}
+```
+
+Propiedad | Descripción
+--------- | -----
+id            |***string*** <br/>Identificador único del cliente.
+creation_date |***datetime*** <br/>Fecha y hora en que se creó el cliente  en formato ISO 8601
+name          |***string*** <br/>Nombre del cliente.
+last_name     |***string*** <br/>Apellidos del cliente.
+email         |***string*** <br/>Cuenta de correo electrónico del cliente.
+phone_number  |***numeric*** <br/>Número telefónico del Cliente.
+status        |***string*** <br/>Estatus de la cuenta del cliente puede ser active o deleted. Si la cuenta se encuentra en estatus deleted no se permite realizar ninguna transacción.
+balance       |***numeric*** <br/>Saldo en la cuenta con dos decimales.
+clabe         |***numeric*** <br/>Cuenta CLABE asociada con la que puede recibir fondos realizando una  transferencia desde cualquier banco en México.
+[address](#objeto-direcci-n) |***object*** <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
+store |***object*** <br/>Contiene la referencia que se puede utilizar para realizar depósitos en tiendas de conveniencia, también se incluye la url para generar el código de barra.

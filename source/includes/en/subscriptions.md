@@ -62,26 +62,26 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 
 ```php
 <?
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $subscription = $customer->subscriptions->add(subscriptionDataRequest);
 ?>
 ```
 
 ```java
-openpayAPI.subscriptions().create(String customerId, Subscription request);
+bancomerAPI.subscriptions().create(String customerId, Subscription request);
 ```
 
 ```csharp
-openpayAPI.SubscriptionService.Create(string customer_id, Subscription request);
+bancomerAPI.SubscriptionService.Create(string customer_id, Subscription request);
 ```
 
 ```javascript
-openpay.customers.subscriptions.create(customerId, subscriptionRequest, callback);
+bancomer.customers.subscriptions.create(customerId, subscriptionRequest, callback);
 ```
 
 ```ruby
 #Customer
-@subscriptions=@openpay.create(:subscriptions)
+@subscriptions=@bancomer.create(:subscriptions)
 @subscriptions.create(request_hash, customer_id)
 ```
 
@@ -106,7 +106,7 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $subscriptionDataRequest = array(
     'trial_end_date' => '2014-01-01', 
@@ -119,7 +119,7 @@ $subscriptionDataRequest = array(
          'cvv2' => '110',
          'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f'));
 
-$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
 $subscription = $customer->subscriptions->add($subscriptionDataRequest);
 ?>
 ```
@@ -128,7 +128,7 @@ $subscription = $customer->subscriptions->add($subscriptionDataRequest);
 final Calendar trialEndDate = Calendar.getInstance();
 trialEndDate.set(2014, 5, 1, 0, 0, 0);
         
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.planId("pbi4kb8hpb64x0uud2eb");
 request.trialEndDate(trialEndDate.getTime());
@@ -145,7 +145,7 @@ request = api.subscriptions().create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.PlanId = "idPlan-01001";
 request.TrialEndDate = new Datetime(2014, 5, 1);
@@ -174,14 +174,14 @@ var subscriptionRequest = {
    'plan_id':'pbi4kb8hpb64x0uud2eb'
 };
 
-openpay.customers.subscriptions.create(customerId, subscriptionRequest, function(error, subscription){
+bancomer.customers.subscriptions.create(customerId, subscriptionRequest, function(error, subscription){
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@subscriptions=@openpay.create(:subscriptions)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@bancomer.create(:subscriptions)
 card_hash={
      "holder_name" => "Juan Perez Ramirez",
      "card_number" => "4111111111111111",
@@ -229,7 +229,7 @@ response_hash=@subscriptions.create(request_hash.to_hash, "a9pvykxz4g5rg0fplze0"
 }
 ```
  
-Create a new subscription for an existing customer.  You can use an existing card or you can send the info of the card where the charges will be made, in these you can include the property <code>device_session_id</code> to use the antifraud tool, see [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
+Create a new subscription for an existing customer.  You can use an existing card or you can send the info of the card where the charges will be made, in these you can include the property <code>device_session_id</code> to use the antifraud tool, see [Fraud detection using device data](https://github.com/open-pay/bancomer-js#fraud-detection-using-device-data).
 
 
 ###Request
@@ -254,27 +254,27 @@ PUT https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 
 ```php
 <?
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $subscription = $customer->subscriptions->get(subscriptionId);
 $subscription->save();
 ?>
 ```
 
 ```java
-openpayAPI.subscriptions().update(Subscription request);
+bancomerAPI.subscriptions().update(Subscription request);
 ```
 
 ```csharp
-openpayAPI.SubscriptionService.Update(string customer_id, Subscription subscription);
+bancomerAPI.SubscriptionService.Update(string customer_id, Subscription subscription);
 ```
 
 ```javascript
-openpay.customers.subscriptions.update(customerId, subscriptionId, subscriptionRequest, callback);
+bancomer.customers.subscriptions.update(customerId, subscriptionId, subscriptionRequest, callback);
 ```
 
 ```ruby
 #Customer
-@subscriptions=@openpay.create(:subscriptions)
+@subscriptions=@bancomer.create(:subscriptions)
 @subscriptions.update(request_hash, customer_id)
 ```
 
@@ -298,9 +298,9 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
 $subscription = $customer->subscriptions->get('s7ri24srbldoqqlfo4vp');
 $subscription->trial_end_date = '2014-12-31';
 $subscription->save();
@@ -311,7 +311,7 @@ $subscription->save();
 final Calendar trialEndDate = Calendar.getInstance();
 trialEndDate.set(2014, 5, 1, 0, 0, 0);
         
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.planId("idPlan-01001");
 request.trialEndDate(trialEndDate.getTime());
@@ -321,7 +321,7 @@ request = api.subscriptions().update(request);
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.PlanId = "idPlan-01001";
 request.TrialEndDate = new Datetime(2014, 5, 1);;
@@ -342,15 +342,15 @@ var subscriptionRequest = {
   }
 };
 
-openpay.customers.subscriptions.update('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', subscriptionRequest, 
+bancomer.customers.subscriptions.update('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', subscriptionRequest, 
     function(error, subscription){
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@subscriptions=@openpay.create(:subscriptions)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@bancomer.create(:subscriptions)
 request_hash={
      "plan_id" => "pbi4kb8hpb64x0uud2eb",
      "cancel_at_period_end" => true,
@@ -416,26 +416,26 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 
 ```php
 <?
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $subscription = $customer->subscriptions->get(subscriptionId);
 ?>
 ```
 
 ```java
-openpayAPI.subscriptions().get(String customerId, String customerId);
+bancomerAPI.subscriptions().get(String customerId, String customerId);
 ```
 
 ```csharp
-openpayAPI.SubscriptionService.Get(string customer_id, string subscription_id);
+bancomerAPI.SubscriptionService.Get(string customer_id, string subscription_id);
 ```
 
 ```javascript
-openpay.customers.subscriptions.get(customerId, subscriptionId, callback);
+bancomer.customers.subscriptions.get(customerId, subscriptionId, callback);
 ```
 
 ```ruby
 #Customer
-@subscriptions=@openpay.create(:subscriptions)
+@subscriptions=@bancomer.create(:subscriptions)
 @subscriptions.get(subscription_id,customer_id)
 ```
 
@@ -448,32 +448,32 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
 $subscription = $customer->subscriptions->get('s7ri24srbldoqqlfo4vp');
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription subscription = api.subscriptions().get("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription subscription = api.SubscriptionService.Get("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 ```
 
 ```javascript
-openpay.customers.subscriptions.get('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', function(error, subscription){
+bancomer.customers.subscriptions.get('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', function(error, subscription){
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@subscriptions=@openpay.create(:subscriptions)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@bancomer.create(:subscriptions)
 
 response_hash=@subscriptions.get("s0gmyor4yqtyv1miqwr0", "pbi4kb8hpb64x0uud2eb")
 ```
@@ -529,27 +529,27 @@ DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_I
 
 ```php
 <?
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $subscription = $customer->subscriptions->get(subscriptionId);
 $subscription->delete();
 ?>
 ```
 
 ```java
-openpayAPI.subscriptions().delete(String customerId, String subscriptionId);
+bancomerAPI.subscriptions().delete(String customerId, String subscriptionId);
 ```
 
 ```csharp
-openpayAPI.SubscriptionService.Delete(string customer_id, string subscription_id);
+bancomerAPI.SubscriptionService.Delete(string customer_id, string subscription_id);
 ```
 
 ```javascript
-openpay.customers.subscriptions.delete(customerId, subscriptionId, callback);
+bancomer.customers.subscriptions.delete(customerId, subscriptionId, callback);
 ```
 
 ```ruby
 #Customer
-@subscriptions=@openpay.create(:subscriptions)
+@subscriptions=@bancomer.create(:subscriptions)
 @subscriptions.delete(subscription_id, customer_id)
 ```
 
@@ -563,33 +563,33 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
 $subscription = $customer->subscriptions->get('s7ri24srbldoqqlfo4vp');
 $subscription->delete();
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.subscriptions().delete("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.SubscriptionService.Delete("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 ```
 
 ```javascript
-openpay.customers.subscriptions.delete('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', function(error){
+bancomer.customers.subscriptions.delete('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', function(error){
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@subscriptions=@openpay.create(:subscriptions)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@bancomer.create(:subscriptions)
 
 @subscriptions.detele("s0gmyor4yqtyv1miqwr0", "pbi4kb8hpb64x0uud2eb")
 ```
@@ -613,27 +613,27 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 
 ```php
 <?
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $subscriptionList = $customer->subscriptions->getList(findDataRequest);
 ?>
 ```
 
 ```java
-openpayAPI.subscriptions().list(String customerId, SearchParams request);
+bancomerAPI.subscriptions().list(String customerId, SearchParams request);
 ```
 
 ```csharp
-openpayAPI.SubscriptionService.List(string customer_id, SearchParams request = null);
+bancomerAPI.SubscriptionService.List(string customer_id, SearchParams request = null);
 ```
 
 ```javascript
-openpay.customers.subscriptions.list(customerId, callback);
-openpay.customers.subscriptions.list(customerId, searchParams, callback);
+bancomer.customers.subscriptions.list(customerId, callback);
+bancomer.customers.subscriptions.list(customerId, searchParams, callback);
 ```
 
 ```ruby
 #Customer
-@subscriptions=@openpay.create(:subscriptions)
+@subscriptions=@bancomer.create(:subscriptions)
 @subscriptions.all(customer_id)
 ```
 
@@ -646,7 +646,7 @@ curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag
 
 ```php
 <?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $findData = array(
     'creation[gte]' => '2013-01-01',
@@ -654,7 +654,7 @@ $findData = array(
     'offset' => 0,
     'limit' => 5);
 
-$customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
 $subscriptionList = $customer->subscriptions->getList($findData);
 ?>
 ```
@@ -665,7 +665,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
         
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -676,7 +676,7 @@ List<Subscription> subscriptions = api.subscriptions().list("a9pvykxz4g5rg0fplze
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.CreationGte = new Datetime(2014, 5, 1);
 request.CreationLte = new DateTime(2014, 5, 15);
@@ -691,14 +691,14 @@ var searchParams = {
   'limit' : 2
 };
 
-openpay.customers.subscriptions.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
+bancomer.customers.subscriptions.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@subscriptions=@openpay.create(:subscriptions)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@bancomer.create(:subscriptions)
 
 @subscriptions.all("pbi4kb8hpb64x0uud2eb")
 ```

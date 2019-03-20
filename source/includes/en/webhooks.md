@@ -2,7 +2,7 @@
 Weebhooks allow to notify a Merchant party when an event has occurred in the platform, so the Merchant can take the corresponding actions.
 
 <aside class="notice">
-Openpay requires that the webhook is verified before executing it.
+Bancomer requires that the webhook is verified before executing it.
 </aside>
 
 
@@ -52,7 +52,7 @@ subscription.charge.failed | Subscription    | Reports when the charge to a subs
 payout.created             | Payout          | Reports when a payout has been scheduled for the next day. 
 payout.succeeded           | Payout          | Reports when a payout has been applied.
 payout.failed              | Payout          | Reports when a payout has failed.
-transfer.succeeded         | Transfer | Reports when a transfer has been performed between to Openpay accounts.
+transfer.succeeded         | Transfer | Reports when a transfer has been performed between to Bancomer accounts.
 fee.succeeded              | Fee     | Reports when a fee is charged successfully to a customer.
 fee.refund.succeeded       | Fee     | Reports when a fee has been successfully refunded to a customer.
 spei.received              | SPEI           | Reports when a payout has been received by SPEI for adding funds to the account.
@@ -78,24 +78,24 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/webhooks
 
 ```php
 <?
-$webhook = $openpay->webhooks->create(webhook);
+$webhook = $bancomer->webhooks->create(webhook);
 ?>
 ```
 
 ```java
-openpayAPI.webhooks().create(Webhook request);
+bancomerAPI.webhooks().create(Webhook request);
 ```
 
 ```csharp
-openpayAPI.WebhooksService.Create(Webhook request);
+bancomerAPI.WebhooksService.Create(Webhook request);
 ```
 
 ```javascript
-openpay.webhooks.create(webhook, callback);
+bancomer.webhooks.create(webhook, callback);
 ```
 
 ```ruby
-@webhooks=@openpay.create(:webhooks)
+@webhooks=@bancomer.create(:webhooks)
 @webhooks.create(request_hash)
 ```
 
@@ -121,7 +121,7 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/webhooks \
 
 ```php
 <?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $webhook = array(
     'url' => 'http://requestb.in/11vxrsf1',
@@ -136,12 +136,12 @@ $webhook = array(
     )
     );
 
-$webhook = $openpay->webhooks->create($webhook);
+$webhook = $bancomer->webhooks->create($webhook);
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Webhook request = new Webhook();
 request.url("http://requestb.in/11vxrsf1");
 request.user("juanito");
@@ -153,7 +153,7 @@ Webhook webhook = api.webhooks().create(request);
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Webhook request = new Webhook();
 request.Url = "http://requestb.in/11vxrsf1";
 request.User = "juanito";
@@ -178,14 +178,14 @@ var webhook_params = {
     ]
 };
 
-openpay.webhooks.create(webhook_params, function(error, webhook){
+bancomer.webhooks.create(webhook_params, function(error, webhook){
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@webhooks=@openpay.create(:webhooks)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@webhooks=@bancomer.create(:webhooks)
 request_hash={
     "url" => "http://requestb.in/11vxrsf1",
     "user" => "juanito",
@@ -246,24 +246,24 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
 
 ```php
 <?
-$webhook = $openpay->webhooks->get(webhookId);
+$webhook = $bancomer->webhooks->get(webhookId);
 ?>
 ```
 
 ```java
-openpayAPI.webhooks().get(String webhookId);
+bancomerAPI.webhooks().get(String webhookId);
 ```
 
 ```csharp
-openpayAPI.WebhooksService.Get(string webhookId);
+bancomerAPI.WebhooksService.Get(string webhookId);
 ```
 
 ```javascript
-openpay.webhooks.get(webhookId, callback);
+bancomer.webhooks.get(webhookId, callback);
 ```
 
 ```ruby
-@webhooks=@openpay.create(:webhooks)
+@webhooks=@bancomer.create(:webhooks)
 @webhooks.get(webhookId)
 ```
 
@@ -277,31 +277,31 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanst
 
 ```php
 <?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$webhook = $openpay->webhooks->get('wxvanstudf4ssme8khmc');
+$webhook = $bancomer->webhooks->get('wxvanstudf4ssme8khmc');
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Webhook webhook = api.webhooks().get("wxvanstudf4ssme8khmc");
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Webhook webhook = api.WebhooksService.Get("wxvanstudf4ssme8khmc");
 ```
 
 ```javascript
-openpay.webhooks.get('wxvanstudf4ssme8khmc', function(error, webhook){
+bancomer.webhooks.get('wxvanstudf4ssme8khmc', function(error, webhook){
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@webhooks=@openpay.create(:webhooks)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@webhooks=@bancomer.create(:webhooks)
 
 response_hash=@webhooks.get("wxvanstudf4ssme8khmc")
 ```
@@ -361,25 +361,25 @@ DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
 
 ```php
 <?
-$webhook = $openpay->webhooks->get(webhookId);
+$webhook = $bancomer->webhooks->get(webhookId);
 $webhook->delete();
 ?>
 ```
 
 ```java
-openpayAPI.webhooks().delete(String webhookId);
+bancomerAPI.webhooks().delete(String webhookId);
 ```
 
 ```csharp
-openpayAPI.WebhooksService.Delete(string webhook_id);
+bancomerAPI.WebhooksService.Delete(string webhook_id);
 ```
 
 ```javascript
-openpay.webhooks.delete(webhookId, callback);
+bancomer.webhooks.delete(webhookId, callback);
 ```
 
 ```ruby
-@webhooks=@openpay.create(:webhooks)
+@webhooks=@bancomer.create(:webhooks)
 @webhooks.delete(webhook_id)
 ```
 
@@ -393,32 +393,32 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanst
 
 ```php
 <?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$webhook = $openpay->webhooks->get('wxvanstudf4ssme8khmc');
+$webhook = $bancomer->webhooks->get('wxvanstudf4ssme8khmc');
 $webhook->delete();
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.webhooks().delete("wxvanstudf4ssme8khmc");
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.WebhooksService.Delete("wxvanstudf4ssme8khmc");
 ```
 
 ```javascript
-openpay.webhooks.delete('wxvanstudf4ssme8khmc', function(error) {
+bancomer.webhooks.delete('wxvanstudf4ssme8khmc', function(error) {
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@webhooks=@openpay.create(:webhooks)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@webhooks=@bancomer.create(:webhooks)
 
 response_hash=@webhooks.delete("wxvanstudf4ssme8khmc")
 ```
@@ -447,24 +447,24 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/webhooks
 
 ```php
 <?
-$webhookList = $openpay->webhooks->getList();
+$webhookList = $bancomer->webhooks->getList();
 ?>
 ```
 
 ```java
-openpayAPI.webhooks().list();
+bancomerAPI.webhooks().list();
 ```
 
 ```csharp
-openpayAPI.WebhooksService.List();
+bancomerAPI.WebhooksService.List();
 ```
 
 ```javascript
-openpay.webhooks.list(callback);
+bancomer.webhooks.list(callback);
 ```
 
 ```ruby
-@webhooks=@openpay.create(:webhooks)
+@webhooks=@bancomer.create(:webhooks)
 @webhooks.all
 ```
 
@@ -478,31 +478,31 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/webhooks \
 
 ```php
 <?
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$webhookList = $openpay->webhooks->getList();
+$webhookList = $bancomer->webhooks->getList();
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 List<Webhook> webhooks = api.webhooks().list();
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 List<Webhook> webhooks = api.WebhooksService.List();
 ```
 
 ```javascript
-openpay.webhooks.list(function(error, list){
+bancomer.webhooks.list(function(error, list){
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@webhooks=@openpay.create(:webhooks)
+@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@webhooks=@bancomer.create(:webhooks)
 
 response_hash=@webhooks.all
 ```

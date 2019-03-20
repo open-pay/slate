@@ -36,7 +36,7 @@ Information for objects shared in request and response.
 
 Property | Description
 --------- | -----------
-id | _**string**_ <br/> Unique identifier assigned by Openpay at the moment of creation.
+id | _**string**_ <br/> Unique identifier assigned by Bancomer at the moment of creation.
 authorization | ***string*** <br/>Authorization number created by the processor entity.
 transaction_type| ***string*** <br/>Transaction type: fee, charge, payout, transfer.
 operation_type| ***string*** <br/>Operation type in the account: in, out.
@@ -79,26 +79,6 @@ state | ***string*** (required) <br/>State
 city | ***string*** (required) <br/>City
 country_code | ***string*** (required) <br/>Country code, in the two character format: ISO_3166-1.
 
-## Store object
-
-> Object example:
-
-```json
-{
-   "reference":"OPENPAY02DQ35YOY7",
-   "barcode_url":"https://sand-api.ecommercebbva.com/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false",
-   "paybin_reference":"0101990000001065",
-   "barcode_paybin_url":"https://sand-api.ecommercebbva.com/barcode/0101990000001065?width=1&height=45&text=false"
-}
-```
-
-Property | Description
---------- | -----------
-reference | ***string*** <br/>Payment reference to go stores and make deposits to Openpay account
-barcode_url | ***string*** <br/>It is the url that generates the bar code of reference.
-paybin_reference | ***string*** <br/>Paybin reference to go store and make deposits to Openpay
-barcode_paybin_url | ***string*** <br/>It is the url that generates the bar code of paybin reference.
-
 ##PaymentPlan Object
 
 > Object example:
@@ -133,24 +113,6 @@ remaining | ***numeric*** <br/> Amount of points remaining in the card after the
 amount | ***numeric*** <br/>Transaction amount paid using points.
 caption | ***string*** (opcional) <br/> A message to be shown to the customer in their ticket or receipt.
 
-##Object Geolocation
-
-> Object example:
-
-```json
-{
-  "lng": -100.421865,
-  "lat": 20.618171,
-  "place_id": "ChIJwSN2wpNa04URsDryLW517lg"
-}
-```
-
-Property | Description
---------- | -----------
-lng | ***numeric*** <br/> Longitud, geographical coordinate.
-lat | ***numeric*** <br/> Latitud, geographical coordinate.
-place_id | ***string*** <br/>Unique identifier of google maps
-
 ##Object PaynetChain
 
 > Object example:
@@ -158,8 +120,8 @@ place_id | ***string*** <br/>Unique identifier of google maps
 ```json
 {
       "name": "EXTRA",
-      "logo": "http://www.openpay.mx/logotipos/extra.png",
-      "thumb": "http://www.openpay.mx/thumb/extra.png",
+      "logo": "http://www.bancomer.mx/logotipos/extra.png",
+      "thumb": "http://www.bancomer.mx/thumb/extra.png",
       "max_amount": 99999.99
 }
 ```
@@ -184,3 +146,50 @@ CHARGEBACK_ADJUSTMENT| Transaction that has an ajust for chargeback
 CHARGE_PENDING| Transaction that is waiting to be paid 
 CANCELLED| Transaction that was not paid and has been cancelled
 FAILED| Transaction that was paid but ocurred an error
+
+##Objeto Cliente
+
+> Ejemplo de Objeto:
+
+```json
+{
+   "id":"cz4nkhrlcu9k7qd4lwqx",
+   "creation_date":"2013-11-08T12:04:46-06:00",
+   "name":"Rodrigo",
+   "last_name":"Velazco Perez",
+   "email":"rodrigo.velazco@payments.com", 
+   "phone_number":"4425667045",
+   "external_id":"cliente1",
+   "status":"active",
+   "balance":103,
+   "address":{
+      "line1":"Av. 5 de febrero No. 1080 int Roble 207",
+      "line2":"Carrillo puerto",
+      "line3":"Zona industrial carrillo puerto",
+      "postal_code":"06500",
+      "state":"Querétaro",
+      "city":"Querétaro",
+      "country_code":"MX"
+   },
+   "store": {
+       "reference": "OPENPAY02DQ35YOY7",
+       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+   },
+   "clabe": "646180109400423323"
+}
+```
+
+
+Property | Description
+--------- | -----
+id            |***string*** <br/>Customer unique identifier.
+creation_date |***datetime*** <br/>Date and time when the customer was created in ISO 8601 format. 
+name          |***string*** <br/>Name of the customer.
+last_name     |***string*** <br/>Last name of the customer.
+email         |***string*** <br/>Email of the customer.
+phone_number  |***numeric*** <br/>Telephone number of the customer.
+status        |***string*** <br/>Account status of the customer can be active or deleted. If the account is on deleted status, no transaction is allowed.
+balance       |***numeric*** <br/>Account balance with two decimal digits.
+clabe         |***numeric*** <br/>CLABE account used to receive funds by transfer from any bank in Mexico.
+[address](#addres-object) |***object*** <br/>Address of the customer. It is usually used as shipping address.
+[store](#store-object) |_*object**_ <br/>Contains reference string to go to Store and make deposits, the url to generate barcode is contained too.

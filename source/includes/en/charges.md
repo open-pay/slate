@@ -3,7 +3,7 @@ Charges can be made to cards, stores and banks. Each charge is assigned with an 
 
 You can do card charges by using a saved card id, using a token or you can send the card information at the time of invocation.
 
-##With a card id or token
+##With token
 
 > Definition
 
@@ -18,45 +18,37 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```php
 <?
 Merchant
-$openpay->charges->create(chargeRequest);
+$bancomer->charges->create(chargeRequest);
 
 Customer
-$customer = $openpay->customers->get($customerId);
+$customer = $bancomer->customers->get($customerId);
 $customer->charges->create(chargeRequest);
 ?>
 ```
 
 ```java
 //Customer
-openpayAPI.charges().create(String customerId, CreateCardChargeParams request);
+bancomerAPI.charges().create(String customerId, List<Parameter> request);
 
 //Merchant
-openpayAPI.charges().create(CreateCardChargeParams request);
-```
-
-```javascript
-// Merchant
-openpay.charges.create(chargeRequest, callback);
-
-// Customer
-openpay.customers.charges.create(customerId, chargeRequest, callback);
+bancomerAPI.charges().create(List<Parameter> request);
 ```
 
 ```csharp
 //Customer
-openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
+bancomerAPI.ChargeService.Create(string customer_id, List<IParameter> request);
 
 //Merchant
-openpayAPI.ChargeService.Create(ChargeRequest request);
+bancomerAPI.ChargeService.Create(List<IParameter> request);
 ```
 
 ```ruby
 #Customer
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.create(request_hash, customer_id)
 
 #Merchant
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.create(request_hash)
 ```
 
@@ -67,119 +59,121 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
-   "source_id" : "kqgykn96i7bcs1wwhvgw",
-   "method" : "card",
+   "affiliation_bbva" : "720939",
    "amount" : 100,
    "description" : "Cargo inicial a mi cuenta",
-   "order_id" : "oid-00051",
-   "device_session_id":"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
-   "customer" : {
-   	    "name" : "Juan",
-   	    "last_name" : "Vazquez Juarez",
-   	    "phone_number" : "4423456723",
-   	    "email" : "juan.vazquez@empresa.com.mx"
-   }
-}' 
+   "currency" : "MXN",
+   "token" : "krv3y6yucurt47w2sv1d",
+   "order_id" : "oid-00051"
+}'
+```
+
+```csharp
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+List<IParameter> tokenRequest = List<IParameter>{
+    new SingleParameter("holder_nane", "Juan Perez Ramirez"),
+    new SingleParameter("card_number", "4111111111111111"),
+    new SingleParameter("cvv2", "022"),
+    new SingleParameter("expiration_month", "12"),
+    new SingleParameter("expiration_year", "20"),
+};
+
+Dictionary<String, Object> tokenDictionary = bancomerAPI.TokenService.Create(tokenRequest);
+ParameterContainer token = new ParameterContainer("token", tokenDictionary);
+
+List<IParameter> request = List<IParameter> {
+    new SingleParameter("affiliation_bbva", "720931"),
+    new SingleParameter("amount", "200.00"),
+    new SingleParameter("description", "Test Charge"),
+    new SingleParameter("customer_language", "SP"),
+    new SingleParameter("capture", "TRUE"),
+    new SingleParameter("use_3d_secure", "FALSE"),
+    new SingleParameter("use_card_points", "NONE"),
+    new SingleParameter("token", token.GetSingleValue("id").ParameterValue),
+    new SingleParameter("currency", "MXN"),
+    new SingleParameter("order_id", "oid-00051")
+};
+
+Dictionary<String, Object> chargeDictionary = bancomerAPI.ChargeService.Create(request);
+ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
+```
+
+```java
+BancomerAPI api = new BancomerAPI(
+        "https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+
+List<Parameter> tokenRequest = new ArrayList<Parameter>(Arrays.asList(
+    new SingleParameter("card_number", "4111111111111111"),
+    new SingleParameter("cvv2", "295"),
+    new SingleParameter("expiration_month", "12"),
+    new SingleParameter("expiration_year", "20"),
+    new SingleParameter("holder_name", "Juan Perez Lopez")));
+
+Map tokenAsMap = api.tokens().create(tokenRequest);
+ParameterContainer token = new ParameterContainer("token", tokenAsMap);
+
+List<Parameter> request = new ArrayList<Parameter>(Arrays.asList(
+    new SingleParameter("affiliation_bbva", "720931"),
+    new SingleParameter("amount", "10.00"),
+    new SingleParameter("description", "Cargo inicial"),
+    new SingleParameter("customer_language", "SP"),
+    new SingleParameter("capture", "true"),
+    new SingleParameter("use_3d_secure", "false"),
+    new SingleParameter("use_card_points", "NONE"),
+    new SingleParameter("token", token.getSingleValue("id").getParameterValue()),
+    new SingleParameter("currency", "MXN"),
+    new SingleParameter("order_id", "oid-00051")
+
+));
+
+Map chargeAsMap = api.charges().create(request);
+ParameterContainer charge = new ParameterContainer("charge", chargeAsMap);
 ```
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
-$customer = array(
-   	 'name' => 'Juan',
-   	 'last_name' => 'Vazquez Juarez',
-   	 'phone_number' => '4423456723',
-   	 'email' => 'juan.vazquez@empresa.com.mx');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$tokenRequest = array(
+     'card_number' => '4111111111111111',
+     'cvv2' => '295',
+     'expiration_month' => '11',
+     'expiration_year' => '22',
+     'holder_name' => 'Juan Perez Lopez');
+
+$token = $bancomer->tokens->create($tokenRequest);
 
 $chargeRequest = array(
-    'method' => 'card',
-    'source_id' => 'kqgykn96i7bcs1wwhvgw',
+    'affiliation_bbva' => '720931',
     'amount' => 100,
     'description' => 'Cargo inicial a mi merchant',
+    'customer_language' => 'SP',
+    'capture' => 'FALSE',
+    'use_card_points' => 'FALSE',
+    'currency' => 'MXN'
     'order_id' => 'oid-00051'
-    'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
-    'customer' => $customer);
+    'token' => $token['id']);
 
-$charge = $openpay->charges->create($chargeRequest);
+$charge = $bancomer->charges->create($chargeRequest);
 ?>
 ```
 
-```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-CreateCardChargeParams request = new CreateCardChargeParams();
-Customer customer = new Customer();
-customer.setName("Juan");
-customer.setLastName("Vazquez Juarez");
-customer.setPhoneNumber("4423456723");
-customer.setEmail("juan.vazquez@empresa.com.mx");
-
-request.cardId("kqgykn96i7bcs1wwhvgw"); // =source_id
-request.amount(new BigDecimal("100.00"));
-request.description("Cargo inicial a mi merchant");
-request.orderId("oid-00051");
-request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
-request.setCustomer(customer);
-
-Charge charge = api.charges().create(request);
-```
-
-```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Customer customer = new Customer();
-customer.Name = "Juan";
-customer.LastName = "Vazquez Juarez";
-customer.PhoneNumber = "4423456723";
-customer.Email = "juan.vazquez@empresa.com.mx";
-
-ChargeRequest request = new ChargeRequest();
-request.Method = "card";
-request.SourceId = "kwkoqpg6fcvfse8k8mg2";
-request.Amount = new Decimal(100.00);
-request.Description = "Cargo inicial a mi merchant";
-request.OrderId = "oid-00051";
-request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
-request.Customer = customer;
-
-Charge charge = api.ChargeService.Create(request);
-```
-
-```javascript
-var chargeRequest = {
-   'source_id' : 'kqgykn96i7bcs1wwhvgw',
-   'method' : 'card',
-   'amount' : 100,
-   'description' : 'Cargo inicial a mi cuenta',
-   'order_id' : 'oid-00051',
-   'device_session_id' : 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
-   'customer' : {
-   	    'name' : 'Juan',
-   	    'last_name' : 'Vazquez Juarez',
-   	    'phone_number' : '4423456723',
-   	    'email' : 'juan.vazquez@empresa.com.mx'
-   }
-}
-
-openpay.charges.create(chargeRequest, function(error, charge) {
-  // ...
-});
-```
-
 ```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
+@bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@bancomer.create(:charges)
 customer_hash={
     "name" => "Juan",
     "last_name" => "Vazquez Juarez",
     "phone_number" => "4423456723",
     "email" => "juan.vazquez@empresa.com.mx"
 }
+
 request_hash={
     "method" => "card",
     "source_id" => "kqgykn96i7bcs1wwhvgw",
     "amount" => 100.00,
+    "currency" => "MXN",
     "description" => "Cargo inicial a mi merchant",
     "order_id" => "oid-00051",
-    "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
     "customer" => customer_hash
 }
 
@@ -224,646 +218,35 @@ response_hash=@charges.create(request_hash.to_hash)
 
 This type of charge requires a saved card or a previously generated token. To save cards read [Create a card] (#create-a-card) and to use tokens visit the [Creation of tokens] (#create-a-new-token) section.
 
-Once you have a saved card or token use the <code>source_id</code> property to send the identifier.
-
-The <code>device_session_id</code> property must be generated using JavaScript API, see [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
-
 <aside class="notice">
 You can charge the merchant account or the customer account.
 </aside>
 
 ***Customized antifraud system***</br>
-You can send extra data to Openpay in order to increase number of variables and get better results in antifraud detection for your transactions.
+You can send extra data to Bancomer in order to increase number of variables and get better results in antifraud detection for your transactions.
 
 <aside class="notice">
 If you want to use this feature you need to send <code>metadata</code> property with all fields you think can help to decide when a transaction is a fraud trying. Call support line to enable this feature</br>
 </aside>
 
 ###Request 
-
 Property | Description
 --------- | -----
-method|***string*** (required) <br/>It must contain the **card** value in order to specify the charge will be made from card.
-source_id | ***string*** (required, length = 45) <br/>Saved ID card or token id created from where the funds are withdrawn.
-cvv2 |***numeric***  (length = 3 or 4) <br/>Security code as it appears on the back of the card. Usually 3 digits.<br/>It's used only charges with [Stored Cards](#create-a-card).
-amount | ***numeric*** (required) <br/>Amount to charge. Must be an amount greater than zero, with up to two decimal digits.
-description | ***string*** (required, length = 250) <br/>A description associated to the charge.
-order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
-device_session_id |  ***string*** (required, length = 255) <br/>Identifier of the device generated by the antifraud tool.
-capture | ***boolean*** (optional, default = true) <br/>Indicates whether the charge is made immediately or not , when the value is false the charge is handled as authorized (or pre-authorization) and the amount is only to be confirmed or canceled in a second call.
-[customer](#create-a-new-customer)| ***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the merchant level<br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
-[payment_plan](#objetc-paymentplan)|***object*** (opcional) <br/>Plan data months without interest is desired as use in the charge. Refer to [PaymentPlan Object](#paymentplan-objetc).
-metadata |  ***list(key, value)*** (optional) <br/>Field list to send antifraud system, It must be according to [Rules to send custom antifraud fields] (#custom-to-send-antifraud-fields).
-use_card_points | ***string*** (optional, default = NONE) <br/> <table><tr><td><strong>ONLY_POINTS</strong></td> <td>Charge only with points (<a href="#consulta-de-puntos">Points card</a>)</td></tr><tr><td><strong>MIXED</strong></td><td>Charge with points and pesos</td></tr><tr><td><strong>NONE</strong></td>        <td>Charge only with pesos</td></tr></table>The values that indicate points must be used only if the points_card property is true, otherwise an error will occur.
-send_email | ***boolean*** (optional) <br/>Used in redirect charges. Indicates if is need send a email that redirect to the openpay payment form.
-redirect_url | ***string*** (optional) <br/>Used in redirect charges. It indicates the url to which redirect after a successful transaction in the openpay payment form.
-
-###Response
-Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
-
-##With virtual terminal
-
-> Definition
-
-```shell
-Merchant
-POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges
-
-Customer
-POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
-```
-
-```php
-<?
-Merchant
-$openpay->charges->create(chargeRequest);
-
-Customer
-$customer = $openpay->customers->get($customerId);
-$customer->charges->create(chargeRequest);
-?>
-```
-
-```java
-//Customer
-openpayAPI.charges().create(String customerId, CreateCardChargeParams request);
-
-//Merchant
-openpayAPI.charges().create(CreateCardChargeParams request);
-```
-
-```javascript
-// Merchant
-openpay.charges.create(chargeRequest, callback);
-
-// Customer
-openpay.customers.charges.create(customerId, chargeRequest, callback);
-```
-
-```csharp
-//Customer
-openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
-
-//Merchant
-openpayAPI.ChargeService.Create(ChargeRequest request);
-```
-
-```ruby
-#Customer
-@charges=@openpay.create(:charges)
-@charges.create(request_hash, customer_id)
-
-#Merchant
-@charges=@openpay.create(:charges)
-@charges.create(request_hash)
-```
-
-> Merchant request example
-
-```shell
-curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/charges \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" \
-   -X POST -d '{
-   "method" : "card",
-   "amount" : 100,
-   "description" : "Cargo inicial a mi cuenta",
-   "order_id" : "oid-00051",
-   "customer" : {
-        "name" : "Juan",
-        "last_name" : "Vazquez Juarez",
-        "phone_number" : "4423456723",
-        "email" : "juan.vazquez@empresa.com.mx"
-   },
-   "confirm" : "false",
-   "send_email":"false",
-   "redirect_url":"http://www.openpay.mx/index.html"
-}'
-```
-
-```php
-<?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
-$customer = array(
-     'name' => 'Juan',
-     'last_name' => 'Vazquez Juarez',
-     'phone_number' => '4423456723',
-     'email' => 'juan.vazquez@empresa.com.mx');
-
-$chargeRequest = array(
-    "method" : "card",
-    'amount' => 100,
-    'description' => 'Cargo terminal virtual a mi merchant',
-    'customer' => $customer,
-    'send_email' => false,
-    'confirm' => false,
-    'redirect_url' => 'http://www.openpay.mx/index.html')
-;
-
-$charge = $openpay->charges->create($chargeRequest);
-?>
-```
-
-```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-CreateCardChargeParams request = new CreateCardChargeParams();
-Customer customer = new Customer();
-customer.setName("Juan");
-customer.setLastName("Vazquez Juarez");
-customer.setPhoneNumber("4423456723");
-customer.setEmail("juan.vazquez@empresa.com.mx");
-
-request.amount(new BigDecimal("100.00"));
-request.description("Cargo inicial a mi merchant");
-request.orderId("oid-00051");
-request.setCustomer(customer);
-request.setSendEmail(false);
-request.setConfirm(false);
-request.setRedirectUrl("http://www.openpay.mx/index.html");
-
-Charge charge = api.charges().create(request);
-```
-
-```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-ChargeRequest request = new ChargeRequest();
-Customer customer = new Customer();
-customer.Name = "Juan";
-customer.LastName = "Vazquez Juarez";
-customer.PhoneNumber = "4423456723";
-customer.Email = "juan.vazquez@empresa.com.mx";
-
-request.Method = "card";
-request.Amount = new Decimal(100.00);
-request.Description = "Cargo inicial a mi merchant";
-request.OrderId = "oid-00051";
-request.Confirm = false;
-request.SendEmail = false;
-request.RedirectUrl = "http://www.openpay.mx/index.html";
-request.Customer = customer;
-
-Charge charge = api.ChargeService.Create(request);
-```
-
-```javascript
-var chargeRequest = {
-   'method' : 'card',
-   'amount' : 100,
-   'description' : 'Cargo inicial a mi cuenta',
-   'order_id' : 'oid-00051',
-   'customer' : {
-        'name' : 'Juan',
-        'last_name' : 'Vazquez Juarez',
-        'phone_number' : '4423456723',
-        'email' : 'juan.vazquez@empresa.com.mx'
-   },
-  'send_email' : false,
-  'confirm' : false,
-  'redirect_url' : 'http://www.openpay.mx/index.html')
-}
-
-openpay.charges.create(chargeRequest, function(error, charge) {
-  // ...
-});
-```
-
-```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
-customer_hash={
-    "name" => "Juan",
-    "last_name" => "Vazquez Juarez",
-    "phone_number" => "4423456723",
-    "email" => "juan.vazquez@empresa.com.mx"
-}
-
-request_hash={
-    "method" => "card",
-    "amount" => 100.00,
-    "description" => "Cargo inicial a mi merchant",
-    "order_id" => "oid-00051",
-    "customer" => customer_hash,
-    "send_email" => false,
-    "confirm" => false,
-    "redirect_url" => "http://www.openpay.mx/index.html"
-}
-
-response_hash=@charges.create(request_hash.to_hash)
-```
-
-> Response example
-
-```json
-
-{
-  "id": "trq7yrthx5vc4gtjdkwg",
-  "authorization": null,
-  "method": "card",
-  "operation_type": "in",
-  "transaction_type": "charge",
-  "status": "charge_pending",
-  "conciliated": false,
-  "creation_date": "2016-09-09T18:52:02-05:00",
-  "operation_date": "2016-09-09T18:52:02-05:00",
-  "description": "Cargo desde terminal virtual de 111",
-  "error_message": null,
-  "amount": 100,
-  "currency": "MXN",
-  "payment_method": {
-    "type": "redirect",
-    "url": "https://sand-api.ecommercebbva.com/v1/mexzhpxok3houd5lbvz1/charges/trq7yrthx5vc4gtjdkwg/card_capture"
-  },
-  "customer": {
-    "name": "Juan",
-    "last_name": "Vazquez Juarez",
-    "email": "juan.vazquez@empresa.com.mx",
-    "phone_number": "4423456723",
-    "creation_date": "2016-09-09T18:52:02-05:00",
-    "clabe": null,
-    "external_id": null
-  }
-}
-```
-
-This type of charge don't requires a saved card or a previously generated token
-
-###Request 
-
-Property | Description
---------- | -----
-method|***string*** (required in card) <br/>It must contain the card value in order to specify the charge will be made from card.
-amount | ***numeric*** (required) <br/>Amount to charge. Must be an amount greater than zero, with up to two decimal digits.
-description | ***string*** (required, length = 250) <br/>A description associated to the charge.
-order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
-[customer](#create-a-new-customer)| ***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the merchant level<br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
-confirm |  ***boolean*** (required in false) <br/>Indicates whether the charge is made immediately or not , when the value is false the charge is handled as authorized (or pre-authorization) and the amount is only to be confirmed or canceled in a second call.
-send_email | ***boolean*** (optional) <br/>Indicates if is need send a email that redirect to the openpay payment form.
-redirect_url | ***string*** (required) <br/>It indicates the url to which redirect after a successful transaction in the openpay payment form.
-
-###Response
-Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
-
-##Charge via store
-
-> Definition
-
-```shell
-Merchant
-POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges
-
-Customer
-POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
-```
-
-```php
-<?
-Merchant
-$openpay->charges->create(chargeRequest);
-
-Customer
-$customer = $openpay->customers->get(customerId);
-$customer->charges->create(chargeRequest;
-?>
-```
-
-```java
-//Customer
-openpayAPI.charges().create(String customerId, CreateStoreChargeParams request);
-
-//Merchant
-openpayAPI.charges().create(CreateStoreChargeParams request);
-```
-
-```csharp
-//Customer
-openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
-
-//Merchant
-openpayAPI.ChargeService.Create(ChargeRequest request);
-```
-
-```javascript
-//Merchant
-openpay.charges.create(chargeRequest, callback);
-
-//Customer
-openpay.customers.charges.create(customerId, chargeRequest, callback);
-```
-
-```ruby
-#Customer
-@charges=@openpay.create(:charges)
-@charges.create(request_hash, customer_id)
-
-#Merchant
-@charges=@openpay.create(:charges)
-@charges.create(request_hash)
-```
-
-> Customer request example
-
-```shell
-curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" \
-   -X POST -d '{
-   "method" : "store",
-   "amount" : 100,
-   "description" : "Cargo con tienda",
-   "order_id" : "oid-00053",
-   "due_date" : "2014-05-28T13:45:00"
-}' 
-```
-
-```php
-<?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
-
-$chargeRequest = array(
-    'method' => 'store',
-    'amount' => 100,
-    'description' => 'Cargo con tienda',
-    'order_id' => 'oid-00053',
-    'due_date' => '2014-05-28T13:45:00');
-
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeRequest);
-?>
-```
-
-```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Calendar dueDate = Calendar.getInstance();
-dueDate.set(2014, 5, 28, 13, 45, 0);
-CreateStoreChargeParams request = new CreateStoreChargeParams();
-request.amount(new BigDecimal("100.00"));
-request.description("Cargo con tienda");
-request.orderId("oid-00053"
-request.dueDate(dueDate.getTime());
-
-Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
-```
-
-```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-ChargeRequest request = new ChargeRequest();
-request.Method = "store";
-request.Amount = new Decimal(100.00);
-request.Description = "Cargo con tienda";
-request.OrderId = "oid-00053";
-request.DueDate = new DateTime(2014, 5, 28, 13, 45, 0);
-
-Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
-```
-
-```javascript
-var storeChargeRequest = {
-   'method' : 'store',
-   'amount' : 100,
-   'description' : 'Cargo con tienda',
-   'order_id' : 'oid-00053',
-   'due_date' : '2014-05-28T13:45:00'
-};
-
-openpay.customers.charges.create('ag4nktpdzebjiye1tlze', storeChargeRequest, function(error, charge) {
-  // ...
-});
-```
-
-```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
-request_hash={
-     "method" => "store",
-     "amount" => 100.00,
-     "description" => "Cargo con tienda",
-     "order_id" => "oid-00053",
-     "due_date" => "2014-05-28T13:45:00"
-   }
-
-response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
-```
-
-> Response example
-
-```json
-{
-   "id":"trnirkiyobo5qfex55ef",
-   "amount":100.00,
-   "authorization":null,
-   "method":"store",
-   "operation_type":"in",
-   "transaction_type":"charge",
-   "status":"in_progress",
-   "currency":"MXN",
-   "creation_date":"2014-05-26T13:48:25-05:00",
-   "operation_date":"2014-05-26T13:48:25-05:00",
-   "due_date":"2014-05-28T13:45:00-05:00",
-   "description":"Cargo con tienda",
-   "error_message":null,
-   "order_id":"oid-00053",
-   "customer_id":"ag4nktpdzebjiye1tlze",
-   "payment_method":{
-      "type":"store",
-      "reference":"000020TRNIRKIYOBO5QFEX55EF0100009",
-      "paybin_reference":"0101990000001065",
-      "barcode_url":"https://sand-api.ecommercebbva.com/barcode/000020TRNIRKIYOBO5QFEX55EF0100009?width=1&height=45&text=false",
-      "barcode_paybin_url":"https://sand-api.ecommercebbva.com/barcode/0101990000001065?width=1&height=45&text=false"
-   }
-}
-```
-
-For payments at a convenience store you should create a charge type request by indicating **store** as method. This will generate a response with a reference number and a URL with a barcode, which you must use to create a receipt so your customer can make the payment in one of the convenience stores. The barcode is Code 128 type.
-
-###Request 
-
-Property | Description
---------- | -----
-method|***string*** (required) <br/>It must constains the **store** value in order to specify you want to pay at store.
-amount | ***numeric*** (required) <br/>Amount of charge. Must be an amount greater than zero, with up to two decimal digits.
-description | ***string*** (required, length = 250) <br/>A description associated to the charge.
-order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
-due_date | ***datetime*** (optional) <br/>Due date for making the payment in the store in  ISO 8601 format. <br/><br/>Example (UTC): 2014-08-01T00:50:00Z <br/>***Note:*** On the server side the date will be changeg to central time<br/><br/>Example (Central Time): 2014-08-01T11:51:23-05:00
-[customer](#create-a-new-customer)|***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer leve.
-
-###Response
-Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
-
-##Charge via bank
-
-> Definition
-
-```shell
-Merchant
-POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges
-
-Customer
-POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
-```
-
-```php
-<?
-Merchant
-$openpay->charges->create(chargeRequest);
-
-Customer
-$customer = $openpay->customers->get(customerId);
-$customer->charges->create(chargeRequest);
-?>
-```
-
-```java
-//Customer
-openpayAPI.charges().create(String customerId, CreateBankChargeParams request);
-
-//Merchant
-openpayAPI.charges().create(CreateBankChargeParams request);
-```
-
-```csharp
-//Customer
-openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
-
-//Merchant
-openpayAPI.ChargeService.Create(ChargeRequest request);
-```
-
-```javascript
-// Merchant
-openpay.charges.create(chargeRequest, callback);
-
-// Customer
-openpay.customers.charges.create(customerId, chargeRequest, callback);
-```
-
-```ruby
-#Customer
-@charges=@openpay.create(:charges)
-@charges.create(request_hash, customer_id)
-
-#Merchant
-@charges=@openpay.create(:charges)
-@charges.create(request_hash)
-```
-
-> customer request example
-
-```shell
-curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" \
-   -X POST -d '{
-   "method" : "bank_account",
-   "amount" : 100,
-   "description" : "Cargo con banco",
-   "order_id" : "oid-00055"
-} ' 
-```
-
-```php
-<?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
-
-$chargeRequest = array(
-    'method' => 'bank_account',
-    'amount' => 100,
-    'description' => 'Cargo con banco',
-    'order_id' => 'oid-00055');
-
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeRequest);
-?>
-```
-
-```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-CreateBankChargeParams request = new CreateBankChargeParams();
-request.amount(new BigDecimal("100.00"));
-request.description("Cargo con banco");
-request.orderId("oid-00053");
-
-Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
-```
-
-```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-ChargeRequest request = new ChargeRequest();
-request.Method = "bank_account";
-request.Amount = new Decimal(100.00);
-request.Description = "Cargo con banco";
-request.OrderId = "oid-00053";
-
-Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
-```
-
-```javascript
-var bankChargeRequest = {
-   'method' : 'bank_account',
-   'amount' : 100,
-   'description' : 'Cargo con banco',
-   'order_id' : 'oid-00055'
-};
-
-openpay.customers.charges.create('ag4nktpdzebjiye1tlze', bankChargeRequest, function(error, charge) {
-  // ...
-});
-
-```
-
-```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
-request_hash={
-     "method" => "bank_account",
-     "amount" => 100.00,
-     "description" => "Cargo con banco",
-     "order_id" => "oid-00053"
-   }
-
-response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
-```
-
-> Response example
-
-```json
-{
-   "id":"trnzf2xjwpupjfryyj23",
-   "amount":100.00,
-   "authorization":null,
-   "method":"bank_account",
-   "operation_type":"in",
-   "transaction_type":"charge",
-   "status":"in_progress",
-   "currency":"MXN",
-   "creation_date":"2014-05-26T13:51:25-05:00",
-   "operation_date":"2014-05-26T13:51:25-05:00",
-   "description":"Cargo con banco",
-   "error_message":null,
-   "order_id":"oid-00055",
-   "customer_id":"ag4nktpdzebjiye1tlze",
-   "payment_method":{
-      "type":"bank_transfer",
-      "agreement" : "1411217",
-      "bank":"BBVA Bancomer",
-      "clabe":"012914002014112176",
-      "name":"11030021342311520255"
-   }
-}
-```
-For a charge via bank you must create a charge type request  by indicating ** bank_account** as method. This will 
-generate a response with a Bancomer CIE agreement number, a CLABE account number and a reference, you have to indicate 
-these data in a receipt so your customer can do the wire transfer via SPEI.
-
-###Request 
-
-Property | Description
---------- | -----
-method|***string*** (required) <br/>It must contain the **bank_account** value to specify the pay will be made with bank transfer.
-amount | ***numeric*** (required) <br/>Amount of charge. Must be an amount greater than zero, with up to two decimal digits.
-description | ***string*** (required, length = 250) <br/>A description associated to the charge.
-order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
-due_date | ***datetime*** (optional) <br/>>Due date for making the bank charge in the ISO 8601 format. <br/><br/>Example (UTC): 2014-08-01T00:50:00Z <br/>***Note:*** On the server side the date will be changed to central time<br/><br/>Example (Central Time): 2014-08-01T11:51:23-05:00
-[customer](#create-a-new-customer)|***object*** (optional) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the Merchant level establishing a level trade <br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
+affiliation_bbva|               ***string*** (required) <br/>It must contain the affiliation number.
+amount |                        ***numeric*** (required) <br/>Amount to charge. Must be an amount greater than zero, with up to two decimal digits.
+currency |                      ***string*** (optional) <br/>Charge currency type. Currently you can only use two currency types: Mexican pesos(MXN) y American dollars(USD).
+order_id |                      ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
+description |                   ***string*** (required, length = 250) <br/>A description associated to the charge.
+[customer](##objeto-cliente)|   ***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the merchant level<br/><br/> To create a customer and keep a record of their charges history refer to [Objeto Cliente](#objeto-cliente) (#create-a-new-customer) and do the charge at the customer level.
+customer_language |             ***string*** (required, length = 2) <br/>Language to be used in the receipt and the purchase screen, currently two values are accepted SP-Spanish In-English.
+[payment_plan](#objetc-paymentplan)|    ***object*** (optional) <br/>Plan data months without interest is desired as use in the charge. Refer to [PaymentPlan Object](#paymentplan-objetc).
+redirect_url |                          ***string*** (optional) <br/>Used in redirect charges. It indicates the url to which redirect after a successful transaction in the bancomer payment form.
+use_card_points |                       ***string*** (optional, default = NONE) <br/> <table><tr><td><strong>ONLY_POINTS</strong></td> <td>Charge only with points (<a href="#consulta-de-puntos">Points card</a>)</td></tr><tr><td><strong>MIXED</strong></td><td>Charge with points and pesos</td></tr><tr><td><strong>NONE</strong></td>        <td>Charge only with pesos</td></tr></table>The values that indicate points must be used only if the points_card property is true, otherwise an error will occur.
+use_3d_secure |                         ***string*** (optional) <br/>By default the value is TRUE, if the trade has enabled the configuration to not use 3d secure, then you can send the parameter to FALSE.
+token |                                 ***string*** (required, length = 45) <br/>ID of the saved card or the id of the token created from where the funds will be withdrawn.
+metadata |                              ***list(key, value)*** (optional) <br/>Field list to send antifraud system, It must be according to [Rules to send custom antifraud fields] (#custom-to-send-antifraud-fields).
+capture |                               ***boolean*** (optional, default = true) <br/>Indicates whether the charge is made immediately or not , when the value is false the charge is handled as authorized (or pre-authorization) and the amount is only to be confirmed or canceled in a second call.
+***************
 
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
@@ -883,11 +266,11 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```php
 <?
 Merchant
-$charge = $openpay->charges->get(transactionId);
+$charge = $bancomer->charges->get(transactionId);
 $charge->capture(captureData);
 
 Customer
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $charge = $customer->charges->get(transactionId);
 $charge->capture(captureData);
 ?>
@@ -895,35 +278,35 @@ $charge->capture(captureData);
 
 ```java
 //Customer
-openpayAPI.charges().confirmCapture(String customerId, ConfirmCaptureParams request);
+bancomerAPI.charges().confirmCapture(String customerId, ConfirmCaptureParams request);
 
 //Merchant
-openpayAPI.charges().confirmCapture(ConfirmCaptureParams request);
+bancomerAPI.charges().confirmCapture(ConfirmCaptureParams request);
 ```
 
 ```csharp
 //Customer
-openpayAPI.ChargeService.Capture(string customer_id, string transaction_id, Decimal? amount);
+bancomerAPI.ChargeService.Capture(string customer_id, string transaction_id, Decimal? amount);
 
 //Merchant
-openpayAPI.ChargeService.Capture(string transaction_id, Decimal? amount);
+bancomerAPI.ChargeService.Capture(string transaction_id, Decimal? amount);
 ```
 
 ```javascript
 // Merchant
-openpay.charges.capture(transactionId, captureRequest, callback);
+bancomer.charges.capture(transactionId, captureRequest, callback);
 
 // Customer
-openpay.customers.charges.capture(customerId, transactionId, captureRequest, callback);
+bancomer.customers.charges.capture(customerId, transactionId, captureRequest, callback);
 ```
 
 ```ruby
 #Customer
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.capture(transaction_id, customer_id)
 
 #Merchant
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.capture(transaction_id)
 ```
 
@@ -940,18 +323,18 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
 $captureData = array('amount' => 100.00);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $bancomer->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->get('tryqihxac3msedn4yxed');
 $charge->capture($captureData);
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 ConfirmCaptureParams request = new ConfirmCaptureParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.amount(new BigDecimal("100.00"));
@@ -960,7 +343,7 @@ Charge charge = api.charges().confirmCapture("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Charge charge = api.ChargeService.Capture("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", new Decimal(100.00));
 ```
 
@@ -969,15 +352,15 @@ var captureRequest = {
   'amount' : 100.00
 };
 
-openpay.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', captureRequest, 
+bancomer.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', captureRequest, 
     function(error, charge){
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
+@bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@bancomer.create(:charges)
 
 response_hash=@charges.capture("tryqihxac3msedn4yxed", "ag4nktpdzebjiye1tlze")
 ```
@@ -1047,11 +430,11 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```php
 <?
 Merchant
-$charge = $openpay->charges->get(transactionId);
+$charge = $bancomer->charges->get(transactionId);
 $charge->refund(refundData);
 
 Customer
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $charge = $customer->charges->get(transactionId);
 $charge->refund(refundData);
 ?>
@@ -1059,35 +442,35 @@ $charge->refund(refundData);
 
 ```java
 //Customer
-openpayAPI.charges().refund(String customerId, RefundParams request);
+bancomerAPI.charges().refund(String customerId, RefundParams request);
 
 //Merchant
-openpayAPI.charges().refund(RefundParams request);
+bancomerAPI.charges().refund(RefundParams request);
 ```
 
 ```csharp
 //Customer
-openpayAPI.ChargeService.Refund(string customer_id, string transaction_id, string description);
+bancomerAPI.ChargeService.Refund(string customer_id, string transaction_id, string description);
 
 //Merchant
-openpayAPI.ChargeService.Refund(string transaction_id, string description);
+bancomerAPI.ChargeService.Refund(string transaction_id, string description);
 ```
 
 ```javascript
 // Merchant
-openpay.charges.refund(transactionId, refundRequest, callback);
+bancomer.charges.refund(transactionId, refundRequest, callback);
 
 // Customer
-openpay.customers.charges.refund(customerId, transactionId, refundRequest, callback);
+bancomer.customers.charges.refund(customerId, transactionId, refundRequest, callback);
 ```
 
 ```ruby
 #Customer
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.refund(transaction_id, request_hash, customer_id)
 
 #Merchant
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.refund(transaction_id, request_hash)
 ```
 
@@ -1105,20 +488,20 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
 $refundData = array(
     'description' => 'devolución',
     'amount' => 100);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $bancomer->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 $charge->refund($refundData);
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 RefundParams request = new RefundParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.description("Monto de cargo devuelto");
@@ -1128,7 +511,7 @@ Charge charge = api.charges().refund("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Charge charge = api.ChargeService.Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
 ```
 
@@ -1138,15 +521,15 @@ var refundRequest = {
    'amount' : 100.00
 };
 
-openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest, 
+bancomer.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest, 
     function(error, charge) {
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
+@bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@bancomer.create(:charges)
 
 request_hash={
      "description" => "Monto de cargo devuelto",
@@ -1238,45 +621,45 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 ```php
 <?
 Merchant
-$charge = $openpay->charges->get(transactionId);
+$charge = $bancomer->charges->get(transactionId);
 
 Customer
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $charge = $customer->charges->get(transactionId);
 ?>
 ```
 
 ```java
 //Customer
-openpayAPI.charges().get(String customerId, String transactionId);
+bancomerAPI.charges().get(String customerId, String transactionId);
 
 //Merchant
-openpayAPI.charges().get(String transactionId);
+bancomerAPI.charges().get(String transactionId);
 ```
 
 ```csharp
 //Customer
-openpayAPI.ChargeService.Get(string customer_id, string transaction_id);
+bancomerAPI.ChargeService.Get(string customer_id, string transaction_id);
 
 //Merchant
-openpayAPI.ChargeService.Get(string transaction_id);
+bancomerAPI.ChargeService.Get(string transaction_id);
 ```
 
 ```javascript
 // Merchant
-openpay.charges.get(transactionId, callback);
+bancomer.charges.get(transactionId, callback);
 
 // Customer
-openpay.customers.charges.get(customerId, transactionId, callback);
+bancomer.customers.charges.get(customerId, transactionId, callback);
 ```
 
 ```ruby
 #Customer
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.get(transaction_id, customerId)
 
 #Merchant
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.get(transaction_id)
 ```
 
@@ -1289,32 +672,32 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $bancomer->customers->get('ag4nktpdzebjiye1tlze');
 $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Charge charge = api.charges().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Charge charge = api.ChargeService.Get("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed");
 ```
 
 ```javascript
-openpay.customers.charges.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', function(error, charge){
+bancomer.customers.charges.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', function(error, charge){
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
+@bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@bancomer.create(:charges)
 
 response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag4nktpdzebjiye1tlze")
 ```
@@ -1396,47 +779,47 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 ```php
 <?
 Merchant
-$chargeList = $openpay->charges->getList(searchParams);
+$chargeList = $bancomer->charges->getList(searchParams);
 
 Customer
-$customer = $openpay->customers->get(customerId);
+$customer = $bancomer->customers->get(customerId);
 $chargeList = $customer->charges->getList(searchParams);
 ?>
 ```
 
 ```java
 //Customer
-openpayAPI.charges().list(String customerId, SearchParams request);
+bancomerAPI.charges().list(String customerId, SearchParams request);
 
 //Merchant
-openpayAPI.charges().list(SearchParams request);
+bancomerAPI.charges().list(SearchParams request);
 ```
 
 ```csharp
 //Customer
-openpayAPI.ChargeService.List(string customer_id, SearchParams request = null);
+bancomerAPI.ChargeService.List(string customer_id, SearchParams request = null);
 
 //Merchant
-openpayAPI.ChargeService.List(SearchParams request = null);
+bancomerAPI.ChargeService.List(SearchParams request = null);
 ```
 
 ```javascript
 // Merchant
-openpay.charges.list(callback);
-openpay.charges.list(searchParams, callback);
+bancomer.charges.list(callback);
+bancomer.charges.list(searchParams, callback);
 
 // Customer
-openpay.customers.charges.list(customerId, callback);
-openpay.customers.charges.list(customerId, searchParams, callback);
+bancomer.customers.charges.list(customerId, callback);
+bancomer.customers.charges.list(customerId, searchParams, callback);
 ```
 
 ```ruby
 #Customer
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.all(customer_id)
 
 #Merchant
-@charges=@openpay.create(:charges)
+@charges=@bancomer.create(:charges)
 @charges.all
 ```
 
@@ -1449,7 +832,7 @@ curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 
 $searchParams = array(
     'creation[gte]' => '2013-11-01',
@@ -1457,7 +840,7 @@ $searchParams = array(
     'offset' => 0,
     'limit' => 2);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $bancomer->customers->get('ag4nktpdzebjiye1tlze');
 $chargeList = $customer->charges->getList($searchParams);
 ?>
 ```
@@ -1468,7 +851,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
 
-OpenpayAPI api = new OpenpayAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -1480,7 +863,7 @@ List<Charge> charges = api.charges().list("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.CreationGte = new Datetime(2014, 5, 1);
 request.CreationLte = new DateTime(2014, 5, 15);
@@ -1488,7 +871,7 @@ request.Offset = 0;
 request.Limit = 100;
 request.Amount = new Decimal(100.00);
 
-List<Charge> charges= openpayAPI.ChargeService.List("ag4nktpdzebjiye1tlze", request);
+List<Charge> charges= bancomerAPI.ChargeService.List("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```javascript
@@ -1497,14 +880,14 @@ var searchParams = {
   'limit' : 2
 };
 
-openpay.customers.charges.list('ag4nktpdzebjiye1tlze',searchParams, function(error, chargeList) {
+bancomer.customers.charges.list('ag4nktpdzebjiye1tlze',searchParams, function(error, chargeList) {
   // ...
 });
 ```
 
 ```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
+@bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@bancomer.create(:charges)
 
 response_hash=@charges.all("ag4nktpdzebjiye1tlze")
 ```
