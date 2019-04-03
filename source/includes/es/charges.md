@@ -3,7 +3,7 @@ Los cargos se pueden realizar a tarjetas de crédito o debito. A cada cargo se l
 
 En cargos a tarjeta puedes hacerlo usando un token o desplegando un formulario para que el usuario capture los datos de la tarjeta.
 
-##Con token
+##Con tarjeta
 
 > Definición
 
@@ -63,35 +63,22 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/charges \
    "amount" : 100,
    "description" : "Cargo inicial a mi cuenta",
    "currency" : "MXN",
-   "token" : "krv3y6yucurt47w2sv1d",
    "order_id" : "oid-00051"
 }'
 ```
 
 ```csharp
 BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-List<IParameter> tokenRequest = List<IParameter>{
-    new SingleParameter("holder_nane", "Juan Perez Ramirez"),
-    new SingleParameter("card_number", "4111111111111111"),
-    new SingleParameter("cvv2", "022"),
-    new SingleParameter("expiration_month", "12"),
-    new SingleParameter("expiration_year", "20"),
-};
-
-Dictionary<String, Object> tokenDictionary = bancomerAPI.TokenService.Create(tokenRequest);
-ParameterContainer token = new ParameterContainer("token", tokenDictionary);
 
 List<IParameter> request = List<IParameter> {
     new SingleParameter("affiliation_bbva", "720931"),
     new SingleParameter("amount", "200.00"),
     new SingleParameter("description", "Test Charge"),
     new SingleParameter("customer_language", "SP"),
-    new SingleParameter("capture", "TRUE"),
-    new SingleParameter("use_3d_secure", "FALSE"),
     new SingleParameter("use_card_points", "NONE"),
-    new SingleParameter("token", token.GetSingleValue("id").ParameterValue),
     new SingleParameter("currency", "MXN"),
-    new SingleParameter("order_id", "oid-00051")
+    new SingleParameter("order_id", "oid-00051"),
+    new SingleParameter("redirect_url", "https://sand-portal.ecommercebbva.com")
 };
 
 Dictionary<String, Object> chargeDictionary = bancomerAPI.ChargeService.Create(request);
@@ -102,28 +89,15 @@ ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 BancomerAPI api = new BancomerAPI(
         "https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 
-List<Parameter> tokenRequest = new ArrayList<Parameter>(Arrays.asList(
-    new SingleParameter("card_number", "4111111111111111"),
-    new SingleParameter("cvv2", "295"),
-    new SingleParameter("expiration_month", "12"),
-    new SingleParameter("expiration_year", "20"),
-    new SingleParameter("holder_name", "Juan Perez Lopez")));
-
-Map tokenAsMap = api.tokens().create(tokenRequest);
-ParameterContainer token = new ParameterContainer("token", tokenAsMap);
-
 List<Parameter> request = new ArrayList<Parameter>(Arrays.asList(
     new SingleParameter("affiliation_bbva", "720931"),
     new SingleParameter("amount", "10.00"),
     new SingleParameter("description", "Cargo inicial"),
     new SingleParameter("customer_language", "SP"),
-    new SingleParameter("capture", "true"),
-    new SingleParameter("use_3d_secure", "false"),
     new SingleParameter("use_card_points", "NONE"),
-    new SingleParameter("token", token.getSingleValue("id").getParameterValue()),
     new SingleParameter("currency", "MXN"),
-    new SingleParameter("order_id", "oid-00051")
-
+    new SingleParameter("order_id", "oid-00051"),
+    new SingleParameter("redirect_url", "https://sand-portal.ecommercebbva.com")
 ));
 
 Map chargeAsMap = api.charges().create(request);
@@ -133,25 +107,16 @@ ParameterContainer charge = new ParameterContainer("charge", chargeAsMap);
 ```php
 <?
 $bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
-$tokenRequest = array(
-     'card_number' => '4111111111111111',
-     'cvv2' => '295',
-     'expiration_month' => '11',
-     'expiration_year' => '22',
-     'holder_name' => 'Juan Perez Lopez');
-
-$token = $bancomer->tokens->create($tokenRequest);
 
 $chargeRequest = array(
     'affiliation_bbva' => '720931',
     'amount' => 100,
     'description' => 'Cargo inicial a mi merchant',
     'customer_language' => 'SP',
-    'capture' => 'FALSE',
     'use_card_points' => 'FALSE',
     'currency' => 'MXN'
     'order_id' => 'oid-00051'
-    'token' => $token['id']);
+    'redirect_url' => 'https://sand-portal.ecommercebbva.com');
 
 $charge = $bancomer->charges->create($chargeRequest);
 ?>
@@ -221,10 +186,6 @@ response_hash=@charges.create(request_hash.to_hash)
 }
 ```
 
-Este tipo de cargo requiere que hayas generado un token. Para usar tokens consulta la sección [creación de tokens](#crear-un-nuevo-token).
-
-Una vez que tengas un token usa la propiedad <code>token</code> para enviar el identificador.
-
 <aside class="notice">
 Puedes realizar el cargo a la cuenta del comercio. </br>
 </aside>
@@ -249,16 +210,14 @@ description | ***string*** (requerido, longitud = 250) <br/>Una descripción aso
 [customer](#objeto-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [Objeto Cliente](#objeto-cliente) y realice el cargo a nivel cliente.
 customer_language | ***string*** (requerido, longitud = 2) <br/>Idioma a usarse en el recibo y la pantalla de compra, actualmente se aceptan dos valores SP-Español En-Inglés.
 [payment_plan](#objeto-paymentplan)|***objeto*** (opcional) <br/>Datos del plan de meses sin intereses que se desea utilizar en el cargo. Ver [Objeto PaymentPlan](#objeto-paymentplan).
-redirect_url | ***string*** (opcional) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de bancomer.
+redirect_url | ***string*** (requerido) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de bancomer.
 use_card_points | ***string*** (opcional, default = NONE) <br/> <table><tr><td><strong>ONLY_POINTS</strong></td> <td>Cargo solo con puntos (<a href="#consulta-de-puntos">Consulta de puntos</a>)</td></tr><tr><td><strong>MIXED</strong></td>       <td>Cargo con pesos y puntos</td></tr><tr><td><strong>NONE</strong></td>        <td>Cargo solo con pesos</td></tr></table>Los valores que indican puntos solo se deben usarse si la propiedad points_card de la tarjeta es true, de otra forma ocurrirá un error.
 use_3d_secure | ***string*** (opcional) <br/>Por defecto el valor es TRUE, si el comercio tiene habilitada la configuración para no utilizar 3d secure, entonces podrá enviar el parámetro en FALSE.
-token | ***string*** (requerido, longitud = 45) <br/>ID de la tarjeta guardada o el id del token creado de donde se retirarán los fondos.
 metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
 capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o preautorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
-
 
 
 ##Confirmar un cargo

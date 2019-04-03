@@ -15,7 +15,7 @@ includes:
   - en/errors
   - en/charges
   - en/qropay
-  - en/tokens
+  #- en/tokens
   - en/common_objects
 
 lang: EN

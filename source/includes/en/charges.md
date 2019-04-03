@@ -70,16 +70,6 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/charges \
 
 ```csharp
 BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-List<IParameter> tokenRequest = List<IParameter>{
-    new SingleParameter("holder_nane", "Juan Perez Ramirez"),
-    new SingleParameter("card_number", "4111111111111111"),
-    new SingleParameter("cvv2", "022"),
-    new SingleParameter("expiration_month", "12"),
-    new SingleParameter("expiration_year", "20"),
-};
-
-Dictionary<String, Object> tokenDictionary = bancomerAPI.TokenService.Create(tokenRequest);
-ParameterContainer token = new ParameterContainer("token", tokenDictionary);
 
 List<IParameter> request = List<IParameter> {
     new SingleParameter("affiliation_bbva", "720931"),
@@ -89,7 +79,6 @@ List<IParameter> request = List<IParameter> {
     new SingleParameter("capture", "TRUE"),
     new SingleParameter("use_3d_secure", "FALSE"),
     new SingleParameter("use_card_points", "NONE"),
-    new SingleParameter("token", token.GetSingleValue("id").ParameterValue),
     new SingleParameter("currency", "MXN"),
     new SingleParameter("order_id", "oid-00051")
 };
@@ -102,16 +91,6 @@ ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 BancomerAPI api = new BancomerAPI(
         "https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 
-List<Parameter> tokenRequest = new ArrayList<Parameter>(Arrays.asList(
-    new SingleParameter("card_number", "4111111111111111"),
-    new SingleParameter("cvv2", "295"),
-    new SingleParameter("expiration_month", "12"),
-    new SingleParameter("expiration_year", "20"),
-    new SingleParameter("holder_name", "Juan Perez Lopez")));
-
-Map tokenAsMap = api.tokens().create(tokenRequest);
-ParameterContainer token = new ParameterContainer("token", tokenAsMap);
-
 List<Parameter> request = new ArrayList<Parameter>(Arrays.asList(
     new SingleParameter("affiliation_bbva", "720931"),
     new SingleParameter("amount", "10.00"),
@@ -120,7 +99,6 @@ List<Parameter> request = new ArrayList<Parameter>(Arrays.asList(
     new SingleParameter("capture", "true"),
     new SingleParameter("use_3d_secure", "false"),
     new SingleParameter("use_card_points", "NONE"),
-    new SingleParameter("token", token.getSingleValue("id").getParameterValue()),
     new SingleParameter("currency", "MXN"),
     new SingleParameter("order_id", "oid-00051")
 
@@ -133,14 +111,6 @@ ParameterContainer charge = new ParameterContainer("charge", chargeAsMap);
 ```php
 <?
 $bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
-$tokenRequest = array(
-     'card_number' => '4111111111111111',
-     'cvv2' => '295',
-     'expiration_month' => '11',
-     'expiration_year' => '22',
-     'holder_name' => 'Juan Perez Lopez');
-
-$token = $bancomer->tokens->create($tokenRequest);
 
 $chargeRequest = array(
     'affiliation_bbva' => '720931',
@@ -149,9 +119,8 @@ $chargeRequest = array(
     'customer_language' => 'SP',
     'capture' => 'FALSE',
     'use_card_points' => 'FALSE',
-    'currency' => 'MXN'
-    'order_id' => 'oid-00051'
-    'token' => $token['id']);
+    'currency' => 'MXN',
+    'order_id' => 'oid-00051';
 
 $charge = $bancomer->charges->create($chargeRequest);
 ?>
@@ -216,8 +185,6 @@ response_hash=@charges.create(request_hash.to_hash)
 }
 ```
 
-This type of charge requires a saved card or a previously generated token. To save cards read [Create a card] (#create-a-card) and to use tokens visit the [Creation of tokens] (#create-a-new-token) section.
-
 <aside class="notice">
 You can charge the merchant account or the customer account.
 </aside>
@@ -240,10 +207,9 @@ description |                   ***string*** (required, length = 250) <br/>A des
 [customer](##objeto-cliente)|   ***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the merchant level<br/><br/> To create a customer and keep a record of their charges history refer to [Objeto Cliente](#objeto-cliente) (#create-a-new-customer) and do the charge at the customer level.
 customer_language |             ***string*** (required, length = 2) <br/>Language to be used in the receipt and the purchase screen, currently two values are accepted SP-Spanish In-English.
 [payment_plan](#objetc-paymentplan)|    ***object*** (optional) <br/>Plan data months without interest is desired as use in the charge. Refer to [PaymentPlan Object](#paymentplan-objetc).
-redirect_url |                          ***string*** (optional) <br/>Used in redirect charges. It indicates the url to which redirect after a successful transaction in the bancomer payment form.
+redirect_url |                          ***string*** (required) <br/>Used in redirect charges. It indicates the url to which redirect after a successful transaction in the bancomer payment form.
 use_card_points |                       ***string*** (optional, default = NONE) <br/> <table><tr><td><strong>ONLY_POINTS</strong></td> <td>Charge only with points (<a href="#consulta-de-puntos">Points card</a>)</td></tr><tr><td><strong>MIXED</strong></td><td>Charge with points and pesos</td></tr><tr><td><strong>NONE</strong></td>        <td>Charge only with pesos</td></tr></table>The values that indicate points must be used only if the points_card property is true, otherwise an error will occur.
 use_3d_secure |                         ***string*** (optional) <br/>By default the value is TRUE, if the trade has enabled the configuration to not use 3d secure, then you can send the parameter to FALSE.
-token |                                 ***string*** (required, length = 45) <br/>ID of the saved card or the id of the token created from where the funds will be withdrawn.
 metadata |                              ***list(key, value)*** (optional) <br/>Field list to send antifraud system, It must be according to [Rules to send custom antifraud fields] (#custom-to-send-antifraud-fields).
 capture |                               ***boolean*** (optional, default = true) <br/>Indicates whether the charge is made immediately or not , when the value is false the charge is handled as authorized (or pre-authorization) and the amount is only to be confirmed or canceled in a second call.
 ***************
