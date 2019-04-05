@@ -75,7 +75,7 @@ bancomerAPI.Production = true;
 #You only need to pass a "true" value as the third argument when creating the BancomerApi object. 
 ```
 
-To make requests to the Bancomer API, is necessary to send the API Key on all your calls to our servers. You can get the key from the [dashboard](https://sandbox-dashboard.bancomer.mx).
+To make requests to the Bancomer API, is necessary to send the API Key on all your calls to our servers. You can get the key from the [dashboard](https://sand-portal.ecommercebbva.com/login).
 
 There are 2 types of API keys:
 

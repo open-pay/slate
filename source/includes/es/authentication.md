@@ -80,7 +80,7 @@ bancomerAPI.Production = true;
 #Solo es necesario pasar como tercer argumento un "true" cuando se crea el objeto BancomerApi
 ```
 
-Para realizar peticiones a la API, es necesario enviar la llave de API (API Key) en todas tus llamadas a nuestros  servidores. ​La llave la puedes obtener desde el [dashboard](https://sandbox-bancomer.bancomer.mx/login).
+Para realizar peticiones a la API, es necesario enviar la llave de API (API Key) en todas tus llamadas a nuestros  servidores. ​La llave la puedes obtener desde el [dashboard](https://sand-portal.ecommercebbva.com/login).
 
 Existen 2 tipos de llaves de API:
 

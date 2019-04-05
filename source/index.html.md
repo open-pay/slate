@@ -27,6 +27,4 @@ La API está diseñada sobre [REST](http://es.wikipedia.org/wiki/Representationa
 
 Todas las respuestas de la API están en formato [JSON](http://www.json.org/), incluyendo errores.
 
-<!---
-  En el caso de usar los clientes existentes del API de Openpay ([Java](https://github.com/open-pay/openpay-java), [Php](https://github.com/open-pay/openpay-php), [C#](https://github.com/open-pay/openpay-dotnet), [Python](https://github.com/open-pay/openpay-python), [Ruby](https://github.com/open-pay/openpay-ruby), [NodeJS](https://github.com/open-pay/openpay-node)), las respuestas son específicamente del tipo definido en dichos clientes en sus respectivos lenguajes.
--->
+En el caso de usar los clientes existentes del API de Bancomer ([Java](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-JAVA.git), [Php](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-PHP.git), [C#](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-CSHARP.git), [Ruby](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-RUBY.git)), las respuestas son específicamente del tipo definido en dichos clientes en sus respectivos lenguajes.
