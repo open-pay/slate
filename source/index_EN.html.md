@@ -27,5 +27,5 @@ The API is designed on [REST](http://es.wikipedia.org/wiki/Representational_Stat
 
 All the API responses are in [JSON](http://www.json.org/) format, including the errors.
 
-In the case to use the existents API clients ([Java](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-JAVA.git), [Php](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-PHP.git), [C#](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-CSHARP.git), [Ruby](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-RUBY.git)), the responses are specifically of type defined in the clients and their respective languajes.
+In the case to use the existents API clients ([Java](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-JAVA.git), [PHP](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-PHP.git), [C#](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-CSHARP.git), [Ruby](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-RUBY.git)), the responses are specifically of type defined in the clients and their respective languajes.
 

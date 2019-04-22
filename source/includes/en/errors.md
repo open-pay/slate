@@ -58,7 +58,6 @@ Code    | HTTP Error |Cause
 1007 | 402 Payment Required | The transfer of funds from a bank account or card to the Bancomer account was not accepted.
 1008 | 423 Locked | One of the accounts required in the request is deactivated.
 1009 | 413 Request Entity too large | The request body is too large.
-1010 | 403 Forbidden | The public key is used to make a call but it requires the private key, or it ‘s using the private key from JavaScript.
 
 ###Storage
 

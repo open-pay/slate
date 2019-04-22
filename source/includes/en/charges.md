@@ -1,52 +1,35 @@
 #Charges
 Charges can be made to cards, stores and banks. Each charge is assigned with an unique identifier in the system.
 
-You can do card charges by using a saved card id, using a token or you can send the card information at the time of invocation.
+In card charges you can do by showing a form for the user to capture the card information.
 
-##With token
+##With card
 
 > Definition
 
 ```shell
 Merchant
 POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges
-
-Customer
-POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
 <?
 Merchant
 $bancomer->charges->create(chargeRequest);
-
-Customer
-$customer = $bancomer->customers->get($customerId);
-$customer->charges->create(chargeRequest);
 ?>
 ```
 
 ```java
-//Customer
-bancomerAPI.charges().create(String customerId, List<Parameter> request);
-
 //Merchant
 bancomerAPI.charges().create(List<Parameter> request);
 ```
 
 ```csharp
-//Customer
-bancomerAPI.ChargeService.Create(string customer_id, List<IParameter> request);
-
 //Merchant
 bancomerAPI.ChargeService.Create(List<IParameter> request);
 ```
 
 ```ruby
-#Customer
-@charges=@bancomer.create(:charges)
-@charges.create(request_hash, customer_id)
-
 #Merchant
 @charges=@bancomer.create(:charges)
 @charges.create(request_hash)
@@ -55,11 +38,11 @@ bancomerAPI.ChargeService.Create(List<IParameter> request);
 > Merchant request example 
 
 ```shell
-curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/charges \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges \
+   -u sk_326c6d0443f6457aae29ffbd48f7d1be: \
    -H "Content-type: application/json" \
    -X POST -d '{
-   "affiliation_bbva" : "107098",
+   "affiliation_bbva" : "781500",
    "amount" : 100,
    "description" : "Init charge",
    "currency" : "MXN",
@@ -75,7 +58,7 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/charges \
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
 
 ParameterContainer customer = new ParameterContainer("customer");
     customer.AddValue("name", "Juan");
@@ -98,7 +81,7 @@ ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 
 ```java
 BancomerAPI api = new BancomerAPI(
-        "https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+        "https://sand-api.ecommercebbva.com", "sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
 
 ParameterContainer customer = new ParameterContainer("customer");
     customer.addValue("name", "Juan");
@@ -121,7 +104,7 @@ ParameterContainer charge = new ParameterContainer("charge", chargeAsMap);
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mptdggroasfcmqs8plpy', 'sk_326c6d0443f6457aae29ffbd48f7d1be');
 
 $chargeRequest = array(
     'affiliation_bbva' => '781500',
@@ -164,7 +147,7 @@ request_hash={
 response_hash=@charges.create(request_hash.to_hash)
 ```
 
-> Ejemplo de respuesta
+> Response example
 
 ```json
 {
@@ -182,7 +165,7 @@ response_hash=@charges.create(request_hash.to_hash)
     "order_id": "oid-00051",
     "payment_method": {
         "type": "redirect",
-        "url": "https://sand-api.ecommercebbva.com/v1/mppfjk5cznzjqvrxp64k/charges/trz8v1n3g992xtylohts/card_capture"
+        "url": "https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges/trywj1kyx7vczirifkyw/card_capture"
     },
     "currency": "MXN",
     "amount": 100.00,
@@ -198,17 +181,6 @@ response_hash=@charges.create(request_hash.to_hash)
     }
 }
 ```
-
-<aside class="notice">
-You can charge the merchant account or the customer account.
-</aside>
-
-***Customized antifraud system***</br>
-You can send extra data to Bancomer in order to increase number of variables and get better results in antifraud detection for your transactions.
-
-<aside class="notice">
-If you want to use this feature you need to send <code>metadata</code> property with all fields you think can help to decide when a transaction is a fraud trying. Call support line to enable this feature</br>
-</aside>
 
 ###Request 
 Property | Description
@@ -234,9 +206,6 @@ Returns a [transaction object](#transaction-object) with the charge information 
 ```shell
 Merchant
 POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/capture
-
-Customer
-POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/capture
 ```
 
 ```php
@@ -244,26 +213,15 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 Merchant
 $charge = $bancomer->charges->get(transactionId);
 $charge->capture(captureData);
-
-Customer
-$customer = $bancomer->customers->get(customerId);
-$charge = $customer->charges->get(transactionId);
-$charge->capture(captureData);
 ?>
 ```
 
 ```java
-//Customer
-bancomerAPI.charges().confirmCapture(String customerId, ConfirmCaptureParams request);
-
 //Merchant
 bancomerAPI.charges().confirmCapture(ConfirmCaptureParams request);
 ```
 
 ```csharp
-//Customer
-bancomerAPI.ChargeService.Capture(string customer_id, string transaction_id, Decimal? amount);
-
 //Merchant
 bancomerAPI.ChargeService.Capture(string transaction_id, Decimal? amount);
 ```
@@ -271,26 +229,19 @@ bancomerAPI.ChargeService.Capture(string transaction_id, Decimal? amount);
 ```javascript
 // Merchant
 bancomer.charges.capture(transactionId, captureRequest, callback);
-
-// Customer
-bancomer.customers.charges.capture(customerId, transactionId, captureRequest, callback);
 ```
 
 ```ruby
-#Customer
-@charges=@bancomer.create(:charges)
-@charges.capture(transaction_id, customer_id)
-
 #Merchant
 @charges=@bancomer.create(:charges)
 @charges.capture(transaction_id)
 ```
 
-> Customer request example
+> Merchant request example
 
 ```shell
-curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tryqihxac3msedn4yxed/capture \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges/tryqihxac3msedn4yxed/capture \
+   -u sk_326c6d0443f6457aae29ffbd48f7d1be: \
    -H "Content-type: application/json" \
    -X POST -d '{
     "amount" : 100.00
@@ -299,18 +250,17 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mptdggroasfcmqs8plpy', 'sk_326c6d0443f6457aae29ffbd48f7d1be');
 
 $captureData = array('amount' => 100.00);
 
-$customer = $bancomer->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->get('tryqihxac3msedn4yxed');
+$charge = $bancomer->charges->get('ag4nktpdzebjiye1tlze');
 $charge->capture($captureData);
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
 ConfirmCaptureParams request = new ConfirmCaptureParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.amount(new BigDecimal("100.00"));
@@ -319,19 +269,8 @@ Charge charge = api.charges().confirmCapture("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
 Charge charge = api.ChargeService.Capture("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", new Decimal(100.00));
-```
-
-```javascript
-var captureRequest = {
-  'amount' : 100.00
-};
-
-bancomer.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', captureRequest, 
-    function(error, charge){
-  // ...
-});
 ```
 
 ```ruby
@@ -374,11 +313,11 @@ response_hash=@charges.capture("tryqihxac3msedn4yxed", "ag4nktpdzebjiye1tlze")
    "customer_id":"ag4nktpdzebjiye1tlze"
 }
 ```
-Confirm a charge created with the <code>capture = "false" </code> property, this method is the second part of the [create a charge with a card (id or token)] (#with-a-card-id-or-token) and it can confirm the amount captured on the first call or a lesser amount.
+Confirm a charge created with the <code>capture = "false" </code> property, this method is the second part of the [create a charge with a card] (#with-a-card-id-or-token) and it can confirm the amount captured on the first call or a lesser amount.
 
-<aside class="notice">
+
 **Note:** You only can confirm charges via card. To cancel the charge created you should make a call to the method [charge refund] (#charge-refund)
-</aside>
+
 
 
 ###Request 
@@ -398,9 +337,6 @@ Returns a [transaction object](#transaction-object) with the charge information 
 ```shell
 Merchant
 POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/refund
-
-Customer
-POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/refund
 ```
 
 ```php
@@ -408,53 +344,30 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 Merchant
 $charge = $bancomer->charges->get(transactionId);
 $charge->refund(refundData);
-
-Customer
-$customer = $bancomer->customers->get(customerId);
-$charge = $customer->charges->get(transactionId);
-$charge->refund(refundData);
 ?>
 ```
 
 ```java
-//Customer
-bancomerAPI.charges().refund(String customerId, RefundParams request);
-
 //Merchant
 bancomerAPI.charges().refund(RefundParams request);
 ```
 
 ```csharp
-//Customer
-bancomerAPI.ChargeService.Refund(string customer_id, string transaction_id, string description);
-
 //Merchant
 bancomerAPI.ChargeService.Refund(string transaction_id, string description);
 ```
 
-```javascript
-// Merchant
-bancomer.charges.refund(transactionId, refundRequest, callback);
-
-// Customer
-bancomer.customers.charges.refund(customerId, transactionId, refundRequest, callback);
-```
-
 ```ruby
-#Customer
-@charges=@bancomer.create(:charges)
-@charges.refund(transaction_id, request_hash, customer_id)
-
 #Merchant
 @charges=@bancomer.create(:charges)
 @charges.refund(transaction_id, request_hash)
 ```
 
-> Customer request example
+> Merchant request example
 
 ```shell
-curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tr6cxbcefzatd10guvvw/refund \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges/tr6cxbcefzatd10guvvw/refund \
+   -u sk_326c6d0443f6457aae29ffbd48f7d1be: \
    -H "Content-type: application/json" \
    -X POST -d '{
    "description" : "devolución",
@@ -464,20 +377,19 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mptdggroasfcmqs8plpy', 'sk_326c6d0443f6457aae29ffbd48f7d1be');
 
 $refundData = array(
     'description' => 'devolución',
     'amount' => 100);
 
-$customer = $bancomer->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
-$charge->refund($refundData);
+$charge = $bancomer->charges->get('ag4nktpdzebjiye1tlze');
+$charge->refund(refundData);
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
 RefundParams request = new RefundParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.description("Monto de cargo devuelto");
@@ -487,20 +399,8 @@ Charge charge = api.charges().refund("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
 Charge charge = api.ChargeService.Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
-```
-
-```javascript
-var refundRequest = {
-   'description' : 'devolución',
-   'amount' : 100.00
-};
-
-bancomer.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest, 
-    function(error, charge) {
-  // ...
-});
 ```
 
 ```ruby
@@ -589,86 +489,54 @@ Returns a [transaction object](#transaction-object) with the charge information 
 ```shell
 Merchant
 GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}
-
-Merchant
-GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}
 ```
 
 ```php
 <?
 Merchant
 $charge = $bancomer->charges->get(transactionId);
-
-Customer
-$customer = $bancomer->customers->get(customerId);
-$charge = $customer->charges->get(transactionId);
 ?>
 ```
 
 ```java
-//Customer
-bancomerAPI.charges().get(String customerId, String transactionId);
-
 //Merchant
 bancomerAPI.charges().get(String transactionId);
 ```
 
 ```csharp
-//Customer
-bancomerAPI.ChargeService.Get(string customer_id, string transaction_id);
-
 //Merchant
 bancomerAPI.ChargeService.Get(string transaction_id);
 ```
 
-```javascript
-// Merchant
-bancomer.charges.get(transactionId, callback);
-
-// Customer
-bancomer.customers.charges.get(customerId, transactionId, callback);
-```
-
 ```ruby
-#Customer
-@charges=@bancomer.create(:charges)
-@charges.get(transaction_id, customerId)
-
 #Merchant
 @charges=@bancomer.create(:charges)
 @charges.get(transaction_id)
 ```
 
-> Customer request example
+> Merchant request example
 
 ```shell
-curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tr6cxbcefzatd10guvvw \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges/tr6cxbcefzatd10guvvw \
+   -u sk_326c6d0443f6457aae29ffbd48f7d1be:
 ```
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mptdggroasfcmqs8plpy', 'sk_326c6d0443f6457aae29ffbd48f7d1be');
 
-$customer = $bancomer->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
+$charge = $bancomer->charges->get('tr6cxbcefzatd10guvvw');
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
 Charge charge = api.charges().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
 Charge charge = api.ChargeService.Get("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed");
-```
-
-```javascript
-bancomer.customers.charges.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', function(error, charge){
-  // ...
-});
 ```
 
 ```ruby
@@ -747,68 +615,47 @@ Returns a [transaction object](#transaction-object) with the charge information 
 ```shell
 Merchant
 GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges
-
-Merchant
-GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
 <?
 Merchant
 $chargeList = $bancomer->charges->getList(searchParams);
-
-Customer
-$customer = $bancomer->customers->get(customerId);
-$chargeList = $customer->charges->getList(searchParams);
 ?>
 ```
 
 ```java
-//Customer
-bancomerAPI.charges().list(String customerId, SearchParams request);
-
 //Merchant
 bancomerAPI.charges().list(SearchParams request);
 ```
 
 ```csharp
-//Customer
-bancomerAPI.ChargeService.List(string customer_id, SearchParams request = null);
-
 //Merchant
 bancomerAPI.ChargeService.List(SearchParams request = null);
 ```
 
 ```javascript
-// Merchant
-bancomer.charges.list(callback);
-bancomer.charges.list(searchParams, callback);
-
 // Customer
 bancomer.customers.charges.list(customerId, callback);
 bancomer.customers.charges.list(customerId, searchParams, callback);
 ```
 
 ```ruby
-#Customer
-@charges=@bancomer.create(:charges)
-@charges.all(customer_id)
-
 #Merchant
 @charges=@bancomer.create(:charges)
 @charges.all
 ```
 
-> Customer request example
+> Merchant request example
 
 ```shell
-curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges?creation[gte]=2013-11-01&limit=2" \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+curl -g "https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges?creation[gte]=2013-11-01&limit=2" \
+   -u sk_326c6d0443f6457aae29ffbd48f7d1be: 
 ```
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bancomer = Bancomer::getInstance('mptdggroasfcmqs8plpy', 'sk_326c6d0443f6457aae29ffbd48f7d1be');
 
 $searchParams = array(
     'creation[gte]' => '2013-11-01',
@@ -827,7 +674,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
 
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -839,7 +686,7 @@ List<Charge> charges = api.charges().list("ag4nktpdzebjiye1tlze", request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BancomerAPI api = new BancomerAPI("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
 SearchParams request = new SearchParams();
 request.CreationGte = new Datetime(2014, 5, 1);
 request.CreationLte = new DateTime(2014, 5, 15);

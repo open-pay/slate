@@ -1,7 +1,7 @@
 
 #Errores
 
-El API regresa objetos de JSON en las respuestas del servicio, incluso en caso de errores por lo que cuando exista un error.
+El API regresa objetos JSON en las respuestas del servicio, incluso en caso de errores por lo que cuando exista un error.
 
 ##Objeto Error
 
@@ -10,7 +10,7 @@ El API regresa objetos de JSON en las respuestas del servicio, incluso en caso d
 ```json
 {
     "category" : "request",
-    "description" : "The customer with id 'm4hqp35pswl02mmc567' does not exist",
+    "description" : "The customer with id 'mptdggroasfcmqs8plpy' does not exist",
     "http_code" : 404,
     "error_code" : 1005,
     "request_id" : "1981cdb8-19cb-4bad-8256-e95d58bc035c",
@@ -60,7 +60,6 @@ Código    | Error HTTP  |Causa
 1007  |402 Payment Required | La transferencia de fondos entre una cuenta de banco o tarjeta y la cuenta no fue aceptada.
 1008  |423 Locked | Una de las cuentas requeridas en la petición se encuentra desactivada.
 1009  |413 Request Entity too large  | El cuerpo de la petición es demasiado grande.
-1010  |403 Forbidden  |Se esta utilizando la llave pública para hacer una llamada que requiere la llave privada, o bien, se esta usando la llave privada desde JavaScript.
 
 ###Almacenamiento
 

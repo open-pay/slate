@@ -5,15 +5,9 @@
 <br/>
 <br/>
 
-> a) By Merchant
-
 ```
-/v1/{MERCHANT_ID}/...
-
-/charges
-/charges/{TRANSACTION_ID}
-​/tokens
-/tokens/{TOKEN_ID}
+/v1/{MERCHANT_ID}/charges
+/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}
 ```
 
 The Bancomer REST API has a test environment (sandbox) and a production environment. For integrating your system with Bancomer, use the credentials that were generated when you signed up. Once you are ready to move to production environment and your request is approved, new credentials will be generated for accessing the production environment.
@@ -25,9 +19,9 @@ The following URIs are the basis of the endpoints for the supported environments
 
 A complete endpoint consists of the base URI of the environment, the identifier of the Merchant and the resource.
 
-For example, if we want to create a new customer, the endpoint would be::
+For example, if we want to create a new charge, the endpoint would be::
 
-<code>POST https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers</code>
+<code>POST https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges</code>
 
 In order to create a complete request is necessary to send the right HTTP headers and the information in JSON format.
 

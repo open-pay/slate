@@ -5,14 +5,9 @@
 <br/>
 <br/>
 
-> a) Por Comercio
-
 ```
-/v1/{MERCHANT_ID}/...
-/charges
-/charges/{TRANSACTION_ID}
-​/tokens
-/tokens/{TOKEN_ID}
+/v1/{MERCHANT_ID}/charges
+/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}
 ```
 
 
@@ -28,9 +23,9 @@ Un endpoint completo esta formado por la URI base del ambiente, el identificador
 
 Por ejemplo, si queremos crear un nuevo cliente, el endpoint sería:
 
-<code>POST https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers</code>
+<code>POST https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/customers</code>
 
-Para crear una petición completa es necesaria envíar las cabeceras HTTP correctas y la información en formato JSON.
+Para crear una petición completa es necesario envíar las cabeceras HTTP correctas y la información en formato JSON.
 
 <aside class="notice">
 Todos los ejemplos de está documentación están apuntados al ambiente de pruebas.

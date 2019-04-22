@@ -14,7 +14,7 @@ includes:
   - es/authentication
   - es/errors
   - es/charges
-  - es/qropay
+  #- es/qropay
   #- es/tokens
   - es/common_objects
  
@@ -27,4 +27,4 @@ La API está diseñada sobre [REST](http://es.wikipedia.org/wiki/Representationa
 
 Todas las respuestas de la API están en formato [JSON](http://www.json.org/), incluyendo errores.
 
-En el caso de usar los clientes existentes del API de Bancomer ([Java](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-JAVA.git), [Php](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-PHP.git), [C#](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-CSHARP.git), [Ruby](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-RUBY.git)), las respuestas son específicamente del tipo definido en dichos clientes en sus respectivos lenguajes.
+En el caso de usar los clientes existentes del API de Bancomer ([Java](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-JAVA.git), [PHP](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-PHP.git), [C#](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-CSHARP.git), [Ruby](https://github.com/BBVA-Bancomer-Ecommerce/BBVA-RUBY.git)), las respuestas son específicamente del tipo definido en dichos clientes en sus respectivos lenguajes.

@@ -3,8 +3,8 @@
 > Authentication example
 
 ```shell
-curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/charges \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges \
+   -u sk_326c6d0443f6457aae29ffbd48f7d1be:
 
 The -u parameter is responsible for the HTTP basic authentication (adding two points after the private key prevents the use of password)
 ```
@@ -12,34 +12,34 @@ The -u parameter is responsible for the HTTP basic authentication (adding two po
 ```php
 <? 
 //Sandbox is used by default 
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178ce26348b0fac'); 
+$bancomer = Bancomer::getInstance('mptdggroasfcmqs8plpy', 'sk_326c6d0443f6457aae29ffbd48f7d1be');
 ?>
 ```
 
 ```java
 //Sandbox
-final BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+final BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "mptdggroasfcmqs8plpy", "sk_326c6d0443f6457aae29ffbd48f7d1be");
 
 //Production
-final BancomerAPI api = new BancomerAPI("https://api.ecommercebbva.com", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+final BancomerAPI api = new BancomerAPI("https://api.ecommercebbva.com", "mptdggroasfcmqs8plpy", "sk_326c6d0443f6457aae29ffbd48f7d1be");
 ```
 
 ```csharp
 //Sandbox
-BancomerAPI bancomerAPI = new Bancomer("sk_3433941e467c4875b178ce26348b0fac", "moiep6umtcnanql3jrxp");
+BancomerAPI bancomerAPI = new Bancomer("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
 bancomerAPI.Production = false; // Default value = false
 
 //Produtcion
-BancomerAPI bancomerAPI = new Bancomer("sk_3433941e467c4875b178ce26348b0fac", "moiep6umtcnanql3jrxp");
+BancomerAPI bancomerAPI = new Bancomer("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
 bancomerAPI.Production = true;
 ```
 
 ```ruby
 #Sandbox
-bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+bancomer=BancomerApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7d1be")
 
 #Production
-bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac", true)
+bancomer=BancomerApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7d1be", true)
 
 
 #Define the timeout for the requests
@@ -77,7 +77,7 @@ bancomerAPI.Production = true;
 
 To make requests to the Bancomer API, is necessary to send the API Key on all your calls to our servers. You can get the key from the [dashboard](https://sand-portal.ecommercebbva.com/login).
 
-There are 2 types of API keys:
+API key:
 
 * **Private.-** 
 For calls between servers and full access to all API operations (should never be shared).
@@ -86,14 +86,7 @@ For calls between servers and full access to all API operations (should never be
 Keep this key safe and never share it to anyone.
 </aside>
 
-* **Public.-**
-should only be used in JavaScript calls. This key is only allowed to create cards or create tokens.
-
-<aside class="notice">
-To make calls with your public key use the [Bancomer.js] library(#)
-</aside>
-
-For API authentication you must use the [basic access authentication]http://es.wikipedia.org/wiki/Autenticación_de_acceso_básica), where the API key is the username. The password is not required and it should be left blank for purposes of simplicity
+For API authentication you must use the [basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication), where the API key is the username. The password is not required and it should be left blank for purposes of simplicity
 
 <aside class="notice">
 For security reasons, all requests must be through **HTTPS**.
