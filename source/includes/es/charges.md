@@ -3,7 +3,7 @@ Los cargos se pueden realizar a tarjetas de crédito o débito. A cada cargo se 
 
 En cargos a tarjeta puedes hacerlo desplegando un formulario para que el usuario capture los datos de la tarjeta.
 
-##Con tarjeta
+##Con VPOS
 
 > Definición
 
@@ -199,6 +199,263 @@ use_3d_secure | ***string*** (opcional) <br/>Por defecto el valor es TRUE, si el
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
+## Con tarjeta
+
+> Definición
+
+```shell
+Comercio
+POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/charges
+```
+
+```php
+<?
+Comercio
+$bancomer->charges->create(chargeRequest);
+?>
+```
+
+```java
+//Comercio
+bancomerAPI.charges().create(List<Parameter> request);
+```
+
+```csharp
+//Comercio
+bancomerAPI.ChargeService.Create(List<IParameter> request);
+```
+
+```ruby
+#Comercio
+@charges=@bancomer.create(:charges)
+@charges.create(request_hash)
+```
+
+> Ejemplo de petición con comercio
+
+```shell
+curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges \
+   -u sk_326c6d0443f6457aae29ffbd48f7d1be: \
+   -H "Content-type: application/json" \
+   -X POST -d '{
+   "affiliation_bbva" : "781500",
+   "amount" : 100,
+   "description" : "Cargo inicial a mi cuenta",
+   "currency" : "MXN",
+   "order_id" : "oid-00051",
+   "customer": {
+        "name": "Juan",
+        "last_name": "Vazquez Juarez",
+        "email": "juan.vazquez@empresa.com.mx",
+        "phone_number": "555-444-3322"
+   },
+   "card" : {
+        "holder_name" : "Juan Vazquez",
+        "card_number" : "4242424242424242",
+        "expiration_month" : "12",
+        "expiration_year" : "21",
+        "cvv2" : "842"
+        
+   }
+   "redirect_url": "https://sand-portal.ecommercebbva.com"
+}'
+```
+
+```csharp
+BancomerAPI api = new BancomerAPI("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
+
+ParameterContainer customer = new ParameterContainer("customer");
+    customer.AddValue("name", "Juan");
+    customer.AddValue("last_name", "Vazquez Juarez");
+    customer.AddValue("email", "juan.vazquez@empresa.com.mx");
+    customer.AddValue("phone_number", "554-170-3567");
+    
+ParameterContainer card = new ParameterContainer("card");
+    customer.AddValue("holder_name", "Juan Vazquez Juarez");
+    customer.AddValue("card_number", "4242424242424242");
+    customer.AddValue("expiration_month", "12");
+    customer.AddValue("expiration_year", "21");
+    customer.AddValue("cvv2", "842");
+    
+ParameterContainer request = new ParameterContainer("charge");
+    request.AddValue("affiliation_bbva", "781500");
+    request.AddValue("amount", "100.00");
+    request.AddValue("description", "Cargo inicial a mi merchant");
+    request.AddValue("currency", "MXN");
+    request.AddValue("order_id", "oid-00051");
+    request.AddValue("redirect_url", "https://sand-portal.ecommercebbva.com");
+    request.AddMultiValue(customer);
+    request.AddMultiValue(card):
+            
+Dictionary<String, Object> chargeDictionary = bancomerAPI.ChargeService.Create(request.ParameterValues);
+ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
+```
+
+```java
+BancomerAPI api = new BancomerAPI(
+        "https://sand-api.ecommercebbva.com", "sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
+
+ParameterContainer customer = new ParameterContainer("customer");
+    customer.addValue("name", "Juan");
+    customer.addValue("last_name", "Vazquez Juarez");
+    customer.addValue("email", "juan.vazquez@empresa.com.mx");
+    customer.addValue("phone_number", "554-170-3567");
+    
+ParameterContainer card = new ParameterContainer("card");
+    card.addValue("card_number", "4242424242424242");
+    card.addValue("holder_name", "Juan Vazquez");
+    card.addValue("expiration_year", "21");
+    card.addValue("expiration_month", "12");
+    card.addValue("cvv2", "842");
+
+ParameterContainer charge = new ParameterContainer("charge");
+    charge.addValue("affiliation_bbva", "781500");
+    charge.addValue("amount", "100.00");
+    charge.addValue("description", "Cargo inicial a mi merchant");
+    charge.addValue("currency", "MXN");
+    charge.addValue("order_id", "oid-00051");
+    charge.addValue("redirect_url", "https://sand-portal.ecommercebbva.com");
+    charge.addMultiValue(customer);
+    charge.addMultiValue(card);
+
+Map chargeAsMap = api.charges().create(charge.getParameterValues());
+ParameterContainer charge = new ParameterContainer("charge", chargeAsMap);
+```
+
+```php
+<?
+$bancomer = Bancomer::getInstance('mptdggroasfcmqs8plpy', 'sk_326c6d0443f6457aae29ffbd48f7d1be');
+
+$chargeRequest = array(
+    'affiliation_bbva' => '781500',
+    'amount' => 100,
+    'description' => 'Cargo inicial a mi merchant',
+    'currency' => 'MXN',
+    'order_id' => 'oid-00051',
+    'redirect_url' => 'https://sand-portal.ecommercebbva.com',
+    'card' => array(
+            'holder_name' => 'Juan Vazquez',
+            'card_number' => '4242424242424242',
+            'expiration_month' => '12',
+            'expiration_year' => '21'
+            'cvv2' => '842'),
+    'customer' => array(
+        'name' => 'Juan',
+        'last_name' => 'Vazquez Juarez',
+        'email' => 'juan.vazquez@empresa.com.mx',
+        'phone_number' => '554-170-3567')
+);
+
+$charge = $bancomer->charges->create($chargeRequest);
+?>
+```
+
+```ruby
+@bancomer=BancomerApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7d1be")
+@charges=@bancomer.create(:charges)
+customer_hash={
+    "name" => "Juan",
+    "last_name" => "Vazquez Juarez",
+    "phone_number" => "4423456723",
+    "email" => "juan.vazquez@empresa.com.mx"
+}
+
+card_hash={
+    "holder_name" => "Juan Vazquez",
+    "card_number" => "4242424242424242",
+    "expiration_month" => "12",
+    "expiration_year" => "21",
+    "cvv2" => "842"
+}
+
+request_hash={
+    "affiliation_bbva" => "781500",
+    "amount" => 100.00,
+    "currency" => "MXN",
+    "description" => "Cargo inicial a mi merchant",
+    "order_id" => "oid-00051",
+    "redirect_url" => "https://sand-portal.ecommercebbva.com",
+    "customer" => customer_hash,
+    "card" => card_hash
+}
+
+response_hash=@charges.create(request_hash.to_hash)
+```
+
+> Ejemplo de respuesta
+
+```json
+{
+    "id": "trocmtrnivm5scpfguvl",
+    "authorization": "trocmtrnivm5scpfguvl",
+    "operation_type": "in",
+    "method": "card",
+    "transaction_type": "charge",
+    "card": {
+        "type": "credit",
+        "brand": "visa",
+        "address": null,
+        "card_number": "424242XXXXXX4242",
+        "holder_name": "Juan Vazquez",
+        "expiration_year": "21",
+        "expiration_month": "12",
+        "allows_charges": true,
+        "allows_payouts": false,
+        "bank_name": "BANCOMER",
+        "points_type": "bancomer",
+        "bank_code": "012",
+        "points_card": true
+    },
+    "status": "charge_pending",
+    "conciliated": true,
+    "creation_date": "2019-04-24T10:43:06-05:00",
+    "operation_date": "2019-04-24T10:43:06-05:00",
+    "description": "Pago",
+    "error_message": null,
+    "order_id": "1556120584928",
+    "amount": 105.32,
+    "customer": {
+        "name": "Juan",
+        "last_name": "Perez",
+        "email": "juanperez@example.com",
+        "phone_number": "554-170-3567",
+        "address": {
+            "line1": "Calle Morelos #12 - 11",
+            "line2": "Colonia Centro",
+            "line3": "Cuauhtémoc",
+            "state": "Queretaro",
+            "city": "Queretaro",
+            "postal_code": "12345",
+            "country_code": "MX"
+        },
+        "creation_date": "2019-04-24T10:43:06-05:00",
+        "external_id": null,
+        "clabe": null
+    },
+    "payment_method": {
+        "type": "redirect",
+        "url": "https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges/trocmtrnivm5scpfguvl/redirect/"
+    },
+    "currency": "MXN"
+}
+```
+
+###Petición
+
+Propiedad | Descripción
+--------- | -----
+affiliation_bbva|***string*** (requerido) <br/>Debe contener el número de afiliación.
+amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
+description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
+currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 2 tipos de monedas: Pesos Mexicanos(MXN) y Dólares Americanos(USD).
+order_id | ***string*** (requerido, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
+[customer](#objeto-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [Objeto Cliente](#objeto-cliente) y realice el cargo a nivel cliente.
+[card](#objeto-tarjeta)|***objeto*** (requerido) <br/> Lorem ipsum dolor sit amet. 
+redirect_url | ***string*** (requerido) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de bancomer.
+use_3d_secure | ***string*** (opcional) <br/>Por defecto el valor es TRUE, si el comercio tiene habilitada la configuración para no utilizar 3d secure, entonces podrá enviar el parámetro en FALSE.
+
+###Respuesta
+Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 ##Confirmar un cargo
 
