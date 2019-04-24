@@ -178,3 +178,54 @@ balance       |***numeric*** <br/>Saldo en la cuenta con dos decimales.
 clabe         |***numeric*** <br/>Cuenta CLABE asociada con la que puede recibir fondos realizando una  transferencia desde cualquier banco en México.
 [address](#objeto-direcci-n) |***object*** <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
 store |***object*** <br/>Contiene la referencia que se puede utilizar para realizar depósitos en tiendas de conveniencia, también se incluye la url para generar el código de barra.
+
+##Objeto Tarjeta
+
+> Ejemplo de objeto 
+
+```json
+{
+   "type":"debit",
+   "brand":"mastercard",
+   "address":{
+      "line1":"Av 5 de Febrero",
+      "line2":"Roble 207",
+      "line3":"col carrillo",
+      "state":"Queretaro",
+      "city":"Querétaro",
+      "postal_code":"76900",
+      "country_code":"MX"
+   },
+   "id":"kgipbqixvjg3gbzowl7l",
+   "card_number":"1111",
+   "holder_name":"Juan Perez Ramirez",
+   "expiration_year":"20",
+   "expiration_month":"12",
+   "allows_charges":true,
+   "allows_payouts":false,
+   "creation_date":"2013-12-12T17:50:00-06:00",
+   "bank_name":"DESCONOCIDO",
+   "bank_code":"000",
+   "customer_id":"a2b79p8xmzeyvmolqfja",
+   "points_card":true
+}
+```
+
+Propiedad | Descripción
+--------- | ------
+id            |***string*** <br/>Identificador único de la tarjeta.
+creation_date |***datetime*** <br/>Fecha y hora en que se creó la tarjeta en formato ISO 8601
+holder_name |***string***  <br/>Nombre del tarjeta habiente.
+card_number |***numeric***  <br/>Número de tarjeta, puede ser de 16 o 19 dígitos.
+cvv2 |***numeric***  <br/>Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.
+expiration_month |***numeric***  <br/>Mes de expiración tal como aparece en la tarjeta.
+expiration_year |***numeric***  <br/>Año de expiración tal como aparece en la tarjeta.
+[address](#objeto-dirección) |***object*** <br/>Dirección de facturación del tarjeta habiente.
+allows_charges |***boolean*** <br/>Permite conocer si se pueden realizar cargos a la tarjeta.
+allows_payouts |***boolean*** <br/>Permite conocer si se pueden realizar envíos de pagos a la tarjeta. 
+brand |***string*** <br/>Marca de la tarjeta: visa, mastercard, carnet o american express.
+type |***string*** <br/>Tipo de la tarjeta: debit, credit, cash, etc.
+bank_name |***string*** <br/>Nombre del banco emisor.
+bank_code |***string*** <br/>Código del banco emisor.
+customer_id |***string*** <br/>Identificador del cliente al que pertenece la tarjeta. Si la tarjeta es a nivel comercio este valor será null.
+points_card |***boolean*** <br/>Indica si la tarjeta soporta el pago con puntos.

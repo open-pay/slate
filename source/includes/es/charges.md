@@ -5,6 +5,8 @@ En cargos a tarjeta puedes hacerlo desplegando un formulario para que el usuario
 
 ##Con VPOS
 
+Este tipo de cargo no requiere una tarjeta guardada o que hayas generado un token.
+
 > Definición
 
 ```shell
@@ -450,7 +452,7 @@ description | ***string*** (requerido, longitud = 250) <br/>Una descripción aso
 currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 2 tipos de monedas: Pesos Mexicanos(MXN) y Dólares Americanos(USD).
 order_id | ***string*** (requerido, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 [customer](#objeto-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [Objeto Cliente](#objeto-cliente) y realice el cargo a nivel cliente.
-[card](#objeto-tarjeta)|***objeto*** (requerido) <br/> Lorem ipsum dolor sit amet. 
+[card](#objeto-tarjeta)|***objeto*** (requerido) <br/> Información de la tarjeta de donde se retirarán los fondos. 
 redirect_url | ***string*** (requerido) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de bancomer.
 use_3d_secure | ***string*** (opcional) <br/>Por defecto el valor es TRUE, si el comercio tiene habilitada la configuración para no utilizar 3d secure, entonces podrá enviar el parámetro en FALSE.
 

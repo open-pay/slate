@@ -5,6 +5,8 @@ In card charges you can do by showing a form for the user to capture the card in
 
 ##With VPOS
 
+This type of charge don’t requires a saved card or a previously generated token
+
 > Definition
 
 ```shell
@@ -449,7 +451,7 @@ description |                   ***string*** (required, length = 250) <br/>A des
 currency |                      ***string*** (optional) <br/>Charge currency type. Currently you can only use two currency types: Mexican pesos(MXN) y American dollars(USD).
 order_id |                      ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
 [customer](##objeto-cliente)|   ***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the merchant level<br/><br/> To create a customer and keep a record of their charges history refer to [Objeto Cliente](#objeto-cliente) (#create-a-new-customer) and do the charge at the customer level.
-[card](#objecto-tarjeta)|    ***object*** (required) <br/>Lorem ipsum dolor sit amet. Refer to [Card Object](#card-object).
+[card](#objecto-tarjeta)|    ***object*** (required) <br/> Card information where the funds are withdrawn.
 redirect_url |                          ***string*** (required) <br/>Used in redirect charges. It indicates the url to which redirect after a successful transaction in the bancomer payment form.
 use_3d_secure |                         ***string*** (optional) <br/>By default the value is TRUE, if the trade has enabled the configuration to not use 3d secure, then you can send the parameter to FALSE.
 ***************

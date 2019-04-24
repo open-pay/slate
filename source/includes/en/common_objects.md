@@ -193,3 +193,54 @@ balance       |***numeric*** <br/>Account balance with two decimal digits.
 clabe         |***numeric*** <br/>CLABE account used to receive funds by transfer from any bank in Mexico.
 [address](#addres-object) |***object*** <br/>Address of the customer. It is usually used as shipping address.
 [store](#store-object) |_*object**_ <br/>Contains reference string to go to Store and make deposits, the url to generate barcode is contained too.
+
+##Card Object
+
+> Object example 
+
+```json
+{
+   "type":"debit",
+   "brand":"mastercard",
+   "address":{
+      "line1":"Av 5 de Febrero",
+      "line2":"Roble 207",
+      "line3":"col carrillo",
+      "state":"Queretaro",
+      "city":"Querétaro",
+      "postal_code":"76900",
+      "country_code":"MX"
+   },
+   "id":"kgipbqixvjg3gbzowl7l",
+   "card_number":"1111",
+   "holder_name":"Juan Perez Ramirez",
+   "expiration_year":"20",
+   "expiration_month":"12",
+   "allows_charges":true,
+   "allows_payouts":false,
+   "creation_date":"2013-12-12T17:50:00-06:00",
+   "bank_name":"DESCONOCIDO",
+   "bank_code":"000",
+   "customer_id":"a2b79p8xmzeyvmolqfja",
+   "points_card":true
+}
+```
+
+Property | Description
+--------- | ------
+id            |***string*** <br/>Unique identifier of the card.
+creation_date |***datetime*** <br/>Date and time when the card was created in ISO 8601 format.
+holder_name |***string***  <br/>Name of the cardholder.
+card_number |***numeric***  <br/>Card Number, it can be 16 or 19 digits.
+cvv2 |***numeric***  <br/>Security code as it appears on the back of the card. Usually 3 digits..
+expiration_month |***numeric***  <br/>Expiration month as it appears on the card.
+expiration_year |***numeric***  <br/>Expiration year as it appears on the card.
+[address](#address-object) |***object*** <br/>Billing address of cardholder.
+allows_charges |***boolean*** <br/>It allows to know if you can make charges to the card.
+allows_payouts |***boolean*** <br/>It allows to know if you can send payments to the card. 
+brand |***string*** <br/>Card brand: visa, mastercard, carnet or american express.
+type |***string*** <br/>Card Type: debit, credit, cash, etc.
+bank_name |***string*** <br/>Name of the issuing bank.
+bank_code |***string*** <br/>Code of the issuing bank.
+customer_id |***string*** <br/>Customer identifier to which the card belongs. If the card is at Merchant level this value is null.
+points_card |***boolean*** <br/>Indicates whether the card allows the use of reward points.
