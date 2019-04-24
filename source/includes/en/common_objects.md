@@ -147,7 +147,7 @@ CHARGE_PENDING| Transaction that is waiting to be paid
 CANCELLED| Transaction that was not paid and has been cancelled
 FAILED| Transaction that was paid but ocurred an error
 
-##Objeto Cliente
+##Customer object
 
 > Ejemplo de Objeto:
 
