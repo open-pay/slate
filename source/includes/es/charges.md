@@ -67,7 +67,7 @@ ParameterContainer customer = new ParameterContainer("customer");
     customer.AddValue("last_name", "Vazquez Juarez");
     customer.AddValue("email", "juan.vazquez@empresa.com.mx");
     customer.AddValue("phone_number", "554-170-3567");
-    
+
 ParameterContainer request = new ParameterContainer("charge");
     request.AddValue("affiliation_bbva", "781500");
     request.AddValue("amount", "100.00");
@@ -76,7 +76,7 @@ ParameterContainer request = new ParameterContainer("charge");
     request.AddValue("order_id", "oid-00051");
     request.AddValue("redirect_url", "https://sand-portal.ecommercebbva.com");
     request.AddMultiValue(customer):
-            
+
 Dictionary<String, Object> chargeDictionary = bancomerAPI.ChargeService.Create(request.ParameterValues);
 ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 ```
@@ -195,7 +195,7 @@ currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento
 order_id | ***string*** (requerido, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 [customer](#objeto-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [Objeto Cliente](#objeto-cliente) y realice el cargo a nivel cliente.
 [payment_plan](#objeto-paymentplan)|***objeto*** (opcional) <br/>Datos del plan de meses sin intereses que se desea utilizar en el cargo. Ver [Objeto PaymentPlan](#objeto-paymentplan).
-redirect_url | ***string*** (requerido) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de bancomer.
+redirect_url | ***string*** (requerido) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de BBVA.
 use_3d_secure | ***string*** (opcional) <br/>Por defecto el valor es TRUE, si el comercio tiene habilitada la configuración para no utilizar 3d secure, entonces podrá enviar el parámetro en FALSE.
 
 ###Respuesta
@@ -257,7 +257,7 @@ curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges \
         "expiration_month" : "12",
         "expiration_year" : "21",
         "cvv2" : "842"
-        
+
    }
    "redirect_url": "https://sand-portal.ecommercebbva.com"
 }'
@@ -271,14 +271,14 @@ ParameterContainer customer = new ParameterContainer("customer");
     customer.AddValue("last_name", "Vazquez Juarez");
     customer.AddValue("email", "juan.vazquez@empresa.com.mx");
     customer.AddValue("phone_number", "554-170-3567");
-    
+
 ParameterContainer card = new ParameterContainer("card");
     customer.AddValue("holder_name", "Juan Vazquez Juarez");
     customer.AddValue("card_number", "4242424242424242");
     customer.AddValue("expiration_month", "12");
     customer.AddValue("expiration_year", "21");
     customer.AddValue("cvv2", "842");
-    
+
 ParameterContainer request = new ParameterContainer("charge");
     request.AddValue("affiliation_bbva", "781500");
     request.AddValue("amount", "100.00");
@@ -288,7 +288,7 @@ ParameterContainer request = new ParameterContainer("charge");
     request.AddValue("redirect_url", "https://sand-portal.ecommercebbva.com");
     request.AddMultiValue(customer);
     request.AddMultiValue(card):
-            
+
 Dictionary<String, Object> chargeDictionary = bancomerAPI.ChargeService.Create(request.ParameterValues);
 ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 ```
@@ -302,7 +302,7 @@ ParameterContainer customer = new ParameterContainer("customer");
     customer.addValue("last_name", "Vazquez Juarez");
     customer.addValue("email", "juan.vazquez@empresa.com.mx");
     customer.addValue("phone_number", "554-170-3567");
-    
+
 ParameterContainer card = new ParameterContainer("card");
     card.addValue("card_number", "4242424242424242");
     card.addValue("holder_name", "Juan Vazquez");
@@ -452,8 +452,8 @@ description | ***string*** (requerido, longitud = 250) <br/>Una descripción aso
 currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 2 tipos de monedas: Pesos Mexicanos(MXN) y Dólares Americanos(USD).
 order_id | ***string*** (requerido, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 [customer](#objeto-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [Objeto Cliente](#objeto-cliente) y realice el cargo a nivel cliente.
-[card](#objeto-tarjeta)|***objeto*** (requerido) <br/> Información de la tarjeta de donde se retirarán los fondos. 
-redirect_url | ***string*** (requerido) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de bancomer.
+[card](#objeto-tarjeta)|***objeto*** (requerido) <br/> Información de la tarjeta de donde se retirarán los fondos.
+redirect_url | ***string*** (requerido) <br/>Usado para cargos de tipo redirect. Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de BBVA.
 use_3d_secure | ***string*** (opcional) <br/>Por defecto el valor es TRUE, si el comercio tiene habilitada la configuración para no utilizar 3d secure, entonces podrá enviar el parámetro en FALSE.
 
 ###Respuesta
