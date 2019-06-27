@@ -10,6 +10,7 @@ language_tabs:
   - ruby: Ruby
 
 includes:
+  - es/quickguide
   - es/endpoints
   - es/authentication
   - es/errors
@@ -17,7 +18,7 @@ includes:
   #- es/qropay
   #- es/tokens
   - es/common_objects
- 
+
 lang: ES
 ---
 
@@ -27,4 +28,4 @@ La API está diseñada sobre [REST](http://es.wikipedia.org/wiki/Representationa
 
 Todas las respuestas de la API están en formato [JSON](http://www.json.org/), incluyendo errores.
 
-En el caso de usar los clientes existentes del API de Bbva ([Java](https://github.com/EcommerceBBVA/BBVA-JAVA.git), [PHP](https://github.com/EcommerceBBVA/BBVA-PHP.git), [C#](https://github.com/EcommerceBBVA/BBVA-CSHARP.git), [Ruby](https://github.com/EcommerceBBVA/BBVA-RUBY.git)), las respuestas son específicamente del tipo definido en dichos clientes en sus respectivos lenguajes.
+En el caso de usar los clientes existentes del API de BBVA ([Java](https://github.com/EcommerceBBVA/BBVA-JAVA.git), [PHP](https://github.com/EcommerceBBVA/BBVA-PHP.git), [C#](https://github.com/EcommerceBBVA/BBVA-CSHARP.git), [Ruby](https://github.com/EcommerceBBVA/BBVA-RUBY.git)), las respuestas son específicamente del tipo definido en dichos clientes en sus respectivos lenguajes.
