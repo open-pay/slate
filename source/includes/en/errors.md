@@ -1,6 +1,6 @@
 #Errors
 
-Bancomer returns JSON objects in the service responses. 
+Bbva returns JSON objects in the service responses. 
 
 ##Error Object
 
@@ -20,24 +20,24 @@ Bancomer returns JSON objects in the service responses.
 ```
 
 ```java
-//For Java every operation will return an instance of the "BancomerServiceException" class which will have the error information. ```
+//For Java every operation will return an instance of the "BbvaServiceException" class which will have the error information. ```
 
 ```csharp
-//For C Sharp,  every operation will return an instance of the "BancomerException" class which will have the error information.
+//For C Sharp,  every operation will return an instance of the "BbvaException" class which will have the error information.
 ```
 
 ```ruby
 #For Ruby, every operation can return any of the following exceptions:
 
-# => BancomerException: For generic errors, like invalid resources, etc.
-# => BancomerConnectionException: For errors related with server connection problems.
-# => BancomerTransactionException: For errors during operations implementation.
+# => BbvaException: For generic errors, like invalid resources, etc.
+# => BbvaConnectionException: For errors related with server connection problems.
+# => BbvaTransactionException: For errors during operations implementation.
 ```
 
 Property | Description
 --------- | -----
-category    |***string*** <br/>**request:**  Indicates an error caused by data sent by the customer. For example, an invalid request, an attempt at a transaction without funds or a transfer to an account that does not exist. <br/><br/>**internal:** Indicates an error on Bancomer side, and will occur very rarely. <br/><br/>**gateway:** Indicates an error during the transaction of funds from one card to the Bancomer account or from the account to a bank or card.
-error_code  |***numeric*** <br/>Bancomer numeric error code indicating a problem happened.
+category    |***string*** <br/>**request:**  Indicates an error caused by data sent by the customer. For example, an invalid request, an attempt at a transaction without funds or a transfer to an account that does not exist. <br/><br/>**internal:** Indicates an error on Bbva side, and will occur very rarely. <br/><br/>**gateway:** Indicates an error during the transaction of funds from one card to the Bbva account or from the account to a bank or card.
+error_code  |***numeric*** <br/>Bbva numeric error code indicating a problem happened.
 description |***string*** <br/>Error description.
 http_code   |***string*** <br/>HTTP error code  of the response.
 request_id  |***string*** <br/> Request identifier.
@@ -48,14 +48,14 @@ fraud_rules |***array*** <br/> Array with antifraud rules broken according to fr
 ###General
 Code    | HTTP Error |Cause
 --------- | ----------- | --------
-1000 | 500 Internal Server Error | An internal error occurred on the Bancomer server 
+1000 | 500 Internal Server Error | An internal error occurred on the Bbva server 
 1001 | 400 Bad Request | The format of the request is not JSON, the fields do not have the correct format, or the request does not have fields that are required.
 1002 | 401 Unauthorized | The call is not authenticated or the authentication is incorrect.
 1003 | 422 Unprocessable Entity | The operation could not be completed because the value of one or more of the parameters is incorrect.
 1004 | 503 Service Unavailable | A necessary for processing the transaction service is unavailable.
 1005 | 404 Not Found | One of the resources requested does not exist.
 1006 | 409 Conflict | A transaction with the same order ID already exists.
-1007 | 402 Payment Required | The transfer of funds from a bank account or card to the Bancomer account was not accepted.
+1007 | 402 Payment Required | The transfer of funds from a bank account or card to the Bbva account was not accepted.
 1008 | 423 Locked | One of the accounts required in the request is deactivated.
 1009 | 413 Request Entity too large | The request body is too large.
 
@@ -90,4 +90,4 @@ Code    | HTTP Error |Cause
 ###Accounts
 Code    | HTTP Error |Cause
 --------- | ----------- | --------
-4001  |412 Preconditon Failed | The Bancomer account has not enough funds.
+4001  |412 Preconditon Failed | The Bbva account has not enough funds.

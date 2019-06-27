@@ -12,43 +12,43 @@ The -u parameter is responsible for the HTTP basic authentication (adding two po
 ```php
 <? 
 //Sandbox is used by default 
-$bancomer = Bancomer::getInstance('mptdggroasfcmqs8plpy', 'sk_326c6d0443f6457aae29ffbd48f7d1be');
+$bbva = Bbva::getInstance('mptdggroasfcmqs8plpy', 'sk_326c6d0443f6457aae29ffbd48f7d1be');
 ?>
 ```
 
 ```java
 //Sandbox
-final BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "mptdggroasfcmqs8plpy", "sk_326c6d0443f6457aae29ffbd48f7d1be");
+final BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "mptdggroasfcmqs8plpy", "sk_326c6d0443f6457aae29ffbd48f7d1be");
 
 //Production
-final BancomerAPI api = new BancomerAPI("https://api.ecommercebbva.com", "mptdggroasfcmqs8plpy", "sk_326c6d0443f6457aae29ffbd48f7d1be");
+final BbvaAPI api = new BbvaAPI("https://api.ecommercebbva.com", "mptdggroasfcmqs8plpy", "sk_326c6d0443f6457aae29ffbd48f7d1be");
 ```
 
 ```csharp
 //Sandbox
-BancomerAPI bancomerAPI = new Bancomer("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
-bancomerAPI.Production = false; // Default value = false
+BbvaAPI bbvaAPI = new Bbva("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
+bbvaAPI.Production = false; // Default value = false
 
 //Produtcion
-BancomerAPI bancomerAPI = new Bancomer("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
-bancomerAPI.Production = true;
+BbvaAPI bbvaAPI = new Bbva("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
+bbvaAPI.Production = true;
 ```
 
 ```ruby
 #Sandbox
-bancomer=BancomerApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7d1be")
+bbva=BbvaApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7d1be")
 
 #Production
-bancomer=BancomerApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7d1be", true)
+bbva=BbvaApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7d1be", true)
 
 
 #Define the timeout for the requests
-#This cllient uses a default 90 secs timeout. In order to configure the timeout used to create request to the bancomer services, you need to clearly define the kind of environment, followed by the new timeout value for the request:
+#This cllient uses a default 90 secs timeout. In order to configure the timeout used to create request to the bbva services, you need to clearly define the kind of environment, followed by the new timeout value for the request:
 
 #Syntax:
-#   bancomer_prod=BancomerApi.new(merchant_id,private_key,isProduction,timeout)
+#   bbva_prod=BbvaApi.new(merchant_id,private_key,isProduction,timeout)
 #Example:
-#   bancomer_prod=BancomerApi.new(merchant_id,private_key,false,30)
+#   bbva_prod=BbvaApi.new(merchant_id,private_key,false,30)
 ```
 
 > Production 
@@ -59,7 +59,7 @@ You only need to use the URI base https://api.ecommercebbva.com
 
 ```php
 <? 
-Bancomer::setProductionMode(true); 
+Bbva::setProductionMode(true); 
 ?>
 ```
 
@@ -68,14 +68,14 @@ Bancomer::setProductionMode(true);
 ```
 
 ```csharp
-bancomerAPI.Production = true;
+bbvaAPI.Production = true;
 ```
 
 ```ruby
-#You only need to pass a "true" value as the third argument when creating the BancomerApi object. 
+#You only need to pass a "true" value as the third argument when creating the BbvaApi object. 
 ```
 
-To make requests to the Bancomer API, is necessary to send the API Key on all your calls to our servers. You can get the key from the [dashboard](https://sand-portal.ecommercebbva.com/login).
+To make requests to the Bbva API, is necessary to send the API Key on all your calls to our servers. You can get the key from the [dashboard](https://sand-portal.ecommercebbva.com/login).
 
 API key:
 

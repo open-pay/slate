@@ -25,7 +25,7 @@ Información de objetos compartidos en peticiones y respuestas.
       "rfc":ONE316015PM1,
       "mobile":null,
       "alias":null,
-      "bank_name":"BANCOMER",
+      "bank_name":"BBVA",
       "creation_date":"2013-11-14T18:29:34-06:00",
       "clabe":"012XXXXXXXXXX24616",
       "holder_name":"Juan Tapia Trejo",

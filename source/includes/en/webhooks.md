@@ -2,7 +2,7 @@
 Weebhooks allow to notify a Merchant party when an event has occurred in the platform, so the Merchant can take the corresponding actions.
 
 <aside class="notice">
-Bancomer requires that the webhook is verified before executing it.
+Bbva requires that the webhook is verified before executing it.
 </aside>
 
 
@@ -52,7 +52,7 @@ subscription.charge.failed | Subscription    | Reports when the charge to a subs
 payout.created             | Payout          | Reports when a payout has been scheduled for the next day. 
 payout.succeeded           | Payout          | Reports when a payout has been applied.
 payout.failed              | Payout          | Reports when a payout has failed.
-transfer.succeeded         | Transfer | Reports when a transfer has been performed between to Bancomer accounts.
+transfer.succeeded         | Transfer | Reports when a transfer has been performed between to Bbva accounts.
 fee.succeeded              | Fee     | Reports when a fee is charged successfully to a customer.
 fee.refund.succeeded       | Fee     | Reports when a fee has been successfully refunded to a customer.
 spei.received              | SPEI           | Reports when a payout has been received by SPEI for adding funds to the account.
@@ -78,24 +78,24 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/webhooks
 
 ```php
 <?
-$webhook = $bancomer->webhooks->create(webhook);
+$webhook = $bbva->webhooks->create(webhook);
 ?>
 ```
 
 ```java
-bancomerAPI.webhooks().create(Webhook request);
+bbvaAPI.webhooks().create(Webhook request);
 ```
 
 ```csharp
-bancomerAPI.WebhooksService.Create(Webhook request);
+bbvaAPI.WebhooksService.Create(Webhook request);
 ```
 
 ```javascript
-bancomer.webhooks.create(webhook, callback);
+bbva.webhooks.create(webhook, callback);
 ```
 
 ```ruby
-@webhooks=@bancomer.create(:webhooks)
+@webhooks=@bbva.create(:webhooks)
 @webhooks.create(request_hash)
 ```
 
@@ -121,7 +121,7 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/webhooks \
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $webhook = array(
     'url' => 'http://requestb.in/11vxrsf1',
@@ -136,12 +136,12 @@ $webhook = array(
     )
     );
 
-$webhook = $bancomer->webhooks->create($webhook);
+$webhook = $bbva->webhooks->create($webhook);
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Webhook request = new Webhook();
 request.url("http://requestb.in/11vxrsf1");
 request.user("juanito");
@@ -153,7 +153,7 @@ Webhook webhook = api.webhooks().create(request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Webhook request = new Webhook();
 request.Url = "http://requestb.in/11vxrsf1";
 request.User = "juanito";
@@ -178,14 +178,14 @@ var webhook_params = {
     ]
 };
 
-bancomer.webhooks.create(webhook_params, function(error, webhook){
+bbva.webhooks.create(webhook_params, function(error, webhook){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@webhooks=@bancomer.create(:webhooks)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@webhooks=@bbva.create(:webhooks)
 request_hash={
     "url" => "http://requestb.in/11vxrsf1",
     "user" => "juanito",
@@ -246,24 +246,24 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
 
 ```php
 <?
-$webhook = $bancomer->webhooks->get(webhookId);
+$webhook = $bbva->webhooks->get(webhookId);
 ?>
 ```
 
 ```java
-bancomerAPI.webhooks().get(String webhookId);
+bbvaAPI.webhooks().get(String webhookId);
 ```
 
 ```csharp
-bancomerAPI.WebhooksService.Get(string webhookId);
+bbvaAPI.WebhooksService.Get(string webhookId);
 ```
 
 ```javascript
-bancomer.webhooks.get(webhookId, callback);
+bbva.webhooks.get(webhookId, callback);
 ```
 
 ```ruby
-@webhooks=@bancomer.create(:webhooks)
+@webhooks=@bbva.create(:webhooks)
 @webhooks.get(webhookId)
 ```
 
@@ -277,31 +277,31 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanst
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$webhook = $bancomer->webhooks->get('wxvanstudf4ssme8khmc');
+$webhook = $bbva->webhooks->get('wxvanstudf4ssme8khmc');
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Webhook webhook = api.webhooks().get("wxvanstudf4ssme8khmc");
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Webhook webhook = api.WebhooksService.Get("wxvanstudf4ssme8khmc");
 ```
 
 ```javascript
-bancomer.webhooks.get('wxvanstudf4ssme8khmc', function(error, webhook){
+bbva.webhooks.get('wxvanstudf4ssme8khmc', function(error, webhook){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@webhooks=@bancomer.create(:webhooks)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@webhooks=@bbva.create(:webhooks)
 
 response_hash=@webhooks.get("wxvanstudf4ssme8khmc")
 ```
@@ -361,25 +361,25 @@ DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
 
 ```php
 <?
-$webhook = $bancomer->webhooks->get(webhookId);
+$webhook = $bbva->webhooks->get(webhookId);
 $webhook->delete();
 ?>
 ```
 
 ```java
-bancomerAPI.webhooks().delete(String webhookId);
+bbvaAPI.webhooks().delete(String webhookId);
 ```
 
 ```csharp
-bancomerAPI.WebhooksService.Delete(string webhook_id);
+bbvaAPI.WebhooksService.Delete(string webhook_id);
 ```
 
 ```javascript
-bancomer.webhooks.delete(webhookId, callback);
+bbva.webhooks.delete(webhookId, callback);
 ```
 
 ```ruby
-@webhooks=@bancomer.create(:webhooks)
+@webhooks=@bbva.create(:webhooks)
 @webhooks.delete(webhook_id)
 ```
 
@@ -393,32 +393,32 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanst
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$webhook = $bancomer->webhooks->get('wxvanstudf4ssme8khmc');
+$webhook = $bbva->webhooks->get('wxvanstudf4ssme8khmc');
 $webhook->delete();
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.webhooks().delete("wxvanstudf4ssme8khmc");
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.WebhooksService.Delete("wxvanstudf4ssme8khmc");
 ```
 
 ```javascript
-bancomer.webhooks.delete('wxvanstudf4ssme8khmc', function(error) {
+bbva.webhooks.delete('wxvanstudf4ssme8khmc', function(error) {
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@webhooks=@bancomer.create(:webhooks)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@webhooks=@bbva.create(:webhooks)
 
 response_hash=@webhooks.delete("wxvanstudf4ssme8khmc")
 ```
@@ -447,24 +447,24 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/webhooks
 
 ```php
 <?
-$webhookList = $bancomer->webhooks->getList();
+$webhookList = $bbva->webhooks->getList();
 ?>
 ```
 
 ```java
-bancomerAPI.webhooks().list();
+bbvaAPI.webhooks().list();
 ```
 
 ```csharp
-bancomerAPI.WebhooksService.List();
+bbvaAPI.WebhooksService.List();
 ```
 
 ```javascript
-bancomer.webhooks.list(callback);
+bbva.webhooks.list(callback);
 ```
 
 ```ruby
-@webhooks=@bancomer.create(:webhooks)
+@webhooks=@bbva.create(:webhooks)
 @webhooks.all
 ```
 
@@ -478,31 +478,31 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/webhooks \
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$webhookList = $bancomer->webhooks->getList();
+$webhookList = $bbva->webhooks->getList();
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 List<Webhook> webhooks = api.webhooks().list();
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 List<Webhook> webhooks = api.WebhooksService.List();
 ```
 
 ```javascript
-bancomer.webhooks.list(function(error, list){
+bbva.webhooks.list(function(error, list){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@webhooks=@bancomer.create(:webhooks)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@webhooks=@bbva.create(:webhooks)
 
 response_hash=@webhooks.all
 ```

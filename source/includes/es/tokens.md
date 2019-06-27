@@ -53,24 +53,24 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/tokens
 
 ```java
 //Merchant
-bancomerAPI.tokens().create(List<Parameter> request);
+bbvaAPI.tokens().create(List<Parameter> request);
 ```
 
 ```csharp
 //Merchant
-bancomerAPI.TokenService.Create(List<IParameter> request);
+bbvaAPI.TokenService.Create(List<IParameter> request);
 ```
 
 ```ruby
 #Merchant
-@tokens=@bancomer.create(:tokens)
+@tokens=@bbva.create(:tokens)
 @tokens.create(request_hash)
 ```
 
 ```php
 <?
 //Merchant
-$token = $bancomer->tokens->create($tokenRequest);
+$token = $bbva->tokens->create($tokenRequest);
 ?>
 ```
 
@@ -99,7 +99,7 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/tokens \
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com/", "sk_08453429e4c54220a3a82ab4d974c31a", "miklpzr4nsvsucghm2qp");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com/", "sk_08453429e4c54220a3a82ab4d974c31a", "miklpzr4nsvsucghm2qp");
 
 List<Parameter> request = new ArrayList<Parameter>(Arrays.asList(
         new SingleParameter("card_number", "4111111111111111"),
@@ -112,7 +112,7 @@ Map tokenAsMap = this.api.tokens().create(request);
 ParameterContainer token = new ParameterContainer("token", tokenAsMap);
 ```
 ```csharp
-BancomerAPI bancomerAPI = new BancomerAPI("sk_08453429e4c54220a3a82ab4d974c31a", "miklpzr4nsvsucghm2qp");
+BbvaAPI bbvaAPI = new BbvaAPI("sk_08453429e4c54220a3a82ab4d974c31a", "miklpzr4nsvsucghm2qp");
 
 List<IParameter> request = new List<IParameter>{
     new SingleParameter("holder_nane", "Juan Perez Ramirez"),
@@ -122,12 +122,12 @@ List<IParameter> request = new List<IParameter>{
     new SingleParameter("expiration_year", "20"),
 };
 
-Dictionary<String, Object> tokenDictionary = bancomerAPI.TokenService.Create(request);
+Dictionary<String, Object> tokenDictionary = bbvaAPI.TokenService.Create(request);
 ParameterContainer token = new ParameterContainer("token", tokenDictionary);
 ```
 ```ruby
-@bancomer=BancomerApi.new('mywvupjjs9xdnryxtplq', 'sk_92b25d3baec149e6b428d81abfe37006')
-@tokens=@bancomer.create(:tokens)
+@bbva=BbvaApi.new('mywvupjjs9xdnryxtplq', 'sk_92b25d3baec149e6b428d81abfe37006')
+@tokens=@bbva.create(:tokens)
 
 token_hash={
     card_number '4111111111111111'
@@ -151,7 +151,7 @@ token=@tokens.create(token_hash)
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bbva = Bbva::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 $address = array(
     'postal_code' => '76190',
     'state' => 'QRO',
@@ -169,7 +169,7 @@ $request = array(
    	 'cvv2' => '111',
    	 'address' => $address);
 
-$token = bancomer->tokens->create($request);
+$token = bbva->tokens->create($request);
 ?>
 ```
 
@@ -224,22 +224,22 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}
 ```
 
 ```java
-bancomerAPI.tokens().get(String tokenId);
+bbvaAPI.tokens().get(String tokenId);
 ```
 
 ```php
 <?
-$token = $bancomer->tokens->get(tokenId);
+$token = $bbva->tokens->get(tokenId);
 ?>
 ```
 
 ```ruby
-@tokens=@bancomer.create(:tokens)
+@tokens=@bbva.create(:tokens)
 @tokens.get(token_id)
 ```
 
 ```csharp
-bancomerAPI.TokenService.Get(String token_id);
+bbvaAPI.TokenService.Get(String token_id);
 ```
 
 > Ejemplo de petición
@@ -250,28 +250,28 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnj
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Map tokenAsMap = api.tokens().get("tr6cxbcefzatd10guvvw");
 ParameterContainer token = new ParameterContainer("token", tokenAsMap);
 ```
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$token = $bancomer->tokens->get('a9ualumwnrcxkl42l6mh');
+$token = $bbva->tokens->get('a9ualumwnrcxkl42l6mh');
 ?>
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@tokens=@bancomer.create(:tokens)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@tokens=@bbva.create(:tokens)
 
 response_hash=@tokens.get("ag4nktpdzebjiye1tlze")
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Dictionary<String, Object> tokenDictionary = api.TokenService.Get("tr6cxbcefzatd10guvvw");
 ParameterContainer token = new ParameterContainer("token", tokenDictionary);
 ```

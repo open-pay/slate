@@ -25,7 +25,7 @@ Information for objects shared in request and response.
       "rfc":ONE316015PM1,
       "mobile":null,
       "alias":null,
-      "bank_name":"BANCOMER",
+      "bank_name":"BBVA",
       "creation_date":"2013-11-14T18:29:34-06:00",
       "clabe":"012XXXXXXXXXX24616",
       "holder_name":"Juan Tapia Trejo",
@@ -36,7 +36,7 @@ Information for objects shared in request and response.
 
 Property | Description
 --------- | -----------
-id | _**string**_ <br/> Unique identifier assigned by Bancomer at the moment of creation.
+id | _**string**_ <br/> Unique identifier assigned by Bbva at the moment of creation.
 authorization | ***string*** <br/>Authorization number created by the processor entity.
 transaction_type| ***string*** <br/>Transaction type: fee, charge, payout, transfer.
 operation_type| ***string*** <br/>Operation type in the account: in, out.
@@ -120,8 +120,8 @@ caption | ***string*** (opcional) <br/> A message to be shown to the customer in
 ```json
 {
       "name": "EXTRA",
-      "logo": "http://www.bancomer.mx/logotipos/extra.png",
-      "thumb": "http://www.bancomer.mx/thumb/extra.png",
+      "logo": "http://www.bbva.mx/logotipos/extra.png",
+      "thumb": "http://www.bbva.mx/thumb/extra.png",
       "max_amount": 99999.99
 }
 ```

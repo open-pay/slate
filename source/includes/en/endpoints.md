@@ -10,7 +10,7 @@
 /v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}
 ```
 
-The Bancomer REST API has a test environment (sandbox) and a production environment. For integrating your system with Bancomer, use the credentials that were generated when you signed up. Once you are ready to move to production environment and your request is approved, new credentials will be generated for accessing the production environment.
+The Bbva REST API has a test environment (sandbox) and a production environment. For integrating your system with Bbva, use the credentials that were generated when you signed up. Once you are ready to move to production environment and your request is approved, new credentials will be generated for accessing the production environment.
 
 The following URIs are the basis of the endpoints for the supported environments:
 
