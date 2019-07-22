@@ -466,7 +466,7 @@ response_hash=@bank_accounts.all("asynwirguzkgq2bizogo")
    "id":"bb0zt72rxoyiwz9jzzai",
    "clabe":"012680012426485980",
    "bank_code":"012",
-   "bank_name":"BANCOMER",
+   "bank_name":"BBVA",
    "alias":null,
    "holder_name":"Juan Hernández Sánchez",
    "creation_date":"2013-11-14T18:07:45-06:00"

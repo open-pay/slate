@@ -91,7 +91,7 @@ This URL is located within the response in the "payment_method" object:
 
 **Example of URL.-**  
 
-https://sandbox-api.openpay.mx/v1/md8r38qyiyiprpmim9yy/charges/trrla2nopehlfx31fbrg/redirect/
+https://sand-api.ecommercebbva.com/v1/md8r38qyiyiprpmim9yy/charges/trrla2nopehlfx31fbrg/redirect/
 
  The field **"id" (string)** is a unique identifier assigned by BBVA at the time of its creation. The merchant has to associate a sale order number with this ID.
 
@@ -111,3 +111,13 @@ https://sandbox-api.openpay.mx/v1/md8r38qyiyiprpmim9yy/charges/trrla2nopehlfx31f
 
 **Note.-** The merchant generates your purchase receipt based on the information obtained from the object "Obtain a Position"
 The status of the transaction must be requested from the BBVA server and the latter responds to an object "Transaction object". with the data that should be shown on the payment receipt.
+
+
+##Troubleshooting
+
+If you have any questions you can check the issues section of the library you are using:
+
+* [Java](https://github.com/EcommerceBBVA/BBVA-JAVA)
+* [Ruby](https://github.com/EcommerceBBVA/BBVA-RUBY)
+* [.NET](https://github.com/EcommerceBBVA/BBVA-CSHARP)
+* [PHP](https://github.com/EcommerceBBVA/BBVA-PHP)

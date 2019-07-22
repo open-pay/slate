@@ -38,8 +38,8 @@ El API regresa objetos JSON en las respuestas del servicio, incluso en caso de e
 
 Propiedad | Descripción
 --------- | -----
-category    |***string*** <br/>**request:** Indica un error causado por datos enviados por el cliente. Por ejemplo, una petición inválida, un intento de una transacción sin fondos, o una transferencia a una cuenta que no existe. <br/><br/>**internal:** Indica un error del lado del API, y ocurrira muy raramente. <br/><br/>**gateway:** Indica un error durante la transacción de los fondos de una tarjeta a la cuenta de Openpay o de la cuenta hacia un banco o tarjeta.
-error_code  |***numeric*** <br/>El código del error de Openpay indicando el problema que ocurrió.
+category    |***string*** <br/>**request:** Indica un error causado por datos enviados por el cliente. Por ejemplo, una petición inválida, un intento de una transacción sin fondos, o una transferencia a una cuenta que no existe. <br/><br/>**internal:** Indica un error del lado del API, y ocurrira muy raramente. <br/><br/>**gateway:** Indica un error durante la transacción de los fondos de una tarjeta a la cuenta de BBVA o de la cuenta hacia un banco o tarjeta.
+error_code  |***numeric*** <br/>El código del error indicando el problema que ocurrió.
 description |***string*** <br/>Descripción del error.
 http_code   |***string*** <br/>Código de error HTTP de la respuesta.
 request_id  |***string*** <br/>Identificador de la petición.
@@ -65,7 +65,6 @@ Código    | Error HTTP  |Causa
 
 Código    | Error HTTP  |Causa
 --------- | ----------- | --------
-2001  |409 Conflict | La cuenta de banco con esta CLABE ya se encuentra registrada en el cliente.
 2002  |409 Conflict | La tarjeta con este número ya se encuentra registrada en el cliente.
 2003  |409 Conflict | El cliente con este identificador externo (External ID) ya existe.
 2004  |422 Unprocessable Entity | El dígito verificador del número de tarjeta es inválido de acuerdo al algoritmo Luhn.
@@ -89,8 +88,3 @@ Código    | Error HTTP  |Causa
 3010  |402 Payment Required | El banco ha restringido la tarjeta.
 3011  |402 Payment Required | El banco ha solicitado que la tarjeta sea retenida. Contacte al banco.
 3012  |412 Precondition Failed | Se requiere solicitar al banco autorización para realizar este pago.
-
-###Cuentas
-Código    | Error HTTP  |Causa
---------- | ----------- | --------
-4001  |412 Preconditon Failed | La cuenta de Openpay no tiene fondos suficientes.

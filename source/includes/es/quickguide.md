@@ -93,7 +93,7 @@ Esta URL se encuentra  dentro de la respuesta en el objeto"payment_method":
 
 **Ejemplo de la URL.-**  
 
-https://sandbox-api.openpay.mx/v1/md8r38qyiyiprpmim9yy/charges/trrla2nopehlfx31fbrg/redirect/
+https://sand-api.ecommercebbva.com/v1/md8r38qyiyiprpmim9yy/charges/trrla2nopehlfx31fbrg/redirect/
 
  El campo **“id” (string)** es un Identificador único asignado por BBVA al momento de su creación.  El comercio tiene que asociar un número de orden de la venta con este ID .
 
@@ -113,3 +113,13 @@ https://sandbox-api.openpay.mx/v1/md8r38qyiyiprpmim9yy/charges/trrla2nopehlfx31f
 
 **Nota.-**   El comercio genera su recibo de compra en base a la información obtenida del  objeto “Obtener un Cargo”
 Se  deberá pedir el estatus de la transacción al servidor de BBVA  y este responde un objeto  “Objeto transacción “ . con la data que se deberá mostrar en el recibo de pago .
+
+
+##Resolución de dudas
+
+Si tienes alguna duda puedes consultar la sección de reportes de la librería que estas utilizando:
+
+* [Java](https://github.com/EcommerceBBVA/BBVA-JAVA)
+* [Ruby](https://github.com/EcommerceBBVA/BBVA-RUBY)
+* [.NET](https://github.com/EcommerceBBVA/BBVA-CSHARP)
+* [PHP](https://github.com/EcommerceBBVA/BBVA-PHP)

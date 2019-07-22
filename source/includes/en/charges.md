@@ -3,6 +3,11 @@ Charges can be made to cards, stores and banks. Each charge is assigned with an 
 
 In card charges you can do by showing a form for the user to capture the card information.
 
+<br><br>
+**¡ IMPORTANT !**
+
+**The handling and sending of data, as well as the capture of responses from each of the transactions is the responsibility of the commerce**
+
 ##With VPOS
 
 This type of charge don’t requires a saved card or a previously generated token
@@ -37,7 +42,7 @@ bancomerAPI.ChargeService.Create(List<IParameter> request);
 @charges.create(request_hash)
 ```
 
-> Merchant request example 
+> Merchant request example
 
 ```shell
 curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges \
@@ -55,7 +60,7 @@ curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges \
         "email": "juan.vazquez@example.com.mx",
         "phone_number": "555-444-3322"
    },
-   "redirect_url": "https://sand-portal.ecommercebbva.com"
+   "redirect_url": "https://micomercio.com"
 }'
 ```
 
@@ -67,7 +72,7 @@ ParameterContainer customer = new ParameterContainer("customer");
     customer.AddValue("last_name", "Vazquez Juarez");
     customer.AddValue("email", "juan.vazquez@example.com.mx");
     customer.AddValue("phone_number", "554-170-3567");
-    
+
 ParameterContainer request = new ParameterContainer("charge");
     request.AddValue("affiliation_bbva", "781500");
     request.AddValue("amount", "100.00");
@@ -76,7 +81,7 @@ ParameterContainer request = new ParameterContainer("charge");
     request.AddValue("order_id", "oid-00051");
     request.AddValue("redirect_url", "https://sand-portal.ecommercebbva.com");
     request.AddMultiValue(customer):
-            
+
 Dictionary<String, Object> chargeDictionary = bancomerAPI.ChargeService.Create(request.ParameterValues);
 ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 ```
@@ -184,7 +189,7 @@ response_hash=@charges.create(request_hash.to_hash)
 }
 ```
 
-###Request 
+###Request
 Property | Description
 --------- | -----
 affiliation_bbva|               ***string*** (required) <br/>It must contain the affiliation number.
@@ -194,7 +199,7 @@ currency |                      ***string*** (optional) <br/>Charge currency typ
 order_id |                      ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
 [customer](##customer-object)|   ***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the merchant level<br/><br/> To create a customer and keep a record of their charges history refer to [Objeto Cliente](#objeto-cliente) (#create-a-new-customer) and do the charge at the customer level.
 [payment_plan](#paymentplan-object)|    ***object*** (optional) <br/>Plan data months without interest is desired as use in the charge. Refer to [PaymentPlan Object](#paymentplan-object).
-redirect_url |                          ***string*** (required) <br/>Used in redirect charges. It indicates the url to which redirect after a successful transaction in the bancomer payment form.
+redirect_url |                          ***string*** (required) <br/>Used in redirect charges. It indicates the url to which redirect after a successful transaction in the BBVA payment form.
 use_3d_secure |                         ***string*** (optional) <br/>By default the value is TRUE, if the trade has enabled the configuration to not use 3d secure, then you can send the parameter to FALSE.
 
 ###Response
@@ -232,7 +237,7 @@ bancomerAPI.ChargeService.Create(List<IParameter> request);
 @charges.create(request_hash)
 ```
 
-> Merchant request example 
+> Merchant request example
 
 ```shell
 curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges \
@@ -256,9 +261,9 @@ curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges \
         "expiration_month" : "12",
         "expiration_year" : "21",
         "cvv2" : "842"
-        
+
    }
-   "redirect_url": "https://sand-portal.ecommercebbva.com"
+   "redirect_url": "https://micomercio.com"
 }'
 ```
 
@@ -270,14 +275,14 @@ ParameterContainer customer = new ParameterContainer("customer");
     customer.AddValue("last_name", "Vazquez Juarez");
     customer.AddValue("email", "juan.vazquez@example.com.mx");
     customer.AddValue("phone_number", "554-170-3567");
-    
+
 ParameterContainer card = new ParameterContainer("card");
     customer.AddValue("holder_name", "Juan Vazquez Juarez");
     customer.AddValue("card_number", "4242424242424242");
     customer.AddValue("expiration_month", "12");
     customer.AddValue("expiration_year", "21");
     customer.AddValue("cvv2", "842");
-    
+
 ParameterContainer request = new ParameterContainer("charge");
     request.AddValue("affiliation_bbva", "781500");
     request.AddValue("amount", "100.00");
@@ -287,7 +292,7 @@ ParameterContainer request = new ParameterContainer("charge");
     request.AddValue("redirect_url", "https://sand-portal.ecommercebbva.com");
     request.AddMultiValue(customer);
     request.AddMultiValue(card):
-            
+
 Dictionary<String, Object> chargeDictionary = bancomerAPI.ChargeService.Create(request.ParameterValues);
 ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 ```
@@ -301,7 +306,7 @@ ParameterContainer customer = new ParameterContainer("customer");
     customer.addValue("last_name", "Vazquez Juarez");
     customer.addValue("email", "juan.vazquez@example.com.mx");
     customer.addValue("phone_number", "554-170-3567");
-    
+
 ParameterContainer card = new ParameterContainer("card");
     card.addValue("card_number", "4242424242424242");
     card.addValue("holder_name", "Juan Vazquez");
@@ -402,8 +407,8 @@ response_hash=@charges.create(request_hash.to_hash)
         "expiration_month": "12",
         "allows_charges": true,
         "allows_payouts": false,
-        "bank_name": "BANCOMER",
-        "points_type": "bancomer",
+        "bank_name": "BBVA",
+        "points_type": "BBVA",
         "bank_code": "012",
         "points_card": true
     },
@@ -441,7 +446,7 @@ response_hash=@charges.create(request_hash.to_hash)
 }
 ```
 
-###Request 
+###Request
 Property | Description
 --------- | -----
 affiliation_bbva|               ***string*** (required) <br/>It must contain the affiliation number.
@@ -451,7 +456,7 @@ currency |                      ***string*** (optional) <br/>Charge currency typ
 order_id |                      ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
 [customer](#customer-object)|   ***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the merchant level<br/><br/> To create a customer and keep a record of their charges history refer to [Objeto Cliente](#objeto-cliente) (#create-a-new-customer) and do the charge at the customer level.
 [card](#card-object)|    ***object*** (required) <br/> Card information where the funds are withdrawn.
-redirect_url |                          ***string*** (required) <br/>Used in redirect charges. It indicates the url to which redirect after a successful transaction in the bancomer payment form.
+redirect_url |                          ***string*** (required) <br/>Used in redirect charges. It indicates the url to which redirect after a successful transaction in the BBVA payment form.
 use_3d_secure |                         ***string*** (optional) <br/>By default the value is TRUE, if the trade has enabled the configuration to not use 3d secure, then you can send the parameter to FALSE.
 
 ###Response
@@ -503,7 +508,7 @@ curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges/tryqihxa
    -H "Content-type: application/json" \
    -X POST -d '{
     "amount" : 100.00
-} ' 
+} '
 ```
 
 ```php
@@ -578,7 +583,7 @@ Confirm a charge created with the <code>capture = "false" </code> property, this
 
 
 
-###Request 
+###Request
 
 Property | Description
 --------- | -----
@@ -630,7 +635,7 @@ curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges/tr6cxbce
    -X POST -d '{
    "description" : "devolución",
    "amount" : 100.00
-} ' 
+} '
 ```
 
 ```php
@@ -729,7 +734,7 @@ You can use this method if you want to make a charge refund to a card. The amoun
 </aside>
 
 
-###Request 
+###Request
 
 Property | Description
 --------- | -----
@@ -908,7 +913,7 @@ bancomer.customers.charges.list(customerId, searchParams, callback);
 
 ```shell
 curl -g "https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges?creation[gte]=2013-11-01&limit=2" \
-   -u sk_326c6d0443f6457aae29ffbd48f7d1be: 
+   -u sk_326c6d0443f6457aae29ffbd48f7d1be:
 ```
 
 ```php
@@ -1024,7 +1029,7 @@ response_hash=@charges.all("ag4nktpdzebjiye1tlze")
       "payment_method":{
          "type":"bank_transfer",
          "agreement" : "1411217",
-         "bank":"BBVA Bancomer",
+         "bank":"BBVA",
          "clabe":"012914002014112176",
          "name":"11030021342311520255"
       }
@@ -1047,7 +1052,7 @@ limit| ***numeric*** <br/>Number of required records, default 10.
 amount| ***numeric*** <br/>Same as the amount.
 amount[gte] | ***numeric*** <br/>Greater than or equal to the amount.
 amount[lte] | ***numeric*** <br/>Less than or equal to the amount.
-[status](#object-transaction-status) | ***TransactionStatus*** <br/>Estado de la transacción (IN_PROGRESS,COMPLETED,REFUNDED,CHARGEBACK_PENDING,CHARGEBACK_ACCEPTED,CHARGEBACK_ADJUSTMENT,CHARGE_PENDING,CANCELLED,FAILED).
+[status](#object-transaction-status) | ***TransactionStatus*** <br/>Estado de la transacción (IN_PROGRESS,COMPLETED,REFUNDED,CHARGE_PENDING,CANCELLED,FAILED).
 
 ###Response
 

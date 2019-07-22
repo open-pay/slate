@@ -10,8 +10,8 @@ The -u parameter is responsible for the HTTP basic authentication (adding two po
 ```
 
 ```php
-<? 
-//Sandbox is used by default 
+<?
+//Sandbox is used by default
 $bancomer = Bancomer::getInstance('mptdggroasfcmqs8plpy', 'sk_326c6d0443f6457aae29ffbd48f7d1be');
 ?>
 ```
@@ -43,7 +43,7 @@ bancomer=BancomerApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7
 
 
 #Define the timeout for the requests
-#This cllient uses a default 90 secs timeout. In order to configure the timeout used to create request to the bancomer services, you need to clearly define the kind of environment, followed by the new timeout value for the request:
+#This cllient uses a default 90 secs timeout. In order to configure the timeout used to create request to the BBVA services, you need to clearly define the kind of environment, followed by the new timeout value for the request:
 
 #Syntax:
 #   bancomer_prod=BancomerApi.new(merchant_id,private_key,isProduction,timeout)
@@ -51,15 +51,15 @@ bancomer=BancomerApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7
 #   bancomer_prod=BancomerApi.new(merchant_id,private_key,false,30)
 ```
 
-> Production 
+> Production
 
 ```shell
 You only need to use the URI base https://api.ecommercebbva.com
 ```
 
 ```php
-<? 
-Bancomer::setProductionMode(true); 
+<?
+Bancomer::setProductionMode(true);
 ?>
 ```
 
@@ -72,14 +72,14 @@ bancomerAPI.Production = true;
 ```
 
 ```ruby
-#You only need to pass a "true" value as the third argument when creating the BancomerApi object. 
+#You only need to pass a "true" value as the third argument when creating the BancomerApi object.
 ```
 
-To make requests to the Bancomer API, is necessary to send the API Key on all your calls to our servers. You can get the key from the [dashboard](https://sand-portal.ecommercebbva.com/login).
+To make requests to the BBVA API, is necessary to send the API Key on all your calls to our servers. You can get the key from the [dashboard](https://sand-portal.ecommercebbva.com/login).
 
 API key:
 
-* **Private.-** 
+* **Private.-**
 For calls between servers and full access to all API operations (should never be shared).
 
 <aside class="warning">

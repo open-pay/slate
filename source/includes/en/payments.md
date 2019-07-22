@@ -158,7 +158,7 @@ response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
       "id":"b3d54sd3mdjf75udjfvoc",
       "clabe":"012XXXXXXXXXX24616",
       "bank_code":"012",
-      "bank_name":"BANCOMER",
+      "bank_name":"BBVA",
       "alias":null,
       "holder_name":"Mi empresa"
    },
@@ -368,7 +368,7 @@ response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "bank_account":{
       "clabe":"012XXXXXXXXXX24616",
       "bank_code":"012",
-      "bank_name":"BANCOMER",
+      "bank_name":"BBVA",
       "alias":null,
       "holder_name":"Mi empresa"
    },
@@ -499,7 +499,7 @@ response_hash=@payouts.get("tr6cxbcefzatd10guvvw", "asynwirguzkgq2bizogo")
    "bank_account":{
       "clabe":"012XXXXXXXXXX24616",
       "bank_code":"012",
-      "bank_name":"BANCOMER",
+      "bank_name":"BBVA",
       "alias":null,
       "holder_name":"Mi empresa"
    },
@@ -633,7 +633,7 @@ response_hash=@payouts.delete("trozeipf364jqrsbt3ej", "asynwirguzkgq2bizogo")
    "bank_account":{
       "clabe":"012XXXXXXXXXX24616",
       "bank_code":"012",
-      "bank_name":"BANCOMER",
+      "bank_name":"BBVA",
       "alias":null,
       "holder_name":"Mi empresa"
    },
@@ -811,7 +811,7 @@ response_hash=@payouts.all("asynwirguzkgq2bizogo")
       "bank_account":{
          "clabe":"012XXXXXXXXXX24616",
          "bank_code":"012",
-         "bank_name":"BANCOMER",
+         "bank_name":"BBVA",
          "alias":null,
          "holder_name":"Mi empresa"
       },
@@ -827,7 +827,7 @@ response_hash=@payouts.all("asynwirguzkgq2bizogo")
       "bank_account":{
          "clabe":"012XXXXXXXXXX24616",
          "bank_code":"012",
-         "bank_name":"BANCOMER",
+         "bank_name":"BBVA",
          "alias":null,
          "holder_name":"Mi empresa"
       },

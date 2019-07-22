@@ -25,7 +25,7 @@ Information for objects shared in request and response.
       "rfc":ONE316015PM1,
       "mobile":null,
       "alias":null,
-      "bank_name":"BANCOMER",
+      "bank_name":"BBVA",
       "creation_date":"2013-11-14T18:29:34-06:00",
       "clabe":"012XXXXXXXXXX24616",
       "holder_name":"Juan Tapia Trejo",
@@ -36,7 +36,7 @@ Information for objects shared in request and response.
 
 Property | Description
 --------- | -----------
-id | _**string**_ <br/> Unique identifier assigned by Bancomer at the moment of creation.
+id | _**string**_ <br/> Unique identifier assigned by BBVA at the moment of creation.
 authorization | ***string*** <br/>Authorization number created by the processor entity.
 transaction_type| ***string*** <br/>Transaction type: fee, charge, payout, transfer.
 operation_type| ***string*** <br/>Operation type in the account: in, out.
@@ -51,7 +51,7 @@ customer_id| ***string*** <br/>Unique identifier for the customer who this trans
 currency| ***string*** <br/>Currency used in the operation by default is MXN (Mexican pesos).
 bank_account| ***object*** <br/>Bank account data used for the transaction.  See the *BankAccount* object.
 card| ***object*** <br/>Credit card data used in the transaction.  See the *Card* object.
-card_points| ***object*** <br/>Contains information about the reward points used for payment, if they were used. See the [CardPoints object](#cardpoints-object) 
+card_points| ***object*** <br/>Contains information about the reward points used for payment, if they were used. See the [CardPoints object](#cardpoints-object)
 
 ## Address Object
 
@@ -65,7 +65,7 @@ card_points| ***object*** <br/>Contains information about the reward points used
    "state":"Queretaro",
    "city":"QuerÃ©taro",
    "postal_code":"76900",
-   "country_code":"MX" 
+   "country_code":"MX"
 }
 ```
 
@@ -120,8 +120,8 @@ caption | ***string*** (opcional) <br/> A message to be shown to the customer in
 ```json
 {
       "name": "EXTRA",
-      "logo": "http://www.bancomer.mx/logotipos/extra.png",
-      "thumb": "http://www.bancomer.mx/thumb/extra.png",
+      "logo": "http://www.bbva.mx/logotipos/extra.png",
+      "thumb": "http://www.bbva.mx/thumb/extra.png",
       "max_amount": 99999.99
 }
 ```
@@ -140,10 +140,7 @@ Value | Description
 IN_PROGRESS| Transaction is in progress
 COMPLETED| Transaction was succesfully completed
 REFUNDED| Transaction that has been refunded
-CHARGEBACK_PENDING| Transaction that has a pending chargeback
-CHARGEBACK_ACCEPTED| Transaction that has an accepted chargeback
-CHARGEBACK_ADJUSTMENT| Transaction that has an ajust for chargeback
-CHARGE_PENDING| Transaction that is waiting to be paid 
+CHARGE_PENDING| Transaction that is waiting to be paid
 CANCELLED| Transaction that was not paid and has been cancelled
 FAILED| Transaction that was paid but ocurred an error
 
@@ -157,7 +154,7 @@ FAILED| Transaction that was paid but ocurred an error
    "creation_date":"2013-11-08T12:04:46-06:00",
    "name":"Rodrigo",
    "last_name":"Velazco Perez",
-   "email":"rodrigo.velazco@payments.com", 
+   "email":"rodrigo.velazco@payments.com",
    "phone_number":"4425667045",
    "external_id":"cliente1",
    "status":"active",
@@ -171,10 +168,6 @@ FAILED| Transaction that was paid but ocurred an error
       "city":"Querétaro",
       "country_code":"MX"
    },
-   "store": {
-       "reference": "OPENPAY02DQ35YOY7",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
-   },
    "clabe": "646180109400423323"
 }
 ```
@@ -183,7 +176,7 @@ FAILED| Transaction that was paid but ocurred an error
 Property | Description
 --------- | -----
 id            |***string*** <br/>Customer unique identifier.
-creation_date |***datetime*** <br/>Date and time when the customer was created in ISO 8601 format. 
+creation_date |***datetime*** <br/>Date and time when the customer was created in ISO 8601 format.
 name          |***string*** <br/>Name of the customer.
 last_name     |***string*** <br/>Last name of the customer.
 email         |***string*** <br/>Email of the customer.
@@ -196,7 +189,7 @@ clabe         |***numeric*** <br/>CLABE account used to receive funds by transfe
 
 ##Card Object
 
-> Object example 
+> Object example
 
 ```json
 {
@@ -237,7 +230,7 @@ expiration_month |***numeric***  <br/>Expiration month as it appears on the card
 expiration_year |***numeric***  <br/>Expiration year as it appears on the card.
 [address](#address-object) |***object*** <br/>Billing address of cardholder.
 allows_charges |***boolean*** <br/>It allows to know if you can make charges to the card.
-allows_payouts |***boolean*** <br/>It allows to know if you can send payments to the card. 
+allows_payouts |***boolean*** <br/>It allows to know if you can send payments to the card.
 brand |***string*** <br/>Card brand: visa, mastercard, carnet or american express.
 type |***string*** <br/>Card Type: debit, credit, cash, etc.
 bank_name |***string*** <br/>Name of the issuing bank.

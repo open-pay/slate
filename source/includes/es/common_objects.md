@@ -25,7 +25,7 @@ Información de objetos compartidos en peticiones y respuestas.
       "rfc":ONE316015PM1,
       "mobile":null,
       "alias":null,
-      "bank_name":"BANCOMER",
+      "bank_name":"BBVA",
       "creation_date":"2013-11-14T18:29:34-06:00",
       "clabe":"012XXXXXXXXXX24616",
       "holder_name":"Juan Tapia Trejo",
@@ -36,7 +36,7 @@ Información de objetos compartidos en peticiones y respuestas.
 
 Propiedad | Descripción
 --------- | -----------
-id | _**string**_ <br/> Identificador único asignado por Openpay al momento de su creación.
+id | _**string**_ <br/> Identificador único asignado por BBVA al momento de su creación.
 authorization | ***string*** <br/>Número de autorización generado por el procesador.
 transaction_type| ***string*** <br/>Tipo de transacción que fue creada: fee, charge, payout, transfer.
 operation_type| ***string*** <br/>Tipo de afectación en la cuenta: in, out.
@@ -125,9 +125,6 @@ Value | Description
 IN_PROGRESS | Transacción en proceso
 COMPLETED | Transacción ejecutadá correctamente
 REFUNDED | Transacción reembolsada
-CHARGEBACK_PENDING | Transacción con contracargo pendiente
-CHARGEBACK_ACCEPTED | Transacción con contracargo aceptado
-CHARGEBACK_ADJUSTMENT | Transacción con ajuste de contracargo
 CHARGE_PENDING | Transacción de cargo que no ha sido pagada
 CANCELLED | Transacción de cargo que no fue pagada y se ha cancelado
 FAILED | Transacción que se intentó pagar pero ocurrió algún error
@@ -143,7 +140,7 @@ FAILED | Transacción que se intentó pagar pero ocurrió algún error
    "creation_date":"2013-11-08T12:04:46-06:00",
    "name":"Rodrigo",
    "last_name":"Velazco Perez",
-   "email":"rodrigo.velazco@payments.com", 
+   "email":"rodrigo.velazco@payments.com",
    "phone_number":"4425667045",
    "external_id":"cliente1",
    "status":"active",
@@ -156,10 +153,6 @@ FAILED | Transacción que se intentó pagar pero ocurrió algún error
       "state":"Querétaro",
       "city":"Querétaro",
       "country_code":"MX"
-   },
-   "store": {
-       "reference": "OPENPAY02DQ35YOY7",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
    "clabe": "646180109400423323"
 }
@@ -181,7 +174,7 @@ store |***object*** <br/>Contiene la referencia que se puede utilizar para reali
 
 ##Objeto Tarjeta
 
-> Ejemplo de objeto 
+> Ejemplo de objeto
 
 ```json
 {
@@ -222,7 +215,7 @@ expiration_month |***numeric***  <br/>Mes de expiración tal como aparece en la 
 expiration_year |***numeric***  <br/>Año de expiración tal como aparece en la tarjeta.
 [address](#objeto-dirección) |***object*** <br/>Dirección de facturación del tarjeta habiente.
 allows_charges |***boolean*** <br/>Permite conocer si se pueden realizar cargos a la tarjeta.
-allows_payouts |***boolean*** <br/>Permite conocer si se pueden realizar envíos de pagos a la tarjeta. 
+allows_payouts |***boolean*** <br/>Permite conocer si se pueden realizar envíos de pagos a la tarjeta.
 brand |***string*** <br/>Marca de la tarjeta: visa, mastercard, carnet o american express.
 type |***string*** <br/>Tipo de la tarjeta: debit, credit, cash, etc.
 bank_name |***string*** <br/>Nombre del banco emisor.

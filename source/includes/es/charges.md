@@ -3,6 +3,12 @@ Los cargos se pueden realizar a tarjetas de crédito o débito. A cada cargo se 
 
 En cargos a tarjeta puedes hacerlo desplegando un formulario para que el usuario capture los datos de la tarjeta.
 
+<br><br>
+**¡ IMPORTANTE !**
+
+**El manejo y envío de los datos, así como la captura de respuestas de
+cada una de las transacciones  es responsabilidad del comercio**
+
 ##Con VPOS
 
 Este tipo de cargo no requiere una tarjeta guardada o que hayas generado un token.
@@ -55,7 +61,7 @@ curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges \
         "email": "juan.vazquez@empresa.com.mx",
         "phone_number": "555-444-3322"
    },
-   "redirect_url": "https://sand-portal.ecommercebbva.com"
+   "redirect_url": "https://micomercio.com"
 }'
 ```
 
@@ -259,7 +265,7 @@ curl https://sand-api.ecommercebbva.com/v1/mptdggroasfcmqs8plpy/charges \
         "cvv2" : "842"
 
    }
-   "redirect_url": "https://sand-portal.ecommercebbva.com"
+   "redirect_url": "https://micomercio.com"
 }'
 ```
 
@@ -403,8 +409,8 @@ response_hash=@charges.create(request_hash.to_hash)
         "expiration_month": "12",
         "allows_charges": true,
         "allows_payouts": false,
-        "bank_name": "BANCOMER",
-        "points_type": "bancomer",
+        "bank_name": "BBVA",
+        "points_type": "BBVA",
         "bank_code": "012",
         "points_card": true
     },

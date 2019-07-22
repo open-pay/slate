@@ -420,7 +420,7 @@ response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
    "allows_charges":true,
    "allows_payouts":false,
    "creation_date":"2014-02-12T10:57:09-06:00",
-   "bank_name":"BANCOMER",
+   "bank_name":"BBVA",
    "bank_code":"012",
    "customer_id":"a2b79p8xmzeyvmolqfja"
 }

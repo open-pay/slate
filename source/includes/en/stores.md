@@ -29,8 +29,8 @@ The object represents a convenience store
     },
     "paynet_chain": {
       "name": "EXTRA",
-      "logo": "http://www.bancomer.mx/logotipos/extra.png",
-      "thumb": "http://www.bancomer.mx/thumb/extra.png",
+      "logo": "http://www.bbva.mx/logotipos/extra.png",
+      "thumb": "http://www.bbva.mx/thumb/extra.png",
       "max_amount": 99999.99
     }
   }
@@ -119,8 +119,8 @@ curl https://api.ecommercebbva.com/stores?latitud=20.618975&longitud=-100.422290
     },
     "paynet_chain": {
       "name": "EXTRA",
-      "logo": "http://www.bancomer.mx/logotipos/extra.png",
-      "thumb": "http://www.bancomer.mx/thumb/extra.png",
+      "logo": "http://www.bbva.mx/logotipos/extra.png",
+      "thumb": "http://www.bbva.mx/thumb/extra.png",
       "max_amount": 99999.99
     }
   },
@@ -146,8 +146,8 @@ curl https://api.ecommercebbva.com/stores?latitud=20.618975&longitud=-100.422290
     },
     "paynet_chain": {
       "name": "EL ASTURIANO",
-      "logo": "http://www.bancomer.mx/logotipos/asturiano.png",
-      "thumb": "http://www.bancomer.mx/thumb/asturiano.png",
+      "logo": "http://www.bbva.mx/logotipos/asturiano.png",
+      "thumb": "http://www.bbva.mx/thumb/asturiano.png",
       "max_amount": 99999.99
     }
   }
