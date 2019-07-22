@@ -16,25 +16,25 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 
 ```php
 <?
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $transfer = $customer->transfers->create(transferDataRequest);
 ?>
 ```
 
 ```java
-bancomerAPI.transfers().create(String customerId, CreateTransferParams request);
+bbvaAPI.transfers().create(String customerId, CreateTransferParams request);
 ```
 
 ```csharp
-bancomerAPI.TransferService.Create(string from_customer_id, TransferRequest request);
+bbvaAPI.TransferService.Create(string from_customer_id, TransferRequest request);
 ```
 
 ```javascript
-bancomer.customers.transfers.create(customerId, transferRequest, callback);
+bbva.customers.transfers.create(customerId, transferRequest, callback);
 ```
 
 ```ruby
-@transfers=@bancomer.create(:transfers)
+@transfers=@bbva.create(:transfers)
 @transfers.create(request_hash, from_customer_id)
 ```
 
@@ -54,7 +54,7 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $transferDataRequest = array(
     'customer_id' => 'aqedin0owpu0kexr2eor',
@@ -62,13 +62,13 @@ $transferDataRequest = array(
     'description' => 'Cobro de Comisión',
     'order_id' => 'ORDEN-00061');
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $transfer = $customer->transfers->create($transferDataRequest);
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateTransferParams request = new CreateTransferParams();
 request.toCustomerId("ah1ki9jmb50mvlsf9gqn");
 request.amount(new BigDecimal("100.00"));
@@ -79,7 +79,7 @@ Transfer transfer = api.transfers().create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 TransferRequest request = new TransferRequest();
 request.CustomerId = "ah1ki9jmb50mvlsf9gqn";
 request.Amount = new Decimal(100.00);
@@ -97,14 +97,14 @@ var transferRequest = {
   'order_id' : 'oid-1245'
 };
 
-bancomer.customers.transfers.create('ag4nktpdzebjiye1tlze', transferRequest, function(error, transfer) {
+bbva.customers.transfers.create('ag4nktpdzebjiye1tlze', transferRequest, function(error, transfer) {
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@transfers=@bancomer.create(:transfers)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@transfers=@bbva.create(:transfers)
 request_hash={
      "customer_id" => "dvocf97jd20es3tw5laz",
      "amount" => 12.50,
@@ -146,7 +146,7 @@ Makes the transfer of funds from one account of the customer to another. The fun
 
 Property | Description
 --------- | ------
-customer_id | ***string*** (required, length = 45) <br/>The Bancomer ID of the customer you want to send the funds.
+customer_id | ***string*** (required, length = 45) <br/>The Bbva ID of the customer you want to send the funds.
 amount | ***numeric*** (required) <br/>Amount to transfer. It must be an amount greater than one peso with up to two decimal digits. 
 description | ***string*** (required, length = 250) <br/>A description associated to the transfer.
 order_id | ***string*** (optional, length = 100) <br/>Unique identifier of the transfer. It will be assigned to the withdrawal transaction.
@@ -164,25 +164,25 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 
 ```php
 <?
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $transfer = $customer->transfers->get(transactionId);
 ?>
 ```
 
 ```java
-bancomerAPI.transfers().get(String customerId, String transactionId);
+bbvaAPI.transfers().get(String customerId, String transactionId);
 ```
 
 ```csharp
-bancomerAPI.TransferService.Get(string customer_id, string transaction_id);
+bbvaAPI.TransferService.Get(string customer_id, string transaction_id);
 ```
 
 ```javascript
-bancomer.customers.transfers.get(customerId, transactionId, callback);
+bbva.customers.transfers.get(customerId, transactionId, callback);
 ```
 
 ```ruby
-@transfers=@bancomer.create(:transfers)
+@transfers=@bbva.create(:transfers)
 @transfers.get(transaction_id, customer_id)
 ```
 
@@ -196,32 +196,32 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $transfer = $customer->transfers->get('tyxesptjtx1bodfdjmlb');
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Transfer transfer = api.transfers().get("a9pvykxz4g5rg0fplze0", "tr6cxbcefzatd10guvvw");
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Transfer transfer = api.TransferService.Get("a9pvykxz4g5rg0fplze0", "tr6cxbcefzatd10guvvw");
 ```
 
 ```javascript
-bancomer.customers.transfers.get('ag4nktpdzebjiye1tlze', 'twpmbike2jejex3pahzd', function(error, transfer) {
+bbva.customers.transfers.get('ag4nktpdzebjiye1tlze', 'twpmbike2jejex3pahzd', function(error, transfer) {
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@transfers=@bancomer.create(:transfers)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@transfers=@bbva.create(:transfers)
 
 response_hash=@transfers.get("twpmbike2jejex3pahzd", "ag4nktpdzebjiye1tlze")
 ```
@@ -267,26 +267,26 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 
 ```php
 <?
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $transferList = $customer->transfers->getList(findDataRequest);
 ?>
 ```
 
 ```java
-bancomerAPI.transfers().list(String customerId, SearchParams request);
+bbvaAPI.transfers().list(String customerId, SearchParams request);
 ```
 
 ```csharp
-bancomerAPI.TransferService.List(string customer_id, SearchParams request = null);
+bbvaAPI.TransferService.List(string customer_id, SearchParams request = null);
 ```
 
 ```javascript
-bancomer.customers.transfers.list(customerId, callback);
-bancomer.customers.transfers.list(customerId, searchParams, callback);
+bbva.customers.transfers.list(customerId, callback);
+bbva.customers.transfers.list(customerId, searchParams, callback);
 ```
 
 ```ruby
-@transfers=@bancomer.create(:transfers)
+@transfers=@bbva.create(:transfers)
 @transfers.all(customer_id)
 ```
 
@@ -299,7 +299,7 @@ curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $findDataRequest = array(
     'creation[gte]' => '2013-01-01',
@@ -307,7 +307,7 @@ $findDataRequest = array(
     'offset' => 0,
     'limit' => 5);
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $transferList = $customer->transfers->getList($findDataRequest);
 ?>
 ```
@@ -318,7 +318,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
         
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -329,7 +329,7 @@ List<Transfer> transfers = api.transfers().list("a9pvykxz4g5rg0fplze0", request)
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.CreationGte = new Datetime(2014, 5, 1);
 request.CreationLte = new DateTime(2014, 5, 15);
@@ -344,14 +344,14 @@ var searchParams = {
   'limit' : 2
 };
 
-bancomer.customers.transfers.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list) {
+bbva.customers.transfers.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list) {
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@transfers=@bancomer.create(:transfers)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@transfers=@bbva.create(:transfers)
 
 response_hash=@transfers.all("asynwirguzkgq2bizogo")
 ```

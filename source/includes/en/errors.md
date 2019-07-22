@@ -20,18 +20,18 @@ BBVA returns JSON objects in the service responses.
 ```
 
 ```java
-//For Java every operation will return an instance of the "BancomerServiceException" class which will have the error information. ```
+//For Java every operation will return an instance of the "BbvaServiceException" class which will have the error information. ```
 
 ```csharp
-//For C Sharp,  every operation will return an instance of the "BancomerException" class which will have the error information.
+//For C Sharp,  every operation will return an instance of the "BbvaException" class which will have the error information.
 ```
 
 ```ruby
 #For Ruby, every operation can return any of the following exceptions:
 
-# => BancomerException: For generic errors, like invalid resources, etc.
-# => BancomerConnectionException: For errors related with server connection problems.
-# => BancomerTransactionException: For errors during operations implementation.
+# => BbvaException: For generic errors, like invalid resources, etc.
+# => BbvaConnectionException: For errors related with server connection problems.
+# => BbvaTransactionException: For errors during operations implementation.
 ```
 
 Property | Description

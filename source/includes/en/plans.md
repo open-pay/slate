@@ -1,6 +1,6 @@
 #Plans
 
-Plans are an Bancomer resource that allows create templates for subscriptions.  Using plans you can define the amount and frequency of recurrent charges.
+Plans are an Bbva resource that allows create templates for subscriptions.  Using plans you can define the amount and frequency of recurrent charges.
 
 
 ##Plan Object
@@ -47,25 +47,25 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/plans
 
 ```php
 <?
-$plan = $bancomer->plans->add(planDataRequest);
+$plan = $bbva->plans->add(planDataRequest);
 ?>
 ```
 
 ```java
-bancomerAPI.plans().create(Plan request);
+bbvaAPI.plans().create(Plan request);
 ```
 
 ```csharp
-bancomerAPI.PlanService.Create(Plan plan);
+bbvaAPI.PlanService.Create(Plan plan);
 ```
 
 ```javascript
-bancomer.plans.create(planRequest, callback);
+bbva.plans.create(planRequest, callback);
 ```
 
 ```ruby
 #Customere
-@plans=@bancomer.create(:plans)
+@plans=@bbva.create(:plans)
 @plans.create(request_hash)
 ```
 
@@ -88,7 +88,7 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/plans \
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $planDataRequest = array(
     'amount' => 150.00,
@@ -100,12 +100,12 @@ $planDataRequest = array(
     'repeat_every' => '1',
     'currency' => 'MXN');
 
-$plan = $bancomer->plans->add($planDataRequest);
+$plan = $bbva->plans->add($planDataRequest);
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan request = new Plan();
 request.name("Curso de ingles");
 request.amount(new BigDecimal("100.00"));
@@ -118,7 +118,7 @@ request = api.plans().create(request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan request = new Plan();
 request.Name = "Curso de ingles";
 request.Amount = new Decimal(100.00);
@@ -142,14 +142,14 @@ var planRequest = {
   'repeat_every': '1'
 };
 
-bancomer.plans.create(planRequest, function(error, plan){
+bbva.plans.create(planRequest, function(error, plan){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@plans=@bancomer.create(:plans)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@plans=@bbva.create(:plans)
 request_hash={
      "name" => "Curso de ingles",
      "amount" => 150.00,
@@ -211,26 +211,26 @@ PUT https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 
 ```php
 <?
-$plan = $bancomer->plans->get(planId);
+$plan = $bbva->plans->get(planId);
 $plan->save();
 ?>
 ```
 
 ```java
-bancomerAPI.plans().update(Plan request);
+bbvaAPI.plans().update(Plan request);
 ```
 
 ```csharp
-bancomerAPI.PlanService.Update(Plan plan);
+bbvaAPI.PlanService.Update(Plan plan);
 ```
 
 ```javascript
-bancomer.plans.update(planId, planRequest, callback);
+bbva.plans.update(planId, planRequest, callback);
 ```
 
 ```ruby
 #Customer
-@plans=@bancomer.create(:plans)
+@plans=@bbva.create(:plans)
 @plans.update(request_hash, plan_id)
 ```
 
@@ -248,16 +248,16 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafq
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$plan = $bancomer->plans->get('pduar9iitv4enjftuwyl');
+$plan = $bbva->plans->get('pduar9iitv4enjftuwyl');
 $plan->name = 'Plan Curso de Verano 2014';
 $plan->save();
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan request = new Plan();
 request.setId("p8e6x3hafqqsbmnoevrt");
 request.name("Curso de ingles");
@@ -267,7 +267,7 @@ request = api.plans().update(request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan request = new Plan();
 request.Id = "p8e6x3hafqqsbmnoevrt";
 request.Name = "Curso de ingles";
@@ -282,14 +282,14 @@ var planRequest = {
   'trial_days': 60
 };
 
-bancomer.plans.update(planId, planRequest, function(error, plan){
+bbva.plans.update(planId, planRequest, function(error, plan){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@plans=@bancomer.create(:plans)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@plans=@bbva.create(:plans)
 request_hash={
      "name" => "Curso de ingles",
      "trial_days" => "30"
@@ -338,25 +338,25 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 
 ```php
 <?
-$plan = $bancomer->plans->get(planId);
+$plan = $bbva->plans->get(planId);
 ?>
 ```
 
 ```java
-bancomerAPI.plans().get(String planId);
+bbvaAPI.plans().get(String planId);
 ```
 
 ```csharp
-bancomerAPI.PlanService.Get(string plan_id);
+bbvaAPI.PlanService.Get(string plan_id);
 ```
 
 ```javascript
-bancomer.plans.get(planId, callback);
+bbva.plans.get(planId, callback);
 ```
 
 ```ruby
 #Customer
-@plans=@bancomer.create(:plans)
+@plans=@bbva.create(:plans)
 @plans.get(plan_id)
 ```
 
@@ -369,31 +369,31 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafq
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$plan = $bancomer->plans->get('pduar9iitv4enjftuwyl');
+$plan = $bbva->plans->get('pduar9iitv4enjftuwyl');
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan plan = api.plans().get("p8e6x3hafqqsbmnoevrt");
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan plan = api.PlanService.Get("p8e6x3hafqqsbmnoevrt");
 ```
 
 ```javascript
-bancomer.plans.get('p8e6x3hafqqsbmnoevrt', function(error, plan){
+bbva.plans.get('p8e6x3hafqqsbmnoevrt', function(error, plan){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@plans=@bancomer.create(:plans)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@plans=@bbva.create(:plans)
 
 response_hash=@plans.get("p8e6x3hafqqsbmnoevrt")
 ```
@@ -436,27 +436,27 @@ DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/plans/{PLAN_ID}
 
 ```php
 <?
-$customer = $bancomer->customers->get(customerId);
-$plan = $bancomer->plans->get(planId);
+$customer = $bbva->customers->get(customerId);
+$plan = $bbva->plans->get(planId);
 $plan->delete();
 ?>
 ```
 
 ```java
-bancomerAPI.plans().delete(String planId);
+bbvaAPI.plans().delete(String planId);
 ```
 
 ```csharp
-bancomerAPI.PlanService.Delete(string plan_id);
+bbvaAPI.PlanService.Delete(string plan_id);
 ```
 
 ```javascript
-bancomer.plans.delete(planId, callback);
+bbva.plans.delete(planId, callback);
 ```
 
 ```ruby
 #Customer
-@plans=@bancomer.create(:plans)
+@plans=@bbva.create(:plans)
 @plans.delete(plan_id)
 ```
 
@@ -470,33 +470,33 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafq
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
-$plan = $bancomer->plans->get('pduar9iitv4enjftuwyl');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
+$plan = $bbva->plans->get('pduar9iitv4enjftuwyl');
 $plan->delete();
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.plans().delete("p8e6x3hafqqsbmnoevrt");
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.PlanService.Delete("p8e6x3hafqqsbmnoevrt");
 ```
 
 ```javascript
-bancomer.plans.delete('p8e6x3hafqqsbmnoevrt', function(error){
+bbva.plans.delete('p8e6x3hafqqsbmnoevrt', function(error){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@plans=@bancomer.create(:plans)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@plans=@bbva.create(:plans)
 
 response_hash=@plans.delete("p8e6x3hafqqsbmnoevrt")
 ```
@@ -521,26 +521,26 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/plans
 
 ```php
 <?
-$planList = $bancomer->plans->getList(findDataRequest);
+$planList = $bbva->plans->getList(findDataRequest);
 ?>
 ```
 
 ```java
-bancomerAPI.plans().list(SearchParams request);
+bbvaAPI.plans().list(SearchParams request);
 ```
 
 ```csharp
-bancomerAPI.PlanService.List(SearchParams request = null);
+bbvaAPI.PlanService.List(SearchParams request = null);
 ```
 
 ```javascript
-bancomer.plans.list(callback);
-bancomer.plans.list(searchParams, callback);
+bbva.plans.list(callback);
+bbva.plans.list(searchParams, callback);
 ```
 
 ```ruby
 #Customer
-@plans=@bancomer.create(:plans)
+@plans=@bbva.create(:plans)
 @plans.all
 ```
 
@@ -553,7 +553,7 @@ curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/plans?limit=
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $findDataRequest = array(
     'creation[gte]' => '2013-01-01',
@@ -561,7 +561,7 @@ $findDataRequest = array(
     'offset' => 0,
     'limit' => 5);
 
-$planList = $bancomer->plans->getList($findDataRequest);
+$planList = $bbva->plans->getList($findDataRequest);
 ?>
 ```
 
@@ -571,7 +571,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
         
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -582,7 +582,7 @@ List<Plan> plans = api.plans().list(request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.CreationGte = new Datetime(2014, 5, 1);
 request.CreationLte = new DateTime(2014, 5, 15);
@@ -597,14 +597,14 @@ var searchParams = {
   'limit' : 10
 };
 
-bancomer.plans.list(searchParams, function(error, list){
+bbva.plans.list(searchParams, function(error, list){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@plans=@bancomer.create(:plans)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@plans=@bbva.create(:plans)
 
 response_hash=@plans.all
 ```

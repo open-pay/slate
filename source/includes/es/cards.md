@@ -677,7 +677,7 @@ response_hash=@cards.getPoints("asynwirguzkgq2bizogo","tnasugabhdgq456wr")
 ]
 ```
 
-Regresa un el balance de puntos de la tarjeta. Solo aplicable a puntos Santander, Scotiabank y Bancomer.
+Regresa un el balance de puntos de la tarjeta. Solo aplicable a puntos Santander, Scotiabank y Bbva.
 
 ###Petición
 Puedes consultar los puntos de una tarjeta perteneciente a un comercio o un cliente mediante el id de la tarjeta
@@ -696,7 +696,7 @@ id| ***string*** (requerido, longitud = 45) <br/> Identificador de token
 ###Respuesta
 Propiedad | Descripción
 --------- | ------
-points_type|  Tipo de puntos aceptados por la tarjeta (Santander, Scotiabank ó Bancomer)
+points_type|  Tipo de puntos aceptados por la tarjeta (Santander, Scotiabank ó Bbva)
 remaining_points| Cantidad de puntos restante
 remaining_mxn| Saldo de puntos restante en pesos
 
@@ -954,7 +954,7 @@ response_hash=@cards.all("asynwirguzkgq2bizogo")
       "allows_charges":true,
       "allows_payouts":true,
       "creation_date":"2013-11-20T09:22:25-06:00",
-      "bank_name":"BBVA BANCOMER",
+      "bank_name":"BBVA",
       "bank_code":"012",
       "type":"debit",
       "brand":"mastercard"
@@ -968,7 +968,7 @@ response_hash=@cards.all("asynwirguzkgq2bizogo")
       "allows_charges":true,
       "allows_payouts":true,
       "creation_date":"2013-11-19T13:26:12-06:00",
-      "bank_name":"BBVA BANCOMER",
+      "bank_name":"BBVA",
       "bank_code":"012",
       "type":"debit",
       "brand":"mastercard"

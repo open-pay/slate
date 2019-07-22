@@ -14,36 +14,36 @@ El parámetro -u se ocupa para realizar la autenticación HTTP Basic
 ```php
 <?
 //Por default se usa el ambiente de sandbox
-$bancomer = Bancomer::getInstance('mptdggroasfcmqs8plpy', 'sk_326c6d0443f6457aae29ffbd48f7d1be');
+$bbva = Bbva::getInstance('mptdggroasfcmqs8plpy', 'sk_326c6d0443f6457aae29ffbd48f7d1be');
 ?>
 ```
 
 ```java
 //Sandbox
-final BancomerAPI api = new BancomerAPI(
+final BbvaAPI api = new BbvaAPI(
         "https://sand-api.ecommercebbva.com", "mptdggroasfcmqs8plpy", "sk_326c6d0443f6457aae29ffbd48f7d1be");
 
 //Produccion
-final BancomerAPI api = new BancomerAPI(
+final BbvaAPI api = new BbvaAPI(
         "https://api.ecommercebbva.com", "mptdggroasfcmqs8plpy", "sk_326c6d0443f6457aae29ffbd48f7d1be");
 ```
 
 ```csharp
 //Sandbox
-BancomerAPI bancomerAPI = new BancomerAPI("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
-bancomerAPI.Production = false; // Default value = false
+BbvaAPI bbvaAPI = new BbvaAPI("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
+bbvaAPI.Production = false; // Default value = false
 
 //Produccion
-BancomerAPI bancomerAPI = new BancomerAPI("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
-bancomerAPI.Production = true;
+BbvaAPI bbvaAPI = new BbvaAPI("sk_326c6d0443f6457aae29ffbd48f7d1be", "mptdggroasfcmqs8plpy");
+bbvaAPI.Production = true;
 ```
 
 ```ruby
 #Sandbox
-bancomer=BancomerApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7d1be")
+bbva=BbvaApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7d1be")
 
 #Produccion
-bancomer=BancomerApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7d1be", true)
+bbva=BbvaApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7d1be", true)
 
 
 #Definir timeout para los request's
@@ -51,9 +51,9 @@ bancomer=BancomerApi.new("mptdggroasfcmqs8plpy","sk_326c6d0443f6457aae29ffbd48f7
 # servicios, es necesario definir explícitamente el tipo de ambiente, seguido del nuevo valor del timeout para el request:
 
 #Sintaxis:
-#   bancomer_prod=BancomerApi.new(merchant_id,private_key,isProduction,timeout)
+#   bbva_prod=BbvaApi.new(merchant_id,private_key,isProduction,timeout)
 #Example:
-#   bancomer_prod=BancomerApi.new(merchant_id,private_key,false,30)
+#   bbva_prod=BbvaApi.new(merchant_id,private_key,false,30)
 ```
 
 > Producción
@@ -64,7 +64,7 @@ Solo es necesario usar la URI base https://api.ecommercebbva.com
 
 ```php
 <?
-Bancomer::setProductionMode(true);
+Bbva::setProductionMode(true);
 ?>
 ```
 
@@ -73,11 +73,11 @@ Bancomer::setProductionMode(true);
 ```
 
 ```csharp
-bancomerAPI.Production = true;
+bbvaAPI.Production = true;
 ```
 
 ```ruby
-#Solo es necesario pasar como tercer argumento un "true" cuando se crea el objeto BancomerApi
+#Solo es necesario pasar como tercer argumento un "true" cuando se crea el objeto BbvaApi
 ```
 
 Para realizar peticiones a la API, es necesario enviar la llave de API (API Key) en todas tus llamadas a nuestros  servidores. ​La llave la puedes obtener desde el [dashboard](https://sand-portal.ecommercebbva.com/login).

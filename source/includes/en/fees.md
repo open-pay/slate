@@ -14,25 +14,25 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/fees
 
 ```php
 <?
-$fee = $bancomer->fees->create(feeDataRequest);
+$fee = $bbva->fees->create(feeDataRequest);
 ?>
 ```
 
 ```java
-bancomerAPI.fees().create(CreateFeeParams request);
+bbvaAPI.fees().create(CreateFeeParams request);
 ```
 
 ```csharp
-bancomerAPI.FeeService.Create(FeeRequest request);
+bbvaAPI.FeeService.Create(FeeRequest request);
 ```
 
 ```javascript
-bancomer.fees.create(feeRequest, callback);
+bbva.fees.create(feeRequest, callback);
 ```
 
 ```ruby
 #Customer
-@fees=@bancomer.create(:fees)
+@fees=@bbva.create(:fees)
 @fees.create(request_hash)
 ```
 
@@ -52,7 +52,7 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/fees \
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $feeDataRequest = array(
     'customer_id' => 'a9ualumwnrcxkl42l6mh',
@@ -60,12 +60,12 @@ $feeDataRequest = array(
     'description' => 'Cobro de ComisiÃ³n',
     'order_id' => 'ORDEN-00063');
 
-$fee = $bancomer->fees->create($feeDataRequest);
+$fee = $bbva->fees->create($feeDataRequest);
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateFeeParams request = new CreateFeeParams();
 request.customerId("a9pvykxz4g5rg0fplze0");
 request.amount(new BigDecimal("100.00"));
@@ -76,7 +76,7 @@ Fee fee = api.fees().create(request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 FeeRequest request = new FeeRequest();
 request.CustomerId = "a9pvykxz4g5rg0fplze0";
 request.Amount = new Decimal(100.00);
@@ -94,14 +94,14 @@ var feeRequest = {
      'order_id' : 'oid-1245'
 };
 
-bancomer.fees.create(feeRequest, function(error, fee){
+bbva.fees.create(feeRequest, function(error, fee){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@fees=@bancomer.create(:fees)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@fees=@bbva.create(:fees)
 request_hash={
      "customer_id" => "dvocf97jd20es3tw5laz",
      "amount" => 12.50,
@@ -157,26 +157,26 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/fees/{TRANSACTION_ID}/r
 
 ```php
 <?
-$fee = $bancomer->fees->get(transactionId);
+$fee = $bbva->fees->get(transactionId);
 $fee->refund(refundData);
 ?>
 ```
 
 ```java
-bancomerAPI.fees().refund(String transactionId, RefundParams request);
+bbvaAPI.fees().refund(String transactionId, RefundParams request);
 ```
 
 ```csharp
-bancomerAPI.FeeService.Refund(string transaction_id, RefundRequest request);
+bbvaAPI.FeeService.Refund(string transaction_id, RefundRequest request);
 ```
 
 ```javascript
-bancomer.fees.refund(transactionId, feeRequest, callback);
+bbva.fees.refund(transactionId, feeRequest, callback);
 ```
 
 ```ruby
 #Customer
-@fees=@bancomer.create(:fees)
+@fees=@bbva.create(:fees)
 @fees.refund(transaction_id, refund_hash)
 ```
 
@@ -193,19 +193,19 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/fees/trzjaozcik8
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $refundData = array(
     'description' => 'Fee Refund'
     );
 
-$fee = $bancomer->fees->get("trzjaozcik8msyqshka4");
+$fee = $bbva->fees->get("trzjaozcik8msyqshka4");
 $fee->refund($refundData);
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 RefundParams request = new RefundParams();
 request.description("Fee Refund");
 
@@ -213,7 +213,7 @@ Fee fee = api.fees().refund("trzjaozcik8msyqshka4", request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 RefundRequest request = new RefundRequest();
 request.Description = "Fee Refund";
 
@@ -225,14 +225,14 @@ var refundRequest = {
      'description' : 'Fee Refund'
 };
 
-bancomer.fees.refund("trzjaozcik8msyqshka4", refundRequest, function(error, refund){
+bbva.fees.refund("trzjaozcik8msyqshka4", refundRequest, function(error, refund){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@fees=@bancomer.create(:fees)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@fees=@bbva.create(:fees)
 refund_hash={
      "description" => "Fee Refund"
    }
@@ -283,26 +283,26 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/fees
 
 ```php
 <?
-$feeList = $bancomer->fees->getList(findDataRequest);
+$feeList = $bbva->fees->getList(findDataRequest);
 ?>
 ```
 
 ```java
-bancomerAPI.fees().list(SearchParams request);
+bbvaAPI.fees().list(SearchParams request);
 ```
 
 ```csharp
-bancomerAPI.FeeService.List(SearchParams request = null);
+bbvaAPI.FeeService.List(SearchParams request = null);
 ```
 
 ```javascript
-bancomer.fees.list(callback);
-bancomer.fees.list(searchParams, callback);
+bbva.fees.list(callback);
+bbva.fees.list(searchParams, callback);
 ```
 
 ```ruby
 #Customer
-@fees=@bancomer.create(:fees)
+@fees=@bbva.create(:fees)
 @fees.all
 ```
 
@@ -315,7 +315,7 @@ curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/fees?limit=1
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $findData = array(
     'creation[gte]' => '2013-01-01',
@@ -323,7 +323,7 @@ $findData = array(
     'offset' => 0,
     'limit' => 5);
 
-$feeList = $bancomer->fees->getList($findDataRequest);
+$feeList = $bbva->fees->getList($findDataRequest);
 ?>
 ```
 
@@ -333,7 +333,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
         
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -344,7 +344,7 @@ List<Fee> fees = api.fees().list(request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.CreationGte = new Datetime(2014, 5, 1);
 request.CreationLte = new DateTime(2014, 5, 15);
@@ -359,14 +359,14 @@ var searchParams = {
   'limit' : 10
 };
 
-bancomer.fees.list(searchParams, function(error, list){
+bbva.fees.list(searchParams, function(error, list){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@fees=@bancomer.create(:fees)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@fees=@bbva.create(:fees)
 
 response_hash=@fees.all
 ```

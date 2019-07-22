@@ -62,26 +62,26 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 
 ```php
 <?
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $subscription = $customer->subscriptions->add(subscriptionDataRequest);
 ?>
 ```
 
 ```java
-bancomerAPI.subscriptions().create(String customerId, Subscription request);
+bbvaAPI.subscriptions().create(String customerId, Subscription request);
 ```
 
 ```csharp
-bancomerAPI.SubscriptionService.Create(string customer_id, Subscription request);
+bbvaAPI.SubscriptionService.Create(string customer_id, Subscription request);
 ```
 
 ```javascript
-bancomer.customers.subscriptions.create(customerId, subscriptionRequest, callback);
+bbva.customers.subscriptions.create(customerId, subscriptionRequest, callback);
 ```
 
 ```ruby
 #Customer
-@subscriptions=@bancomer.create(:subscriptions)
+@subscriptions=@bbva.create(:subscriptions)
 @subscriptions.create(request_hash, customer_id)
 ```
 
@@ -106,7 +106,7 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $subscriptionDataRequest = array(
     'trial_end_date' => '2014-01-01', 
@@ -119,7 +119,7 @@ $subscriptionDataRequest = array(
          'cvv2' => '110',
          'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f'));
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $subscription = $customer->subscriptions->add($subscriptionDataRequest);
 ?>
 ```
@@ -128,7 +128,7 @@ $subscription = $customer->subscriptions->add($subscriptionDataRequest);
 final Calendar trialEndDate = Calendar.getInstance();
 trialEndDate.set(2014, 5, 1, 0, 0, 0);
         
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.planId("pbi4kb8hpb64x0uud2eb");
 request.trialEndDate(trialEndDate.getTime());
@@ -145,7 +145,7 @@ request = api.subscriptions().create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.PlanId = "idPlan-01001";
 request.TrialEndDate = new Datetime(2014, 5, 1);
@@ -174,14 +174,14 @@ var subscriptionRequest = {
    'plan_id':'pbi4kb8hpb64x0uud2eb'
 };
 
-bancomer.customers.subscriptions.create(customerId, subscriptionRequest, function(error, subscription){
+bbva.customers.subscriptions.create(customerId, subscriptionRequest, function(error, subscription){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@subscriptions=@bancomer.create(:subscriptions)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@bbva.create(:subscriptions)
 card_hash={
      "holder_name" => "Juan Perez Ramirez",
      "card_number" => "4111111111111111",
@@ -229,7 +229,7 @@ response_hash=@subscriptions.create(request_hash.to_hash, "a9pvykxz4g5rg0fplze0"
 }
 ```
  
-Create a new subscription for an existing customer.  You can use an existing card or you can send the info of the card where the charges will be made, in these you can include the property <code>device_session_id</code> to use the antifraud tool, see [Fraud detection using device data](https://github.com/open-pay/bancomer-js#fraud-detection-using-device-data).
+Create a new subscription for an existing customer.  You can use an existing card or you can send the info of the card where the charges will be made, in these you can include the property <code>device_session_id</code> to use the antifraud tool, see [Fraud detection using device data](https://github.com/open-pay/bbva-js#fraud-detection-using-device-data).
 
 
 ###Request
@@ -254,27 +254,27 @@ PUT https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 
 ```php
 <?
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $subscription = $customer->subscriptions->get(subscriptionId);
 $subscription->save();
 ?>
 ```
 
 ```java
-bancomerAPI.subscriptions().update(Subscription request);
+bbvaAPI.subscriptions().update(Subscription request);
 ```
 
 ```csharp
-bancomerAPI.SubscriptionService.Update(string customer_id, Subscription subscription);
+bbvaAPI.SubscriptionService.Update(string customer_id, Subscription subscription);
 ```
 
 ```javascript
-bancomer.customers.subscriptions.update(customerId, subscriptionId, subscriptionRequest, callback);
+bbva.customers.subscriptions.update(customerId, subscriptionId, subscriptionRequest, callback);
 ```
 
 ```ruby
 #Customer
-@subscriptions=@bancomer.create(:subscriptions)
+@subscriptions=@bbva.create(:subscriptions)
 @subscriptions.update(request_hash, customer_id)
 ```
 
@@ -298,9 +298,9 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $subscription = $customer->subscriptions->get('s7ri24srbldoqqlfo4vp');
 $subscription->trial_end_date = '2014-12-31';
 $subscription->save();
@@ -311,7 +311,7 @@ $subscription->save();
 final Calendar trialEndDate = Calendar.getInstance();
 trialEndDate.set(2014, 5, 1, 0, 0, 0);
         
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.planId("idPlan-01001");
 request.trialEndDate(trialEndDate.getTime());
@@ -321,7 +321,7 @@ request = api.subscriptions().update(request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.PlanId = "idPlan-01001";
 request.TrialEndDate = new Datetime(2014, 5, 1);;
@@ -342,15 +342,15 @@ var subscriptionRequest = {
   }
 };
 
-bancomer.customers.subscriptions.update('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', subscriptionRequest, 
+bbva.customers.subscriptions.update('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', subscriptionRequest, 
     function(error, subscription){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@subscriptions=@bancomer.create(:subscriptions)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@bbva.create(:subscriptions)
 request_hash={
      "plan_id" => "pbi4kb8hpb64x0uud2eb",
      "cancel_at_period_end" => true,
@@ -416,26 +416,26 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 
 ```php
 <?
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $subscription = $customer->subscriptions->get(subscriptionId);
 ?>
 ```
 
 ```java
-bancomerAPI.subscriptions().get(String customerId, String customerId);
+bbvaAPI.subscriptions().get(String customerId, String customerId);
 ```
 
 ```csharp
-bancomerAPI.SubscriptionService.Get(string customer_id, string subscription_id);
+bbvaAPI.SubscriptionService.Get(string customer_id, string subscription_id);
 ```
 
 ```javascript
-bancomer.customers.subscriptions.get(customerId, subscriptionId, callback);
+bbva.customers.subscriptions.get(customerId, subscriptionId, callback);
 ```
 
 ```ruby
 #Customer
-@subscriptions=@bancomer.create(:subscriptions)
+@subscriptions=@bbva.create(:subscriptions)
 @subscriptions.get(subscription_id,customer_id)
 ```
 
@@ -448,32 +448,32 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $subscription = $customer->subscriptions->get('s7ri24srbldoqqlfo4vp');
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription subscription = api.subscriptions().get("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription subscription = api.SubscriptionService.Get("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 ```
 
 ```javascript
-bancomer.customers.subscriptions.get('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', function(error, subscription){
+bbva.customers.subscriptions.get('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', function(error, subscription){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@subscriptions=@bancomer.create(:subscriptions)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@bbva.create(:subscriptions)
 
 response_hash=@subscriptions.get("s0gmyor4yqtyv1miqwr0", "pbi4kb8hpb64x0uud2eb")
 ```
@@ -529,27 +529,27 @@ DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_I
 
 ```php
 <?
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $subscription = $customer->subscriptions->get(subscriptionId);
 $subscription->delete();
 ?>
 ```
 
 ```java
-bancomerAPI.subscriptions().delete(String customerId, String subscriptionId);
+bbvaAPI.subscriptions().delete(String customerId, String subscriptionId);
 ```
 
 ```csharp
-bancomerAPI.SubscriptionService.Delete(string customer_id, string subscription_id);
+bbvaAPI.SubscriptionService.Delete(string customer_id, string subscription_id);
 ```
 
 ```javascript
-bancomer.customers.subscriptions.delete(customerId, subscriptionId, callback);
+bbva.customers.subscriptions.delete(customerId, subscriptionId, callback);
 ```
 
 ```ruby
 #Customer
-@subscriptions=@bancomer.create(:subscriptions)
+@subscriptions=@bbva.create(:subscriptions)
 @subscriptions.delete(subscription_id, customer_id)
 ```
 
@@ -563,33 +563,33 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $subscription = $customer->subscriptions->get('s7ri24srbldoqqlfo4vp');
 $subscription->delete();
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.subscriptions().delete("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.SubscriptionService.Delete("a9pvykxz4g5rg0fplze0", "s0gmyor4yqtyv1miqwr0");
 ```
 
 ```javascript
-bancomer.customers.subscriptions.delete('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', function(error){
+bbva.customers.subscriptions.delete('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', function(error){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@subscriptions=@bancomer.create(:subscriptions)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@bbva.create(:subscriptions)
 
 @subscriptions.detele("s0gmyor4yqtyv1miqwr0", "pbi4kb8hpb64x0uud2eb")
 ```
@@ -613,27 +613,27 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 
 ```php
 <?
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $subscriptionList = $customer->subscriptions->getList(findDataRequest);
 ?>
 ```
 
 ```java
-bancomerAPI.subscriptions().list(String customerId, SearchParams request);
+bbvaAPI.subscriptions().list(String customerId, SearchParams request);
 ```
 
 ```csharp
-bancomerAPI.SubscriptionService.List(string customer_id, SearchParams request = null);
+bbvaAPI.SubscriptionService.List(string customer_id, SearchParams request = null);
 ```
 
 ```javascript
-bancomer.customers.subscriptions.list(customerId, callback);
-bancomer.customers.subscriptions.list(customerId, searchParams, callback);
+bbva.customers.subscriptions.list(customerId, callback);
+bbva.customers.subscriptions.list(customerId, searchParams, callback);
 ```
 
 ```ruby
 #Customer
-@subscriptions=@bancomer.create(:subscriptions)
+@subscriptions=@bbva.create(:subscriptions)
 @subscriptions.all(customer_id)
 ```
 
@@ -646,7 +646,7 @@ curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $findData = array(
     'creation[gte]' => '2013-01-01',
@@ -654,7 +654,7 @@ $findData = array(
     'offset' => 0,
     'limit' => 5);
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $subscriptionList = $customer->subscriptions->getList($findData);
 ?>
 ```
@@ -665,7 +665,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
         
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -676,7 +676,7 @@ List<Subscription> subscriptions = api.subscriptions().list("a9pvykxz4g5rg0fplze
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.CreationGte = new Datetime(2014, 5, 1);
 request.CreationLte = new DateTime(2014, 5, 15);
@@ -691,14 +691,14 @@ var searchParams = {
   'limit' : 2
 };
 
-bancomer.customers.subscriptions.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
+bbva.customers.subscriptions.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@subscriptions=@bancomer.create(:subscriptions)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@subscriptions=@bbva.create(:subscriptions)
 
 @subscriptions.all("pbi4kb8hpb64x0uud2eb")
 ```

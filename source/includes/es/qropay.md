@@ -47,18 +47,18 @@ curl -u sk_e568c42a6c384b7ab02cd47d2e407cab \
 ```
 
 ```php
-$bancomer = Bancomer::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$bbva = Bbva::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
 $chargeRequest = array(
     'method' => 'qropay',
     'amount' => 100,
     'description' => 'Cargo qropay');
 
-$charge = $bancomer->charges->create($chargeRequest);
+$charge = $bbva->charges->create($chargeRequest);
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI(
+BbvaAPI api = new BbvaAPI(
         "https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 
 List<Parameter> request = new ArrayList<Parameter>(Arrays.asList(
@@ -72,7 +72,7 @@ ParameterContainer charge = new ParameterContainer("charge", chargeAsMap);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 
 List<IParameter> request = List<IParameter> {
     new SingleParameter("method", "qropay"),
@@ -80,13 +80,13 @@ List<IParameter> request = List<IParameter> {
     new SingleParameter("description", "Cargo qropay")
 };
 
-Dictionary<String, Object> chargeDictionary = bancomerAPI.ChargeService.Create(request);
+Dictionary<String, Object> chargeDictionary = bbvaAPI.ChargeService.Create(request);
 ParameterContainer charge = new ParameterContainer("charge", chargeDictionary);
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@bancomer.create(:charges)
+@bbva=BbvaApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@bbva.create(:charges)
 
 request_hash={
     "method" => "qropay",

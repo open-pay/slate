@@ -1,5 +1,5 @@
 #Cards
-Within the Bancomer platform you can add cards to the customer's account, delete them, recover some in specific and list them.
+Within the Bbva platform you can add cards to the customer's account, delete them, recover some in specific and list them.
 
 You can store multiple debit and / or credit cards at Merchant or customer level for making charges later without the need to enter the information again.
 
@@ -69,45 +69,45 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```php
 <?
 //Customer
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $card = $customer->cards->add(cardDataRequest);
 
 //Merchant
-$card = $bancomer->cards->add(cardDataRequest);
+$card = $bbva->cards->add(cardDataRequest);
 ?>
 ```
 
 ```java
 //Customer
-bancomerAPI.cards().create(String customerId, Card request);
+bbvaAPI.cards().create(String customerId, Card request);
 
 //Merchant
-bancomerAPI.cards().create(Card request);
+bbvaAPI.cards().create(Card request);
 ```
 
 ```csharp
 //Customer
-bancomerAPI.CardService.Create(string customer_id, Card card);
+bbvaAPI.CardService.Create(string customer_id, Card card);
 
 //Merchant
-bancomerAPI.CardService.Create(Card card);
+bbvaAPI.CardService.Create(Card card);
 ```
 
 ```javascript
 // Merchant
-bancomer.cards.create(cardRequest, callback);
+bbva.cards.create(cardRequest, callback);
 
 // Customer
-bancomer.customers.cards.create(customerId, cardRequest, callback);
+bbva.customers.cards.create(customerId, cardRequest, callback);
 ```
 
 ```ruby
 #Customer
-@cards=@bancomer.create(:cards)
+@cards=@bbva.create(:cards)
 @cards.create(request_hash, customer_id)
 
 #Merchant
-@cards=@bancomer.create(:cards)
+@cards=@bbva.create(:cards)
 @cards.create(request_hash)
 ```
 
@@ -129,7 +129,7 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $cardDataRequest = array(
     'holder_name' => 'Teofilo Velazco',
@@ -147,13 +147,13 @@ $cardDataRequest = array(
             'city' => 'Querétaro.',
             'country_code' => 'MX'));
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $card = $customer->cards->add($cardDataRequest);
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card request = new Card();
 request.holderName("Juan Perez Ramirez");
 request.cardNumber("4111111111111111");
@@ -175,7 +175,7 @@ request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card request = new Card();
 request.HolderName = "Juan Perez Ramirez";
 request.CardNumber = "4111111111111111";
@@ -206,14 +206,14 @@ var cardRequest = {
    'device_session_id':'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f'
 };
 
-bancomer.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(error, card)  {
+bbva.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(error, card)  {
     // ...    
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@cards=@bancomer.create(:cards)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@cards=@bbva.create(:cards)
 address_hash={
       "line1" => "Calle 10",
       "line2" => "col. san pablo",
@@ -259,12 +259,12 @@ response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
 When a card is created the customer must be specified, if the customer is not specified the card will be registered for the Merchant account. Once the card is saved, it can not obtain the number and security code.
 
 <aside class = "notice">
-**Note:** When stored in Bancomer, all cards  are validated by making an authorization for $ 10.00 which is returned at the time.
+**Note:** When stored in Bbva, all cards  are validated by making an authorization for $ 10.00 which is returned at the time.
 </aside>
 
 When saving a card, an ID will be created which can be used to make card charges, payouts to a card or just for getting the not sensitive card information.
 
-You can use the antifraud system implementation. The <code>device_session_id</code> property must be generated using JavaScript API, see [Fraud detection using device data](https://github.com/open-pay/bancomer-js#fraud-detection-using-device-data).
+You can use the antifraud system implementation. The <code>device_session_id</code> property must be generated using JavaScript API, see [Fraud detection using device data](https://github.com/open-pay/bbva-js#fraud-detection-using-device-data).
 
 ###Request
 
@@ -297,45 +297,45 @@ POST https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```php
 <?
 //Customer
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $card = $customer->cards->add(cardDataRequest);
 
 //Merchant
-$card = $bancomer->cards->add(cardDataRequest);
+$card = $bbva->cards->add(cardDataRequest);
 ?>
 ```
 
 ```java
 //Customer
-bancomerAPI.cards().create(String customerId, Card card);
+bbvaAPI.cards().create(String customerId, Card card);
 
 //Merchant
-bancomerAPI.cards().create(Card card);
+bbvaAPI.cards().create(Card card);
 ```
 
 ```csharp
 //Customer
-bancomerAPI.CardService.Create(string customer_id, Card request);
+bbvaAPI.CardService.Create(string customer_id, Card request);
 
 //Merchant
-bancomerAPI.CardService.Create(Card request);
+bbvaAPI.CardService.Create(Card request);
 ```
 
 ```javascript
 // Merchant
-bancomer.cards.create(cardRequest, callback);
+bbva.cards.create(cardRequest, callback);
 
 // Customer
-bancomer.customers.cards.create(customerId, cardRequest, callback);
+bbva.customers.cards.create(customerId, cardRequest, callback);
 ```
 
 ```ruby
 #Customer
-@cards=@bancomer.create(:cards)
+@cards=@bbva.create(:cards)
 @cards.create(request_hash, customer_id)
 
 #Merchant
-@cards=@bancomer.create(:cards)
+@cards=@bbva.create(:cards)
 @cards.create(request_hash)
 ```
 
@@ -353,20 +353,20 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $cardDataRequest = array(
     'token_id' => 'tokgslwpdcrkhlgxqi9a',
     'device_session_id' => '8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o'
     );
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $card = $customer->cards->add($cardDataRequest);
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card request = new Card();
 request.tokenId("tokgslwpdcrkhlgxqi9a");
 request.deviceSessionId("8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o");
@@ -375,7 +375,7 @@ request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card request = new Card();
 request.TokenId = "tokgslwpdcrkhlgxqi9a";
 request.DeviceSessionId = "8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o";
@@ -389,14 +389,14 @@ var cardRequest = {
   'device_session_id' : '8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o'
 }
 
-bancomer.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(error, card)  {
+bbva.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(error, card)  {
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@cards=@bancomer.create(:cards)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@cards=@bbva.create(:cards)
 request_hash={
      "token_id" => "tokgslwpdcrkhlgxqi9a",
      "device_session_id" => "8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o"
@@ -452,45 +452,45 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 ```php
 <?
 //Customer
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $card = $customer->cards->get(cardId);
 
 //Merchant
-$card = $bancomer->cards->get(cardId);
+$card = $bbva->cards->get(cardId);
 ?>
 ```
 
 ```java
 //Customer
-bancomerAPI.cards().get(String customerId, String cardId);
+bbvaAPI.cards().get(String customerId, String cardId);
 
 //Merchant
-bancomerAPI.cards().get(String cardId);
+bbvaAPI.cards().get(String cardId);
 ```
 
 ```csharp
 //Customer
-bancomerAPI.CardService.Get(string customer_id, string card_id);
+bbvaAPI.CardService.Get(string customer_id, string card_id);
 
 //Merchant
-bancomerAPI.CardService.Get(string card_id);
+bbvaAPI.CardService.Get(string card_id);
 ```
 
 ```javascript
 // Merchant
-bancomer.cards.get(cardId, callback);
+bbva.cards.get(cardId, callback);
 
 // Customer
-bancomer.customers.cards.get(customerId, cardId, callback);
+bbva.customers.cards.get(customerId, cardId, callback);
 ```
 
 ```ruby
 #Customer
-@cards=@bancomer.create(:cards)
+@cards=@bbva.create(:cards)
 @cards.get(card_id, customer_id)
 
 #Merchant
-@cards=@bancomer.create(:cards)
+@cards=@bbva.create(:cards)
 @cards.get(card_id)
 ```
 
@@ -504,32 +504,32 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $card = $customer->cards->get('k9pn8qtsvr7k7gxoq1r5');
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card card = api.cards().get("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card card = api.CardService.Get("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 ```
 
 ```javascript
-bancomer.customers.cards.get('a9pvykxz4g5rg0fplze0', 'ktrpvymgatocelsciak7', function(error, card){
+bbva.customers.cards.get('a9pvykxz4g5rg0fplze0', 'ktrpvymgatocelsciak7', function(error, card){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@cards=@bancomer.create(:cards)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@cards=@bbva.create(:cards)
 
 response_hash=@cards.get("ktrpvymgatocelsciak7", "asynwirguzkgq2bizogo")
 ```
@@ -587,48 +587,48 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}/points
 ```php
 <?
 //Customer
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $pointsBalance = $customer->cards->get(cardId)->get("points");
 
 //Merchant
-$pointsBalance = $bancomer->cards->get(cardId)->get("points");
+$pointsBalance = $bbva->cards->get(cardId)->get("points");
 
 //Token
-$pointsBalance = $bancomer->get("tokens")->get(tokenId)->get("points");
+$pointsBalance = $bbva->get("tokens")->get(tokenId)->get("points");
 ?>
 ```
 
 ```java
 //Customer
-bancomerAPI.cards().points(String customerId, String cardId);
+bbvaAPI.cards().points(String customerId, String cardId);
 
 //Merchant
-bancomerAPI.cards().points(String cardId);
+bbvaAPI.cards().points(String cardId);
 ```
 
 ```csharp
 //Customer
-bancomerAPI.CardService.Points(string customer_id, string cardId);
+bbvaAPI.CardService.Points(string customer_id, string cardId);
 
 //Merchant
-bancomerAPI.CardService.Points(string cardId);
+bbvaAPI.CardService.Points(string cardId);
 ```
 
 ```javascript
 // Merchant
-bancomer.cards.getPoints(cardId, callback);
+bbva.cards.getPoints(cardId, callback);
 
 // Customer
-bancomer.cards.getPoints(customerId, cardId, callback);
+bbva.cards.getPoints(customerId, cardId, callback);
 ```
 
 ```ruby
 // Merchant
-@cards=@bancomer.create(:cards)
+@cards=@bbva.create(:cards)
 @cards.getPoints(card_id)
 
 // Customer
-@cards=@bancomer.create(:cards)
+@cards=@bbva.create(:cards)
 @cards.getPoints(card_id, customer_id)
 ```
 
@@ -641,33 +641,33 @@ curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 $cardId =  'tfghdfghtertdfbsd';
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $pointsBalance = $customer->cards->get(cardId)->get("points");
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128",
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128",
 "maonhzpqm8xp2ydssovf");
 PointsBalance points = api.cards().points("a9pvykxz4g5rg0fplze0", "knasugabhdgq456wr");
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 PointsBalance points = api.CardService.Points("a9pvykxz4g5rg0fplze0", "knasugabhdgq456wr");
 ```
 
 ```javascript
-bancomer.customers.cards.getPoints('ag4nktpdzebjiye1tlze', 'tnasugabhdgq456wr', function(error, list){
+bbva.customers.cards.getPoints('ag4nktpdzebjiye1tlze', 'tnasugabhdgq456wr', function(error, list){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@cards=@bancomer.create(:cards)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@cards=@bbva.create(:cards)
 
 response_hash=@cards.getPoints("asynwirguzkgq2bizogo","tnasugabhdgq456wr")
 ```
@@ -684,7 +684,7 @@ response_hash=@cards.getPoints("asynwirguzkgq2bizogo","tnasugabhdgq456wr")
 ]
 ```
 
-Returns the card point balance. Is applicable only for Santander, Scotiabank and Bancomer points.
+Returns the card point balance. Is applicable only for Santander, Scotiabank and Bbva points.
 
 ###Request
 
@@ -705,7 +705,7 @@ id| ***string*** (required, length = 45) <br/> Identifier token
 
 Property | Description
 --------- | ------
-points_type|  Points type accepted by the card (Santander, Scotiabank or Bancomer)
+points_type|  Points type accepted by the card (Santander, Scotiabank or Bbva)
 remaining_points| Number of remaining points
 remaining_mxn| Balance remaining points in pesos
 
@@ -728,47 +728,47 @@ DELETE https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_I
 ```php
 <?
 //Customer
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $card = $customer->cards->get(cardId);
 $card->delete();
 
 //Merchant
-$card = $bancomer->cards->get(cardId);
+$card = $bbva->cards->get(cardId);
 $card->delete();
 ?>
 ```
 
 ```java
 //Customer
-bancomerAPI.cards().delete(String customerId, String cardId);
+bbvaAPI.cards().delete(String customerId, String cardId);
 
 //Merchant
-bancomerAPI.cards().delete(String cardId);
+bbvaAPI.cards().delete(String cardId);
 ```
 
 ```csharp
 //Customer
-bancomerAPI.CardService.Delete(string customer_id, string card_id);
+bbvaAPI.CardService.Delete(string customer_id, string card_id);
 
 //Merchant
-bancomerAPI.CardService.Delete(string card_id);
+bbvaAPI.CardService.Delete(string card_id);
 ```
 
 ```javascript
 // Merchant
-bancomer.cards.delete(cardId, callback);
+bbva.cards.delete(cardId, callback);
 
 // Customer
-bancomer.customers.cards.delete(customerId, cardId, callback);
+bbva.customers.cards.delete(customerId, cardId, callback);
 ```
 
 ```ruby
 #Customer
-@cards=@bancomer.create(:cards)
+@cards=@bbva.create(:cards)
 @cards.delete(card_id, customer_id)
 
 #Merchant
-@cards=@bancomer.create(:cards)
+@cards=@bbva.create(:cards)
 @cards.delete(card_id)
 ```
 
@@ -782,33 +782,33 @@ curl https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $card = $customer->cards->get('k9pn8qtsvr7k7gxoq1r5');
 $card->delete();
 ?>
 ```
 
 ```java
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.cards().delete("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.CardService.Delete("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 ```
 
 ```javascript
-bancomer.customers.cards.delete('a9pvykxz4g5rg0fplze0', 'ktrpvymgatocelsciak7', function(error) {
+bbva.customers.cards.delete('a9pvykxz4g5rg0fplze0', 'ktrpvymgatocelsciak7', function(error) {
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@cards=@bancomer.create(:cards)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@cards=@bbva.create(:cards)
 
 response_hash=@cards.delete("ktrpvymgatocelsciak7", "asynwirguzkgq2bizogo")
 ```
@@ -841,47 +841,47 @@ GET https://sand-api.ecommercebbva.com/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/
 ```php
 <?
 //Customer
-$customer = $bancomer->customers->get(customerId);
+$customer = $bbva->customers->get(customerId);
 $cardList = $customer->cards->getList(findDataRequest);
 
 //Merchant
-$cardList = $bancomer->cards->getList(findDataRequest);
+$cardList = $bbva->cards->getList(findDataRequest);
 ?>
 ```
 
 ```java
 //Customer
-bancomerAPI.cards().list(String customerId, SearchParams request);
+bbvaAPI.cards().list(String customerId, SearchParams request);
 
 //Merchant
-bancomerAPI.cards().list(SearchParams request);
+bbvaAPI.cards().list(SearchParams request);
 ```
 
 ```csharp
 //Customer
-bancomerAPI.CardService.List(string customer_id, SearchParams request = null);
+bbvaAPI.CardService.List(string customer_id, SearchParams request = null);
 
 //Merchant
-bancomerAPI.CardService.List(SearchParams request = null);
+bbvaAPI.CardService.List(SearchParams request = null);
 ```
 
 ```javascript
 // Merchant
-bancomer.cards.list(callback);
-bancomer.cards.list(searchParams, callback);
+bbva.cards.list(callback);
+bbva.cards.list(searchParams, callback);
 
 // Customer
-bancomer.cards.list(customerId, callback);
-bancomer.cards.list(customerId, searchParams, callback);
+bbva.cards.list(customerId, callback);
+bbva.cards.list(customerId, searchParams, callback);
 ```
 
 ```ruby
 #Customer
-@cards=@bancomer.create(:cards)
+@cards=@bbva.create(:cards)
 @cards.all(customer_id)
 
 #Merchant
-@cards=@bancomer.create(:cards)
+@cards=@bbva.create(:cards)
 @cards.all
 ```
 
@@ -894,7 +894,7 @@ curl -g "https://sand-api.ecommercebbva.com/v1/mzdtln0bmtms6o3kck8f/customers/ag
 
 ```php
 <?
-$bancomer = Bancomer::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
+$bbva = Bbva::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $findDataRequest = array(
     'creation[gte]' => '2013-01-01',
@@ -902,7 +902,7 @@ $findDataRequest = array(
     'offset' => 0,
     'limit' => 5);
 
-$customer = $bancomer->customers->get('a9ualumwnrcxkl42l6mh');
+$customer = $bbva->customers->get('a9ualumwnrcxkl42l6mh');
 $cardList = $customer->cards->getList($findDataRequest);
 ?>
 ```
@@ -913,7 +913,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
         
-BancomerAPI api = new BancomerAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("https://sand-api.ecommercebbva.com", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -923,7 +923,7 @@ List<Card> cards = api.cards().list("a9pvykxz4g5rg0fplze0", request);
 ```
 
 ```csharp
-BancomerAPI api = new BancomerAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+BbvaAPI api = new BbvaAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.CreationGte = new Datetime(2014, 5, 1);
 request.CreationLte = new DateTime(2014, 5, 15);
@@ -938,14 +938,14 @@ var searchParams = {
   'limit' : 2
 };
 
-bancomer.customers.cards.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
+bbva.customers.cards.list('ag4nktpdzebjiye1tlze', searchParams, function(error, list){
   // ...
 });
 ```
 
 ```ruby
-@bancomer=BancomerApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
-@cards=@bancomer.create(:cards)
+@bbva=BbvaApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
+@cards=@bbva.create(:cards)
 
 response_hash=@cards.all("asynwirguzkgq2bizogo")
 ```
@@ -963,7 +963,7 @@ response_hash=@cards.all("asynwirguzkgq2bizogo")
       "allows_charges":true,
       "allows_payouts":true,
       "creation_date":"2013-11-20T09:22:25-06:00",
-      "bank_name":"BBVA BANCOMER",
+      "bank_name":"BBVA",
       "bank_code":"012",
       "type":"debit",
       "brand":"mastercard"
@@ -977,7 +977,7 @@ response_hash=@cards.all("asynwirguzkgq2bizogo")
       "allows_charges":true,
       "allows_payouts":true,
       "creation_date":"2013-11-19T13:26:12-06:00",
-      "bank_name":"BBVA BANCOMER",
+      "bank_name":"BBVA",
       "bank_code":"012",
       "type":"debit",
       "brand":"mastercard"
