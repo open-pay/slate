@@ -16,18 +16,14 @@ includes:
   - es/charges
   - es/payments
   - es/customers
-  - es/transfers
   - es/cards
-  - es/bank_accounts
   - es/plans
   - es/subscriptions
   - es/fees
   - es/webhooks
   - es/tokens
   - es/merchant
-  - es/stores
   - es/common_objects
-  - es/electronic_invoice
 
 toc_footers:
  - <a href='#'>Sign Up for a Developer Key</a>

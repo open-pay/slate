@@ -70,14 +70,14 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    "source_id" : "kqgykn96i7bcs1wwhvgw",
    "method" : "card",
    "amount" : 100,
-   "currency" : "MXN",
+   "currency" : "COP",
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-00051",
    "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
    "customer" : {
    	    "name" : "Juan",
    	    "last_name" : "Vazquez Juarez",
-   	    "phone_number" : "4423456723",
+   	    "phone_number" : "571627926831",
    	    "email" : "juan.vazquez@empresa.com.mx"
    }
 }'
@@ -89,14 +89,14 @@ $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02c
 $customer = array(
    	 'name' => 'Juan',
    	 'last_name' => 'Vazquez Juarez',
-   	 'phone_number' => '4423456723',
+   	 'phone_number' => '571627926831',
    	 'email' => 'juan.vazquez@empresa.com.mx');
 
 $chargeRequest = array(
     'method' => 'card',
     'source_id' => 'kqgykn96i7bcs1wwhvgw',
     'amount' => 100,
-    'currency' => 'MXN'
+    'currency' => 'COP'
     'description' => 'Cargo inicial a mi merchant',
     'order_id' => 'oid-00051',
     'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
@@ -112,12 +112,12 @@ CreateCardChargeParams request = new CreateCardChargeParams();
 Customer customer = new Customer();
 customer.setName("Juan");
 customer.setLastName("Vazquez Juarez");
-customer.setPhoneNumber("4423456723");
+customer.setPhoneNumber("571627926831");
 customer.setEmail("juan.vazquez@empresa.com.mx");
 
 request.cardId("kqgykn96i7bcs1wwhvgw"); // =source_id
 request.amount(new BigDecimal("100.00"));
-request.currency("MXN");
+request.currency("COP");
 request.description("Cargo inicial a mi merchant");
 request.orderId("oid-00051");
 request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
@@ -132,13 +132,13 @@ ChargeRequest request = new ChargeRequest();
 Customer customer = new Customer();
 customer.Name = "Juan";
 customer.LastName = "Vazquez Juarez";
-customer.PhoneNumber = "4423456723";
+customer.PhoneNumber = "571627926831";
 customer.Email = "juan.vazquez@empresa.com.mx";
 
 request.Method = "card";
 request.SourceId = "kwkoqpg6fcvfse8k8mg2";
 request.Amount = new Decimal(100.00);
-request.Currency = "MXN";
+request.Currency = "COP";
 request.Description = "Cargo inicial a mi merchant";
 request.OrderId = "oid-00051";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
@@ -152,14 +152,14 @@ var chargeRequest = {
    'source_id' : 'kqgykn96i7bcs1wwhvgw',
    'method' : 'card',
    'amount' : 100,
-   'currency' : 'MXN',
+   'currency' : 'COP',
    'description' : 'Cargo inicial a mi cuenta',
    'order_id' : 'oid-00051',
    'device_session_id' : 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
    'customer' : {
    	    'name' : 'Juan',
    	    'last_name' : 'Vazquez Juarez',
-   	    'phone_number' : '4423456723',
+   	    'phone_number' : '571627926831',
    	    'email' : 'juan.vazquez@empresa.com.mx'
    }
 }
@@ -175,7 +175,7 @@ openpay.charges.create(chargeRequest, function(error, charge) {
 customer_hash={
     "name" => "Juan",
     "last_name" => "Vazquez Juarez",
-    "phone_number" => "4423456723",
+    "phone_number" => "571627926831",
     "email" => "juan.vazquez@empresa.com.mx"
 }
 
@@ -183,7 +183,7 @@ request_hash={
     "method" => "card",
     "source_id" => "kqgykn96i7bcs1wwhvgw",
     "amount" => 100.00,
-    "currency" => "MXN",
+    "currency" => "COP",
     "description" => "Cargo inicial a mi merchant",
     "order_id" => "oid-00051",
     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
@@ -219,13 +219,7 @@ response_hash=@charges.create(request_hash.to_hash)
       "bank_code":"002"
    },
    "status":"completed",
-   "currency":"USD",
-   "exchange_rate" : {
-      "from" : "USD",
-      "date" : "2014-11-21",
-      "value" : 13.61,
-      "to" : "MXN"
-   },
+   "currency":"COP",
    "creation_date":"2014-05-26T11:02:45-05:00",
    "operation_date":"2014-05-26T11:02:45-05:00",
    "description":"Cargo inicial a mi cuenta",
@@ -260,7 +254,7 @@ method|***string*** (requerido) <br/>Debe contener el valor **card** para indica
 source_id | ***string*** (requerido, longitud = 45) <br/>ID de la tarjeta guardada o el id del token creado de donde se retirarán los fondos.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 cvv2 | ***numeric*** (requerido, longitud = 3-4) <br/>Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.<br/>Se utiliza solo para cargos con [Tarjetas Guardadas](#crear-una-tarjeta).
-currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 2 tipos de monedas: Pesos Mexicanos(MXN) y Dólares Americanos(USD).
+currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 2 tipos de monedas: Pesos Colombianos(COP) y Dólares Americanos(USD).
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 device_session_id |  ***string*** (requerido, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta antifraudes
@@ -483,7 +477,7 @@ response_hash=@charges.create(request_hash.to_hash)
   "description": "Cargo desde terminal virtual de 111",
   "error_message": null,
   "amount": 100,
-  "currency": "MXN",
+  "currency": "COP",
   "payment_method": {
     "type": "redirect",
     "url": "https://sandbox-api.openpay.mx/v1/mexzhpxok3houd5lbvz1/charges/trq7yrthx5vc4gtjdkwg/card_capture"
@@ -514,517 +508,6 @@ order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del
 confirm |  ***boolean*** (requerido en false) <br/>El valor `false` indica que se trata de un cargo con terminal virtual.
 send_email | ***boolean*** (opcional) <br/>Indica si se desea enviar un email que direccione al formulario de pago de openpay.
 redirect_url | ***string*** (requerido) <br/>Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de openpay.
-
-###Respuesta
-Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
-
-##Cargo en tienda
-
-> Definición
-
-```plaintext
-Comercio
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
-
-Cliente
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
-```
-
-```php
-<?
-Comercio
-$openpay->charges->create(chargeRequest);
-
-Cliente
-$customer = $openpay->customers->get(customerId);
-$customer->charges->create(chargeRequest;
-?>
-```
-
-```java
-//Cliente
-openpayAPI.charges().create(String customerId, CreateStoreChargeParams request);
-
-//Comercio
-openpayAPI.charges().create(CreateStoreChargeParams request);
-```
-
-```csharp
-//Cliente
-openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
-
-//Comercio
-openpayAPI.ChargeService.Create(ChargeRequest request);
-```
-
-```javascript
-//Comercio
-openpay.charges.create(chargeRequest, callback);
-
-//Cliente
-openpay.customers.charges.create(customerId, chargeRequest, callback);
-```
-
-```ruby
-#Cliente
-@charges=@openpay.create(:charges)
-@charges.create(request_hash, customer_id)
-
-#Comercio
-@charges=@openpay.create(:charges)
-@charges.create(request_hash)
-```
-
-> Ejemplo de petición con cliente
-
-```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" \
-   -X POST -d '{
-   "method" : "store",
-   "amount" : 100,
-   "description" : "Cargo con tienda",
-   "order_id" : "oid-00053",
-   "due_date" : "2014-05-20T13:45:00"
-} '
-```
-
-```php
-<?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
-
-$chargeRequest = array(
-    'method' => 'store',
-    'amount' => 100,
-    'description' => 'Cargo con tienda',
-    'order_id' => 'oid-00053',
-    'due_date' => '2014-05-28T13:45:00');
-
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeRequest);
-?>
-```
-
-```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Calendar dueDate = Calendar.getInstance();
-dueDate.set(2014, 5, 28, 13, 45, 0);
-CreateStoreChargeParams request = new CreateStoreChargeParams();
-request.amount(new BigDecimal("100.00"));
-request.description("Cargo con tienda");
-request.orderId("oid-00053");
-request.dueDate(dueDate.getTime());
-
-Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
-```
-
-```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-ChargeRequest request = new ChargeRequest();
-request.Method = "store";
-request.Amount = new Decimal(100.00);
-request.Description = "Cargo con tienda";
-request.OrderId = "oid-00053";
-request.DueDate = new DateTime(2014, 5, 28, 13, 45, 0);
-
-Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
-```
-
-```javascript
-var storeChargeRequest = {
-   'method' : 'store',
-   'amount' : 100,
-   'description' : 'Cargo con tienda',
-   'order_id' : 'oid-00053',
-   'due_date' : '2014-05-28T13:45:00'
-};
-
-openpay.customers.charges.create('ag4nktpdzebjiye1tlze', storeChargeRequest, function(error, charge) {
-  // ...
-});
-```
-
-```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
-request_hash={
-     "method" => "store",
-     "amount" => 100.00,
-     "description" => "Cargo con tienda",
-     "order_id" => "oid-00053"
-     "due_date" => "2014-05-28T13:45:00"
-   }
-
-response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
-```
-
-> Ejemplo de respuesta
-
-```json
-{
-   "id":"trnirkiyobo5qfex55ef",
-   "amount":100.00,
-   "authorization":null,
-   "method":"store",
-   "operation_type":"in",
-   "transaction_type":"charge",
-   "status":"in_progress",
-   "currency":"MXN",
-   "creation_date":"2014-05-26T13:48:25-05:00",
-   "operation_date":"2014-05-26T13:48:25-05:00",
-   "due_date":"2014-05-28T13:45:00-05:00",
-   "description":"Cargo con tienda",
-   "error_message":null,
-   "order_id":"oid-00053",
-   "customer_id":"ag4nktpdzebjiye1tlze",
-   "payment_method":{
-      "type":"store",
-      "reference":"000020TRNIRKIYOBO5QFEX55EF0100009",
-      "paybin_reference":"0101990000001065",
-      "barcode_url":"https://sandbox-api.openpay.mx/barcode/000020TRNIRKIYOBO5QFEX55EF0100009?width=1&height=45&text=false",
-      "barcode_paybin_url":"https://sandbox-api.openpay.mx/barcode/0101990000001065?width=1&height=45&text=false"
-   }
-}
-```
-
-Para un pago en una tienda de conveniencia se debe crear un petición de tipo cargo indicando como método **store**. Esto generará una respuesta con un número de referencia y una URL a un código de barras, los cuales debes de utilizar para crear un recibo a tu cliente y que con él pueda realizar el pago en una de las tienda de conveniencia aceptadas. El código de barras es de tipo Code 128.
-
-###Petición
-
-Propiedad | Descripción
---------- | -----
-method|***string*** (requerido) <br/>Debe contener el valor **store** para indicar que el pago se hará en tienda.
-amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
-due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el pago en la tienda en formato ISO 8601. <br/><br/>Ejemplo (UTC): 2014-08-01T00:50:00Z <br/>***Nota:*** Del lado del servidor se cambiara a hora central<br/><br/>Ejemplo (Central Time): 2014-08-01T11:51:23-05:00
-[customer](#crear-un-nuevo-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
-
-###Respuesta
-Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
-
-##Cargo en banco
-
-> Definición
-
-```shell
-Comercio
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
-
-Cliente
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
-```
-
-```php
-<?
-Comercio
-$openpay->charges->create(chargeRequest);
-
-Cliente
-$customer = $openpay->customers->get(customerId);
-$customer->charges->create(chargeRequest);
-?>
-```
-
-```java
-//Cliente
-openpayAPI.charges().create(String customerId, CreateBankChargeParams request);
-
-//Comercio
-openpayAPI.charges().create(CreateBankChargeParams request);
-```
-
-```csharp
-//Cliente
-openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
-
-//Comercio
-openpayAPI.ChargeService.Create(ChargeRequest request);
-```
-
-```javascript
-// Comercio
-openpay.charges.create(chargeRequest, callback);
-
-// Cliente
-openpay.customers.charges.create(customerId, chargeRequest, callback);
-```
-
-```ruby
-#Cliente
-@charges=@openpay.create(:charges)
-@charges.create(request_hash, customer_id)
-
-#Comercio
-@charges=@openpay.create(:charges)
-@charges.create(request_hash)
-```
-
-> Ejemplo de petición con cliente
-
-```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" \
-   -X POST -d '{
-   "method" : "bank_account",
-   "amount" : 100,
-   "description" : "Cargo con banco",
-   "order_id" : "oid-00055",
-   "due_date"
-} '
-```
-
-```php
-<?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
-
-$chargeRequest = array(
-    'method' => 'bank_account',
-    'amount' => 100,
-    'description' => 'Cargo con banco',
-    'order_id' => 'oid-00055');
-
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeRequest);
-?>
-```
-
-```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-CreateBankChargeParams request = new CreateBankChargeParams();
-request.amount(new BigDecimal("100.00"));
-request.description("Cargo con banco");
-request.orderId("oid-00053");
-
-Charge charge = api.charges().create("ag4nktpdzebjiye1tlze", request);
-```
-
-```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-ChargeRequest request = new ChargeRequest();
-request.Method = "bank_account";
-request.Amount = new Decimal(100.00);
-request.Description = "Cargo con banco";
-request.OrderId = "oid-00053";
-
-Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
-```
-
-```javascript
-var bankChargeRequest = {
-   'method' : 'bank_account',
-   'amount' : 100,
-   'description' : 'Cargo con banco',
-   'order_id' : 'oid-00055'
-};
-
-openpay.customers.charges.create('ag4nktpdzebjiye1tlze', bankChargeRequest, function(error, charge) {
-  // ...
-});
-
-```
-
-```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
-request_hash={
-     "method" => "bank_account",
-     "amount" => 100.00,
-     "description" => "Cargo con banco",
-     "order_id" => "oid-00053"
-   }
-
-response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
-```
-
-> Ejemplo de respuesta
-
-```json
-{
-   "id":"trnzf2xjwpupjfryyj23",
-   "amount":100.00,
-   "authorization":null,
-   "method":"bank_account",
-   "operation_type":"in",
-   "transaction_type":"charge",
-   "status":"in_progress",
-   "currency":"MXN",
-   "creation_date":"2014-05-26T13:51:25-05:00",
-   "operation_date":"2014-05-26T13:51:25-05:00",
-   "description":"Cargo con banco",
-   "error_message":null,
-   "order_id":"oid-00055",
-   "customer_id":"ag4nktpdzebjiye1tlze",
-   "payment_method":{
-      "type":"bank_transfer",
-      "agreement" : "1411217",
-      "bank":"BBVA Bancomer",
-      "clabe":"012914002014112176",
-      "name":"11030021342311520255"
-   }
-}
-```
-Para un cargo a banco se debe crear una petición de tipo cargo indicando como método **bank_account**. Esto te generará
-una respuesta con un número de convenio CIE Bancomer, número de CLABE bancaria y una referencia, estos datos los debes
-de indicar a tu cliente en un recibo para que realice la transferencia vía SPEI.
-
-
-###Petición
-
-Propiedad | Descripción
---------- | -----
-method|***string*** (requerido) <br/>Debe contener el valor **bank_account** para indicar que se pagará con transferencia bancaria.
-amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
-due_date | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el cargo a banco en formato ISO 8601. <br/><br/>Ejemplo (UTC): 2014-08-01T00:50:00Z <br/>***Nota:*** Del lado del servidor se cambiara a hora central<br/><br/>Ejemplo (Central Time): 2014-08-01T11:51:23-05:00
-[customer](#crear-un-nuevo-cliente)|***objeto*** (opcional) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
-
-###Respuesta
-Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
-
-##Cargo en Alipay
-
-> Definicion
-
-```plaintext--endpoints
-Comercio
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
-
-Cliente
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
-```
-
-> Ejemplo de petición con cliente
-
-```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" \
-   -X POST -d '{
-   "description": "Cargo Alipay",
-   "amount": "2000.00",
-   "method": "alipay",
-   "redirect_url" : "http://www.example.com/myRedirectUrl"
-} '
-```
-
-```php
-<?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
-
-$chargeRequest = array(
-    'method' => 'alipay',
-    'amount' => 100,
-    'description' => 'Cargo Alipay',
-    'order_id' => 'oid-00055',
-    'redirect_url' => 'http://www.example.com/myRedirectUrl');
-
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
-$charge = $customer->charges->create($chargeRequest);
-?>
-```
-
-```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "mzdtln0bmtms6o3kck8f");
-CreateAlipayChargeParams request = new CreateAlipayChargeParams();
-request.amount(new BigDecimal("100.00"));
-request.description("Cargo Alipay");
-request.orderId("oid-00053");
-request.redirectUrl("http://www.example.com/myRedirectUrl")
-
-Charge charge = api.charges().createCharge("ag4nktpdzebjiye1tlze", request);
-```
-
-```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-ChargeRequest request = new ChargeRequest();
-request.Method = "alipay";
-request.Amount = new Decimal(100.00);
-request.Description = "Cargo Alipay";
-request.OrderId = "oid-00053";
-request.RedirectUrl ="http://www.example.com/myRedirectUrl";
-
-Charge charge = api.ChargeService.Create("ag4nktpdzebjiye1tlze", request);
-```
-
-```javascript
-var alipayChargeRequest = {
-   'method' : 'alipay',
-   'amount' : 100,
-   'description' : 'Cargo Alipay',
-   'order_id' : 'oid-00055',
-   'redirect_url' : 'http://www.example.com/myRedirectUrl'
-};
-
-openpay.customers.charges.create('ag4nktpdzebjiye1tlze', alipayChargeRequest, function(error, charge) {
-  // ...
-});
-```
-
-```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
-request_hash={
-     "method" => "alipay",
-     "amount" => 100.00,
-     "description" => "Cargo Alipay",
-     "order_id" => "oid-00053",
-     "redirect_url" => "http://www.example.com/myRedirectUrl"
-   }
-
-response_hash=@charges.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
-```
-
-> Ejemplo de respuesta
-
-```json
-{
-    "id": "truq1dwjz0kmssvpbrlj",
-    "authorization": null,
-    "operation_type": "in",
-    "method": "alipay",
-    "transaction_type": "charge",
-    "status": "charge_pending",
-    "conciliated": false,
-    "creation_date": "2018-06-14T12:42:11-05:00",
-    "operation_date": "2018-06-14T12:42:11-05:00",
-    "description": "Cargo Alipay",
-    "error_message": null,
-    "order_id": null,
-    "due_date": "2018-06-15T12:42:11-05:00",
-    "payment_method": {
-        "type": "redirect",
-        "url": "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges/truq1dwjo0kmssvqbrlj/redirect/"
-    },
-    "amount": 2000,
-    "currency": "MXN",
-    "fee": {
-        "amount": 2.00  ,
-        "tax": 0,
-        "currency": "MXN"
-    }
-}
-```
-
-Para realizar una transacción con un pago mediante Alipay es necesario indicar el método de pago como **alipay**.
-La respuesta de esta transacción generará una URL de pago en la que el usuario podrá introducir sus datos de cuenta
-de Alipay, o escanear un código de barras que le permitirá pagar mediante la aplicación móvil.
-
-
-###Petición
-
-Propiedad   | Descripción
------------ | -----
-method      | ***string*** (requerido) <br/>Debe contener el valor **alipay** para indicar que el pago se hará en Alipay.
-amount      | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
-order_id    | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
-due_date    | ***datetime*** (opcional) <br/>Fecha de vigencia para hacer el pago en Alipay en formato ISO 8601. El usuario podría tener hasta 15 minutos adicionales después de esta fecha después de iniciar su sesión para hacer su pago. <br/><br/>Ejemplo (UTC): 2014-08-01T00:50:00Z <br/>***Nota:*** Del lado del servidor se cambiara a hora central<br/><br/>Ejemplo (Central Time): 2014-08-01T11:51:23-05:00
-[customer](#crear-un-nuevo-cliente)|***objeto***  <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realize el cargo a nivel cliente.
-redirect_url | ***string*** (requerido) <br/>Indica la url a la que redireccionar despues de una transaccion exitosa, al recibir la llamada en esta url el comercio deberá tomar el atributo id con el id de la transacción para consultar el resultado.
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
@@ -1167,7 +650,7 @@ response_hash=@charges.capture("tryqihxac3msedn4yxed", "ag4nktpdzebjiye1tlze")
       "bank_code":"002"
    },
    "status":"completed",
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-26T14:00:17-05:00",
    "operation_date":"2014-05-26T14:00:17-05:00",
    "description":"Cargo inicial a mi cuenta",
@@ -1349,7 +832,7 @@ response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4
       "operation_type":"out",
       "transaction_type":"refund",
       "status":"completed",
-      "currency":"MXN",
+      "currency":"COP",
       "creation_date":"2014-05-26T13:56:21-05:00",
       "operation_date":"2014-05-26T13:56:21-05:00",
       "description":"devolucion",
@@ -1357,7 +840,7 @@ response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4
       "order_id":null,
       "customer_id":"ag4nktpdzebjiye1tlze"
    },
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-26T11:56:25-05:00",
    "operation_date":"2014-05-26T11:56:25-05:00",
    "description":"Cargo inicial a mi cuenta",
@@ -1512,7 +995,7 @@ response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag4nktpdzebjiye1tlze")
       "operation_type":"out",
       "transaction_type":"refund",
       "status":"completed",
-      "currency":"MXN",
+      "currency":"COP",
       "creation_date":"2014-05-26T13:56:21-05:00",
       "operation_date":"2014-05-26T13:56:21-05:00",
       "description":"devolucion",
@@ -1520,7 +1003,7 @@ response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag4nktpdzebjiye1tlze")
       "order_id":null,
       "customer_id":"ag4nktpdzebjiye1tlze"
    },
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-26T11:56:25-05:00",
    "operation_date":"2014-05-26T11:56:25-05:00",
    "description":"Cargo inicial a mi cuenta",
@@ -1695,7 +1178,7 @@ response_hash=@charges.all("ag4nktpdzebjiye1tlze")
          "bank_code":"002"
       },
       "status":"completed",
-      "currency":"MXN",
+      "currency":"COP",
       "creation_date":"2014-05-26T14:00:17-05:00",
       "operation_date":"2014-05-26T14:00:17-05:00",
       "description":"Cargo inicial a mi cuenta",
@@ -1711,7 +1194,7 @@ response_hash=@charges.all("ag4nktpdzebjiye1tlze")
       "operation_type":"in",
       "transaction_type":"charge",
       "status":"in_progress",
-      "currency":"MXN",
+      "currency":"COP",
       "creation_date":"2014-05-26T13:51:25-05:00",
       "operation_date":"2014-05-26T13:51:25-05:00",
       "description":"Cargo con banco",
