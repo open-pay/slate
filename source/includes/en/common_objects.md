@@ -12,7 +12,7 @@ Information for objects shared in request and response.
    "authorization":null,
    "transaction_type":"payout",
    "operation_type":"out",
-   "currency":"MXN",
+   "currency":"COP",
    "method":"bank",
    "creation_date":"2013-11-14T18:29:35-06:00",
    "order_id":"000001",
@@ -48,7 +48,7 @@ amount| ***numeric*** <br/>Transaction full amount, including two decimal places
 description|***string*** <br/>Transaction description.
 error_message| ***string*** <br/>If the transaction is in *failed* status, this field will include the error message.
 customer_id| ***string*** <br/>Unique identifier for the customer who this transaction belongs.  If the value is null the transaction belongs to Merchant account.
-currency| ***string*** <br/>Currency used in the operation by default is MXN (Mexican pesos).
+currency| ***string*** <br/>Currency used in the operation by default is COP (Colombia pesos).
 bank_account| ***object*** <br/>Bank account data used for the transaction.  See the *BankAccount* object.
 card| ***object*** <br/>Credit card data used in the transaction.  See the *Card* object.
 card_points| ***object*** <br/>Contains information about the reward points used for payment, if they were used. See the [CardPoints object](#cardpoints-object)
@@ -65,7 +65,7 @@ card_points| ***object*** <br/>Contains information about the reward points used
    "state":"Queretaro",
    "city":"QuerÃ©taro",
    "postal_code":"76900",
-   "country_code":"MX"
+   "country_code":"COL"
 }
 ```
 

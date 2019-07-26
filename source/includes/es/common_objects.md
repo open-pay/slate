@@ -12,7 +12,7 @@ Información de objetos compartidos en peticiones y respuestas.
    "authorization":null,
    "transaction_type":"payout",
    "operation_type":"out",
-   "currency":"MXN",
+   "currency":"COP",
    "method":"bank",
    "creation_date":"2013-11-14T18:29:35-06:00",
    "order_id":"000001",
@@ -48,7 +48,7 @@ amount| ***numeric*** <br/>Cantidad de la transacción a dos decimales.
 description|***string*** <br/>Descripción de la transacción.
 error_message| ***string*** <br/>Si la transacción está en status: failed, en este campo se mostrará la razón del fallo.
 customer_id| ***string*** <br/>Identificar único del cliente al cual pertence la transacción. Si es valor es nulo, la transacción pertenece a la cuenta del comercio.
-currency| ***string*** <br/>Moneda usada en la operación, por default es MXN.
+currency| ***string*** <br/>Moneda usada en la operación, por default es COL.
 bank_account| ***objeto*** <br/>Datos de la cuenta bancaria usada en la transacción. Ver objeto BankAccoount
 card| ***objeto*** <br/>Datos de la tarjeta usada en la transacción. Ver objeto Card
 card_points| ***objeto*** <br/>Datos de los puntos de la tarjeta usados para el pago, si fueron utilizados. Ver [objeto CardPoints](#objeto-cardpoints)
@@ -65,7 +65,7 @@ card_points| ***objeto*** <br/>Datos de los puntos de la tarjeta usados para el 
    "state":"Queretaro",
    "city":"Querétaro",
    "postal_code":"76900",
-   "country_code":"MX"
+   "country_code":"COL"
 }
 ```
 

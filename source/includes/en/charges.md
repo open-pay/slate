@@ -77,7 +77,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    	    "name" : "Juan",
    	    "last_name" : "Vazquez Juarez",
    	    "phone_number" : "4423456723",
-   	    "email" : "juan.vazquez@empresa.com.mx"
+   	    "email" : "juan.vazquez@empresa.com.col"
    }
 }'
 ```
@@ -89,7 +89,7 @@ $customer = array(
    	 'name' => 'Juan',
    	 'last_name' => 'Vazquez Juarez',
    	 'phone_number' => '4423456723',
-   	 'email' => 'juan.vazquez@empresa.com.mx');
+   	 'email' => 'juan.vazquez@empresa.com.col');
 
 $chargeRequest = array(
     'method' => 'card',
@@ -111,7 +111,7 @@ Customer customer = new Customer();
 customer.setName("Juan");
 customer.setLastName("Vazquez Juarez");
 customer.setPhoneNumber("4423456723");
-customer.setEmail("juan.vazquez@empresa.com.mx");
+customer.setEmail("juan.vazquez@empresa.com.col");
 
 request.cardId("kqgykn96i7bcs1wwhvgw"); // =source_id
 request.amount(new BigDecimal("100.00"));
@@ -129,7 +129,7 @@ Customer customer = new Customer();
 customer.Name = "Juan";
 customer.LastName = "Vazquez Juarez";
 customer.PhoneNumber = "4423456723";
-customer.Email = "juan.vazquez@empresa.com.mx";
+customer.Email = "juan.vazquez@empresa.com.col";
 
 ChargeRequest request = new ChargeRequest();
 request.Method = "card";
@@ -155,7 +155,7 @@ var chargeRequest = {
    	    'name' : 'Juan',
    	    'last_name' : 'Vazquez Juarez',
    	    'phone_number' : '4423456723',
-   	    'email' : 'juan.vazquez@empresa.com.mx'
+   	    'email' : 'juan.vazquez@empresa.com.col'
    }
 }
 
@@ -171,7 +171,7 @@ customer_hash={
     "name" => "Juan",
     "last_name" => "Vazquez Juarez",
     "phone_number" => "4423456723",
-    "email" => "juan.vazquez@empresa.com.mx"
+    "email" => "juan.vazquez@empresa.com.col"
 }
 request_hash={
     "method" => "card",
@@ -213,7 +213,7 @@ response_hash=@charges.create(request_hash.to_hash)
       "customer_id":"ag4nktpdzebjiye1tlze"
    },
    "status":"completed",
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-26T11:02:45-05:00",
    "operation_date":"2014-05-26T11:02:45-05:00",
    "description":"Cargo inicial a mi cuenta",
@@ -328,13 +328,14 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    -X POST -d '{
    "method" : "card",
    "amount" : 100,
+   "currency" : "COP",
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-00051",
    "customer" : {
         "name" : "Juan",
         "last_name" : "Vazquez Juarez",
         "phone_number" : "4423456723",
-        "email" : "juan.vazquez@empresa.com.mx"
+        "email" : "juan.vazquez@empresa.com.col"
    },
    "confirm" : "false",
    "send_email":"false",
@@ -349,11 +350,12 @@ $customer = array(
      'name' => 'Juan',
      'last_name' => 'Vazquez Juarez',
      'phone_number' => '4423456723',
-     'email' => 'juan.vazquez@empresa.com.mx');
+     'email' => 'juan.vazquez@empresa.com.col');
 
 $chargeRequest = array(
     "method" : "card",
     'amount' => 100,
+    "currency" => "COP",
     'description' => 'Cargo terminal virtual a mi merchant',
     'customer' => $customer,
     'send_email' => false,
@@ -372,7 +374,7 @@ Customer customer = new Customer();
 customer.setName("Juan");
 customer.setLastName("Vazquez Juarez");
 customer.setPhoneNumber("4423456723");
-customer.setEmail("juan.vazquez@empresa.com.mx");
+customer.setEmail("juan.vazquez@empresa.com.col");
 
 request.amount(new BigDecimal("100.00"));
 request.description("Cargo inicial a mi merchant");
@@ -392,7 +394,7 @@ Customer customer = new Customer();
 customer.Name = "Juan";
 customer.LastName = "Vazquez Juarez";
 customer.PhoneNumber = "4423456723";
-customer.Email = "juan.vazquez@empresa.com.mx";
+customer.Email = "juan.vazquez@empresa.com.col";
 
 request.Method = "card";
 request.Amount = new Decimal(100.00);
@@ -410,13 +412,14 @@ Charge charge = api.ChargeService.Create(request);
 var chargeRequest = {
    'method' : 'card',
    'amount' : 100,
+   'currency' : 'COP',
    'description' : 'Cargo inicial a mi cuenta',
    'order_id' : 'oid-00051',
    'customer' : {
         'name' : 'Juan',
         'last_name' : 'Vazquez Juarez',
         'phone_number' : '4423456723',
-        'email' : 'juan.vazquez@empresa.com.mx'
+        'email' : 'juan.vazquez@empresa.com.col'
    },
   'send_email' : false,
   'confirm' : false,
@@ -435,12 +438,13 @@ customer_hash={
     "name" => "Juan",
     "last_name" => "Vazquez Juarez",
     "phone_number" => "4423456723",
-    "email" => "juan.vazquez@empresa.com.mx"
+    "email" => "juan.vazquez@empresa.com.col"
 }
 
 request_hash={
     "method" => "card",
     "amount" => 100.00,
+    "currency" => "COP",
     "description" => "Cargo inicial a mi merchant",
     "order_id" => "oid-00051",
     "customer" => customer_hash,
@@ -469,7 +473,7 @@ response_hash=@charges.create(request_hash.to_hash)
   "description": "Cargo desde terminal virtual de 111",
   "error_message": null,
   "amount": 100,
-  "currency": "MXN",
+  "currency": "COP",
   "payment_method": {
     "type": "redirect",
     "url": "https://sandbox-api.openpay.mx/v1/mexzhpxok3houd5lbvz1/charges/trq7yrthx5vc4gtjdkwg/card_capture"
@@ -477,7 +481,7 @@ response_hash=@charges.create(request_hash.to_hash)
   "customer": {
     "name": "Juan",
     "last_name": "Vazquez Juarez",
-    "email": "juan.vazquez@empresa.com.mx",
+    "email": "juan.vazquez@empresa.com.col",
     "phone_number": "4423456723",
     "creation_date": "2016-09-09T18:52:02-05:00",
     "clabe": null,
@@ -500,6 +504,7 @@ order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charg
 confirm |  ***boolean*** (required in false) <br/>Indicates whether the charge is made immediately or not , when the value is false the charge is handled as authorized (or pre-authorization) and the amount is only to be confirmed or canceled in a second call.
 send_email | ***boolean*** (optional) <br/>Indicates if is need send a email that redirect to the openpay payment form.
 redirect_url | ***string*** (required) <br/>It indicates the url to which redirect after a successful transaction in the openpay payment form.
+currency | ***string*** (required) <br/> Currency used in the operation
 
 ###Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
@@ -642,7 +647,7 @@ response_hash=@charges.capture("tryqihxac3msedn4yxed", "ag4nktpdzebjiye1tlze")
       "bank_code":"002"
    },
    "status":"completed",
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-26T14:00:17-05:00",
    "operation_date":"2014-05-26T14:00:17-05:00",
    "description":"Cargo inicial a mi cuenta",
@@ -824,7 +829,7 @@ response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4
       "operation_type":"out",
       "transaction_type":"refund",
       "status":"completed",
-      "currency":"MXN",
+      "currency":"COP",
       "creation_date":"2014-05-26T13:56:21-05:00",
       "operation_date":"2014-05-26T13:56:21-05:00",
       "description":"devolucion",
@@ -832,7 +837,7 @@ response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4
       "order_id":null,
       "customer_id":"ag4nktpdzebjiye1tlze"
    },
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-26T11:56:25-05:00",
    "operation_date":"2014-05-26T11:56:25-05:00",
    "description":"Cargo inicial a mi cuenta",
@@ -987,7 +992,7 @@ response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag4nktpdzebjiye1tlze")
       "operation_type":"out",
       "transaction_type":"refund",
       "status":"completed",
-      "currency":"MXN",
+      "currency":"COP",
       "creation_date":"2014-05-26T13:56:21-05:00",
       "operation_date":"2014-05-26T13:56:21-05:00",
       "description":"devolucion",
@@ -995,7 +1000,7 @@ response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag4nktpdzebjiye1tlze")
       "order_id":null,
       "customer_id":"ag4nktpdzebjiye1tlze"
    },
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-26T11:56:25-05:00",
    "operation_date":"2014-05-26T11:56:25-05:00",
    "description":"Cargo inicial a mi cuenta",
@@ -1170,7 +1175,7 @@ response_hash=@charges.all("ag4nktpdzebjiye1tlze")
          "bank_code":"002"
       },
       "status":"completed",
-      "currency":"MXN",
+      "currency":"COP",
       "creation_date":"2014-05-26T14:00:17-05:00",
       "operation_date":"2014-05-26T14:00:17-05:00",
       "description":"Cargo inicial a mi cuenta",
@@ -1186,7 +1191,7 @@ response_hash=@charges.all("ag4nktpdzebjiye1tlze")
       "operation_type":"in",
       "transaction_type":"charge",
       "status":"in_progress",
-      "currency":"MXN",
+      "currency":"COP",
       "creation_date":"2014-05-26T13:51:25-05:00",
       "operation_date":"2014-05-26T13:51:25-05:00",
       "description":"Cargo con banco",

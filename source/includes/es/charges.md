@@ -336,6 +336,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    -X POST -d '{
    "method" : "card",
    "amount" : 100,
+   "currency": "COP",
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-00051",
    "customer" : {
@@ -362,6 +363,7 @@ $customer = array(
 $chargeRequest = array(
     "method" : "card",
     'amount' => 100,
+    "currency"=> "COP",
     'description' => 'Cargo terminal virtual a mi merchant',
     'customer' => $customer,
     'send_email' => false,
@@ -418,6 +420,7 @@ Charge charge = api.ChargeService.Create(request);
 var chargeRequest = {
    'method' : 'card',
    'amount' : 100,
+   'currency': 'COP',
    'description' : 'Cargo inicial a mi cuenta',
    'order_id' : 'oid-00051',
    'customer' : {
@@ -449,6 +452,7 @@ customer_hash={
 request_hash={
     "method" => "card",
     "amount" => 100.00,
+    "currency" => "COP",
     "description" => "Cargo inicial a mi merchant",
     "order_id" => "oid-00051",
     "customer" => customer_hash,
@@ -508,6 +512,7 @@ order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del
 confirm |  ***boolean*** (requerido en false) <br/>El valor `false` indica que se trata de un cargo con terminal virtual.
 send_email | ***boolean*** (opcional) <br/>Indica si se desea enviar un email que direccione al formulario de pago de openpay.
 redirect_url | ***string*** (requerido) <br/>Indica la url a la que redireccionar despues de una transaccion exitosa en el fomulario de pago de openpay.
+currency | ***string*** (requerido) <br/> Moneda usada en la operación
 
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
