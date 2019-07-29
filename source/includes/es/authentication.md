@@ -11,9 +11,9 @@ El parámetro -u se ocupa para realizar la autenticación HTTP Basic (al agregar
 ```
 
 ```php
-<? 
+<?
 //Por default se usa el ambiente de sandbox
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178ce26348b0fac'); 
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178ce26348b0fac');
 ?>
 ```
 
@@ -57,15 +57,15 @@ openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0f
 #   openpay_prod=OpenpayApi.new(merchant_id,private_key,false,30)
 ```
 
-> Producción 
+> Producción
 
 ```shell
 Solo es necesario usar la URI base https://api.openpay.mx
 ```
 
 ```php
-<? 
-Openpay::setProductionMode(true); 
+<?
+Openpay::setProductionMode(true);
 ?>
 ```
 
@@ -89,7 +89,7 @@ Para realizar peticiones a la API de Openpay, es necesario enviar la llave de AP
 
 Existen 2 tipos de llaves de API:
 
-* **Privada.-** 
+* **Privada.-**
 Para llamadas entre servidores y con acceso total a todas las operaciones de la API (nunca debe ser  compartida).
 
 <aside class="warning">
@@ -100,7 +100,7 @@ Manten esta llave segura y nunca la compartas con nadie.
 Sólo se debe utilizar en llamadas desde JavaScript. Esta llave sólo tiene permitido realizar crear tarjetas o crear tokens
 
 <aside class="notice">
-Para hacer llamadas con tu llave pública utiliza la librería [Openpay.js](#)
+Para hacer llamadas con tu llave pública utiliza la librería <a href="https://github.com/open-pay/openpay-js">Openpay.js</a>
 </aside>
 
 Para la autenticación al API debes usar [autenticación de acceso básica](http://es.wikipedia.org/wiki/Autenticación_de_acceso_básica), donde la llave de API es el nombre de usuario. La contraseña no es requerida y debe dejarse en blanco por fines de simplicidad.

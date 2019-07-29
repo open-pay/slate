@@ -10,9 +10,9 @@ The -u parameter is responsible for the HTTP basic authentication (adding two po
 ```
 
 ```php
-<? 
-//Sandbox is used by default 
-$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178ce26348b0fac'); 
+<?
+//Sandbox is used by default
+$openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178ce26348b0fac');
 ?>
 ```
 
@@ -56,15 +56,15 @@ openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0f
 #   openpay_prod=OpenpayApi.new(merchant_id,private_key,false,30)
 ```
 
-> Production 
+> Production
 
 ```shell
 You only need to use the URI base https://api.openpay.mx
 ```
 
 ```php
-<? 
-Openpay::setProductionMode(true); 
+<?
+Openpay::setProductionMode(true);
 ?>
 ```
 
@@ -81,14 +81,14 @@ openpay.setProductionReady(true);
 ```
 
 ```ruby
-#You only need to pass a "true" value as the third argument when creating the OpenpayApi object. 
+#You only need to pass a "true" value as the third argument when creating the OpenpayApi object.
 ```
 
 To make requests to the Openpay API, is necessary to send the API Key on all your calls to our servers. You can get the key from the [dashboard](https://sandbox-dashboard.openpay.mx).
 
 There are 2 types of API keys:
 
-* **Private.-** 
+* **Private.-**
 For calls between servers and full access to all API operations (should never be shared).
 
 <aside class="warning">
@@ -99,7 +99,7 @@ Keep this key safe and never share it to anyone.
 should only be used in JavaScript calls. This key is only allowed to create cards or create tokens.
 
 <aside class="notice">
-To make calls with your public key use the [Openpay.js] library(#)
+To make calls with your public key use the <a href="https://github.com/open-pay/openpay-js">Openpay.js</a> library(#)
 </aside>
 
 For API authentication you must use the [basic access authentication]http://es.wikipedia.org/wiki/Autenticación_de_acceso_básica), where the API key is the username. The password is not required and it should be left blank for purposes of simplicity

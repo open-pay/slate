@@ -14,7 +14,6 @@ includes:
   - es/authentication
   - es/errors
   - es/charges
-  - es/payments
   - es/customers
   - es/cards
   - es/plans
