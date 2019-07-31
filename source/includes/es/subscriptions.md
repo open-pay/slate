@@ -6,7 +6,7 @@ Para poder suscribir algún cliente es necesario primero [crear un plan](#crear-
 
 ##Objeto Suscripción
 
-> Ejemplo de objeto 
+> Ejemplo de objeto
 
 ```json
 {
@@ -85,7 +85,7 @@ openpay.customers.subscriptions.create(customerId, subscriptionRequest, callback
 @subscriptions.create(request_hash, customer_id)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/subscriptions \
@@ -101,7 +101,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
       "device_session_id":"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
    },
    "plan_id":"pbi4kb8hpb64x0uud2eb"
-}' 
+}'
 ```
 
 ```php
@@ -109,7 +109,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $subscriptionDataRequest = array(
-    'trial_end_date' => '2014-01-01', 
+    'trial_end_date' => '2014-01-01',
     'plan_id' => 'pbi4kb8hpb64x0uud2eb',
     'card' => array(
          'card_number' => '4111111111111111',
@@ -127,7 +127,7 @@ $subscription = $customer->subscriptions->add($subscriptionDataRequest);
 ```java
 final Calendar trialEndDate = Calendar.getInstance();
 trialEndDate.set(2014, 5, 1, 0, 0, 0);
-        
+
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.planId("pbi4kb8hpb64x0uud2eb");
@@ -236,7 +236,7 @@ Propiedad | Descripción
 --------- | ------
 plan_id | ***string*** (requerido, longitud = 45) <br/> Identificador del plan sobre el que se crea la suscripción.
 trial_end_date | ***string*** (opcional, longitud = 10) <br/> Último día de prueba del cliente. Si no se indica se utilizará el valor de trial_days del plan para calcularlo. Si se indica una fecha anterior al día de hoy, se interpretará como una suscripción sin días de prueba. (Con formato yyy-mm-dd)
-source_id | ***string*** (requerido si no se envía card, longitud = 45) <br/> Identificador del token o la tarjeta previamente registrada al cliente con la que se cobrará la suscripción. 
+source_id | ***string*** (requerido si no se envía card, longitud = 45) <br/> Identificador del token o la tarjeta previamente registrada al cliente con la que se cobrará la suscripción.
 card | ***object*** (requerido si no se envía source_id) <br/> Medio de pago con el cual se cobrará la suscripción. Ver [objeto tarjeta](#objeto-tarjeta)
 
 ###Respuesta
@@ -247,7 +247,7 @@ Regresa el [objeto suscripción](#objeto-suscripción) creado o una [respuesta d
 > Definición
 
 ```shell
-PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions
+PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions/{subscriptionId}
 ```
 
 ```php
@@ -276,7 +276,7 @@ openpay.customers.subscriptions.update(customerId, subscriptionId, subscriptionR
 @subscriptions.update(request_hash, customer_id)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/subscriptions/s0gmyor4yqtyv1miqwr0 \
@@ -291,7 +291,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
         "expiration_month": "12",
         "cvv2":"1234"
     }
-}' 
+}'
 ```
 
 ```php
@@ -308,7 +308,7 @@ $subscription->save();
 ```java
 final Calendar trialEndDate = Calendar.getInstance();
 trialEndDate.set(2014, 5, 1, 0, 0, 0);
-        
+
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.planId("idPlan-01001");
@@ -340,7 +340,7 @@ var subscriptionRequest = {
   }
 };
 
-openpay.customers.subscriptions.update('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', subscriptionRequest, 
+openpay.customers.subscriptions.update('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', subscriptionRequest,
     function(error, subscription){
   // ...
 });
@@ -395,13 +395,13 @@ Propiedad | Descripción
 --------- | ------
 cancel_at_period_end | ***booelan*** (opcional) <br/> Indica si se cancela la suscripción al terminar el periodo.
 trial_end_date | ***string*** (opcional, longitud = 10) <br/> Último día de prueba del cliente. Si no se indica se utilizará el valor de trial_days del plan para calcularlo. Si se indica una fecha anterior al día de hoy, se interpretará como una suscripción sin días de prueba. (Con formato yyy-mm-dd)
-source_id | ***string*** (opcional, longitud = 45) <br/> Identificador del token o la tarjeta previamente registrada al cliente con la que se cobrará la suscripción. 
+source_id | ***string*** (opcional, longitud = 45) <br/> Identificador del token o la tarjeta previamente registrada al cliente con la que se cobrará la suscripción.
 card | ***object*** (opcional) <br/> Medio de pago con el cual se cobrará la suscripción. Ver [objeto tarjeta](#objeto-tarjeta)
 
 ###Respuesta
 Regresa el [objeto suscripción](#objeto-suscripción) actualizado o una [respuesta de error](#objeto-error) si ocurrió algún problema en la actualización.
 
-##Obtener un suscripción
+##Obtener una suscripción
 
 > Definición
 
@@ -434,12 +434,12 @@ openpay.customers.subscriptions.get(customerId, subscriptionId, callback);
 @subscriptions.get(subscription_id,customer_id)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/subscriptions/s0gmyor4yqtyv1miqwr0 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
-``` 
+```
 
 ```php
 <?
@@ -548,7 +548,7 @@ openpay.customers.subscriptions.delete(customerId, subscriptionId, callback);
 @subscriptions.delete(subscription_id, customer_id)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/subscriptions/s0gmyor4yqtyv1miqwr0 \
@@ -597,7 +597,7 @@ Propiedad | Descripción
 id| ***string*** (requerido, longitud = 45) <br/> Identificador del plan a eliminar
 
 ###Respuesta
-Si la suscripción se cancelo correctamente la respuesta es vacía, si no se regresa un [objeto error](#objeto-error) indicando el motivo. 
+Si la suscripción se cancelo correctamente la respuesta es vacía, si no se regresa un [objeto error](#objeto-error) indicando el motivo.
 
 ##Listado de suscripciones
 > Definición
@@ -632,11 +632,11 @@ openpay.customers.subscriptions.list(customerId, searchParams, callback);
 @subscriptions.all(customer_id)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/subscriptions?limit=10" \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
 ```php
@@ -659,7 +659,7 @@ final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
-        
+
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());

@@ -43,12 +43,12 @@ id | ***string*** <br/> Unique subscription identifier.
 creation_date | ***datetime*** <br/> Date and time in which the subscription was created using ISO 8601 format.
 cancel_at_period_end  | ***string*** <br/> Indicates if the subscription has been canceled at the end of the period.
 charge_date | ***numeric*** <br/> Date in which the subscription will be charged.
-current_period_number | ***string*** <br/> Indicates the current period to be charged. 
+current_period_number | ***string*** <br/> Indicates the current period to be charged.
 period_end_date | ***numeric*** <br/> Date in which the current period ends, it's one day before the next charge.
 trial_end_date | ***string*** <br/> Date in which the trial period ends.  One day after this date the first charge is applied.
 plan_id | ***numeric*** <br/>  Plan identifier in which this subscription will be created.
 status | ***string*** <br/> Subscription status, it can be *active*, *trial*, *past_due*, *unpaid* or *cancelled*.  If the subscription has a trial period, the trial period is applied, if it doesn't have or when the trial period ends and the first payment is executed it changes to *active*.  When the charge was unable to be completed it changes to *past_due*.  When all the charge tries has been completed according to the plan configuration it can change to *unpaid* or *cancelled*.  When it's marked as *unpaid* and the subscription wants to be reactivated it's required to update the subscription payment method(card).  In any other case, the status is set to *cancelled*.
-customer_id | ***string*** <br/> Customer identifier for the subscription owner. 
+customer_id | ***string*** <br/> Customer identifier for the subscription owner.
 card | ***object*** <br/> Payment method for the subscription.  See [card object](#card-object).
 
 
@@ -101,7 +101,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
       "device_session_id":"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
    },
    "plan_id":"pbi4kb8hpb64x0uud2eb"
-}' 
+}'
 ```
 
 ```php
@@ -109,7 +109,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $subscriptionDataRequest = array(
-    'trial_end_date' => '2014-01-01', 
+    'trial_end_date' => '2014-01-01',
     'plan_id' => 'pbi4kb8hpb64x0uud2eb',
     'card' => array(
          'card_number' => '4111111111111111',
@@ -127,7 +127,7 @@ $subscription = $customer->subscriptions->add($subscriptionDataRequest);
 ```java
 final Calendar trialEndDate = Calendar.getInstance();
 trialEndDate.set(2014, 5, 1, 0, 0, 0);
-        
+
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.planId("pbi4kb8hpb64x0uud2eb");
@@ -228,7 +228,7 @@ response_hash=@subscriptions.create(request_hash.to_hash, "a9pvykxz4g5rg0fplze0"
    "customer_id":"ag4nktpdzebjiye1tlze"
 }
 ```
- 
+
 Create a new subscription for an existing customer.  You can use an existing card or you can send the info of the card where the charges will be made, in these you can include the property <code>device_session_id</code> to use the antifraud tool, see [Fraud detection using device data](https://github.com/open-pay/openpay-js#fraud-detection-using-device-data).
 
 
@@ -236,8 +236,8 @@ Create a new subscription for an existing customer.  You can use an existing car
 Property  | Description
 --------- | ------
 plan_id   | ***string*** (required, length = 45) <br/> Plan identifier in which the subscription will be created.
-trial_end_date | ***string*** (optional, length = 10) <br/> Indicates the customer trial end date. If it's not indicated the plan will be used to calculate it.  If the date is in the past it will be interpreted as a subscription with no trial.  Format: yyyy-mm-dd. 
-source_id | ***string*** (required if the card is not sent, length = 45) <br/> Card token identifier, or the customer registered card which will be used to charge the subscription. 
+trial_end_date | ***string*** (optional, length = 10) <br/> Indicates the customer trial end date. If it's not indicated the plan will be used to calculate it.  If the date is in the past it will be interpreted as a subscription with no trial.  Format: yyyy-mm-dd.
+source_id | ***string*** (required if the card is not sent, length = 45) <br/> Card token identifier, or the customer registered card which will be used to charge the subscription.
 card | ***object*** (required if the source_id is not present) <br/> Payment method which will be used to charge the subscription. See [card object](#card-object).
 
 
@@ -249,7 +249,7 @@ Returns the created [subscription object](#subscription-object) or an [error res
 > Definition
 
 ```shell
-PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions
+PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/subscriptions/{subscriptionId}
 ```
 
 ```php
@@ -293,7 +293,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
         "expiration_month": "12",
         "cvv2":"1234"
     }
-}' 
+}'
 ```
 
 ```php
@@ -310,7 +310,7 @@ $subscription->save();
 ```java
 final Calendar trialEndDate = Calendar.getInstance();
 trialEndDate.set(2014, 5, 1, 0, 0, 0);
-        
+
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.planId("idPlan-01001");
@@ -342,7 +342,7 @@ var subscriptionRequest = {
   }
 };
 
-openpay.customers.subscriptions.update('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', subscriptionRequest, 
+openpay.customers.subscriptions.update('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1miqwr0', subscriptionRequest,
     function(error, subscription){
   // ...
 });
@@ -444,7 +444,7 @@ openpay.customers.subscriptions.get(customerId, subscriptionId, callback);
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/subscriptions/s0gmyor4yqtyv1miqwr0 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
-``` 
+```
 
 ```php
 <?
@@ -641,7 +641,7 @@ openpay.customers.subscriptions.list(customerId, searchParams, callback);
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/subscriptions?limit=10" \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
 ```php
@@ -664,7 +664,7 @@ final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
-        
+
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
@@ -749,5 +749,3 @@ limit| ***numeric*** <br/> Number of records to return, by default is 10.
 
 ###Response
 A list of [subscription objects](#subscription-object) for a customer. Sort by creation date in descending order.
-
-
