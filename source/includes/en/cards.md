@@ -5,7 +5,7 @@ You can store multiple debit and / or credit cards at Merchant or customer level
 
 ##Card Object
 
-> Object example 
+> Object example
 
 ```json
 {
@@ -30,8 +30,7 @@ You can store multiple debit and / or credit cards at Merchant or customer level
    "creation_date":"2013-12-12T17:50:00-06:00",
    "bank_name":"DESCONOCIDO",
    "bank_code":"000",
-   "customer_id":"a2b79p8xmzeyvmolqfja",
-   "points_card":true
+   "customer_id":"a2b79p8xmzeyvmolqfja"
 }
 ```
 
@@ -46,13 +45,12 @@ expiration_month |***numeric***  <br/>Expiration month as it appears on the card
 expiration_year |***numeric***  <br/>Expiration year as it appears on the card.
 [address](#address-object) |***object*** <br/>Billing address of cardholder.
 allows_charges |***boolean*** <br/>It allows to know if you can make charges to the card.
-allows_payouts |***boolean*** <br/>It allows to know if you can send payments to the card. 
+allows_payouts |***boolean*** <br/>It allows to know if you can send payments to the card.
 brand |***string*** <br/>Card brand: visa, mastercard, carnet or american express.
 type |***string*** <br/>Card Type: debit, credit, cash, etc.
 bank_name |***string*** <br/>Name of the issuing bank.
 bank_code |***string*** <br/>Code of the issuing bank.
 customer_id |***string*** <br/>Customer identifier to which the card belongs. If the card is at Merchant level this value is null.
-points_card |***boolean*** <br/>Indicates whether the card allows the use of reward points.
 
 ##Create a card
 
@@ -124,7 +122,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "expiration_month":"12",
    "cvv2":"110",
    "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
- }' 
+ }'
 ```
 
 ```php
@@ -255,7 +253,7 @@ response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
    "bank_code":"002"
 }
 ```
- 
+
 When a card is created the customer must be specified, if the customer is not specified the card will be registered for the Merchant account. Once the card is saved, it can not obtain the number and security code.
 
 <aside class = "notice">
@@ -283,7 +281,7 @@ Returns a [card object](#card-object) when it is created correctly or returns an
 
 
 ##Create a card with token
- 
+
 > Definition
 
 ```shell
@@ -348,7 +346,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -X POST -d '{
       "token_id":"tokgslwpdcrkhlgxqi9a",
       "device_session_id":"8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o"
-   }' 
+   }'
 ```
 
 ```php
@@ -499,8 +497,8 @@ openpay.customers.cards.get(customerId, cardId, callback);
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" 
-``` 
+   -H "Content-type: application/json"
+```
 
 ```php
 <?
@@ -637,7 +635,7 @@ openpay.cards.getPoints(customerId, cardId, callback);
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7/points" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
-``` 
+```
 
 ```php
 <?
@@ -824,7 +822,7 @@ Property | Description
 id| ***string*** (required, length = 45) <br/> Card unique identifier.
 
 ###Response
-If the card is removed correctly the answer is empty, if it can not be deleted a [error object] (#error-object) indicating the reason is returned. 
+If the card is removed correctly the answer is empty, if it can not be deleted a [error object] (#error-object) indicating the reason is returned.
 
 
 ##List of cards
@@ -889,7 +887,7 @@ openpay.cards.list(customerId, searchParams, callback);
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards?limit=2" \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
 ```php
@@ -912,7 +910,7 @@ final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
-        
+
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
@@ -1021,7 +1019,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -H "Content-type: application/json" \
    -X PUT -d '{
       "cvv2":"000"
-   }' 
+   }'
 ```
 
 ```javascript
@@ -1048,4 +1046,3 @@ merchant_id | **string** (conditional) <br/> Merchant ID to use to validate this
 
 ###Response
 Returns an empty JSON object. Please consider that this response may be extended in the future.
-

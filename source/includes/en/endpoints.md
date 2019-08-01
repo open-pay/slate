@@ -14,8 +14,6 @@
 /fees/{FEE_ID}
 /charges
 /charges/{TRANSACTION_ID}
-/payouts
-/payouts/{TRANSACTION_ID}
 /cards
 /cards/{CARD_ID}
 /customers

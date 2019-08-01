@@ -14,8 +14,6 @@
 /fees/{FEE_ID}
 /charges
 /charges/{TRANSACTION_ID}
-/payouts
-/payouts/{TRANSACTION_ID}
 /cards
 /cards/{CARD_ID}
 /customers
@@ -52,7 +50,7 @@ La siguientes URIs forman la base de los endpoints para los ambientes soportados
 * **Pruebas**, URI base: <br/> `https://sandbox-api.openpay.mx`<br/><br/>
 * **Producción**, URI base: <br/>`https://api.openpay.mx`<br/>
 
-Un endpoint completo esta formado por la URI base del ambiente, el identificador del comercio y el recurso. 
+Un endpoint completo esta formado por la URI base del ambiente, el identificador del comercio y el recurso.
 
 Por ejemplo, si queremos crear un nuevo cliente, el endpoint sería:
 

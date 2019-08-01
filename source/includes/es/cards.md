@@ -5,7 +5,7 @@ Se pueden almacenar múltiples tarjetas de débito y/o crédito a nivel cliente 
 
 ##Objeto Tarjeta
 
-> Ejemplo de objeto 
+> Ejemplo de objeto
 
 ```json
 {
@@ -30,8 +30,7 @@ Se pueden almacenar múltiples tarjetas de débito y/o crédito a nivel cliente 
    "creation_date":"2013-12-12T17:50:00-06:00",
    "bank_name":"DESCONOCIDO",
    "bank_code":"000",
-   "customer_id":"a2b79p8xmzeyvmolqfja",
-   "points_card":true
+   "customer_id":"a2b79p8xmzeyvmolqfja"
 }
 ```
 
@@ -46,13 +45,12 @@ expiration_month |***numeric***  <br/>Mes de expiración tal como aparece en la 
 expiration_year |***numeric***  <br/>Año de expiración tal como aparece en la tarjeta.
 [address](#objeto-direcci-n) |***object*** <br/>Dirección de facturación del tarjeta habiente.
 allows_charges |***boolean*** <br/>Permite conocer si se pueden realizar cargos a la tarjeta.
-allows_payouts |***boolean*** <br/>Permite conocer si se pueden realizar envíos de pagos a la tarjeta. 
+allows_payouts |***boolean*** <br/>Permite conocer si se pueden realizar envíos de pagos a la tarjeta.
 brand |***string*** <br/>Marca de la tarjeta: visa, mastercard, carnet o american express.
 type |***string*** <br/>Tipo de la tarjeta: debit, credit, cash, etc.
 bank_name |***string*** <br/>Nombre del banco emisor.
 bank_code |***string*** <br/>Código del banco emisor.
 customer_id |***string*** <br/>Identificador del cliente al que pertenece la tarjeta. Si la tarjeta es a nivel comercio este valor será null.
-points_card |***boolean*** <br/>Indica si la tarjeta soporta el pago con puntos.
 
 ##Crear una tarjeta
 
@@ -124,7 +122,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    "expiration_month":"12",
    "cvv2":"110",
    "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
- }' 
+ }'
 ```
 
 ```php
@@ -255,7 +253,7 @@ response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
    "bank_code":"002"
 }
 ```
- 
+
 Cuando se crea una tarjeta debe especificarse cliente, si no se especifica el cliente la tarjeta quedará registrada para la cuenta del comercio. Una vez guardada la tarjeta no se puede obtener el número y código de seguridad.
 
 <aside class="notice">
@@ -283,7 +281,7 @@ Regresa un [objeto tarjeta](#objeto-tarjeta) cuando se creó correctamente o una
 
 
 ##Crear una tarjeta con token
- 
+
 > Definición
 
 ```shell
@@ -348,7 +346,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -X POST -d '{
       "token_id":"tokgslwpdcrkhlgxqi9a",
       "device_session_id":"8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o"
-   }' 
+   }'
 ```
 
 ```php
@@ -499,8 +497,8 @@ openpay.customers.cards.get(customerId, cardId, callback);
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" 
-``` 
+   -H "Content-type: application/json"
+```
 
 ```php
 <?
@@ -554,7 +552,7 @@ response_hash=@cards.get("ktrpvymgatocelsciak7", "asynwirguzkgq2bizogo")
 }
 ```
 
-Obtiene los detalles de una tarjeta solicitándola con su id. 
+Obtiene los detalles de una tarjeta solicitándola con su id.
 
 <aside class="notice">
 **Nota:** Nunca se regresarán datos sensibles como son el código de seguridad y del número de tarjeta sólo se mostraran los primeros 6 y los últimos 4 dígitos.
@@ -630,7 +628,7 @@ openpay.cards.getPoints(customerId, cardId, callback);
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7/points" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
-``` 
+```
 
 ```php
 <?
@@ -815,7 +813,7 @@ Propiedad | Descripción
 id| ***string*** (requerido, longitud = 45) <br/> Identificador único de la tarjeta
 
 ###Respuesta
-Si la tarjeta se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo. 
+Si la tarjeta se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo.
 
 
 ##Listado de tarjetas
@@ -880,7 +878,7 @@ openpay.cards.list(customerId, searchParams, callback);
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards?limit=2" \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
 ```php
@@ -903,7 +901,7 @@ final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
-        
+
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
@@ -976,7 +974,7 @@ response_hash=@cards.all("asynwirguzkgq2bizogo")
 ]
 ```
 
-Regresa una lista de las tarjetas registrados por comercio o cliente, si desea delimitar el resultado se pueden utilizar los filtros. 
+Regresa una lista de las tarjetas registrados por comercio o cliente, si desea delimitar el resultado se pueden utilizar los filtros.
 
 ###Petición
 Puede realizar una búsqueda utilizando los siguiente parámetros como filtros.
@@ -1012,7 +1010,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -H "Content-type: application/json" \
    -X PUT -d '{
       "cvv2":"000"
-   }' 
+   }'
 ```
 
 ```javascript
@@ -1040,4 +1038,3 @@ merchant_id | ***string*** (condicional) <br/> ID del comercio. Usado solamente 
 
 ###Respuesta
 Actualmente regresa un JSON sin datos. Considerar que se podría extender la respuesta en el futuro.
-

@@ -1,8 +1,8 @@
 #Clientes
 
-Los clientes son recursos en Openpay que se manejan dentro de su cuenta de comercio y puede representar usuarios, clientes o socios segun el tipo de negocio. 
+Los clientes son recursos en Openpay que se manejan dentro de su cuenta de comercio y puede representar usuarios, clientes o socios segun el tipo de negocio.
 
-A los clientes les puedes agregar tarjetas y cuentas de banco para despues realizar transacciones de Cargo, Transferencia o Pago.
+A los clientes les puedes agregar tarjetas para despues realizar transacciones de Cargo
 
 ##Objeto Cliente
 
@@ -14,7 +14,7 @@ A los clientes les puedes agregar tarjetas y cuentas de banco para despues reali
    "creation_date":"2013-11-08T12:04:46-06:00",
    "name":"Rodrigo",
    "last_name":"Velazco Perez",
-   "email":"rodrigo.velazco@payments.com", 
+   "email":"rodrigo.velazco@payments.com",
    "phone_number":"4425667045",
    "external_id":"cliente1",
    "status":"active",
@@ -27,12 +27,7 @@ A los clientes les puedes agregar tarjetas y cuentas de banco para despues reali
       "state":"Querétaro",
       "city":"Querétaro",
       "country_code":"MX"
-   },
-   "store": {
-       "reference": "OPENPAY02DQ35YOY7",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
-   },
-   "clabe": "646180109400423323"
+   }
 }
 ```
 
@@ -46,9 +41,7 @@ email         |***string*** <br/>Cuenta de correo electrónico del cliente.
 phone_number  |***numeric*** <br/>Número telefónico del Cliente.
 status        |***string*** <br/>Estatus de la cuenta del cliente puede ser active o deleted. Si la cuenta se encuentra en estatus deleted no se permite realizar ninguna transacción.
 balance       |***numeric*** <br/>Saldo en la cuenta con dos decimales.
-clabe         |***numeric*** <br/>Cuenta CLABE asociada con la que puede recibir fondos realizando una  transferencia desde cualquier banco en México.
 [address](#objeto-direcci-n) |***object*** <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
-[store](#objeto-store) |***object*** <br/>Contiene la referencia que se puede utilizar para realizar depósitos en tiendas de conveniencia, también se incluye la url para generar el código de barra.
 
 
 ##Crear un nuevo cliente
@@ -82,7 +75,7 @@ openpay.customers.create(customerRequest, callback);
 @customers.create(request_hash)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers \
@@ -91,8 +84,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers \
    -X POST -d '{
    "name": "customer name",
    "email": "customer_email@me.com",
-   "requires_account": false 
-   }' 
+   "requires_account": false
+   }'
 ```
 
 ```php
@@ -169,11 +162,11 @@ request = api.CustomerService.Create(request);
 var customerRequest = {
    'name': 'customer name',
    'email': 'customer_email@me.com',
-   'requires_account': false 
+   'requires_account': false
    };
 
 openpay.customers.create(customerRequest, function(error, customer) {
-  // ... 
+  // ...
 });
 ```
 
@@ -273,7 +266,7 @@ openpay.customers.update(customerId, customerRequest, callback);
 @customers.update(request_hash)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
@@ -292,7 +285,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni
       "country_code":"MX"
    },
    "phone_number":"44209087654"
- }' 
+ }'
 ```
 
 ```php
@@ -362,7 +355,7 @@ var customerRequest = {
 };
 
 openpay.customers.update('anbnldwgni1way3yp2dw', customerRequest, function(error, customer) {
-  // ... 
+  // ...
 });
 ```
 
@@ -466,12 +459,12 @@ openpay.customers.get(customerId, callback);
 @customers.get(customer_id)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" 
+   -H "Content-type: application/json"
 ```
 
 ```php
@@ -494,7 +487,7 @@ Customer customer = api.CustomerService.Update("a9pvykxz4g5rg0fplze0");
 
 ```javascript
 openpay.customers.get('a9pvykxz4g5rg0fplze0', function(error, customer) {
-  // ... 
+  // ...
 });
 ```
 
@@ -577,7 +570,7 @@ openpay.customers.delete(customerId, callback);
 @customers.delete(customer_id)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
@@ -607,7 +600,7 @@ api.CustomerService.Delete("a9pvykxz4g5rg0fplze0");
 
 ```javascript
 openpay.customers.delete('a9pvykxz4g5rg0fplze0', function(error) {
-  // ... 
+  // ...
 });
 ```
 
@@ -629,7 +622,7 @@ Propiedad | Descripción
 id| _**string**_ (requerido, longitud = 45)<br/> Identificador único del cliente a borrar.
 
 ###Respuesta
-Si el cliente se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo. 
+Si el cliente se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo.
 
 ##Listado de clientes
 
@@ -663,12 +656,12 @@ openpay.customers.list(searchParams, callback);
 @customers.all
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers?creation[gte]=2013-11-01&limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" 
+   -H "Content-type: application/json"
 ```
 
 ```php

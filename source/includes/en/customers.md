@@ -2,7 +2,7 @@
 
 Customers are Openpay resources that are handled within the Merchant account and can represent users, customers or partners according to the type of Merchant.
 
-You can add cards and bank accounts  to the customers so you can make transactions like Charges, Transfers or Payouts.
+You can add cards  to the customers so you can make transactions like Charges.
 
 ##Customer object
 
@@ -14,7 +14,7 @@ You can add cards and bank accounts  to the customers so you can make transactio
    "creation_date":"2013-11-08T12:04:46-06:00",
    "name":"Rodrigo",
    "last_name":"Velazco Perez",
-   "email":"rodrigo.velazco@payments.com", 
+   "email":"rodrigo.velazco@payments.com",
    "phone_number":"4425667045",
    "external_id":"cliente1",
    "status":"active",
@@ -27,28 +27,21 @@ You can add cards and bank accounts  to the customers so you can make transactio
       "state":"Querétaro",
       "city":"Querétaro",
       "country_code":"MX"
-   },
-   "store": {
-       "reference": "OPENPAY02DQ35YOY7",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
-   },
-   "clabe": "646180109400423323"
+   }
 }
 ```
 
 Property | Description
 --------- | -----
 id            |***string*** <br/>Customer unique identifier.
-creation_date |***datetime*** <br/>Date and time when the customer was created in ISO 8601 format. 
+creation_date |***datetime*** <br/>Date and time when the customer was created in ISO 8601 format.
 name          |***string*** <br/>Name of the customer.
 last_name     |***string*** <br/>Last name of the customer.
 email         |***string*** <br/>Email of the customer.
 phone_number  |***numeric*** <br/>Telephone number of the customer.
 status        |***string*** <br/>Account status of the customer can be active or deleted. If the account is on deleted status, no transaction is allowed.
 balance       |***numeric*** <br/>Account balance with two decimal digits.
-clabe         |***numeric*** <br/>CLABE account used to receive funds by transfer from any bank in Mexico.
 [address](#addres-object) |***object*** <br/>Address of the customer. It is usually used as shipping address.
-[store](#store-object) |_*object**_ <br/>Contains reference string to go to Store and make deposits, the url to generate barcode is contained too.
 
 ##Create a new customer
 
@@ -81,7 +74,7 @@ openpay.customers.create(customerRequest, callback);
 @customers.create(request_hash)
 ```
 
-> Request example 
+> Request example
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers \
@@ -90,8 +83,8 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers \
    -X POST -d '{
    "name": "customer name",
    "email": "customer_email@me.com",
-   "requires_account": false 
-   }' 
+   "requires_account": false
+   }'
 ```
 
 ```php
@@ -168,11 +161,11 @@ request = api.CustomerService.Create(request);
 var customerRequest = {
    'name': 'customer name',
    'email': 'customer_email@me.com',
-   'requires_account': false 
+   'requires_account': false
    };
 
 openpay.customers.create(customerRequest, function(error, customer) {
-  // ... 
+  // ...
 });
 ```
 
@@ -272,7 +265,7 @@ openpay.customers.update(customerId, customerRequest, callback);
 @customers.update(request_hash)
 ```
 
-> Request example 
+> Request example
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
@@ -291,7 +284,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni
       "country_code":"MX"
    },
    "phone_number":"44209087654"
- }' 
+ }'
 ```
 
 ```php
@@ -361,7 +354,7 @@ var customerRequest = {
 };
 
 openpay.customers.update('anbnldwgni1way3yp2dw', customerRequest, function(error, customer) {
-  // ... 
+  // ...
 });
 ```
 
@@ -417,7 +410,7 @@ response_hash=@customers.update(request_hash.to_hash)
 }
 ```
 
-Updates one or more data of the customer. 
+Updates one or more data of the customer.
 
 ###Request
 
@@ -465,12 +458,12 @@ openpay.customers.get(customerId, callback);
 @customers.get(customer_id)
 ```
 
-> Request example 
+> Request example
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" 
+   -H "Content-type: application/json"
 ```
 
 ```php
@@ -493,7 +486,7 @@ Customer customer = api.CustomerService.Update("a9pvykxz4g5rg0fplze0");
 
 ```javascript
 openpay.customers.get('a9pvykxz4g5rg0fplze0', function(error, customer) {
-  // ... 
+  // ...
 });
 ```
 
@@ -538,7 +531,7 @@ Gets the current information of an existing customer. You only need to specify t
 
 Property | Description
 --------- | ------
-id| _**string**_ (required, legth = 45)<br/>Unique identifier of the customer. 
+id| _**string**_ (required, legth = 45)<br/>Unique identifier of the customer.
 
 ###Response
 
@@ -576,7 +569,7 @@ openpay.customers.delete(customerId, callback);
 @customers.delete(customer_id)
 ```
 
-> Request example 
+> Request example
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
@@ -606,7 +599,7 @@ api.CustomerService.Delete("a9pvykxz4g5rg0fplze0");
 
 ```javascript
 openpay.customers.delete('a9pvykxz4g5rg0fplze0', function(error) {
-  // ... 
+  // ...
 });
 ```
 
@@ -661,12 +654,12 @@ openpay.customers.list(searchParams, callback);
 @customers.all
 ```
 
-> Request example 
+> Request example
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers?creation[gte]=2013-11-01&limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
-   -H "Content-type: application/json" 
+   -H "Content-type: application/json"
 ```
 
 ```php
@@ -778,4 +771,3 @@ limit| ***numeric*** <br/>Number of required records, default 10.
 ###Response
 
 Returns an array of [customer object](#customer-object).
-
