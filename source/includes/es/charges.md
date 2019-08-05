@@ -500,7 +500,7 @@ Este tipo de cargo no requiere una tarjeta guardada o que hayas generado un toke
 
 Propiedad | Descripción
 --------- | -----
-method|***string*** (requerido en card) <br/>Debe contener el valor **card** para indicat que el cargo se hará de una tarjeta.
+method|***string*** (requerido en card) <br/>Debe contener el valor **card** para indicar que el cargo se hará de una tarjeta.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
