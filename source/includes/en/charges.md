@@ -67,17 +67,19 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
-   "source_id" : "kqgykn96i7bcs1wwhvgw",
+   "source_id" : "kdx205scoizh93upqbte",
    "method" : "card",
-   "amount" : 100,
+   "amount" : 666,
+   "currency" : "COP",
    "description" : "Cargo inicial a mi cuenta",
-   "order_id" : "oid-00051",
-   "device_session_id":"kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
+   "order_id" : "oid-12324",
+   "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
+   "iva": "10",
    "customer" : {
-   	    "name" : "Juan",
-   	    "last_name" : "Vazquez Juarez",
-   	    "phone_number" : "4423456723",
-   	    "email" : "juan.vazquez@empresa.com.col"
+        "name" : "Cliente Colombia",
+        "last_name" : "Vazquez Juarez",
+        "phone_number" : "4448936475",
+        "email" : "juan.vazquez@empresa.com.mx"
    }
 }'
 ```

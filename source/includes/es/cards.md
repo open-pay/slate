@@ -116,13 +116,13 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
-   "card_number":"4111111111111111",
-   "holder_name":"Juan Perez Ramirez",
-   "expiration_year":"20",
-   "expiration_month":"12",
-   "cvv2":"110",
-   "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
- }'
+  "holder_name":"DinnersClub",
+  "card_number":"36728481533333",
+  "cvv2":"651",
+  "expiration_month":"07",
+  "expiration_year":"21",
+  "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
+}'
 ```
 
 ```php
@@ -238,19 +238,19 @@ response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
 
 ```json
 {
-   "id":"ktrpvymgatocelsciak7",
-   "type":"debit",
-   "brand":"visa",
-   "card_number":"411111XXXXXX1111",
-   "holder_name":"Juan Perez Ramirez",
-   "expiration_year":"20",
-   "expiration_month":"12",
-   "allows_charges":true,
-   "allows_payouts":true,
-   "creation_date":"2014-05-21T17:31:01-05:00",
-   "bank_name":"Banamex",
-   "customer_id":"ag4nktpdzebjiye1tlze",
-   "bank_code":"002"
+    "id": "kulqltitbq0wnk3l2q3c",
+    "type": "credit",
+    "brand": "diners",
+    "address": null,
+    "card_number": "367284XXXX3333",
+    "holder_name": "DinnersClub",
+    "expiration_year": "21",
+    "expiration_month": "07",
+    "allows_charges": true,
+    "allows_payouts": false,
+    "creation_date": "2019-08-12T13:12:22-05:00",
+    "bank_name": "BANCO DE BOGOTÁ",
+    "bank_code": "000"
 }
 ```
 
@@ -408,19 +408,19 @@ response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
 
 ```json
 {
-   "type":"credit",
-   "brand":"visa",
-   "id":"kso4st83wxaibffyt6su",
-   "card_number":"4242",
-   "holder_name":"Juan Perez Ramirez",
-   "expiration_year":"15",
-   "expiration_month":"12",
-   "allows_charges":true,
-   "allows_payouts":false,
-   "creation_date":"2014-02-12T10:57:09-06:00",
-   "bank_name":"BANCOMER",
-   "bank_code":"012",
-   "customer_id":"a2b79p8xmzeyvmolqfja"
+    "id": "kh6u8t1agrjhh4sz3vlt",
+    "type": "debit",
+    "brand": "visa",
+    "address": null,
+    "card_number": "457562XXXXXX0326",
+    "holder_name": "Jorge Lopez",
+    "expiration_year": "19",
+    "expiration_month": "12",
+    "allows_charges": true,
+    "allows_payouts": false,
+    "creation_date": "2019-08-12T13:14:34-05:00",
+    "bank_name": "BBVA COLOMBIA",
+    "bank_code": "000"
 }
 ```
 
@@ -536,19 +536,19 @@ response_hash=@cards.get("ktrpvymgatocelsciak7", "asynwirguzkgq2bizogo")
 
 ```json
 {
-   "id":"ktrpvymgatocelsciak7",
-   "type":"debit",
-   "brand":"visa",
-   "card_number":"411111XXXXXX1111",
-   "holder_name":"Juan Perez Ramirez",
-   "expiration_year":"20",
-   "expiration_month":"12",
-   "allows_charges":true,
-   "allows_payouts":true,
-   "creation_date":"2014-05-21T17:31:01-05:00",
-   "bank_name":"Banamex",
-   "customer_id":"ag4nktpdzebjiye1tlze",
-   "bank_code":"002"
+    "id": "kh6u8t1agrjhh4sz3vlt",
+    "type": "debit",
+    "brand": "visa",
+    "address": null,
+    "card_number": "457562XXXXXX0326",
+    "holder_name": "Jorge Lopez",
+    "expiration_year": "19",
+    "expiration_month": "12",
+    "allows_charges": true,
+    "allows_payouts": false,
+    "creation_date": "2019-08-12T13:14:34-05:00",
+    "bank_name": "BBVA COLOMBIA",
+    "bank_code": "000"
 }
 ```
 

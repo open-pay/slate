@@ -67,18 +67,19 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
-   "source_id" : "kqgykn96i7bcs1wwhvgw",
+   "source_id" : "kdx205scoizh93upqbte",
    "method" : "card",
-   "amount" : 100,
+   "amount" : 666,
    "currency" : "COP",
    "description" : "Cargo inicial a mi cuenta",
-   "order_id" : "oid-00051",
+   "order_id" : "oid-12324",
    "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
+   "iva": "10",
    "customer" : {
-   	    "name" : "Juan",
-   	    "last_name" : "Vazquez Juarez",
-   	    "phone_number" : "571627926831",
-   	    "email" : "juan.vazquez@empresa.com.mx"
+        "name" : "Cliente Colombia",
+        "last_name" : "Vazquez Juarez",
+        "phone_number" : "4448936475",
+        "email" : "juan.vazquez@empresa.com.mx"
    }
 }'
 ```
@@ -197,34 +198,51 @@ response_hash=@charges.create(request_hash.to_hash)
 
 ```json
 {
-   "id":"trzjaozcik8msyqshka4",
-   "amount":100.00,
-   "authorization":"801585",
-   "method":"card",
-   "operation_type":"in",
-   "transaction_type":"charge",
-   "card":{
-      "id":"kqgykn96i7bcs1wwhvgw",
-      "type":"debit",
-      "brand":"visa",
-      "address":null,
-      "card_number":"411111XXXXXX1111",
-      "holder_name":"Juan Perez Ramirez",
-      "expiration_year":"20",
-      "expiration_month":"12",
-      "allows_charges":true,
-      "allows_payouts":true,
-      "creation_date":"2014-05-26T11:02:16-05:00",
-      "bank_name":"Banamex",
-      "bank_code":"002"
-   },
-   "status":"completed",
-   "currency":"COP",
-   "creation_date":"2014-05-26T11:02:45-05:00",
-   "operation_date":"2014-05-26T11:02:45-05:00",
-   "description":"Cargo inicial a mi cuenta",
-   "error_message":null,
-   "order_id":"oid-00051"
+    "id": "trbeuhyvmkr3b9jitajp",
+    "authorization": "1128731327",
+    "operation_type": "in",
+    "method": "card",
+    "transaction_type": "charge",
+    "card": {
+        "id": "kdx205scoizh93upqbte",
+        "type": "credit",
+        "brand": "diners",
+        "address": null,
+        "card_number": "367284XXXX3333",
+        "holder_name": "DinnersClub",
+        "expiration_year": "21",
+        "expiration_month": "07",
+        "allows_charges": true,
+        "allows_payouts": false,
+        "creation_date": "2019-08-09T13:35:48-05:00",
+        "bank_name": "BANCO DE BOGOTÁ",
+        "bank_code": "000"
+    },
+    "status": "completed",
+    "conciliated": true,
+    "iva": "10",
+    "creation_date": "2019-08-12T12:36:56-05:00",
+    "operation_date": "2019-08-12T12:36:56-05:00",
+    "description": "Ejemplo cargo",
+    "error_message": null,
+    "order_id": "oid-12330",
+    "currency": "COP",
+    "amount": 666.00,
+    "customer": {
+        "name": "Cliente Colombia",
+        "last_name": "Vazquez Juarez",
+        "email": "juan.vazquez@empresa.com.mx",
+        "phone_number": "4448936475",
+        "address": null,
+        "creation_date": "2019-08-12T12:36:56-05:00",
+        "external_id": null,
+        "clabe": null
+    },
+    "fee": {
+        "amount": 21.81,
+        "tax": 3.4896,
+        "currency": "COP"
+    }
 }
 ```
 
@@ -332,15 +350,16 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    -X POST -d '{
    "method" : "card",
    "amount" : 100,
-   "currency": "COP",
+   "currency":"COP",
    "description" : "Cargo inicial a mi cuenta",
-   "order_id" : "oid-00051",
+   "order_id" : "oid-11152",
    "customer" : {
         "name" : "Juan",
         "last_name" : "Vazquez Juarez",
         "phone_number" : "4423456723",
         "email" : "juan.vazquez@empresa.com.mx"
    },
+   "iva": "10",
    "confirm" : "false",
    "send_email":"false",
    "redirect_url":"http://www.openpay.mx/index.html"
@@ -465,32 +484,35 @@ response_hash=@charges.create(request_hash.to_hash)
 ```json
 
 {
-  "id": "trq7yrthx5vc4gtjdkwg",
-  "authorization": null,
-  "method": "card",
-  "operation_type": "in",
-  "transaction_type": "charge",
-  "status": "charge_pending",
-  "conciliated": false,
-  "creation_date": "2016-09-09T18:52:02-05:00",
-  "operation_date": "2016-09-09T18:52:02-05:00",
-  "description": "Cargo desde terminal virtual de 111",
-  "error_message": null,
-  "amount": 100,
-  "currency": "COP",
-  "payment_method": {
-    "type": "redirect",
-    "url": "https://sandbox-api.openpay.mx/v1/mexzhpxok3houd5lbvz1/charges/trq7yrthx5vc4gtjdkwg/card_capture"
-  },
-  "customer": {
-    "name": "Juan",
-    "last_name": "Vazquez Juarez",
-    "email": "juan.vazquez@empresa.com.mx",
-    "phone_number": "4423456723",
-    "creation_date": "2016-09-09T18:52:02-05:00",
-    "clabe": null,
-    "external_id": null
-  }
+    "id": "tro1ezxbfn5c8lvzhfcr",
+    "authorization": null,
+    "operation_type": "in",
+    "method": "card",
+    "transaction_type": "charge",
+    "status": "charge_pending",
+    "conciliated": false,
+    "iva": "10",
+    "creation_date": "2019-08-12T12:47:41-05:00",
+    "operation_date": "2019-08-12T12:47:41-05:00",
+    "description": "Cargo inicial a mi cuenta",
+    "error_message": null,
+    "order_id": "oid-11153",
+    "payment_method": {
+        "type": "redirect",
+        "url": "https://sandbox-api.openpay.mx/v1/mpixehq7z4xupfwoohrm/charges/tro1ezxbfn5c8lvzhfcr/card_capture"
+    },
+    "currency": "COP",
+    "amount": 100.00,
+    "customer": {
+        "name": "Juan",
+        "last_name": "Vazquez Juarez",
+        "email": "juan.vazquez@empresa.com.mx",
+        "phone_number": "4423456723",
+        "address": null,
+        "creation_date": "2019-08-12T12:47:41-05:00",
+        "external_id": null,
+        "clabe": null
+    }
 }
 ```
 
@@ -805,49 +827,84 @@ response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4
 
 ```json
 {
-   "id":"tr6cxbcefzatd10guvvw",
-   "amount":100.00,
-   "authorization":"801585",
-   "method":"card",
-   "operation_type":"in",
-   "transaction_type":"charge",
-   "card":{
-      "type":"debit",
-      "brand":"visa",
-      "address":null,
-      "card_number":"411111XXXXXX1111",
-      "holder_name":"Juan Perez Ramirez",
-      "expiration_year":"20",
-      "expiration_month":"12",
-      "allows_charges":true,
-      "allows_payouts":true,
-      "bank_name":"Banamex",
-      "bank_code":"002"
-   },
-   "status":"completed",
-   "refund":{
-      "id":"trcbsmjkroqmjobxqhpb",
-      "amount":100.00,
-      "authorization":"801585",
-      "method":"card",
-      "operation_type":"out",
-      "transaction_type":"refund",
-      "status":"completed",
-      "currency":"COP",
-      "creation_date":"2014-05-26T13:56:21-05:00",
-      "operation_date":"2014-05-26T13:56:21-05:00",
-      "description":"devolucion",
-      "error_message":null,
-      "order_id":null,
-      "customer_id":"ag4nktpdzebjiye1tlze"
-   },
-   "currency":"COP",
-   "creation_date":"2014-05-26T11:56:25-05:00",
-   "operation_date":"2014-05-26T11:56:25-05:00",
-   "description":"Cargo inicial a mi cuenta",
-   "error_message":null,
-   "order_id":"oid-00052",
-   "customer_id":"ag4nktpdzebjiye1tlze"
+    "id": "troztz0scxl7berfxju0",
+    "authorization": "332225182",
+    "operation_type": "in",
+    "method": "card",
+    "transaction_type": "charge",
+    "card": {
+        "type": "debit",
+        "brand": "visa",
+        "address": null,
+        "card_number": "457562XXXXXX0326",
+        "holder_name": "Bruno Colombia 6",
+        "expiration_year": "19",
+        "expiration_month": "12",
+        "allows_charges": true,
+        "allows_payouts": false,
+        "bank_name": "BBVA COLOMBIA",
+        "bank_code": "000"
+    },
+    "status": "completed",
+    "conciliated": true,
+    "creation_date": "2019-08-12T12:51:56-05:00",
+    "operation_date": "2019-08-12T12:51:56-05:00",
+    "description": "Cargo inicial a mi cuenta",
+    "error_message": null,
+    "order_id": "oid-12317",
+    "refunds": [
+        {
+            "operation_date": "2019-08-12T13:00:23-05:00",
+            "authorization": "1091286572",
+            "amount": 100.00,
+            "status": "completed",
+            "conciliated": true,
+            "id": "tr76epoxpjwsqcdynpmb",
+            "description": "Reembolso",
+            "currency": "COP"
+        }
+    ],
+    "refund": {
+        "operation_date": "2019-08-12T13:00:23-05:00",
+        "authorization": "1091286572",
+        "amount": 100.00,
+        "operation_type": "out",
+        "method": "card",
+        "transaction_type": "refund",
+        "status": "completed",
+        "conciliated": true,
+        "id": "tr76epoxpjwsqcdynpmb",
+        "creation_date": "2019-08-12T13:00:23-05:00",
+        "description": "Reembolso",
+        "customer": {
+            "name": "Cliente Colombia",
+            "last_name": "Vazquez Juarez",
+            "email": "juan.vazquez@empresa.com.mx",
+            "phone_number": "4448936475",
+            "address": null,
+            "creation_date": "2019-08-12T12:51:56-05:00",
+            "external_id": null,
+            "clabe": null
+        },
+        "currency": "COP"
+    },
+    "currency": "COP",
+    "amount": 100.00,
+    "customer": {
+        "name": "Cliente Colombia",
+        "last_name": "Vazquez Juarez",
+        "email": "juan.vazquez@empresa.com.mx",
+        "phone_number": "4448936475",
+        "address": null,
+        "creation_date": "2019-08-12T12:51:56-05:00",
+        "external_id": null,
+        "clabe": null
+    },
+    "fee": {
+        "amount": 5.4000,
+        "tax": 0.8640,
+        "currency": "COP"
+    }
 }
 ```
 Si deseas realizar una devolución de un cargo hecho a tarjeta puedes ocupar este método. El monto a devolver será por el total del cargo o un monto menor. Ten en cuenta que la devolución puede tardar en aparecer en el estado de cuenta de tu cliente de 1 a 3 días hábiles.
@@ -968,49 +1025,50 @@ response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag4nktpdzebjiye1tlze")
 
 ```json
 {
-   "id":"tr6cxbcefzatd10guvvw",
-   "amount":100.00,
-   "authorization":"801585",
-   "method":"card",
-   "operation_type":"in",
-   "transaction_type":"charge",
-   "card":{
-      "type":"debit",
-      "brand":"visa",
-      "address":null,
-      "card_number":"411111XXXXXX1111",
-      "holder_name":"Juan Perez Ramirez",
-      "expiration_year":"20",
-      "expiration_month":"12",
-      "allows_charges":true,
-      "allows_payouts":true,
-      "bank_name":"Banamex",
-      "bank_code":"002"
-   },
-   "status":"completed",
-   "refund":{
-      "id":"trcbsmjkroqmjobxqhpb",
-      "amount":100.00,
-      "authorization":"801585",
-      "method":"card",
-      "operation_type":"out",
-      "transaction_type":"refund",
-      "status":"completed",
-      "currency":"COP",
-      "creation_date":"2014-05-26T13:56:21-05:00",
-      "operation_date":"2014-05-26T13:56:21-05:00",
-      "description":"devolucion",
-      "error_message":null,
-      "order_id":null,
-      "customer_id":"ag4nktpdzebjiye1tlze"
-   },
-   "currency":"COP",
-   "creation_date":"2014-05-26T11:56:25-05:00",
-   "operation_date":"2014-05-26T11:56:25-05:00",
-   "description":"Cargo inicial a mi cuenta",
-   "error_message":null,
-   "order_id":"oid-00052",
-   "customer_id":"ag4nktpdzebjiye1tlze"
+    "id": "trsc2di0dymydqkm5ieo",
+    "authorization": "194883321",
+    "operation_type": "in",
+    "method": "card",
+    "transaction_type": "charge",
+    "card": {
+        "id": "kdx205scoizh93upqbte",
+        "type": "credit",
+        "brand": "diners",
+        "address": null,
+        "card_number": "367284XXXX3333",
+        "holder_name": "DinnersClub",
+        "expiration_year": "21",
+        "expiration_month": "07",
+        "allows_charges": true,
+        "allows_payouts": false,
+        "creation_date": "2019-08-09T13:35:48-05:00",
+        "bank_name": "BANCO DE BOGOTÁ",
+        "bank_code": "000"
+    },
+    "status": "completed",
+    "conciliated": true,
+    "creation_date": "2019-08-12T13:02:18-05:00",
+    "operation_date": "2019-08-12T13:02:18-05:00",
+    "description": "Ejemplo cargo",
+    "error_message": null,
+    "order_id": "oid-12331",
+    "currency": "COP",
+    "amount": 666.00,
+    "customer": {
+        "name": "Cliente Colombia",
+        "last_name": "Vazquez Juarez",
+        "email": "juan.vazquez@empresa.com.mx",
+        "phone_number": "4448936475",
+        "address": null,
+        "creation_date": "2019-08-12T13:02:18-05:00",
+        "external_id": null,
+        "clabe": null
+    },
+    "fee": {
+        "amount": 21.8100,
+        "tax": 3.4896,
+        "currency": "COP"
+    }
 }
 ```
 
@@ -1158,58 +1216,132 @@ response_hash=@charges.all("ag4nktpdzebjiye1tlze")
 
 ```json
 [
-   {
-      "id":"tryqihxac3msedn4yxed",
-      "amount":100.00,
-      "authorization":"801585",
-      "method":"card",
-      "operation_type":"in",
-      "transaction_type":"charge",
-      "card":{
-         "type":"debit",
-         "brand":"visa",
-         "address":null,
-         "card_number":"411111XXXXXX1111",
-         "holder_name":"Juan Perez Ramirez",
-         "expiration_year":"20",
-         "expiration_month":"12",
-         "allows_charges":true,
-         "allows_payouts":true,
-         "bank_name":"Banamex",
-         "bank_code":"002"
-      },
-      "status":"completed",
-      "currency":"COP",
-      "creation_date":"2014-05-26T14:00:17-05:00",
-      "operation_date":"2014-05-26T14:00:17-05:00",
-      "description":"Cargo inicial a mi cuenta",
-      "error_message":null,
-      "order_id":null,
-      "customer_id":"ag4nktpdzebjiye1tlze"
-   },
-   {
-      "id":"trnzf2xjwpupjfryyj23",
-      "amount":100.00,
-      "authorization":null,
-      "method":"bank_account",
-      "operation_type":"in",
-      "transaction_type":"charge",
-      "status":"in_progress",
-      "currency":"COP",
-      "creation_date":"2014-05-26T13:51:25-05:00",
-      "operation_date":"2014-05-26T13:51:25-05:00",
-      "description":"Cargo con banco",
-      "error_message":null,
-      "order_id":"oid-00055",
-      "customer_id":"ag4nktpdzebjiye1tlze",
-      "payment_method":{
-         "type":"bank_transfer",
-         "agreement" : "1411217",
-         "bank":"BBVA Bancomer",
-         "clabe":"012914002014112176",
-         "name":"11030021342311520255"
-      }
-   }
+    {
+        "id": "trsc2di0dymydqkm5ieo",
+        "authorization": "194883321",
+        "operation_type": "in",
+        "method": "card",
+        "transaction_type": "charge",
+        "card": {
+            "id": "kdx205scoizh93upqbte",
+            "type": "credit",
+            "brand": "diners",
+            "address": null,
+            "card_number": "367284XXXX3333",
+            "holder_name": "DinnersClub",
+            "expiration_year": "21",
+            "expiration_month": "07",
+            "allows_charges": true,
+            "allows_payouts": false,
+            "creation_date": "2019-08-09T13:35:48-05:00",
+            "bank_name": "BANCO DE BOGOTÁ",
+            "bank_code": "000"
+        },
+        "status": "completed",
+        "conciliated": true,
+        "creation_date": "2019-08-12T13:02:18-05:00",
+        "operation_date": "2019-08-12T13:02:18-05:00",
+        "description": "Ejemplo cargo",
+        "error_message": null,
+        "order_id": "oid-12331",
+        "currency": "COP",
+        "amount": 666.00,
+        "customer": {
+            "name": "Cliente Colombia",
+            "last_name": "Vazquez Juarez",
+            "email": "juan.vazquez@empresa.com.mx",
+            "phone_number": "4448936475",
+            "address": null,
+            "creation_date": "2019-08-12T13:02:18-05:00",
+            "external_id": null,
+            "clabe": null
+        },
+        "fee": {
+            "amount": 21.8100,
+            "tax": 3.4896,
+            "currency": "MXN"
+        }
+    },
+    {
+        "id": "troztz0scxl7berfxju0",
+        "authorization": "332225182",
+        "operation_type": "in",
+        "method": "card",
+        "transaction_type": "charge",
+        "card": {
+            "type": "debit",
+            "brand": "visa",
+            "address": null,
+            "card_number": "457562XXXXXX0326",
+            "holder_name": "Bruno Colombia 6",
+            "expiration_year": "19",
+            "expiration_month": "12",
+            "allows_charges": true,
+            "allows_payouts": false,
+            "bank_name": "BBVA COLOMBIA",
+            "bank_code": "000"
+        },
+        "status": "completed",
+        "conciliated": true,
+        "creation_date": "2019-08-12T12:51:56-05:00",
+        "operation_date": "2019-08-12T12:51:56-05:00",
+        "description": "Cargo inicial a mi cuenta",
+        "error_message": null,
+        "order_id": "oid-12317",
+        "refunds": [
+            {
+                "operation_date": "2019-08-12T13:00:23-05:00",
+                "authorization": "1091286572",
+                "amount": 100.00,
+                "status": "completed",
+                "conciliated": true,
+                "id": "tr76epoxpjwsqcdynpmb",
+                "description": "Reembolso",
+                "currency": "COP"
+            }
+        ],
+        "refund": {
+            "operation_date": "2019-08-12T13:00:23-05:00",
+            "authorization": "1091286572",
+            "amount": 100.00,
+            "operation_type": "out",
+            "method": "card",
+            "transaction_type": "refund",
+            "status": "completed",
+            "conciliated": true,
+            "id": "tr76epoxpjwsqcdynpmb",
+            "creation_date": "2019-08-12T13:00:23-05:00",
+            "description": "Reembolso",
+            "currency": "COP",
+            "customer": {
+                "name": "Cliente Colombia",
+                "last_name": "Vazquez Juarez",
+                "email": "juan.vazquez@empresa.com.mx",
+                "phone_number": "4448936475",
+                "address": null,
+                "creation_date": "2019-08-12T12:51:56-05:00",
+                "external_id": null,
+                "clabe": null
+            }
+        },
+        "currency": "COP",
+        "amount": 100.00,
+        "customer": {
+            "name": "Cliente Colombia",
+            "last_name": "Vazquez Juarez",
+            "email": "juan.vazquez@empresa.com.mx",
+            "phone_number": "4448936475",
+            "address": null,
+            "creation_date": "2019-08-12T12:51:56-05:00",
+            "external_id": null,
+            "clabe": null
+        },
+        "fee": {
+            "amount": 5.4000,
+            "tax": 0.8640,
+            "currency": "MXN"
+        }
+    }
 ]
 ```
 Obtiene un listado de los cargos realizados por comercio o cliente.
