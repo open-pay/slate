@@ -215,7 +215,7 @@ response_hash=@subscriptions.create(request_hash.to_hash, "a9pvykxz4g5rg0fplze0"
       "expiration_month":"12",
       "allows_charges":true,
       "allows_payouts":true,
-      "bank_name":"Banamex",
+      "bank_name":"BANCO DE BOGOTÁ",
       "bank_code":"002"
    },
    "cancel_at_period_end":false,
@@ -375,7 +375,7 @@ response_hash=@subscriptions.update(request_hash.to_hash, "pbi4kb8hpb64x0uud2eb"
       "expiration_month":"12",
       "allows_charges":true,
       "allows_payouts":false,
-      "bank_name":"AMERICAN EXPRESS",
+      "bank_name":"BANCO DE BOGOTÁ",
       "bank_code":"103"
    },
    "cancel_at_period_end":false,

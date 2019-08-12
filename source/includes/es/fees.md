@@ -36,7 +36,7 @@ openpay.fees.create(feeRequest, callback);
 @fees.create(request_hash)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees \
@@ -47,7 +47,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees \
      "amount" : 12.50,          
      "description" : "Cobro de Comisión",
      "order_id" : "oid-1245"
-}' 
+}'
 ```
 
 ```php
@@ -120,7 +120,7 @@ response_hash=@fees.create(request_hash.to_hash)
    "authorization":null,
    "method":"customer",
    "operation_type":"out",
-   "currency":"MXN",
+   "currency":"COP",
    "transaction_type":"fee",
    "status":"completed",
    "id":"th8tafyrkakdbyry3kxi",
@@ -142,7 +142,7 @@ customer_id | ***string*** (requerido, longitud = 45) <br/>El identificador úni
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cobro comisión.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único de la comisión. Debe ser único para todas las transacciones.
- 
+
 ###Regresa
 El [objeto de transacción](#objeto-transacci-n) de la comisión, con su fecha de creación y su id o una [respuesta de error](#objeto-error).
 
@@ -179,7 +179,7 @@ openpay.fees.refund(transactionId, feeRequest, callback);
 @fees.refund(transaction_id, refund_hash)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees/trzjaozcik8msyqshka4/refund \
@@ -187,7 +187,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees/trzjaozcik8msyq
    -H "Content-type: application/json" \
    -X POST -d '{                                            
      "description" : "Devolución de Comisión"
-}' 
+}'
 ```
 
 ```php
@@ -257,7 +257,7 @@ response_hash=@fees.refund("mzdtln0bmtms6o3kck8f", refund_hash.to_hash)
   "order_id": null,
   "customer_id": "ar2btmquidjhykdaztp6",
   "amount": 11.11,
-  "currency": "MXN"
+  "currency": "COP"
 }
 ```
 
@@ -268,7 +268,7 @@ Devuelve una comisión a la cuenta de un cliente.
 Propiedad | Descripción
 --------- | ------
 description | ***string*** (opcional, longitud = 250) <br/>Una descripción asociada al reembolso de la comisión.
- 
+
 ###Regresa
 El [objeto de transacción](#objeto-transacci-n) del reembolso, con su fecha de creación y su id o una [respuesta de error](#objeto-error).
 
@@ -305,11 +305,11 @@ openpay.fees.list(searchParams, callback);
 @fees.all
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees?limit=10" \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
 ```php
@@ -331,7 +331,7 @@ final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
-        
+
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
@@ -379,7 +379,7 @@ response_hash=@fees.all
       "authorization":null,
       "method":"customer",
       "operation_type":"out",
-      "currency":"MXN",
+      "currency":"COP",
       "transaction_type":"fee",
       "status":"completed",
       "id":"th8tafyrkakdbyry3kxi",
@@ -394,7 +394,7 @@ response_hash=@fees.all
       "authorization":null,
       "method":"customer",
       "operation_type":"out",
-      "currency":"MXN",
+      "currency":"COP",
       "transaction_type":"fee",
       "status":"completed",
       "id":"tdzottaaohuhosf4cdv9",

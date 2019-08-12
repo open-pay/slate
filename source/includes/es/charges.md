@@ -837,7 +837,7 @@ response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4
         "brand": "visa",
         "address": null,
         "card_number": "457562XXXXXX0326",
-        "holder_name": "Bruno Colombia 6",
+        "holder_name": "Jorge Lopez",
         "expiration_year": "19",
         "expiration_month": "12",
         "allows_charges": true,
@@ -1257,91 +1257,12 @@ response_hash=@charges.all("ag4nktpdzebjiye1tlze")
             "clabe": null
         },
         "fee": {
-            "amount": 21.8100,
-            "tax": 3.4896,
-            "currency": "MXN"
-        }
-    },
-    {
-        "id": "troztz0scxl7berfxju0",
-        "authorization": "332225182",
-        "operation_type": "in",
-        "method": "card",
-        "transaction_type": "charge",
-        "card": {
-            "type": "debit",
-            "brand": "visa",
-            "address": null,
-            "card_number": "457562XXXXXX0326",
-            "holder_name": "Bruno Colombia 6",
-            "expiration_year": "19",
-            "expiration_month": "12",
-            "allows_charges": true,
-            "allows_payouts": false,
-            "bank_name": "BBVA COLOMBIA",
-            "bank_code": "000"
-        },
-        "status": "completed",
-        "conciliated": true,
-        "creation_date": "2019-08-12T12:51:56-05:00",
-        "operation_date": "2019-08-12T12:51:56-05:00",
-        "description": "Cargo inicial a mi cuenta",
-        "error_message": null,
-        "order_id": "oid-12317",
-        "refunds": [
-            {
-                "operation_date": "2019-08-12T13:00:23-05:00",
-                "authorization": "1091286572",
-                "amount": 100.00,
-                "status": "completed",
-                "conciliated": true,
-                "id": "tr76epoxpjwsqcdynpmb",
-                "description": "Reembolso",
-                "currency": "COP"
-            }
-        ],
-        "refund": {
-            "operation_date": "2019-08-12T13:00:23-05:00",
-            "authorization": "1091286572",
-            "amount": 100.00,
-            "operation_type": "out",
-            "method": "card",
-            "transaction_type": "refund",
-            "status": "completed",
-            "conciliated": true,
-            "id": "tr76epoxpjwsqcdynpmb",
-            "creation_date": "2019-08-12T13:00:23-05:00",
-            "description": "Reembolso",
-            "currency": "COP",
-            "customer": {
-                "name": "Cliente Colombia",
-                "last_name": "Vazquez Juarez",
-                "email": "juan.vazquez@empresa.com.mx",
-                "phone_number": "4448936475",
-                "address": null,
-                "creation_date": "2019-08-12T12:51:56-05:00",
-                "external_id": null,
-                "clabe": null
-            }
-        },
-        "currency": "COP",
-        "amount": 100.00,
-        "customer": {
-            "name": "Cliente Colombia",
-            "last_name": "Vazquez Juarez",
-            "email": "juan.vazquez@empresa.com.mx",
-            "phone_number": "4448936475",
-            "address": null,
-            "creation_date": "2019-08-12T12:51:56-05:00",
-            "external_id": null,
-            "clabe": null
-        },
-        "fee": {
-            "amount": 5.4000,
-            "tax": 0.8640,
-            "currency": "MXN"
+          "amount": 21.8100,
+          "tax": 3.4896,
+          "currency": "COP"
         }
     }
+
 ]
 ```
 Obtiene un listado de los cargos realizados por comercio o cliente.
