@@ -1,17 +1,17 @@
 #Planes
 
-Los planes son recursos en Openpay que permiten crear plantillas para las suscripciones. Con ellos podrás definir la cantidad y frecuencia con la que se realizarán los cargos recurrentes. 
+Los planes son recursos en Openpay que permiten crear plantillas para las suscripciones. Con ellos podrás definir la cantidad y frecuencia con la que se realizarán los cargos recurrentes.
 
 ##Objeto Plan
 
-> Ejemplo de objeto 
+> Ejemplo de objeto
 
 ```json
 {
     "name": "Curso de ingles",
     "status": "active",
     "amount": 150,
-    "currency": "MXN",
+    "currency": "COP",
     "id": "patpflacwilazguj6bem",
     "creation_date": "2013-12-13T09:43:52-06:00",
     "repeat_every": 1,
@@ -37,7 +37,7 @@ status_after_retry | ***string*** <br/> Este campo especifica el status en el qu
 trial_days | ***numeric*** <br/> Numero de días de prueba por defecto que tendrá la suscripción.
 
 ##Crear un nuevo plan
- 
+
 > Definición
 
 ```shell
@@ -68,7 +68,7 @@ openpay.plans.create(planRequest, callback);
 @plans.create(request_hash)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans \
@@ -82,7 +82,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans \
   "repeat_unit": "month",
   "trial_days": "30",
   "repeat_every": "1"
-}' 
+}'
 ```
 
 ```php
@@ -170,7 +170,7 @@ response_hash=@plans.create(request_hash.to_hash)
    "name":"Curso de ingles",
    "status":"active",
    "amount":150.00,
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-22T12:29:31-05:00",
    "repeat_every":1,
    "repeat_unit":"month",
@@ -194,7 +194,7 @@ repeat_unit | ***numeric*** (requerido) <br/>Especifica la frecuencia de cobro. 
 retry_times | ***numeric*** (opcional) <br/> Numero de reintentos de cobro de la suscripción. Cuando se agotan los intentos se pone en el estado determinado por el campo status_after_retry.
 status_after_retry | ***string*** (requerido, valores = "UNPAID/CANCELLED") <br/>Este campo especifica el status en el que se pondrá la suscripción una vez que se agotaron los intentos. Puede ser: unpaid o cancelled
 trial_days | ***numeric*** (requerido) <br/>Numero de días de prueba por defecto que tendrán las suscripciones que se creen a partir del plan creado.
- 
+
 
 ###Respuesta
 Regresa un [objeto plan](#objeto-plan) creado o un error en caso de ocurrir algún problema.
@@ -233,7 +233,7 @@ openpay.plans.update(planId, planRequest, callback);
 @plans.update(request_hash, plan_id)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbmnoevrt \
@@ -242,7 +242,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbm
    -X PUT -d '{
       "name": "Curso de aleman",
       "trial_days": "60"
-   }' 
+   }'
 ```
 
 ```php
@@ -305,7 +305,7 @@ response_hash=@plans.update(request_hash.to_hash, "p8e6x3hafqqsbmnoevrt")
    "name":"Curso de aleman",
    "status":"active",
    "amount":150.00,
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-22T12:29:31-05:00",
    "repeat_every":1,
    "repeat_unit":"month",
@@ -314,7 +314,7 @@ response_hash=@plans.update(request_hash.to_hash, "p8e6x3hafqqsbmnoevrt")
    "trial_days":60
 }
 ```
- 
+
 Actualiza la información de un plan. Se requiere tener el id del plan y solo se puede actualizar cierta información.
 
 ###Petición
@@ -358,12 +358,12 @@ openpay.plans.get(planId, callback);
 @plans.get(plan_id)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbmnoevrt \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
-``` 
+```
 
 ```php
 <?
@@ -404,7 +404,7 @@ response_hash=@plans.get("p8e6x3hafqqsbmnoevrt")
    "name":"Curso de aleman",
    "status":"active",
    "amount":150.00,
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-22T12:29:31-05:00",
    "repeat_every":1,
    "repeat_unit":"month",
@@ -458,7 +458,7 @@ openpay.plans.delete(planId, callback);
 @plans.delete(plan_id)
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans/p8e6x3hafqqsbmnoevrt \
@@ -507,7 +507,7 @@ Propiedad | Descripción
 id| ***string*** (requerido, longitud = 45) <br/> Identificador del plan a eliminar
 
 ###Respuesta
-Si el plan se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo. 
+Si el plan se borra correctamente la respuesta es vacía, si no se puede borrar se regresa un [objeto error](#objeto-error) indicando el motivo.
 
 ##Listado de planes
 > Definición
@@ -541,11 +541,11 @@ openpay.plans.list(searchParams, callback);
 @plans.all
 ```
 
-> Ejemplo de petición 
+> Ejemplo de petición
 
 ```shell
 curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/plans?limit=10" \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: 
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
 ```php
@@ -567,7 +567,7 @@ final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
-        
+
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
@@ -614,7 +614,7 @@ response_hash=@plans.all
         "name": "Curso de aleman",
         "status": "active",
         "amount": 150,
-        "currency": "MXN",
+        "currency": "COP",
         "id": "patpflacwilazguj6bem",
         "creation_date": "2013-12-13T09:43:52-06:00",
         "repeat_every": 1,
@@ -627,7 +627,7 @@ response_hash=@plans.all
         "name": "Curso de ingles",
         "status": "active",
         "amount": 150,
-        "currency": "MXN",
+        "currency": "COP",
         "id": "pjl7wfryrrd1tznr0fnl",
         "creation_date": "2013-12-13T11:36:40-06:00",
         "repeat_every": 1,
