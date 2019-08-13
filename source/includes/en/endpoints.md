@@ -1,6 +1,6 @@
 # API Endpoints
 
-> Available resourcers
+> Available resources
 
 <br/>
 <br/>

@@ -24,6 +24,8 @@ under the License.
 
     <%= stylesheet_link_tag "screen", media: 'screen' %>
     <%= stylesheet_link_tag "print", media: 'print' %>
+    <%= stylesheet_link_tag "custom", media: 'screen' %>
+
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     <%= javascript_include_tag  "all" %>
     
@@ -61,6 +63,17 @@ under the License.
             <% end %>
           <% end %>
         ]);
+        $('.link_mx_api_doc').on('click', function(e){
+        	var url = "https://www.openpay.mx/docs/api/";
+			var win = window.open(url, '_blank');
+			if (win) {
+			    //Browser has allowed it to be opened
+			    win.focus();
+			} else {
+			    //Browser has blocked it
+			    alert('Por favor permite popups para este sitio web');
+			}
+        });
       });
     </script>
   </head>
@@ -84,6 +97,11 @@ under the License.
           <li><%= footer %></li>
         <% end %>
       </ul>
+      <% end %>
+      <% if current_page.data.lang == 'EN' %>
+	      <%= partial "includes/en/links_flags.md.erb" %>
+      <% else %>
+    	  <%= partial "includes/es/links_flags.md.erb" %>
       <% end %>
     </div>
     <div class="page-wrapper">
