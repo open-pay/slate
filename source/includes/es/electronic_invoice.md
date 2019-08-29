@@ -17,8 +17,8 @@
 |observaciones|Opcional (Alfanumérico) <br> Observaciones.
 |total_trasladados|Opcional (Decimal) <br> Total de impuestos trasladados en caso que existan.
 |total_retenidos|Opcional (Decimal) <br> Total de impuestos retenidos en caso que existan.
-|moneda|Requerido (3 Alfanumerico) <br> Moneda en la que se realizó la venta en caso que sea diferente de MXN. (ISO 4217)
-|tipo_de_cambio|Requerido (Decimal) <br> Tipo de cambio de la moneda en la que se realizó la venta. 1.00 en caso que la moneda sea MXN.
+|moneda|Requerido (3 Alfanumerico) <br> Moneda en la que se realizó la venta en caso que sea diferente de COP. (ISO 4217)
+|tipo_de_cambio|Requerido (Decimal) <br> Tipo de cambio de la moneda en la que se realizó la venta. 1.00 en caso que la moneda sea COP.
 |receptor|Requerido ([Objeto Receptor](#objeto-receptor)) <br> Nodo que contiene los datos del receptor de la factura.
 |conceptos|Requerido (Arreglo de [Objeto Concepto](#objeto-concepto)) <br> Arreglo de conceptos incluidos en la factura.
 |cfdi_relacionados|Opcional ([Objeto Relacionados](#objeto-relacionado)) <br> Facturas relacionadas.
@@ -198,7 +198,7 @@ Campo 			| Descripción
 fecha_pago			| Requerido <br> Fecha de la operación.
 forma_de_pago		| Requerido <br> Forma de pago.
 moneda_p			| Requerido (Decimal) <br> Monto del cargo.
-tipo_cambio_p		| Requerido (Decimal) <br> Tipo de cambio de la moneda en la que se realizó la venta. 1.00 en caso que la moneda sea MXN.
+tipo_cambio_p		| Requerido (Decimal) <br> Tipo de cambio de la moneda en la que se realizó la venta. 1.00 en caso que la moneda sea COP.
 monto				| Requerido (Decimal) <br> Monto del pago.
 num_operacion		| Opcional (1-100 Alfanumérico) <br> Número de pago.
 rfc_emisor_cta_ord	| Opcional <br> RFC del emisor.

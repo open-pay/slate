@@ -151,7 +151,7 @@ response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "amount":10.5,
    "authorization":null,
    "method":"bank_account",
-   "currency":"MXN",
+   "currency":"COP",
    "operation_type":"out",
    "transaction_type":"payout",
    "bank_account":{
@@ -359,7 +359,7 @@ response_hash=@payouts.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "operation_type":"out",
    "transaction_type":"payout",
    "status":"in_progress",
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-26T17:23:03-05:00",
    "operation_date":"2014-05-26T17:23:03-05:00",
    "description":"Retiro de saldo semanal",
@@ -504,7 +504,7 @@ response_hash=@payouts.get("tr6cxbcefzatd10guvvw", "asynwirguzkgq2bizogo")
       "holder_name":"Mi empresa"
    },
    "status":"completed",
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-26T17:04:26-05:00",
    "operation_date":"2014-05-26T17:06:28-05:00",
    "description":"Retiro de saldo semanal",
@@ -638,7 +638,7 @@ response_hash=@payouts.delete("trozeipf364jqrsbt3ej", "asynwirguzkgq2bizogo")
       "holder_name":"Mi empresa"
    },
    "status":"cancelled",
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-26T17:04:26-05:00",
    "operation_date":"2014-05-26T17:06:28-05:00",
    "description":"Retiro de saldo semanal",
@@ -802,7 +802,7 @@ response_hash=@payouts.all("asynwirguzkgq2bizogo")
       "operation_type":"out",
       "transaction_type":"payout",
       "status":"completed",
-      "currency":"MXN",
+      "currency":"COP",
       "creation_date":"2014-05-26T17:23:03-05:00",
       "operation_date":"2014-05-26T17:26:27-05:00",
       "description":"Retiro de saldo semanal",
@@ -832,7 +832,7 @@ response_hash=@payouts.all("asynwirguzkgq2bizogo")
          "holder_name":"Mi empresa"
       },
       "status":"completed",
-      "currency":"MXN",
+      "currency":"COP",
       "creation_date":"2014-05-26T17:04:26-05:00",
       "operation_date":"2014-05-26T17:06:28-05:00",
       "description":"Retiro de saldo semanal",
@@ -1097,7 +1097,7 @@ response_hash=@transactionsPayout.getDetails("tr6cxbcefzatd10guvvw", search_para
       "holder_name": "persona003"
     },
     "amount": 700,
-    "currency": "MXN"
+    "currency": "COP"
   },
   {
     "id": "tru6lsl6xpvseqp87vjd",
@@ -1126,7 +1126,7 @@ response_hash=@transactionsPayout.getDetails("tr6cxbcefzatd10guvvw", search_para
     "error_message": null,
     "order_id": null,
     "amount": 2000,
-    "currency": "MXN"
+    "currency": "COP"
   }
 ]
 ```

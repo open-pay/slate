@@ -79,7 +79,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
         "name" : "Cliente Colombia",
         "last_name" : "Vazquez Juarez",
         "phone_number" : "4448936475",
-        "email" : "juan.vazquez@empresa.com.mx"
+        "email" : "juan.vazquez@empresa.co"
    }
 }'
 ```
@@ -91,7 +91,7 @@ $customer = array(
    	 'name' => 'Juan',
    	 'last_name' => 'Vazquez Juarez',
    	 'phone_number' => '571627926831',
-   	 'email' => 'juan.vazquez@empresa.com.mx');
+   	 'email' => 'juan.vazquez@empresa.co');
 
 $chargeRequest = array(
     'method' => 'card',
@@ -114,7 +114,7 @@ Customer customer = new Customer();
 customer.setName("Juan");
 customer.setLastName("Vazquez Juarez");
 customer.setPhoneNumber("571627926831");
-customer.setEmail("juan.vazquez@empresa.com.mx");
+customer.setEmail("juan.vazquez@empresa.co");
 
 request.cardId("kqgykn96i7bcs1wwhvgw"); // =source_id
 request.amount(new BigDecimal("100.00"));
@@ -134,7 +134,7 @@ Customer customer = new Customer();
 customer.Name = "Juan";
 customer.LastName = "Vazquez Juarez";
 customer.PhoneNumber = "571627926831";
-customer.Email = "juan.vazquez@empresa.com.mx";
+customer.Email = "juan.vazquez@empresa.co";
 
 request.Method = "card";
 request.SourceId = "kwkoqpg6fcvfse8k8mg2";
@@ -161,7 +161,7 @@ var chargeRequest = {
    	    'name' : 'Juan',
    	    'last_name' : 'Vazquez Juarez',
    	    'phone_number' : '571627926831',
-   	    'email' : 'juan.vazquez@empresa.com.mx'
+   	    'email' : 'juan.vazquez@empresa.co'
    }
 }
 
@@ -177,7 +177,7 @@ customer_hash={
     "name" => "Juan",
     "last_name" => "Vazquez Juarez",
     "phone_number" => "571627926831",
-    "email" => "juan.vazquez@empresa.com.mx"
+    "email" => "juan.vazquez@empresa.co"
 }
 
 request_hash={
@@ -231,7 +231,7 @@ response_hash=@charges.create(request_hash.to_hash)
     "customer": {
         "name": "Cliente Colombia",
         "last_name": "Vazquez Juarez",
-        "email": "juan.vazquez@empresa.com.mx",
+        "email": "juan.vazquez@empresa.co",
         "phone_number": "4448936475",
         "address": null,
         "creation_date": "2019-08-12T12:36:56-05:00",
@@ -357,7 +357,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
         "name" : "Juan",
         "last_name" : "Vazquez Juarez",
         "phone_number" : "4423456723",
-        "email" : "juan.vazquez@empresa.com.mx"
+        "email" : "juan.vazquez@empresa.co"
    },
    "iva": "10",
    "confirm" : "false",
@@ -373,7 +373,7 @@ $customer = array(
      'name' => 'Juan',
      'last_name' => 'Vazquez Juarez',
      'phone_number' => '4423456723',
-     'email' => 'juan.vazquez@empresa.com.mx');
+     'email' => 'juan.vazquez@empresa.co');
 
 $chargeRequest = array(
     "method" : "card",
@@ -397,7 +397,7 @@ Customer customer = new Customer();
 customer.setName("Juan");
 customer.setLastName("Vazquez Juarez");
 customer.setPhoneNumber("4423456723");
-customer.setEmail("juan.vazquez@empresa.com.mx");
+customer.setEmail("juan.vazquez@empresa.co");
 
 request.amount(new BigDecimal("100.00"));
 request.description("Cargo inicial a mi merchant");
@@ -417,7 +417,7 @@ Customer customer = new Customer();
 customer.Name = "Juan";
 customer.LastName = "Vazquez Juarez";
 customer.PhoneNumber = "4423456723";
-customer.Email = "juan.vazquez@empresa.com.mx";
+customer.Email = "juan.vazquez@empresa.co";
 
 request.Method = "card";
 request.Amount = new Decimal(100.00);
@@ -442,7 +442,7 @@ var chargeRequest = {
         'name' : 'Juan',
         'last_name' : 'Vazquez Juarez',
         'phone_number' : '4423456723',
-        'email' : 'juan.vazquez@empresa.com.mx'
+        'email' : 'juan.vazquez@empresa.co'
    },
   'send_email' : false,
   'confirm' : false,
@@ -461,7 +461,7 @@ customer_hash={
     "name" => "Juan",
     "last_name" => "Vazquez Juarez",
     "phone_number" => "4423456723",
-    "email" => "juan.vazquez@empresa.com.mx"
+    "email" => "juan.vazquez@empresa.co"
 }
 
 request_hash={
@@ -506,7 +506,7 @@ response_hash=@charges.create(request_hash.to_hash)
     "customer": {
         "name": "Juan",
         "last_name": "Vazquez Juarez",
-        "email": "juan.vazquez@empresa.com.mx",
+        "email": "juan.vazquez@empresa.co",
         "phone_number": "4423456723",
         "address": null,
         "creation_date": "2019-08-12T12:47:41-05:00",
@@ -879,7 +879,7 @@ response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4
         "customer": {
             "name": "Cliente Colombia",
             "last_name": "Vazquez Juarez",
-            "email": "juan.vazquez@empresa.com.mx",
+            "email": "juan.vazquez@empresa.co",
             "phone_number": "4448936475",
             "address": null,
             "creation_date": "2019-08-12T12:51:56-05:00",
@@ -893,7 +893,7 @@ response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4
     "customer": {
         "name": "Cliente Colombia",
         "last_name": "Vazquez Juarez",
-        "email": "juan.vazquez@empresa.com.mx",
+        "email": "juan.vazquez@empresa.co",
         "phone_number": "4448936475",
         "address": null,
         "creation_date": "2019-08-12T12:51:56-05:00",
@@ -1057,7 +1057,7 @@ response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag4nktpdzebjiye1tlze")
     "customer": {
         "name": "Cliente Colombia",
         "last_name": "Vazquez Juarez",
-        "email": "juan.vazquez@empresa.com.mx",
+        "email": "juan.vazquez@empresa.co",
         "phone_number": "4448936475",
         "address": null,
         "creation_date": "2019-08-12T13:02:18-05:00",
@@ -1249,7 +1249,7 @@ response_hash=@charges.all("ag4nktpdzebjiye1tlze")
         "customer": {
             "name": "Cliente Colombia",
             "last_name": "Vazquez Juarez",
-            "email": "juan.vazquez@empresa.com.mx",
+            "email": "juan.vazquez@empresa.co",
             "phone_number": "4448936475",
             "address": null,
             "creation_date": "2019-08-12T13:02:18-05:00",

@@ -15,7 +15,7 @@ A los clientes les puedes agregar tarjetas para despues realizar transacciones d
    "name":"Rodrigo",
    "last_name":"Velazco Perez",
    "email":"rodrigo.velazco@payments.com",
-   "phone_number":"4425667045",
+   "phone_number":"16362801",
    "external_id":"cliente1",
    "status":"active",
    "balance":103,
@@ -23,10 +23,10 @@ A los clientes les puedes agregar tarjetas para despues realizar transacciones d
       "line1":"Av. 5 de febrero No. 1080 int Roble 207",
       "line2":"Carrillo puerto",
       "line3":"Zona industrial carrillo puerto",
-      "postal_code":"06500",
-      "state":"Querétaro",
-      "city":"Querétaro",
-      "country_code":"MX"
+      "postal_code":"110831",
+      "state":"Bogotá",
+      "city":"Bogotá",
+      "country_code":"CO"
    }
 }
 ```
@@ -98,15 +98,15 @@ $customerData = array(
      'last_name' => '',
      'email' => 'customer_email@me.com',
      'requires_account' => false,
-     'phone_number' => '44209087654',
+     'phone_number' => '16362801',
      'address' => array(
          'line1' => 'Calle 10',
          'line2' => 'col. san pablo',
          'line3' => 'entre la calle 1 y la 2',
-         'state' => 'Queretaro',
-         'city' => 'Queretaro',
-         'postal_code' => '76000',
-         'country_code' => 'MX'
+         'state' => 'Bogota',
+         'city' => 'Bogota',
+         'postal_code' => '110731',
+         'country_code' => 'CO'
       )
    );
 
@@ -121,13 +121,13 @@ request.externalId("idExterno0101");
 request.name("Julian Gerardo");
 request.lastName("López Martínez");
 request.email("julian.martinez@gmail.com");
-request.phoneNumber("4421432915");
+request.phoneNumber("16362801");
 request.requiresAccount(false);
 Address address = new Address();
-address.city("Queretaro");
-address.countryCode("MX");
-address.state("Queretaro");
-address.postalCode("79125");
+address.city("Bogota");
+address.countryCode("CO");
+address.state("Bogota");
+address.postalCode("110731");
 address.line1("Av. Pie de la cuesta #12");
 address.line2("Desarrollo San Pablo");
 address.line3("Qro. Qro.");
@@ -143,16 +143,16 @@ request.ExternalId = "idExterno0101";
 request.Name = "Julian Gerardo";
 request.LastName = "López Martínez";
 request.Email = "julian.martinez@gmail.com";
-request.PhoneNumber = "4421432915";
+request.PhoneNumber = "16362801";
 request.RequiresAccount = false;
 Address address = new Address();
-address.City = "Queretaro";
-address.CountryCode = "MX";
-address.State = "Queretaro";
-address.PostalCode = "79125";
+address.City = "Bogota";
+address.CountryCode = "CO";
+address.State = "Bogota";
+address.PostalCode = "110731";
 address.Line1 = "Av. Pie de la cuesta #12";
 address.Line2 = "Desarrollo San Pablo";
-address.Line3 = "Qro. Qro.";
+address.Line3 = "Bogota";
 request.Address = address;
 
 request = api.CustomerService.Create(request);
@@ -177,10 +177,10 @@ address_hash={
       "line1" => "Calle 10",
       "line2" => "col. san pablo",
       "line3" => "entre la calle 1 y la 2",
-      "state" => "Queretaro",
-      "city" => "Queretaro",
-      "postal_code" => "76000",
-      "country_code" => "MX"
+      "state" => "Bogota",
+      "city" => "Bogota",
+      "postal_code" => "111071",
+      "country_code" => "CO"
    }
 request_hash={
      "external_id" => nil,
@@ -188,7 +188,7 @@ request_hash={
      "last_name" => nil,
      "email" => "customer_email@me.com",
      "requires_account" => false,
-     "phone_number" => "44209087654",
+     "phone_number" => "16362801",
      "address" => address_hash
    }
 
@@ -276,15 +276,15 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni
    "name": "customer name",
    "email": "customer_email@me.com",
    "address":{
-      "city":"Queretaro",
-      "state":"Queretaro",
+      "city":"Bogota",
+      "state":"Bogota",
       "line1":"Calle 10",
-      "postal_code":"76000",
+      "postal_code":"111071",
       "line2":"col. san pablo",
       "line3":"entre la calle 1 y la 2",
-      "country_code":"MX"
+      "country_code":"CO"
    },
-   "phone_number":"44209087654"
+   "phone_number":"16362801"
  }'
 ```
 
@@ -305,12 +305,12 @@ Customer request = new Customer();
 request.name("Julian Gerardo");
 request.lastName("López Martínez");
 request.email("julian.martinez@gmail.com");
-request.phoneNumber("4421432915");
+request.phoneNumber("16362801");
 Address address = new Address();
-address.city("Queretaro");
+address.city("Bogota");
 address.countryCode("10");
-address.state("Queretaro");
-address.postalCode("79125");
+address.state("Bogota");
+address.postalCode("111071");
 address.line1("Av. Pie de la cuesta #12");
 address.line2("Desarrollo San Pablo");
 address.line3("Qro. Qro.");
@@ -325,12 +325,12 @@ Customer request = new Customer();
 request.Name = "Julian Gerardo";
 request.LastName = "López Martínez";
 request.Email = "julian.martinez@gmail.com";
-request.PhoneNumber = "4421432915";
+request.PhoneNumber = "16362801";
 Address address = new Address();
-address.City = "Queretaro";
-address.CountryCode = "MX";
-address.State = "Queretaro";
-address.PostalCode = "79125";
+address.City = "Bogota";
+address.CountryCode = "CO";
+address.State = "Bogota";
+address.PostalCode = "111071";
 address.Line1 = "Av. Pie de la cuesta #12";
 address.Line2 = "Desarrollo San Pablo";
 address.Line3 = "Qro. Qro.";
@@ -344,13 +344,13 @@ var customerRequest = {
     'name': 'customer name',
     'email': 'customer_email@me.com',
     'address':{
-      'city':'Queretaro',
-      'state':'Queretaro',
+      'city':'Bogota',
+      'state':'Bogota',
       'line1':'Calle 10',
-      'postal_code':'76000',
+      'postal_code':'111071',
       'line2':'col. san pablo',
       'line3':'entre la calle 1 y la 2',
-      'country_code':'MX'
+      'country_code':'CO'
     }
 };
 
@@ -366,10 +366,10 @@ address_hash={
       "line1" => "Calle 10",
       "line2" => "col. san pablo",
       "line3" => "entre la calle 1 y la 2",
-      "state" => "Queretaro",
-      "city" => "Queretaro",
-      "postal_code" => "76000",
-      "country_code" => "MX"
+      "state" => "Bogota",
+      "city" => "Bogota",
+      "postal_code" => "111071",
+      "country_code" => "CO"
    }
 request_hash={
      "external_id" => nil,
@@ -392,15 +392,15 @@ response_hash=@customers.update(request_hash.to_hash)
    "name":"customer name",
    "last_name":null,
    "email":"customer_email@me.com",
-   "phone_number":"44209087654",
+   "phone_number":"16362801",
    "address":{
       "line1":"Calle 10",
       "line2":"col. san pablo",
       "line3":"entre la calle 1 y la 2",
-      "state":"Queretaro",
-      "city":"Queretaro",
-      "postal_code":"76000",
-      "country_code":"MX"
+      "state":"Bogota",
+      "city":"Bogota",
+      "postal_code":"111071",
+      "country_code":"CO"
    },
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
@@ -511,10 +511,10 @@ response_hash=@customers.get("asynwirguzkgq2bizogo")
       "line1":"Calle 10",
       "line2":"col. san pablo",
       "line3":"entre la calle 1 y la 2",
-      "state":"Queretaro",
-      "city":"Queretaro",
-      "postal_code":"76000",
-      "country_code":"MX"
+      "state":"Bogota",
+      "city":"Bogota",
+      "postal_code":"111071",
+      "country_code":"CO"
    },
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
@@ -732,7 +732,7 @@ response_hash=@customers.all
    "name":"Rodrigo",
    "last_name":"Velazco Perez",
    "email":"rodrigo.velazco@payments.com",
-   "phone_number":"4425667045",
+   "phone_number":"16362801",
    "status":"active",
    "balance":142.5,
    "store": {
@@ -746,7 +746,7 @@ response_hash=@customers.all
    "name":"Eriberto",
    "last_name":"Rodriguez Lopez",
    "email":"eriberto.rodriguez@payments.com",
-   "phone_number":"442",
+   "phone_number":"16362801",
    "status":"active",
    "balance":103,
    "store": {

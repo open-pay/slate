@@ -12,7 +12,7 @@ Plans are an Openpay resource that allows create templates for subscriptions.  U
     "name": "Curso de ingles",
     "status": "active",
     "amount": 150,
-    "currency": "MXN",
+    "currency": "COP",
     "id": "patpflacwilazguj6bem",
     "creation_date": "2013-12-13T09:43:52-06:00",
     "repeat_every": 1,
@@ -29,7 +29,7 @@ id | ***string*** <br/> Unique plan identifier.
 creation_date | ***datetime*** <br/> Date and time in which the plan was created in ISO 8601 format.
 name  | ***string*** <br/> Plan name.
 amount | ***numeric*** <br/> Amount that will be applied once the subscription is charged.  It has to be more than zero and it can have up to two decimal places.
-currency | ***string*** <br/> Currency used in the operation, by default is MXN (Mexican pesos).
+currency | ***string*** <br/> Currency used in the operation, by default is COP (Colombian pesos).
 repeat_every | ***numeric*** <br/>  Time units in which the subscription will be charged.  For example, repeat_unit=month and repeat_every=2 indicates that it will be charged every 2 months.
 repeat_unit | ***string*** <br/> Describes the charge unit frequency.  It can be weekly(week), monthly(month) or yearly (year).
 retry_times | ***numeric*** <br/> Number of attempts to try to charge the subscription.  When the attempts have been exhausted, the status field is determined by the field *status_after_retry*.
@@ -98,7 +98,7 @@ $planDataRequest = array(
     'repeat_unit' => 'month',
     'trial_days' => '30',
     'repeat_every' => '1',
-    'currency' => 'MXN');
+    'currency' => 'COP');
 
 $plan = $openpay->plans->add($planDataRequest);
 ?>
@@ -171,7 +171,7 @@ response_hash=@plans.create(request_hash.to_hash)
    "name":"Curso de ingles",
    "status":"active",
    "amount":150.00,
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-22T12:29:31-05:00",
    "repeat_every":1,
    "repeat_unit":"month",
@@ -306,7 +306,7 @@ response_hash=@plans.update(request_hash.to_hash, "p8e6x3hafqqsbmnoevrt")
    "name":"Curso de aleman",
    "status":"active",
    "amount":150.00,
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-22T12:29:31-05:00",
    "repeat_every":1,
    "repeat_unit":"month",
@@ -406,7 +406,7 @@ response_hash=@plans.get("p8e6x3hafqqsbmnoevrt")
    "name":"Curso de aleman",
    "status":"active",
    "amount":150.00,
-   "currency":"MXN",
+   "currency":"COP",
    "creation_date":"2014-05-22T12:29:31-05:00",
    "repeat_every":1,
    "repeat_unit":"month",
@@ -617,7 +617,7 @@ response_hash=@plans.all
         "name": "Curso de aleman",
         "status": "active",
         "amount": 150,
-        "currency": "MXN",
+        "currency": "COP",
         "id": "patpflacwilazguj6bem",
         "creation_date": "2013-12-13T09:43:52-06:00",
         "repeat_every": 1,
@@ -630,7 +630,7 @@ response_hash=@plans.all
         "name": "Curso de ingles",
         "status": "active",
         "amount": 150,
-        "currency": "MXN",
+        "currency": "COP",
         "id": "pjl7wfryrrd1tznr0fnl",
         "creation_date": "2013-12-13T11:36:40-06:00",
         "repeat_every": 1,

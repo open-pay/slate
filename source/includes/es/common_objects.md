@@ -48,7 +48,7 @@ amount| ***numeric*** <br/>Cantidad de la transacción a dos decimales.
 description|***string*** <br/>Descripción de la transacción.
 error_message| ***string*** <br/>Si la transacción está en status: failed, en este campo se mostrará la razón del fallo.
 customer_id| ***string*** <br/>Identificar único del cliente al cual pertence la transacción. Si es valor es nulo, la transacción pertenece a la cuenta del comercio.
-currency| ***string*** <br/>Moneda usada en la operación, por default es COL.
+currency| ***string*** <br/>Moneda usada en la operación, por default es COP.
 bank_account| ***objeto*** <br/>Datos de la cuenta bancaria usada en la transacción. Ver objeto BankAccoount
 card| ***objeto*** <br/>Datos de la tarjeta usada en la transacción. Ver objeto Card
 card_points| ***objeto*** <br/>Datos de los puntos de la tarjeta usados para el pago, si fueron utilizados. Ver [objeto CardPoints](#objeto-cardpoints)
@@ -62,10 +62,10 @@ card_points| ***objeto*** <br/>Datos de los puntos de la tarjeta usados para el 
    "line1":"Av 5 de Febrero",
    "line2":"Roble 207",
    "line3":"col carrillo",
-   "state":"Queretaro",
-   "city":"Querétaro",
-   "postal_code":"76900",
-   "country_code":"COL"
+   "state":"Bogota",
+   "city":"Bogotá",
+   "postal_code":"110511",
+   "country_code":"CO"
 }
 ```
 

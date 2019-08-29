@@ -17,8 +17,8 @@
 |observaciones|Optional (Alphanumeric) <br> Observations
 |total_trasladados|Optional (Decimal) <br> Total taxes transferred if they exist
 |total_retenidos|Optional (Decimal) <br> Total taxes withheld if there are
-|moneda|Required (3 Alphanumeric) <br> Currency in which the sale was made in case it is different from MXN. (ISO 4217)
-|tipo_de_cambio|Required (Decimal) <br> Exchange rate of the currency in which the sale was made. 1.00 in case the currency is MXN.
+|moneda|Required (3 Alphanumeric) <br> Currency in which the sale was made in case it is different from COP. (ISO 4217)
+|tipo_de_cambio|Required (Decimal) <br> Exchange rate of the currency in which the sale was made. 1.00 in case the currency is COP.
 |receptor|Required ([Receiver Object](#receiver-object)) <br> Node that contains the data of the recipient of the invoice
 |conceptos|Required (Arrangement of [Concept Object](#concept-object)) <br> Arrangement of concepts included in the invoice
 |cfdi_relacionados|Optional ([Related Object](#related-object)) <br> Related invoices
@@ -194,7 +194,7 @@ Field 			| Description
 fecha_pago			| Required <br> Date of the operation.
 forma_de_pago		| Required <br> Way to pay.
 moneda_p			| Required (Decimal) <br> Amount of the charge.
-tipo_cambio_p		| Required (Decimal) <br> Exchange rate of the currency in which the sale was made. 1.00 in case the currency is MXN.
+tipo_cambio_p		| Required (Decimal) <br> Exchange rate of the currency in which the sale was made. 1.00 in case the currency is COP.
 monto				| Required (Decimal) <br> Payment amount.
 num_operacion		| Optional (1-100 Alphanumeric) <br> Payment number.
 rfc_emisor_cta_ord	| Optional <br> RFC of the issuer.

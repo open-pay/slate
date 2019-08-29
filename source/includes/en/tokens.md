@@ -25,11 +25,11 @@ To use this API functionality we recommend using our JavaScript library for your
        "address":{
           "line1":"Av 5 de febrero",
           "line2":"Roble 207",
-          "line3":"Queretaro",
-          "state":"Queretaro",
-          "city":"Queretaro",
-          "postal_code":"76900",
-          "country_code":"MX"
+          "line3":"Bogota",
+          "state":"Bogota",
+          "city":"Bogota",
+          "postal_code":"110511",
+          "country_code":"CO"
        },
        "creation_date":"2014-01-30T13:53:11-06:00",
        "brand":"visa",
@@ -66,12 +66,12 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens \
    "cvv2":"110",
    "address":{
       "city":"QuerÃƒÂ©taro",
-      "country_code":"MX",
-      "postal_code":"76900",
+      "country_code":"CO",
+      "postal_code":"110511",
       "line1":"Av 5 de Febrero",
       "line2":"Roble 207",
       "line3":"col carrillo",
-      "state":"Queretaro"
+      "state":"Bogota"
    }
 }' 
 ```
@@ -90,10 +90,10 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens \
          "line1":"Av 5 de Febrero",
          "line2":"Roble 207",
          "line3":"col carrillo",
-         "state":"Queretaro",
+         "state":"Bogota",
          "city":"QuerÃƒÂ©taro",
-         "postal_code":"76900",
-         "country_code":"MX"
+         "postal_code":"110511",
+         "country_code":"CO"
       },
       "creation_date":null,
       "brand":"visa"
@@ -146,10 +146,10 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxq
          "line1":"Av 5 de Febrero",
          "line2":"Roble 207",
          "line3":"col carrillo",
-         "state":"Queretaro",
+         "state":"Bogota",
          "city":"QuerÃƒÂ©taro",
-         "postal_code":"76900",
-         "country_code":"MX"
+         "postal_code":"110511",
+         "country_code":"CO"
       },
       "creation_date":null,
       "brand":"visa"

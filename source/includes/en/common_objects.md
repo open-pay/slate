@@ -62,10 +62,10 @@ card_points| ***object*** <br/>Contains information about the reward points used
    "line1":"Av 5 de Febrero",
    "line2":"Roble 207",
    "line3":"col carrillo",
-   "state":"Queretaro",
-   "city":"QuerÃ©taro",
-   "postal_code":"76900",
-   "country_code":"COL"
+   "state":"Bogota",
+   "city":"Bogotá",
+   "postal_code":"110511",
+   "country_code":"CO"
 }
 ```
 

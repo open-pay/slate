@@ -79,7 +79,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
         "name" : "Cliente Colombia",
         "last_name" : "Vazquez Juarez",
         "phone_number" : "4448936475",
-        "email" : "juan.vazquez@empresa.com.mx"
+        "email" : "juan.vazquez@empresa.co"
    }
 }'
 ```

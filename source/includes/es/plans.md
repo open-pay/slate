@@ -28,7 +28,7 @@ id | ***string*** <br/> Identificador único del Plan.
 creation_date | ***datetime*** <br/> Fecha y hora en que se creó el Plan  en formato ISO 8601
 name  | ***string*** <br/> Nombre del Plan.
 amount | ***numeric*** <br/> Monto que se aplicara cada vez que se cobre la suscripción. Debe ser una cantidad mayor a cero, con hasta 2 dígitos decimales.
-currency | ***string*** <br/> Moneda usada en la operación, por default es MXN
+currency | ***string*** <br/> Moneda usada en la operación, por default es COP
 repeat_every | ***numeric*** <br/> Número de unidades tiempo entre los que se cobrara la suscripción. Por ejemplo, repeat_unit=month y repeat_every=2 indica que se cobrara cada 2 meses.
 repeat_unit | ***string*** <br/> Especifica la frecuencia de cobro. Puede ser semanal(week), mensual(month) o anual(year).
 retry_times | ***numeric*** <br/>  Numero de reintentos de cobro de la suscripción. Cuando se agotan los intentos se pone en el estatus determinado por el campo status_after_retry.
@@ -97,7 +97,7 @@ $planDataRequest = array(
     'repeat_unit' => 'month',
     'trial_days' => '30',
     'repeat_every' => '1',
-    'currency' => 'MXN');
+    'currency' => 'COP');
 
 $plan = $openpay->plans->add($planDataRequest);
 ?>

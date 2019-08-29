@@ -120,7 +120,7 @@ response_hash=@fees.create(request_hash.to_hash)
    "authorization":null,
    "method":"customer",
    "operation_type":"out",
-   "currency":"MXN",
+   "currency":"COP",
    "transaction_type":"fee",
    "status":"completed",
    "id":"th8tafyrkakdbyry3kxi",
@@ -258,7 +258,7 @@ response_hash=@fees.refund("mzdtln0bmtms6o3kck8f", refund_hash.to_hash)
   "order_id": null,
   "customer_id": "ar2btmquidjhykdaztp6",
   "amount": 11.11,
-  "currency": "MXN"
+  "currency": "COP"
 }
 ```
 
@@ -380,7 +380,7 @@ response_hash=@fees.all
       "authorization":null,
       "method":"customer",
       "operation_type":"out",
-      "currency":"MXN",
+      "currency":"COP",
       "transaction_type":"fee",
       "status":"completed",
       "id":"th8tafyrkakdbyry3kxi",
@@ -395,7 +395,7 @@ response_hash=@fees.all
       "authorization":null,
       "method":"customer",
       "operation_type":"out",
-      "currency":"MXN",
+      "currency":"COP",
       "transaction_type":"fee",
       "status":"completed",
       "id":"tdzottaaohuhosf4cdv9",

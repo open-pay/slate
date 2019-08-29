@@ -22,10 +22,10 @@ The object represents a convenience store
       "line1": "AV. 5 DE FEBRERO KM 7.5 NO 1341",
       "line2": "SAN PABLO",
       "line3": null,
-      "state": "QUERETARO",
-      "city": "QUERETARO",
-      "postal_code": "76030",
-      "country_code": "MX"
+      "state": "BOGOTA",
+      "city": "BOGOTA",
+      "postal_code": "110111",
+      "country_code": "CO"
     },
     "paynet_chain": {
       "name": "EXTRA",
@@ -112,10 +112,10 @@ curl https://api.openpay.mx/stores?latitud=20.618975&longitud=-100.422290&kilome
       "line1": "AV. 5 DE FEBRERO KM 7.5 NO 1341",
       "line2": "SAN PABLO",
       "line3": null,
-      "state": "QUERETARO",
-      "city": "QUERETARO",
-      "postal_code": "76030",
-      "country_code": "MX"
+      "state": "BOGOTA",
+      "city": "BOGOTA",
+      "postal_code": "110111",
+      "country_code": "CO"
     },
     "paynet_chain": {
       "name": "EXTRA",
@@ -139,10 +139,10 @@ curl https://api.openpay.mx/stores?latitud=20.618975&longitud=-100.422290&kilome
       "line1": "PROLONGACION TECNOLOGICO NORTE #999",
       "line2": "SAN PABLO",
       "line3": null,
-      "state": "QUERETARO",
-      "city": "QUERETARO",
-      "postal_code": "76159",
-      "country_code": "MX"
+      "state": "BOGOTA",
+      "city": "BOGOTA",
+      "postal_code": "110311",
+      "country_code": "CO"
     },
     "paynet_chain": {
       "name": "EL ASTURIANO",

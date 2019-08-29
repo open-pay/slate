@@ -15,10 +15,10 @@ Se pueden almacenar múltiples tarjetas de débito y/o crédito a nivel cliente 
       "line1":"Av 5 de Febrero",
       "line2":"Roble 207",
       "line3":"col carrillo",
-      "state":"Queretaro",
-      "city":"Querétaro",
-      "postal_code":"76900",
-      "country_code":"MX"
+      "state":"Bogota",
+      "city":"Bogotá",
+      "postal_code":"110511",
+      "country_code":"CO"
    },
    "id":"kgipbqixvjg3gbzowl7l",
    "card_number":"1111",
@@ -141,9 +141,9 @@ $cardDataRequest = array(
             'line2' => 'Co. El Tintero',
             'line3' => '',
             'postal_code' => '76920',
-            'state' => 'Querétaro',
-            'city' => 'Querétaro.',
-            'country_code' => 'MX'));
+            'state' => 'Bogotá',
+            'city' => 'Bogotá',
+            'country_code' => 'CO'));
 
 $customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
 $card = $customer->cards->add($cardDataRequest);
@@ -160,9 +160,9 @@ request.expirationMonth(12);
 request.expirationYear(20);
 request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
 Address address = new Address();
-address.city("Queretaro");
+address.city("Bogota");
 address.countryCode("10");
-address.state("Queretaro");
+address.state("Bogota");
 address.postalCode("79125");
 address.line1("Av. Pie de la cuesta #12");
 address.line2("Desarrollo San Pablo");
@@ -182,9 +182,9 @@ request.ExpirationMonth = "12";
 request.ExpirationYear = "20";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
 Address address = new Address();
-address.City = "Queretaro";
-address.CountryCode = "MX";
-address.State = "Queretaro";
+address.City = "Bogota";
+address.CountryCode = "CO";
+address.State = "Bogota";
 address.PostalCode = "79125";
 address.Line1 = "Av. Pie de la cuesta #12";
 address.Line2 = "Desarrollo San Pablo";
@@ -216,10 +216,10 @@ address_hash={
       "line1" => "Calle 10",
       "line2" => "col. san pablo",
       "line3" => "entre la calle 1 y la 2",
-      "state" => "Queretaro",
-      "city" => "Queretaro",
+      "state" => "Bogota",
+      "city" => "Bogota",
       "postal_code" => "76000",
-      "country_code" => "MX"
+      "country_code" => "CO"
    }
 request_hash={
      "holder_name" => "Juan Perez Ramirez",
