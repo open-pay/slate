@@ -1,5 +1,5 @@
 #Cargos
-Los cargos se pueden realizar a tarjetas. A cada cargo se le asigna un identificador único en el sistema.
+Los cargos se pueden realizar a tarjetas y PSE. A cada cargo se le asigna un identificador único en el sistema.
 
 Los cargos a tarjeta puedes hacerlos a una tarjeta guardada usando el id de la tarjeta, usando un token o puedes enviar la información de la tarjeta al momento de la invocación.
 
@@ -9,10 +9,10 @@ Los cargos a tarjeta puedes hacerlos a una tarjeta guardada usando el id de la t
 
 ```shell
 Comercio
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges
 
 Cliente
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
@@ -63,8 +63,8 @@ openpayAPI.ChargeService.Create(ChargeRequest request);
 > Ejemplo de petición con comercio
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/charges \
+   -u sk_e562c42a6q384b2ab02cd47d2n301uwk: \
    -H "Content-type: application/json" \
    -X POST -d '{
    "source_id" : "kdx205scoizh93upqbte",
@@ -86,7 +86,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
 $customer = array(
    	 'name' => 'Juan',
    	 'last_name' => 'Vazquez Juarez',
@@ -108,7 +108,7 @@ $charge = $openpay->charges->create($chargeRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateCardChargeParams request = new CreateCardChargeParams();
 Customer customer = new Customer();
 customer.setName("Juan");
@@ -129,13 +129,14 @@ Charge charge = api.charges().create(request);
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-ChargeRequest request = new ChargeRequest();
+
 Customer customer = new Customer();
 customer.Name = "Juan";
 customer.LastName = "Vazquez Juarez";
 customer.PhoneNumber = "571627926831";
 customer.Email = "juan.vazquez@empresa.co";
 
+ChargeRequest request = new ChargeRequest();
 request.Method = "card";
 request.SourceId = "kwkoqpg6fcvfse8k8mg2";
 request.Amount = new Decimal(100.00);
@@ -290,10 +291,10 @@ Regresa un [objeto de transacción](#objeto-transacci-n) con la información del
 
 ```shell
 Comercio
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges
 
 Cliente
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
@@ -344,8 +345,8 @@ openpayAPI.ChargeService.Create(ChargeRequest request);
 > Ejemplo de petición con comercio
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/charges \
+   -u sk_e562c42a6q384b2ab02cd47d2n301uwk: \
    -H "Content-type: application/json" \
    -X POST -d '{
    "method" : "card",
@@ -362,13 +363,13 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
    "iva": "10",
    "confirm" : "false",
    "send_email":"false",
-   "redirect_url":"http://www.openpay.mx/index.html"
+   "redirect_url":"http://www.openpay.co/index.html"
 }'
 ```
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
 $customer = array(
      'name' => 'Juan',
      'last_name' => 'Vazquez Juarez',
@@ -383,7 +384,7 @@ $chargeRequest = array(
     'customer' => $customer,
     'send_email' => false,
     'confirm' => false,
-    'redirect_url' => 'http://www.openpay.mx/index.html')
+    'redirect_url' => 'http://www.openpay.co/index.html')
 ;
 
 $charge = $openpay->charges->create($chargeRequest);
@@ -391,7 +392,7 @@ $charge = $openpay->charges->create($chargeRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateCardChargeParams request = new CreateCardChargeParams();
 Customer customer = new Customer();
 customer.setName("Juan");
@@ -405,7 +406,7 @@ request.orderId("oid-00051");
 request.setCustomer(customer);
 request.setSendEmail(false);
 request.setConfirm(false);
-request.setRedirectUrl("http://www.openpay.mx/index.html");
+request.setRedirectUrl("http://www.openpay.co/index.html");
 
 Charge charge = api.charges().create(request);
 ```
@@ -425,7 +426,7 @@ request.Description = "Cargo inicial a mi merchant";
 request.OrderId = "oid-00051";
 request.Confirm = false;
 request.SendEmail = false;
-request.RedirectUrl = "http://www.openpay.mx/index.html";
+request.RedirectUrl = "http://www.openpay.co/index.html";
 request.Customer = customer;
 
 Charge charge = api.ChargeService.Create(request);
@@ -446,7 +447,7 @@ var chargeRequest = {
    },
   'send_email' : false,
   'confirm' : false,
-  'redirect_url' : 'http://www.openpay.mx/index.html')
+  'redirect_url' : 'http://www.openpay.co/index.html')
 }
 
 openpay.charges.create(chargeRequest, function(error, charge) {
@@ -473,7 +474,7 @@ request_hash={
     "customer" => customer_hash,
     "send_email" => false,
     "confirm" => false,
-    "redirect_url" => "http://www.openpay.mx/index.html"
+    "redirect_url" => "http://www.openpay.co/index.html"
 }
 
 response_hash=@charges.create(request_hash.to_hash)
@@ -499,7 +500,7 @@ response_hash=@charges.create(request_hash.to_hash)
     "order_id": "oid-11153",
     "payment_method": {
         "type": "redirect",
-        "url": "https://sandbox-api.openpay.mx/v1/mpixehq7z4xupfwoohrm/charges/tro1ezxbfn5c8lvzhfcr/card_capture"
+        "url": "https://sandbox-api.openpay.co/v1/mpixehq7z4xupfwoohrm/charges/tro1ezxbfn5c8lvzhfcr/card_capture"
     },
     "currency": "COP",
     "amount": 100.00,
@@ -535,16 +536,17 @@ currency | ***string*** (requerido) <br/> Moneda usada en la operación
 ###Respuesta
 Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
+
 ##Confirmar un cargo
 
 > Definición
 
 ```shell
 Comercio
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/capture
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/capture
 
 Cliente
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/capture
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/capture
 ```
 
 ```php
@@ -597,8 +599,8 @@ openpay.customers.charges.capture(customerId, transactionId, captureRequest, cal
 > Ejemplo de petición con cliente
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tryqihxac3msedn4yxed/capture \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/customers/ag9nkpvdzebjiye5tlzi/charges/tryqihxac3msedn4yxed/capture \
+   -u sk_e562c42a6q384b2ab02cd47d2n301uwk: \
    -H "Content-type: application/json" \
    -X POST -d '{
     "amount" : 100.00
@@ -607,28 +609,28 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
 
 $captureData = array('amount' => 100.00);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $openpay->customers->get('ag9nkpvdzebjiye5tlzi');
 $charge = $customer->charges->get('tryqihxac3msedn4yxed');
 $charge->capture($captureData);
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 ConfirmCaptureParams request = new ConfirmCaptureParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.amount(new BigDecimal("100.00"));
 
-Charge charge = api.charges().confirmCapture("ag4nktpdzebjiye1tlze", request);
+Charge charge = api.charges().confirmCapture("ag9nkpvdzebjiye5tlzi", request);
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.ChargeService.Capture("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", new Decimal(100.00));
+Charge charge = api.ChargeService.Capture("ag9nkpvdzebjiye5tlzi", "tryqihxac3msedn4yxed", new Decimal(100.00));
 ```
 
 ```javascript
@@ -636,7 +638,7 @@ var captureRequest = {
   'amount' : 100.00
 };
 
-openpay.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', captureRequest,
+openpay.customers.charges.capture('ag9nkpvdzebjiye5tlzi', 'tryqihxac3msedn4yxed', captureRequest,
     function(error, charge){
   // ...
 });
@@ -646,7 +648,7 @@ openpay.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed'
 @openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 @charges=@openpay.create(:charges)
 
-response_hash=@charges.capture("tryqihxac3msedn4yxed", "ag4nktpdzebjiye1tlze")
+response_hash=@charges.capture("tryqihxac3msedn4yxed", "ag9nkpvdzebjiye5tlzi")
 ```
 
 > Ejemplo de respuesta
@@ -669,17 +671,17 @@ response_hash=@charges.capture("tryqihxac3msedn4yxed", "ag4nktpdzebjiye1tlze")
       "expiration_month":"12",
       "allows_charges":true,
       "allows_payouts":true,
-      "bank_name":"Banamex",
+      "bank_name":"BBVA",
       "bank_code":"002"
    },
    "status":"completed",
    "currency":"COP",
-   "creation_date":"2014-05-26T14:00:17-05:00",
-   "operation_date":"2014-05-26T14:00:17-05:00",
+   "creation_date":"2019-05-26T14:00:17-05:00",
+   "operation_date":"2019-05-26T14:00:17-05:00",
    "description":"Cargo inicial a mi cuenta",
    "error_message":null,
    "order_id":null,
-   "customer_id":"ag4nktpdzebjiye1tlze"
+   "customer_id":"ag9nkpvdzebjiye5tlzi"
 }
 ```
 Confirmar un cargo creado con la propieda de <code>capture = "false"</code>,  este método es la segunda parte de la [creación de un cargo con tarjeta (id o token)](#con-id-de-tarjeta-o-token) y puede confirmar el monto capturado en la primera llamada o un monto menor.
@@ -705,10 +707,10 @@ Regresa un [objeto de transacción](#objeto-transacci-n) con la información del
 
 ```shell
 Comercio
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/refund
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/refund
 
 Cliente
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/refund
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/refund
 ```
 
 ```php
@@ -761,8 +763,8 @@ openpay.customers.charges.refund(customerId, transactionId, refundRequest, callb
 > Ejemplo de petición con cliente
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tr6cxbcefzatd10guvvw/refund \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/customers/ag9nkpvdzebjiye5tlzi/charges/tr6cxbcefzatd10guvvw/refund \
+   -u sk_e562c42a6q384b2ab02cd47d2n301uwk: \
    -H "Content-type: application/json" \
    -X POST -d '{
    "description" : "devolución",
@@ -772,31 +774,31 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
 
 $refundData = array(
     'description' => 'devolución',
     'amount' => 100);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $openpay->customers->get('ag9nkpvdzebjiye5tlzi');
 $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 $charge->refund($refundData);
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 RefundParams request = new RefundParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.description("Monto de cargo devuelto");
 request.amount(new BigDecimal("100.00"));
 
-Charge charge = api.charges().refund("ag4nktpdzebjiye1tlze", request);
+Charge charge = api.charges().refund("ag9nkpvdzebjiye5tlzi", request);
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.ChargeService.Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
+Charge charge = api.ChargeService.Refund("ag9nkpvdzebjiye5tlzi", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
 ```
 
 ```javascript
@@ -805,7 +807,7 @@ var refundRequest = {
    'amount' : 100.00
 };
 
-openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest,
+openpay.customers.charges.refund('ag9nkpvdzebjiye5tlzi', 'tryqihxac3msedn4yxed', refundRequest,
     function(error, charge) {
   // ...
 });
@@ -820,7 +822,7 @@ request_hash={
      "amount" => 100.00
    }
 
-response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4nktpdzebjiye1tlze")
+response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag9nkpvdzebjiye5tlzi")
 ```
 
 > Ejemplo de respuesta
@@ -931,10 +933,10 @@ Regresa un [objeto de transacción](#objeto-transacci-n) con la información del
 
 ```shell
 Comercio
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}
 
 Comercio
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}
 ```
 
 ```php
@@ -985,31 +987,31 @@ openpay.customers.charges.get(customerId, transactionId, callback);
 > Ejemplo de petición con cliente
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tr6cxbcefzatd10guvvw \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/customers/ag9nkpvdzebjiye5tlzi/charges/tr6cxbcefzatd10guvvw \
+   -u sk_e562c42a6q384b2ab02cd47d2n301uwk:
 ```
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $openpay->customers->get('ag9nkpvdzebjiye5tlzi');
 $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.charges().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Charge charge = api.charges().get("ag9nkpvdzebjiye5tlzi", "tr6cxbcefzatd10guvvw");
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.ChargeService.Get("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed");
+Charge charge = api.ChargeService.Get("ag9nkpvdzebjiye5tlzi", "tryqihxac3msedn4yxed");
 ```
 
 ```javascript
-openpay.customers.charges.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', function(error, charge){
+openpay.customers.charges.get('ag9nkpvdzebjiye5tlzi', 'tr6cxbcefzatd10guvvw', function(error, charge){
   // ...
 });
 ```
@@ -1018,7 +1020,7 @@ openpay.customers.charges.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', fu
 @openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 @charges=@openpay.create(:charges)
 
-response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag4nktpdzebjiye1tlze")
+response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag9nkpvdzebjiye5tlzi")
 ```
 
 > Ejemplo de respuesta
@@ -1090,10 +1092,10 @@ Regresa un [objeto de transacción](#objeto-transacci-n) con la información del
 
 ```shell
 Comercio
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges
 
 Comercio
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
@@ -1146,21 +1148,21 @@ openpay.customers.charges.list(customerId, searchParams, callback);
 > Ejemplo de petición con cliente
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges?creation[gte]=2013-11-01&limit=2" \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab:  
+curl -g "https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/customers/ag9nkpvdzebjiye5tlzi/charges?creation[gte]=2018-11-01&limit=2" \
+   -u sk_e562c42a6q384b2ab02cd47d2n301uwk:  
 ```
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
 
 $searchParams = array(
-    'creation[gte]' => '2013-11-01',
-    'creation[lte]' => '2014-11-01',
+    'creation[gte]' => '2018-11-01',
+    'creation[lte]' => '2019-11-01',
     'offset' => 0,
     'limit' => 2);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $openpay->customers->get('ag9nkpvdzebjiye5tlzi');
 $chargeList = $customer->charges->getList($searchParams);
 ?>
 ```
@@ -1168,10 +1170,10 @@ $chargeList = $customer->charges->getList($searchParams);
 ```java
 final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
-dateGte.set(2014, 5, 1, 0, 0, 0);
-dateLte.set(2014, 5, 15, 0, 0, 0);
+dateGte.set(2019, 5, 1, 0, 0, 0);
+dateLte.set(2019, 5, 15, 0, 0, 0);
 
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -1179,28 +1181,28 @@ request.offset(0);
 request.limit(100);
 request.amount(new BigDecimal("100.00"));
 
-List<Charge> charges = api.charges().list("ag4nktpdzebjiye1tlze", request);
+List<Charge> charges = api.charges().list("ag9nkpvdzebjiye5tlzi", request);
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
-request.CreationGte = new Datetime(2014, 5, 1);
-request.CreationLte = new DateTime(2014, 5, 15);
+request.CreationGte = new Datetime(2019, 5, 1);
+request.CreationLte = new DateTime(2019, 5, 15);
 request.Offset = 0;
 request.Limit = 100;
 request.Amount = new Decimal(100.00);
 
-List<Charge> charges= openpayAPI.ChargeService.List("ag4nktpdzebjiye1tlze", request);
+List<Charge> charges= openpayAPI.ChargeService.List("ag9nkpvdzebjiye5tlzi", request);
 ```
 
 ```javascript
 var searchParams = {
-  'creation[gte]' : '2013-11-01',
+  'creation[gte]' : '2018-11-01',
   'limit' : 2
 };
 
-openpay.customers.charges.list('ag4nktpdzebjiye1tlze',searchParams, function(error, chargeList) {
+openpay.customers.charges.list('ag9nkpvdzebjiye5tlzi',searchParams, function(error, chargeList) {
   // ...
 });
 ```
@@ -1209,7 +1211,7 @@ openpay.customers.charges.list('ag4nktpdzebjiye1tlze',searchParams, function(err
 @openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 @charges=@openpay.create(:charges)
 
-response_hash=@charges.all("ag4nktpdzebjiye1tlze")
+response_hash=@charges.all("ag9nkpvdzebjiye5tlzi")
 ```
 
 > Ejemplo de respuesta

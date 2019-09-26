@@ -215,7 +215,7 @@ response_hash=@subscriptions.create(request_hash.to_hash, "a9pvykxz4g5rg0fplze0"
       "expiration_month":"12",
       "allows_charges":true,
       "allows_payouts":true,
-      "bank_name":"Banamex",
+      "bank_name":"BBVA",
       "bank_code":"002"
    },
    "cancel_at_period_end":false,

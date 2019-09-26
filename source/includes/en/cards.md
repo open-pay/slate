@@ -248,7 +248,7 @@ response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
    "allows_charges":true,
    "allows_payouts":true,
    "creation_date":"2014-05-21T17:31:01-05:00",
-   "bank_name":"Banamex",
+   "bank_name":"BBVA",
    "customer_id":"ag4nktpdzebjiye1tlze",
    "bank_code":"002"
 }
@@ -546,7 +546,7 @@ response_hash=@cards.get("ktrpvymgatocelsciak7", "asynwirguzkgq2bizogo")
    "allows_charges":true,
    "allows_payouts":true,
    "creation_date":"2014-05-21T17:31:01-05:00",
-   "bank_name":"Banamex",
+   "bank_name":"BBVA",
    "customer_id":"ag4nktpdzebjiye1tlze",
    "bank_code":"002"
 }
@@ -682,7 +682,7 @@ response_hash=@cards.getPoints("asynwirguzkgq2bizogo","tnasugabhdgq456wr")
 ]
 ```
 
-Returns the card point balance. Is applicable only for Santander, Scotiabank and Bancomer points.
+Returns the card point balance. Is applicable only for Santander, Scotiabank and BBVA points.
 
 ###Request
 
@@ -703,7 +703,7 @@ id| ***string*** (required, length = 45) <br/> Identifier token
 
 Property | Description
 --------- | ------
-points_type|  Points type accepted by the card (Santander, Scotiabank or Bancomer)
+points_type|  Points type accepted by the card (Santander, Scotiabank or BBVA)
 remaining_points| Number of remaining points
 remaining_mxn| Balance remaining points in pesos
 

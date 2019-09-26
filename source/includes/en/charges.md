@@ -1,5 +1,5 @@
 #Charges
-Charges can be made to cards. Each charge is assigned with an unique identifier in the system.
+Charges can be made to cards and PSE. Each charge is assigned with an unique identifier in the system.
 
 You can do card charges by using a saved card id, using a token or you can send the card information at the time of invocation.
 
@@ -9,10 +9,10 @@ You can do card charges by using a saved card id, using a token or you can send 
 
 ```shell
 Merchant
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges
 
 Customer
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
@@ -63,8 +63,8 @@ openpayAPI.ChargeService.Create(ChargeRequest request);
 > Merchant request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/charges \
+   -u sk_e562c42a6q384b2ab02cd47d2n301uwk: \
    -H "Content-type: application/json" \
    -X POST -d '{
    "source_id" : "kdx205scoizh93upqbte",
@@ -86,19 +86,20 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
 $customer = array(
    	 'name' => 'Juan',
    	 'last_name' => 'Vazquez Juarez',
-   	 'phone_number' => '4423456723',
-   	 'email' => 'juan.vazquez@empresa.com.col');
+   	 'phone_number' => '571627926831',
+   	 'email' => 'juan.vazquez@empresa.co');
 
 $chargeRequest = array(
     'method' => 'card',
     'source_id' => 'kqgykn96i7bcs1wwhvgw',
     'amount' => 100,
+    'currency' => 'COP'
     'description' => 'Cargo inicial a mi merchant',
-    'order_id' => 'oid-00051'
+    'order_id' => 'oid-00051',
     'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
     'customer' => $customer);
 
@@ -107,16 +108,17 @@ $charge = $openpay->charges->create($chargeRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateCardChargeParams request = new CreateCardChargeParams();
 Customer customer = new Customer();
 customer.setName("Juan");
 customer.setLastName("Vazquez Juarez");
-customer.setPhoneNumber("4423456723");
-customer.setEmail("juan.vazquez@empresa.com.col");
+customer.setPhoneNumber("571627926831");
+customer.setEmail("juan.vazquez@empresa.co");
 
 request.cardId("kqgykn96i7bcs1wwhvgw"); // =source_id
 request.amount(new BigDecimal("100.00"));
+request.currency("COP");
 request.description("Cargo inicial a mi merchant");
 request.orderId("oid-00051");
 request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
@@ -127,16 +129,18 @@ Charge charge = api.charges().create(request);
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+
 Customer customer = new Customer();
 customer.Name = "Juan";
 customer.LastName = "Vazquez Juarez";
-customer.PhoneNumber = "4423456723";
-customer.Email = "juan.vazquez@empresa.com.col";
+customer.PhoneNumber = "571627926831";
+customer.Email = "juan.vazquez@empresa.co";
 
 ChargeRequest request = new ChargeRequest();
 request.Method = "card";
 request.SourceId = "kwkoqpg6fcvfse8k8mg2";
 request.Amount = new Decimal(100.00);
+request.Currency = "COP";
 request.Description = "Cargo inicial a mi merchant";
 request.OrderId = "oid-00051";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
@@ -150,14 +154,15 @@ var chargeRequest = {
    'source_id' : 'kqgykn96i7bcs1wwhvgw',
    'method' : 'card',
    'amount' : 100,
+   'currency' : 'COP',
    'description' : 'Cargo inicial a mi cuenta',
    'order_id' : 'oid-00051',
    'device_session_id' : 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
    'customer' : {
    	    'name' : 'Juan',
    	    'last_name' : 'Vazquez Juarez',
-   	    'phone_number' : '4423456723',
-   	    'email' : 'juan.vazquez@empresa.com.col'
+   	    'phone_number' : '571627926831',
+   	    'email' : 'juan.vazquez@empresa.co'
    }
 }
 
@@ -172,13 +177,15 @@ openpay.charges.create(chargeRequest, function(error, charge) {
 customer_hash={
     "name" => "Juan",
     "last_name" => "Vazquez Juarez",
-    "phone_number" => "4423456723",
-    "email" => "juan.vazquez@empresa.com.col"
+    "phone_number" => "571627926831",
+    "email" => "juan.vazquez@empresa.co"
 }
+
 request_hash={
     "method" => "card",
     "source_id" => "kqgykn96i7bcs1wwhvgw",
     "amount" => 100.00,
+    "currency" => "COP",
     "description" => "Cargo inicial a mi merchant",
     "order_id" => "oid-00051",
     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
@@ -192,35 +199,51 @@ response_hash=@charges.create(request_hash.to_hash)
 
 ```json
 {
-   "id":"trzjaozcik8msyqshka4",
-   "amount":100.00,
-   "authorization":"801585",
-   "method":"card",
-   "operation_type":"in",
-   "transaction_type":"charge",
-   "card":{
-      "id":"kqgykn96i7bcs1wwhvgw",
-      "type":"debit",
-      "brand":"visa",
-      "address":null,
-      "card_number":"411111XXXXXX1111",
-      "holder_name":"Juan Perez Ramirez",
-      "expiration_year":"20",
-      "expiration_month":"12",
-      "allows_charges":true,
-      "allows_payouts":true,
-      "creation_date":"2014-05-26T11:02:16-05:00",
-      "bank_name":"Banamex",
-      "bank_code":"002",
-      "customer_id":"ag4nktpdzebjiye1tlze"
-   },
-   "status":"completed",
-   "currency":"COP",
-   "creation_date":"2014-05-26T11:02:45-05:00",
-   "operation_date":"2014-05-26T11:02:45-05:00",
-   "description":"Cargo inicial a mi cuenta",
-   "error_message":null,
-   "order_id":"oid-00051"
+    "id": "trbeuhyvmkr3b9jitajp",
+    "authorization": "1128731327",
+    "operation_type": "in",
+    "method": "card",
+    "transaction_type": "charge",
+    "card": {
+        "id": "kdx205scoizh93upqbte",
+        "type": "credit",
+        "brand": "diners",
+        "address": null,
+        "card_number": "367284XXXX3333",
+        "holder_name": "DinnersClub",
+        "expiration_year": "21",
+        "expiration_month": "07",
+        "allows_charges": true,
+        "allows_payouts": false,
+        "creation_date": "2019-08-09T13:35:48-05:00",
+        "bank_name": "BANCO DE BOGOTÁ",
+        "bank_code": "000"
+    },
+    "status": "completed",
+    "conciliated": true,
+    "iva": "10",
+    "creation_date": "2019-08-12T12:36:56-05:00",
+    "operation_date": "2019-08-12T12:36:56-05:00",
+    "description": "Ejemplo cargo",
+    "error_message": null,
+    "order_id": "oid-12330",
+    "currency": "COP",
+    "amount": 666.00,
+    "customer": {
+        "name": "Cliente Colombia",
+        "last_name": "Vazquez Juarez",
+        "email": "juan.vazquez@empresa.co",
+        "phone_number": "4448936475",
+        "address": null,
+        "creation_date": "2019-08-12T12:36:56-05:00",
+        "external_id": null,
+        "clabe": null
+    },
+    "fee": {
+        "amount": 21.81,
+        "tax": 3.4896,
+        "currency": "COP"
+    }
 }
 ```
 
@@ -266,10 +289,10 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 ```shell
 Merchant
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges
 
 Customer
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
@@ -320,45 +343,46 @@ openpayAPI.ChargeService.Create(ChargeRequest request);
 > Merchant request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/charges \
+   -u sk_e562c42a6q384b2ab02cd47d2n301uwk: \
    -H "Content-type: application/json" \
    -X POST -d '{
    "method" : "card",
    "amount" : 100,
-   "currency" : "COP",
+   "currency":"COP",
    "description" : "Cargo inicial a mi cuenta",
-   "order_id" : "oid-00051",
+   "order_id" : "oid-11152",
    "customer" : {
         "name" : "Juan",
         "last_name" : "Vazquez Juarez",
         "phone_number" : "4423456723",
-        "email" : "juan.vazquez@empresa.com.col"
+        "email" : "juan.vazquez@empresa.co"
    },
+   "iva": "10",
    "confirm" : "false",
    "send_email":"false",
-   "redirect_url":"http://www.openpay.mx/index.html"
+   "redirect_url":"http://www.openpay.co/index.html"
 }'
 ```
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
 $customer = array(
      'name' => 'Juan',
      'last_name' => 'Vazquez Juarez',
      'phone_number' => '4423456723',
-     'email' => 'juan.vazquez@empresa.com.col');
+     'email' => 'juan.vazquez@empresa.co');
 
 $chargeRequest = array(
     "method" : "card",
     'amount' => 100,
-    "currency" => "COP",
+    "currency"=> "COP",
     'description' => 'Cargo terminal virtual a mi merchant',
     'customer' => $customer,
     'send_email' => false,
     'confirm' => false,
-    'redirect_url' => 'http://www.openpay.mx/index.html')
+    'redirect_url' => 'http://www.openpay.co/index.html')
 ;
 
 $charge = $openpay->charges->create($chargeRequest);
@@ -366,13 +390,13 @@ $charge = $openpay->charges->create($chargeRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateCardChargeParams request = new CreateCardChargeParams();
 Customer customer = new Customer();
 customer.setName("Juan");
 customer.setLastName("Vazquez Juarez");
 customer.setPhoneNumber("4423456723");
-customer.setEmail("juan.vazquez@empresa.com.col");
+customer.setEmail("juan.vazquez@empresa.co");
 
 request.amount(new BigDecimal("100.00"));
 request.description("Cargo inicial a mi merchant");
@@ -380,7 +404,7 @@ request.orderId("oid-00051");
 request.setCustomer(customer);
 request.setSendEmail(false);
 request.setConfirm(false);
-request.setRedirectUrl("http://www.openpay.mx/index.html");
+request.setRedirectUrl("http://www.openpay.co/index.html");
 
 Charge charge = api.charges().create(request);
 ```
@@ -392,7 +416,7 @@ Customer customer = new Customer();
 customer.Name = "Juan";
 customer.LastName = "Vazquez Juarez";
 customer.PhoneNumber = "4423456723";
-customer.Email = "juan.vazquez@empresa.com.col";
+customer.Email = "juan.vazquez@empresa.co";
 
 request.Method = "card";
 request.Amount = new Decimal(100.00);
@@ -400,7 +424,7 @@ request.Description = "Cargo inicial a mi merchant";
 request.OrderId = "oid-00051";
 request.Confirm = false;
 request.SendEmail = false;
-request.RedirectUrl = "http://www.openpay.mx/index.html";
+request.RedirectUrl = "http://www.openpay.co/index.html";
 request.Customer = customer;
 
 Charge charge = api.ChargeService.Create(request);
@@ -410,18 +434,18 @@ Charge charge = api.ChargeService.Create(request);
 var chargeRequest = {
    'method' : 'card',
    'amount' : 100,
-   'currency' : 'COP',
+   'currency': 'COP',
    'description' : 'Cargo inicial a mi cuenta',
    'order_id' : 'oid-00051',
    'customer' : {
         'name' : 'Juan',
         'last_name' : 'Vazquez Juarez',
         'phone_number' : '4423456723',
-        'email' : 'juan.vazquez@empresa.com.col'
+        'email' : 'juan.vazquez@empresa.co'
    },
   'send_email' : false,
   'confirm' : false,
-  'redirect_url' : 'http://www.openpay.mx/index.html')
+  'redirect_url' : 'http://www.openpay.co/index.html')
 }
 
 openpay.charges.create(chargeRequest, function(error, charge) {
@@ -436,7 +460,7 @@ customer_hash={
     "name" => "Juan",
     "last_name" => "Vazquez Juarez",
     "phone_number" => "4423456723",
-    "email" => "juan.vazquez@empresa.com.col"
+    "email" => "juan.vazquez@empresa.co"
 }
 
 request_hash={
@@ -448,7 +472,7 @@ request_hash={
     "customer" => customer_hash,
     "send_email" => false,
     "confirm" => false,
-    "redirect_url" => "http://www.openpay.mx/index.html"
+    "redirect_url" => "http://www.openpay.co/index.html"
 }
 
 response_hash=@charges.create(request_hash.to_hash)
@@ -459,32 +483,35 @@ response_hash=@charges.create(request_hash.to_hash)
 ```json
 
 {
-  "id": "trq7yrthx5vc4gtjdkwg",
-  "authorization": null,
-  "method": "card",
-  "operation_type": "in",
-  "transaction_type": "charge",
-  "status": "charge_pending",
-  "conciliated": false,
-  "creation_date": "2016-09-09T18:52:02-05:00",
-  "operation_date": "2016-09-09T18:52:02-05:00",
-  "description": "Cargo desde terminal virtual de 111",
-  "error_message": null,
-  "amount": 100,
-  "currency": "COP",
-  "payment_method": {
-    "type": "redirect",
-    "url": "https://sandbox-api.openpay.mx/v1/mexzhpxok3houd5lbvz1/charges/trq7yrthx5vc4gtjdkwg/card_capture"
-  },
-  "customer": {
-    "name": "Juan",
-    "last_name": "Vazquez Juarez",
-    "email": "juan.vazquez@empresa.com.col",
-    "phone_number": "4423456723",
-    "creation_date": "2016-09-09T18:52:02-05:00",
-    "clabe": null,
-    "external_id": null
-  }
+    "id": "tro1ezxbfn5c8lvzhfcr",
+    "authorization": null,
+    "operation_type": "in",
+    "method": "card",
+    "transaction_type": "charge",
+    "status": "charge_pending",
+    "conciliated": false,
+    "iva": "10",
+    "creation_date": "2019-08-12T12:47:41-05:00",
+    "operation_date": "2019-08-12T12:47:41-05:00",
+    "description": "Cargo inicial a mi cuenta",
+    "error_message": null,
+    "order_id": "oid-11153",
+    "payment_method": {
+        "type": "redirect",
+        "url": "https://sandbox-api.openpay.co/v1/mpixehq7z4xupfwoohrm/charges/tro1ezxbfn5c8lvzhfcr/card_capture"
+    },
+    "currency": "COP",
+    "amount": 100.00,
+    "customer": {
+        "name": "Juan",
+        "last_name": "Vazquez Juarez",
+        "email": "juan.vazquez@empresa.co",
+        "phone_number": "4423456723",
+        "address": null,
+        "creation_date": "2019-08-12T12:47:41-05:00",
+        "external_id": null,
+        "clabe": null
+    }
 }
 ```
 
@@ -504,8 +531,9 @@ send_email | ***boolean*** (optional) <br/>Indicates if is need send a email tha
 redirect_url | ***string*** (required) <br/>It indicates the url to which redirect after a successful transaction in the openpay payment form.
 currency | ***string*** (required) <br/> Currency used in the operation
 
-###Response
-Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
+###Respuesta
+Response an [objeto de transacción](#objeto-transacci-n) with payment info or a [respuesta de error](#objeto-error).
+
 
 ##Confirming a charge
 
@@ -513,10 +541,10 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 ```shell
 Merchant
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/capture
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/capture
 
 Customer
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/capture
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/capture
 ```
 
 ```php
@@ -569,8 +597,8 @@ openpay.customers.charges.capture(customerId, transactionId, captureRequest, cal
 > Customer request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tryqihxac3msedn4yxed/capture \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/customers/ag9nkpvdzebjiye5tlzi/charges/tryqihxac3msedn4yxed/capture \
+   -u sk_e562c42a6q384b2ab02cd47d2n301uwk: \
    -H "Content-type: application/json" \
    -X POST -d '{
     "amount" : 100.00
@@ -579,28 +607,28 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
 
 $captureData = array('amount' => 100.00);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $openpay->customers->get('ag9nkpvdzebjiye5tlzi');
 $charge = $customer->charges->get('tryqihxac3msedn4yxed');
 $charge->capture($captureData);
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 ConfirmCaptureParams request = new ConfirmCaptureParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.amount(new BigDecimal("100.00"));
 
-Charge charge = api.charges().confirmCapture("ag4nktpdzebjiye1tlze", request);
+Charge charge = api.charges().confirmCapture("ag9nkpvdzebjiye5tlzi", request);
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.ChargeService.Capture("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", new Decimal(100.00));
+Charge charge = api.ChargeService.Capture("ag9nkpvdzebjiye5tlzi", "tryqihxac3msedn4yxed", new Decimal(100.00));
 ```
 
 ```javascript
@@ -608,7 +636,7 @@ var captureRequest = {
   'amount' : 100.00
 };
 
-openpay.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', captureRequest,
+openpay.customers.charges.capture('ag9nkpvdzebjiye5tlzi', 'tryqihxac3msedn4yxed', captureRequest,
     function(error, charge){
   // ...
 });
@@ -618,7 +646,7 @@ openpay.customers.charges.capture('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed'
 @openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 @charges=@openpay.create(:charges)
 
-response_hash=@charges.capture("tryqihxac3msedn4yxed", "ag4nktpdzebjiye1tlze")
+response_hash=@charges.capture("tryqihxac3msedn4yxed", "ag9nkpvdzebjiye5tlzi")
 ```
 
 > Response example
@@ -641,17 +669,17 @@ response_hash=@charges.capture("tryqihxac3msedn4yxed", "ag4nktpdzebjiye1tlze")
       "expiration_month":"12",
       "allows_charges":true,
       "allows_payouts":true,
-      "bank_name":"Banamex",
+      "bank_name":"BBVA",
       "bank_code":"002"
    },
    "status":"completed",
    "currency":"COP",
-   "creation_date":"2014-05-26T14:00:17-05:00",
-   "operation_date":"2014-05-26T14:00:17-05:00",
+   "creation_date":"2019-05-26T14:00:17-05:00",
+   "operation_date":"2019-05-26T14:00:17-05:00",
    "description":"Cargo inicial a mi cuenta",
    "error_message":null,
    "order_id":null,
-   "customer_id":"ag4nktpdzebjiye1tlze"
+   "customer_id":"ag9nkpvdzebjiye5tlzi"
 }
 ```
 Confirm a charge created with the <code>capture = "false" </code> property, this method is the second part of the [create a charge with a card (id or token)] (#with-a-card-id-or-token) and it can confirm the amount captured on the first call or a lesser amount.
@@ -677,10 +705,10 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 ```shell
 Merchant
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/refund
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/refund
 
 Customer
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/refund
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/refund
 ```
 
 ```php
@@ -733,8 +761,8 @@ openpay.customers.charges.refund(customerId, transactionId, refundRequest, callb
 > Customer request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tr6cxbcefzatd10guvvw/refund \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/customers/ag9nkpvdzebjiye5tlzi/charges/tr6cxbcefzatd10guvvw/refund \
+   -u sk_e562c42a6q384b2ab02cd47d2n301uwk: \
    -H "Content-type: application/json" \
    -X POST -d '{
    "description" : "devolución",
@@ -744,31 +772,31 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
 
 $refundData = array(
     'description' => 'devolución',
     'amount' => 100);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $openpay->customers->get('ag9nkpvdzebjiye5tlzi');
 $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 $charge->refund($refundData);
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 RefundParams request = new RefundParams();
 request.chargeId("tryqihxac3msedn4yxed");
 request.description("Monto de cargo devuelto");
 request.amount(new BigDecimal("100.00"));
 
-Charge charge = api.charges().refund("ag4nktpdzebjiye1tlze", request);
+Charge charge = api.charges().refund("ag9nkpvdzebjiye5tlzi", request);
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.ChargeService.Refund("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
+Charge charge = api.ChargeService.Refund("ag9nkpvdzebjiye5tlzi", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
 ```
 
 ```javascript
@@ -777,7 +805,7 @@ var refundRequest = {
    'amount' : 100.00
 };
 
-openpay.customers.charges.refund('ag4nktpdzebjiye1tlze', 'tryqihxac3msedn4yxed', refundRequest,
+openpay.customers.charges.refund('ag9nkpvdzebjiye5tlzi', 'tryqihxac3msedn4yxed', refundRequest,
     function(error, charge) {
   // ...
 });
@@ -792,56 +820,91 @@ request_hash={
      "amount" => 100.00
    }
 
-response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4nktpdzebjiye1tlze")
+response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag9nkpvdzebjiye5tlzi")
 ```
 
 > Response example
 
 ```json
 {
-   "id":"tr6cxbcefzatd10guvvw",
-   "amount":100.00,
-   "authorization":"801585",
-   "method":"card",
-   "operation_type":"in",
-   "transaction_type":"charge",
-   "card":{
-      "type":"debit",
-      "brand":"visa",
-      "address":null,
-      "card_number":"411111XXXXXX1111",
-      "holder_name":"Juan Perez Ramirez",
-      "expiration_year":"20",
-      "expiration_month":"12",
-      "allows_charges":true,
-      "allows_payouts":true,
-      "bank_name":"Banamex",
-      "bank_code":"002"
-   },
-   "status":"completed",
-   "refund":{
-      "id":"trcbsmjkroqmjobxqhpb",
-      "amount":100.00,
-      "authorization":"801585",
-      "method":"card",
-      "operation_type":"out",
-      "transaction_type":"refund",
-      "status":"completed",
-      "currency":"COP",
-      "creation_date":"2014-05-26T13:56:21-05:00",
-      "operation_date":"2014-05-26T13:56:21-05:00",
-      "description":"devolucion",
-      "error_message":null,
-      "order_id":null,
-      "customer_id":"ag4nktpdzebjiye1tlze"
-   },
-   "currency":"COP",
-   "creation_date":"2014-05-26T11:56:25-05:00",
-   "operation_date":"2014-05-26T11:56:25-05:00",
-   "description":"Cargo inicial a mi cuenta",
-   "error_message":null,
-   "order_id":"oid-00052",
-   "customer_id":"ag4nktpdzebjiye1tlze"
+    "id": "troztz0scxl7berfxju0",
+    "authorization": "332225182",
+    "operation_type": "in",
+    "method": "card",
+    "transaction_type": "charge",
+    "card": {
+        "type": "debit",
+        "brand": "visa",
+        "address": null,
+        "card_number": "457562XXXXXX0326",
+        "holder_name": "Jorge Lopez",
+        "expiration_year": "19",
+        "expiration_month": "12",
+        "allows_charges": true,
+        "allows_payouts": false,
+        "bank_name": "BBVA COLOMBIA",
+        "bank_code": "000"
+    },
+    "status": "completed",
+    "conciliated": true,
+    "creation_date": "2019-08-12T12:51:56-05:00",
+    "operation_date": "2019-08-12T12:51:56-05:00",
+    "description": "Cargo inicial a mi cuenta",
+    "error_message": null,
+    "order_id": "oid-12317",
+    "refunds": [
+        {
+            "operation_date": "2019-08-12T13:00:23-05:00",
+            "authorization": "1091286572",
+            "amount": 100.00,
+            "status": "completed",
+            "conciliated": true,
+            "id": "tr76epoxpjwsqcdynpmb",
+            "description": "Reembolso",
+            "currency": "COP"
+        }
+    ],
+    "refund": {
+        "operation_date": "2019-08-12T13:00:23-05:00",
+        "authorization": "1091286572",
+        "amount": 100.00,
+        "operation_type": "out",
+        "method": "card",
+        "transaction_type": "refund",
+        "status": "completed",
+        "conciliated": true,
+        "id": "tr76epoxpjwsqcdynpmb",
+        "creation_date": "2019-08-12T13:00:23-05:00",
+        "description": "Reembolso",
+        "customer": {
+            "name": "Cliente Colombia",
+            "last_name": "Vazquez Juarez",
+            "email": "juan.vazquez@empresa.co",
+            "phone_number": "4448936475",
+            "address": null,
+            "creation_date": "2019-08-12T12:51:56-05:00",
+            "external_id": null,
+            "clabe": null
+        },
+        "currency": "COP"
+    },
+    "currency": "COP",
+    "amount": 100.00,
+    "customer": {
+        "name": "Cliente Colombia",
+        "last_name": "Vazquez Juarez",
+        "email": "juan.vazquez@empresa.co",
+        "phone_number": "4448936475",
+        "address": null,
+        "creation_date": "2019-08-12T12:51:56-05:00",
+        "external_id": null,
+        "clabe": null
+    },
+    "fee": {
+        "amount": 5.4000,
+        "tax": 0.8640,
+        "currency": "COP"
+    }
 }
 ```
 You can use this method if you want to make a charge refund to a card. The amount to be returned will be the total charge or a lower amount. Note that the refund may be delayed in the statement of your customer for 1-3 business days.
@@ -868,10 +931,10 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 ```shell
 Merchant
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}
 
 Merchant
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}
 ```
 
 ```php
@@ -922,31 +985,31 @@ openpay.customers.charges.get(customerId, transactionId, callback);
 > Customer request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges/tr6cxbcefzatd10guvvw \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/customers/ag9nkpvdzebjiye5tlzi/charges/tr6cxbcefzatd10guvvw \
+   -u sk_e562c42a6q384b2ab02cd47d2n301uwk:
 ```
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $openpay->customers->get('ag9nkpvdzebjiye5tlzi');
 $charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
 ?>
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.charges().get("ag4nktpdzebjiye1tlze", "tr6cxbcefzatd10guvvw");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Charge charge = api.charges().get("ag9nkpvdzebjiye5tlzi", "tr6cxbcefzatd10guvvw");
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.ChargeService.Get("ag4nktpdzebjiye1tlze", "tryqihxac3msedn4yxed");
+Charge charge = api.ChargeService.Get("ag9nkpvdzebjiye5tlzi", "tryqihxac3msedn4yxed");
 ```
 
 ```javascript
-openpay.customers.charges.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', function(error, charge){
+openpay.customers.charges.get('ag9nkpvdzebjiye5tlzi', 'tr6cxbcefzatd10guvvw', function(error, charge){
   // ...
 });
 ```
@@ -955,56 +1018,57 @@ openpay.customers.charges.get('ag4nktpdzebjiye1tlze', 'tr6cxbcefzatd10guvvw', fu
 @openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 @charges=@openpay.create(:charges)
 
-response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag4nktpdzebjiye1tlze")
+response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag9nkpvdzebjiye5tlzi")
 ```
 
 > Response example
 
 ```json
 {
-   "id":"tr6cxbcefzatd10guvvw",
-   "amount":100.00,
-   "authorization":"801585",
-   "method":"card",
-   "operation_type":"in",
-   "transaction_type":"charge",
-   "card":{
-      "type":"debit",
-      "brand":"visa",
-      "address":null,
-      "card_number":"411111XXXXXX1111",
-      "holder_name":"Juan Perez Ramirez",
-      "expiration_year":"20",
-      "expiration_month":"12",
-      "allows_charges":true,
-      "allows_payouts":true,
-      "bank_name":"Banamex",
-      "bank_code":"002"
-   },
-   "status":"completed",
-   "refund":{
-      "id":"trcbsmjkroqmjobxqhpb",
-      "amount":100.00,
-      "authorization":"801585",
-      "method":"card",
-      "operation_type":"out",
-      "transaction_type":"refund",
-      "status":"completed",
-      "currency":"COP",
-      "creation_date":"2014-05-26T13:56:21-05:00",
-      "operation_date":"2014-05-26T13:56:21-05:00",
-      "description":"devolucion",
-      "error_message":null,
-      "order_id":null,
-      "customer_id":"ag4nktpdzebjiye1tlze"
-   },
-   "currency":"COP",
-   "creation_date":"2014-05-26T11:56:25-05:00",
-   "operation_date":"2014-05-26T11:56:25-05:00",
-   "description":"Cargo inicial a mi cuenta",
-   "error_message":null,
-   "order_id":"oid-00052",
-   "customer_id":"ag4nktpdzebjiye1tlze"
+    "id": "trsc2di0dymydqkm5ieo",
+    "authorization": "194883321",
+    "operation_type": "in",
+    "method": "card",
+    "transaction_type": "charge",
+    "card": {
+        "id": "kdx205scoizh93upqbte",
+        "type": "credit",
+        "brand": "diners",
+        "address": null,
+        "card_number": "367284XXXX3333",
+        "holder_name": "DinnersClub",
+        "expiration_year": "21",
+        "expiration_month": "07",
+        "allows_charges": true,
+        "allows_payouts": false,
+        "creation_date": "2019-08-09T13:35:48-05:00",
+        "bank_name": "BANCO DE BOGOTÁ",
+        "bank_code": "000"
+    },
+    "status": "completed",
+    "conciliated": true,
+    "creation_date": "2019-08-12T13:02:18-05:00",
+    "operation_date": "2019-08-12T13:02:18-05:00",
+    "description": "Ejemplo cargo",
+    "error_message": null,
+    "order_id": "oid-12331",
+    "currency": "COP",
+    "amount": 666.00,
+    "customer": {
+        "name": "Cliente Colombia",
+        "last_name": "Vazquez Juarez",
+        "email": "juan.vazquez@empresa.co",
+        "phone_number": "4448936475",
+        "address": null,
+        "creation_date": "2019-08-12T13:02:18-05:00",
+        "external_id": null,
+        "clabe": null
+    },
+    "fee": {
+        "amount": 21.8100,
+        "tax": 3.4896,
+        "currency": "COP"
+    }
 }
 ```
 
@@ -1026,10 +1090,10 @@ Returns a [transaction object](#transaction-object) with the charge information 
 
 ```shell
 Merchant
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges
 
 Merchant
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
 ```
 
 ```php
@@ -1082,21 +1146,21 @@ openpay.customers.charges.list(customerId, searchParams, callback);
 > Customer request example
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/charges?creation[gte]=2013-11-01&limit=2" \
-   -u sk_e568c42a6c384b7ab02cd47d2e407cab:
+curl -g "https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/customers/ag9nkpvdzebjiye5tlzi/charges?creation[gte]=2018-11-01&limit=2" \
+   -u sk_e562c42a6q384b2ab02cd47d2n301uwk:  
 ```
 
 ```php
 <?
-$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
 
 $searchParams = array(
-    'creation[gte]' => '2013-11-01',
-    'creation[lte]' => '2014-11-01',
+    'creation[gte]' => '2018-11-01',
+    'creation[lte]' => '2019-11-01',
     'offset' => 0,
     'limit' => 2);
 
-$customer = $openpay->customers->get('ag4nktpdzebjiye1tlze');
+$customer = $openpay->customers->get('ag9nkpvdzebjiye5tlzi');
 $chargeList = $customer->charges->getList($searchParams);
 ?>
 ```
@@ -1104,10 +1168,10 @@ $chargeList = $customer->charges->getList($searchParams);
 ```java
 final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
-dateGte.set(2014, 5, 1, 0, 0, 0);
-dateLte.set(2014, 5, 15, 0, 0, 0);
+dateGte.set(2019, 5, 1, 0, 0, 0);
+dateLte.set(2019, 5, 15, 0, 0, 0);
 
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -1115,28 +1179,28 @@ request.offset(0);
 request.limit(100);
 request.amount(new BigDecimal("100.00"));
 
-List<Charge> charges = api.charges().list("ag4nktpdzebjiye1tlze", request);
+List<Charge> charges = api.charges().list("ag9nkpvdzebjiye5tlzi", request);
 ```
 
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
-request.CreationGte = new Datetime(2014, 5, 1);
-request.CreationLte = new DateTime(2014, 5, 15);
+request.CreationGte = new Datetime(2019, 5, 1);
+request.CreationLte = new DateTime(2019, 5, 15);
 request.Offset = 0;
 request.Limit = 100;
 request.Amount = new Decimal(100.00);
 
-List<Charge> charges= openpayAPI.ChargeService.List("ag4nktpdzebjiye1tlze", request);
+List<Charge> charges= openpayAPI.ChargeService.List("ag9nkpvdzebjiye5tlzi", request);
 ```
 
 ```javascript
 var searchParams = {
-  'creation[gte]' : '2013-11-01',
+  'creation[gte]' : '2018-11-01',
   'limit' : 2
 };
 
-openpay.customers.charges.list('ag4nktpdzebjiye1tlze',searchParams, function(error, chargeList) {
+openpay.customers.charges.list('ag9nkpvdzebjiye5tlzi',searchParams, function(error, chargeList) {
   // ...
 });
 ```
@@ -1145,65 +1209,60 @@ openpay.customers.charges.list('ag4nktpdzebjiye1tlze',searchParams, function(err
 @openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
 @charges=@openpay.create(:charges)
 
-response_hash=@charges.all("ag4nktpdzebjiye1tlze")
+response_hash=@charges.all("ag9nkpvdzebjiye5tlzi")
 ```
 
 > Response example
 
 ```json
 [
-   {
-      "id":"tryqihxac3msedn4yxed",
-      "amount":100.00,
-      "authorization":"801585",
-      "method":"card",
-      "operation_type":"in",
-      "transaction_type":"charge",
-      "card":{
-         "type":"debit",
-         "brand":"visa",
-         "address":null,
-         "card_number":"411111XXXXXX1111",
-         "holder_name":"Juan Perez Ramirez",
-         "expiration_year":"20",
-         "expiration_month":"12",
-         "allows_charges":true,
-         "allows_payouts":true,
-         "bank_name":"Banamex",
-         "bank_code":"002"
-      },
-      "status":"completed",
-      "currency":"COP",
-      "creation_date":"2014-05-26T14:00:17-05:00",
-      "operation_date":"2014-05-26T14:00:17-05:00",
-      "description":"Cargo inicial a mi cuenta",
-      "error_message":null,
-      "order_id":null,
-      "customer_id":"ag4nktpdzebjiye1tlze"
-   },
-   {
-      "id":"trnzf2xjwpupjfryyj23",
-      "amount":100.00,
-      "authorization":null,
-      "method":"bank_account",
-      "operation_type":"in",
-      "transaction_type":"charge",
-      "status":"in_progress",
-      "currency":"COP",
-      "creation_date":"2014-05-26T13:51:25-05:00",
-      "operation_date":"2014-05-26T13:51:25-05:00",
-      "description":"Cargo con banco",
-      "error_message":null,
-      "order_id":"oid-00055",
-      "customer_id":"ag4nktpdzebjiye1tlze",
-      "payment_method":{
-         "type":"bank_transfer",
-         "agreement" : "1411217",
-         "bank":"BBVA Bancomer",
-         "clabe":"012914002014112176",
-         "name":"11030021342311520255"
-      }
-   }
+    {
+        "id": "trsc2di0dymydqkm5ieo",
+        "authorization": "194883321",
+        "operation_type": "in",
+        "method": "card",
+        "transaction_type": "charge",
+        "card": {
+            "id": "kdx205scoizh93upqbte",
+            "type": "credit",
+            "brand": "diners",
+            "address": null,
+            "card_number": "367284XXXX3333",
+            "holder_name": "DinnersClub",
+            "expiration_year": "21",
+            "expiration_month": "07",
+            "allows_charges": true,
+            "allows_payouts": false,
+            "creation_date": "2019-08-09T13:35:48-05:00",
+            "bank_name": "BANCO DE BOGOTÁ",
+            "bank_code": "000"
+        },
+        "status": "completed",
+        "conciliated": true,
+        "creation_date": "2019-08-12T13:02:18-05:00",
+        "operation_date": "2019-08-12T13:02:18-05:00",
+        "description": "Ejemplo cargo",
+        "error_message": null,
+        "order_id": "oid-12331",
+        "currency": "COP",
+        "amount": 666.00,
+        "customer": {
+            "name": "Cliente Colombia",
+            "last_name": "Vazquez Juarez",
+            "email": "juan.vazquez@empresa.co",
+            "phone_number": "4448936475",
+            "address": null,
+            "creation_date": "2019-08-12T13:02:18-05:00",
+            "external_id": null,
+            "clabe": null
+        },
+        "fee": {
+          "amount": 21.8100,
+          "tax": 3.4896,
+          "currency": "COP"
+        }
+    }
+
 ]
 ```
 Gets a list of the charges made by Merchant or customer.
