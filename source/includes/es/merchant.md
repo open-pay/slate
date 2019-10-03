@@ -36,7 +36,7 @@ clabe | ***numeric***   <br/>Cuenta CLABE asociada con la que puede recibir fond
 > Definición
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}
 ```
 
 ```php
@@ -70,12 +70,12 @@ openpay.merchant.get(callback);
 > Ejemplo de petición
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Merchant merchant = api.merchant().get();
 ```
 
@@ -90,7 +90,7 @@ openpay.merchant.get(function(error, merchant){
 ```json
 {
    "name":"Demo Openpay",
-   "email":"demo@openpay.mx",
+   "email":"demo@openpay.co",
    "phone":"(442) 258-1039",
    "status":"active",
    "balance":218.73,

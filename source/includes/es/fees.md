@@ -9,7 +9,7 @@ Para que las cuentas de los clientes manejen saldo debieron ser creadas con la p
 > Definición
 
 ```shell
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/fees
 ```
 
 ```php
@@ -39,7 +39,7 @@ openpay.fees.create(feeRequest, callback);
 > Ejemplo de petición
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/fees \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{                                            
@@ -65,7 +65,7 @@ $fee = $openpay->fees->create($feeDataRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateFeeParams request = new CreateFeeParams();
 request.customerId("a9pvykxz4g5rg0fplze0");
 request.amount(new BigDecimal("100.00"));
@@ -151,7 +151,7 @@ El [objeto de transacción](#objeto-transacci-n) de la comisión, con su fecha d
 > Definición
 
 ```shell
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees/{TRANSACTION_ID}/refund
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/fees/{TRANSACTION_ID}/refund
 ```
 
 ```php
@@ -182,7 +182,7 @@ openpay.fees.refund(transactionId, feeRequest, callback);
 > Ejemplo de petición
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees/trzjaozcik8msyqshka4/refund \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/fees/trzjaozcik8msyqshka4/refund \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{                                            
@@ -204,7 +204,7 @@ $fee->refund($refundData);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 RefundParams request = new RefundParams();
 request.description("Devolución de comisión");
 
@@ -277,7 +277,7 @@ El [objeto de transacción](#objeto-transacci-n) del reembolso, con su fecha de 
 > Definición
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/fees
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/fees
 ```
 
 ```php
@@ -308,7 +308,7 @@ openpay.fees.list(searchParams, callback);
 > Ejemplo de petición
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/fees?limit=10" \
+curl -g "https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/fees?limit=10" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
@@ -332,7 +332,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
 
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());

@@ -4,7 +4,7 @@
 > Ejemplo de autenticación
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 
 El parámetro -u se ocupa para realizar la autenticación HTTP Basic (al agregar dos puntos después de la llave privada se previene el uso de contraseña)
@@ -19,10 +19,10 @@ $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178
 
 ```java
 //Sandbox
-final OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+final OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 
 //Produccion
-final OpenpayAPI api = new OpenpayAPI("https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+final OpenpayAPI api = new OpenpayAPI("https://api.openpay.co", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 ```
 
 ```javascript
@@ -60,7 +60,7 @@ openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0f
 > Producción
 
 ```shell
-Solo es necesario usar la URI base https://api.openpay.mx
+Solo es necesario usar la URI base https://api.openpay.co
 ```
 
 ```php
@@ -70,7 +70,7 @@ Openpay::setProductionMode(true);
 ```
 
 ```java
-//Solo es necesario usar la URI base https://api.openpay.mx
+//Solo es necesario usar la URI base https://api.openpay.co
 ```
 
 ```csharp
@@ -85,7 +85,7 @@ openpay.setProductionReady(true);
 #Solo es necesario pasar como tercer argumento un "true" cuando se crea el objeto OpenpayApi
 ```
 
-Para realizar peticiones a la API de Openpay, es necesario enviar la llave de API (API Key) en todas tus llamadas a nuestros  servidores. ​La llave la puedes obtener desde el [dashboard](https://sandbox-dashboard.openpay.mx).
+Para realizar peticiones a la API de Openpay, es necesario enviar la llave de API (API Key) en todas tus llamadas a nuestros  servidores. ​La llave la puedes obtener desde el [dashboard](https://sandbox-dashboard.openpay.co).
 
 Existen 2 tipos de llaves de API:
 

@@ -49,13 +49,13 @@ card | ***object*** <br/>Card associated with the token.  See [card object](#car
 > Definition
 
 ```
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/tokens
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/tokens
 ```
 
 > Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/tokens \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -122,13 +122,13 @@ Returs the created [token object](#token-object) or an [error response](#error-o
 > Definition
 
 ```
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}
 ```
 
 > Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxqia8q7cm \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxqia8q7cm \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ``` 
 

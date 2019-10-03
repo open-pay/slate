@@ -58,10 +58,10 @@ customer_id |***string*** <br/>Identificador del cliente al que pertenece la tar
 
 ```shell
 Comercio
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/cards
 
 Cliente
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
 ```
 
 ```php
@@ -112,7 +112,7 @@ openpay.customers.cards.create(customerId, cardRequest, callback);
 > Ejemplo de petición con cliente
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -151,7 +151,7 @@ $card = $customer->cards->add($cardDataRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card request = new Card();
 request.holderName("Juan Perez Ramirez");
 request.cardNumber("4111111111111111");
@@ -286,10 +286,10 @@ Regresa un [objeto tarjeta](#objeto-tarjeta) cuando se creó correctamente o una
 
 ```shell
 Comercio
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/cards
 
 Cliente
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
 ```
 
 ```php
@@ -340,7 +340,7 @@ openpay.customers.cards.create(customerId, cardRequest, callback);
 > Ejemplo de petición con cliente
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -364,7 +364,7 @@ $card = $customer->cards->add($cardDataRequest);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card request = new Card();
 request.tokenId("tokgslwpdcrkhlgxqi9a");
 request.deviceSessionId("8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o");
@@ -441,10 +441,10 @@ Regresa un [objeto tarjeta](#objeto-tarjeta)
 
 ```shell
 Comercio
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/cards/{CARD_ID}
 
 Cliente
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
 ```
 
 ```php
@@ -495,7 +495,7 @@ openpay.customers.cards.get(customerId, cardId, callback);
 > Ejemplo de petición con cliente
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json"
 ```
@@ -510,7 +510,7 @@ $card = $customer->cards->get('k9pn8qtsvr7k7gxoq1r5');
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Card card = api.cards().get("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 ```
 
@@ -572,13 +572,13 @@ Regresa un [objeto tarjeta](#objeto-tarjeta)
 
 ```shell
 Comercio
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}/points
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/cards/{CARD_ID}/points
 
 Cliente
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}/points
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}/points
 
 Token
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}/points
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/tokens/{TOKEN_ID}/points
 ```
 
 ```php
@@ -626,7 +626,7 @@ openpay.cards.getPoints(customerId, cardId, callback);
 > Ejemplo de petición con cliente
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7/points" \
+curl -g "https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7/points" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
@@ -640,7 +640,7 @@ $pointsBalance = $customer->cards->get(cardId)->get("points");
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128",
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128",
 "maonhzpqm8xp2ydssovf");
 PointsBalance points = api.cards().points("a9pvykxz4g5rg0fplze0", "knasugabhdgq456wr");
 ```
@@ -709,10 +709,10 @@ remaining_mxn| Saldo de puntos restante en pesos
 
 ```shell
 Comercio
-DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}
+DELETE https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/cards/{CARD_ID}
 
 Cliente
-DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
+DELETE https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
 ```
 
 ```php
@@ -765,7 +765,7 @@ openpay.customers.cards.delete(customerId, cardId, callback);
 > Ejemplo de petición con cliente
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/ktrpvymgatocelsciak7 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -X DELETE
 ```
@@ -781,7 +781,7 @@ $card->delete();
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.cards().delete("a9pvykxz4g5rg0fplze0", "ktrpvymgatocelsciak7");
 ```
 
@@ -821,10 +821,10 @@ Si la tarjeta se borra correctamente la respuesta es vacía, si no se puede borr
 
 ```shell
 Comercio
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers
 
 Cliente
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards
 ```
 
 ```php
@@ -877,7 +877,7 @@ openpay.cards.list(customerId, searchParams, callback);
 > Ejemplo de petición con cliente
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards?limit=2" \
+curl -g "https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards?limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
@@ -902,7 +902,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
 
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -996,16 +996,16 @@ Listado de [objetos tarjeta](#objeto-tarjeta) registrados de acuerdo a los pará
 
 ```plaintext
 Comercio
-PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/cards/{CARD_ID}
+PUT https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/cards/{CARD_ID}
 
 Cliente
-PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
+PUT https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/cards/{CARD_ID}
 ```
 
 > Ejemplo de petición con cliente
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/kysc8pycq8hnlzivk1x4 \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdzebjiye1tlze/cards/kysc8pycq8hnlzivk1x4 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X PUT -d '{

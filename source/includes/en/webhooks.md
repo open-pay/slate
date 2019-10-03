@@ -73,7 +73,7 @@ order.payment.cancelled    | Order          | Reports when a payment order is ca
 > Definition
 
 ```shell
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/webhooks
 ```
 
 ```php
@@ -102,7 +102,7 @@ openpay.webhooks.create(webhook, callback);
 > Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/webhooks \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -141,7 +141,7 @@ $webhook = $openpay->webhooks->add($webhook);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Webhook request = new Webhook();
 request.url("http://requestb.in/11vxrsf1");
 request.user("juanito");
@@ -241,7 +241,7 @@ Returns a [webhook object](#webhook-object) when it was successfully created or 
 > Definition
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
 ```
 
 ```php
@@ -270,7 +270,7 @@ openpay.webhooks.get(webhookId, callback);
 > Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json"
 ```
@@ -284,7 +284,7 @@ $webhook = $openpay->webhooks->get('wxvanstudf4ssme8khmc');
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Webhook webhook = api.webhooks().get("wxvanstudf4ssme8khmc");
 ```
 
@@ -356,7 +356,7 @@ Returns a [webhook object](#webhook-object)
 > Definition
 
 ```shell
-DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
+DELETE https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/webhooks/{WEBHOOK_ID}
 ```
 
 ```php
@@ -386,7 +386,7 @@ openpay.webhooks.delete(webhookId, callback);
 > Customer request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/webhooks/wxvanstudf4ssme8khmc \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -X DELETE
 ```
@@ -401,7 +401,7 @@ $webhook->delete();
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.webhooks().delete("wxvanstudf4ssme8khmc");
 ```
 
@@ -442,7 +442,7 @@ If the webhook was deleted correctly the response will be empty, if the webhook 
 > Definition
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/webhooks
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/webhooks
 ```
 
 ```php
@@ -471,7 +471,7 @@ openpay.webhooks.list(callback);
 > Request example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/webhooks \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/webhooks \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json"
 ```
@@ -485,7 +485,7 @@ $webhookList = $openpay->webhooks->getList();
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 List<Webhook> webhooks = api.webhooks().list();
 ```
 

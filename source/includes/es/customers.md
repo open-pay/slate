@@ -49,7 +49,7 @@ balance       |***numeric*** <br/>Saldo en la cuenta con dos decimales.
 > Definición
 
 ```shell
-POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
+POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers
 ```
 
 ```php
@@ -78,7 +78,7 @@ openpay.customers.create(customerRequest, callback);
 > Ejemplo de petición
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
@@ -115,7 +115,7 @@ $customer = $openpay->customers->add($customerData);
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Customer request = new Customer();
 request.externalId("idExterno0101");
 request.name("Julian Gerardo");
@@ -209,7 +209,7 @@ response_hash=@customers.create(request_hash.to_hash)
    "external_id":null,
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+       "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
    "clabe": "646180109400423323"
 }
@@ -239,7 +239,7 @@ Un [objeto cliente](#objeto-cliente) en caso que se hayan enviado todos los dato
 > Definición
 
 ```shell
-PUT https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
+PUT https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```
 
 ```php
@@ -269,7 +269,7 @@ openpay.customers.update(customerId, customerRequest, callback);
 > Ejemplo de petición
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X PUT -d '{
@@ -300,7 +300,7 @@ $customer->save();
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Customer request = new Customer();
 request.name("Julian Gerardo");
 request.lastName("López Martínez");
@@ -404,7 +404,7 @@ response_hash=@customers.update(request_hash.to_hash)
    },
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+       "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
    "clabe": "646180109400423323",
    "creation_date":"2014-05-20T16:47:47-05:00",
@@ -433,7 +433,7 @@ Regresa un [objeto cliente](#objeto-cliente) con la información actualizada, o 
 > Definición
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```
 
 ```php
@@ -462,7 +462,7 @@ openpay.customers.get(customerId, callback);
 > Ejemplo de petición
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json"
 ```
@@ -476,7 +476,7 @@ $customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Customer customer = api.customers().get("a9pvykxz4g5rg0fplze0");
 ```
 
@@ -518,7 +518,7 @@ response_hash=@customers.get("asynwirguzkgq2bizogo")
    },
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+       "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
    "clabe": "646180109400423323",
    "creation_date":"2014-05-20T16:47:47-05:00",
@@ -543,7 +543,7 @@ Si el identificador existe regresa un [objeto cliente](#objeto-cliente) con la i
 > Definición
 
 ```shell
-DELETE https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
+DELETE https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}
 ```
 
 ```php
@@ -573,7 +573,7 @@ openpay.customers.delete(customerId, callback);
 > Ejemplo de petición
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni1way3yp2dw \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X DELETE
@@ -589,7 +589,7 @@ $customer->delete();
 ```
 
 ```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 api.customers().delete("a9pvykxz4g5rg0fplze0");
 ```
 
@@ -629,7 +629,7 @@ Si el cliente se borra correctamente la respuesta es vacía, si no se puede borr
 > Definición
 
 ```shell
-GET https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers
+GET https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers
 ```
 
 ```php
@@ -659,7 +659,7 @@ openpay.customers.list(searchParams, callback);
 > Ejemplo de petición
 
 ```shell
-curl -g "https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers?creation[gte]=2013-11-01&limit=2" \
+curl -g "https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers?creation[gte]=2013-11-01&limit=2" \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json"
 ```
@@ -684,7 +684,7 @@ final Calendar dateLte = Calendar.getInstance();
 dateGte.set(2014, 5, 1, 0, 0, 0);
 dateLte.set(2014, 5, 15, 0, 0, 0);
 
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
 request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
@@ -737,7 +737,7 @@ response_hash=@customers.all
    "balance":142.5,
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
+       "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
    "clabe": "646180109400423323"
 }, {
@@ -751,7 +751,7 @@ response_hash=@customers.all
    "balance":103,
    "store": {
        "reference": "OPENPAY02DQWERWJ3",
-       "barcode_url": "https://sandbox-api.openpay.mx/barcode/OPENPAY02DQWERWJ3?width=1&height=45&text=false"
+       "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQWERWJ3?width=1&height=45&text=false"
    },
    "clabe": "646180109400423323"
 }]

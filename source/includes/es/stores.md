@@ -29,8 +29,8 @@ El objeto representa una tienda de conveniencia
     },
     "paynet_chain": {
       "name": "EXTRA",
-      "logo": "http://www.openpay.mx/logotipos/extra.png",
-      "thumb": "http://www.openpay.mx/thumb/extra.png",
+      "logo": "http://www.openpay.co/logotipos/extra.png",
+      "thumb": "http://www.openpay.co/thumb/extra.png",
       "max_amount": 99999.99
     }
   }
@@ -51,7 +51,7 @@ last_update|***string*** <br/>Fecha de la ultima actualizacion de la tienda en f
 > Definición
 
 ```shell
-GET https://api.openpay.mx/stores?latitud={latitud}&longitud={longitud}&kilometers={radio}&amount={monto}
+GET https://api.openpay.co/stores?latitud={latitud}&longitud={longitud}&kilometers={radio}&amount={monto}
 ```
 
 ```php
@@ -89,7 +89,7 @@ GET https://api.openpay.mx/stores?latitud={latitud}&longitud={longitud}&kilomete
 > Ejemplo de petición
 
 ```shell
-curl https://api.openpay.mx/stores?latitud=20.618975&longitud=-100.422290&kilometers=1.5&amount=4000 \
+curl https://api.openpay.co/stores?latitud=20.618975&longitud=-100.422290&kilometers=1.5&amount=4000 \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 ```
 
@@ -119,8 +119,8 @@ curl https://api.openpay.mx/stores?latitud=20.618975&longitud=-100.422290&kilome
     },
     "paynet_chain": {
       "name": "EXTRA",
-      "logo": "http://www.openpay.mx/logotipos/extra.png",
-      "thumb": "http://www.openpay.mx/thumb/extra.png",
+      "logo": "http://www.openpay.co/logotipos/extra.png",
+      "thumb": "http://www.openpay.co/thumb/extra.png",
       "max_amount": 99999.99
     }
   },
@@ -146,8 +146,8 @@ curl https://api.openpay.mx/stores?latitud=20.618975&longitud=-100.422290&kilome
     },
     "paynet_chain": {
       "name": "EL ASTURIANO",
-      "logo": "http://www.openpay.mx/logotipos/asturiano.png",
-      "thumb": "http://www.openpay.mx/thumb/asturiano.png",
+      "logo": "http://www.openpay.co/logotipos/asturiano.png",
+      "thumb": "http://www.openpay.co/thumb/asturiano.png",
       "max_amount": 99999.99
     }
   }

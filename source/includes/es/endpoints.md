@@ -47,14 +47,14 @@ La API REST de Openpay tiene un ambiente de pruebas (sandbox) y un ambiente de p
 
 La siguientes URIs forman la base de los endpoints para los ambientes soportados:
 
-* **Pruebas**, URI base: <br/> `https://sandbox-api.openpay.mx`<br/><br/>
-* **Producción**, URI base: <br/>`https://api.openpay.mx`<br/>
+* **Pruebas**, URI base: <br/> `https://sandbox-api.openpay.co`<br/><br/>
+* **Producción**, URI base: <br/>`https://api.openpay.co`<br/>
 
 Un endpoint completo esta formado por la URI base del ambiente, el identificador del comercio y el recurso.
 
 Por ejemplo, si queremos crear un nuevo cliente, el endpoint sería:
 
-<code>POST https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers</code>
+<code>POST https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers</code>
 
 Para crear una petición completa es necesaria envíar las cabeceras HTTP correctas y la información en formato JSON.
 

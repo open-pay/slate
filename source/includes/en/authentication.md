@@ -3,7 +3,7 @@
 > Authentication example
 
 ```shell
-curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
+curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/charges \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab:
 
 The -u parameter is responsible for the HTTP basic authentication (adding two points after the private key prevents the use of password)
@@ -18,10 +18,10 @@ $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c4875b178
 
 ```java
 //Sandbox
-final OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+final OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 
 //Production
-final OpenpayAPI api = new OpenpayAPI("https://api.openpay.mx", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
+final OpenpayAPI api = new OpenpayAPI("https://api.openpay.co", "moiep6umtcnanql3jrxp", "sk_3433941e467c4875b178ce26348b0fac");
 ```
 
 ```javascript
@@ -59,7 +59,7 @@ openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0f
 > Production
 
 ```shell
-You only need to use the URI base https://api.openpay.mx
+You only need to use the URI base https://api.openpay.co
 ```
 
 ```php
@@ -69,7 +69,7 @@ Openpay::setProductionMode(true);
 ```
 
 ```java
-//You only need to use the URI base https://api.openpay.mx
+//You only need to use the URI base https://api.openpay.co
 ```
 
 ```csharp
@@ -84,7 +84,7 @@ openpay.setProductionReady(true);
 #You only need to pass a "true" value as the third argument when creating the OpenpayApi object.
 ```
 
-To make requests to the Openpay API, is necessary to send the API Key on all your calls to our servers. You can get the key from the [dashboard](https://sandbox-dashboard.openpay.mx).
+To make requests to the Openpay API, is necessary to send the API Key on all your calls to our servers. You can get the key from the [dashboard](https://sandbox-dashboard.openpay.co).
 
 There are 2 types of API keys:
 
