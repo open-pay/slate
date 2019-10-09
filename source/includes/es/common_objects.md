@@ -8,25 +8,25 @@ Información de objetos compartidos en peticiones y respuestas.
 
 ```json
 {
-   "id":"trehwr2zarltvae56vxl",
+   "id":"trehwr2zcrltvae56vxl",
    "authorization":null,
    "transaction_type":"payout",
    "operation_type":"out",
    "currency":"COP",
    "method":"bank",
-   "creation_date":"2013-11-14T18:29:35-06:00",
+   "creation_date":"2019-08-14T18:29:35-06:00",
    "order_id":"000001",
    "status":"in_progress",
    "amount":500,
    "description":"Pago de ganancias",
    "error_message":null,
-   "customer_id":"afk4csrazjp1udezj1po",
+   "customer_id":"afk4csrazjp1udezj5po",
    "bank_account":{
       "rfc":ONE316015PM1,
       "mobile":null,
       "alias":null,
-      "bank_name":"BANCOMER",
-      "creation_date":"2013-11-14T18:29:34-06:00",
+      "bank_name":"BANCO DE BOGOTÁ",
+      "creation_date":"2019-08-14T18:29:34-06:00",
       "clabe":"012XXXXXXXXXX24616",
       "holder_name":"Juan Tapia Trejo",
       "bank_code":"012"
@@ -51,7 +51,6 @@ customer_id| ***string*** <br/>Identificar único del cliente al cual pertence l
 currency| ***string*** <br/>Moneda usada en la operación, por default es COP.
 bank_account| ***objeto*** <br/>Datos de la cuenta bancaria usada en la transacción. Ver objeto BankAccoount
 card| ***objeto*** <br/>Datos de la tarjeta usada en la transacción. Ver objeto Card
-card_points| ***objeto*** <br/>Datos de los puntos de la tarjeta usados para el pago, si fueron utilizados. Ver [objeto CardPoints](#objeto-cardpoints)
 
 ##Objeto Dirección
 
@@ -61,7 +60,7 @@ card_points| ***objeto*** <br/>Datos de los puntos de la tarjeta usados para el 
 {
    "line1":"Av 5 de Febrero",
    "line2":"Roble 207",
-   "line3":"col carrillo",
+   "line3":"Depto Cundinamarca",
    "state":"Bogota",
    "city":"Bogotá",
    "postal_code":"110511",

@@ -69,7 +69,7 @@ curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/charges \
    -X POST -d '{
    "source_id" : "kdx205scoizh93upqbte",
    "method" : "card",
-   "amount" : 666,
+   "amount" : 701,
    "currency" : "COP",
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-12324",

@@ -51,7 +51,7 @@ customer_id| ***string*** <br/>Unique identifier for the customer who this trans
 currency| ***string*** <br/>Currency used in the operation by default is COP (Colombia pesos).
 bank_account| ***object*** <br/>Bank account data used for the transaction.  See the *BankAccount* object.
 card| ***object*** <br/>Credit card data used in the transaction.  See the *Card* object.
-card_points| ***object*** <br/>Contains information about the reward points used for payment, if they were used. See the [CardPoints object](#cardpoints-object)
+
 
 ## Address Object
 
