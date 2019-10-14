@@ -135,8 +135,7 @@ response_hash=@transfers.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
        "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
-   },
-   "clabe": "646180109400423323"
+   }
 }
 ```
 
@@ -147,7 +146,7 @@ Makes the transfer of funds from one account of the customer to another. The fun
 Property | Description
 --------- | ------
 customer_id | ***string*** (required, length = 45) <br/>The Openpay ID of the customer you want to send the funds.
-amount | ***numeric*** (required) <br/>Amount to transfer. It must be an amount greater than one peso with up to two decimal digits. 
+amount | ***numeric*** (required) <br/>Amount to transfer. It must be an amount greater than one peso. 
 description | ***string*** (required, length = 250) <br/>A description associated to the transfer.
 order_id | ***string*** (optional, length = 100) <br/>Unique identifier of the transfer. It will be assigned to the withdrawal transaction.
 

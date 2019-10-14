@@ -27,7 +27,6 @@ Información de objetos compartidos en peticiones y respuestas.
       "alias":null,
       "bank_name":"BANCO DE BOGOTÁ",
       "creation_date":"2019-08-14T18:29:34-06:00",
-      "clabe":"012XXXXXXXXXX24616",
       "holder_name":"Juan Tapia Trejo",
       "bank_code":"012"
    }
@@ -91,15 +90,7 @@ country_code | ***string*** (requerido) <br/>Código del país del tarjeta habie
 
 Propiedad | Descripción
 --------- | -----------
-payments | ***numeric*** <br/> Es el número de pagos en los cuales se pretende realizar un cargo a meses sin intereses (3, 6, 9, 12, 18).
-
-
-Propiedad | Descripción
---------- | -----------
-name | ***string*** <br/> Nombre de la cadena.
-logo | ***string*** <br/> Url de la imagen del logotipo de la cadena.
-thumb | ***string*** <br/> Url de la imagen miniatura del logotipo de la cadena.
-max_amount | ***numeric*** <br/>Monto máximo de pago que aceptan las tiendas de la cadena
+payments | ***numeric*** <br/> Es el número de pagos en los cuales se pretende realizar un cargo a meses sin intereses (1, 2, 3, ... , 36).
 
 ##Objeto Transaction Status
 

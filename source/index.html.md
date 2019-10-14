@@ -13,13 +13,14 @@ includes:
   - es/errors
   - es/charges
   - es/customers
+  - es/transfers
   - es/cards
   - es/plans
   - es/subscriptions
   - es/fees
   - es/webhooks
   - es/tokens
-  - es/merchant
+  - es/stores
   - es/common_objects
 
 toc_footers:

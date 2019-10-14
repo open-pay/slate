@@ -64,7 +64,6 @@ Code    | HTTP Error |Cause
 
 Code    | HTTP Error |Cause
 --------- | ----------- | --------
-2001 | 409 Conflict | The bank account with this CLABE is already registered on the customer.
 2002 | 409 Conflict | The card with this number is already registered on the customer.
 2003 | 409 Conflict | Customer with this external identifier (External ID) already exists.
 2004 | 422 Unprocessable Entity | The check digit card number is invalid according to the Luhn algorithm.

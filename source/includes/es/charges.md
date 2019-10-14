@@ -236,8 +236,7 @@ response_hash=@charges.create(request_hash.to_hash)
         "phone_number": "4448936475",
         "address": null,
         "creation_date": "2019-08-12T12:36:56-05:00",
-        "external_id": null,
-        "clabe": null
+        "external_id": null
     },
     "fee": {
         "amount": 21.81,
@@ -511,8 +510,7 @@ response_hash=@charges.create(request_hash.to_hash)
         "phone_number": "4423456723",
         "address": null,
         "creation_date": "2019-08-12T12:47:41-05:00",
-        "external_id": null,
-        "clabe": null
+        "external_id": null
     }
 }
 ```
@@ -693,8 +691,7 @@ response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag9nkpvdzebjiye5tlzi")
         "phone_number": "4448936475",
         "address": null,
         "creation_date": "2019-08-12T13:02:18-05:00",
-        "external_id": null,
-        "clabe": null
+        "external_id": null
     },
     "fee": {
         "amount": 21.8100,
@@ -885,8 +882,7 @@ response_hash=@charges.all("ag9nkpvdzebjiye5tlzi")
             "phone_number": "4448936475",
             "address": null,
             "creation_date": "2019-08-12T13:02:18-05:00",
-            "external_id": null,
-            "clabe": null
+            "external_id": null
         },
         "fee": {
           "amount": 21.8100,

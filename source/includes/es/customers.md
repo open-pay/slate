@@ -11,7 +11,7 @@ A los clientes les puedes agregar tarjetas para despues realizar transacciones d
 ```json
 {
    "id":"cz4nkhrlcu9k7qd4lwqx",
-   "creation_date":"2013-11-08T12:04:46-06:00",
+   "creation_date":"2018-11-08T12:04:46-06:00",
    "name":"Rodrigo",
    "last_name":"Velazco Perez",
    "email":"rodrigo.velazco@payments.com",
@@ -22,7 +22,7 @@ A los clientes les puedes agregar tarjetas para despues realizar transacciones d
    "address":{
       "line1":"Av. 5 de febrero No. 1080 int Roble 207",
       "line2":"Carrillo puerto",
-      "line3":"Zona industrial carrillo puerto",
+      "line3":"Esquina Ramón Pérez",
       "postal_code":"110831",
       "state":"Bogotá",
       "city":"Bogotá",
@@ -102,7 +102,7 @@ $customerData = array(
      'address' => array(
          'line1' => 'Calle 10',
          'line2' => 'col. san pablo',
-         'line3' => 'entre la calle 1 y la 2',
+         'line3' => 'Esquina Ramón Pérez',
          'state' => 'Bogota',
          'city' => 'Bogota',
          'postal_code' => '110731',
@@ -130,7 +130,7 @@ address.state("Bogota");
 address.postalCode("110731");
 address.line1("Av. Pie de la cuesta #12");
 address.line2("Desarrollo San Pablo");
-address.line3("Qro. Qro.");
+address.line3("Esquina Ramón Pérez");
 request.address(address);
 
 request = api.customers().create(request);
@@ -152,7 +152,7 @@ address.State = "Bogota";
 address.PostalCode = "110731";
 address.Line1 = "Av. Pie de la cuesta #12";
 address.Line2 = "Desarrollo San Pablo";
-address.Line3 = "Bogota";
+address.Line3 = "Esquina Ramón Pérez";
 request.Address = address;
 
 request = api.CustomerService.Create(request);
@@ -176,7 +176,7 @@ openpay.customers.create(customerRequest, function(error, customer) {
 address_hash={
       "line1" => "Calle 10",
       "line2" => "col. san pablo",
-      "line3" => "entre la calle 1 y la 2",
+      "line3" => "Esquina Ramón Pérez",
       "state" => "Bogota",
       "city" => "Bogota",
       "postal_code" => "111071",
@@ -205,13 +205,12 @@ response_hash=@customers.create(request_hash.to_hash)
    "email":"customer_email@me.com",
    "phone_number":null,
    "address":null,
-   "creation_date":"2014-05-20T16:47:47-05:00",
+   "creation_date":"2018-05-20T16:47:47-05:00",
    "external_id":null,
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
        "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
-   },
-   "clabe": "646180109400423323"
+   }
 }
 ```
 
@@ -281,7 +280,7 @@ curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni
       "line1":"Calle 10",
       "postal_code":"111071",
       "line2":"col. san pablo",
-      "line3":"entre la calle 1 y la 2",
+      "line3":"Esquina Ramón Pérez",
       "country_code":"CO"
    },
    "phone_number":"16362801"
@@ -313,7 +312,7 @@ address.state("Bogota");
 address.postalCode("111071");
 address.line1("Av. Pie de la cuesta #12");
 address.line2("Desarrollo San Pablo");
-address.line3("Qro. Qro.");
+address.line3("Esquina Ramón Pérez");
 request.address(address);
 
 request = api.customers().update(request);
@@ -333,7 +332,7 @@ address.State = "Bogota";
 address.PostalCode = "111071";
 address.Line1 = "Av. Pie de la cuesta #12";
 address.Line2 = "Desarrollo San Pablo";
-address.Line3 = "Qro. Qro.";
+address.Line3 = "Esquina Ramón Pérez";
 request.Address = address;
 
 request = api.CustomerService.Update(request);
@@ -349,7 +348,7 @@ var customerRequest = {
       'line1':'Calle 10',
       'postal_code':'111071',
       'line2':'col. san pablo',
-      'line3':'entre la calle 1 y la 2',
+      'line3':'Esquina Ramón Pérez',
       'country_code':'CO'
     }
 };
@@ -365,7 +364,7 @@ openpay.customers.update('anbnldwgni1way3yp2dw', customerRequest, function(error
 address_hash={
       "line1" => "Calle 10",
       "line2" => "col. san pablo",
-      "line3" => "entre la calle 1 y la 2",
+      "line3" => "Esquina Ramón Pérez",
       "state" => "Bogota",
       "city" => "Bogota",
       "postal_code" => "111071",
@@ -396,7 +395,7 @@ response_hash=@customers.update(request_hash.to_hash)
    "address":{
       "line1":"Calle 10",
       "line2":"col. san pablo",
-      "line3":"entre la calle 1 y la 2",
+      "line3":"Esquina Ramón Pérez",
       "state":"Bogota",
       "city":"Bogota",
       "postal_code":"111071",
@@ -406,8 +405,7 @@ response_hash=@customers.update(request_hash.to_hash)
        "reference": "OPENPAY02DQ35YOY7",
        "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
-   "clabe": "646180109400423323",
-   "creation_date":"2014-05-20T16:47:47-05:00",
+   "creation_date":"2018-05-20T16:47:47-05:00",
    "external_id":null
 }
 ```
@@ -510,7 +508,7 @@ response_hash=@customers.get("asynwirguzkgq2bizogo")
    "address":{
       "line1":"Calle 10",
       "line2":"col. san pablo",
-      "line3":"entre la calle 1 y la 2",
+      "line3":"Esquina Ramón Pérez",
       "state":"Bogota",
       "city":"Bogota",
       "postal_code":"111071",
@@ -520,8 +518,7 @@ response_hash=@customers.get("asynwirguzkgq2bizogo")
        "reference": "OPENPAY02DQ35YOY7",
        "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
-   "clabe": "646180109400423323",
-   "creation_date":"2014-05-20T16:47:47-05:00",
+   "creation_date":"2018-05-20T16:47:47-05:00",
    "external_id":null
 }
 ```
@@ -669,8 +666,8 @@ curl -g "https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers?creati
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $findDataRequest = array(
-    'creation[gte]' => '2013-01-01',
-    'creation[lte]' => '2013-12-31',
+    'creation[gte]' => '2018-01-01',
+    'creation[lte]' => '2018-12-31',
     'offset' => 0,
     'limit' => 5);
 
@@ -681,8 +678,8 @@ $customerList = $openpay->customers->getList($findDataRequest);
 ```java
 final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
-dateGte.set(2014, 5, 1, 0, 0, 0);
-dateLte.set(2014, 5, 15, 0, 0, 0);
+dateGte.set(2018, 5, 1, 0, 0, 0);
+dateLte.set(2018, 5, 15, 0, 0, 0);
 
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
@@ -697,8 +694,8 @@ List<Customer> customers = api.customers().list(request);
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
-request.CreationGte = new Datetime(2014, 5, 1);
-request.CreationLte = new DateTime(2014, 5, 15);
+request.CreationGte = new Datetime(2018, 5, 1);
+request.CreationLte = new DateTime(2018, 5, 15);
 request.Offset = 0;
 request.Limit = 100;
 
@@ -707,7 +704,7 @@ List<Customer> customers = api.CustomerService.List(request);
 
 ```javascript
 var searchParams = {
-  'creation[gte]' : '2013-11-01',
+  'creation[gte]' : '2018-11-01',
   'limit' : 2
 };
 
@@ -728,7 +725,7 @@ response_hash=@customers.all
 ```json
 [{
    "id":"cpjdhf754ythr65yu9k7q",
-   "creation_date":"2013-11-08T12:04:46-06:00",
+   "creation_date":"2018-11-08T12:04:46-06:00",
    "name":"Rodrigo",
    "last_name":"Velazco Perez",
    "email":"rodrigo.velazco@payments.com",
@@ -738,11 +735,10 @@ response_hash=@customers.all
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
        "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
-   },
-   "clabe": "646180109400423323"
+   }
 }, {
    "id":"cz4nkhrlcu9k7qd4lwqx",
-   "creation_date":"2013-11-07T14:54:46-06:00",
+   "creation_date":"2018-11-07T14:54:46-06:00",
    "name":"Eriberto",
    "last_name":"Rodriguez Lopez",
    "email":"eriberto.rodriguez@payments.com",
@@ -750,10 +746,9 @@ response_hash=@customers.all
    "status":"active",
    "balance":103,
    "store": {
-       "reference": "OPENPAY02DQWERWJ3",
-       "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQWERWJ3?width=1&height=45&text=false"
-   },
-   "clabe": "646180109400423323"
+       "reference": "©",
+       "barcode_url": "https://sandbox-api.openpay.co/barcode/©?width=1&height=45&text=false"
+   }
 }]
 ```
 Regresa una lista de los cliente registrados, si desea delimitar el resultado se pueden utilizar los filtros.

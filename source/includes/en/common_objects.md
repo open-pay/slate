@@ -8,13 +8,13 @@ Information for objects shared in request and response.
 
 ```json
 {
-   "id":"trehwr2zarltvae56vxl",
+   "id":"trehwr2zcrltvae56vxl",
    "authorization":null,
    "transaction_type":"payout",
    "operation_type":"out",
    "currency":"COP",
    "method":"bank",
-   "creation_date":"2013-11-14T18:29:35-06:00",
+   "creation_date":"2019-08-14T18:29:35-06:00",
    "order_id":"000001",
    "status":"in_progress",
    "amount":500,
@@ -25,8 +25,8 @@ Information for objects shared in request and response.
       "rfc":ONE316015PM1,
       "mobile":null,
       "alias":null,
-      "bank_name":"BANCOMER",
-      "creation_date":"2013-11-14T18:29:34-06:00",
+      "bank_name":"BANCO DE BOGOTÁ",
+      "creation_date":"2019-08-14T18:29:34-06:00",
       "holder_name":"Juan Tapia Trejo",
       "bank_code":"012"
    }
@@ -60,7 +60,7 @@ card| ***object*** <br/>Credit card data used in the transaction.  See the *Card
 {
    "line1":"Av 5 de Febrero",
    "line2":"Roble 207",
-   "line3":"col carrillo",
+   "line3":"Depto Cundinamarca",
    "state":"Bogota",
    "city":"Bogotá",
    "postal_code":"110511",
@@ -90,7 +90,7 @@ country_code | ***string*** (required) <br/>Country code, in the two character f
 
 Property | Description
 --------- | -----------
-payments | ***numeric*** <br/> Plan data months without interest is desired as use in the charge (3, 6, 9, 12, 18).
+payments | ***numeric*** <br/> Plan data months without interest is desired as use in the charge (1, 2, 3, ... , 36).
 
 ##Object Transaction Status
 

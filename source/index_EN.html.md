@@ -12,24 +12,20 @@ includes:
   - en/authentication
   - en/errors
   - en/charges
-  - en/payments
   - en/customers
   - en/transfers
   - en/cards
-  - en/bank_accounts
   - en/plans
   - en/subscriptions
   - en/fees
   - en/webhooks
   - en/tokens
-  - en/merchant
   - en/stores
   - en/common_objects
-  - en/electronic_invoice
 
 toc_footers:
- - <a href='#'>Sign Up for a Developer Key</a>
- - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
+ - #
+ - #
 
 lang: EN
 ---

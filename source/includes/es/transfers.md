@@ -135,8 +135,7 @@ response_hash=@transfers.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
        "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
-   },
-   "clabe": "646180109400423323"
+   }
 }
 ```
 
@@ -147,7 +146,7 @@ Realiza la transferencia de fondos de una cuenta de cliente a otra. Los fondos s
 Propiedad | Descripción
 --------- | ------
 customer_id | ***string*** (requerido, longitud = 45) <br/>El ID de Openpay del cliente al que deseas enviarle los fondos.
-amount | ***numeric*** (requerido) <br/>Cantidad a transferir. Debe ser una cantidad mayor a un peso, con hasta dos dígitos decimales.
+amount | ***numeric*** (requerido) <br/>Cantidad a transferir. Debe ser una cantidad mayor a un peso.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada a la transferencia.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único de la transferencia. Será asignado a la transacción de retiro.
 
