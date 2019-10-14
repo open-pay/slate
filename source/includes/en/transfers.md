@@ -46,7 +46,7 @@ curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -H "Content-type: application/json" \
    -X POST -d '{                                            
      "customer_id" : "dvocf97jd20es3tw5laz",
-     "amount" : 12.50,          
+     "amount" : 716,
      "description" : "Transferencia entre cuentas",
      "order_id" : "oid-1245"
 }' 
@@ -58,7 +58,7 @@ $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178
 
 $transferDataRequest = array(
     'customer_id' => 'aqedin0owpu0kexr2eor',
-    'amount' => 12.50,
+    'amount' => 716,
     'description' => 'Cobro de Comisión',
     'order_id' => 'ORDEN-00061');
 
@@ -71,7 +71,7 @@ $transfer = $customer->transfers->create($transferDataRequest);
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateTransferParams request = new CreateTransferParams();
 request.toCustomerId("ah1ki9jmb50mvlsf9gqn");
-request.amount(new BigDecimal("100.00"));
+request.amount(new BigDecimal("716"));
 request.description("Transferencia del Customer 1 al Customer 2");
 request.orderId("idOrdExt-0101");
 
@@ -82,7 +82,7 @@ Transfer transfer = api.transfers().create("a9pvykxz4g5rg0fplze0", request);
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 TransferRequest request = new TransferRequest();
 request.CustomerId = "ah1ki9jmb50mvlsf9gqn";
-request.Amount = new Decimal(100.00);
+request.Amount = new Decimal(716);
 request.Description = "Transferencia del Customer 1 al Customer 2";
 request.OrderId = "idOrdExt-0101";
 
@@ -92,7 +92,7 @@ Transfer transfer = api.TransferService.Create("a9pvykxz4g5rg0fplze0", request);
 ```javascript
 var transferRequest = {                                          
   'customer_id' : 'dvocf97jd20es3tw5laz',
-  'amount' : 12.50,          
+  'amount' : 716,          
   'description' : 'Transferencia entre cuentas',
   'order_id' : 'oid-1245'
 };
@@ -107,7 +107,7 @@ openpay.customers.transfers.create('ag4nktpdzebjiye1tlze', transferRequest, func
 @transfers=@openpay.create(:transfers)
 request_hash={
      "customer_id" => "dvocf97jd20es3tw5laz",
-     "amount" => 12.50,
+     "amount" => 716,
      "description" => "Transferencia entre cuentas",
      "order_id" => "oid-1245"
    }
@@ -119,7 +119,7 @@ response_hash=@transfers.create(request_hash.to_hash, "ag4nktpdzebjiye1tlze")
 
 ```json
 {
-   "amount":12.50,
+   "amount":716,
    "authorization":null,
    "method":"customer",
    "operation_type":"out",
@@ -230,7 +230,7 @@ response_hash=@transfers.get("twpmbike2jejex3pahzd", "ag4nktpdzebjiye1tlze")
 
 ```json
 {
-   "amount":12.50,
+   "amount":716,
    "authorization":null,
    "method":"customer",
    "operation_type":"out",
@@ -302,8 +302,8 @@ curl -g "https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $findDataRequest = array(
-    'creation[gte]' => '2013-01-01',
-    'creation[lte]' => '2013-12-31',
+    'creation[gte]' => '2019-01-01',
+    'creation[lte]' => '2019-12-31',
     'offset' => 0,
     'limit' => 5);
 
@@ -315,8 +315,8 @@ $transferList = $customer->transfers->getList($findDataRequest);
 ```java
 final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
-dateGte.set(2014, 5, 1, 0, 0, 0);
-dateLte.set(2014, 5, 15, 0, 0, 0);
+dateGte.set(2019, 1, 1, 0, 0, 0);
+dateLte.set(2019, 12, 31, 0, 0, 0);
         
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
@@ -331,8 +331,8 @@ List<Transfer> transfers = api.transfers().list("a9pvykxz4g5rg0fplze0", request)
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
-request.CreationGte = new Datetime(2014, 5, 1);
-request.CreationLte = new DateTime(2014, 5, 15);
+request.CreationGte = new Datetime(2019, 1, 1);
+request.CreationLte = new DateTime(2019, 12, 31);
 request.Offset = 0;
 request.Limit = 100;
 
@@ -361,7 +361,7 @@ response_hash=@transfers.all("asynwirguzkgq2bizogo")
 ```json
 [
    {
-      "amount":130.00,
+      "amount":716,
       "authorization":null,
       "method":"customer",
       "currency":"COP",
@@ -369,14 +369,14 @@ response_hash=@transfers.all("asynwirguzkgq2bizogo")
       "transaction_type":"transfer",
       "status":"completed",
       "id":"a74mbe4e2j5gc6gfahzd",
-      "creation_date":"2013-09-18T00:31:19-06:00",
+      "creation_date":"2019-09-18T00:31:19-06:00",
       "description":"Una descripcion",
       "error_message":null,
       "order_id":"20131115103317",
       "customer_id":"afk4csrazjp1udezj1po"
    },
    {
-      "amount":130.00,
+      "amount":715,
       "authorization":null,
       "method":"customer",
       "currency":"COP",
@@ -384,7 +384,7 @@ response_hash=@transfers.all("asynwirguzkgq2bizogo")
       "transaction_type":"transfer",
       "status":"completed",
       "id":"a74mbe4e2j5gc6gfahzd",
-      "creation_date":"2013-09-18T00:31:19-06:00",
+      "creation_date":"2019-09-18T00:31:19-06:00",
       "description":"Una descripcion",
       "error_message":null,
       "order_id":null,

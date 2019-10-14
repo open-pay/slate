@@ -71,7 +71,7 @@ Code    | HTTP Error |Cause
 2005 | 400 Bad Request | The expiration date of the card is prior to the current date.
 2006 | 400 Bad Request | Security code card (CVV2) was not provided.
 2007 | 412 Precondition Failed | The card number is a test number and can only be used in Sandbox.
-2008 | 412 Precondition Failed | The consulted card is not valid for points.
+2009 | 412 Precondition Failed | El código de seguridad de la tarjeta (CVV2) no es valido.
 
 ###Cards
 Code    | HTTP Error |Cause

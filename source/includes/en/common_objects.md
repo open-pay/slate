@@ -27,7 +27,6 @@ Information for objects shared in request and response.
       "alias":null,
       "bank_name":"BANCOMER",
       "creation_date":"2013-11-14T18:29:34-06:00",
-      "clabe":"012XXXXXXXXXX24616",
       "holder_name":"Juan Tapia Trejo",
       "bank_code":"012"
    }
@@ -44,7 +43,7 @@ method| ***string*** <br/>Transaction method type: card, bank o customer.
 creation_date| ***datetime***  <br/>Transaction creation date in ISO 8601 format.
 order_id| ***string*** <br/>Unique transaction and reference number.
 status| ***string*** <br/>Current transaction status.  Possible values: completed, in_progress, failed.
-amount| ***numeric*** <br/>Transaction full amount, including two decimal places.
+amount| ***numeric*** <br/>Transaction full amount.
 description|***string*** <br/>Transaction description.
 error_message| ***string*** <br/>If the transaction is in *failed* status, this field will include the error message.
 customer_id| ***string*** <br/>Unique identifier for the customer who this transaction belongs.  If the value is null the transaction belongs to Merchant account.

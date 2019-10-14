@@ -65,7 +65,7 @@ curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/tokens \
    "expiration_month":"12",
    "cvv2":"110",
    "address":{
-      "city":"QuerÃƒÂ©taro",
+      "city":"Bogotá",
       "country_code":"CO",
       "postal_code":"110511",
       "line1":"Av 5 de Febrero",
@@ -91,7 +91,7 @@ curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/tokens \
          "line2":"Roble 207",
          "line3":"col carrillo",
          "state":"Bogota",
-         "city":"QuerÃƒÂ©taro",
+         "city":"Bogotá",
          "postal_code":"110511",
          "country_code":"CO"
       },
@@ -147,7 +147,7 @@ curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxq
          "line2":"Roble 207",
          "line3":"col carrillo",
          "state":"Bogota",
-         "city":"QuerÃƒÂ©taro",
+         "city":"Bogotá",
          "postal_code":"110511",
          "country_code":"CO"
       },

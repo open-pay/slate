@@ -20,7 +20,7 @@ Para poder suscribir algún cliente es necesario primero [crear un plan](#crear-
         "expiration_month": "12",
         "allows_charges": true,
         "allows_payouts": false,
-        "creation_date": "2013-12-13T12:39:46-06:00",
+        "creation_date": "2018-12-13T12:39:46-06:00",
         "bank_name": "DESCONOCIDO",
         "customer_id": null,
         "bank_code": "000"
@@ -28,10 +28,10 @@ Para poder suscribir algún cliente es necesario primero [crear un plan](#crear-
     "id": "svxdm1suclzipbi4pavm",
     "cancel_at_period_end": false,
     "charge_date": "2014-01-12",
-    "creation_date": "2013-12-13T12:39:46-06:00",
+    "creation_date": "2018-12-13T12:39:46-06:00",
     "current_period_number": 0,
-    "period_end_date": "2014-01-11",
-    "trial_end_date": "2014-01-11",
+    "period_end_date": "2019-01-11",
+    "trial_end_date": "2019-01-11",
     "plan_id": "pjl7wfryrrd1tznr0fnl",
     "customer_id": "a2b79p8xmzeyvmolqfja"
 }
@@ -109,7 +109,7 @@ curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $subscriptionDataRequest = array(
-    'trial_end_date' => '2014-01-01',
+    'trial_end_date' => '2019-05-01',
     'plan_id' => 'pbi4kb8hpb64x0uud2eb',
     'card' => array(
          'card_number' => '4111111111111111',
@@ -126,7 +126,7 @@ $subscription = $customer->subscriptions->add($subscriptionDataRequest);
 
 ```java
 final Calendar trialEndDate = Calendar.getInstance();
-trialEndDate.set(2014, 5, 1, 0, 0, 0);
+trialEndDate.set(2019, 5, 1, 0, 0, 0);
 
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
@@ -148,7 +148,7 @@ request = api.subscriptions().create("a9pvykxz4g5rg0fplze0", request);
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.PlanId = "idPlan-01001";
-request.TrialEndDate = new Datetime(2014, 5, 1);
+request.TrialEndDate = new Datetime(2019, 5, 1);
 Card card = new Card();
 card.HolderName = "Juan Perez Ramirez";
 card.CardNumber = "4111111111111111";
@@ -192,7 +192,7 @@ card_hash={
    }
 request_hash={
      "plan_id" => "pbi4kb8hpb64x0uud2eb",
-     "trial_end_date" => "2014-06-20",
+     "trial_end_date" => "2019-05-01",
      "card" => card_hash
    }
 
@@ -219,8 +219,8 @@ response_hash=@subscriptions.create(request_hash.to_hash, "a9pvykxz4g5rg0fplze0"
       "bank_code":"002"
    },
    "cancel_at_period_end":false,
-   "charge_date":"2014-06-21",
-   "creation_date":"2014-05-22T15:56:18-05:00",
+   "charge_date":"2019-05-22",
+   "creation_date":"2019-05-22T15:56:18-05:00",
    "current_period_number":0,
    "period_end_date":"2014-06-20",
    "trial_end_date":"2014-06-20",
@@ -307,7 +307,7 @@ $subscription->save();
 
 ```java
 final Calendar trialEndDate = Calendar.getInstance();
-trialEndDate.set(2014, 5, 1, 0, 0, 0);
+trialEndDate.set(2019, 5, 1, 0, 0, 0);
 
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
@@ -322,7 +322,7 @@ request = api.subscriptions().update(request);
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Subscription request = new Subscription();
 request.PlanId = "idPlan-01001";
-request.TrialEndDate = new Datetime(2014, 5, 1);;
+request.TrialEndDate = new Datetime(2019, 5, 1);;
 request.CardId = "ktrpvymgatocelsciak7";
 
 request = api.SubscriptionService.Update("a9pvykxz4g5rg0fplze0", request);
@@ -330,7 +330,7 @@ request = api.SubscriptionService.Update("a9pvykxz4g5rg0fplze0", request);
 
 ```javascript
 var subscriptionRequest = {
-'trial_end_date': '2016-01-11',
+'trial_end_date': '2019-05-11',
   'card': {
     'card_number': '343434343434343',
     'holder_name': 'Juan Perez Ramirez',
@@ -352,7 +352,7 @@ openpay.customers.subscriptions.update('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1mi
 request_hash={
      "plan_id" => "pbi4kb8hpb64x0uud2eb",
      "cancel_at_period_end" => true,
-     "trial_end_date" => "2014-06-20",
+     "trial_end_date" => "2019-05-20",
      "source_id" => "ktrpvymgatocelsciak7"
    }
 
@@ -380,10 +380,10 @@ response_hash=@subscriptions.update(request_hash.to_hash, "pbi4kb8hpb64x0uud2eb"
    },
    "cancel_at_period_end":false,
    "charge_date":"2016-01-12",
-   "creation_date":"2014-05-22T15:56:18-05:00",
+   "creation_date":"2019-05-22T15:56:18-05:00",
    "current_period_number":0,
-   "period_end_date":"2016-01-11",
-   "trial_end_date":"2016-01-11",
+   "period_end_date":"2019-05-11",
+   "trial_end_date":"2019-05-11",
    "plan_id":"pbi4kb8hpb64x0uud2eb",
    "customer_id":"ag4nktpdzebjiye1tlze"
 }
@@ -493,11 +493,11 @@ response_hash=@subscriptions.get("s0gmyor4yqtyv1miqwr0", "pbi4kb8hpb64x0uud2eb")
       "bank_code":"103"
    },
    "cancel_at_period_end":false,
-   "charge_date":"2016-01-12",
-   "creation_date":"2014-05-22T15:56:18-05:00",
+   "charge_date":"2019-05-12",
+   "creation_date":"2019-05-22T15:56:18-05:00",
    "current_period_number":0,
-   "period_end_date":"2016-01-11",
-   "trial_end_date":"2016-01-11",
+   "period_end_date":"2019-05-11",
+   "trial_end_date":"2019-05-11",
    "plan_id":"pbi4kb8hpb64x0uud2eb",
    "customer_id":"ag4nktpdzebjiye1tlze"
 }
@@ -644,8 +644,8 @@ curl -g "https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/ag4nkt
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $findData = array(
-    'creation[gte]' => '2013-01-01',
-    'creation[lte]' => '2013-12-31',
+    'creation[gte]' => '2019-01-01',
+    'creation[lte]' => '2019-12-31',
     'offset' => 0,
     'limit' => 5);
 
@@ -657,8 +657,8 @@ $subscriptionList = $customer->subscriptions->getList($findData);
 ```java
 final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
-dateGte.set(2014, 5, 1, 0, 0, 0);
-dateLte.set(2014, 5, 15, 0, 0, 0);
+dateGte.set(2019, 1, 1, 0, 0, 0);
+dateLte.set(2019, 12, 31, 0, 0, 0);
 
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
@@ -673,8 +673,8 @@ List<Subscription> subscriptions = api.subscriptions().list("a9pvykxz4g5rg0fplze
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
-request.CreationGte = new Datetime(2014, 5, 1);
-request.CreationLte = new DateTime(2014, 5, 15);
+request.CreationGte = new Datetime(2019, 1, 1);
+request.CreationLte = new DateTime(2019, 12, 31);
 request.Offset = 0;
 request.Limit = 100;
 
@@ -719,11 +719,11 @@ openpay.customers.subscriptions.list('ag4nktpdzebjiye1tlze', searchParams, funct
          "bank_code":"103"
       },
       "cancel_at_period_end":false,
-      "charge_date":"2016-01-12",
-      "creation_date":"2014-05-22T15:56:18-05:00",
+      "charge_date":"2019-05-22",
+      "creation_date":"2019-05-22T15:56:18-05:00",
       "current_period_number":0,
-      "period_end_date":"2016-01-11",
-      "trial_end_date":"2016-01-11",
+      "period_end_date":"2019-05-11",
+      "trial_end_date":"2019-05-11",
       "plan_id":"pbi4kb8hpb64x0uud2eb",
       "customer_id":"ag4nktpdzebjiye1tlze"
    }

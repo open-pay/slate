@@ -27,7 +27,7 @@ Propiedad | Descripción
 id | ***string*** <br/> Identificador único del Plan.
 creation_date | ***datetime*** <br/> Fecha y hora en que se creó el Plan  en formato ISO 8601
 name  | ***string*** <br/> Nombre del Plan.
-amount | ***numeric*** <br/> Monto que se aplicara cada vez que se cobre la suscripción. Debe ser una cantidad mayor a cero, con hasta 2 dígitos decimales.
+amount | ***numeric*** <br/> Monto que se aplicara cada vez que se cobre la suscripción. Debe ser una cantidad mayor a cero.
 currency | ***string*** <br/> Moneda usada en la operación, por default es COP
 repeat_every | ***numeric*** <br/> Número de unidades tiempo entre los que se cobrara la suscripción. Por ejemplo, repeat_unit=month y repeat_every=2 indica que se cobrara cada 2 meses.
 repeat_unit | ***string*** <br/> Especifica la frecuencia de cobro. Puede ser semanal(week), mensual(month) o anual(year).
@@ -75,7 +75,7 @@ curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/plans \
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
-  "amount": 150.00,
+  "amount": 150,
   "status_after_retry": "cancelled",
   "retry_times": 2,
   "name": "Curso de ingles",
@@ -90,7 +90,7 @@ curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/plans \
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $planDataRequest = array(
-    'amount' => 150.00,
+    'amount' => 150,
     'status_after_retry' => 'cancelled',
     'retry_times' => 2,
     'name' => 'Plan Curso Verano',
@@ -107,7 +107,7 @@ $plan = $openpay->plans->add($planDataRequest);
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan request = new Plan();
 request.name("Curso de ingles");
-request.amount(new BigDecimal("100.00"));
+request.amount(new BigDecimal("150"));
 request.repeatEvery(1, PlanRepeatUnit.WEEK);
 request.retryTimes(3);
 request.statusAfterRetry(PlanStatusAfterRetry.UNPAID);
@@ -120,7 +120,7 @@ request = api.plans().create(request);
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 Plan request = new Plan();
 request.Name = "Curso de ingles";
-request.Amount = new Decimal(100.00);
+request.Amount = new Decimal(150);
 request.RepeatEvery = 1;
 request.RepeatUnit = "week";
 request.RetryTimes = 2;
@@ -132,7 +132,7 @@ request = api.PlanService.Create(request);
 
 ```javascript
 var planRequest = {
-  'amount': 150.00,
+  'amount': 150,
   'status_after_retry': 'cancelled',
   'retry_times': 2,
   'name': 'Curso de ingles',
@@ -151,7 +151,7 @@ openpay.plans.create(planRequest, function(error, plan){
 @plans=@openpay.create(:plans)
 request_hash={
      "name" => "Curso de ingles",
-     "amount" => 150.00,
+     "amount" => 150,
      "repeat_every" => "1",
      "repeat_unit" => "month",
      "retry_times" => 2,
@@ -169,7 +169,7 @@ response_hash=@plans.create(request_hash.to_hash)
    "id":"p8e6x3hafqqsbmnoevrt",
    "name":"Curso de ingles",
    "status":"active",
-   "amount":150.00,
+   "amount":150,
    "currency":"COP",
    "creation_date":"2014-05-22T12:29:31-05:00",
    "repeat_every":1,
@@ -188,7 +188,7 @@ Crea un nuevo plan al se podrán suscribir uno o varios clientes.
 Propiedad | Descripción
 --------- | ------
 name | ***string*** (requerido, longitud = 255) <br/>Nombre del Plan.
-amount | ***numeric*** (requerido) <br/>Monto que se aplicara cada vez que se cobre la suscripción. Debe ser una cantidad mayor a cero, con hasta 2 dígitos decimales.
+amount | ***numeric*** (requerido) <br/>Monto que se aplicara cada vez que se cobre la suscripción. Debe ser una cantidad mayor a cero.
 repeat_every | ***numeric*** (requerido) <br/>Número de unidades tiempo entre los que se cobrara la suscripción. Por ejemplo, repeat_unit=month y repeat_every=2 indica que se cobrara cada 2 meses.
 repeat_unit | ***numeric*** (requerido) <br/>Especifica la frecuencia de cobro. Puede ser semanal(week), mensual(month) o anual(year).
 retry_times | ***numeric*** (opcional) <br/> Numero de reintentos de cobro de la suscripción. Cuando se agotan los intentos se pone en el estado determinado por el campo status_after_retry.
@@ -304,7 +304,7 @@ response_hash=@plans.update(request_hash.to_hash, "p8e6x3hafqqsbmnoevrt")
    "id":"p8e6x3hafqqsbmnoevrt",
    "name":"Curso de aleman",
    "status":"active",
-   "amount":150.00,
+   "amount":150,
    "currency":"COP",
    "creation_date":"2014-05-22T12:29:31-05:00",
    "repeat_every":1,
@@ -403,7 +403,7 @@ response_hash=@plans.get("p8e6x3hafqqsbmnoevrt")
    "id":"p8e6x3hafqqsbmnoevrt",
    "name":"Curso de aleman",
    "status":"active",
-   "amount":150.00,
+   "amount":150,
    "currency":"COP",
    "creation_date":"2014-05-22T12:29:31-05:00",
    "repeat_every":1,
@@ -553,8 +553,8 @@ curl -g "https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/plans?limit=10" 
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $findDataRequest = array(
-    'creation[gte]' => '2013-01-01',
-    'creation[lte]' => '2013-12-31',
+    'creation[gte]' => '2019-01-01',
+    'creation[lte]' => '2019-12-31',
     'offset' => 0,
     'limit' => 5);
 
@@ -565,8 +565,8 @@ $planList = $openpay->plans->getList($findDataRequest);
 ```java
 final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
-dateGte.set(2014, 5, 1, 0, 0, 0);
-dateLte.set(2014, 5, 15, 0, 0, 0);
+dateGte.set(2019, 5, 1, 0, 0, 0);
+dateLte.set(2019, 5, 15, 0, 0, 0);
 
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
@@ -581,8 +581,8 @@ List<Plan> plans = api.plans().list(request);
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
-request.CreationGte = new Datetime(2014, 5, 1);
-request.CreationLte = new DateTime(2014, 5, 15);
+request.CreationGte = new Datetime(2019, 5, 1);
+request.CreationLte = new DateTime(2019, 5, 15);
 request.Offset = 0;
 request.Limit = 100;
 
@@ -616,7 +616,7 @@ response_hash=@plans.all
         "amount": 150,
         "currency": "COP",
         "id": "patpflacwilazguj6bem",
-        "creation_date": "2013-12-13T09:43:52-06:00",
+        "creation_date": "2019-05-13T09:43:52-06:00",
         "repeat_every": 1,
         "repeat_unit": "month",
         "retry_times": 2,
@@ -629,7 +629,7 @@ response_hash=@plans.all
         "amount": 150,
         "currency": "COP",
         "id": "pjl7wfryrrd1tznr0fnl",
-        "creation_date": "2013-12-13T11:36:40-06:00",
+        "creation_date": "2019-05-13T11:36:40-06:00",
         "repeat_every": 1,
         "repeat_unit": "month",
         "retry_times": 2,

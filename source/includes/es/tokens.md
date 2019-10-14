@@ -32,8 +32,7 @@ Para usar esta funcionalidad de la API, te recomendamos usar nuestra librería e
             "country_code":"CO"
          },
          "creation_date":"2014-01-30T13:53:11-06:00",
-         "brand":"visa",
-         "points_card":false
+         "brand":"visa"
       }
    }
 ```

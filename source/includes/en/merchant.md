@@ -13,8 +13,7 @@ The *merchant* object allows you to query info related to your account using the
    "email": "contacto@enlinea.co", 
    "phone": "(1) 636 2801", 
    "status": "active", 
-   "balance": 1000, 
-   "clabe": "646180109400000542" 
+   "balance": 1000
 } 
 ```
 
@@ -105,8 +104,7 @@ openpay.merchant.get(function(error, merchant){
    "email":"demo@openpay.co",
    "phone":"(442) 258-1039",
    "status":"active",
-   "balance":218.73,
-   "clabe":"646180109400135624",
+   "balance":218.73
    "id":"mzdtln0bmtms6o3kck8f",
    "creation_date":"2014-01-23T10:45:53-06:00"
 }

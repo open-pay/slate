@@ -6,8 +6,6 @@ language_tabs:
   - php: PHP
   - java: JAVA
   - csharp: C#
-  - javascript : Node.js
-  - ruby: Ruby
 
 includes:
   - en/endpoints

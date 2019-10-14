@@ -209,8 +209,7 @@ response_hash=@customers.create(request_hash.to_hash)
    "store": {
        "reference": "OPENPAY02DQ35YOY7",
        "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
-   },
-   "clabe": "646180109400423323"
+   }
 }
 ```
 
@@ -404,7 +403,6 @@ response_hash=@customers.update(request_hash.to_hash)
       "reference": "OPENPAY02DQ35YOY7",
       "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
-   "clabe": "646180109400423323",
    "creation_date":"2014-05-20T16:47:47-05:00",
    "external_id":null
 }
@@ -519,7 +517,6 @@ response_hash=@customers.get("asynwirguzkgq2bizogo")
        "reference": "OPENPAY02DQ35YOY7",
        "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
-   "clabe": "646180109400423323",
    "creation_date":"2014-05-20T16:47:47-05:00",
    "external_id":null
 }
@@ -737,7 +734,6 @@ response_hash=@customers.all
        "reference": "OPENPAY02DQ35YOY7",
        "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35YOY7?width=1&height=45&text=false"
    },
-   "clabe": "646180109400423323"
 }, {
    "id":"cz4nkhrlcu9k7qd4lwqx",
    "creation_date":"2013-11-07T14:54:46-06:00",
@@ -750,8 +746,7 @@ response_hash=@customers.all
    "store": {
        "reference": "OPENPAY02DQ35DRE4",
        "barcode_url": "https://sandbox-api.openpay.co/barcode/OPENPAY02DQ35DRE4?width=1&height=45&text=false"
-  },
-  "clabe": "646180109400423323"
+  }
 }]
 ```
 Returns a list of registered customers, if you want to delimit the result you may use filters.

@@ -69,7 +69,7 @@ curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/charges \
    -X POST -d '{
    "source_id" : "kdx205scoizh93upqbte",
    "method" : "card",
-   "amount" : 701,
+   "amount" : 716,
    "currency" : "COP",
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-12324",
@@ -96,7 +96,7 @@ $customer = array(
 $chargeRequest = array(
     'method' => 'card',
     'source_id' => 'kqgykn96i7bcs1wwhvgw',
-    'amount' => 100,
+    'amount' => 716,
     'currency' => 'COP'
     'description' => 'Cargo inicial a mi merchant',
     'order_id' => 'oid-00051',
@@ -117,7 +117,7 @@ customer.setPhoneNumber("571627926831");
 customer.setEmail("juan.vazquez@empresa.co");
 
 request.cardId("kqgykn96i7bcs1wwhvgw"); // =source_id
-request.amount(new BigDecimal("100.00"));
+request.amount(new BigDecimal("716"));
 request.currency("COP");
 request.description("Cargo inicial a mi merchant");
 request.orderId("oid-00051");
@@ -139,7 +139,7 @@ customer.Email = "juan.vazquez@empresa.co";
 ChargeRequest request = new ChargeRequest();
 request.Method = "card";
 request.SourceId = "kwkoqpg6fcvfse8k8mg2";
-request.Amount = new Decimal(100.00);
+request.Amount = new Decimal(716);
 request.Currency = "COP";
 request.Description = "Cargo inicial a mi merchant";
 request.OrderId = "oid-00051";
@@ -153,7 +153,7 @@ Charge charge = api.ChargeService.Create(request);
 var chargeRequest = {
    'source_id' : 'kqgykn96i7bcs1wwhvgw',
    'method' : 'card',
-   'amount' : 100,
+   'amount' : 716,
    'currency' : 'COP',
    'description' : 'Cargo inicial a mi cuenta',
    'order_id' : 'oid-00051',
@@ -184,7 +184,7 @@ customer_hash={
 request_hash={
     "method" => "card",
     "source_id" => "kqgykn96i7bcs1wwhvgw",
-    "amount" => 100.00,
+    "amount" => Float(716),
     "currency" => "COP",
     "description" => "Cargo inicial a mi merchant",
     "order_id" => "oid-00051",
@@ -228,7 +228,7 @@ response_hash=@charges.create(request_hash.to_hash)
     "error_message": null,
     "order_id": "oid-12330",
     "currency": "COP",
-    "amount": 666.00,
+    "amount": 716,
     "customer": {
         "name": "Cliente Colombia",
         "last_name": "Vazquez Juarez",
@@ -271,9 +271,9 @@ Propiedad | Descripción
 --------- | -----
 method|***string*** (requerido) <br/>Debe contener el valor **card** para indicar que el cargo se hará de una tarjeta.
 source_id | ***string*** (requerido, longitud = 45) <br/>ID de la tarjeta guardada o el id del token creado de donde se retirarán los fondos.
-amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-cvv2 | ***numeric*** (requerido, longitud = 3-4) <br/>Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.<br/>Se utiliza solo para cargos con [Tarjetas Guardadas](#crear-una-tarjeta).
+amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero.
 currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 1 tipo de moneda: Pesos Colombianos(COP).
+cvv2 | ***numeric*** (requerido, longitud = 3-4) <br/>Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.<br/>Se utiliza solo para cargos con [Tarjetas Guardadas](#crear-una-tarjeta).
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 device_session_id |  ***string*** (requerido, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta antifraudes
@@ -350,7 +350,7 @@ curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/charges \
    -H "Content-type: application/json" \
    -X POST -d '{
    "method" : "card",
-   "amount" : 100,
+   "amount" : 716,
    "currency":"COP",
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-11152",
@@ -378,7 +378,7 @@ $customer = array(
 
 $chargeRequest = array(
     "method" : "card",
-    'amount' => 100,
+    'amount' => 716,
     "currency"=> "COP",
     'description' => 'Cargo terminal virtual a mi merchant',
     'customer' => $customer,
@@ -400,7 +400,7 @@ customer.setLastName("Vazquez Juarez");
 customer.setPhoneNumber("4423456723");
 customer.setEmail("juan.vazquez@empresa.co");
 
-request.amount(new BigDecimal("100.00"));
+request.amount(new BigDecimal("716"));
 request.description("Cargo inicial a mi merchant");
 request.orderId("oid-00051");
 request.setCustomer(customer);
@@ -421,7 +421,7 @@ customer.PhoneNumber = "4423456723";
 customer.Email = "juan.vazquez@empresa.co";
 
 request.Method = "card";
-request.Amount = new Decimal(100.00);
+request.Amount = new Decimal(716);
 request.Description = "Cargo inicial a mi merchant";
 request.OrderId = "oid-00051";
 request.Confirm = false;
@@ -435,7 +435,7 @@ Charge charge = api.ChargeService.Create(request);
 ```javascript
 var chargeRequest = {
    'method' : 'card',
-   'amount' : 100,
+   'amount' : 716,
    'currency': 'COP',
    'description' : 'Cargo inicial a mi cuenta',
    'order_id' : 'oid-00051',
@@ -467,7 +467,7 @@ customer_hash={
 
 request_hash={
     "method" => "card",
-    "amount" => 100.00,
+    "amount" => Float(716),
     "currency" => "COP",
     "description" => "Cargo inicial a mi merchant",
     "order_id" => "oid-00051",
@@ -503,7 +503,7 @@ response_hash=@charges.create(request_hash.to_hash)
         "url": "https://sandbox-api.openpay.co/v1/mpixehq7z4xupfwoohrm/charges/tro1ezxbfn5c8lvzhfcr/card_capture"
     },
     "currency": "COP",
-    "amount": 100.00,
+    "amount": 716,
     "customer": {
         "name": "Juan",
         "last_name": "Vazquez Juarez",
@@ -524,7 +524,8 @@ Este tipo de cargo no requiere una tarjeta guardada o que hayas generado un toke
 Propiedad | Descripción
 --------- | -----
 method|***string*** (requerido en card) <br/>Debe contener el valor **card** para indicar que el cargo se hará de una tarjeta.
-amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
+amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero.
+currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 1 tipo de moneda: Pesos Colombianos(COP).
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 [customer](#crear-un-nuevo-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realice el cargo a nivel cliente.
@@ -537,378 +538,7 @@ currency | ***string*** (requerido) <br/> Moneda usada en la operación
 Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
 
 
-##Confirmar un cargo
 
-> Definición
-
-```shell
-Comercio
-POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/capture
-
-Cliente
-POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/capture
-```
-
-```php
-<?
-Comercio
-$charge = $openpay->charges->get(transactionId);
-$charge->capture(captureData);
-
-Cliente
-$customer = $openpay->customers->get(customerId);
-$charge = $customer->charges->get(transactionId);
-$charge->capture(captureData);
-?>
-```
-
-```java
-//Cliente
-openpayAPI.charges().confirmCapture(String customerId, ConfirmCaptureParams request);
-
-//Comercio
-openpayAPI.charges().confirmCapture(ConfirmCaptureParams request);
-```
-
-```csharp
-//Cliente
-openpayAPI.ChargeService.Capture(string customer_id, string transaction_id, Decimal? amount);
-
-//Comercio
-openpayAPI.ChargeService.Capture(string transaction_id, Decimal? amount);
-```
-
-```javascript
-// Comercio
-openpay.charges.capture(transactionId, captureRequest, callback);
-
-// Cliente
-openpay.customers.charges.capture(customerId, transactionId, captureRequest, callback);
-```
-
-```ruby
-#Cliente
-@charges=@openpay.create(:charges)
-@charges.capture(transaction_id, customer_id)
-
-#Comercio
-@charges=@openpay.create(:charges)
-@charges.capture(transaction_id)
-```
-
-> Ejemplo de petición con cliente
-
-```shell
-curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/customers/ag9nkpvdzebjiye5tlzi/charges/tryqihxac3msedn4yxed/capture \
-   -u sk_e562c42a6q384b2ab02cd47d2n301uwk: \
-   -H "Content-type: application/json" \
-   -X POST -d '{
-    "amount" : 100.00
-} '
-```
-
-```php
-<?
-$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
-
-$captureData = array('amount' => 100.00);
-
-$customer = $openpay->customers->get('ag9nkpvdzebjiye5tlzi');
-$charge = $customer->charges->get('tryqihxac3msedn4yxed');
-$charge->capture($captureData);
-?>
-```
-
-```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-ConfirmCaptureParams request = new ConfirmCaptureParams();
-request.chargeId("tryqihxac3msedn4yxed");
-request.amount(new BigDecimal("100.00"));
-
-Charge charge = api.charges().confirmCapture("ag9nkpvdzebjiye5tlzi", request);
-```
-
-```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.ChargeService.Capture("ag9nkpvdzebjiye5tlzi", "tryqihxac3msedn4yxed", new Decimal(100.00));
-```
-
-```javascript
-var captureRequest = {
-  'amount' : 100.00
-};
-
-openpay.customers.charges.capture('ag9nkpvdzebjiye5tlzi', 'tryqihxac3msedn4yxed', captureRequest,
-    function(error, charge){
-  // ...
-});
-```
-
-```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
-
-response_hash=@charges.capture("tryqihxac3msedn4yxed", "ag9nkpvdzebjiye5tlzi")
-```
-
-> Ejemplo de respuesta
-
-```json
-{
-   "id":"tryqihxac3msedn4yxed",
-   "amount":100.00,
-   "authorization":"801585",
-   "method":"card",
-   "operation_type":"in",
-   "transaction_type":"charge",
-   "card":{
-      "type":"debit",
-      "brand":"visa",
-      "address":null,
-      "card_number":"411111XXXXXX1111",
-      "holder_name":"Juan Perez Ramirez",
-      "expiration_year":"20",
-      "expiration_month":"12",
-      "allows_charges":true,
-      "allows_payouts":true,
-      "bank_name":"BBVA",
-      "bank_code":"002"
-   },
-   "status":"completed",
-   "currency":"COP",
-   "creation_date":"2019-05-26T14:00:17-05:00",
-   "operation_date":"2019-05-26T14:00:17-05:00",
-   "description":"Cargo inicial a mi cuenta",
-   "error_message":null,
-   "order_id":null,
-   "customer_id":"ag9nkpvdzebjiye5tlzi"
-}
-```
-Confirmar un cargo creado con la propieda de <code>capture = "false"</code>,  este método es la segunda parte de la [creación de un cargo con tarjeta (id o token)](#con-id-de-tarjeta-o-token) y puede confirmar el monto capturado en la primera llamada o un monto menor.
-
-<aside class="notice">
-**Nota:** Solo se pueden confirmar cargos a tarjeta. Para cancelar el cargo creado se debe hacer una llamada al método <a href="/#devolver-un-cargo">Devolver un cargo</a>
-</aside>
-
-
-###Petición
-
-Propiedad | Descripción
---------- | -----
-amount | ***numeric*** (opcional) <br/>Cantidad a confirmar. Puede ser menor o igual al monto capturado hasta dos dígitos decimales.
-
-
-###Respuesta
-Regresa un [objeto de transacción](#objeto-transacci-n) con la información del cargo o una [respuesta de error](#objeto-error).
-
-##Devolver un cargo
-
-> Definición
-
-```shell
-Comercio
-POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/charges/{TRANSACTION_ID}/refund
-
-Cliente
-POST https://sandbox-api.openpay.co/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges/{TRANSACTION_ID}/refund
-```
-
-```php
-<?
-Comercio
-$charge = $openpay->charges->get(transactionId);
-$charge->refund(refundData);
-
-Cliente
-$customer = $openpay->customers->get(customerId);
-$charge = $customer->charges->get(transactionId);
-$charge->refund(refundData);
-?>
-```
-
-```java
-//Cliente
-openpayAPI.charges().refund(String customerId, RefundParams request);
-
-//Comercio
-openpayAPI.charges().refund(RefundParams request);
-```
-
-```csharp
-//Cliente
-openpayAPI.ChargeService.Refund(string customer_id, string transaction_id, string description);
-
-//Comercio
-openpayAPI.ChargeService.Refund(string transaction_id, string description);
-```
-
-```javascript
-// Comercio
-openpay.charges.refund(transactionId, refundRequest, callback);
-
-// Cliente
-openpay.customers.charges.refund(customerId, transactionId, refundRequest, callback);
-```
-
-```ruby
-#Cliente
-@charges=@openpay.create(:charges)
-@charges.refund(transaction_id, request_hash, customer_id)
-
-#Comercio
-@charges=@openpay.create(:charges)
-@charges.refund(transaction_id, request_hash)
-```
-
-> Ejemplo de petición con cliente
-
-```shell
-curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/customers/ag9nkpvdzebjiye5tlzi/charges/tr6cxbcefzatd10guvvw/refund \
-   -u sk_e562c42a6q384b2ab02cd47d2n301uwk: \
-   -H "Content-type: application/json" \
-   -X POST -d '{
-   "description" : "devolución",
-   "amount" : 100.00
-} '
-```
-
-```php
-<?
-$openpay = Openpay::getInstance('mzdtln3bqtms6o3kck2f', 'sk_e562c42a6q384b2ab02cd47d2n301uwk');
-
-$refundData = array(
-    'description' => 'devolución',
-    'amount' => 100);
-
-$customer = $openpay->customers->get('ag9nkpvdzebjiye5tlzi');
-$charge = $customer->charges->get('tr6cxbcefzatd10guvvw');
-$charge->refund($refundData);
-?>
-```
-
-```java
-OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-RefundParams request = new RefundParams();
-request.chargeId("tryqihxac3msedn4yxed");
-request.description("Monto de cargo devuelto");
-request.amount(new BigDecimal("100.00"));
-
-Charge charge = api.charges().refund("ag9nkpvdzebjiye5tlzi", request);
-```
-
-```csharp
-OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
-Charge charge = api.ChargeService.Refund("ag9nkpvdzebjiye5tlzi", "tryqihxac3msedn4yxed", "Monto de cargo devuelto", , new Decimal(100.00));
-```
-
-```javascript
-var refundRequest = {
-   'description' : 'devolución',
-   'amount' : 100.00
-};
-
-openpay.customers.charges.refund('ag9nkpvdzebjiye5tlzi', 'tryqihxac3msedn4yxed', refundRequest,
-    function(error, charge) {
-  // ...
-});
-```
-
-```ruby
-@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
-@charges=@openpay.create(:charges)
-
-request_hash={
-     "description" => "Monto de cargo devuelto",
-     "amount" => 100.00
-   }
-
-response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag9nkpvdzebjiye5tlzi")
-```
-
-> Ejemplo de respuesta
-
-```json
-{
-    "id": "troztz0scxl7berfxju0",
-    "authorization": "332225182",
-    "operation_type": "in",
-    "method": "card",
-    "transaction_type": "charge",
-    "card": {
-        "type": "debit",
-        "brand": "visa",
-        "address": null,
-        "card_number": "457562XXXXXX0326",
-        "holder_name": "Jorge Lopez",
-        "expiration_year": "19",
-        "expiration_month": "12",
-        "allows_charges": true,
-        "allows_payouts": false,
-        "bank_name": "BBVA COLOMBIA",
-        "bank_code": "000"
-    },
-    "status": "completed",
-    "conciliated": true,
-    "creation_date": "2019-08-12T12:51:56-05:00",
-    "operation_date": "2019-08-12T12:51:56-05:00",
-    "description": "Cargo inicial a mi cuenta",
-    "error_message": null,
-    "order_id": "oid-12317",
-    "refunds": [
-        {
-            "operation_date": "2019-08-12T13:00:23-05:00",
-            "authorization": "1091286572",
-            "amount": 100.00,
-            "status": "completed",
-            "conciliated": true,
-            "id": "tr76epoxpjwsqcdynpmb",
-            "description": "Reembolso",
-            "currency": "COP"
-        }
-    ],
-    "refund": {
-        "operation_date": "2019-08-12T13:00:23-05:00",
-        "authorization": "1091286572",
-        "amount": 100.00,
-        "operation_type": "out",
-        "method": "card",
-        "transaction_type": "refund",
-        "status": "completed",
-        "conciliated": true,
-        "id": "tr76epoxpjwsqcdynpmb",
-        "creation_date": "2019-08-12T13:00:23-05:00",
-        "description": "Reembolso",
-        "customer": {
-            "name": "Cliente Colombia",
-            "last_name": "Vazquez Juarez",
-            "email": "juan.vazquez@empresa.co",
-            "phone_number": "4448936475",
-            "address": null,
-            "creation_date": "2019-08-12T12:51:56-05:00",
-            "external_id": null,
-            "clabe": null
-        },
-        "currency": "COP"
-    },
-    "currency": "COP",
-    "amount": 100.00,
-    "customer": {
-        "name": "Cliente Colombia",
-        "last_name": "Vazquez Juarez",
-        "email": "juan.vazquez@empresa.co",
-        "phone_number": "4448936475",
-        "address": null,
-        "creation_date": "2019-08-12T12:51:56-05:00",
-        "external_id": null,
-        "clabe": null
-    },
-    "fee": {
-        "amount": 5.4000,
-        "tax": 0.8640,
-        "currency": "COP"
-    }
-}
-```
 Si deseas realizar una devolución de un cargo hecho a tarjeta puedes ocupar este método. El monto a devolver será por el total del cargo o un monto menor. Ten en cuenta que la devolución puede tardar en aparecer en el estado de cuenta de tu cliente de 1 a 3 días hábiles.
 
 <aside class="notice">
@@ -921,7 +551,7 @@ Si deseas realizar una devolución de un cargo hecho a tarjeta puedes ocupar est
 Propiedad | Descripción
 --------- | -----
 description | ***string*** (opcional, longitud = 250) <br/>Texto libre para describir motivo de la devolución.
-amount | ***numeric*** (opcional) <br/>Cantidad a reembolsar. Debe ser una cantidad mayor a cero y menor o igual al cargo original, con hasta dos dígitos decimales.
+amount | ***numeric*** (opcional) <br/>Cantidad a reembolsar. Debe ser una cantidad mayor a cero y menor o igual al cargo original.
 
 
 ###Respuesta
@@ -1055,7 +685,7 @@ response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag9nkpvdzebjiye5tlzi")
     "error_message": null,
     "order_id": "oid-12331",
     "currency": "COP",
-    "amount": 666.00,
+    "amount": 716,
     "customer": {
         "name": "Cliente Colombia",
         "last_name": "Vazquez Juarez",
@@ -1179,7 +809,7 @@ request.creationGte(dateGte.getTime());
 request.creationLte(dateLte.getTime());
 request.offset(0);
 request.limit(100);
-request.amount(new BigDecimal("100.00"));
+request.amount(new BigDecimal("716"));
 
 List<Charge> charges = api.charges().list("ag9nkpvdzebjiye5tlzi", request);
 ```
@@ -1191,7 +821,7 @@ request.CreationGte = new Datetime(2019, 5, 1);
 request.CreationLte = new DateTime(2019, 5, 15);
 request.Offset = 0;
 request.Limit = 100;
-request.Amount = new Decimal(100.00);
+request.Amount = new Decimal(716);
 
 List<Charge> charges= openpayAPI.ChargeService.List("ag9nkpvdzebjiye5tlzi", request);
 ```
@@ -1247,7 +877,7 @@ response_hash=@charges.all("ag9nkpvdzebjiye5tlzi")
         "error_message": null,
         "order_id": "oid-12331",
         "currency": "COP",
-        "amount": 666.00,
+        "amount": 716,
         "customer": {
             "name": "Cliente Colombia",
             "last_name": "Vazquez Juarez",

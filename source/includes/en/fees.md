@@ -44,7 +44,7 @@ curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/fees \
    -H "Content-type: application/json" \
    -X POST -d '{                                            
      "customer_id" : "dvocf97jd20es3tw5laz",
-     "amount" : 12.50,          
+     "amount" : 12,          
      "description" : "Cobro de ComisiÃ³n",
      "order_id" : "oid-1245"
 }' 
@@ -56,7 +56,7 @@ $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178
 
 $feeDataRequest = array(
     'customer_id' => 'a9ualumwnrcxkl42l6mh',
-    'amount' => 12.50,
+    'amount' => 12,
     'description' => 'Cobro de ComisiÃ³n',
     'order_id' => 'ORDEN-00063');
 
@@ -68,7 +68,7 @@ $fee = $openpay->fees->create($feeDataRequest);
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 CreateFeeParams request = new CreateFeeParams();
 request.customerId("a9pvykxz4g5rg0fplze0");
-request.amount(new BigDecimal("100.00"));
+request.amount(new BigDecimal("12"));
 request.description("Cobro de comisiÃ³n");
 request.orderId("oid-1245");
 
@@ -79,7 +79,7 @@ Fee fee = api.fees().create(request);
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 FeeRequest request = new FeeRequest();
 request.CustomerId = "a9pvykxz4g5rg0fplze0";
-request.Amount = new Decimal(100.00);
+request.Amount = new Decimal(12);
 request.Description = "Cobro de comisiÃ³n";
 request.OrderId = "oid-1245;
 
@@ -89,7 +89,7 @@ Fee fee = api.FeeService.Create(request);
 ```javascript
 var feeRequest = {                                            
      'customer_id' : 'dvocf97jd20es3tw5laz',
-     'amount' : 12.50,          
+     'amount' : 12,          
      'description' : 'Cobro de ComisiÃ³n',
      'order_id' : 'oid-1245'
 };
@@ -104,7 +104,7 @@ openpay.fees.create(feeRequest, function(error, fee){
 @fees=@openpay.create(:fees)
 request_hash={
      "customer_id" => "dvocf97jd20es3tw5laz",
-     "amount" => 12.50,
+     "amount" => Float(12),
      "description" => "Cobro de ComisiÃ³n",
      "order_id" => "oid-1245"
    }
@@ -116,7 +116,7 @@ response_hash=@fees.create(request_hash.to_hash)
 
 ```json
 {
-   "amount":12.50,
+   "amount":12,
    "authorization":null,
    "method":"customer",
    "operation_type":"out",
@@ -139,7 +139,7 @@ Charge a fee to the customer account.
 Property | Description
 --------- | ------
 customer_id | ***string*** (required, length = 45) <br/>The unique identifier of the customer that you want to charge the fee.
-amount | ***numeric*** (required) <br/>Charge amount.  It needs to be more than zero, it can have up to two decimal places.
+amount | ***numeric*** (required) <br/>Charge amount.  It needs to be more than zero.
 description | ***string*** (required, length = 250) <br/> A description associated with the fee charge.
 order_id | ***string*** (optional, length = 100) <br/>Unique fee identifier.  It has to be unique among all the transactions. 
 
@@ -257,7 +257,7 @@ response_hash=@fees.refund("mzdtln0bmtms6o3kck8f", refund_hash.to_hash)
   "error_message": null,
   "order_id": null,
   "customer_id": "ar2btmquidjhykdaztp6",
-  "amount": 11.11,
+  "amount": 12,
   "currency": "COP"
 }
 ```
@@ -318,8 +318,8 @@ curl -g "https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/fees?limit=10" \
 $openpay = Openpay::getInstance('moiep6umtcnanql3jrxp', 'sk_3433941e467c1055b178ce26348b0fac');
 
 $findData = array(
-    'creation[gte]' => '2013-01-01',
-    'creation[lte]' => '2013-12-31',
+    'creation[gte]' => '2019-01-01',
+    'creation[lte]' => '2019-12-31',
     'offset' => 0,
     'limit' => 5);
 
@@ -330,8 +330,8 @@ $feeList = $openpay->fees->getList($findDataRequest);
 ```java
 final Calendar dateGte = Calendar.getInstance();
 final Calendar dateLte = Calendar.getInstance();
-dateGte.set(2014, 5, 1, 0, 0, 0);
-dateLte.set(2014, 5, 15, 0, 0, 0);
+dateGte.set(2019, 5, 1, 0, 0, 0);
+dateLte.set(2019, 5, 15, 0, 0, 0);
         
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.co", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
@@ -346,8 +346,8 @@ List<Fee> fees = api.fees().list(request);
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
 SearchParams request = new SearchParams();
-request.CreationGte = new Datetime(2014, 5, 1);
-request.CreationLte = new DateTime(2014, 5, 15);
+request.CreationGte = new Datetime(2019, 5, 1);
+request.CreationLte = new DateTime(2019, 5, 15);
 request.Offset = 0;
 request.Limit = 100;
 
@@ -376,7 +376,7 @@ response_hash=@fees.all
 ```json
 [
    {
-      "amount":30.00,
+      "amount":12,
       "authorization":null,
       "method":"customer",
       "operation_type":"out",
@@ -391,7 +391,7 @@ response_hash=@fees.all
       "customer_id":"dvocf97jd20es3tw5laz"
    },
    {
-      "amount":12.00,
+      "amount":11,
       "authorization":null,
       "method":"customer",
       "operation_type":"out",
