@@ -11,15 +11,7 @@ You can store multiple debit and / or credit cards at Merchant or customer level
 {
    "type":"debit",
    "brand":"mastercard",
-   "address":{
-      "line1":"Av 5 de Febrero",
-      "line2":"Roble 207",
-      "line3":"col carrillo",
-      "state":"Bogota",
-      "city":"Bogotá",
-      "postal_code":"110511",
-      "country_code":"CO"
-   },
+   "address":null,
    "id":"kgipbqixvjg3gbzowl7l",
    "card_number":"1111",
    "holder_name":"Juan Perez Ramirez",
@@ -27,8 +19,8 @@ You can store multiple debit and / or credit cards at Merchant or customer level
    "expiration_month":"12",
    "allows_charges":true,
    "allows_payouts":false,
-   "creation_date":"2013-12-12T17:50:00-06:00",
-   "bank_name":"DESCONOCIDO",
+   "creation_date":"2018-12-12T17:50:00-06:00",
+   "bank_name":"BANCO DE COLOMBIA",
    "bank_code":"000",
    "customer_id":"a2b79p8xmzeyvmolqfja"
 }
@@ -43,7 +35,7 @@ card_number |***numeric***  <br/>Card Number, it can be 16 or 19 digits.
 cvv2 |***numeric***  <br/>Security code as it appears on the back of the card. Usually 3 digits..
 expiration_month |***numeric***  <br/>Expiration month as it appears on the card.
 expiration_year |***numeric***  <br/>Expiration year as it appears on the card.
-[address](#address-object) |***object*** <br/>Billing address of cardholder.
+[address](#address-object) |***object*** <br/>It is not used at this time.
 allows_charges |***boolean*** <br/>It allows to know if you can make charges to the card.
 allows_payouts |***boolean*** <br/>It allows to know if you can send payments to the card.
 brand |***string*** <br/>Card brand: visa, mastercard, carnet or american express.
@@ -116,13 +108,13 @@ curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/ag4nktpdze
    -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
    -H "Content-type: application/json" \
    -X POST -d '{
-   "card_number":"4111111111111111",
-   "holder_name":"Juan Perez Ramirez",
-   "expiration_year":"20",
-   "expiration_month":"12",
-   "cvv2":"110",
-   "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
- }'
+  "holder_name":"DinnersClub",
+  "card_number":"36728481533333",
+  "cvv2":"651",
+  "expiration_month":"07",
+  "expiration_year":"21",
+  "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
+}'
 ```
 
 ```php
@@ -135,15 +127,8 @@ $cardDataRequest = array(
     'cvv2' => '123',
     'expiration_month' => '12',
     'expiration_year' => '15',
-    'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f',
-    'address' => array(
-            'line1' => 'Privada Rio No. 12',
-            'line2' => 'Co. El Tintero',
-            'line3' => '',
-            'postal_code' => '76920',
-            'state' => 'Bogotá',
-            'city' => 'Bogotá',
-            'country_code' => 'CO'));
+    'device_session_id' => 'kR1MiQhz2otdIuUlQkbEyitIqVMiI16f'
+);
 
 $customer = $openpay->customers->get('a9ualumwnrcxkl42l6mh');
 $card = $customer->cards->add($cardDataRequest);
@@ -159,15 +144,7 @@ request.cvv2("110");
 request.expirationMonth(12);
 request.expirationYear(20);
 request.deviceSessionId("kR1MiQhz2otdIuUlQkbEyitIqVMiI16f");
-Address address = new Address();
-address.city("Bogota");
-address.countryCode("10");
-address.state("Bogota");
-address.postalCode("79125");
-address.line1("Av. Pie de la cuesta #12");
-address.line2("Desarrollo San Pablo");
-address.line3("Qro. Qro.");
-request.address(address);
+
 
 request = api.cards().create("a9pvykxz4g5rg0fplze0", request);
 ```
@@ -181,15 +158,7 @@ request.Cvv2 = "110";
 request.ExpirationMonth = "12";
 request.ExpirationYear = "20";
 request.DeviceSessionId = "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
-Address address = new Address();
-address.City = "Bogota";
-address.CountryCode = "CO";
-address.State = "Bogota";
-address.PostalCode = "79125";
-address.Line1 = "Av. Pie de la cuesta #12";
-address.Line2 = "Desarrollo San Pablo";
-address.Line3 = "Qro. Qro.";
-request.Address = address;
+
 
 request = api.CardService.Create("a9pvykxz4g5rg0fplze0", request);
 ```
@@ -212,23 +181,14 @@ openpay.customers.cards.create('a9pvykxz4g5rg0fplze0', cardRequest, function(err
 ```ruby
 @openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
 @cards=@openpay.create(:cards)
-address_hash={
-      "line1" => "Calle 10",
-      "line2" => "col. san pablo",
-      "line3" => "entre la calle 1 y la 2",
-      "state" => "Bogota",
-      "city" => "Bogota",
-      "postal_code" => "76000",
-      "country_code" => "CO"
-   }
+
 request_hash={
      "holder_name" => "Juan Perez Ramirez",
      "card_number" => "411111XXXXXX1111",
      "cvv2" => "110",
      "expiration_month" => "12",
      "expiration_year" => "20",
-     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
-     "address" => address_hash
+     "device_session_id" => "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f"
    }
 
 response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
@@ -238,19 +198,19 @@ response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
 
 ```json
 {
-   "id":"ktrpvymgatocelsciak7",
-   "type":"debit",
-   "brand":"visa",
-   "card_number":"411111XXXXXX1111",
-   "holder_name":"Juan Perez Ramirez",
-   "expiration_year":"20",
-   "expiration_month":"12",
-   "allows_charges":true,
-   "allows_payouts":true,
-   "creation_date":"2014-05-21T17:31:01-05:00",
-   "bank_name":"BBVA",
-   "customer_id":"ag4nktpdzebjiye1tlze",
-   "bank_code":"002"
+     "id": "kulqltitbq0wnk3l2q3c",
+     "type": "debit",
+     "brand": "visa",
+     "address": null,
+     "card_number":"411111XXXXXX1111",
+     "holder_name":"Juan Perez Ramirez",
+     "expiration_year":"20",
+     "expiration_month":"12",
+     "allows_charges":true,
+     "allows_payouts":true,
+     "creation_date":"2018-05-21T17:31:01-05:00",
+     "bank_name":"BBVA",
+     "bank_code":"000"
 }
 ```
 
@@ -274,7 +234,7 @@ cvv2 |***numeric*** (required) <br/>Security code as it appears on the back of t
 expiration_month |***numeric*** (required) <br/>Expiration month as it appears on the card.
 expiration_year |***numeric*** (required) <br/>Expiration year as it appears on the card.
 device_session_id | ***string*** (optional, length = 255) <br/>Device identifier generated by antifraud tool.
-[address](#address-object) |***object*** <br/>Billing address of cardholder.
+
 
 ###Response
 Returns a [card object](#card-object) when it is created correctly or returns an [error response](#error-object) if a problem happened during the creation.
@@ -408,18 +368,19 @@ response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
 
 ```json
 {
-   "type":"credit",
-   "brand":"visa",
-   "id":"kso4st83wxaibffyt6su",
-   "card_number":"4242",
-   "holder_name":"Juan Perez Ramirez",
-   "expiration_year":"15",
-   "expiration_month":"12",
-   "allows_charges":true,
-   "allows_payouts":false,
-   "creation_date":"2014-02-12T10:57:09-06:00",
-   "bank_name":"BANCOMER",
-   "bank_code":"012",
+    "id": "kh6u8t1agrjhh4sz3vlt",
+    "type": "debit",
+    "brand": "visa",
+    "address": null,
+    "card_number": "457562XXXXXX0326",
+    "holder_name": "Jorge Lopez",
+    "expiration_year": "19",
+    "expiration_month": "12",
+    "allows_charges": true,
+    "allows_payouts": false,
+    "creation_date": "2019-08-12T13:14:34-05:00",
+    "bank_name": "BBVA COLOMBIA",
+    "bank_code": "000",
    "customer_id":"a2b79p8xmzeyvmolqfja"
 }
 ```
@@ -536,19 +497,19 @@ response_hash=@cards.get("ktrpvymgatocelsciak7", "asynwirguzkgq2bizogo")
 
 ```json
 {
-   "id":"ktrpvymgatocelsciak7",
-   "type":"debit",
-   "brand":"visa",
-   "card_number":"411111XXXXXX1111",
-   "holder_name":"Juan Perez Ramirez",
-   "expiration_year":"20",
-   "expiration_month":"12",
-   "allows_charges":true,
-   "allows_payouts":true,
-   "creation_date":"2014-05-21T17:31:01-05:00",
-   "bank_name":"BBVA",
-   "customer_id":"ag4nktpdzebjiye1tlze",
-   "bank_code":"002"
+     "id": "kulqltitbq0wnk3l2q3c",
+     "type": "debit",
+     "brand": "visa",
+     "address": null,
+     "card_number":"411111XXXXXX1111",
+     "holder_name":"Juan Perez Ramirez",
+     "expiration_year":"20",
+     "expiration_month":"12",
+     "allows_charges":true,
+     "allows_payouts":true,
+     "creation_date":"2018-05-21T17:31:01-05:00",
+     "bank_name":"BBVA",
+     "bank_code":"000"
 }
 ```
 
@@ -666,8 +627,7 @@ openpay.customers.cards.delete('a9pvykxz4g5rg0fplze0', 'ktrpvymgatocelsciak7', f
 response_hash=@cards.delete("ktrpvymgatocelsciak7", "asynwirguzkgq2bizogo")
 ```
 
-
-Deletes a card of the customer or Merchant. After deleting it won’t be possible to make movements with that card, however, all records of the transactions you have made will be kept and will be available on the dashboard.
+Elimina una tarjeta del cliente o comercio. Una vez eliminada no se permitirá hacer movimientos, sin embargo, se mantendrán todos los registros de operaciones que haya realizado y se podrán consultar en el dashboard.
 
 To remove it is only necessary to provide the card identifier.
 
@@ -807,34 +767,36 @@ response_hash=@cards.all("asynwirguzkgq2bizogo")
 
 ```json
 [
-   {
-      "id":"kxq1rpdymlcpxekvjsxm",
-      "card_number":"1118",
-      "holder_name":"Pedro Paramo",
-      "expiration_year":"15",
-      "expiration_month":"12",
-      "allows_charges":true,
-      "allows_payouts":true,
-      "creation_date":"2013-11-20T09:22:25-06:00",
-      "bank_name":"BBVA BANCOMER",
-      "bank_code":"012",
-      "type":"debit",
-      "brand":"mastercard"
-   },
-   {
-      "id":"kgjy0jiami01kkpdoywr",
-      "card_number":"1111",
-      "holder_name":"Pedro Paramo",
-      "expiration_year":"15",
-      "expiration_month":"12",
-      "allows_charges":true,
-      "allows_payouts":true,
-      "creation_date":"2013-11-19T13:26:12-06:00",
-      "bank_name":"BBVA BANCOMER",
-      "bank_code":"012",
-      "type":"debit",
-      "brand":"mastercard"
-   }
+	{
+	"id": "kulqltitbq0wnk3l2q3c",
+	"type": "debit",
+	"brand": "visa",
+	"address": null,
+	"card_number":"411111XXXXXX1111",
+	"holder_name":"Juan Perez Ramirez",
+	"expiration_year":"20",
+	"expiration_month":"12",
+	"allows_charges":true,
+	"allows_payouts":true,
+	"creation_date":"2018-05-21T17:31:01-05:00",
+	"bank_name":"BBVA",
+	"bank_code":"000"
+	},
+	{
+	"id":"kgjy0jiami01kkpdoywr",
+	"type":"debit",
+	"brand":"mastercard",
+	"address": null,
+	"card_number":"1111",
+	"holder_name":"Pedro Paramo",
+	"expiration_year":"15",
+	"expiration_month":"12",
+	"allows_charges":true,
+	"allows_payouts":true,
+	"creation_date":"2013-11-19T13:26:12-06:00",
+	"bank_name":"BBVA BANCOMER",
+	"bank_code":"012"
+	}
 ]
 ```
 
