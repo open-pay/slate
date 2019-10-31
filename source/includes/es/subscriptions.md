@@ -19,7 +19,6 @@ Para poder suscribir algún cliente es necesario primero [crear un plan](#crear-
         "expiration_year": "20",
         "expiration_month": "12",
         "allows_charges": true,
-        "allows_payouts": false,
         "creation_date": "2018-12-13T12:39:46-06:00",
         "bank_name": "DESCONOCIDO",
         "customer_id": null,
@@ -214,7 +213,6 @@ response_hash=@subscriptions.create(request_hash.to_hash, "a9pvykxz4g5rg0fplze0"
       "expiration_year":"20",
       "expiration_month":"12",
       "allows_charges":true,
-      "allows_payouts":true,
       "bank_name":"BANCO DE BOGOTÁ",
       "bank_code":"002"
    },
@@ -374,7 +372,6 @@ response_hash=@subscriptions.update(request_hash.to_hash, "pbi4kb8hpb64x0uud2eb"
       "expiration_year":"20",
       "expiration_month":"12",
       "allows_charges":true,
-      "allows_payouts":false,
       "bank_name":"BANCO DE BOGOTÁ",
       "bank_code":"103"
    },
@@ -488,7 +485,6 @@ response_hash=@subscriptions.get("s0gmyor4yqtyv1miqwr0", "pbi4kb8hpb64x0uud2eb")
       "expiration_year":"20",
       "expiration_month":"12",
       "allows_charges":true,
-      "allows_payouts":false,
       "bank_name":"AMERICAN EXPRESS",
       "bank_code":"103"
    },
@@ -714,7 +710,6 @@ openpay.customers.subscriptions.list('ag4nktpdzebjiye1tlze', searchParams, funct
          "expiration_year":"20",
          "expiration_month":"12",
          "allows_charges":true,
-         "allows_payouts":false,
          "bank_name":"AMERICAN EXPRESS",
          "bank_code":"103"
       },

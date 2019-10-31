@@ -220,7 +220,6 @@ response_hash=@charges.create(request_hash.to_hash)
         "expiration_year": "21",
         "expiration_month": "07",
         "allows_charges": true,
-        "allows_payouts": false,
         "creation_date": "2019-08-09T13:35:48-05:00",
         "bank_name": "BANCO DE BOGOTÁ",
         "bank_code": "000"
@@ -899,7 +898,6 @@ response_hash=@charges.refund("tryqihxac3msedn4yxed", request_hash.to_hash, "ag4
       "expiration_year":"20",
       "expiration_month":"12",
       "allows_charges":true,
-      "allows_payouts":true,
       "bank_name":"BANCO DE BOGOTÁ",
       "bank_code":"002"
    },
@@ -1061,7 +1059,6 @@ response_hash=@charges.get("tr6cxbcefzatd10guvvw", "ag9nkpvdzebjiye5tlzi")
         "expiration_year": "21",
         "expiration_month": "07",
         "allows_charges": true,
-        "allows_payouts": false,
         "creation_date": "2019-08-09T13:35:48-05:00",
         "bank_name": "BANCO DE BOGOTÁ",
         "bank_code": "000"
@@ -1253,7 +1250,6 @@ response_hash=@charges.all("ag9nkpvdzebjiye5tlzi")
             "expiration_year": "21",
             "expiration_month": "07",
             "allows_charges": true,
-            "allows_payouts": false,
             "creation_date": "2019-08-09T13:35:48-05:00",
             "bank_name": "BANCO DE BOGOTÁ",
             "bank_code": "000"

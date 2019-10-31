@@ -26,7 +26,6 @@ Se pueden almacenar múltiples tarjetas de débito y/o crédito a nivel cliente 
    "expiration_year":"20",
    "expiration_month":"12",
    "allows_charges":true,
-   "allows_payouts":false,
    "creation_date":"2013-12-12T17:50:00-06:00",
    "bank_name":"DESCONOCIDO",
    "bank_code":"000",
@@ -45,7 +44,6 @@ expiration_month |***numeric***  <br/>Mes de expiración tal como aparece en la 
 expiration_year |***numeric***  <br/>Año de expiración tal como aparece en la tarjeta.
 [address](#objeto-direcci-n) |***object*** <br/>Dirección de facturación del tarjeta habiente.
 allows_charges |***boolean*** <br/>Permite conocer si se pueden realizar cargos a la tarjeta.
-allows_payouts |***boolean*** <br/>Permite conocer si se pueden realizar envíos de pagos a la tarjeta.
 brand |***string*** <br/>Marca de la tarjeta: visa, mastercard, carnet o american express.
 type |***string*** <br/>Tipo de la tarjeta: debit, credit, cash, etc.
 bank_name |***string*** <br/>Nombre del banco emisor.
@@ -247,7 +245,6 @@ response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
     "expiration_year": "21",
     "expiration_month": "07",
     "allows_charges": true,
-    "allows_payouts": false,
     "creation_date": "2019-08-12T13:12:22-05:00",
     "bank_name": "BANCO DE BOGOTÁ",
     "bank_code": "000"
@@ -417,7 +414,6 @@ response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
     "expiration_year": "19",
     "expiration_month": "12",
     "allows_charges": true,
-    "allows_payouts": false,
     "creation_date": "2019-08-12T13:14:34-05:00",
     "bank_name": "BBVA COLOMBIA",
     "bank_code": "000"
@@ -545,7 +541,6 @@ response_hash=@cards.get("ktrpvymgatocelsciak7", "asynwirguzkgq2bizogo")
     "expiration_year": "19",
     "expiration_month": "12",
     "allows_charges": true,
-    "allows_payouts": false,
     "creation_date": "2019-08-12T13:14:34-05:00",
     "bank_name": "BBVA COLOMBIA",
     "bank_code": "000"
@@ -813,7 +808,6 @@ response_hash=@cards.all("asynwirguzkgq2bizogo")
       "expiration_year":"15",
       "expiration_month":"12",
       "allows_charges":true,
-      "allows_payouts":true,
       "creation_date":"2013-11-20T09:22:25-06:00",
       "bank_name":"BBVA BANCOMER",
       "bank_code":"012",
@@ -827,7 +821,6 @@ response_hash=@cards.all("asynwirguzkgq2bizogo")
       "expiration_year":"15",
       "expiration_month":"12",
       "allows_charges":true,
-      "allows_payouts":true,
       "creation_date":"2013-11-19T13:26:12-06:00",
       "bank_name":"BBVA BANCOMER",
       "bank_code":"012",
