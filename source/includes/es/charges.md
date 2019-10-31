@@ -75,7 +75,6 @@ curl https://sandbox-api.openpay.co/v1/mzdtln3bqtms6o3kck2f/charges \
    "description" : "Cargo inicial a mi cuenta",
    "order_id" : "oid-12324",
    "device_session_id" : "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f",
-   "iva": "10",
    "customer" : {
         "name" : "Cliente Colombia",
         "last_name" : "Vazquez Juarez",
@@ -264,9 +263,6 @@ Puedes realizar el cargo a la cuenta del comercio o a la cuenta de un cliente. <
 ***Sistema antifraude personalizado***</br>
 Es posible enviar información adicional a la plataforma Openpay para incrementar su base de conocimientos, esto le permitirá aplicar reglas personalizadas de acuerdo al giro del comercio y de manera oportuna, con el propósito de detectar con la mayor efectividad posible los intentos de fraude.
 
-<aside class="notice">
-Para utilizar esta característica es necesario enviar como parte del contenido de la transacción, la propiedad <code>metadata</code>, el cual contendrá un listado de campos personalizados de antrifraude, con la información propia del comercio que se desea tomar en cuenta al momento de validar y aplicar un cargo. Póngase en contacto con el departamento de soporte de Openpay para habilitar esta funcion. </br>
-</aside>
 
 
 ###Petición
@@ -282,7 +278,6 @@ description | ***string*** (requerido, longitud = 250) <br/>Una descripción aso
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
 device_session_id |  ***string*** (requerido, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta antifraudes
 [customer](#crear-un-nuevo-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realice el cargo a nivel cliente.
-metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personalizados de antifraude, estos campos deben de apegarse a las [reglas para creación de campos personalizados de antifraude](#reglas-para-creación-de-campos-personalizados-de-antifraude)
 
 
 ###Respuesta
