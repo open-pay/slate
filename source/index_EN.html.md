@@ -6,12 +6,15 @@ language_tabs:
   - php: PHP
   - java: JAVA
   - csharp: C#
-
+  - javascript : 
+  - ruby: 
+  
 includes:
   - en/endpoints
   - en/authentication
   - en/errors
   - en/charges
+  - en/pse
   - en/customers
   - en/transfers
   - en/cards
@@ -36,4 +39,4 @@ The Openpay API is designed on [REST](http://es.wikipedia.org/wiki/Representatio
 
 All the API responses are in [JSON](http://www.json.org/) format, including the errors.
 
-In the case to use the existents Openpay API clients ([Java](https://github.com/open-pay/openpay-java), [Php](https://github.com/open-pay/openpay-php), [C#](https://github.com/open-pay/openpay-dotnet), [Python](https://github.com/open-pay/openpay-python), [Ruby](https://github.com/open-pay/openpay-ruby), [NodeJS](https://github.com/open-pay/openpay-node)), the responses are specifically of type defined in the clients and their respective languajes.
+In the case to use the existents Openpay API clients ([Java](https://github.com/open-pay/openpay-java), [Php](https://github.com/open-pay/openpay-php), [C#](https://github.com/open-pay/openpay-dotnet)), the responses are specifically of type defined in the clients and their respective languajes.

@@ -14,6 +14,7 @@
 /fees/{FEE_ID}
 /charges
 /charges/{TRANSACTION_ID}
+/pse
 /cards
 /cards/{CARD_ID}
 /customers
@@ -31,14 +32,9 @@
 
 /cards
 /cards/{CARD_ID}
-/bankaccounts
-/bankaccounts/{BANKACCOUNT_ID}
 /charges
 /charges/{TRANSACTION_ID}
-/payouts
-/payouts/{TRANSACTION_ID}
-/transfers
-/transfers/{TRANSACTION_ID}
+/pse
 /subscriptions
 /subscriptions/{SUBSCRIPTION_ID}
 ```

@@ -8,28 +8,26 @@ Información de objetos compartidos en peticiones y respuestas.
 
 ```json
 {
-   "id":"trehwr2zcrltvae56vxl",
-   "authorization":null,
-   "transaction_type":"payout",
-   "operation_type":"out",
-   "currency":"COP",
-   "method":"bank",
-   "creation_date":"2019-08-14T18:29:35-06:00",
-   "order_id":"000001",
-   "status":"in_progress",
-   "amount":500,
-   "description":"Pago de ganancias",
-   "error_message":null,
-   "customer_id":"afk4csrazjp1udezj5po",
-   "bank_account":{
-      "rfc":ONE316015PM1,
-      "mobile":null,
-      "alias":null,
-      "bank_name":"BANCO DE BOGOTÁ",
-      "creation_date":"2019-08-14T18:29:34-06:00",
-      "holder_name":"Juan Tapia Trejo",
-      "bank_code":"012"
-   }
+    "id": "tryqbk08mmjihwejd3si",
+    "authorization": "faa33f71-f122-4efc-9",
+    "operation_type": "in",
+    "method": "bank_account",
+    "transaction_type": "charge",
+    "status": "completed",
+    "conciliated": true,
+    "creation_date": "2018-10-19T11:14:33-05:00",
+    "operation_date": "2018-10-19T11:14:45-05:00",
+    "description": "1 Calzado M",
+    "error_message": null,
+    "order_id": "161951571501672795",
+    "customer_id": "azxhcjwagajxtfciuytw",
+    "due_date": "2019-10-18T11:34:33-05:00",
+    "amount": 54627.00,
+    "currency": "COP",
+    "payment_method": {
+        "type": "redirect",
+        "url": "https://myecommerce.co/shopping-cart/"
+    }
 }
 ```
 
@@ -57,40 +55,18 @@ card| ***objeto*** <br/>Datos de la tarjeta usada en la transacción. Ver objeto
 
 ```json
 {
-   "line1":"Av 5 de Febrero",
-   "line2":"Roble 207",
-   "line3":"Depto Cundinamarca",
-   "state":"Bogota",
-   "city":"Bogotá",
-   "postal_code":"110511",
-   "country_code":"CO"
+   "department":"Medellín",
+   "city":"Antioquia",
+   "additional":"Avenida 7g bis #229-32 Apartamento 511"
 }
 ```
 
 Propiedad | Descripción
 --------- | -----------
-line1 | ***string*** (requerido) <br/>Primera línea de dirección del tarjeta habiente. Usada comúnmente para indicar la calle y número exterior e interior.
-line2 | ***string*** <br/>Segunda línea de la dirección del tarjeta habiente. Usada comúnmente para indicar condominio, suite o delegación.
-line3 | ***string*** <br/>Tercer línea de la dirección del tarjeta habiente. Usada comúnmente para indicar la colonia.
-postal_code | ***string*** (requerido) <br/>Código postal del tarjeta habiente
-state | ***string*** (requerido) <br/>Estado del tarjeta habiente
-city | ***string*** (requerido) <br/>Ciudad del tarjeta habiente
-country_code | ***string*** (requerido) <br/>Código del país del tarjeta habiente a dos caracteres en formato ISO_3166-1
+department | ***string*** (requerido) <br/>Departamento.
+city | ***string*** (requerid) <br/>Ciudad.
+additional | ***string*** (requerido) <br/>Información adicional para especificar la dirección.
 
-
-##Objeto PaymentPlan
-
-> Ejemplo de Objeto:
-
-```json
-{
-   "payments":"6"
-}
-```
-
-Propiedad | Descripción
---------- | -----------
-payments | ***numeric*** <br/> Es el número de pagos en los cuales se pretende realizar un cargo a meses sin intereses (1, 2, 3, ... , 36).
 
 ##Objeto Transaction Status
 

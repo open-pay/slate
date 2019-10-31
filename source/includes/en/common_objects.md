@@ -8,28 +8,26 @@ Information for objects shared in request and response.
 
 ```json
 {
-   "id":"trehwr2zcrltvae56vxl",
-   "authorization":null,
-   "transaction_type":"payout",
-   "operation_type":"out",
-   "currency":"COP",
-   "method":"bank",
-   "creation_date":"2019-08-14T18:29:35-06:00",
-   "order_id":"000001",
-   "status":"in_progress",
-   "amount":500,
-   "description":"Winning payments",
-   "error_message":null,
-   "customer_id":"afk4csrazjp1udezj1po",
-   "bank_account":{
-      "rfc":ONE316015PM1,
-      "mobile":null,
-      "alias":null,
-      "bank_name":"BANCO DE BOGOTÁ",
-      "creation_date":"2019-08-14T18:29:34-06:00",
-      "holder_name":"Juan Tapia Trejo",
-      "bank_code":"012"
-   }
+    "id": "tryqbk08mmjihwejd3si",
+    "authorization": "faa33f71-f122-4efc-9",
+    "operation_type": "in",
+    "method": "bank_account",
+    "transaction_type": "charge",
+    "status": "completed",
+    "conciliated": true,
+    "creation_date": "2018-10-19T11:14:33-05:00",
+    "operation_date": "2018-10-19T11:14:45-05:00",
+    "description": "1 Calzado M",
+    "error_message": null,
+    "order_id": "161951571501672795",
+    "customer_id": "azxhcjwagajxtfciuytw",
+    "due_date": "2019-10-18T11:34:33-05:00",
+    "amount": 54627.00,
+    "currency": "COP",
+    "payment_method": {
+        "type": "redirect",
+        "url": "https://myecommerce.co/shopping-cart/"
+    }
 }
 ```
 
@@ -58,39 +56,18 @@ card| ***object*** <br/>Credit card data used in the transaction.  See the *Card
 
 ```json
 {
-   "line1":"Av 5 de Febrero",
-   "line2":"Roble 207",
-   "line3":"Depto Cundinamarca",
-   "state":"Bogota",
-   "city":"Bogotá",
-   "postal_code":"110511",
-   "country_code":"CO"
+   "department":"Medellín",
+   "city":"Antioquia",
+   "additional":"Avenida 7g bis #229-32 Apartamento 511"
 }
 ```
 
 Property | Description
 --------- | -----------
-line1 | ***string*** (required) <br/>The first line is the card owner address. It's commonly used to indicate street address and number.
-line2 | ***string*** <br/>Second addres line, commonly use to indicate interior number, suite number  or county.
-line3 | ***string*** <br/>Third address line, commonly use to to indicate the neighborhood.
-postal_code | ***string*** (required) <br/>Zip code
-state | ***string*** (required) <br/>State
-city | ***string*** (required) <br/>City
-country_code | ***string*** (required) <br/>Country code, in the two character format: ISO_3166-1.
+department | ***string*** (required) <br/>Departament.
+city | ***string*** (required) <br/>City.
+additional | ***string*** (required) <br/>Additional information to specify the address data.
 
-##PaymentPlan Object
-
-> Object example:
-
-```json
-{
-   "payments":"6"
-}
-```
-
-Property | Description
---------- | -----------
-payments | ***numeric*** <br/> Plan data months without interest is desired as use in the charge (1, 2, 3, ... , 36).
 
 ##Object Transaction Status
 

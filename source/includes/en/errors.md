@@ -19,11 +19,24 @@ Openpay returns JSON objects in the service responses.
 }
 ```
 
+```shell
+
+```
+
+```php
+
+```
+
 ```java
-//For Java every operation will return an instance of the "OpenpayServiceException" class which will have the error information. ```
+//For Java every operation will return an instance of the "OpenpayServiceException" class which will have the error information. 
+```
 
 ```csharp
 //For C Sharp,  every operation will return an instance of the "OpenpayException" class which will have the error information.
+```
+
+```javascript
+
 ```
 
 ```ruby
@@ -36,7 +49,7 @@ Openpay returns JSON objects in the service responses.
 
 Property | Description
 --------- | -----
-category    |***string*** <br/>**request:**  Indicates an error caused by data sent by the customer. For example, an invalid request, an attempt at a transaction without funds or a transfer to an account that does not exist. <br/><br/>**internal:** Indicates an error on Openpay side, and will occur very rarely. <br/><br/>**gateway:** Indicates an error during the transaction of funds from one card to the Openpay account or from the account to a bank or card.
+category    |***string*** <br/>**request:**  Indicates an error caused by data sent by the customer. For example, an invalid request, an attempt at a transaction without funds. <br/><br/>**internal:** Indicates an error on Openpay side, and will occur very rarely. <br/><br/>**gateway:** Indicates an error during the transaction of funds from one card to the Openpay account or from the account to a bank or card.
 error_code  |***numeric*** <br/>Openpay numeric error code indicating a problem happened.
 description |***string*** <br/>Error description.
 http_code   |***string*** <br/>HTTP error code  of the response.
