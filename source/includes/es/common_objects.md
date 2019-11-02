@@ -64,7 +64,7 @@ card| ***objeto*** <br/>Datos de la tarjeta usada en la transacción. Ver objeto
 Propiedad | Descripción
 --------- | -----------
 department | ***string*** (requerido) <br/>Departamento.
-city | ***string*** (requerid) <br/>Ciudad.
+city | ***string*** (requerido) <br/>Ciudad.
 additional | ***string*** (requerido) <br/>Información adicional para especificar la dirección.
 
 
