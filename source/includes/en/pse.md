@@ -194,4 +194,3 @@ metadata |  ***list(key, value)*** (optional) <br/>Field list to send antifraud 
 
 ###Response
 Return a url with the information to continue the PSE payment or an [error response](#error-object).
-

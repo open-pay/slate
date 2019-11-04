@@ -195,4 +195,3 @@ metadata |  ***list(key, value)*** (opcional) <br/>Listado de campos personaliza
 
 ###Respuesta
 Regresa una url con la información para continuar el pago PSE o una [respuesta de error](#objeto-error).
-
