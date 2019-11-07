@@ -20,7 +20,6 @@ includes:
   - es/cards
   - es/plans
   - es/subscriptions
-  - es/fees
   - es/webhooks
   - es/tokens
   - es/stores
