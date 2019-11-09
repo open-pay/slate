@@ -219,7 +219,6 @@ response_hash=@charges.create(request_hash.to_hash)
         "expiration_year": "21",
         "expiration_month": "07",
         "allows_charges": true,
-        "allows_payouts": false,
         "creation_date": "2019-08-09T13:35:48-05:00",
         "bank_name": "BANCO DE BOGOTÁ",
         "bank_code": "000"

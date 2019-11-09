@@ -16,9 +16,10 @@ A los clientes les puedes agregar tarjetas para despues realizar transacciones d
     "email": "pedro.alatorre@comercio.com",
     "phone_number": "5744484951",
     "status": "active",
-    "balance": 0,
+    "balance": 0.00,
     "creation_date": "2018-10-31T11:39:21-06:00",
     "external_id": null,
+    "address" : null,
     "customer_address": {
         "department": "Medellín",
         "city": "Antioquía",
@@ -130,11 +131,11 @@ request.LastName = "Alatorre Martínez";
 request.Email = "pedro.alatorre@comercio.com";
 request.PhoneNumber = "16362801";
 request.RequiresAccount = false;
-Address address = new Address();
-address.Department = "Medellín";
-address.City = "Bogota";
-address.Additional = "Avenida 7f bis # 138-58 Apartamento 942";
-request.Address = address;
+CustomerAddress customerAddress = new CustomerAddress();
+customerAddress.Department = "Medellín";
+customerAddress.City = "Bogota";
+customerAddress.Additional = "Avenida 7f bis # 138-58 Apartamento 942";
+request.CustomerAddress = customerAddress;
 
 request = api.CustomerService.Create(request);
 ```
@@ -161,7 +162,7 @@ openpay.customers.create(customerRequest, function(error, customer) {
 ```ruby
 @openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
 @customers=@openpay.create(:customers)
-address_hash={
+address_customer={
       "department" => "Medellín",
       "city" => "Bogota",
       "additional" => "Avenida 7f bis # 138-58 Apartamento 942"
@@ -173,10 +174,10 @@ request_hash={
      "email" => "pedro.alatorre@comercio.com",
      "requires_account" => false,
      "phone_number" => "16362801",
-     "address_customer" => address_hash
+     "address_customer" => address_customer
    }
 
-response_hash=@customers.create(request_hash.to_hash)
+response_hash=@customers.create(request_hash)
 ```
 
 > Ejemplo de respuesta
@@ -189,9 +190,10 @@ response_hash=@customers.create(request_hash.to_hash)
     "email": "pedro.alatorre@comercio.com",
     "phone_number": "5744484951",
     "status": "active",
-    "balance": 0,
+    "balance": 0.00,
     "creation_date": "2018-10-31T11:39:21-06:00",
     "external_id": null,
+    "address": null,
     "customer_address": {
         "department": "Medellín",
         "city": "Antioquía",
@@ -261,15 +263,11 @@ curl https://sandbox-api.openpay.co/v1/mzdtln0bmtms6o3kck8f/customers/anbnldwgni
    -X PUT -d '{
    "name": "customer name",
    "email": "customer_email@me.com",
-   "address":{
-      "city":"Bogota",
-      "state":"Bogota",
-      "line1":"Calle 10",
-      "postal_code":"111071",
-      "line2":"col. san pablo",
-      "line3":"Esquina Ramón Pérez",
-      "country_code":"CO"
-   },
+    "customer_address": {
+        "department": "Medellín",
+        "city": "Antioquía",
+        "additional": "Avenida 7f bis # 138-58 Apartamento 942"
+    },
    "phone_number":"16362801"
  }'
 ```
@@ -298,15 +296,11 @@ request.Name = "Julian Gerardo";
 request.LastName = "López Martínez";
 request.Email = "julian.martinez@gmail.com";
 request.PhoneNumber = "16362801";
-Address address = new Address();
-address.City = "Bogota";
-address.CountryCode = "CO";
-address.State = "Bogota";
-address.PostalCode = "111071";
-address.Line1 = "Av. Pie de la cuesta #12";
-address.Line2 = "Desarrollo San Pablo";
-address.Line3 = "Esquina Ramón Pérez";
-request.Address = address;
+CustomerAddress customerAddress = new CustomerAddress();
+customerAddress.Department = "Medellín";
+customerAddress.City = "Antioquia";
+customerAddress.Additional = "Avenida 11e bis #152-43 Apartamento 508";
+request.CustomerAddress = customerAddress;
 
 request = api.CustomerService.Update(request);
 ```
@@ -315,15 +309,12 @@ request = api.CustomerService.Update(request);
 var customerRequest = {
     'name': 'customer name',
     'email': 'customer_email@me.com',
-    'address':{
-      'city':'Bogota',
-      'state':'Bogota',
-      'line1':'Calle 10',
-      'postal_code':'111071',
-      'line2':'col. san pablo',
-      'line3':'Esquina Ramón Pérez',
-      'country_code':'CO'
+    "customer_address": {
+        "department": "Medellín",
+        "city": "Antioquía",
+        "additional": "Avenida 7f bis # 138-58 Apartamento 942"
     }
+
 };
 
 openpay.customers.update('anbnldwgni1way3yp2dw', customerRequest, function(error, customer) {
@@ -334,15 +325,13 @@ openpay.customers.update('anbnldwgni1way3yp2dw', customerRequest, function(error
 ```ruby
 @openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
 @customers=@openpay.create(:customers)
-address_hash={
-      "line1" => "Calle 10",
-      "line2" => "col. san pablo",
-      "line3" => "Esquina Ramón Pérez",
-      "state" => "Bogota",
-      "city" => "Bogota",
-      "postal_code" => "111071",
-      "country_code" => "CO"
+address_customer={
+      "department" => "Medellín",
+      "city" => "Antioquía",
+      "additional" => "Antioquía",
+      "additional" => "Avenida 7f bis # 138-58 Apartamento 942"
    }
+   
 request_hash={
      "external_id" => nil,
      "name" => "customer name",
@@ -350,7 +339,7 @@ request_hash={
      "email" => "customer_email@me.com",
      "requires_account" => true,
      "phone_number" => "44209087654",
-     "address" => address_hash
+     "address_customer" => address_customer
    }
 
 response_hash=@customers.update(request_hash.to_hash)
@@ -366,9 +355,10 @@ response_hash=@customers.update(request_hash.to_hash)
     "email": "pedro.alatorre@comercio.com",
     "phone_number": "5744484951",
     "status": "active",
-    "balance": 0,
+    "balance": 0.00,
     "creation_date": "2018-10-31T11:39:21-06:00",
     "external_id": null,
+    "address": null,
     "customer_address": {
         "department": "Medellín",
         "city": "Antioquía",
@@ -478,6 +468,7 @@ response_hash=@customers.get("asynwirguzkgq2bizogo")
     "balance": 0,
     "creation_date": "2018-10-31T11:39:21-06:00",
     "external_id": null,
+    "address": null,
     "customer_address": {
         "department": "Medellín",
         "city": "Antioquía",
@@ -695,9 +686,10 @@ response_hash=@customers.all
     "email": "pedro.alatorre@comercio.com",
     "phone_number": "5744484951",
     "status": "active",
-    "balance": 0,
+    "balance": 0.00,
     "creation_date": "2018-10-31T11:39:21-06:00",
     "external_id": null,
+    "address": null,
     "customer_address": {
         "department": "Medellín",
         "city": "Antioquía",

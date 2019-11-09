@@ -50,7 +50,7 @@ bank_account| ***object*** <br/>Bank account data used for the transaction.  See
 card| ***object*** <br/>Credit card data used in the transaction.  See the *Card* object.
 
 
-## Address Object
+##Customer Address Object
 
 > Object example:
 
@@ -69,7 +69,7 @@ city | ***string*** (required) <br/>City.
 additional | ***string*** (required) <br/>Additional information to specify the address data.
 
 
-##Object Transaction Status
+##Transaction Status Object
 
 Value | Description
 --------- | -----------

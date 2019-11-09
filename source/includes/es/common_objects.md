@@ -49,7 +49,7 @@ currency| ***string*** <br/>Moneda usada en la operación, por default es COP.
 bank_account| ***objeto*** <br/>Datos de la cuenta bancaria usada en la transacción. Ver objeto BankAccoount
 card| ***objeto*** <br/>Datos de la tarjeta usada en la transacción. Ver objeto Card
 
-##Objeto Dirección
+##Objeto Dirección Cliente
 
 > Ejemplo de Objeto:
 
@@ -68,7 +68,7 @@ city | ***string*** (requerido) <br/>Ciudad.
 additional | ***string*** (requerido) <br/>Información adicional para especificar la dirección.
 
 
-##Objeto Transaction Status
+##Objeto Estatus Transacción
 
 Value | Description
 --------- | -----------
