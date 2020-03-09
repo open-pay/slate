@@ -67,6 +67,11 @@ order.expired              | Orden          | Informa cuando una orden ha expira
 order.cancelled            | Orden          | Informa cuando una orden es cancelada.
 order.payment.cancelled    | Orden          | Informa cuando el pago de una orden es cancelado.
 
+#Características de un servicio Webhook válido
+- Endpoint: Solo dominios (No IPs). ejemplo: https://notifications.merchant.com
+- Puerto: 443/TCP, 1518/TCP, 1519/TCP, 8443/TCP y 10443/TCP
+- Protocolo: HTTPS/TLS_1.2
+- Certificado: Válido (firmado por CA pública y match con dominio).
 
 ##Crear un Webhook
 
