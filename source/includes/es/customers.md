@@ -48,7 +48,7 @@ status        |***string*** <br/>Estatus de la cuenta del cliente puede ser acti
 balance       |***numeric*** <br/>Saldo en la cuenta con dos decimales.
 clabe         |***numeric*** <br/>Cuenta CLABE asociada con la que puede recibir fondos realizando una  transferencia desde cualquier banco en México.
 [address](#objeto-direcci-n) |***object*** <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
-[store](#objeto-store) |***object*** <br/>Contiene la referencia que se puede utilizar para realizar depósitos en tiendas de conveniencia, también se incluye la url para generar el código de barra.
+[store](#objeto-store) |***object*** <br/>Contiene la referencia que se puede utilizar para realizar depósitos en tiendas de conveniencia, también se incluye la url para generar el código de barras.
 
 
 ##Crear un nuevo cliente
@@ -238,7 +238,7 @@ phone_number| ***string*** (opcional, longitud = 100) <br/>Número telefónico d
 
 ###Respuesta
 
-Un [objeto cliente](#objeto-cliente) en caso que se hayan enviado todos los datos correctamente, o una [respuesta de error](#objeto-error) si ocurrió algun problema en la creación.
+Un [objeto cliente](#objeto-cliente) en caso de que se hayan enviado todos los datos correctamente, o una [respuesta de error](#objeto-error) si ocurrió algún problema en la creación.
 
 
 ##Actualizar un cliente
@@ -433,7 +433,7 @@ phone_number| ***string*** (opcional, longitud = 100) <br/>Número telefónico d
 
 ###Respuesta
 
-Regresa un [objeto cliente](#objeto-cliente) con la información actualizada, o una [respuesta de error](#objeto-error) si ocurrió algun problema en la actualización.
+Regresa un [objeto cliente](#objeto-cliente) con la información actualizada, o una [respuesta de error](#objeto-error) si ocurrió algún problema en la actualización.
 
 ##Obtener un cliente existente
 

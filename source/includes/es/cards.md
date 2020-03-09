@@ -259,7 +259,7 @@ response_hash=@cards.create(request_hash.to_hash, "asynwirguzkgq2bizogo")
 Cuando se crea una tarjeta debe especificarse cliente, si no se especifica el cliente la tarjeta quedará registrada para la cuenta del comercio. Una vez guardada la tarjeta no se puede obtener el número y código de seguridad.
 
 <aside class="notice">
-**Nota:** Todas las tarjetas al momento de guardarse en Openpay son validadas haciendo un autorización por $10.00 los cuales son devueltos en el momento.
+**Nota:** Todas las tarjetas al momento de guardarse en Openpay son validadas haciendo una autorización por $10.00 los cuales son devueltos en el momento.
 </aside>
 
 Al momento de guardar la tarjeta se generará un id que podrá ser usado para hacer cargos a la tarjeta, envíos a una tarjeta o simplemente obtener la información no sensible de la tarjeta.
@@ -271,7 +271,7 @@ Cuando se crea una tarjeta puede usarse o no la implementación del sistema anti
 Propiedad | Descripción
 --------- | ------
 holder_name |***string*** (requerido, longitud = 80) <br/>Nombre del tarjeta habiente.
-card_number |***numeric*** (requerido) <br/>Numero de tarjeta puede ser de 16 o 19 dígitos.
+card_number |***numeric*** (requerido) <br/>Número de tarjeta puede ser de 16 o 19 dígitos.
 cvv2 |***numeric*** (requerido) <br/>Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.
 expiration_month |***numeric*** (requerido) <br/>Mes de expiración tal como aparece en la tarjeta.
 expiration_year |***numeric*** (requerido) <br/>Año de expiración tal como aparece en la tarjeta.
@@ -557,7 +557,7 @@ response_hash=@cards.get("ktrpvymgatocelsciak7", "asynwirguzkgq2bizogo")
 Obtiene los detalles de una tarjeta solicitándola con su id. 
 
 <aside class="notice">
-**Nota:** Nunca se regresarán datos sensibles como son el código de seguridad y del número de tarjeta sólo se mostraran los primeros 6 y los últimos 4 dígitos.
+**Nota:** Nunca se regresarán datos sensibles como son el código de seguridad y de número de tarjeta sólo se mostrarán los primeros 6 y los últimos 4 dígitos.
 </aside>
 
 ###Petición
@@ -677,7 +677,7 @@ response_hash=@cards.getPoints("asynwirguzkgq2bizogo","tnasugabhdgq456wr")
 ]
 ```
 
-Regresa un el balance de puntos de la tarjeta. Solo aplicable a puntos Santander, Scotiabank y Bancomer.
+Regresa el balance de puntos de la tarjeta. Solo aplicable a puntos Santander, Scotiabank y Bancomer.
 
 ###Petición
 Puedes consultar los puntos de una tarjeta perteneciente a un comercio o un cliente mediante el id de la tarjeta

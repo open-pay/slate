@@ -33,8 +33,8 @@ id            |***string*** <br/>Identificador único del webhook.
 url           |***string*** <br/>URL del webhook
 user          |***string*** <br/>Nombre de usuario para autenticación básica del webhook.
 password      |***string*** <br/>Contraseña para autenticación básica del webhook.
-event_types   |***array[string]*** <br/>Listado de eventos a los que respondera el webhook.
-status        |***string*** <br/>Estado del webhook, indica si esta verificado (verified) o no esta verificado (unverified).
+event_types   |***array[string]*** <br/>Listado de eventos a los que responderá el webhook.
+status        |***string*** <br/>Estado del webhook, indica si está verificado (verified) o no está verificado (unverified).
 
 <aside class="success">
 Los tipos de eventos soportados son:
@@ -43,20 +43,20 @@ Los tipos de eventos soportados son:
 Evento                     | Categoría      | Descripción
 -------------------------- | -------------- |------------
 charge.refunded            | Cargos         | Informa cuando es reembolsado un cargo.
-charge.failed              | Cargos         | Informa cuando un cargo fallo y no se aplico.
+charge.failed              | Cargos         | Informa cuando un cargo falló y no se aplico.
 charge.cancelled           | Cargos         | Informa cuando un cargo es cancelado.
 charge.created             | Cargos         | Informa cuando un cargo es programado.
 charge.succeeded           | Cargos         | Informa cuando un cargo es aplicado.
 charge.rescored.to.decline | Cargos         | Informa cuando a un cargo le es recalculado su score y es declinado.
-subscription.charge.failed | Suscripción    | Informa cuando el cargo de una suscripción fallo.
+subscription.charge.failed | Suscripción    | Informa cuando el cargo de una suscripción falló.
 payout.created             | Pagos          | Informa cuando un pago fue programado para el siguiente día.
 payout.succeeded           | Pagos          | Informa cuando un pago programado se ha aplicado.
-payout.failed              | Pagos          | Informa cuando un pago fallo.
+payout.failed              | Pagos          | Informa cuando un pago falló.
 transfer.succeeded         | Transferencias | Informa cuando se realiza una transferencia entre dos cuentas Openpay.
 fee.succeeded              | Comisiones     | Informa cuando se cobra un Fee a un Customer.
 fee.refund.succeeded       | Comisiones     | Informa cuando se reembolsa un Fee a un Customer.
 spei.received              | SPEI           | Informa cuando se recibe un pago por SPEI para agregar fondos a la cuenta.
-chargeback.created         | Contracargos   | Informa cuando se recibió un chargeback de una transacción y se esta iniciando la investigación.
+chargeback.created         | Contracargos   | Informa cuando se recibió un chargeback de una transacción y se está iniciando la investigación.
 chargeback.rejected        | Contracargos   | Informa cuando un contracargo fue rechazado.
 chargeback.accepted        | Contracargos   | Informa cuando un contracargo fue aceptado.
 order.created              | Orden          | Informa cuando una orden es creada y programada.
@@ -231,7 +231,7 @@ Propiedad | Descripción
 url           |***string*** <br/>URL del webhook
 user          |***string*** <br/>Nombre de usuario para autenticación básica del webhook.
 password      |***string*** <br/>Contraseña para autenticación básica del webhook.
-event_types   |***array[string]*** <br/>Listado de eventos a los que respondera el webhook.
+event_types   |***array[string]*** <br/>Listado de eventos a los que responderá el webhook.
 
 ###Respuesta
 Regresa un [objeto webhook](#objeto-webhook) cuando se creó correctamente o una respuesta de error si ocurrió algún problema en la creación.
@@ -340,7 +340,7 @@ response_hash=@webhooks.get("wxvanstudf4ssme8khmc")
 Obtiene los detalles de un webhook solicitándolo con su id.
 
 <aside class="notice">
-**Nota:** Nunca se regresarán datos sensibles como son el password para accesar al webhook.
+**Nota:** Nunca se regresarán datos sensibles como son el password para acceder al webhook.
 </aside>
 
 
@@ -557,7 +557,7 @@ response_hash=@webhooks.all
 Regresa una lista de webhooks registrados por comercio.
 
 <aside class="notice">
-**Nota:** Nunca se regresarán datos sensibles como son el password para accesar al webhook.
+**Nota:** Nunca se regresarán datos sensibles como son el password para acceder al webhook.
 </aside>
 
 

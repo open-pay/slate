@@ -100,7 +100,7 @@ openpay.merchant.get(function(error, merchant){
 }
 ```
 
-Obtiene los detalles la cuenta del comercio. Solo se requiere indicar el id unico del comercio que se quiere obtener.
+Obtiene los detalles la cuenta del comercio. Solo se requiere indicar el id único del comercio que se quiere obtener.
 
 ###Petición
 

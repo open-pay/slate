@@ -1,6 +1,6 @@
 #Transferencias
 
-Las transferencias permite transferir fondos entre las cuentas de tus clientes. 
+El servicio permite transferir fondos entre las cuentas de tus clientes. 
 
 <aside class="notice">
 **Nota:** Si desea realizar una transferencia a un banco consulte la [sección de pagos](#pagos-o-retiros).

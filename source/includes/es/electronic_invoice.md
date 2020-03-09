@@ -1,4 +1,4 @@
-# Facturación Electronica
+# Facturación Electrónica
 
 ##Objeto Generación de CFDI
 |Campo 	|Descripción         	|
@@ -129,7 +129,7 @@ G03		| Gastos en general.
 I01		| Construcciones.
 I02		| Mobiliario y equipo de oficina por inversiones.
 I03		| Equipo de transporte.
-I04		| Equipo de computo y accesorios.
+I04		| Equipo de cómputo y accesorios.
 I05		| Dados, troqueles, moldes, matrices y herramental.
 I06		| Comunicaciones telefónicas.
 I07		| Comunicaciones satelitales.
@@ -224,10 +224,10 @@ Campo 			| Descripción
 ---------		| ---------
 invoice_id		| Identificador de la factura enviado en la solicitud.
 request_id		| Id de petición generado por Openpay.
-date			| Fecha en que se solicito la generación.
+date			| Fecha en que se solicitó la generación.
 status			| PENDING, OK, ERROR.
 fiscal_status	| ACTIVE, CANCELLED.
-message			| Description del status.
+message			| Descripción del status.
 
 ##Objeto Notificaciones
 Campo 			| Descripción         	
@@ -244,10 +244,10 @@ total					|	Total de la factura.
 subtotal				|	Subtotal de la factura.
 status					|	PENDING, OK, ERROR.
 fiscal_status			|	ACTIVE, CANCELLED.
-cancellation_date		|	Fecha de cancelación de la factura en caso que este cancelada.
+cancellation_date		|	Fecha de cancelación de la factura en caso que esté cancelada.
 public_xml_link			|	Liga para descarga del xml de la factura.
 public_pdf_link			|	Liga para descarga del pdf de la factura.
-link_expiration_date	|	Expiración de las ligas de descarga, una vez expiradas los xml / pdf pueden ser escargados desde el dashboard.
+link_expiration_date	|	Expiración de las ligas de descarga, una vez expiradas los xml / pdf pueden ser descargados desde el dashboard.
 message					|	Detalle del status de la factura.
 
 

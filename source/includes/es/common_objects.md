@@ -47,7 +47,7 @@ status| ***string*** <br/>Estatus actual de la transacción. Posibles valores: c
 amount| ***numeric*** <br/>Cantidad de la transacción a dos decimales.
 description|***string*** <br/>Descripción de la transacción.
 error_message| ***string*** <br/>Si la transacción está en status: failed, en este campo se mostrará la razón del fallo.
-customer_id| ***string*** <br/>Identificar único del cliente al cual pertence la transacción. Si es valor es nulo, la transacción pertenece a la cuenta del comercio.
+customer_id| ***string*** <br/>Identificardor único del cliente al cual pertence la transacción. Si el valor es nulo, la transacción pertenece a la cuenta del comercio.
 currency| ***string*** <br/>Moneda usada en la operación, por default es MXN. 
 bank_account| ***objeto*** <br/>Datos de la cuenta bancaria usada en la transacción. Ver objeto BankAccoount
 card| ***objeto*** <br/>Datos de la tarjeta usada en la transacción. Ver objeto Card
@@ -96,7 +96,7 @@ Propiedad           | Descripción
 ---------           | -----------
 reference           | ***string*** <br/>Es la referencia con la que se puede ir a la tienda y realizar depósitos a la cuenta de Openpay.
 barcode_url         | ***string*** <br/>Es la url con la cual se puede obtener el codigo de barras de la referencia.
-paybin_reference   | ***string*** <br/>Es la referencia con la que se puede ir cualquier tienda que acepte Paybin.
+paybin_reference   | ***string*** <br/>Es la referencia con la que se puede ir a cualquier tienda que acepte Paybin.
 barcode_paybin_url | ***string*** <br/>Es la url con la cual se puede obtener el codigo de barras de la referencia Paybin.
 
 
@@ -149,9 +149,9 @@ caption | ***string*** (opcional) <br/> Mensaje a mostrar al cliente en su recib
 
 Propiedad | Descripción
 --------- | -----------
-lng | ***numeric*** <br/> Longitud, coordenada geografica.
-lat | ***numeric*** <br/> Latitud, coordenada geografica.
-place_id | ***string*** <br/>Identificacdor unico en google maps
+lng | ***numeric*** <br/> Longitud, coordenada geográfica.
+lat | ***numeric*** <br/> Latitud, coordenada geográfica.
+place_id | ***string*** <br/>Identificacdor único en google maps
 
 ##Objeto PaynetChain
 
@@ -178,7 +178,7 @@ max_amount | ***numeric*** <br/>Monto máximo de pago que aceptan las tiendas de
 Value | Description
 --------- | -----------
 IN_PROGRESS | Transacción en proceso
-COMPLETED | Transacción ejecutadá correctamente
+COMPLETED | Transacción ejecutada correctamente
 REFUNDED | Transacción reembolsada
 CHARGEBACK_PENDING | Transacción con contracargo pendiente
 CHARGEBACK_ACCEPTED | Transacción con contracargo aceptado

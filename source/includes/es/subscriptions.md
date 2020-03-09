@@ -1,6 +1,6 @@
 #Suscripciones
 
-Las suscripciones permiten asociar un cliente y una tarjeta para que se pueden realizar cargos recurrentes.
+Las suscripciones permiten asociar un cliente y una tarjeta para que se puedan realizar cargos recurrentes.
 
 Para poder suscribir algún cliente es necesario primero [crear un plan](#crear-una-nuevo-plan).
 
@@ -47,7 +47,7 @@ current_period_number | ***string*** <br/> Indica el periodo actual a cobrar.
 period_end_date | ***numeric*** <br/> Fecha en la que se termina el periodo actual, un día antes del siguiente cobro.
 trial_end_date | ***string*** <br/> Fecha en la que termina el periodo de prueba. Un día después de esta fecha, se realiza el primer cargo.
 plan_id | ***numeric*** <br/>  Identificador del plan sobre el que se crea la suscripción.
-status | ***string*** <br/> Estado de la suscripción puede ser active, "trial", "past_due", "unpaid", o "cancelled". Si la suscripción tiene periodo de prueba, se pone en status "trial", si no tiene periodo de prueba, o cuando termino el periodo de prueba y se logro efectuar el primer pago, se pone en "active", cuando el cobro no logro efectuarse, se coloca en "past_due", y cuando se agotan los intentos de cobro, se coloca de acuerdo a la configuración del plan, en "unpaid" o en "cancelled". Cuando se coloca en "unpaid", y se quiere reactivar la suscripción, es necesario actualizar el medio de pago (tarjeta) de la suscripción. En cualquier otro caso, el status se establece como "cancelled".
+status | ***string*** <br/> Estado de la suscripción puede ser "active", "trial", "past_due", "unpaid", o "cancelled". Si la suscripción tiene periodo de prueba, se pone en status "trial", si no tiene periodo de prueba, o cuando termino el periodo de prueba y se logro efectuar el primer pago, se pone en "active", cuando el cobro no logro efectuarse, se coloca en "past_due", y cuando se agotan los intentos de cobro, se coloca de acuerdo a la configuración del plan, en "unpaid" o en "cancelled". Cuando se coloca en "unpaid", y se quiere reactivar la suscripción, es necesario actualizar el medio de pago (tarjeta) de la suscripción. En cualquier otro caso, el status se establece como "cancelled".
 customer_id | ***string*** <br/> Identificador del customer al que pertenece la suscripción.
 card | ***object*** <br/> Medio de pago con el cual se cobrará la suscripción. Ver [objeto tarjeta](#objeto-tarjeta)
 
@@ -589,7 +589,7 @@ openpay.customers.subscriptions.delete('ag4nktpdzebjiye1tlze', 's0gmyor4yqtyv1mi
 @subscriptions.detele("s0gmyor4yqtyv1miqwr0", "pbi4kb8hpb64x0uud2eb")
 ```
 
-Cancela inmediatamente la suscrupción del cliente. Ya no se realizarán mas cargos a la tarjeta y todos cargos pendientes se cancelarán.
+Cancela inmediatamente la suscrípción del cliente. Ya no se realizarán más cargos a la tarjeta y todos los cargos pendientes se cancelarán.
 
 ###Petición
 Propiedad | Descripción
@@ -732,7 +732,7 @@ openpay.customers.subscriptions.list('ag4nktpdzebjiye1tlze', searchParams, funct
 Regresa los detalles de todas las suscripciones activas para un cliente en específico.
 
 ###Petición
-Se puede realizar búsquedas utilizando los siguiente parámetros.
+Se pueden realizar búsquedas utilizando los siguiente parámetros.
 
 Propiedad | Descripción
 --------- | ------

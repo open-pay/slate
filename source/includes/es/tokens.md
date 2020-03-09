@@ -2,7 +2,7 @@
 
 El objetivo de generar tokens es que se capture la información de la tarjeta desde el navegador o dispositivo del usuario final para que dicha información no viaje a través de tu servidor y así puede evitar o reducir certificaciones PCI.
 
-Para usar esta funcionalidad de la API, te recomendamos usar nuestra librería en JavaScript para cuando tu aplicación este en Web y nuestros SDK's de Android o iOS para cuando este en móvil.
+Para usar esta funcionalidad de la API, te recomendamos usar nuestra librería en JavaScript para cuando tu aplicación esté en Web y nuestros SDK's de Android o iOS para cuando esté en móvil.
 
 **Características**
 
@@ -108,7 +108,7 @@ Para la creación de un token en Openpay es necesario enviar el objeto con la in
 Propiedad | Descripción
 --------- | ------
 holder_name |***string*** (requerido) <br/>Nombre del tarjeta habiente.
-card_number |***numeric*** (requerido) <br/>Numero de tarjeta puede ser de 16 o 19 dígitos.
+card_number |***numeric*** (requerido) <br/>Número de tarjeta puede ser de 16 o 19 dígitos.
 cvv2 |***numeric*** (requerido) <br/>Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.
 expiration_month |***numeric*** (requerido) <br/>Mes de expiración tal como aparece en la tarjeta.
 expiration_year |***numeric*** (requerido) <br/>Año de expiración tal como aparece en la tarjeta.
@@ -161,7 +161,7 @@ curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/tokens/k1n0mscnjwhxq
 Obtiene los detalles de un token. Es necesario tener el id. 
 
 <aside class="notice">
-**Nota:** Nunca se regresarán datos sensibles como son el código de seguridad y del número de tarjeta.
+**Nota:** Nunca se regresarán datos sensibles como son el código de seguridad y de número de tarjeta.
 </aside>
 
 ###Petición

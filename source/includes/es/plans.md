@@ -27,14 +27,14 @@ Propiedad | Descripción
 id | ***string*** <br/> Identificador único del Plan.
 creation_date | ***datetime*** <br/> Fecha y hora en que se creó el Plan  en formato ISO 8601
 name  | ***string*** <br/> Nombre del Plan.
-amount | ***numeric*** <br/> Monto que se aplicara cada vez que se cobre la suscripción. Debe ser una cantidad mayor a cero, con hasta 2 dígitos decimales.
+amount | ***numeric*** <br/> Monto que se aplicará cada vez que se cobre la suscripción. Debe ser una cantidad mayor a cero, con hasta 2 dígitos decimales.
 currency | ***string*** <br/> Moneda usada en la operación, por default es MXN
-repeat_every | ***numeric*** <br/> Número de unidades tiempo entre los que se cobrara la suscripción. Por ejemplo, repeat_unit=month y repeat_every=2 indica que se cobrara cada 2 meses.
+repeat_every | ***numeric*** <br/> Número de unidades tiempo entre los que se cobrará la suscripción. Por ejemplo, repeat_unit=month y repeat_every=2 indica que se cobrará cada 2 meses.
 repeat_unit | ***string*** <br/> Especifica la frecuencia de cobro. Puede ser semanal(week), mensual(month) o anual(year).
-retry_times | ***numeric*** <br/>  Numero de reintentos de cobro de la suscripción. Cuando se agotan los intentos se pone en el estatus determinado por el campo status_after_retry.
+retry_times | ***numeric*** <br/>  Número de reintentos de cobro de la suscripción. Cuando se agotan los intentos se pone en el estatus determinado por el campo status_after_retry.
 status | ***string*** <br/> Estatus del Plan puede ser active o deleted. Si el plan se encuentra en estado deleted no se permite registrar nuevas suscripciones, pero las que ya están registradas, se siguen cobrando.
 status_after_retry | ***string*** <br/> Este campo especifica el status en el que se pondrá la suscripción una vez que se agotaron los intentos. Puede ser: unpaid o cancelled
-trial_days | ***numeric*** <br/> Numero de días de prueba por defecto que tendrá la suscripción.
+trial_days | ***numeric*** <br/> Número de días de prueba por defecto que tendrá la suscripción.
 
 ##Crear un nuevo plan
  
@@ -188,12 +188,12 @@ Crea un nuevo plan al se podrán suscribir uno o varios clientes.
 Propiedad | Descripción
 --------- | ------
 name | ***string*** (requerido, longitud = 255) <br/>Nombre del Plan.
-amount | ***numeric*** (requerido) <br/>Monto que se aplicara cada vez que se cobre la suscripción. Debe ser una cantidad mayor a cero, con hasta 2 dígitos decimales.
+amount | ***numeric*** (requerido) <br/>Monto que se aplicará cada vez que se cobre la suscripción. Debe ser una cantidad mayor a cero, con hasta 2 dígitos decimales.
 repeat_every | ***numeric*** (requerido) <br/>Número de unidades tiempo entre los que se cobrara la suscripción. Por ejemplo, repeat_unit=month y repeat_every=2 indica que se cobrara cada 2 meses.
 repeat_unit | ***numeric*** (requerido) <br/>Especifica la frecuencia de cobro. Puede ser semanal(week), mensual(month) o anual(year).
-retry_times | ***numeric*** (opcional) <br/> Numero de reintentos de cobro de la suscripción. Cuando se agotan los intentos se pone en el estado determinado por el campo status_after_retry.
+retry_times | ***numeric*** (opcional) <br/> Número de reintentos de cobro de la suscripción. Cuando se agotan los intentos se pone en el estado determinado por el campo status_after_retry.
 status_after_retry | ***string*** (requerido, valores = "UNPAID/CANCELLED") <br/>Este campo especifica el status en el que se pondrá la suscripción una vez que se agotaron los intentos. Puede ser: unpaid o cancelled
-trial_days | ***numeric*** (requerido) <br/>Numero de días de prueba por defecto que tendrán las suscripciones que se creen a partir del plan creado.
+trial_days | ***numeric*** (requerido) <br/>Número de días de prueba por defecto que tendrán las suscripciones que se creen a partir del plan creado.
  
 
 ###Respuesta
@@ -321,7 +321,7 @@ Actualiza la información de un plan. Se requiere tener el id del plan y solo se
 Propiedad | Descripción
 --------- | ------
 name | ***string*** (opcional, longitud = 80) <br/>Nombre del Plan.
-trial_days | ***numeric*** (opcional) <br/>Numero de días de prueba por defecto que tendrán las suscripciones que se creen a partir del plan creado.
+trial_days | ***numeric*** (opcional) <br/>Número de días de prueba por defecto que tendrán las suscripciones que se creen a partir del plan creado.
 
 ###Respuesta
 Regresa un [objeto plan](#objeto-plan) con la información actualizada o una [respuesta de error](#objeto-error) si ocurrió algún problema en la actualización.
@@ -641,7 +641,7 @@ response_hash=@plans.all
 Regresa los detalles de todos los planes que están activos.
 
 ###Petición
-Se puede realizar búsquedas utilizando los siguiente parámetros.
+Se pueden realizar búsquedas utilizando los siguiente parámetros.
 
 Propiedad | Descripción
 --------- | ------

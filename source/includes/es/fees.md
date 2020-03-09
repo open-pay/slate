@@ -140,7 +140,7 @@ Propiedad | Descripción
 --------- | ------
 customer_id | ***string*** (requerido, longitud = 45) <br/>El identificador único del cliente al que deseas cobrarle la comisión.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
-description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cobro comisión.
+description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cobro de comisión.
 order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único de la comisión. Debe ser único para todas las transacciones.
  
 ###Regresa
@@ -409,7 +409,7 @@ response_hash=@fees.all
 Regresa los detalles de todas las comisiones cobradas del comercio.
 
 ###Petición
-Se puede realizar búsquedas utilizando los siguiente parámetros.
+Se pueden realizar búsquedas utilizando los siguientes parámetros.
 
 Propiedad | Descripción
 --------- | ------

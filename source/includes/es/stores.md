@@ -41,9 +41,9 @@ Propiedad | Descripción
 id_store|***string*** <br/>Identificador único asignado al momento de su creación.
 id|***string*** <br/>Identificador único por cadena.
 name|***datetime*** <br/>Nombre de la tienda.
-last_update|***string*** <br/>Fecha de la ultima actualizacion de la tienda en formato ISO 8601.
-[geolocation](#objeto-geolocation)| ***objeto*** <br/Representacion geografica de la tienda por medio de coordenadas, Latitud y Longitud.
-[address](#objeto-direcci-n)|***objeto*** <br/>Direccion de la tienda.
+last_update|***string*** <br/>Fecha de la ultima actualización de la tienda en formato ISO 8601.
+[geolocation](#objeto-geolocation)| ***objeto*** <br/>Representación geográfica de la tienda por medio de coordenadas, Latitud y Longitud.
+[address](#objeto-direcci-n)|***objeto*** <br/>Dirección de la tienda.
 [paynet_chain](#objeto-paynetchain)|***objeto*** <br/>Cadena paynet a la que pertence.
 
 ##Obtener lista de tiendas por ubicación
@@ -160,9 +160,9 @@ Obtiene los detalles la cuenta del comercio. Solo se requiere indicar el id unic
 
 Propiedad     | Descripción
 --------- | -----------
-latitud | ***numeric*** (requerido) <br>Latitud de la ubicacion geografica de la tienda 
-longitud | ***numeric*** (requerido) <br>Longitud de la ubicacion geografica de la tienda 
-kilometers | ***numeric*** (requerido) <br>Distancia del radio de la busqueda en kilometros
+latitud | ***numeric*** (requerido) <br>Latitud de la ubicacion geográfica de la tienda 
+longitud | ***numeric*** (requerido) <br>Longitud de la ubicacion geográfica de la tienda 
+kilometers | ***numeric*** (requerido) <br>Distancia del radio de la búsqueda en kilometros
 amount | ***numeric*** (requerido) <br>Monto de la compra
 
 ###Respuesta

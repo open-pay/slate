@@ -23,7 +23,7 @@ Propiedad | Descripción
 --------- | ------
 id | ***string*** <br/>ID de la cuenta bancaria.
 holder_name | ***string*** <br/>Nombre completo del titular.
-alias | ***string*** <br/>Nombre por el cual el se identifica a la cuenta bancaria.
+alias | ***string*** <br/>Nombre por el cual se identifica a la cuenta bancaria.
 clabe | ***string*** <br/>Número CLABE asignado a la cuenta bancaria.
 bank_name | ***string*** <br/>Nombre abreviado del banco donde radica la cuenta, en base al siguiente catálogo de [Códigos de Banco](http://es.wikipedia.org/wiki/CLABE#C.C3.B3digo_de_Banco).
 bank_code | ***string*** <br/>Código del banco donde radica la cuenta bancaria, en base al siguiente catálogo de [Códigos de Banco](http://es.wikipedia.org/wiki/CLABE#C.C3.B3digo_de_Banco).
