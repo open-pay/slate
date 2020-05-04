@@ -213,7 +213,7 @@ external_id | ***string*** (optional, length = 100)  <br/> Unique external ident
 name        | ***string*** (required, length = 100)<br/>Name of the customer.
 last_name   | ***string*** (optional, length = 100)<br/>Last name of the customer.
 email       | ***string*** (required, length = 100)<br/>Email of the customer.
-requires_account | ***boolean***  (optional, default = true) <br/>Send it with **false** value if you need to create the customer without an account to manage the balance.
+requires_account | ***boolean***  (optional, default = true) <br/>Send it with **false** value if you need to create the customer without an account to manage the balance. *To use PSE module this field must be false.*
 phone_number| ***string*** (optional, length = 100) <br/>Telephone number of the customer.
 [customer_address](#address-object) | ***object*** (optional) <br/>Address of the customer. It is usually used as shipping address.
 

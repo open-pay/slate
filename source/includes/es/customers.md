@@ -213,7 +213,7 @@ external_id | ***string*** (opcional, longitud = 100)  <br/> Identificador exter
 name        | ***string*** (requerido, longitud = 100)<br/>Nombre(s) del cliente.
 last_name   | ***string*** (opcional, longitud = 100)<br/>Apellidos del cliente.
 email       | ***string*** (requerido, longitud = 100)<br/>Cuenta de correo electrónico del Cliente.
-requires_account | ***boolean***  (opcional, default = true) <br/> Enviar con valor **false** si requiere que el cliente se cree sin cuenta para manejo del saldo.
+requires_account | ***boolean***  (opcional, default = true) <br/> Enviar con valor **false** si requiere que el cliente se cree sin cuenta para manejo del saldo. *Para usar módulo PSE este campo debe ir en false.*
 phone_number| ***string*** (opcional, longitud = 100) <br/>Número telefónico del Cliente.
 [customer_address](#objeto-direcci-n) | ***object*** (opcional) <br/>Dirección del Cliente. Usada comúnmente como dirección de envío.
 

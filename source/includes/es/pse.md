@@ -161,6 +161,7 @@ Pse pse = openpayAPI.PseService.Create(request);
 
 ```json
 {
+    "orderId":"oid-12524",
 	"redirect_url":"https://sandbox-api.openpay.mx/v1/maonhzpqm8xp2ydssovf/customers/ah8tdi7gr9zll6ejijuu/checkouts/ckqtz7smmjffvc4jgfko/pse"
 }
 ```
