@@ -19,9 +19,15 @@ includes:
   #- es/tokens
   - es/common_objects
   - es/premium
-  - es/cardtoken
-  - es/redirect
+  - es/chargespremium
+  - es/customers
+  - es/cards
   - es/three-d-secure
+  - es/webhooks
+  - es/tokens
+  - es/premiumcr
+  - es/plans
+  - es/subscriptions
 
 lang: ES
 ---
