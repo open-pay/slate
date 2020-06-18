@@ -28,6 +28,15 @@ includes:
   - es/premiumcr
   - es/plans
   - es/subscriptions
+  - es/plugins
+  - es/plugins/magento
+  - es/plugins/magento2
+  - es/plugins/opencart
+  - es/plugins/prestashop
+  - es/plugins/shopify
+  - es/plugins/vtex
+  - es/plugins/woocommerce
+  - es/plugins/woosubscriptions
 
 lang: ES
 ---
