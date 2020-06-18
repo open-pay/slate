@@ -14,10 +14,10 @@ WooSubscriptions ofrece un conjunto de herramientas para su comercio en WordPres
 
 Nuestro plugin para WooSubscriptions le permite configurar su comercio para que pueda utilizar a Openpay como la plataforma de pagos para validar y procesar dichos cargos recurrentes.
 
-<div class="boton-grp boton-plugin">
-<div class="blu-boton"><a href="https://github.com/open-pay/openpay-woosubscriptions/archive/master.zip">Descargar Plugin</a></div>
-<div class="blu-boton"><a href="https://github.com/open-pay/openpay-woosubscriptions">Ver en GitHub</a></div>
-</div>
+
+<a href="https://github.com/open-pay/openpay-woosubscriptions/archive/master.zip">Descargar Plugin</a>
+<a href="https://github.com/open-pay/openpay-woosubscriptions">Ver en GitHub</a>
+
 
 Versiones soportadas
 ----------

@@ -37,7 +37,7 @@ Instalación
 
 Para instalar los módulos de pago para Openpay en su sitio de PrestaShop debe seguir los siguientes pasos:
 
-<section class="prestashop-install">
+
   <ul class="nav nav-tabs" id="TabInstall" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="prestashop16-tab" data-toggle="tab" href="#prestashop16" role="tab" aria-controls="prestashop16" aria-selected="true">PrestaShop 1.6</a>
@@ -46,9 +46,7 @@ Para instalar los módulos de pago para Openpay en su sitio de PrestaShop debe s
       <a class="nav-link" id="prestashop17-tab" data-toggle="tab" href="#prestashop17" role="tab" aria-controls="prestashop17" aria-selected="false">PrestaShop 1.7</a>
     </li>
   </ul>
-  <div class="tab-content" id="prestashopInstall">
-    <div class="tab-pane fade show active" id="prestashop16" role="tabpanel" aria-labelledby="prestashop16-tab">
-      <div class="row align-items-center">
+  
         <ol class="prestashop-install__list">
           <li class="prestashop-install__list">Descargar el archivo ZIP con los contenidos del plugin. Puede descargar el plugin a través de <a href="https://github.com/open-pay/openpay-prestashop/blob/master/PS_1.6/openpayprestashop.zip?raw=true">este enlace</a>.
           </li>
@@ -73,10 +71,8 @@ Para instalar los módulos de pago para Openpay en su sitio de PrestaShop debe s
             <img src="/images/plugins/prestashop/prestashop1.6_install_06.png" alt="Instalación de plugin PrestaShop paso 6" title="Paso 6">
           </figure>
         </ol>
-      </div>
-    </div>
-    <div class="tab-pane fade" id="prestashop17" role="tabpanel" aria-labelledby="prestashop17-tab">
-      <div class="row align-items-center">
+    
+    
         <ol class="prestashop-install__list">
           <li class="prestashop-install__list">Descargar el archivo ZIP que contiene todos los módulos. Puede descargar los plugins a través de <a href="https://github.com/open-pay/openpay-prestashop/blob/master/PS_1.7/openpayprestashop.zip?raw=true">este enlace</a>.
           </li>
@@ -105,15 +101,14 @@ Para instalar los módulos de pago para Openpay en su sitio de PrestaShop debe s
             <img src="/images/plugins/prestashop/prestashop_install_05.png" alt="Instalación de plugin PrestaShop paso 5" title="Paso 5">
           </figure>
         </ol>
-      </div>
-    </div>
-  </div>
-</section>
+    
+  
+
 
 
 Configuración de módulos
 ----------
-<section class="prestashop-settings">
+
   <ol class="prestashop-settings__list">
     <li class="prestashop-settings__item">Identificar las credenciales de API asignadas a su comercio dentro del panel de administración de Openpay.</li>
     <figure class="prestashop-settings__image prestashop-settings__image--small">
@@ -222,4 +217,4 @@ Configuración de módulos
       </div>
     </li>
   </ol>
-</section>
+

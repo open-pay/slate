@@ -14,10 +14,10 @@ OpenCart es una solución gratuita basada en Web diseñada para poner en marcha 
 
 Ponemos a su disposición nuestro plugin para OpenCart, el cual le permitirá configurar y añadir los métodos de pago soportados en Openpay (tarjeta de crédito/débito, tiendas de conveniencia y SPEI) dentro del flujo compra de su tienda basada en esta plataforma.
 
-<div class="boton-grp boton-plugin">
-<div class="blu-boton"><a href="https://github.com/open-pay/openpay-opencart/archive/master.zip">Descargar Plugin</a></div>
-<div class="blu-boton"><a href="https://github.com/open-pay/openpay-opencart">Ver en GitHub</a></div>
-</div>
+
+<a href="https://github.com/open-pay/openpay-opencart/archive/master.zip">Descargar Plugin</a>
+<a href="https://github.com/open-pay/openpay-opencart">Ver en GitHub</a>
+
 
 Los plugins de Openpay descargados vienen organizados de la siguiente manera:
 
@@ -27,7 +27,7 @@ Los plugins de Openpay descargados vienen organizados de la siguiente manera:
 |**OpenpayCards.ocmod.zip**   |Contiene el plugin para aceptar pagos con tarjeta de crédito o débito
 |**OpenpayStores.ocmod.zip** |Contiene el plugin para generar referencias de cobro que podrán ser pagadas en tiendas de conveniencia
 
-> **Nota:** Solo debe instalar los plugins para los métodos de pago que desee habilitar en su comercio.
+ **Nota:** Solo debe instalar los plugins para los métodos de pago que desee habilitar en su comercio.
 
 Versiones soportadas
 ----------
@@ -59,7 +59,7 @@ Instalación
 
 Para instalar los plugins de Openpay en su comercio de OpenCart tiene que seguir los siguientes pasos:
 
-> **Nota:** La siguiente secuencia debe realizarse por cada plugin que se desee instalar.
+ **Nota:** La siguiente secuencia debe realizarse por cada plugin que se desee instalar.
 
 <ol>
 <li>Descargar el archivo ZIP que contiene todos los plugins. Puede descargar los plugins a través de <a href="https://github.com/open-pay/openpay-opencart/archive/master.zip">este enlace</a>.</li>
@@ -81,7 +81,7 @@ Para instalar los plugins de Openpay en su comercio de OpenCart tiene que seguir
 Configuración
 ----------
 
-> **Nota:** La siguiente secuencia debe realizarse por cada plugin que se desee instalar.
+ **Nota:** La siguiente secuencia debe realizarse por cada plugin que se desee instalar.
 
 <ol>
 <li>Identificar las credenciales de API asignadas a su comercio dentro del panel de administración de Openpay.</li>

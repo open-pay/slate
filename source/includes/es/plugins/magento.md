@@ -14,11 +14,11 @@ Magento es una plataforma que permite la gestión de contenidos web para un come
 
 El plugin de Openpay para Magento le permite configurar y añadir nuestros métodos de pago soportados (tarjeta de crédito/débito, tiendas de conveniencia y SPEI) dentro del flujo compra de su comercio electrónico.
 
-<section class="magento">
-    <div class="alert alert-warning magento__warning" role="alert">
-        <p>Por motivos de seguridad, a partir del <strong>30 de junio del 2020</strong> Openpay dejará de soportar las actualizaciones de Magento 1. Invitamos a los usuarios a migrar sus plataforma a la brevedad antes de ser vulnerables a violaciones de seguridad que nos impidan ofrecerles el servicio.</p>
-    </div>
-</section>
+
+    
+**Por motivos de seguridad, a partir del <strong>30 de junio del 2020</strong> Openpay dejará de soportar las actualizaciones de Magento 1. Invitamos a los usuarios a migrar sus plataforma a la brevedad antes de ser vulnerables a violaciones de seguridad que nos impidan ofrecerles el servicio.**
+    
+
 
 Versiones soportadas
 ----------
@@ -97,14 +97,14 @@ Configuración
 
 Notificaciones de pago en tienda y SPEI
 ----------
-> **Importante:** Dependiendo del tipo de notificación que se configure se deben utilizar la siguientes URLs:
+**Importante:** Dependiendo del tipo de notificación que se configure se deben utilizar la siguientes URLs:
 
-{% highlight html %}
+```html
 Store payments -> https://[eCommerce domain]/stores/payments/confirm
 ​SPEI (wire transfer) -> https://[eCommerce domain]/banks/payments/confirm
-{% endhighlight %}
+```
 
-> **Importante:** Es necesario verificar que el Webhook haya sido creado de forma correcta en Openpay.
+**Importante:** Es necesario verificar que el Webhook haya sido creado de forma correcta en Openpay.
 
 <ol>
 <li>En su panel de configuración de Openpay ir a <strong>Ajustes (ícono de engrane) -> Configuraciones</strong>.</li>

@@ -41,37 +41,37 @@ Para implementar las 3 diferentes formas de pago en tu tienda, será necesario i
   <li>
     <p><strong>Módulo de pagos con tarjeta de crédito</strong></p>
     <div markdown="0" class="php-code" style="display:none;">
-{% highlight Bash %}
- composer require openpay/magento2-cards:3.0.*{% endhighlight %}
+```Bash
+ composer require openpay/magento2-cards:3.0.*```
     </div>
   </li>
   <li>
     <p><strong>Módulo para pagos en efectivo</strong></p>
      <div markdown="0" class="php-code" style="display:none;">
-{% highlight Bash %}
- # Para versiones de Magento < 2.3.0
+```Bash
+ ### Para versiones de Magento < 2.3.0
  composer require openpay/magento2-stores:~3.0.0
- # Para versiones de Magento >= 2.3.0
+ ### Para versiones de Magento >= 2.3.0
  composer require openpay/magento2-stores:~3.3.0
-{% endhighlight %}
+```
     </div>
   </li>
   <li>
     <p><strong>Módulo para pagos vía SPEI</strong></p>
      <div markdown="0" class="php-code" style="display:none;">
-{% highlight Bash %}
-# Para versiones de Magento < 2.3.0
+```Bash
+### Para versiones de Magento < 2.3.0
 composer require openpay/magento2-banks:~3.0.0
-# Para versiones de Magento >= 2.3.0
+### Para versiones de Magento >= 2.3.0
 composer require openpay/magento2-banks:~3.3.0
- {% endhighlight %}
+ ```
     </div>
   </li>
 </ol>
 
 3) Después se procede a habilitar los módulos, actualizar y limpiar cache de la plataforma:
 
-```
+```php
 php bin/magento module:enable Openpay_Cards --clear-static-content
 php bin/magento module:enable Openpay_Stores --clear-static-content
 php bin/magento module:enable Openpay_Banks --clear-static-content
@@ -82,12 +82,11 @@ php bin/magento cache:clean
 
 Configuración del plugin
 ----------
-<section class="mgsettings">
   <ol class="mgsettings__list">
     <li class="mgsettings__item">
       <p>Identificar las credenciales de API asignadas a su comercio dentro del panel de administración de Openpay.</p>
       <figure class="mgsettings__image mgsettings__image--small">
-        <img src="/images/plugins/woocommerce/wc_settings_04.png" alt="Configuración de plugin Magento2 paso 1" title="Paso 1">
+        <img src="/images/plugins/woocommerce/wc_settings_04.png" alt="Configuración de plugin Magento2 paso 1" title="Paso 1">        
       </figure>
       <blockquote>
         <p>Para ver las credenciales, dar clic en el engrane del menú superior derecho y luego seleccionar la opción <strong>Credenciales de API</strong></p>
@@ -197,18 +196,17 @@ Configuración del plugin
       </figure>
     </li>
   </ol>
-</section>
 
 Notificaciones de pago en tienda y SPEI
 ----------
-> **Importante:** Dependiendo del tipo de notificación que se configure se deben utilizar la siguientes URL:
+ **Importante:** Dependiendo del tipo de notificación que se configure se deben utilizar la siguientes URL:
 
-{% highlight html %}
+```html
 Store payments -> https://[eCommerce domain]/stores/payments/confirm
 ​SPEI (wire transfer) -> https://[eCommerce domain]/banks/payments/confirm
-{% endhighlight %}
+```
 
-> **Importante:** Es necesario verificar que el Webhook haya sido creado de forma correcta en Openpay.
+ **Importante:** Es necesario verificar que el Webhook haya sido creado de forma correcta en Openpay.
 
 <ol class="mgnotifications__list">
 <li class="mgnotifications__item">En su panel de configuración de Openpay ir a <b>Ajustes (ícono de engrane) -> Configuraciones</b>.</li>
