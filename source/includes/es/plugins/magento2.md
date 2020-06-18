@@ -87,7 +87,7 @@ Configuración del plugin
     <li class="mgsettings__item">
       <p>Identificar las credenciales de API asignadas a su comercio dentro del panel de administración de Openpay.</p>
       <figure class="mgsettings__image mgsettings__image--small">
-        <img src="/img/plugins/woocommerce/wc_settings_04.png" alt="Configuración de plugin Magento2 paso 1" title="Paso 1">
+        <img src="/images/plugins/woocommerce/wc_settings_04.png" alt="Configuración de plugin Magento2 paso 1" title="Paso 1">
       </figure>
       <blockquote>
         <p>Para ver las credenciales, dar clic en el engrane del menú superior derecho y luego seleccionar la opción <strong>Credenciales de API</strong></p>
@@ -96,13 +96,13 @@ Configuración del plugin
     <li class="mgsettings__item">
       <p>En su panel de administración de Magento 2, dirigirse a la sección <strong>Stores -> Configuration</strong>.</p>
       <figure class="mgsettings__image mgsettings__image--medium">
-        <img src="/img/plugins/magento2/magento2_settings_02.png" alt="Configuración de plugin Magento 2 paso 2" title="Paso 2">
+        <img src="/images/plugins/magento2/magento2_settings_02.png" alt="Configuración de plugin Magento 2 paso 2" title="Paso 2">
       </figure>
     </li>
     <li class="mgsettings__item">
       <p>Una vez dentro de la pantalla de Configuración, ubicar en el menú lateral izquierdo <strong>Sales -> Payment Methods.</strong></p>
       <figure class="mgsettings__image mgsettings__image--medium">
-        <img src="/img/plugins/magento2/magento2_settings_03.png" alt="Configuración de plugin Magento 2 paso 3" title="Paso 3">
+        <img src="/images/plugins/magento2/magento2_settings_03.png" alt="Configuración de plugin Magento 2 paso 3" title="Paso 3">
       </figure>
     </li>
     <li class="mgsettings__item"> 
@@ -117,7 +117,7 @@ Configuración del plugin
             <li><strong>País.- </strong> Seleccionar el país donde se encuentra (México, Colombia).</li>
         </ul>
         <figure class="mgsettings__image mgsettings__image--medium">
-            <img src="/img/plugins/magento2/magento2_settings_04_general.png" alt="Configuración de plugin Magento 2 paso 4 General" title="Paso 4 General">
+            <img src="/images/plugins/magento2/magento2_settings_04_general.png" alt="Configuración de plugin Magento 2 paso 4 General" title="Paso 4 General">
         </figure>
       </div>
       <h3 class="mgsettings__subtitle">Configuración pago con tarjeta</h3>
@@ -139,7 +139,7 @@ Configuración del plugin
             <li><strong>Orden.-</strong> Orden en que se mostrará este método de pago.</li>
         </ul>
         <figure class="mgsettings__image mgsettings__image--medium">
-          <img src="/img/plugins/magento2/magento2_settings_04_cards.png" alt="Configuración de plugin Magento 2 paso 4 Cards" title="Paso 4 Cards">
+          <img src="/images/plugins/magento2/magento2_settings_04_cards.png" alt="Configuración de plugin Magento 2 paso 4 Cards" title="Paso 4 Cards">
         </figure>
       </div>
       <h3 class="mgsettings__subtitle">Configuración pagos en tiendas</h3>
@@ -153,12 +153,12 @@ Configuración del plugin
         <div class="row align-items-center">
            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <figure class="mgsettings__image mgsettings__image--medium">
-                <img src="/img/plugins/magento2/magento2_settings_04_stores.png" alt="Configuración de plugin Magento 2 paso 4 Stores" title="Paso 4 Stores">
+                <img src="/images/plugins/magento2/magento2_settings_04_stores.png" alt="Configuración de plugin Magento 2 paso 4 Stores" title="Paso 4 Stores">
             </figure>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <figure class="mgsettings__image mgsettings__image--medium">
-                <img src="/img/plugins/magento2/magento2_settings_04_stores_checkout.png" alt="Configuración de plugin Magento 2 paso 4 Stores" title="Paso 4 Stores">
+                <img src="/images/plugins/magento2/magento2_settings_04_stores_checkout.png" alt="Configuración de plugin Magento 2 paso 4 Stores" title="Paso 4 Stores">
             </figure>
           </div>
         </div>
@@ -173,12 +173,12 @@ Configuración del plugin
         <div class="row align-items-center">
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <figure class="mgsettings__image mgsettings__image--medium">
-              <img src="/img/plugins/magento2/magento2_settings_04_spei.png" alt="Configuración de plugin Magento 2 paso 4 SPEI" title="Paso 4 SPEI">
+              <img src="/images/plugins/magento2/magento2_settings_04_spei.png" alt="Configuración de plugin Magento 2 paso 4 SPEI" title="Paso 4 SPEI">
           </figure>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <figure class="mgsettings__image mgsettings__image--medium">
-              <img src="/img/plugins/magento2/magento2_settings_04_spei_checkout.png" alt="Configuración de plugin Magento 2 paso 4 SPEI" title="Paso 4 SPEI">
+              <img src="/images/plugins/magento2/magento2_settings_04_spei_checkout.png" alt="Configuración de plugin Magento 2 paso 4 SPEI" title="Paso 4 SPEI">
           </figure>
           </div>
         </div>
@@ -190,10 +190,10 @@ Configuración del plugin
     <li class="mgsettings__item">
     Una vez que se hayan guardado los cambios, Magento te solicitará que limpies la cache del sistema, y una vez hecho esto, tu tienda dispondrá de las formas de pago que ofrece Openpay.
       <figure class="mgsettings__image mgsettings__image--full">
-        <img src="/img/plugins/magento2/magento2_config_07.png" alt="Configuración de plugin Magento 2 paso 7" title="Paso 7">
+        <img src="/images/plugins/magento2/magento2_config_07.png" alt="Configuración de plugin Magento 2 paso 7" title="Paso 7">
       </figure>
       <figure class="mgsettings__image mgsettings__image--full">
-        <img src="/img/plugins/magento2/magento2_config_08.png" alt="Configuración de plugin Magento 2 paso 8" title="Paso 8">
+        <img src="/images/plugins/magento2/magento2_config_08.png" alt="Configuración de plugin Magento 2 paso 8" title="Paso 8">
       </figure>
     </li>
   </ol>
@@ -212,9 +212,9 @@ Store payments -> https://[eCommerce domain]/stores/payments/confirm
 
 <ol class="mgnotifications__list">
 <li class="mgnotifications__item">En su panel de configuración de Openpay ir a <b>Ajustes (ícono de engrane) -> Configuraciones</b>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/woocommerce_webhook_02.png" alt="Configuración de notificaciones Magento paso 1" title="Paso 1"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/woocommerce_webhook_02.png" alt="Configuración de notificaciones Magento paso 1" title="Paso 1"></center>
 <li class="mgnotifications__item">Ubicar el apartado de <b>Webhooks</b>. Si el webhook fue configurado correctamente habrá un registro en estado <b>Verificado</b>.</li>
 <figure class="mgnotifications__image mgnotifications__image--medium">
-  <img src="/img/plugins/webhook_verificado.png" alt="Configuración de notificaciones Magento paso 2" title="Paso 2">
+  <img src="/images/plugins/webhook_verificado.png" alt="Configuración de notificaciones Magento paso 2" title="Paso 2">
 </figure>
 </ol>

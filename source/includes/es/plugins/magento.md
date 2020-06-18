@@ -49,11 +49,11 @@ Instalación
 <ol>
 <li>Descargar el archivo ZIP con los contenidos del plugin. Puede descargar el plugin a través de <a href="https://github.com/open-pay/openpay-magento/blob/master/Openpay_Charges-2.0.0.tgz?raw=true">este enlace</a>.</li>
 <li>En su panel de administración de Magento, dirigirse a la sección <strong>System -> Magento Connect -> Magento Connect Manager</strong>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/magento_install_01.png" alt="Instalación de plugin Magento paso 2" title="Paso 2"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/magento_install_01.png" alt="Instalación de plugin Magento paso 2" title="Paso 2"></center>
 <li>Cargar el archivo descargado en el Paso 1 dentro del formulario de la sección <strong>Manage Existing Extensions</strong>, dar clic en <strong>Upload</strong>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/magento_install_02.png" alt="Instalación de plugin Magento paso 3" title="Paso 3"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/magento_install_02.png" alt="Instalación de plugin Magento paso 3" title="Paso 3"></center>
 <li>Confirmar la instalación del plugin.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/magento_install_03.png" alt="Instalación de plugin Magento paso 4" title="Paso 4"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/magento_install_03.png" alt="Instalación de plugin Magento paso 4" title="Paso 4"></center>
 </ol>
 
 Configuración
@@ -61,34 +61,34 @@ Configuración
 
 <ol>
 <li>Identificar las credenciales de API asignadas a su comercio dentro del panel de administración de Openpay.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/prestashop_config_01.png" alt="Configuración de plugin Magento paso 1" title="Paso 1"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/prestashop_config_01.png" alt="Configuración de plugin Magento paso 1" title="Paso 1"></center>
 <blockquote>
 <p>Para ver las credenciales, dar clic en el engrane del menú superior derecho y luego seleccionar la opción <strong>Credenciales de API</strong></p>
 </blockquote>
 <li>En su panel de administración de Magento, dirigirse a la sección <strong>System -> Configuration</strong>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/magento_config_01.png" alt="Configuración de plugin Magento paso 2" title="Paso 2"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/magento_config_01.png" alt="Configuración de plugin Magento paso 2" title="Paso 2"></center>
 <li>Expandir el apartado <strong>States Options</strong> y seleccionar todos los países a los cuales desea vender. Guardar los cambios mediante el botón <strong>Save Config</strong>, ubicado en la esquina superior derecha de la pantalla.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/magento_config_05.png" alt="Configuración de plugin Magento paso 3" title="Paso 3"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/magento_config_05.png" alt="Configuración de plugin Magento paso 3" title="Paso 3"></center>
 <li>Dar clic en el enlace <strong>Sales -> Payment Methods</strong>, ubicado en el menú lateral.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/magento_config_02.png" alt="Configuración de plugin Magento paso 4" title="Paso 4"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/magento_config_02.png" alt="Configuración de plugin Magento paso 4" title="Paso 4"></center>
 <li>Completar el apartado <strong>Openpay - Configuración General</strong> contemplando los siguientes tópicos:</li>
 <ul>
 <li><strong>Modo pruebas (Sandbox)</strong>: Determina si el plugin va a funcionar en entorno de pruebas (seleccionando <strong>Enable</strong>) o Producción (seleccionando <strong>Disable</strong>).</li>
 <li><strong>Llave pública, ID de comercio, Llave privada</strong>: Credenciales de API para utilizar el plugin (ya sea en modo Sandbox o Producción). Copiar y pegar cada dato (obtenido en el Paso 1) como corresponda.</li>
 </ul>
-<center style="margin:10px 0;"><img src="/img/plugins/magento_config_03.png" alt="Configuración de plugin Magento paso 5" title="Paso 5"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/magento_config_03.png" alt="Configuración de plugin Magento paso 5" title="Paso 5"></center>
 <li>Completar el apartado <strong>Openpay - Tarjetas de crédito y débito</strong> utilizando como referencia la siguiente imagen:</li>
-<center style="margin:10px 0;"><img src="/img/plugins/magento_config_04.png" alt="Configuración de plugin Magento paso 6" title="Paso 6"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/magento_config_04.png" alt="Configuración de plugin Magento paso 6" title="Paso 6"></center>
 <blockquote>
 <p>El campo <strong>Enabled</strong> determina si aceptará el comercio como método de pago tarjetas de crédito y débito.</p>
 </blockquote>
 <li>Completar el apartado <strong>Openpay - Tiendas de Conveniencia</strong> utilizando como referencia la siguiente imagen:</li>
-<center style="margin:10px 0;"><img src="/img/plugins/magento_config_06.png" alt="Configuración de plugin Magento paso 7" title="Paso 7"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/magento_config_06.png" alt="Configuración de plugin Magento paso 7" title="Paso 7"></center>
 <blockquote>
 <p>El campo <strong>Enabled</strong> determina si aceptará el comercio como método de pago en tiendas de conveniencia.</p>
 </blockquote>
 <li>Completar el apartado <strong>Openpay - Transferencias Interbancarias (SPEI)</strong> utilizando como referencia la siguiente imagen:</li>
-<center style="margin:10px 0;"><img src="/img/plugins/magento_config_07.png" alt="Configuración de plugin Magento paso 8" title="Paso 8"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/magento_config_07.png" alt="Configuración de plugin Magento paso 8" title="Paso 8"></center>
 <blockquote>
 <p>El campo <strong>Enabled</strong> determina si aceptará el comercio como método de pago por transferencia interbancaria.</p>
 </blockquote>
@@ -108,7 +108,7 @@ Store payments -> https://[eCommerce domain]/stores/payments/confirm
 
 <ol>
 <li>En su panel de configuración de Openpay ir a <strong>Ajustes (ícono de engrane) -> Configuraciones</strong>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/woocommerce_webhook_02.png" alt="Configuración de notificaciones Magento paso 1" title="Paso 1"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/woocommerce_webhook_02.png" alt="Configuración de notificaciones Magento paso 1" title="Paso 1"></center>
 <li>Ubicar el apartado de <strong>Webhooks</strong>. Si el webhook fue configurado correctamente habrá un registro en estado <b>Verificado</b>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/webhook_verificado.png" alt="Configuración de notificaciones Magento paso 2" title="Paso 2"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/webhook_verificado.png" alt="Configuración de notificaciones Magento paso 2" title="Paso 2"></center>
 </ol>

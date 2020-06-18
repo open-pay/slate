@@ -13,7 +13,7 @@ lang: es
 
 Para poder configurar el plugin de Openpay en Vtex se debe seguir el siguiente flujo:
 <p>
-	<img src="/img/plugins/vtex_openpay_52.png">
+	<img src="/images/plugins/vtex_openpay_52.png">
 </p>
 
 A continuación, el detalle de cada punto señalado en el diagrama:
@@ -35,14 +35,14 @@ A continuación, el detalle de cada punto señalado en el diagrama:
 <li>En barra superior, ir al icono de engrane y hacer click en la opción <strong>Credenciales de API</strong>
 <br>
 <br>
-<img src="/img/plugins/vtex_openpay_02.png" alt="Credenciales API">
+<img src="/images/plugins/vtex_openpay_02.png" alt="Credenciales API">
 </li>
 <br>
 <br>
 <li>Obtener ID (identificador del comercio), Llave privada y Llave pública (esta información se usará más adelante).
 <br>
 <br>
-<img src="/img/plugins/vtex_openpay_03.png" alt="Datos">
+<img src="/images/plugins/vtex_openpay_03.png" alt="Datos">
 <br>
 <blockquote>
 <strong>Nota: </strong><em>Las Credenciales de API son diferentes en cada ambiente. Debe guardar estos datos por separado y no confundirlos para que los ambientes de Sandbox y Producción funcionen correctamente.
@@ -89,13 +89,13 @@ Para que su tienda VTEX funcione correctamente con Openpay, se requieren datos a
 <li>En las opciones de contenedor, del lado derecho de la pantalla aparecerá su identificador de GTM que tiene un formato como éste: <em>GTM-A1B2CDE</em>. Debe guardar el ID ya que se utilizará más adelante.
 <br>
 <br>
-<img src="/img/plugins/vtex_openpay_43.png">
+<img src="/images/plugins/vtex_openpay_43.png">
 </li>
 <br>
 <li>Hacer click en <strong>Importar contenedor</strong>
 <br>
 <br>
-<img src="/img/plugins/vtex_openpay_44.png">
+<img src="/images/plugins/vtex_openpay_44.png">
 </li>
 <br>
 <li>Haga click en <strong>Elija el archivo del contenedor</strong>, seleccione el archivo contenedor que descargó en el paso 1 y presione Abrir o Aceptar
@@ -107,7 +107,7 @@ Para que su tienda VTEX funcione correctamente con Openpay, se requieren datos a
 <li>Elija un nombre para su Espacio de trabajo (Si no está seleccionada, elija la opción Combinar / Cambiar el nombre de etiquetas, activadores y variables en conflicto)
 <br>
 <br>
-<img src="/img/plugins/vtex_openpay_45.png">
+<img src="/images/plugins/vtex_openpay_45.png">
 </li>
 <br>
 <li>Presione el botón <strong>Confirmar</strong>
@@ -116,13 +116,13 @@ Para que su tienda VTEX funcione correctamente con Openpay, se requieren datos a
 <li>Aparecerá el contenedor en su Tag Manager del lado izquierdo. Haga click en <strong>Variables</strong>
 <br>
 <br>
-<img src="/img/plugins/vtex_openpay_46.png">
+<img src="/images/plugins/vtex_openpay_46.png">
 </li>
 <br>
 <li>Ir a Variables definidas por el usuario y cambie los valores como se señala:
 <br>
 <br>
-<img src="/img/plugins/vtex_openpay_47.png">
+<img src="/images/plugins/vtex_openpay_47.png">
 <br>
 <br>
 	Si es ambiente <strong>Sandbox</strong>
@@ -151,13 +151,13 @@ Para que su tienda VTEX funcione correctamente con Openpay, se requieren datos a
 <li>Guarde los cambios y haga click en el botón superior derecho <strong>Enviar</strong>. Esto inicia el proceso de publicación de su contenedor con los cambios que realizó en las variables.
 <br>
 <br>
-<img src="/img/plugins/vtex_openpay_48.png">
+<img src="/images/plugins/vtex_openpay_48.png">
 </li>
 <br>
 <li>En la pantalla “Configuración de envío” validar que se muestre seleccionada la opción “Publicar y crear versión” y que en la parte inferior se muestre “Entorno de publicación Live”. Hacer click en el botón <strong>Publicar</strong>.
 <br>
 <br>
-<img src="/img/plugins/vtex_openpay_49.png">  
+<img src="/images/plugins/vtex_openpay_49.png">  
 </li>
 </ol>
 <br>
@@ -168,13 +168,13 @@ Si se publicó correctamente, su GTM está listo para ser consumido por el siste
 <li value="17">Ingresar a <a href="https://vtex.com/">Vtex</a> e ir a <strong>Panel de Administración > Configuración de la tienda > Checkout</strong> y dar click en el botón con icono de engrane
 <br>
 <br>
-<img src="/img/plugins/vtex_openpay_50.png">
+<img src="/images/plugins/vtex_openpay_50.png">
 </li>
 <br>
 <li>Hacer click en la opción <strong>Checkout</strong>, introduzca su GTM ID y presione <strong>Guardar</strong>. Con esto VTEX insertará el código de GTM en su tienda en línea.
 <br>
 <br>
-<img src="/img/plugins/vtex_openpay_51.png">
+<img src="/images/plugins/vtex_openpay_51.png">
 </li>
 </ol>
 <br>
@@ -211,7 +211,7 @@ Si se publicó correctamente, su GTM está listo para ser consumido por el siste
 	<li type="disc"><strong>Application Key:</strong> Prefijo (LIVE_) + ID (identificador del comercio en Openpay)
 	<br>
 	<br>
-	<img src="/img/plugins/vtex_openpay_05.png" alt="Datos">
+	<img src="/images/plugins/vtex_openpay_05.png" alt="Datos">
 	</li>
 	<br>
 	<li type="disc"><strong>Application Token:</strong> Llave privada (obtenida de Openpay)
@@ -246,7 +246,7 @@ Si se publicó correctamente, su GTM está listo para ser consumido por el siste
 </blockquote>
 <br>
 <br>
-<img src="/img/plugins/vtex_openpay_41.png" alt="Validación">
+<img src="/images/plugins/vtex_openpay_41.png" alt="Validación">
 
 </li>
 </ol>
@@ -285,7 +285,7 @@ Para configurar cualquiera de los métodos de pago mencionados debemos de:
 <li>Acceder al path <strong>Transacciones > Pagos > Configuración > Planes de pago</strong> y hacer click en el botón <strong>Agregar</strong>
 	<br>
 	<br>
-	<img src="/img/plugins/vtex_openpay_07.png">
+	<img src="/images/plugins/vtex_openpay_07.png">
  </li>
 <li>Se mostrará una pantalla con diversas opciones donde hay que buscar y seleccionar el método de pago a configurar.
 <blockquote>
@@ -295,19 +295,19 @@ Para configurar cualquiera de los métodos de pago mencionados debemos de:
 	<li><strong>Pago en tiendas:</strong> Buscar en sección de Pago personalizado con la leyenda “Pago en tienda”
 	<br>
 	<br>
-	<img src="/img/plugins/vtex_openpay_08.png">
+	<img src="/images/plugins/vtex_openpay_08.png">
 	</li>
 	<li><strong>Transferencias interbancarias:</strong> Buscar en sección de Otro con la leyenda “SPEI”
 	<br>
 	<br>
-	<img src="/img/plugins/vtex_openpay_11.png">
+	<img src="/images/plugins/vtex_openpay_11.png">
 	</li>
 	</ol>
 </li>
 <li>En la pantalla de configuración del método de pago seleccionado, hacer click en la afiliación de Openpay y marcarlo como activo
 	<br>
 	<br>
-	<img src="/img/plugins/vtex_openpay_09.png">
+	<img src="/images/plugins/vtex_openpay_09.png">
 </li>
 <br>
 <li>En la barra superior capturar la leyenda que corresponda al método de pago que se está configurando.
@@ -356,7 +356,7 @@ En las configuraciones, es necesario la creación de un Webhoook, para notificar
 	</li>
 	<li type="disc"> <strong>Usar autenticación de acceso básica:</strong> Seleccionar este campo, capturar los datos solicitados y hacer click en el botón <strong>Guardar</strong>
 	</li>
-	 <center style="margin:10px 0;"><img src="/img/plugins/vtex_create_webhook.png"></center>
+	 <center style="margin:10px 0;"><img src="/images/plugins/vtex_create_webhook.png"></center>
 	</ol>
 	<br>
 <strong>¿Cómo obtener usuario y contraseña para dar de alta una webhook?</strong>
@@ -367,7 +367,7 @@ En las configuraciones, es necesario la creación de un Webhoook, para notificar
 	<li>Ir al path Gestión de la cuenta > Cuentas > Openpay
 	<br>
 	<br>
-	<center><img src="/img/plugins/vtex_openpay_23.png" style="width: 100%;"></center>
+	<center><img src="/images/plugins/vtex_openpay_23.png" style="width: 100%;"></center>
 	<br>
 	</li>
 	<li>Una  vez  que  el  Owner  genere  una  Cuenta  y  Administre  el  Permiso,  se  mostrará por <strong>una  sola  ocasión</strong>  una  clave que deberá <strong>guardar</strong>
@@ -383,7 +383,7 @@ En las configuraciones, es necesario la creación de un Webhoook, para notificar
 Una vez creado el webhook se debe <strong>informar al administrador de Openpay</strong> para actualizar el estado de de la URL a “Verificado”
 
 
-<img src="/img/plugins/vtex_openpay_26.png">
+<img src="/images/plugins/vtex_openpay_26.png">
 
  <br>
  <br>

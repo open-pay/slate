@@ -64,18 +64,18 @@ Para instalar los plugins de Openpay en su comercio de OpenCart tiene que seguir
 <ol>
 <li>Descargar el archivo ZIP que contiene todos los plugins. Puede descargar los plugins a través de <a href="https://github.com/open-pay/openpay-opencart/archive/master.zip">este enlace</a>.</li>
 <li>Descomprimir el archivo descargado. Dentro de la carpeta obtenida, descomprimir el archivo <strong>openpay_opencart_plugin_1.0.zip</strong>. Consultar la carpeta final resultante.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/opencart_install_05.png" alt="Instalación de plugin OpenCart paso 2" title="Paso 2"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/opencart_install_05.png" alt="Instalación de plugin OpenCart paso 2" title="Paso 2"></center>
 <li>En su panel de administración de OpenCart, dirigirse a la sección <strong>Extensions -> Extension Installer</strong>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/opencart_install_01.png" alt="Instalación de plugin OpenCart paso 3" title="Paso 3"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/opencart_install_01.png" alt="Instalación de plugin OpenCart paso 3" title="Paso 3"></center>
 <li>Clic en el botón <strong>Upload</strong> y seleccionar el archivo ZIP del plugin del método de pago que desee instalar. El plugin comenzará a subirse al portal automáticamente.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/opencart_install_02.png" alt="Instalación de plugin OpenCart paso 4" title="Paso 4"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/opencart_install_02.png" alt="Instalación de plugin OpenCart paso 4" title="Paso 4"></center>
 <blockquote>
 <p>Si al instalar el plugin aparece el error <strong>FTP needs to be enabled in the settings</strong>, es necesario aplicar un fix que puede ser descargado a través de <a href="http://www.opencart.com/index.php?route=extension/extension/info&extension_id=18892">este enlace</a>. Seguir las instrucciones proporcionadas en ese mismo sitio para aplicar exitosamente el ajuste.</p>
 </blockquote>
 <li>Ir a la sección <strong>Extensions -> Payments</strong>, ubicar en el listado el plugin recién subido y dar clic en la opción <strong>Install</strong>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/opencart_install_03.png" alt="Instalación de plugin OpenCart paso 5" title="Paso 5"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/opencart_install_03.png" alt="Instalación de plugin OpenCart paso 5" title="Paso 5"></center>
 <li>Confirmar que el plugin se haya instalado exitosamente.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/opencart_install_04.png" alt="Instalación de plugin OpenCart paso 6" title="Paso 6"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/opencart_install_04.png" alt="Instalación de plugin OpenCart paso 6" title="Paso 6"></center>
 </ol>
 
 Configuración
@@ -85,12 +85,12 @@ Configuración
 
 <ol>
 <li>Identificar las credenciales de API asignadas a su comercio dentro del panel de administración de Openpay.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/prestashop_config_01.png" alt="Configuración de plugin OpenCart paso 1" title="Paso 1"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/prestashop_config_01.png" alt="Configuración de plugin OpenCart paso 1" title="Paso 1"></center>
 <blockquote>
 <p>Para ver las credenciales, dar clic en el engrane del menú superior derecho y luego seleccionar la opción <strong>Credenciales de API</strong>.</p>
 </blockquote>
 <li>En su panel de administración de OpenCart, dirigirse a la sección <strong>Extensions -> Payments</strong>. Ubicar el plugin instalado recientemente y dar clic en la opción <strong>Edit</strong>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/opencart_config_01.png" alt="Configuración de plugin OpenCart paso 2" title="Paso 2"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/opencart_config_01.png" alt="Configuración de plugin OpenCart paso 2" title="Paso 2"></center>
 <li>Completar el formulario de configuración contemplando los siguientes puntos:</li>
 <ul>
 <li><strong>Test mode:</strong> Define si el plugin estará trabajando en entorno de pruebas o producción.</li>
@@ -107,7 +107,7 @@ Configuración
 <li><strong>Status - Captured:</strong> Seleccionar <strong>Pending</strong>.</li>
 </ul>
 <li>Guardar los cambios usando el botón ubicado en la esquina superior derecha de la pantalla.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/opencart_config_02.png" alt="Configuración de plugin OpenCart paso 4" title="Paso 4"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/opencart_config_02.png" alt="Configuración de plugin OpenCart paso 4" title="Paso 4"></center>
 <li>Confirmar que la configuración del plugin haya sido guardada exitosamente.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/opencart_config_03.png" alt="Configuración de plugin OpenCart paso 5" title="Paso 5"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/opencart_config_03.png" alt="Configuración de plugin OpenCart paso 5" title="Paso 5"></center>
 </ol>

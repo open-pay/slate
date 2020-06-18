@@ -40,16 +40,16 @@ Instalación
 
 <ol class="installation">
 <li>En su panel de administración de WordPress, dirigirse a la sección <strong>Plugins -> Add New</strong>, ubicado en el menú lateral.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_install_01.png" alt="Instalación de plugin WooCommerce paso 2" title="Paso 2"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_install_01.png" alt="Instalación de plugin WooCommerce paso 2" title="Paso 2"></center>
 <li>En el buscador, escribe la palabra clave <strong>Openpay</strong> para buscar las opciones de pago disponibles. </li>
-<center style="padding-right:40px; margin:10px 0;"><img src="/img/plugins/woocommerce_install_02.png" alt="Instalación de plugin WooCommerce paso 3" title="Paso 3" style="width: 100%;"></center>
+<center style="padding-right:40px; margin:10px 0;"><img src="/images/plugins/woocommerce_install_02.png" alt="Instalación de plugin WooCommerce paso 3" title="Paso 3" style="width: 100%;"></center>
 <li>En los resultados de la búsqueda, identifica el plugin del método de pago deseado y hacer clic en <strong>Install Now.</strong>. Al terminar la instalación, se debe <strong>activar el plugin</strong>.</li>
 <div class="row installation__step3">
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <center style="margin:10px 0;"><img src="/img/plugins/woocommerce_install_03.png" alt="Instalación de plugin WooCommerce paso 4" title="Paso 4" class="installation__image"></center>
+        <center style="margin:10px 0;"><img src="/images/plugins/woocommerce_install_03.png" alt="Instalación de plugin WooCommerce paso 4" title="Paso 4" class="installation__image"></center>
     </div>
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <center style="margin:10px 0;"><img src="/img/plugins/woocommerce_install_04.png" alt="Instalación de plugin WooCommerce paso 5" title="Paso 5" class="installation__image"></center>
+        <center style="margin:10px 0;"><img src="/images/plugins/woocommerce_install_04.png" alt="Instalación de plugin WooCommerce paso 5" title="Paso 5" class="installation__image"></center>
     </div>
 </div>
 
@@ -60,18 +60,18 @@ Configuración
 
 <ol>
 <li>En su panel de administración de WordPress, dirigirse a la sección <strong>WooCommerce -> Settings</strong>, ubicado en el menú lateral.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_config_01.png" alt="Configuración de plugin WooCommerce paso 1" title="Paso 1"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_config_01.png" alt="Configuración de plugin WooCommerce paso 1" title="Paso 1"></center>
 <li>Modificar el valor <strong>Currency</strong> del formulario por la opción <strong>Mexican Peso ($)</strong>. Guardar los cambios mediante el botón <strong>Save changes</strong> ubicado al final del formulario.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_config_02.png" style="" alt="Configuración de plugin WooCommerce paso 2" title="Paso 2"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_config_02.png" style="" alt="Configuración de plugin WooCommerce paso 2" title="Paso 2"></center>
 <li>Para activar y desactivar las opciones de <strong>pagos</strong>, deberá seguir los siguientes pasos.</li>
-<center style="padding-right:40px; margin:10px 0;"><img src="/img/plugins/woocommerce_config_03.png" alt="Configuración de plugin WooCommerce paso 3" title="Paso 3" style="width:100%;"></center>
+<center style="padding-right:40px; margin:10px 0;"><img src="/images/plugins/woocommerce_config_03.png" alt="Configuración de plugin WooCommerce paso 3" title="Paso 3" style="width:100%;"></center>
 <ol type="a">
     <li>Dirigirse a la pestaña <strong>Payments</strong> ubicada en la parte superior de las configuraciones de Woocommerce.</li>
     <li>Activar la opción de <strong>pago</strong> deseada.</li>
     <li>Dar clic en el bóton <strong>Manage</strong> para comenzar con la configuración.</li>
 </ol>
 <li>Identificar las credenciales de API asignadas a su comercio dentro del panel de administración de Openpay.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/prestashop_config_01.png" alt="Configuración de plugin WooCommerce paso 4" title="Paso 4"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/prestashop_config_01.png" alt="Configuración de plugin WooCommerce paso 4" title="Paso 4"></center>
 <blockquote>
 <p>Para ver las credenciales, dar clic en el engrane del menú superior derecho y luego seleccionar la opción <strong>Credenciales de API</strong></p>
 </blockquote>
@@ -83,7 +83,7 @@ Configuración
 </ul>
 <div class="row justify-content-center">
   <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
-      <center style="margin:10px 0;"><img src="/img/plugins/woocommerce_config_05.png" alt="Configuración de plugin WooCommerce paso 4" title="Paso 5" style="width:100%;"></center>
+      <center style="margin:10px 0;"><img src="/images/plugins/woocommerce_config_05.png" alt="Configuración de plugin WooCommerce paso 4" title="Paso 5" style="width:100%;"></center>
   </div>
 </div>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -113,7 +113,7 @@ Configuración
       </ul>
      </div>
       <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
-         <center style="margin:10px 0;"><img src="/img/plugins/woocommerce_config_05_1.png" alt="Configuración de plugin WooCommerce paso 5" title="Paso 5" style="width: 100%;"></center>
+         <center style="margin:10px 0;"><img src="/images/plugins/woocommerce_config_05_1.png" alt="Configuración de plugin WooCommerce paso 5" title="Paso 5" style="width: 100%;"></center>
       </div>
     </div>
   </div>
@@ -126,11 +126,11 @@ Configuración
         </ul>
       </div>
       <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
-        <center style="margin:10px 0;"><img src="/img/plugins/woocommerce_config_05_2.png" alt="Configuración de plugin WooCommerce paso 5" title="Paso 5" style="width: 100%;"></center>
+        <center style="margin:10px 0;"><img src="/images/plugins/woocommerce_config_05_2.png" alt="Configuración de plugin WooCommerce paso 5" title="Paso 5" style="width: 100%;"></center>
       </div>
     </div>
   </div>
 </div>
 <li>Guardar los cambios en la configuración dando clic sobre el botón <strong>Save changes</strong> ubicado al final del formulario.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/woocommerce_config_06.png" alt="Configuración de plugin WooCommerce paso 6" title="Paso 6" ></center>
+<center style="margin:10px 0;"><img src="/images/plugins/woocommerce_config_06.png" alt="Configuración de plugin WooCommerce paso 6" title="Paso 6" ></center>
 </ol>

@@ -34,12 +34,12 @@ Instalación
 <ol>
 <li>Iniciar sesión con su tienda de Shopify</li>
 <li>En el menú lateral, dirigirse a "Apps". En la esquina superior derecha, clic en "Visitar App Store".</li>
-<center style="margin:10px 0;"><img src="/img/plugins/shopify_install_01.png" alt="Instalación de app Shopify paso 2" title="Paso 2"><img src="/img/plugins/shopify_install_02.png" alt="Instalación de app Shopify paso 2" title="Paso 2" style="margin-left:20px;"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/shopify_install_01.png" alt="Instalación de app Shopify paso 2" title="Paso 2"><img src="/images/plugins/shopify_install_02.png" alt="Instalación de app Shopify paso 2" title="Paso 2" style="margin-left:20px;"></center>
 <li>En el campo de búsqueda ingresar <strong>Openpay Online Payments</strong> y dar clic sobre el resultado que aparezca.</li>
 <li>Dar clic en el botón <strong>"Get"</strong> ubicado a la derecha.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/shopify_install_03.png" alt="Instalación de app Shopify paso 4" title="Paso 4"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/shopify_install_03.png" alt="Instalación de app Shopify paso 4" title="Paso 4"></center>
 <li>Finalmente, clic en el botón <strong>Install App</strong>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/shopify_install_04.png" alt="Instalación de app Shopify paso 5" title="Paso 5"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/shopify_install_04.png" alt="Instalación de app Shopify paso 5" title="Paso 5"></center>
 </ol>
 
 Configuración
@@ -48,7 +48,7 @@ Configuración
 <ol>
 <li>En el panel de administración de su tienda Shopify, dirigirse a <strong>Settings -> Payments</strong>.</li>
 <li>Buscar la sección <strong>Manual Payments</strong> y seleccionar la opción <strong>Create a new custom payment method</strong>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/shopify_config_01.png" alt="Configuración de app Shopify paso 2" title="Paso 2"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/shopify_config_01.png" alt="Configuración de app Shopify paso 2" title="Paso 2"></center>
 <li>Por cada método de pago que quiera habilitar tome en cuenta lo siguiente:</li>
 <ul>
 <li>El <strong>Nombre</strong> del método de pago se muestra dentro del flujo de compra de un Cliente, elija un nombre corto que identifique fácilmente el tipo de pago.</li>
@@ -60,11 +60,11 @@ Configuración
 <ul>
 <li>Seleccione el <strong>Modo de Operación</strong> de la aplicación. Utilice <strong>Modo Sandbox</strong> sólo para realizar pruebas.</li>
 <li>Ingrese sus credenciales <strong>Merchant ID y Secret Key</strong> de Openpay para cada ambiente. Puede obtener dichas credenciales en su <a href="https://dashboard.openpay.mx/" target="_blank">Dashboard</a>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/api_keys_config.png" alt="Api Keys" title="Openpay"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/api_keys_config.png" alt="Api Keys" title="Openpay"></center>
 
 </ul>
 <li>Presione el botón <strong>Guardar</strong>, ubicado en la esquina superior derecha, para guardar los cambios realizados en su configuración.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/shopify_config_02.png" alt="Configuración de app Shopify paso 4" title="Paso 4"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/shopify_config_02.png" alt="Configuración de app Shopify paso 4" title="Paso 4"></center>
 </ol>
 
 #Shopify pagos con Tarjeta
@@ -80,11 +80,11 @@ Configuración
 		</div>
 	</center>
 	<li>Presiona el botón <strong>Add payment gateway</strong>.</li>
-	<center style="margin:10px 0;"><img src="/img/plugins/shopify_config_03.png" alt="Configuración de app Shopify tarjetas paso 2" title="Paso 2"></center>
+	<center style="margin:10px 0;"><img src="/images/plugins/shopify_config_03.png" alt="Configuración de app Shopify tarjetas paso 2" title="Paso 2"></center>
 	<li>Utilice sus credenciales <strong>Merchant ID y Secret Key</strong> de Openpay para cada ambiente. Puede obtener dichas credenciales en su <a href="https://dashboard.openpay.mx/" target="_blank">Dashboard</a>.</li>
-	<center style="margin:10px 0;"><img src="/img/plugins/api_keys_config.png" alt="Api Keys" title="Openpay"></center>
+	<center style="margin:10px 0;"><img src="/images/plugins/api_keys_config.png" alt="Api Keys" title="Openpay"></center>
 	<li>Ingresa el <strong>Merchant ID</strong> y <strong>Private Key</strong>.</li>
 	<li>Selecciona la casilla <strong>Use test mode</strong> para operar en el entorno Sandbox con las credenciales de pruebas.</li>
-	<center style="margin:10px 0;"><img src="/img/plugins/shopify_config_cc.png" alt="Configuración de tarjetas de crédito" title="Paso 2"></center>
+	<center style="margin:10px 0;"><img src="/images/plugins/shopify_config_cc.png" alt="Configuración de tarjetas de crédito" title="Paso 2"></center>
 	<li>Por último presiona el botón <strong>Actvate</strong>.</li>
 </ol>

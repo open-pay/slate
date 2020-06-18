@@ -48,13 +48,13 @@ Para instalar el plugin de Suscripciones Openpay en su comercio de WordPress tie
 <ol>
 <li>Descargar el archivo ZIP con los contenidos del plugin. Puede descargar el plugin a través de <a href="https://github.com/open-pay/openpay-woosubscriptions/archive/master.zip">este enlace</a>.</li>
 <li>En su panel de administración de WordPress, dirigirse a la sección <strong>Plugins -> Add New</strong>, ubicado en el menú lateral.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_install_01.png" alt="Instalación de plugin Suscripciones paso 2" title="Paso 2"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_install_01.png" alt="Instalación de plugin Suscripciones paso 2" title="Paso 2"></center>
 <li>Dar clic en la opción <strong>Upload Plugin</strong>, ubicado en la parte superior de la pantalla.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_install_02.png" alt="Instalación de plugin Suscripciones paso 3" title="Paso 3"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_install_02.png" alt="Instalación de plugin Suscripciones paso 3" title="Paso 3"></center>
 <li>Ubicar el archivo ZIP descargado en el paso 1 y proporcionarlo al formulario de instalación de plugins. Dar clic en el botón <strong>Install Now</strong></li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_install_03.png" alt="Instalación de plugin Suscripciones paso 4" title="Paso 4"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_install_03.png" alt="Instalación de plugin Suscripciones paso 4" title="Paso 4"></center>
 <li>Confirmar que el plugin haya sido instalado correctamente.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_install_04.png" alt="Instalación de plugin Suscripciones paso 5" title="Paso 5"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_install_04.png" alt="Instalación de plugin Suscripciones paso 5" title="Paso 5"></center>
 </ol>
 
 Configuración
@@ -62,22 +62,22 @@ Configuración
 
 <ol>
 <li>En su panel de administración de WordPress, dirigirse a la sección <strong>WooCommerce -> Settings</strong>, ubicado en el menú lateral.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_config_01.png" alt="Configuración de plugin Suscripciones paso 1" title="Paso 1"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_config_01.png" alt="Configuración de plugin Suscripciones paso 1" title="Paso 1"></center>
 <li>Modificar el valor <strong>Currency</strong> del formulario por la opción <strong>Mexican Peso ($)</strong>. Guardar los cambios mediante el botón <strong>Save changes</strong> ubicado al final del formulario.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_config_02.png" alt="Configuración de plugin Suscripciones paso 2" title="Paso 2"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_config_02.png" alt="Configuración de plugin Suscripciones paso 2" title="Paso 2"></center>
 <li>Identificar las credenciales de API asignadas a su comercio dentro del panel de administración de Openpay.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/prestashop_config_01.png" alt="Configuración de plugin Suscripciones paso 3" title="Paso 3"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/prestashop_config_01.png" alt="Configuración de plugin Suscripciones paso 3" title="Paso 3"></center>
 <blockquote>
 <p>Para ver las credenciales, dar clic en el engrane del menú superior derecho y luego seleccionar la opción <strong>Credenciales de API</strong></p>
 </blockquote>
 <li>En su panel de administración de WordPress, dirigirse a la sección <strong>Plugins -> Installed Plugins</strong>, ubicado en el menú lateral.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_config_03.png" alt="Configuración de plugin Suscripciones paso 4" title="Paso 4"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_config_03.png" alt="Configuración de plugin Suscripciones paso 4" title="Paso 4"></center>
 <li>Ubicar el elemento <strong>Openpay WooSubscriptions</strong> dentro del listado de plugins instalados. Dar clic en el vínculo <strong>Activate</strong>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_config_04.png" alt="Configuración de plugin Suscripciones paso 5" title="Paso 5"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_config_04.png" alt="Configuración de plugin Suscripciones paso 5" title="Paso 5"></center>
 <li>Volver a consultar el listado de plugins instalados y dar clic en la opción <strong>Settings</strong> del plugin.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_config_05.png" alt="Configuración de plugin Suscripciones paso 6" title="Paso 6"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_config_05.png" alt="Configuración de plugin Suscripciones paso 6" title="Paso 6"></center>
 <li>Dar clic en la opción <strong>Openpay</strong>, ubicado en la parte inferior derecha de la pantalla (en la pestaña <strong>Checkout</strong>).</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_config_06.png" alt="Configuración de plugin Suscripciones paso 7" title="Paso 7"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_config_06.png" alt="Configuración de plugin Suscripciones paso 7" title="Paso 7"></center>
 <li>Completar el formulario de configuración contemplando los siguientes tópicos:</li>
 <ul>
 <li><strong>Enable/Disable</strong>: Habilita el uso de Openpay como plataforma de pagos.</li>
@@ -91,9 +91,9 @@ Configuración
 </blockquote>
 </ul>
 <li>Guardar los cambios en la configuración dando clic sobre el botón <strong>Save changes</strong> ubicado al final del formulario.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_config_07.png" alt="Configuración de plugin Suscripciones paso 9" title="Paso 9"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_config_07.png" alt="Configuración de plugin Suscripciones paso 9" title="Paso 9"></center>
 <li>En la pantalla de ajustes del plugin, dar clic en la opción <strong>Checkout Options</strong>, ubicado en la parte inferior izquierda de la pantalla (en la pestaña <strong>Checkout</strong>).</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_config_08.png" alt="Configuración de plugin Suscripciones paso 10" title="Paso 10"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_config_08.png" alt="Configuración de plugin Suscripciones paso 10" title="Paso 10"></center>
 <li>En la sección <strong>Payment Gateways</strong> (al final de la pantalla) marcar la opción <strong>Tarjeta de crédito o débito (Openpay)</strong> y guardar los cambios mediante el botón <strong>Save Changes</strong>.</li>
-<center style="margin:10px 0;"><img src="/img/plugins/subscriptions_config_09.png" alt="Configuración de plugin Suscripciones paso 11" title="Paso 11"></center>
+<center style="margin:10px 0;"><img src="/images/plugins/subscriptions_config_09.png" alt="Configuración de plugin Suscripciones paso 11" title="Paso 11"></center>
 </ol>

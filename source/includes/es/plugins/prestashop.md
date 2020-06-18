@@ -54,23 +54,23 @@ Para instalar los módulos de pago para Openpay en su sitio de PrestaShop debe s
           </li>
           <li class="prestashop-install__list">En el panel de administración de PrestaShop, dirigirse a la sección <strong>Módulos y Servicios</strong> a través del menú lateral.</li>
           <figure class="prestashop-install__image prestashop-install__image--small">
-            <img src="/img/plugins/prestashop/prestashop1.6_install_02.png" alt="Instalación de plugin PrestaShop paso 2" title="Paso 2">
+            <img src="/images/plugins/prestashop/prestashop1.6_install_02.png" alt="Instalación de plugin PrestaShop paso 2" title="Paso 2">
           </figure>
           <li class="prestashop-install__list">Dar clic en la opción <strong>Añadir un nuevo módulo</strong> en la parte superior derecha de la pantalla.</li>
           <figure class="prestashop-install__image prestashop-install__image--full">
-            <img src="/img/plugins/prestashop/prestashop1.6_install_03.png" alt="Instalación de plugin PrestaShop paso 3" title="Paso 3">
+            <img src="/images/plugins/prestashop/prestashop1.6_install_03.png" alt="Instalación de plugin PrestaShop paso 3" title="Paso 3">
           </figure>
           <li class="prestashop-install__list">En el formulario que aparece, <strong>Seleccionar el archivo ZIP</strong> descargado, y dar clic en el botón <strong>Subir este módulo</strong>.</li>
           <figure class="prestashop-install__image prestashop-install__image--medium">
-            <img src="/img/plugins/prestashop/prestashop1.6_install_04.png" alt="Instalación de plugin PrestaShop paso 4" title="Paso 4">
+            <img src="/images/plugins/prestashop/prestashop1.6_install_04.png" alt="Instalación de plugin PrestaShop paso 4" title="Paso 4">
           </figure>
           <li class="prestashop-install__list">En la nueva pantalla, se instalará el módulo recién descargado. Dar clic en <strong>Instalar</strong>.</li>
           <figure class="prestashop-install__image prestashop-install__image--medium">
-            <img src="/img/plugins/prestashop/prestashop1.6_install_05.png" alt="Instalación de plugin PrestaShop paso 5" title="Paso 5">
+            <img src="/images/plugins/prestashop/prestashop1.6_install_05.png" alt="Instalación de plugin PrestaShop paso 5" title="Paso 5">
           </figure>
           <li>Confirmar que el plugin haya sido instalado correctamente.</li>
           <figure class="prestashop-install__image prestashop-install__image--full">
-            <img src="/img/plugins/prestashop/prestashop1.6_install_06.png" alt="Instalación de plugin PrestaShop paso 6" title="Paso 6">
+            <img src="/images/plugins/prestashop/prestashop1.6_install_06.png" alt="Instalación de plugin PrestaShop paso 6" title="Paso 6">
           </figure>
         </ol>
       </div>
@@ -83,26 +83,26 @@ Para instalar los módulos de pago para Openpay en su sitio de PrestaShop debe s
           <li>Descomprimir el archivo descargado. Dentro encontrará los tres módulos de Openpay, pago con tarjetas, pago en tiendas y pagos con SPEI.
           </li>
           <figure class="prestashop-install__image prestashop-install__image--medium">
-            <img src="/img/plugins/prestashop/prestashop_install_01.png" alt="Instalación de plugin PrestaShop paso 2" title="Paso 2">
+            <img src="/images/plugins/prestashop/prestashop_install_01.png" alt="Instalación de plugin PrestaShop paso 2" title="Paso 2">
           </figure>
           <li class="prestashop-install__list">En el panel de administración de PrestaShop, dirigirse a la sección <strong>Module Manager</strong> a través del menú lateral.</li>
           <figure class="prestashop-install__image prestashop-install__image--ssmall">
-            <img src="/img/plugins/prestashop/prestashop_install_02.png" alt="Instalación de plugin PrestaShop paso 2" title="Paso 2">
+            <img src="/images/plugins/prestashop/prestashop_install_02.png" alt="Instalación de plugin PrestaShop paso 2" title="Paso 2">
           </figure>
           <li class="prestashop-install__list">Dar clic en la opción <strong>Subir un módulo</strong> en la parte superior derecha de la pantalla.</li>
           <figure class="prestashop-install__image prestashop-install__image--full">
-            <img src="/img/plugins/prestashop/prestashop_install_03.png" alt="Instalación de plugin PrestaShop paso 3" title="Paso 3">
+            <img src="/images/plugins/prestashop/prestashop_install_03.png" alt="Instalación de plugin PrestaShop paso 3" title="Paso 3">
           </figure>
           <blockquote>
           <p>La siguiente secuencia debe realizarse por cada plugin que se desee instalar.</p>
           </blockquote>
           <li class="prestashop-install__list">En el formulario que aparece, seleccionar o arrastrar <strong>el archivo ZIP</strong> del plugin descargado.</li>
           <figure class="prestashop-install__image prestashop-install__image--small">
-            <img src="/img/plugins/prestashop/prestashop_install_04.png" alt="Instalación de plugin PrestaShop paso 4" title="Paso 4">
+            <img src="/images/plugins/prestashop/prestashop_install_04.png" alt="Instalación de plugin PrestaShop paso 4" title="Paso 4">
           </figure>
           <li class="prestashop-install__list">Listo, el módulo Openpay se ha activado con éxito.</li>
           <figure class="prestashop-install__image prestashop-install__image--small">
-            <img src="/img/plugins/prestashop/prestashop_install_05.png" alt="Instalación de plugin PrestaShop paso 5" title="Paso 5">
+            <img src="/images/plugins/prestashop/prestashop_install_05.png" alt="Instalación de plugin PrestaShop paso 5" title="Paso 5">
           </figure>
         </ol>
       </div>
@@ -117,7 +117,7 @@ Configuración de módulos
   <ol class="prestashop-settings__list">
     <li class="prestashop-settings__item">Identificar las credenciales de API asignadas a su comercio dentro del panel de administración de Openpay.</li>
     <figure class="prestashop-settings__image prestashop-settings__image--small">
-      <img src="/img/plugins/woocommerce/wc_settings_04.png" alt="Configuración de plugin PrestaShop paso 1" title="Paso 1">
+      <img src="/images/plugins/woocommerce/wc_settings_04.png" alt="Configuración de plugin PrestaShop paso 1" title="Paso 1">
     </figure>
     <blockquote>
     <p>Para ver las credenciales, dar clic en el engrane del menú superior derecho y luego seleccionar la opción <strong>Credenciales de API</strong></p>
@@ -137,11 +137,11 @@ Configuración de módulos
             <ol class="prestashop-settings__list" type="a">
                 <li class="prestashop-settings__item">En el panel de administración de PrestaShop, dirigirse a la sección <strong>Módulos y Servicios</strong> a través del menú lateral.</li>
                 <figure class="prestashop-settings__image prestashop-settings__image--small">
-                  <img src="/img/plugins/prestashop/prestashop1.6_install_02.png" alt="Configuración de plugin PrestaShop paso 2" title="Paso 2">
+                  <img src="/images/plugins/prestashop/prestashop1.6_install_02.png" alt="Configuración de plugin PrestaShop paso 2" title="Paso 2">
                 </figure>
                 <li class="prestashop-settings__item">A través del buscador de la izquierda, buscar el módulo de <strong>Openpay</strong>. Al resultado desplegado, dar click en <strong>Configurar</strong>.</li>
                 <figure class="prestashop-settings__image prestashop-settings__image--full">
-                  <img src="/img/plugins/prestashop/prestashop1.6_settings_02.png" alt="Configuración de plugin PrestaShop paso 3" title="Paso 3">
+                  <img src="/images/plugins/prestashop/prestashop1.6_settings_02.png" alt="Configuración de plugin PrestaShop paso 3" title="Paso 3">
                 </figure>
                 <li class="prestashop-settings__item">
                   Complete el formulario de configuración ubicado en la parte inferior de la pantalla tomando en cuenta los siguientes puntos:
@@ -154,7 +154,7 @@ Configuración de módulos
                     <li>Defina la cantidad de horas de validez para realizar un pago de Tiendas de Conveniencia y SPEI, en caso de aceptar dichos métodos de pago.</li>
                   </ul>
                   <figure class="prestashop-settings__image prestashop-settings__image--full">
-                  <img src="/img/plugins/prestashop/prestashop1.6_settings_03.png" alt="Configuración de plugin PrestaShop paso 4" title="Paso 4">
+                  <img src="/images/plugins/prestashop/prestashop1.6_settings_03.png" alt="Configuración de plugin PrestaShop paso 4" title="Paso 4">
                 </figure>
                 </li>
                 <li class="prestashop-settings__item">Presionar el botón <strong>Guardar configuración</strong>, una vez que haya completado el formulario.</li>
@@ -166,11 +166,11 @@ Configuración de módulos
             <ol class="prestashop-settings__list" type="a">
               <li class="prestashop-settings__item">En el panel de administración de PrestaShop, dirigirse a la sección <strong>Module Manager</strong> a través del menú lateral.</li>
               <figure class="prestashop-settings__image prestashop-settings__image--ssmall">
-                <img src="/img/plugins/prestashop/prestashop_install_02.png" alt="Configuración de plugin PrestaShop paso 2" title="Paso 2">
+                <img src="/images/plugins/prestashop/prestashop_install_02.png" alt="Configuración de plugin PrestaShop paso 2" title="Paso 2">
               </figure>
               <li class="prestashop-settings__item">A través del buscador situado en la parte superior, buscar los módulos de <strong>Openpay</strong>. Dar clic en <strong>Configurar</strong> al módulo del método de pago que desee seleccionar.</li>
               <figure class="prestashop-settings__image prestashop-settings__image--full">
-                <img src="/img/plugins/prestashop/prestashop_settings_03.png" alt="Configuración de plugin PrestaShop paso 3" title="Paso 3">
+                <img src="/images/plugins/prestashop/prestashop_settings_03.png" alt="Configuración de plugin PrestaShop paso 3" title="Paso 3">
               </figure>
               <li class="prestashop-settings__item">
                 Completar la configuración del apartado de Openpay:
@@ -187,7 +187,7 @@ Configuración de módulos
                 </ul>
               </div>
               <figure class="prestashop-settings__image prestashop-settings__image--full">
-                <img src="/img/plugins/prestashop/prestashop_settings_cards.png" alt="Configuración de plugin PrestaShop paso 4 Cards" title="Paso 4 Cards">
+                <img src="/images/plugins/prestashop/prestashop_settings_cards.png" alt="Configuración de plugin PrestaShop paso 4 Cards" title="Paso 4 Cards">
               </figure>
               <h3 class="prestashop-settings__subtitle">Configuración pagos en tiendas</h3>
               <div class="prestashop-settings__content">
@@ -200,7 +200,7 @@ Configuración de módulos
                 </ul>
               </div>
               <figure class="prestashop-settings__image prestashop-settings__image--full">
-                  <img src="/img/plugins/prestashop/prestashop_settings_store.png" alt="Configuración de plugin PrestaShop paso 4 Store" title="Paso 4 Store">
+                  <img src="/images/plugins/prestashop/prestashop_settings_store.png" alt="Configuración de plugin PrestaShop paso 4 Store" title="Paso 4 Store">
                 </figure>
                 <h3 class="prestashop-settings__subtitle">Configuración pagos vía SPEI</h3>
                 <div class="prestashop-settings__content">
@@ -212,7 +212,7 @@ Configuración de módulos
                   </ul>
                 </div>
                 <figure class="prestashop-settings__image prestashop-settings__image--full">
-                  <img src="/img/plugins/prestashop/prestashop_settings_spei.png" alt="Configuración de plugin PrestaShop paso 4 SPEI" title="Paso 4 SPEI">
+                  <img src="/images/plugins/prestashop/prestashop_settings_spei.png" alt="Configuración de plugin PrestaShop paso 4 SPEI" title="Paso 4 SPEI">
                 </figure>
               </li>
               <li class="prestashop-settings__item">Presionar el botón <strong>Guardar configuración</strong>, una vez que haya completado el formulario.</li>
