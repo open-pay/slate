@@ -19,6 +19,9 @@ includes:
   #- es/tokens
   - es/common_objects
   - es/premium
+  - es/cardtoken
+  - es/redirect
+  - es/three-d-secure
 
 lang: ES
 ---
