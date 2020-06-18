@@ -49,8 +49,8 @@ Pasos:
 5. Openpay envía la instrucción de cargo al banco emisor y regresa la respuesta
 
 
-Creación del formulario
---------------------------------
+##Creación del formulario
+
 >  Código del formulario.
 
 ```html
@@ -106,10 +106,10 @@ Observa que para los datos de la tarjeta no se está ocupando el atributo <code>
 En el formulario de ejemplo anterior no se incluyen los campos "amount" y "description" pero deberan incluirse al hacer el submit al servidor.
 
 
-Sistema antifraude (Paso 1)
---------------------------------
+##Sistema antifraude (Paso 1)
 
-> Con el siguiente código se cargan las librerías necesarios para la generación del id de dispositivo:
+
+> Código para cargar librerias
 
 ```html
 <head>
@@ -122,29 +122,30 @@ Sistema antifraude (Paso 1)
 </head>
 ```
 
-Con el siguiente código se inicializa el valor para el device_session_id:
+> Código para inicializar valor para el device_session_id:
 
 ```html 
-
-<script type="text/javascript">
- $(document).ready(function() {
-  OpenPay.setId('mzdtln0bmtms6o3kck8f');
-  OpenPay.setApiKey('pk_f0660ad5a39f4912872e24a7a660370c');
-  var deviceSessionId = OpenPay.deviceData.setup("payment-form", "deviceIdHiddenFieldName");
-  });
-</script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        OpenPay.setId('mzdtln0bmtms6o3kck8f');
+        OpenPay.setApiKey('pk_f0660ad5a39f4912872e24a7a660370c');
+        var deviceSessionId = OpenPay.deviceData.setup("payment-form", "deviceIdHiddenFieldName");
+        });
+    </script>
 ```
 
 El parámetro <code>payment-form</code>, recibe el id del formulario que contiene la información del cargo que se enviara a tu servidor. Indica a la librería que en ese formulario es donde se va a agregar un campo oculto con el valor del <code>device_session_id</code>.
 
 El parámetro <code>deviceIdHiddenFieldName</code>, recibe el nombre del campo oculto donde se asignara el <code>device_session_id</code>. Este dato es importante si piensas recuperar el valor del hidden y enviar mediante un submit.
 
-Tokenización y envío de datos (Paso 2 y 3)
---------------------------------
+Con el siguiente código se cargan las librerías necesarios para la generación del id de dispositivo:
 
-Una vez que tenemos nuestro formulario creado, vamos a programar que en el botón de enviar se cree un token utilizando la librería [Openpay.js][openpayjs].
+Con el siguiente código se inicializa el valor para el device_session_id:
 
-> Primero agregamos al <code>head</code> el archivo de [Openpay.js][openpayjs] y de JQuery:
+##Tokenización y envío de datos (Paso 2 y 3)
+
+
+> Código para seccion <code>head</code> 
 
 ```html
 <head>
@@ -156,7 +157,7 @@ Una vez que tenemos nuestro formulario creado, vamos a programar que en el botó
 ```
 
 
->​Luego asignamos a la librería de Openpay nuestro <code>merchant-id</code> y nuestra llave pública (<code>public-key</code>):
+> Códgio para ​<code>merchant-id</code> y (<code>public-key</code>):
 
 ```html
 <script type="text/javascript">
@@ -168,7 +169,7 @@ Una vez que tenemos nuestro formulario creado, vamos a programar que en el botó
 </script>
 ```
 
-> Y por último atrapamos el evento de clic del botón "Pagar" para que en lugar de que haga el submit del formulario realice la función "tokenize" de la tarjeta:
+> Código para atrapar evento clic
 
 ```javascript
 $('#pay-button').on('click', function(event) {
@@ -177,11 +178,15 @@ $('#pay-button').on('click', function(event) {
        OpenPay.token.extractFormAndCreate('payment-form', success_callbak, error_callbak);                
 });
 ```
+Una vez que tenemos nuestro formulario creado, vamos a programar que en el botón de enviar se cree un token utilizando la librería [Openpay.js][openpayjs].
 
+ * Primero agregamos al <code>head</code> el archivo de [Openpay.js][openpayjs] y de JQuery.
+ * Luego asignamos a la librería de Openpay nuestro <code>merchant-id</code> y nuestra llave pública (<code>public-key</code>).
+ * Por último atrapamos el evento de clic del botón "Pagar" para que en lugar de que haga el submit del formulario realice la función "tokenize" de la tarjeta.
+ 
 Como puedes ver estamos pasando como parámetro el nombre del formulario creado, esto para que la librería obtengan los datos de la tarjeta y haga la petición a Openpay.
 
-Si todo sale bien se llamará el método ***success_callback*** en el cual asignaremos el valor id del token creado al campo <code>token_id</code> y enviaremos los datos al servidor:
-
+> Código para respuesta exitosa
 
 ```javascript
 var success_callbak = function(response) {
@@ -189,10 +194,13 @@ var success_callbak = function(response) {
               $('#token_id').val(token_id);
               $('#payment-form').submit();
 };
+
 ```
 
-Si existe un problema en la llamada mostramos el error en un alert:
+ * Si todo sale bien se llamará el método ***success_callback*** en el cual asignaremos el valor id del token creado al campo <code>token_id</code> y enviaremos los datos al servidor.
 
+
+> Código para respuesta con error
 
 ```javascript
 var error_callbak = function(response) {
@@ -203,17 +211,18 @@ var error_callbak = function(response) {
 };
 ```
 
-<a name="puntos"><a/>
-> Para mayor referencia del uso de la librería consulta la página de [Openpay.js][openpayjs]
+ * Si existe un problema en la llamada mostramos el error en un alert.
 
 
-Crear cargo (Paso 4 y 5)
---------------------------------
 
-Ahora sólo resta hacer el cargo desde tu servidor, para esto crearemos una instancia de Openpay con el <code>merchant-id</code> y el <code>private-key</code> y luego con los valores del formulario haremos el cargo:
+Para mayor referencia del uso de la librería consulta la página de [Openpay.js][openpayjs]
 
-<div class="curl-code" style="display:none;">
-```Bash
+
+##Crear cargo (Paso 4 y 5)
+
+> Código para realizar cargo desde servidor
+
+```shell
 curl -u sk_e568c42a6c384b7ab02cd47d2e407cab \
 -H "Content-type: application/json" \
 -X POST -d '{
@@ -224,9 +233,8 @@ curl -u sk_e568c42a6c384b7ab02cd47d2e407cab \
     "device_session_id":
 "{device_session_id}" }' https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges
 ```
-</div>
 
-<div class="php-code" style="display:none;">
+
 ```php
 <?php
 $openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f',
@@ -251,9 +259,9 @@ $chargeData = array(
 $charge = $openpay->charges->create($chargeData);
 ?>
 ```
-</div>
 
-<div class="java-code" style="display:none;">
+
+
 ```java
 OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx",
   "sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
@@ -278,9 +286,8 @@ charge.useCardPoints(useCardPoints);
 
 Charge charge = this.api.charges().create(charge);
 ```
-</div>
 
-<div class="dotnet-code" style="display:none;">
+
 ```csharp
 OpenpayAPI api = new OpenpayAPI("sk_e568c42a6c384b7ab02cd47d2e407cab", "mzdtln0bmtms6o3kck8f");
 
@@ -303,34 +310,8 @@ request.UseCardPoints = useCardPoints;
 
 Charge charge = api.ChargeService.Create(request);
 ```
-</div>
 
-<div class="nodejs-code" style="display:none;">
-```javascript
-var chargeRequest = {
-   'source_id' : token_id,
-   'method' : 'card',
-   'amount' : amount,
-   'description' : description,
-   'device_session_id' : device_session_id,
-   'customer' : {
-        'name' : name,
-        'last_name' : last_name,
-        'phone_number' : phone_number,
-        'email' : email
-   }
-}
 
-// Opcional, si estamos usando puntos
-chargeRequest.use_card_points = use_card_points;
-
-openpay.customers.charges.create(chargeRequest, function(error, charge) {
-  // ...
-});
-```
-</div>
-
-<div class="ruby-code" style="display:none;">
 ```ruby
 @openpay=OpenpayApi.new("mzdtln0bmtms6o3kck8f","sk_e568c42a6c384b7ab02cd47d2e407cab")
 @charges=@openpay.create(:charges)
@@ -354,21 +335,23 @@ request_hash={
 
 response_hash=@charges.create(request_hash.to_hash)
 ```
-</div>
+
+Ahora sólo resta hacer el cargo desde tu servidor, para esto crearemos una instancia de Openpay con el <code>merchant-id</code> y el <code>private-key</code> y luego con los valores del formulario haremos el cargo:
 
 **¡¡Listo!!** Ya tenemos un cargo creado con tarjeta.
 
 Si existiera un error recibiriamos una excepción la cual debemos capturar y manejar, para mas información consulta la [seccion de errores][errors]
 
+**Notas:**
 
-> **Notas:**
-> * Los campos amount, description, etc.. que no están en el formulario de ejemplo, son datos propios de tu aplicación que deben haberse obtenido antes del formulario de pago.
-> * En el campo amount, puede ser utilizado un String con formato punto decimal.
-> * Si deseas ver como realizar el procedimiento en otro lenguaje consulta nuestra sección de [integración][libraries].
-> * El código HTML completo se encuentra [aquí][formulario-tarjeta]. ***(La página no funciona completamente, deberás descargarla y realizar la implementación del POST en tu servidor)***.
-> * Asegúrate que tu integración cumple con los requisitos de compatibilidad de versiones [más detalles][versions]
-> * Puedes simular diferentes resultados usando las tarjetas de [Pruebas][tests]
-> * Implementa las [Notificaciones][webhooks] para conocer el estado de los pagos en tiempo real
+ * Los campos amount, description, etc.. que no están en el formulario de ejemplo, son datos propios de tu aplicación que deben haberse obtenido antes del formulario de pago.
+ * En el campo amount, puede ser utilizado un String con formato punto decimal.
+ * Si deseas ver como realizar el procedimiento en otro lenguaje consulta nuestra sección de [integración][libraries].
+ * El código HTML completo se encuentra [aquí][formulario-tarjeta]. ***(La página no funciona completamente, deberás descargarla y realizar la implementación del POST en tu servidor)***.
+ * Asegúrate que tu integración cumple con los requisitos de compatibilidad de versiones [más detalles][versions]
+ * Puedes simular diferentes resultados usando las tarjetas de [Pruebas][tests]
+ * Implementa las [Notificaciones][webhooks] para conocer el estado de los pagos en tiempo real
+
 
 
 
