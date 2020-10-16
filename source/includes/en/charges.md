@@ -1014,6 +1014,257 @@ redirect_url | ***string*** (required) <br/>It indicates the url to which redire
 ### Response
 Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
 
+##Charge with IVR
+
+> Definition
+
+```shell
+Merchant
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/charges
+
+Customer
+POST https://sandbox-api.openpay.mx/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/charges
+```
+
+```php
+<?
+Merchant
+$openpay->charges->create(chargeRequest);
+
+Customer
+$customer = $openpay->customers->get($customerId);
+$customer->charges->create(chargeRequest);
+?>
+```
+
+```java
+//Customer
+openpayAPI.charges().create(String customerId, CreateCardChargeParams request);
+
+//Merchant
+openpayAPI.charges().create(CreateCardChargeParams request);
+```
+
+```javascript
+// Merchant
+openpay.charges.create(chargeRequest, callback);
+
+// Customer
+openpay.customers.charges.create(customerId, chargeRequest, callback);
+```
+
+```csharp
+//Customer
+openpayAPI.ChargeService.Create(string customer_id, ChargeRequest request);
+
+//Merchant
+openpayAPI.ChargeService.Create(ChargeRequest request);
+```
+
+```ruby
+#Customer
+@charges=@openpay.create(:charges)
+@charges.create(request_hash, customer_id)
+
+#Merchant
+@charges=@openpay.create(:charges)
+@charges.create(request_hash)
+```
+
+> Merchant request example
+
+```shell
+curl https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/charges \
+   -u sk_e568c42a6c384b7ab02cd47d2e407cab: \
+   -H "Content-type: application/json" \
+   -X POST -d '{
+   "method" : "card",
+   "confirm" : "ivr",
+   "amount" : 100,
+   "description" : "IVR Charge",
+   "order_id" : "oid-00051",
+   "customer" : {
+   	    "name" : "Juan",
+   	    "last_name" : "Vazquez Juarez",
+   	    "phone_number" : "4423456723",
+   	    "email" : "juan.vazquez@empresa.com.mx"
+   }
+}'
+```
+
+```php
+<?
+$openpay = Openpay::getInstance('mzdtln0bmtms6o3kck8f', 'sk_e568c42a6c384b7ab02cd47d2e407cab');
+$customer = array(
+   	 'name' => 'Juan',
+   	 'last_name' => 'Vazquez Juarez',
+   	 'phone_number' => '4423456723',
+   	 'email' => 'juan.vazquez@empresa.com.mx');
+
+$chargeRequest = array(
+    'method' => 'card',
+    'confirm' => 'ivr',
+    'amount' => 100,
+    'description' => 'IVR Charge',
+    'order_id' => 'oid-00051',
+    'customer' => $customer);
+
+$charge = $openpay->charges->create($chargeRequest);
+?>
+```
+
+```java
+OpenpayAPI api = new OpenpayAPI("https://sandbox-api.openpay.mx", "sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+CreateCardChargeParams request = new CreateCardChargeParams();
+Customer customer = new Customer();
+customer.setName("Juan");
+customer.setLastName("Vazquez Juarez");
+customer.setPhoneNumber("4423456723");
+customer.setEmail("juan.vazquez@empresa.com.mx");
+
+equest.method("card");
+equest.confirm("ivr");
+request.amount(new BigDecimal("100.00"));
+request.description("IVR Charge");
+request.orderId("oid-00051");
+request.setCustomer(customer);
+
+Charge charge = api.charges().create(request);
+```
+
+```csharp
+OpenpayAPI api = new OpenpayAPI("sk_b05586ec98454522ac7d4ccdcaec9128", "maonhzpqm8xp2ydssovf");
+Customer customer = new Customer();
+customer.Name = "Juan";
+customer.LastName = "Vazquez Juarez";
+customer.PhoneNumber = "4423456723";
+customer.Email = "juan.vazquez@empresa.com.mx";
+
+ChargeRequest request = new ChargeRequest();
+request.Method = "card";
+request.Confirm = "ivr";
+request.Amount = new Decimal(100.00);
+request.Description = "IVR Charge";
+request.OrderId = "oid-00051";
+request.Customer = customer;
+
+Charge charge = api.ChargeService.Create(request);
+```
+
+```javascript
+var chargeRequest = {
+   'method' : 'card',
+   'confirm' : 'ivr',
+   'amount' : 100,
+   'description' : 'IVR Charge',
+   'order_id' : 'oid-00051',
+   'customer' : {
+   	    'name' : 'Juan',
+   	    'last_name' : 'Vazquez Juarez',
+   	    'phone_number' : '4423456723',
+   	    'email' : 'juan.vazquez@empresa.com.mx'
+   }
+}
+
+openpay.charges.create(chargeRequest, function(error, charge) {
+  // ...
+});
+```
+
+```ruby
+@openpay=OpenpayApi.new("moiep6umtcnanql3jrxp","sk_3433941e467c4875b178ce26348b0fac")
+@charges=@openpay.create(:charges)
+customer_hash={
+    "name" => "Juan",
+    "last_name" => "Vazquez Juarez",
+    "phone_number" => "4423456723",
+    "email" => "juan.vazquez@empresa.com.mx"
+}
+request_hash={
+    "method" => "card",
+    "confirm" => "ivr",
+    "amount" => 100.00,
+    "description" => "IVR Charge",
+    "order_id" => "oid-00051",
+    "customer" => customer_hash
+}
+
+response_hash=@charges.create(request_hash.to_hash)
+```
+
+> Response example
+
+```json
+{
+    "id": "tranxr78lb4i58xaliu2",
+    "authorization": null,
+    "operation_type": "in",
+    "transaction_type": "charge",
+    "status": "charge_pending",
+    "conciliated": false,
+    "creation_date": "2020-10-16T12:22:25-05:00",
+    "operation_date": "2020-10-16T12:22:25-05:00",
+    "description": "IVR Charge",
+    "error_message": null,
+    "order_id": "ord-323",
+    "due_date": "2020-10-17T00:59:59-05:00",
+    "payment_method": {
+        "type": "ivr",
+        "phone_number": "525588969143",
+        "ivr_key": 676105,
+        "attempts": 0
+    },
+    "amount": 100.00,
+    "currency": "MXN",
+    "customer": {
+        "name": "JUAN",
+        "last_name": "PEREZ",
+        "email": "juan.urbina@hotmail.com",
+        "phone_number": "45155352828",
+        "address": null,
+        "creation_date": "2020-10-16T12:22:25-05:00",
+        "external_id": null,
+        "clabe": null
+    },
+    "method": "card"
+}
+```
+
+<aside class="notice">
+You can charge the merchant account or the customer account.
+</aside>
+
+***Customized antifraud system***</br>
+You can send extra data to Openpay in order to increase number of variables and get better results in antifraud detection for your transactions.
+
+<aside class="notice">
+If you want to use this feature you need to send <code>metadata</code> property with all fields you think can help to decide when a transaction is a fraud trying. Call support line to enable this feature</br>
+</aside>
+
+###Request
+
+Property | Description
+--------- | -----
+method|***string*** (required) <br/>It must contain the **card** value in order to specify the charge will be made from card.
+confirm|***string*** (required) <br/>It must contain the **ivr** value in order to specify the charge will be confirm from IVR.
+source_id | ***string*** (required, length = 45) <br/>Saved ID card or token id created from where the funds are withdrawn.
+cvv2 |***numeric***  (length = 3 or 4) <br/>Security code as it appears on the back of the card. Usually 3 digits.<br/>It's used only charges with [Stored Cards](#create-a-card).
+amount | ***numeric*** (required) <br/>Amount to charge. Must be an amount greater than zero, with up to two decimal digits.
+description | ***string*** (required, length = 250) <br/>A description associated to the charge.
+order_id | ***string*** (optional, length = 100) <br/>Unique identifier of charge. Must be unique among all transactions.
+device_session_id |  ***string*** (required, length = 255) <br/>Identifier of the device generated by the antifraud tool.
+capture | ***boolean*** (optional, default = true) <br/>Indicates whether the charge is made immediately or not , when the value is false the charge is handled as authorized (or pre-authorization) and the amount is only to be confirmed or canceled in a second call.
+[customer](#create-a-new-customer)| ***object*** (required) <br/>Customer information who is charged. You can use the same parameters used in the creation of a customer but an account for the customer will not be created. <br/><br/> **Note:** This parameter can be used only by creating the charge at the merchant level<br/><br/> To create a customer and keep a record of their charges history refer to [create a customer] (#create-a-new-customer) and do the charge at the customer level.
+[payment_plan](#objetc-paymentplan)|***object*** (opcional) <br/>Plan data months without interest is desired as use in the charge. Refer to [PaymentPlan Object](#paymentplan-objetc).
+metadata |  ***list(key, value)*** (optional) <br/>Field list to send antifraud system, It must be according to [Rules to send custom antifraud fields] (#custom-to-send-antifraud-fields).
+use_card_points | ***string*** (optional, default = NONE) <br/> <table><tr><td><strong>ONLY_POINTS</strong></td> <td>Charge only with points (<a href="#consulta-de-puntos">Points card</a>)</td></tr><tr><td><strong>MIXED</strong></td><td>Charge with points and pesos</td></tr><tr><td><strong>NONE</strong></td>        <td>Charge only with pesos</td></tr></table>The values that indicate points must be used only if the points_card property is true, otherwise an error will occur.
+send_email | ***boolean*** (optional) <br/>Used in redirect charges. Indicates if is need send a email that redirect to the openpay payment form.
+redirect_url | ***string*** (optional) <br/>Used in redirect charges. It indicates the url to which redirect after a successful transaction in the openpay payment form.
+use_3d_secure | ***boolean*** (optional) <br/> Used to specify if 3D Secure should be used.
+
+###Response
+Returns a [transaction object](#transaction-object) with the charge information or with an [error response](#error-object).
+
 ##Confirming a charge
 
 > Definition
