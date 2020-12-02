@@ -18,6 +18,7 @@ includes:
   #- es/qropay
   #- es/tokens
   - es/common_objects
+  - es/plugins
 
 lang: ES
 ---
