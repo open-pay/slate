@@ -183,12 +183,14 @@ OpenCart is a free web platform that enables users to quickly start an eCommerce
 
 ###Requirements
 It is required for the server that hosts your OpenCart store to fulfill the following:
+
 * Apache web server
 * **PHP 5.2** or greater.
 * **MySQL 5.0** or greater.
 * Have a **SSL certificate** for your eCommerce domain.
 
 It is also necessary that the installed PHP version comply with these settings:
+
 * **Register Globals** disabled.
 * **Magic Quotes GPC** disabled.
 * File uploads enabled.

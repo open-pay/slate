@@ -69,6 +69,7 @@ Magento es una plataforma que permite la gestión de contenidos web para un come
 
 ###Requerimientos
 Es necesario que el servidor donde se encuentre alojado su comercio electrónico basado en Magento 2 cuente con las siguientes características:
+
 * Versión instalada de **PHP 5.4** o mayor.
 * Versión instalada de **MySQL 5.0** o mayor.
 * Contar con un **certificado SSL** para su comercio electrónico.
@@ -127,6 +128,7 @@ PrestaShop es un software gratuito de comercio electrónico que le permite a sus
 
 ###Requerimientos
 Es necesario que el servidor donde se encuentre alojado su comercio de PrestaShop cumpla con las siguientes pautas:
+
 * PrestaShop v1.7.2 o superior.
 * Versión instalada de **PHP 5.6** o superior.
 * Versión instalada de **MySQL 5.0** o mayor.
@@ -181,12 +183,14 @@ OpenCart es una solución gratuita basada en Web diseñada para poner en marcha 
 
 ###Requerimientos
 Es necesario que el servidor donde se encuentre alojado su comercio de OpenCart cuente con las siguientes configuraciones:
+
 * Servidor web Apache
 * Versión instalada de **PHP 5.2** o mayor.
 * Versión instalada de **MySQL 5.0** o mayor.
 * Contar con un **certificado SSL** para su comercio electrónico.
 
 Adicionalmente para la versión de PHP es necesario que cuente con ciertas características:
+
 * Configuración **Register Globals** deshabilitada.
 * Configuración **Magic Quotes GPC** deshabilitada.
 * Configuración para subida de archivos habilitada.
@@ -197,6 +201,7 @@ Adicionalmente para la versión de PHP es necesario que cuente con ciertas carac
 
 ###Instalación
 Para instalar los plugins de BBVA en su comercio de OpenCart tiene que seguir los siguientes pasos:
+
 1.- Descargar el archivo ZIP que contiene el plugin para pagos con tarjetas de crédito/débito. Puede descargar el plugin a través de este [enlace](https://github.com/open-pay/openpay-opencart/blob/master/OpenpayCards.ocmod.zip?raw=true).
 
 2.- En su panel de administración de OpenCart, dirigirse a la sección **Extensions -> Installer**. Dar clic en la opción **Upload** y seleccionar el archivo ZIP del plugin del método de pago que desee instalar.
