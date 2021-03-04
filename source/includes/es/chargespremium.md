@@ -282,7 +282,7 @@ amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantida
 cvv2 | ***numeric*** (requerido, longitud = 3-4) <br/>Código de seguridad como aparece en la parte de atrás de la tarjeta. Generalmente 3 dígitos.<br/>Se utiliza solo para cargos con [Tarjetas Guardadas](#crear-una-tarjeta).
 currency | ***string*** (opcional) <br/>Tipo de moneda del cargo. Por el momento solo se soportan 2 tipos de monedas: Pesos Mexicanos(MXN) y Dólares Americanos(USD).
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
+order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. En caso de un re-intento de una transacción, el order_id debe ser el mismo.
 device_session_id |  ***string*** (requerido, longitud = 255) <br/>Identificador del dispositivo generado con la herramienta antifraudes
 capture |  ***boolean*** (opcional, default = true) <br/>Indica si el cargo se hace o no inmediatamente, cuando el valor es false el cargo se maneja como una autorización (o preautorización) y solo se reserva el monto para ser confirmado o cancelado en una segunda llamada.
 [customer](#crear-un-nuevo-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realice el cargo a nivel cliente.
@@ -529,7 +529,7 @@ Propiedad | Descripción
 method|***string*** (requerido en card) <br/>Debe contener el valor **card** para indicat que el cargo se hará de una tarjeta.
 amount | ***numeric*** (requerido) <br/>Cantidad del cargo. Debe ser una cantidad mayor a cero, con hasta dos dígitos decimales.
 description | ***string*** (requerido, longitud = 250) <br/>Una descripción asociada al cargo.
-order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. Debe ser único entre todas las transacciones.
+order_id | ***string*** (opcional, longitud = 100) <br/>Identificador único del cargo. En caso de un re-intento de una transacción, el order_id debe ser el mismo.
 [customer](#crear-un-nuevo-cliente)|***objeto*** (requerido) <br/>Información del cliente al que se le realiza el cargo. Se puede ocupar los mismos parámetros usados en la creación de un cliente pero no se creará una cuenta al cliente. <br/><br/> **Nota:** Este parámetro solo se puede utilizar creando el cargo a nivel comercio<br/><br/>Si desea crear un cliente y llevar un historial de sus cargos consulte como [crear un cliente](#crear-un-nuevo-cliente) y realice el cargo a nivel cliente.
 confirm |  ***boolean*** (requerido en false) <br/>El valor `false` indica que se trata de un cargo con terminal virtual.
 send_email | ***boolean*** (opcional) <br/>Indica si se desea enviar un email que direccione al formulario de pago de openpay.
