@@ -69,7 +69,7 @@ order.payment.cancelled    | Order          | Reports when a payment order is ca
 
 #Valid Webhook service features 
 - Endpoint: Domains only (No IPs). example: https://notifications.merchant.com
-- Port: 443/TCP, 1518/TCP, 1519/TCP, 8443/TCP y 10443/TCP
+- Port: 443/TCP, 8443/TCP y 10443/TCP
 - Protocol: HTTPS/TLS_1.2
 - Certificate: Valid (Signed by public CA and match with domain).
 
