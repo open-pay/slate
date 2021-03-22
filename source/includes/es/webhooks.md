@@ -69,7 +69,7 @@ order.payment.cancelled    | Orden          | Informa cuando el pago de una orde
 
 #Características de un servicio Webhook válido
 - Endpoint: Solo dominios (No IPs). ejemplo: https://notifications.merchant.com
-- Puerto: 443/TCP, 1518/TCP, 1519/TCP, 8443/TCP y 10443/TCP
+- Puerto: 443/TCP, 8443/TCP y 10443/TCP
 - Protocolo: HTTPS/TLS_1.2
 - Certificado: Válido (firmado por CA pública y match con dominio).
 
